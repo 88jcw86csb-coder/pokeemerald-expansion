@@ -16929,3 +16929,25 @@ Level: 13
 - Supersonic
 - Leech Life
 - Bite
+
+=== TRAINER_ERYON_ROUTE02_HIKER ===
+Name: DARIO
+Class: Hiker
+Pic: Hiker
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Geodude
+Level: 13
+- Tackle
+- Defense Curl
+- Rock Throw
+- Magnitude
+
+Machop
+Level: 14
+- Low Kick
+- Leer
+- Focus Energy
+- Karate Chop
