@@ -68,6 +68,27 @@ def main():
         elif block_path.stat().st_size != width * height * 2:
             errors.append(f"{name}: layout binary has {block_path.stat().st_size} bytes; expected {width * height * 2}")
 
+        opposites = {"up": "down", "down": "up", "left": "right", "right": "left"}
+        for connection in m.get("connections") or []:
+            direction = connection.get("direction")
+            target_name = ids.get(connection.get("map"))
+            if direction not in opposites or target_name is None:
+                errors.append(f"{name}: invalid map connection {connection}")
+                continue
+            reverse_links = [
+                link for link in (maps[target_name].get("connections") or [])
+                if link.get("map") == m["id"] and link.get("direction") == opposites[direction]
+            ]
+            if not reverse_links:
+                errors.append(f"{name}: missing reverse connection in {target_name}")
+            elif not any(int(link.get("offset", 0)) == -int(connection.get("offset", 0)) for link in reverse_links):
+                errors.append(f"{name}: inconsistent connection offset with {target_name}")
+            target_layout = layouts.get(maps[target_name]["layout"])
+            if target_layout:
+                target_width, target_height = target_layout["width"], target_layout["height"]
+                overlap = min(width, target_width) if direction in ("up", "down") else min(height, target_height)
+                if overlap <= 0 or abs(int(connection.get("offset", 0))) >= max(width, height, target_width, target_height):
+                    errors.append(f"{name}: impossible connection offset to {target_name}")
         for index, warp in enumerate(m.get("warp_events", [])):
             if not (0 <= warp["x"] < width and 0 <= warp["y"] < height):
                 errors.append(f"{name}: warp {index} outside {width}x{height}")
