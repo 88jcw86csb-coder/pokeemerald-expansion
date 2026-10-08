@@ -42,6 +42,20 @@ def main():
                 errors.append(f"{route}: unknown species constant {mon['species']}")
             if mon["min_level"] > mon["max_level"]:
                 errors.append(f"{route}: invalid encounter level range for {mon['species']}")
+    # Enforce the project's Gen I-VI-only roster in opening encounters.
+    species_numbers = {
+        name: int(number)
+        for name, number in re.findall(
+            r"(?m)^\\s*(SPECIES_[A-Z0-9_]+)\\s*=\\s*(\\d+)\\s*,?",
+            species_constants,
+        )
+    }
+    for route in ("Eryon_Rota01", "Eryon_BosqueDeLumina", "Eryon_Rota02"):
+        encounter = wild_by_map.get(maps[route]["id"], {})
+        for mon in encounter.get("land_mons", {}).get("mons", []):
+            number = species_numbers.get(mon["species"])
+            if number is not None and not 1 <= number <= 721:
+                errors.append(f"{route}: species outside National Dex 001-721: {mon['species']}")
     starter_ui = (ROOT / "src/starter_choose.c").read_text(encoding="utf-8")
     if not re.search(r"#define STARTER_MON_COUNT\s+1\b", starter_ui):
         errors.append("Starter selector must expose exactly one Pokemon")
