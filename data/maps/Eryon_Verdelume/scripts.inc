@@ -149,10 +149,6 @@ EryonVerdelume_Text_BotanistAfterKael:
 	.string "Enquanto isso, vou comparar\n"
 	.string "as flores das duas trilhas.$"
 
-EryonVerdelume_Text_KaelDefeat:
-	.string "KAEL: Voce e mais forte do que\n"
-	.string "eu imaginava!$"
-
 EryonVerdelume_Text_KaelChallenge:
 	.string "KAEL: Quero ver o que aprendeu\n"
 	.string "em sua viagem pelo bosque!$"
