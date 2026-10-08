@@ -23,7 +23,8 @@ Nenhuma ROM deve ser anunciada como final sem compilação, execução e valida�
 ## Etapa 3 — Campanha
 - [ ] Oito cidades de ginásio e rotas interligadas
 - [ ] Equipe Eclipse, comandantes, esconderijo e progressão
-- [ ] Solarion, Noctarion e Eclipsion: design, eventos e confrontos
+- [ ] Solarion e Noctarion: símbolos antigos; Eclipsion: fenômeno narrativo (não são espécies de Pokémon)
+- [ ] Definir encontros com lendários oficiais até Kalos, sem Fakemon
 - [ ] Elite 4, Campeã Elara e créditos
 - [ ] Missões opcionais, revisitas e exploração com ritmo gradual
 
