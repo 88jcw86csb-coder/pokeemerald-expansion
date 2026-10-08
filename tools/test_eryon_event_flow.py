@@ -43,7 +43,7 @@ class EryonEventFlowTests(unittest.TestCase):
             [arg.split(":")[0].split("=")[0] for arg in arguments],
             ["trainer", "intro_text", "lose_text", "event_script", "music"],
         )
-        for name in ("Eryon_Verdelume", "Eryon_BosqueDeLumina"):
+        for name in ("Eryon_Verdelume", "Eryon_BosqueDeLumina", "Eryon_Rota02"):
             script = (ROOT / "data/maps" / name / "scripts.inc").read_text(encoding="utf-8")
             for line in script.splitlines():
                 if not line.strip().startswith("trainerbattle_single "):
