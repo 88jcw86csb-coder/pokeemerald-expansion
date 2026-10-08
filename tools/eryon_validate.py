@@ -91,6 +91,16 @@ def main():
                     errors.append(
                         f"{name}: {kind}[{index}] at ({x},{y}) outside {width}x{height} layout"
                     )
+    # Catch overlapping NPCs that can make an encounter impossible to access.
+    for name, map_data in maps.items():
+        occupied = {}
+        for index, npc in enumerate(map_data.get("object_events", [])):
+            pos = (npc["x"], npc["y"])
+            if pos in occupied:
+                errors.append(f"{name}: NPCs {occupied[pos]} and {index} overlap at {pos}")
+            else:
+                occupied[pos] = index
+
     # Every in-region warp must target a real warp that points back.
     for name, map_data in maps.items():
         for index, warp in enumerate(map_data.get("warp_events", [])):
