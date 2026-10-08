@@ -166,6 +166,21 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertLess(entry.index("VAR_ERYON_KAEL_DEFEATED"), entry.index("VAR_ERYON_LUMINA_CLUE_FOUND"))
         self.assertIn("EryonVerdelume_Text_GuideBadge:", script)
 
+    def test_local_kid_reacts_to_first_badge(self):
+        script = (ROOT / "data/maps/Eryon_Verdelume/scripts.inc").read_text(encoding="utf-8")
+        entry = script.split("EryonVerdelume_EventScript_LocalKid::", 1)[1].split(
+            "EryonVerdelume_EventScript_LocalKidBadge::", 1
+        )[0]
+        self.assertIn(
+            "goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonVerdelume_EventScript_LocalKidBadge",
+            entry,
+        )
+        self.assertIn("msgbox EryonVerdelume_Text_LocalKid, MSGBOX_DEFAULT", entry)
+        badge = script.split("EryonVerdelume_EventScript_LocalKidBadge::", 1)[1].split(
+            "EryonVerdelume_Text_LocalKidBadge:", 1
+        )[0]
+        self.assertIn("msgbox EryonVerdelume_Text_LocalKidBadge", badge)
+
     def test_botanist_reacts_to_first_badge(self):
         script = (ROOT / "data/maps/Eryon_Verdelume/scripts.inc").read_text(encoding="utf-8")
         entry = script.split("EryonVerdelume_EventScript_Botanist::", 1)[1].split("EryonVerdelume_EventScript_BotanistAfterBadge::", 1)[0]
