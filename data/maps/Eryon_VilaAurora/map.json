@@ -45,14 +45,6 @@
       "direction": "up"
     }
   ],
-  "warp_events": [
-    {
-      "x": 19,
-      "y": 10,
-      "elevation": 0,
-      "dest_map": "MAP_ERYON_ROTA01",
-      "dest_warp_id": "0"
-    }
-  ],
+  "warp_events": [],
   "region": "REGION_HOENN"
 }
