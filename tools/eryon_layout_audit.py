@@ -100,6 +100,14 @@ def inspect():
             ]
             if not clear_neighbors:
                 print(f"  WARNING: NPC {index} ({x},{y}) has no adjacent zero-collision tile")
+            elif valid:
+                entrances = [position for _, position in valid]
+                if not any(
+                    connected_by_collision_bits(raw, width, height, entry, neighbor)
+                    for entry in entrances for neighbor in clear_neighbors
+                ):
+                    print(f"  WARNING: NPC {index} ({x},{y}) has no zero-collision "
+                          "route from any map warp")
         if not source.startswith("data/layouts/Eryon_"):
             print("  WARNING: inherited Hoenn terrain; geometry not yet original")
     return failures
