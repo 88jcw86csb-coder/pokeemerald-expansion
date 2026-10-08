@@ -131,3 +131,39 @@ EryonBosque_Text_CacheBagFull:
 EryonBosque_Text_EmptyCache:
 	.string "A caixa esta vazia.\n"
 	.string "Alguem a deixou ha muito tempo.$"
+
+@ A suspicious observer foreshadows Team Eclipse without revealing their identity.
+@ This optional encounter does not set story flags or block exploration.
+EryonBosque_EventScript_EclipseScout::
+	lock
+	faceplayer
+	goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonBosque_EventScript_EclipseScoutAfterBadge
+	goto_if_ge VAR_ERYON_LUMINA_CLUE_FOUND, 1, EryonBosque_EventScript_EclipseScoutAfterClue
+	msgbox EryonBosque_Text_EclipseScoutBeforeClue, MSGBOX_DEFAULT
+	release
+	end
+
+EryonBosque_EventScript_EclipseScoutAfterClue::
+	msgbox EryonBosque_Text_EclipseScoutAfterClue, MSGBOX_DEFAULT
+	release
+	end
+
+EryonBosque_EventScript_EclipseScoutAfterBadge::
+	msgbox EryonBosque_Text_EclipseScoutAfterBadge, MSGBOX_DEFAULT
+	release
+	end
+
+EryonBosque_Text_EclipseScoutBeforeClue:
+	.string "ESTRANHO: Procurando luzes?\p"
+	.string "Algumas coisas da floresta\n"
+	.string "devem continuar escondidas.$"
+
+EryonBosque_Text_EclipseScoutAfterClue:
+	.string "ESTRANHO: Voce viu o simbolo?\p"
+	.string "Entao ja sabe demais...\p"
+	.string "Esqueca o que encontrou.$"
+
+EryonBosque_Text_EclipseScoutAfterBadge:
+	.string "ESTRANHO: Kael se envolveu?\p"
+	.string "Isso complica nossos planos...\p"
+	.string "Nao ouviu nada. Entendido?$"
