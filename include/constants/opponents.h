@@ -866,8 +866,9 @@
 
 #define TRAINER_ERYON_KAEL                    855
 #define TRAINER_ERYON_SCOUT                   856
+#define TRAINER_ERYON_ROUTE02_HIKER           857
 
-#define TRAINERS_COUNT_EMERALD     857
+#define TRAINERS_COUNT_EMERALD     858
 #define MAX_TRAINERS_COUNT_EMERALD 864
 
 #if IS_FRLG
