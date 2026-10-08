@@ -11,10 +11,12 @@ if [[ ! -f Makefile || ! -f tools/eryon_rom_smoke.py ]]; then
 fi
 
 echo "== Eryon: checking Python validator/test syntax =="
-python3 -m py_compile tools/eryon_validate.py tools/test_eryon_event_flow.py tools/test_eryon_species.py tools/test_eryon_rom_smoke.py tools/eryon_rom_smoke.py
+python3 -m py_compile tools/eryon_layout_audit.py tools/eryon_validate.py tools/test_eryon_event_flow.py tools/test_eryon_species.py tools/test_eryon_rom_smoke.py tools/eryon_rom_smoke.py
 
 echo "== Eryon: opening data validation =="
 python3 tools/eryon_validate.py
+echo "== Eryon: binary terrain and warp tile audit == "
+python3 tools/eryon_layout_audit.py
 
 echo "== Eryon: species tests =="
 python3 -m unittest discover -s tools -p 'test_eryon_species.py' -v
