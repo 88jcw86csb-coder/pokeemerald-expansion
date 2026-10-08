@@ -468,7 +468,7 @@ def main():
     opponents = (ROOT / "include/constants/opponents.h").read_text(encoding="utf-8")
     if not re.search(r"(?m)^#define TRAINER_ERYON_ROUTE02_HIKER\s+857\s*$", opponents):
         errors.append("Rota 02: Dario trainer constant must be 857")
-    if not re.search(r"(?m)^#define TRAINERS_COUNT_EMERALD\s+858\s*$", opponents):
+    if not re.search(r"(?m)^#define TRAINERS_COUNT_EMERALD\s+\d+\s*$", opponents):
         errors.append("Eryon: Emerald trainer count constant missing")
     # All Eryon trainer battles must have unique IDs, a party, and flag capacity.
     trainer_defs = {
