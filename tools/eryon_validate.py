@@ -70,8 +70,17 @@ def main():
     for required in ("givemon SPECIES_RIOLU, 5", "MON_GIVEN_TO_PARTY", "MON_GIVEN_TO_PC", "VAR_ERYON_STARTER_RECEIVED"):
         if required not in starter_script:
             errors.append(f"Vila Aurora: missing starter gift requirement: {required}")
-    if "goto_if_eq VAR_RESULT, FALSE" in starter_script:
+    gift_section = starter_script.split("EryonVilaAurora_EventScript_RioluToParty::", 1)[0]
+    if "goto_if_eq VAR_RESULT, FALSE" in gift_section:
         errors.append("Vila Aurora: incorrect boolean check for givemon result")
+    if "giveitem ITEM_POKE_BALL, 5" not in starter_script:
+        errors.append("Vila Aurora: five Poke Balls not granted after starter")
+    if "setvar VAR_ERYON_CAPTURE_KIT_RECEIVED, 1" not in starter_script:
+        errors.append("Vila Aurora: capture kit progress not persisted")
+    if "goto_if_eq VAR_ERYON_CAPTURE_KIT_RECEIVED, 0" not in starter_script:
+        errors.append("Vila Aurora: capture kit cannot be retried after full bag")
+    if "goto_if_eq VAR_RESULT, FALSE, EryonVilaAurora_EventScript_CaptureKitFull" not in starter_script:
+        errors.append("Vila Aurora: capture kit full-bag handling missing")
     clue_var = (ROOT / "include/constants/vars.h").read_text(encoding="utf-8")
     forest_script = (ROOT / "data/maps/Eryon_BosqueDeLumina/scripts.inc").read_text(encoding="utf-8")
     town_script = (ROOT / "data/maps/Eryon_Verdelume/scripts.inc").read_text(encoding="utf-8")
