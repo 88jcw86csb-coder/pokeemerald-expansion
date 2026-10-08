@@ -1,0 +1,28 @@
+{
+  "requires_flash": false,
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "object_events": [],
+  "coord_events": [],
+  "bg_events": [],
+  "id": "MAP_ERYON_VILA_AURORA",
+  "name": "Eryon_VilaAurora",
+  "layout": "LAYOUT_ERYON_VILA_AURORA",
+  "music": "MUS_LITTLEROOT",
+  "region_map_section": "MAPSEC_LITTLEROOT_TOWN",
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_TOWN",
+  "connections": null,
+  "warp_events": [
+    {
+      "x": 19,
+      "y": 10,
+      "elevation": 0,
+      "dest_map": "MAP_ERYON_ROTA01",
+      "dest_warp_id": "0"
+    }
+  ]
+}
