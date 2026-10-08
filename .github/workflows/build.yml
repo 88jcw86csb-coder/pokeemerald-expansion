@@ -57,6 +57,11 @@ jobs:
         if: github.ref == 'refs/heads/eryon-development'
         run: python3 -m unittest discover -s tools -p 'test_eryon_event_flow.py' -v
 
+      - name: Test Eryon ROM smoke validator
+        if: github.ref == 'refs/heads/eryon-development'
+        run: python3 -m unittest discover -s tools -p 'test_eryon_rom_smoke.py' -v
+
+
       - name: Validate Eryon opening maps
         if: github.ref == 'refs/heads/eryon-development'
         run: python3 tools/eryon_validate.py
@@ -98,6 +103,8 @@ jobs:
         run: python3 -m unittest discover -s tools -p 'test_eryon_species.py' -v
       - name: Test Eryon event flow
         run: python3 -m unittest discover -s tools -p 'test_eryon_event_flow.py' -v
+      - name: Test Eryon ROM smoke validator
+        run: python3 -m unittest discover -s tools -p 'test_eryon_rom_smoke.py' -v
       - name: Validate Eryon data
         run: python3 tools/eryon_validate.py
 
