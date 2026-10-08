@@ -39,6 +39,8 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertIn("EryonVerdelume_EventScript_KaelVictory", followup)
         victory = script.split("EryonVerdelume_EventScript_KaelVictory::", 1)[1].split("EryonVerdelume_EventScript_KaelAfterBattle::", 1)[0]
         self.assertIn("setvar VAR_ERYON_KAEL_DEFEATED, 1", victory)
+        self.assertIn("call Common_EventScript_PlayGymBadgeFanfare", victory)
+        self.assertIn("setflag FLAG_BADGE01_GET", victory)
 
     def test_eryon_progress_vars_are_unique_and_defined(self):
         vars_text = (ROOT / "include/constants/vars.h").read_text()
