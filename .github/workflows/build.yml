@@ -7,6 +7,7 @@ on:
       - upcoming
       - eryon-development
   pull_request:
+  workflow_dispatch:
 
 env:
   GAME_REVISION: 0
