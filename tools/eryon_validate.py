@@ -132,6 +132,21 @@ def main():
                 reverse = target["warp_events"][int(warp["dest_warp_id"])]
                 if reverse["dest_map"] != m["id"] or int(reverse["dest_warp_id"]) != index:
                     errors.append(f"{name}: warp {index} has no reciprocal return warp")
+        # Multiple events on one tile can make interactions ambiguous.
+        occupied = {}
+        for kind, events in (
+            ("warp", m.get("warp_events", [])),
+            ("NPC", m.get("object_events", [])),
+            ("background", m.get("bg_events", [])),
+        ):
+            for index, event in enumerate(events):
+                pos = (event["x"], event["y"])
+                if pos in occupied:
+                    errors.append(
+                        f"{name}: {kind} event {index} overlaps {occupied[pos]} at {pos}"
+                    )
+                else:
+                    occupied[pos] = f"{kind} event {index}"
         # Validate all map scripts once, even on maps with no NPCs.
         script_file = ROOT / "data/maps" / name / "scripts.inc"
         script_text = script_file.read_text(encoding="utf-8") if script_file.exists() else ""
