@@ -22,6 +22,11 @@ def validate_rom(path):
         raise ValueError("Missing GBA entry-point instructions")
     if not all(0x20 <= byte <= 0x7E for byte in header[0xAC:0xB0]):
         raise ValueError("Invalid GBA game code in header")
+    title = header[0xA0:0xAC].rstrip(b"\\x00 ").decode("ascii", errors="replace")
+    if title != "ERYON":
+        raise ValueError(f"Unexpected ROM title: {title!r}; expected ERYON")
+    if header[0xAC:0xB0] != b"BPEE":
+        raise ValueError("Unexpected GBA game code; expected BPEE")
     if header[0xB2] != 0x96:
         raise ValueError("Invalid GBA fixed header value at 0xB2")
     expected = (-sum(header[0xA0:0xBD]) - 0x19) & 0xFF
