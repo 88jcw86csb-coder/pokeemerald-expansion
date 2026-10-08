@@ -80,6 +80,15 @@ def main():
     gift_section = starter_script.split("EryonVilaAurora_EventScript_RioluToParty::", 1)[0]
     if "goto_if_eq VAR_RESULT, FALSE" in gift_section:
         errors.append("Vila Aurora: incorrect boolean check for givemon result")
+    if not any(event.get("script") == "EryonVilaAurora_EventScript_VillageNotice" for event in maps["Eryon_VilaAurora"].get("bg_events", [])):
+        errors.append("Vila Aurora: village notice not placed on map")
+    for required in (
+        "EryonVilaAurora_EventScript_VillageNotice::",
+        "goto_if_ge VAR_ERYON_STARTER_RECEIVED, 1",
+        "goto_if_ge VAR_ERYON_LUMINA_CLUE_FOUND, 1",
+    ):
+        if required not in starter_script:
+            errors.append(f"Vila Aurora: village notice missing: {required}")
     if "giveitem ITEM_POKE_BALL, 5" not in starter_script:
         errors.append("Vila Aurora: five Poke Balls not granted after starter")
     if "setvar VAR_ERYON_CAPTURE_KIT_RECEIVED, 1" not in starter_script:
