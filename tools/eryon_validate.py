@@ -14,6 +14,11 @@ def load(path):
 
 
 def main():
+    strict_ready = "--strict-ready" in sys.argv[1:]
+    unknown_args = [arg for arg in sys.argv[1:] if arg != "--strict-ready"]
+    if unknown_args:
+        print("Usage: python3 tools/eryon_validate.py [--strict-ready]")
+        return 2
     errors = []
     groups = load("data/maps/map_groups.json")
     layouts = {entry["id"]: entry for entry in load("data/layouts/layouts.json")["layouts"]}
@@ -194,6 +199,8 @@ def main():
         for name, blockmap in inherited.items():
             print(f"WARNING: {name} still uses inherited map tiles: {blockmap}")
         print("WARNING: Original Eryon terrain and collision must be implemented before gameplay sign-off")
+        if strict_ready:
+            errors.append("Readiness blocked: inherited terrain is still in use")
     # Lumina currently borrows Petalburg Woods terrain. Its exits must use
     # actual exit tiles until a custom Eryon forest layout replaces it.
     woods = maps["Eryon_BosqueDeLumina"]
@@ -209,6 +216,8 @@ def main():
         for index, warp in enumerate(maps[map_name].get("warp_events", [])):
             if warp["x"] in (0, width - 1) or warp["y"] in (0, height - 1):
                 print(f"WARNING: {map_name} warp {index} uses a border tile; collision and warp behavior not verified")
+                if strict_ready:
+                    errors.append(f"Readiness blocked: {map_name} warp {index} needs collision verification")
     print("WARNING: route-side warp positions still require terrain/collision verification")
     for name, m in maps.items():
         layout = layouts.get(m["layout"])
@@ -300,6 +309,8 @@ def main():
         return 1
     print(f"PASS: {len(maps)} Eryon opening maps; IDs, NPC scripts, warp indices and encounter slots consistent")
     print("NOTE: collision, tiles, encounters, gameplay and compilation remain untested")
+    if strict_ready:
+        print("NOTE: strict static readiness is not a substitute for compilation or emulator testing")
     return 0
 
 
