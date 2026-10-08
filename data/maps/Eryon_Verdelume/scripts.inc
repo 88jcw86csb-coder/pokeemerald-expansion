@@ -58,3 +58,28 @@ EryonVerdelume_Text_KaelClue:
 	.string "KAEL: Entao viu a marca antiga!\p"
 	.string "A floresta precisa de ajuda.\n"
 	.string "Vamos investigar com cuidado.$"
+
+@ A public notice changes once the player has investigated the forest.
+EryonVerdelume_EventScript_ForestNotice::
+	lock
+	goto_if_ge VAR_ERYON_LUMINA_CLUE_FOUND, 1, EryonVerdelume_EventScript_ForestNoticeClue
+	msgbox EryonVerdelume_Text_ForestNotice, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVerdelume_EventScript_ForestNoticeClue::
+	msgbox EryonVerdelume_Text_ForestNoticeClue, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVerdelume_Text_ForestNotice:
+	.string "AVISO AOS VIAJANTES\p"
+	.string "Luzes estranhas foram vistas\n"
+	.string "no Bosque de Lumina.\p"
+	.string "Explore com cuidado.$"
+
+EryonVerdelume_Text_ForestNoticeClue:
+	.string "AVISO AOS VIAJANTES\p"
+	.string "A antiga marca de eclipse\n"
+	.string "esta sendo investigada.\p"
+	.string "Informe Kael sobre pistas.$"
