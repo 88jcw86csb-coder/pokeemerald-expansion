@@ -1,3 +1,6 @@
+Eryon_Rota01_MapScripts::
+	.byte 0
+
 EryonRota01_EventScript_Explorer::
 	lock
 	faceplayer
