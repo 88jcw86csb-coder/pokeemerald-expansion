@@ -486,6 +486,20 @@ if __name__ == "__main__":
                 fragments = []
                 first_line = None
 
+    # Verify local text references in messages and trainer battles resolve.
+    # Unresolved symbols otherwise fail much later in assembly/linking.
+    for name in NAMES:
+        dialogue = (ROOT / f"data/maps/{name}/scripts.inc").read_text(encoding="utf-8")
+        labels = set(re.findall(r"(?m)^([A-Za-z][A-Za-z0-9_]*):{1,2}\s*$", dialogue))
+        for line_number, line in enumerate(dialogue.splitlines(), 1):
+            instruction = line.strip().split(" ", 1)[0]
+            if instruction not in ("msgbox", "message", "trainerbattle_single"):
+                continue
+            references = re.findall(r"\bEryon[A-Za-z0-9_]*_Text_[A-Za-z0-9_]+\b", line)
+            for reference in references:
+                if reference not in labels:
+                    errors.append(f"{name}:{line_number}: missing dialogue label {reference}")
+
     maps = {name: load(f"data/maps/{name}/map.json") for name in NAMES}
     ids = {m["id"]: name for name, m in maps.items()}
     # A misplaced event can be unreachable or cause invalid warp behavior.
