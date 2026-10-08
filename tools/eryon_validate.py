@@ -67,6 +67,12 @@ def main():
         errors.append("Lumina researcher lacks repeat-visit dialogue")
     if "goto_if_ge VAR_ERYON_LUMINA_CLUE_FOUND, 1" not in town_script:
         errors.append("Verdelume does not react to the Lumina clue")
+    if "EryonVerdelume_EventScript_Kael::" not in town_script:
+        errors.append("Verdelume is missing Kael's first encounter")
+    if "EryonVerdelume_EventScript_KaelClue::" not in town_script:
+        errors.append("Kael does not react to the Eclipse clue")
+    if not any(obj.get("script") == "EryonVerdelume_EventScript_Kael" for obj in maps["Eryon_Verdelume"]["object_events"]):
+        errors.append("Kael's NPC is missing from Verdelume")
     for name, m in maps.items():
         layout = layouts.get(m["layout"])
         if layout is None:
