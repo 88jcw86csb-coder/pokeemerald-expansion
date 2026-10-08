@@ -12,6 +12,28 @@ JUMP = re.compile(r"^\s*(?:goto|goto_if_eq|goto_if_ne|goto_if_ge|goto_if_le|goto
 
 
 class EryonEventFlowTests(unittest.TestCase):
+    def test_caravan_witness_is_placed_and_reacts_to_badge(self):
+        import json
+        town = json.loads(
+            (ROOT / "data/maps/Eryon_Verdelume/map.json").read_text(encoding="utf-8")
+        )
+        script_name = "EryonVerdelume_EventScript_CaravanWitness"
+        witnesses = [
+            obj for obj in town["object_events"] if obj["script"] == script_name
+        ]
+        self.assertEqual(len(witnesses), 1)
+        script = (ROOT / "data/maps/Eryon_Verdelume/scripts.inc").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn(script_name + "::", script)
+        self.assertIn(
+            "goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, "
+            "EryonVerdelume_EventScript_CaravanWitnessAfterBadge",
+            script,
+        )
+        self.assertIn("EryonVerdelume_Text_CaravanWitnessAfterBadge:", script)
+        self.assertIn("EryonVerdelume_Text_CaravanWitnessBeforeBadge:", script)
+
     def test_new_game_starts_in_eryon_village(self):
         source = (ROOT / "src/new_game.c").read_text(encoding="utf-8")
         warp_function = source.split("static void WarpToTruck(void)", 1)[1].split(
