@@ -26,6 +26,8 @@ def main():
     wild_group = next((group for group in wild["wild_encounter_groups"] if group["label"] == "gWildMonHeaders"), None)
     wild_by_map = {entry.get("map"): entry for entry in wild_group["encounters"]} if wild_group else {}
     species_constants = (ROOT / "include/constants/species.h").read_text(encoding="utf-8")
+    if not re.search(r"(?m)^\\s*SPECIES_RIOLU\\s*=", species_constants):
+        errors.append("Riolu starter species is not defined in the species enum")
     for route in ("Eryon_Rota01", "Eryon_BosqueDeLumina", "Eryon_Rota02"):
         map_id = maps[route]["id"]
         encounter = wild_by_map.get(map_id)
