@@ -29,3 +29,28 @@ EryonBosque_Text_ResearcherFollowup:
 	.string "A marca de eclipse ainda esta\n"
 	.string "aqui. Nao e um sinal natural.\p"
 	.string "Converse com o povo de Verdelume.$"
+
+@ A separate encounter hints at human interference without revealing the villains yet.
+EryonBosque_EventScript_SilentTraveler::
+	lock
+	faceplayer
+	goto_if_ge VAR_ERYON_LUMINA_CLUE_FOUND, 1, EryonBosque_EventScript_TravelerAfterClue
+	msgbox EryonBosque_Text_TravelerBeforeClue, MSGBOX_DEFAULT
+	release
+	end
+
+EryonBosque_EventScript_TravelerAfterClue::
+	msgbox EryonBosque_Text_TravelerAfterClue, MSGBOX_DEFAULT
+	release
+	end
+
+EryonBosque_Text_TravelerBeforeClue:
+	.string "VIAJANTE: Nao siga as luzes\\n"
+	.string "que surgem ao anoitecer.\\p"
+	.string "Vi pessoas levando caixas para\\n"
+	.string "dentro da mata. Estranho, nao?$"
+
+EryonBosque_Text_TravelerAfterClue:
+	.string "VIAJANTE: A marca nas pedras?\\p"
+	.string "As caixas tinham o mesmo sinal.\\n"
+	.string "Nao pareciam pesquisadores.$"
