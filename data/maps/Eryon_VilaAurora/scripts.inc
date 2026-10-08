@@ -6,9 +6,20 @@ EryonVilaAurora_EventScript_ProfessorElya::
 	goto_if_ge VAR_ERYON_STARTER_RECEIVED, 1, EryonVilaAurora_EventScript_ElyaAfterStarter
 	msgbox EryonVilaAurora_Text_ElyaIntroduction, MSGBOX_DEFAULT
 	givemon SPECIES_RIOLU, 5
-	goto_if_eq VAR_RESULT, FALSE, EryonVilaAurora_EventScript_PartyFull
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, EryonVilaAurora_EventScript_RioluToParty
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, EryonVilaAurora_EventScript_RioluToPC
+	goto EryonVilaAurora_EventScript_PartyFull
+	end
+
+EryonVilaAurora_EventScript_RioluToParty::
 	setvar VAR_ERYON_STARTER_RECEIVED, 1
 	msgbox EryonVilaAurora_Text_RioluReceived, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVilaAurora_EventScript_RioluToPC::
+	setvar VAR_ERYON_STARTER_RECEIVED, 1
+	msgbox EryonVilaAurora_Text_RioluSentToPC, MSGBOX_DEFAULT
 	release
 	end
 
@@ -31,6 +42,9 @@ EryonVilaAurora_Text_ElyaIntroduction:
 EryonVilaAurora_Text_RioluReceived:
 	.string "Voce recebeu RIOLU!\p"
 	.string "A sua jornada comeca agora.$"
+
+EryonVilaAurora_Text_RioluSentToPC:
+	.string "RIOLU foi enviado ao PC!$"
 
 EryonVilaAurora_Text_PartyFull:
 	.string "Sua equipe esta cheia.\n"
