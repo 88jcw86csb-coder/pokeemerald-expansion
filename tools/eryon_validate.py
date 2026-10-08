@@ -133,6 +133,15 @@ def main():
     ):
         if required not in route01_script:
             errors.append(f"Route 01 explorer progress dialogue missing: {required}")
+    if not any(obj.get("script") == "EryonVerdelume_EventScript_Botanist" for obj in maps["Eryon_Verdelume"].get("object_events", [])):
+        errors.append("Verdelume: botanist NPC missing from map")
+    for required in (
+        "EryonVerdelume_EventScript_Botanist::",
+        "goto_if_ge VAR_ERYON_KAEL_BRIEFED, 1, EryonVerdelume_EventScript_BotanistAfterKael",
+        "goto_if_ge VAR_ERYON_LUMINA_CLUE_FOUND, 1, EryonVerdelume_EventScript_BotanistAfterClue",
+    ):
+        if required not in town_script:
+            errors.append(f"Verdelume: botanist dialogue missing: {required}")
     if "EryonVerdelume_EventScript_Kael::" not in town_script:
         errors.append("Verdelume is missing Kael's first encounter")
     if "EryonVerdelume_EventScript_KaelClue::" not in town_script:
