@@ -654,6 +654,18 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertIn("release", after)
         self.assertIn("EryonBosque_Text_TravelerAfterBadge:", forest)
 
+    def test_dialogue_references_resolve_to_local_labels(self):
+        for name in MAPS:
+            script = (ROOT / "data/maps" / name / "scripts.inc").read_text(encoding="utf-8")
+            labels = set(LABEL.findall(script))
+            for line_number, line in enumerate(script.splitlines(), 1):
+                instruction = line.strip().split(" ", 1)[0]
+                if instruction not in ("msgbox", "message", "trainerbattle_single"):
+                    continue
+                for reference in re.findall(r"\bEryon[A-Za-z0-9_]*_Text_[A-Za-z0-9_]+\b", line):
+                    with self.subTest(map=name, line=line_number, label=reference):
+                        self.assertIn(reference, labels)
+
     def test_dialogue_blocks_end_with_text_terminator(self):
         # Every contiguous sequence of .string fragments needs a final terminator.
         for name in MAPS:
