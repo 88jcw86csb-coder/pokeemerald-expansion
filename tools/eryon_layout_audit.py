@@ -84,8 +84,9 @@ def inspect():
                 if not connected_by_collision_bits(raw, width, height, a_pos, b_pos):
                     print(f"  WARNING: warp {a_index} to warp {b_index} has no "
                           "four-direction zero-collision route; inspect in Porymap")
-        # NPCs can be placed on blocked tiles; check that at least one
-        # neighboring tile is reachable from a clear warp or a clear NPC tile.
+        # Flag NPCs with no adjacent collision-free tile. This is only a
+        # local accessibility check, not a guarantee that the player can
+        # reach the NPC from a map entrance.
         for index, npc in enumerate(data.get("object_events", [])):
             x, y = npc["x"], npc["y"]
             if not (0 <= x < width and 0 <= y < height):
