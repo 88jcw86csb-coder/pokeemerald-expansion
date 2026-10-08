@@ -865,8 +865,9 @@
 //       MAX_TRAINERS_COUNT can be increased but will take up additional saveblock space
 
 #define TRAINER_ERYON_KAEL                    855
+#define TRAINER_ERYON_SCOUT                   856
 
-#define TRAINERS_COUNT_EMERALD     856
+#define TRAINERS_COUNT_EMERALD     857
 #define MAX_TRAINERS_COUNT_EMERALD 864
 
 #if IS_FRLG
