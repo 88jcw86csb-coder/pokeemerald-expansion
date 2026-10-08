@@ -10,6 +10,7 @@ Nenhuma ROM deve ser anunciada como final sem compilação, execução e valida�
 - [ ] Compilar a branch eryon-development sem erros
 - [ ] Verificar boot, novo jogo, spawn e travessia dos mapas em emulador
 - [ ] Conferir limites de layout, warps, scripts e colisões
+- [ ] Passar na validação de prontidão: `python3 tools/eryon_validate.py --strict-ready` (bloqueada até substituir terrenos herdados e verificar passagens de borda)
 
 ## Etapa 2 — Abertura jogável
 - [ ] Layouts originais de Vila Aurora, Rota 01, Bosque de Lúmina, Rota 02 e Verdelume
