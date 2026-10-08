@@ -48,9 +48,15 @@ EryonRota02_Text_RoadsideCacheEmpty:
 EryonRota02_EventScript_Cartographer::
 	lock
 	faceplayer
+	goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonRota02_EventScript_CartographerAfterBadge
 	goto_if_ge VAR_ERYON_KAEL_BRIEFED, 1, EryonRota02_EventScript_CartographerAfterKael
 	goto_if_ge VAR_ERYON_LUMINA_CLUE_FOUND, 1, EryonRota02_EventScript_CartographerAfterClue
 	msgbox EryonRota02_Text_CartographerWelcome, MSGBOX_DEFAULT
+	release
+	end
+
+EryonRota02_EventScript_CartographerAfterBadge::
+	msgbox EryonRota02_Text_CartographerAfterBadge, MSGBOX_DEFAULT
 	release
 	end
 
@@ -78,3 +84,11 @@ EryonRota02_Text_CartographerAfterKael:
 	.string "Kael ouviu sua historia?\p"
 	.string "Vou comparar meu mapa com\n"
 	.string "os registros de Verdelume.$"
+
+@ The first badge unlocks an optional hint for the next stage of the journey.
+EryonRota02_Text_CartographerAfterBadge:
+	.string "Kael me contou da sua vitoria!\p"
+	.string "O mapa antigo mostra outra\n"
+	.string "trilha alem de Verdelume.\p"
+	.string "Ainda preciso confirmar\n"
+	.string "onde ela comeca.$"
