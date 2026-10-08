@@ -34,3 +34,27 @@ EryonVerdelume_Text_LocalKid:
 	.string "Kael treina Pokemon de planta!\p"
 	.string "Dizem que sua ROSERADE nunca\n"
 	.string "desiste de uma batalha.$"
+
+@ Kael's first encounter; the gym battle is not yet implemented.
+EryonVerdelume_EventScript_Kael::
+	lock
+	faceplayer
+	goto_if_ge VAR_ERYON_LUMINA_CLUE_FOUND, 1, EryonVerdelume_EventScript_KaelClue
+	msgbox EryonVerdelume_Text_KaelWelcome, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVerdelume_EventScript_KaelClue::
+	msgbox EryonVerdelume_Text_KaelClue, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVerdelume_Text_KaelWelcome:
+	.string "KAEL: Eu cuido das trilhas daqui.\p"
+	.string "Se visitar o Bosque de Lumina,\n"
+	.string "preste atencao nas pedras.$"
+
+EryonVerdelume_Text_KaelClue:
+	.string "KAEL: Entao viu a marca antiga!\p"
+	.string "A floresta precisa de ajuda.\n"
+	.string "Vamos investigar com cuidado.$"
