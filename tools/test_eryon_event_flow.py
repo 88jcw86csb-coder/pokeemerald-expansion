@@ -75,6 +75,16 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertEqual(forest["warp_events"][0]["dest_map"], "MAP_ERYON_ROTA01")
         self.assertEqual(int(forest["warp_events"][0]["dest_warp_id"]), 0)
 
+    def test_kael_badge_only_after_victory(self):
+        script = (ROOT / "data/maps/Eryon_Verdelume/scripts.inc").read_text()
+        entry = script.split("EryonVerdelume_EventScript_Kael::", 1)[1].split("EryonVerdelume_EventScript_KaelClue::", 1)[0]
+        victory = script.split("EryonVerdelume_EventScript_KaelVictory::", 1)[1].split("EryonVerdelume_EventScript_KaelAfterBattle::", 1)[0]
+        self.assertIn("goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonVerdelume_EventScript_KaelAfterBattle", entry)
+        self.assertIn("setvar VAR_ERYON_KAEL_DEFEATED, 1", victory)
+        self.assertEqual(script.count("setflag FLAG_BADGE01_GET"), 1)
+        self.assertIn("setflag FLAG_BADGE01_GET", victory)
+        self.assertIn("call Common_EventScript_PlayGymBadgeFanfare", victory)
+
     def test_no_duplicate_labels(self):
         for name in MAPS:
             script = (ROOT / "data/maps" / name / "scripts.inc").read_text()
