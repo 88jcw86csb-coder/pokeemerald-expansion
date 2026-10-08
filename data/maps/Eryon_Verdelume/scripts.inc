@@ -1,3 +1,6 @@
+Eryon_Verdelume_MapScripts::
+	.byte 0
+
 @ The town guide acknowledges the forest discovery without forcing progression.
 EryonVerdelume_EventScript_Guide::
 	lock
