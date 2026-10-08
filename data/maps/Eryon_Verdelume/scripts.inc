@@ -165,13 +165,13 @@ EryonVerdelume_EventScript_BotanistAfterKael::
 	end
 
 EryonVerdelume_Text_BotanistAfterBadge:
-	.string "BOTANICA: Depois da batalha,\\n"
-	.string "comparei amostras do bosque.\\p"
-	.string "As flores proximas a marca\\n"
-	.string "florescem fora de epoca.\\p"
-	.string "Alguem pode estar alterando\\n"
-	.string "a energia daquela floresta.\\p"
-	.string "Volte ao bosque e observe\\n"
+	.string "BOTANICA: Depois da batalha,\n"
+	.string "comparei amostras do bosque.\p"
+	.string "As flores proximas a marca\n"
+	.string "florescem fora de epoca.\p"
+	.string "Alguem pode estar alterando\n"
+	.string "a energia daquela floresta.\p"
+	.string "Volte ao bosque e observe\n"
 	.string "as pedras com atencao.$"
 
 EryonVerdelume_Text_BotanistWelcome:
@@ -198,8 +198,12 @@ EryonVerdelume_Text_KaelDefeat:
 
 EryonVerdelume_Text_KaelAfterBattle:
 	.string "KAEL: Foi uma bela batalha!\p"
-	.string "Continue explorando Eryon.\n"
-	.string "Ainda temos muito a descobrir.$"
+	.string "Um mensageiro viu carrocas\n"
+	.string "seguindo a trilha do leste.\p"
+	.string "Dizem que levam cristais\n"
+	.string "marcados com um eclipse.\p"
+	.string "Nao persiga ninguem sozinho.\n"
+	.string "Investigue as pistas primeiro.$"
 
 EryonVerdelume_Text_KaelBadge:
 	.string "KAEL: Voce conquistou a primeira\n"
