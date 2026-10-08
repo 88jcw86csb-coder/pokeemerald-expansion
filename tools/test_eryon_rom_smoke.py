@@ -13,6 +13,7 @@ def header_rom():
     rom[0xA0:0xA5] = b"ERYON"
     rom[0xAC:0xB0] = b"BPEE"
     rom[0xB2] = 0x96
+    rom[0xC0:0xC4] = bytes((0x01, 0x02, 0x03, 0x04))
     rom[0xBD] = (-sum(rom[0xA0:0xBD]) - 0x19) & 0xFF
     return rom
 
@@ -68,6 +69,24 @@ class EryonRomSmokeTests(unittest.TestCase):
             rom[0xBD] = (-sum(rom[0xA0:0xBD]) - 0x19) & 0xFF
             path.write_bytes(rom)
             with self.assertRaisesRegex(ValueError, "game code"):
+                validate_rom(path)
+
+    def test_blank_zero_payload_is_rejected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "empty-zero.gba"
+            rom = header_rom()
+            rom[0xC0:] = bytes(len(rom) - 0xC0)
+            path.write_bytes(rom)
+            with self.assertRaisesRegex(ValueError, "payload"):
+                validate_rom(path)
+
+    def test_blank_ff_payload_is_rejected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "empty-ff.gba"
+            rom = header_rom()
+            rom[0xC0:] = bytes((0xFF,)) * (len(rom) - 0xC0)
+            path.write_bytes(rom)
+            with self.assertRaisesRegex(ValueError, "payload"):
                 validate_rom(path)
 
     def test_header_only_file_is_rejected(self):
