@@ -45,14 +45,14 @@ EryonBosque_EventScript_TravelerAfterClue::
 	end
 
 EryonBosque_Text_TravelerBeforeClue:
-	.string "VIAJANTE: Nao siga as luzes\\n"
-	.string "que surgem ao anoitecer.\\p"
-	.string "Vi pessoas levando caixas para\\n"
+	.string "VIAJANTE: Nao siga as luzes\n"
+	.string "que surgem ao anoitecer.\p"
+	.string "Vi pessoas levando caixas para\n"
 	.string "dentro da mata. Estranho, nao?$"
 
 EryonBosque_Text_TravelerAfterClue:
-	.string "VIAJANTE: A marca nas pedras?\\p"
-	.string "As caixas tinham o mesmo sinal.\\n"
+	.string "VIAJANTE: A marca nas pedras?\p"
+	.string "As caixas tinham o mesmo sinal.\n"
 	.string "Nao pareciam pesquisadores.$"
 
 @ Environmental clue on an old stone, accessible independently of the researcher.
@@ -69,11 +69,11 @@ EryonBosque_EventScript_StoneRecognized::
 	end
 
 EryonBosque_Text_StoneUnknown:
-	.string "Uma pedra coberta de musgo.\\p"
-	.string "Ha um circulo dividido em\\n"
+	.string "Uma pedra coberta de musgo.\p"
+	.string "Ha um circulo dividido em\n"
 	.string "duas metades na superficie.$"
 
 EryonBosque_Text_StoneRecognized:
-	.string "E a mesma marca mencionada\\n"
-	.string "pelo pesquisador.\\p"
+	.string "E a mesma marca mencionada\n"
+	.string "pelo pesquisador.\p"
 	.string "Quem deixou esse simbolo aqui?$"
