@@ -85,6 +85,24 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertIn("setflag FLAG_BADGE01_GET", victory)
         self.assertIn("call Common_EventScript_PlayGymBadgeFanfare", victory)
 
+    def test_approved_gym_level_curve(self):
+        design = (ROOT / "docs/ERYON_DESIGN.md").read_text(encoding="utf-8")
+        expected = [
+            ("Kael", "Roserade", 18),
+            ("Lyra", "Jolteon", 26),
+            ("Bjorn", "Weavile", 33),
+            ("Tessa", "Armaldo", 39),
+            ("Nox", "Drapion", 45),
+            ("Ragna", "Infernape", 51),
+            ("Seraphine", "Gardevoir", 57),
+            ("Draven", "Garchomp", 64),
+        ]
+        section = design.split("## Ginásios e balanceamento aprovado", 1)[1].split("\n## ", 1)[0]
+        rows = re.findall(r"(?m)^\\|\\s*([1-8])\\s*\\|\\s*([^|]+)\\|[^\\n]*?\\|\\s*([^|]+)\\|\\s*(\\d+)\\s*\\|\\s*$", section)
+        actual = [(name.strip(), ace.strip(), int(level)) for _, name, ace, level in rows]
+        self.assertEqual(actual, expected)
+        self.assertEqual([int(number) for number, *_ in rows], list(range(1, 9)))
+
     def test_no_duplicate_text_symbols(self):
         for name in MAPS:
             script = (ROOT / "data/maps" / name / "scripts.inc").read_text()
