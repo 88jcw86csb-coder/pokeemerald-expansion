@@ -118,9 +118,13 @@ def main():
                 reverse = target["warp_events"][int(warp["dest_warp_id"])]
                 if reverse["dest_map"] != m["id"] or int(reverse["dest_warp_id"]) != index:
                     errors.append(f"{name}: warp {index} has no reciprocal return warp")
-        # Validate interactive background events as rigorously as NPC scripts.
+        # Validate all map scripts once, even on maps with no NPCs.
         script_file = ROOT / "data/maps" / name / "scripts.inc"
         script_text = script_file.read_text(encoding="utf-8") if script_file.exists() else ""
+        if f"data/maps/{name}/scripts.inc" not in scripts:
+            errors.append(f"{name}: map scripts not included by data/event_scripts.s")
+        if "\\\\p" in script_text or "\\\\n" in script_text:
+            errors.append(f"{name}: doubled dialogue escapes")
         for index, bg in enumerate(m.get("bg_events", [])):
             if not (0 <= bg["x"] < width and 0 <= bg["y"] < height):
                 errors.append(f"{name}: background event {index} outside {width}x{height}")
@@ -131,21 +135,13 @@ def main():
             elif bg.get("type") == "hidden_item":
                 if not bg.get("item") or not bg.get("flag"):
                     errors.append(f"{name}: incomplete hidden item {index}")
-        if "\\\\p" in script_text or "\\\\n" in script_text:
-            errors.append(f"{name}: doubled dialogue escapes")
         for index, obj in enumerate(m.get("object_events", [])):
             if not (0 <= obj["x"] < width and 0 <= obj["y"] < height):
                 errors.append(f"{name}: NPC {index} outside {width}x{height}")
-            if obj["script"] != "0x0":
-                script_file = ROOT / "data/maps" / name / "scripts.inc"
-                if not script_file.exists() or not re.search(r"(?m)^" + re.escape(obj["script"]) + r"::", script_file.read_text(encoding="utf-8")):
-                    errors.append(f"{name}: missing NPC script {obj['script']}")
-                if script_file.exists():
-                    script_text = script_file.read_text(encoding="utf-8")
-                    if "\\\\p" in script_text or "\\\\n" in script_text:
-                        errors.append(f"{name}: doubled dialogue escapes")
-                if f'data/maps/{name}/scripts.inc' not in scripts:
-                    errors.append(f"{name}: NPC scripts not included by data/event_scripts.s")
+            if obj.get("script") != "0x0":
+                label = obj.get("script", "")
+                if not re.search(r"(?m)^" + re.escape(label) + r"::", script_text):
+                    errors.append(f"{name}: missing NPC script {label}")
     if errors:
         for error in errors:
             print("ERROR:", error)
