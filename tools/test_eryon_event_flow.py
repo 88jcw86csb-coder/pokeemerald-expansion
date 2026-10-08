@@ -211,6 +211,33 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertLess(entry.index("VAR_ERYON_KAEL_DEFEATED"), entry.index("VAR_ERYON_LUMINA_CLUE_FOUND"))
         self.assertIn("EryonVerdelume_Text_GuideBadge:", script)
 
+    def test_eclipse_scout_has_three_nonblocking_story_stages(self):
+        import json
+        map_data = json.loads((ROOT / "data/maps/Eryon_BosqueDeLumina/map.json").read_text(encoding="utf-8"))
+        scouts = [
+            event for event in map_data["object_events"]
+            if event["script"] == "EryonBosque_EventScript_EclipseScout"
+        ]
+        self.assertEqual(len(scouts), 1)
+        script = (ROOT / "data/maps/Eryon_BosqueDeLumina/scripts.inc").read_text(encoding="utf-8")
+        entry = script.split("EryonBosque_EventScript_EclipseScout::", 1)[1].split(
+            "EryonBosque_EventScript_EclipseScoutAfterClue::", 1
+        )[0]
+        self.assertIn("goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonBosque_EventScript_EclipseScoutAfterBadge", entry)
+        self.assertIn("goto_if_ge VAR_ERYON_LUMINA_CLUE_FOUND, 1, EryonBosque_EventScript_EclipseScoutAfterClue", entry)
+        self.assertLess(entry.index("VAR_ERYON_KAEL_DEFEATED"), entry.index("VAR_ERYON_LUMINA_CLUE_FOUND"))
+        for label in (
+            "EryonBosque_EventScript_EclipseScoutAfterClue::",
+            "EryonBosque_EventScript_EclipseScoutAfterBadge::",
+        ):
+            self.assertIn(label, script)
+        for label in (
+            "EryonBosque_Text_EclipseScoutBeforeClue:",
+            "EryonBosque_Text_EclipseScoutAfterClue:",
+            "EryonBosque_Text_EclipseScoutAfterBadge:",
+        ):
+            self.assertIn(label, script)
+
     def test_forest_researcher_unlocks_new_clue_after_badge(self):
         script = (ROOT / "data/maps/Eryon_BosqueDeLumina/scripts.inc").read_text(encoding="utf-8")
         entry = script.split("EryonBosque_EventScript_Researcher::", 1)[1].split(
