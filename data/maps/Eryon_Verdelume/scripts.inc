@@ -153,11 +153,6 @@ EryonVerdelume_Text_KaelDefeat:
 	.string "KAEL: Voce e mais forte do que\n"
 	.string "eu imaginava!$"
 
-EryonVerdelume_Text_KaelAfterBattle:
-	.string "KAEL: Continue investigando.\p"
-	.string "A floresta guarda um segredo\n"
-	.string "maior do que pensamos.$"
-
 EryonVerdelume_Text_KaelChallenge:
 	.string "KAEL: Quero ver o que aprendeu\n"
 	.string "em sua viagem pelo bosque!$"
