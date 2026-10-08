@@ -131,6 +131,18 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertIn("setflag FLAG_BADGE01_GET", victory)
         self.assertIn("call Common_EventScript_PlayGymBadgeFanfare", victory)
 
+    def test_guide_reacts_to_first_badge(self):
+        script = (ROOT / "data/maps/Eryon_Verdelume/scripts.inc").read_text(encoding="utf-8")
+        entry = script.split("EryonVerdelume_EventScript_Guide::", 1)[1].split(
+            "EryonVerdelume_EventScript_GuideBadge::", 1
+        )[0]
+        self.assertIn(
+            "goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonVerdelume_EventScript_GuideBadge",
+            entry,
+        )
+        self.assertLess(entry.index("VAR_ERYON_KAEL_DEFEATED"), entry.index("VAR_ERYON_LUMINA_CLUE_FOUND"))
+        self.assertIn("EryonVerdelume_Text_GuideBadge:", script)
+
     def test_botanist_reacts_to_first_badge(self):
         script = (ROOT / "data/maps/Eryon_Verdelume/scripts.inc").read_text(encoding="utf-8")
         entry = script.split("EryonVerdelume_EventScript_Botanist::", 1)[1].split("EryonVerdelume_EventScript_BotanistAfterBadge::", 1)[0]
