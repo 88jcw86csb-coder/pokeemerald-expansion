@@ -33,6 +33,14 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertLess(10, layout["width"])
         self.assertLess(10, layout["height"])
         self.assertEqual(village["id"], "MAP_ERYON_VILA_AURORA")
+        # Starting on an NPC or a warp can block or immediately move the player.
+        occupied = [
+            (event["x"], event["y"])
+            for kind in ("object_events", "warp_events", "bg_events", "coord_events")
+            for event in village.get(kind, [])
+        ]
+        self.assertNotIn((10, 10), occupied, "New-game spawn overlaps a map event")
+
 
     def test_jump_destinations_exist(self):
         for name in MAPS:
