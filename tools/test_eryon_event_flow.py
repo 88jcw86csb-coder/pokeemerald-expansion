@@ -12,6 +12,28 @@ JUMP = re.compile(r"^\s*(?:goto|goto_if_eq|goto_if_ne|goto_if_ge|goto_if_le|goto
 
 
 class EryonEventFlowTests(unittest.TestCase):
+    def test_new_game_starts_in_eryon_village(self):
+        source = (ROOT / "src/new_game.c").read_text(encoding="utf-8")
+        warp_function = source.split("static void WarpToTruck(void)", 1)[1].split(
+            "void Sav2_ClearSetDefault(void)", 1
+        )[0]
+        self.assertIn(
+            "SetWarpDestination(MAP_GROUP(MAP_ERYON_VILA_AURORA), "
+            "MAP_NUM(MAP_ERYON_VILA_AURORA), WARP_ID_NONE, 10, 10)",
+            warp_function,
+        )
+        import json
+        village = json.loads(
+            (ROOT / "data/maps/Eryon_VilaAurora/map.json").read_text(encoding="utf-8")
+        )
+        layouts = json.loads(
+            (ROOT / "data/layouts/layouts.json").read_text(encoding="utf-8")
+        )["layouts"]
+        layout = next(entry for entry in layouts if entry["id"] == village["layout"])
+        self.assertLess(10, layout["width"])
+        self.assertLess(10, layout["height"])
+        self.assertEqual(village["id"], "MAP_ERYON_VILA_AURORA")
+
     def test_jump_destinations_exist(self):
         for name in MAPS:
             script = (ROOT / "data/maps" / name / "scripts.inc").read_text()
