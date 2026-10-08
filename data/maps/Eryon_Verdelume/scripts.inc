@@ -60,6 +60,10 @@ EryonVerdelume_EventScript_KaelFollowup::
 
 EryonVerdelume_EventScript_KaelVictory::
 	setvar VAR_ERYON_KAEL_DEFEATED, 1
+	message EryonVerdelume_Text_KaelBadge
+	waitmessage
+	call Common_EventScript_PlayGymBadgeFanfare
+	setflag FLAG_BADGE01_GET
 	msgbox EryonVerdelume_Text_KaelAfterBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -165,3 +169,7 @@ EryonVerdelume_Text_KaelAfterBattle:
 	.string "KAEL: Foi uma bela batalha!\p"
 	.string "Continue explorando Eryon.\n"
 	.string "Ainda temos muito a descobrir.$"
+
+EryonVerdelume_Text_KaelBadge:
+	.string "KAEL: Voce conquistou a primeira\n"
+	.string "insignia da regiao de Eryon!$"
