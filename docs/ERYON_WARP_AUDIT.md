@@ -1,40 +1,32 @@
-# Eryon — auditoria estática de transições da abertura
+# Eryon — auditoria das transições iniciais
 
-Data: 2026-10-08. Escopo: os cinco primeiros mapas na branch `eryon-development`.
+Atualizado em 2026-10-08 a partir dos arquivos `map.json` da branch `eryon-development`. Este documento descreve o estado atual dos dados, não uma prova de funcionamento no emulador.
 
-## Cadeia de ida e volta
+## Transições declaradas
 
-| Origem | Warp | Coordenada | Destino | Warp destino | Retorno correspondente |
-|---|---:|---|---|---:|---|
-| Vila Aurora | 0 | (19,10) | Rota 01 | 0 | Sim |
-| Rota 01 | 0 | (0,10) | Vila Aurora | 0 | Sim |
-| Rota 01 | 1 | (19,10) | Bosque de Lúmina | 0 | Sim |
-| Bosque de Lúmina | 0 | (0,22) | Rota 01 | 1 | Sim |
-| Bosque de Lúmina | 1 | (47,22) | Rota 02 | 0 | Sim |
-| Rota 02 | 0 | (0,10) | Bosque de Lúmina | 1 | Sim |
-| Rota 02 | 1 | (49,10) | Verdelume | 0 | Sim |
-| Verdelume | 0 | (0,30) | Rota 02 | 1 | Sim |
+| Origem | Tipo | Coordenada | Destino | Índice de destino | Retorno declarado |
+|---|---|---|---|---:|---|
+| Vila Aurora | conexão de mapa (norte) | borda | Rota 01 | — | conexão sul na Rota 01 |
+| Rota 01 | warp 0 | (19,10) | Bosque de Lúmina | 0 | warp 0 do Bosque |
+| Bosque de Lúmina | warp 0 | (16,38) | Rota 01 | 0 | warp 0 da Rota 01 |
+| Bosque de Lúmina | warp 1 | (14,5) | Rota 02 | 0 | warp 0 da Rota 02 |
+| Rota 02 | warp 0 | (0,10) | Bosque de Lúmina | 1 | warp 1 do Bosque |
+| Rota 02 | warp 1 | (49,10) | Verdelume | 0 | warp 0 de Verdelume |
+| Verdelume | warp 0 | (0,30) | Rota 02 | 1 | warp 1 da Rota 02 |
+| Verdelume | warp 1 | (39,30) | Rota 03 | 0 | conferir continuidade com Rota 03 |
 
-## Limites declarados
+**Importante:** Vila Aurora e Rota 01 usam `connections` entre si, não um par de `warp_events`. Uma conexão de borda depende da geometria e da passagem do motor; não pode ser validada como se fosse um warp de porta.
 
-| Mapa | Dimensões | Eventos de warp dentro dos limites? |
-|---|---|---|
-| Vila Aurora | 20 × 20 | Sim |
-| Rota 01 | 20 × 20 | Sim |
-| Bosque de Lúmina | 48 × 44 | Sim |
-| Rota 02 | 50 × 20 | Sim |
-| Verdelume | 40 × 60 | Sim |
+## Estado da base
 
-## Bloqueios ainda presentes
+- Os cinco mapas já têm NPCs e/ou placas registrados em `object_events` e `bg_events`.
+- Os layouts ainda reutilizam terreno herdado de Hoenn; posições e índices corretos não garantem acesso físico aos pontos de passagem.
+- A compilação GBA passou na execução GitHub Actions [37841661556](https://github.com/88jcw86csb-coder/pokeemerald-expansion/actions/runs/37841661556), com artefato `eryon-gba`. Isso **não** comprova que as transições funcionem no emulador.
 
-1. **Limite de mapa não equivale a tile atravessável.** Os warps estão nas bordas extremas e podem estar sobre tiles bloqueados ou inacessíveis.
-2. Os cinco layouts ainda reutilizam blocos de mapas de Hoenn, não terrenos originais de Eryon.
-3. A existência de pares de warps não comprova que o motor permitirá a transição.
-4. Não há nenhuma execução do GitHub Actions registrada para a branch no momento da auditoria (`total_count: 0`). Nenhuma ROM compilada ou teste no Delta está confirmado.
-5. Antes de adicionar novos warps, criar os layouts originais e verificar o ponto de chegada em cada sentido no emulador.
+## Critérios para aprovação da navegação
 
-## Resultado
-
-**Verificado estaticamente:** todos os oito warps estão dentro dos limites declarados e apontam para índices existentes com retorno correspondente.
-
-**Não verificado:** colisões, tiles, acessibilidade, geração de mapas, compilação e comportamento em tempo de execução.
+1. Substituir os blocos herdados por terrenos originais, mantendo limites e tiles de passagem compatíveis.
+2. Testar os dois sentidos de Vila Aurora ↔ Rota 01 como **conexão de borda**.
+3. Testar os dois sentidos de Rota 01 ↔ Bosque, Bosque ↔ Rota 02 e Rota 02 ↔ Verdelume como **warps**.
+4. Conferir as posições de chegada, colisão, orientação, NPCs e salvamento em emulador.
+5. Registrar resultados de cada passagem; até lá, classificar a navegação como **não validada**.
