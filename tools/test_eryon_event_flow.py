@@ -582,17 +582,21 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertIn("não são espécies de Pokémon", checklist)
         self.assertIn("lendários oficiais até Kalos", checklist)
 
-    def test_route02_healer_dialogue_uses_valid_line_breaks(self):
-        script = (ROOT / "data/maps/Eryon_Rota02/scripts.inc").read_text(encoding="utf-8")
-        for label in (
-            "EryonRota02_Text_HikerHealOffer:",
-            "EryonRota02_Text_HikerHealed:",
-            "EryonRota02_Text_HikerDeclined:",
-        ):
-            section = script.split(label, 1)[1].split("\\n\\n", 1)[0]
-            with self.subTest(label=label):
-                self.assertNotIn(chr(92) * 2 + "n", section)
-                self.assertIn(chr(92) + "n", section)
+    def test_eryon_dialogues_have_no_double_escaped_controls(self):
+        # GBA text control codes must use a single backslash in .string lines.
+        # A doubled backslash can show literal escapes or break text assembly.
+        for name in MAPS:
+            script = (ROOT / "data/maps" / name / "scripts.inc").read_text(encoding="utf-8")
+            for line_number, line in enumerate(script.splitlines(), start=1):
+                if not line.lstrip().startswith(".string "):
+                    continue
+                with self.subTest(map=name, line=line_number):
+                    for control in ("n", "p", "l"):
+                        self.assertNotIn(
+                            chr(92) * 2 + control,
+                            line,
+                            f"Double-escaped GBA text control in {name}:{line_number}",
+                        )
 
     def test_no_duplicate_text_symbols(self):
         for name in MAPS:
