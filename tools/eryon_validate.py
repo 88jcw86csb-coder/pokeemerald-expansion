@@ -101,6 +101,23 @@ def main():
             else:
                 occupied[pos] = index
 
+    # Check map IDs and script registrations against the complete Eryon map group.
+    if len(ids) != len(maps):
+        errors.append("Eryon: duplicate map IDs in the region")
+    event_source = (ROOT / "data/event_scripts.s").read_text(encoding="utf-8")
+    for name in NAMES:
+        include = f'data/maps/{name}/scripts.inc'
+        if event_source.count(include) != 1:
+            errors.append(f"{name}: expected exactly one central event script include")
+        map_data = maps[name]
+        script_source = (ROOT / include).read_text(encoding="utf-8")
+        labels = set(re.findall(r"(?m)^([A-Za-z][A-Za-z0-9_]*):{1,2}\\s*$", script_source))
+        for kind in ("object_events", "bg_events", "coord_events"):
+            for index, event in enumerate(map_data.get(kind, [])):
+                label = event.get("script", "")
+                if label.startswith("Eryon") and label not in labels:
+                    errors.append(f"{name}: {kind}[{index}] missing script {label}")
+
     # Every in-region warp must target a real warp that points back.
     for name, map_data in maps.items():
         for index, warp in enumerate(map_data.get("warp_events", [])):
