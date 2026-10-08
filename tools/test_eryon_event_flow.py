@@ -71,12 +71,12 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertIn("setvar VAR_ERYON_KAEL_DEFEATED, 1", kael)
 
     def test_all_eryon_battle_trainers_have_unique_party_and_id(self):
-        scripts = "\\n".join(
+        scripts = "\n".join(
             (ROOT / "data/maps" / name / "scripts.inc").read_text()
             for name in MAPS
         )
         referenced = set(re.findall(
-            r"\\btrainerbattle_single\\s+(TRAINER_ERYON_[A-Z0-9_]+)",
+            r"\btrainerbattle_single\s+(TRAINER_ERYON_[A-Z0-9_]+)",
             scripts,
         ))
         self.assertGreaterEqual(len(referenced), 3)
@@ -84,7 +84,7 @@ class EryonEventFlowTests(unittest.TestCase):
         ids = {
             name: int(value)
             for name, value in re.findall(
-                r"(?m)^#define\\s+(TRAINER_ERYON_[A-Z0-9_]+)\\s+(\\d+)\\s*$",
+                r"(?m)^#define\s+(TRAINER_ERYON_[A-Z0-9_]+)\s+(\d+)\s*$",
                 opponents,
             )
         }
@@ -95,10 +95,10 @@ class EryonEventFlowTests(unittest.TestCase):
                 self.assertEqual(party.count(f"=== {name} ==="), 1)
         self.assertEqual(len(ids), len(set(ids.values())))
         count = int(re.search(
-            r"(?m)^#define TRAINERS_COUNT_EMERALD\\s+(\\d+)", opponents
+            r"(?m)^#define TRAINERS_COUNT_EMERALD\s+(\d+)", opponents
         ).group(1))
         capacity = int(re.search(
-            r"(?m)^#define MAX_TRAINERS_COUNT_EMERALD\\s+(\\d+)", opponents
+            r"(?m)^#define MAX_TRAINERS_COUNT_EMERALD\s+(\d+)", opponents
         ).group(1))
         self.assertLessEqual(count, capacity)
         self.assertLess(max(ids.values()), count)
