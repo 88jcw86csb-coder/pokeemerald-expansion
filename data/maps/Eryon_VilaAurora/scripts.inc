@@ -30,7 +30,14 @@ EryonVilaAurora_EventScript_PartyFull::
 
 EryonVilaAurora_EventScript_ElyaAfterStarter::
 	goto_if_eq VAR_ERYON_CAPTURE_KIT_RECEIVED, 0, EryonVilaAurora_EventScript_CaptureKit
+	goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonVilaAurora_EventScript_ElyaAfterBadge
 	msgbox EryonVilaAurora_Text_ElyaAfterStarter, MSGBOX_DEFAULT
+	release
+	end
+
+@ Optional homecoming after the first badge; no additional rewards or forced travel.
+EryonVilaAurora_EventScript_ElyaAfterBadge::
+	msgbox EryonVilaAurora_Text_ElyaAfterBadge, MSGBOX_DEFAULT
 	release
 	end
 
@@ -70,6 +77,14 @@ EryonVilaAurora_Text_ElyaAfterStarter:
 	.string "PROF. ELYA: O Bosque de Lumina\n"
 	.string "fica alem da Rota 01.\p"
 	.string "Explore com calma e cuide de RIOLU!$"
+
+EryonVilaAurora_Text_ElyaAfterBadge:
+	.string "PROF. ELYA: Sua primeira\n"
+	.string "insignia! Estou orgulhosa.\p"
+	.string "A marca no bosque ainda\n"
+	.string "precisa ser investigada.\p"
+	.string "Volte sempre que quiser\n"
+	.string "conversar sobre sua jornada.$"
 
 EryonVilaAurora_Text_CaptureKit:
 	.string "PROF. ELYA: Leve estas cinco\n"
