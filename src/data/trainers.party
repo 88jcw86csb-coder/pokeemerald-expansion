@@ -16907,3 +16907,25 @@ Level: 18
 - Mega Drain
 - Poison Sting
 - Growth
+
+=== TRAINER_ERYON_SCOUT ===
+Name: VIGIA
+Class: PkMn Trainer
+Pic: Team Aqua Grunt M
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Poochyena
+Level: 12
+- Bite
+- Howl
+- Sand Attack
+- Tackle
+
+Zubat
+Level: 13
+- Astonish
+- Supersonic
+- Leech Life
+- Bite
