@@ -1,3 +1,6 @@
+Eryon_BosqueDeLumina_MapScripts::
+	.byte 0
+
 @ First persistent clue of the Eclipse mystery. The player can revisit this researcher.
 EryonBosque_EventScript_Researcher::
 	lock
