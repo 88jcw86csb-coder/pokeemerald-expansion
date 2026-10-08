@@ -147,7 +147,7 @@ EryonBosque_EventScript_EclipseScout::
 	end
 
 EryonBosque_EventScript_EclipseScoutAfterClue::
-	trainerbattle_single TRAINER_ERYON_SCOUT, EryonBosque_Text_EclipseScoutChallenge, EryonBosque_Text_EclipseScoutDefeat, EryonBosque_EventScript_EclipseScoutVictory, NO_MUSIC
+	trainerbattle_single TRAINER_ERYON_SCOUT, EryonBosque_Text_EclipseScoutChallenge, EryonBosque_Text_EclipseScoutDefeat, EryonBosque_EventScript_EclipseScoutVictory, FALSE
 	msgbox EryonBosque_Text_EclipseScoutAfterClue, MSGBOX_DEFAULT
 	release
 	end
@@ -159,7 +159,7 @@ EryonBosque_EventScript_EclipseScoutVictory::
 
 @ The optional battle remains available even if Kael was defeated first.
 EryonBosque_EventScript_EclipseScoutAfterBadge::
-	trainerbattle_single TRAINER_ERYON_SCOUT, EryonBosque_Text_EclipseScoutChallenge, EryonBosque_Text_EclipseScoutDefeat, EryonBosque_EventScript_EclipseScoutVictory, NO_MUSIC
+	trainerbattle_single TRAINER_ERYON_SCOUT, EryonBosque_Text_EclipseScoutChallenge, EryonBosque_Text_EclipseScoutDefeat, EryonBosque_EventScript_EclipseScoutVictory, FALSE
 	msgbox EryonBosque_Text_EclipseScoutAfterBadge, MSGBOX_DEFAULT
 	release
 	end
