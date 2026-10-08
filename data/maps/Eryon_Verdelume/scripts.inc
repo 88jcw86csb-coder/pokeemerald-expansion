@@ -197,3 +197,36 @@ EryonVerdelume_Text_KaelAfterBattle:
 EryonVerdelume_Text_KaelBadge:
 	.string "KAEL: Voce conquistou a primeira\n"
 	.string "insignia da regiao de Eryon!$"
+
+
+@ Free, repeatable healing in Verdelume for early-game exploration.
+@ This service is optional and does not change story progress.
+EryonVerdelume_EventScript_FieldMedic::
+	lock
+	faceplayer
+	msgbox EryonVerdelume_Text_FieldMedicWelcome, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonVerdelume_EventScript_FieldMedicDecline
+	special HealPlayerParty
+	msgbox EryonVerdelume_Text_FieldMedicHealed, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVerdelume_EventScript_FieldMedicDecline::
+	msgbox EryonVerdelume_Text_FieldMedicDecline, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVerdelume_Text_FieldMedicWelcome:
+	.string "SOCORRISTA: Suas viagens pelo\n"
+	.string "bosque podem ser cansativas.\p"
+	.string "Quer que eu cuide da sua\n"
+	.string "equipe Pokemon?$"
+
+EryonVerdelume_Text_FieldMedicHealed:
+	.string "Pronto! Seus Pokemon estao\n"
+	.string "descansados e saudaveis.\p"
+	.string "Boa sorte na sua jornada!$"
+
+EryonVerdelume_Text_FieldMedicDecline:
+	.string "Tudo bem! Volte se precisar\n"
+	.string "de ajuda com sua equipe.$"
