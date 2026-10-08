@@ -32,6 +32,34 @@ def main():
 
     maps = {name: load(f"data/maps/{name}/map.json") for name in NAMES}
     ids = {m["id"]: name for name, m in maps.items()}
+    # A misplaced event can be unreachable or cause invalid warp behavior.
+    for name, map_data in maps.items():
+        layout = layouts.get(map_data["layout"])
+        if layout is None:
+            errors.append(f"{name}: unknown map layout {map_data['layout']}")
+            continue
+        width, height = layout["width"], layout["height"]
+        for kind in ("object_events", "bg_events", "warp_events", "coord_events"):
+            for index, event in enumerate(map_data.get(kind, [])):
+                x, y = event["x"], event["y"]
+                if not (0 <= x < width and 0 <= y < height):
+                    errors.append(
+                        f"{name}: {kind}[{index}] at ({x},{y}) outside {width}x{height} layout"
+                    )
+    # Every in-region warp must target a real warp that points back.
+    for name, map_data in maps.items():
+        for index, warp in enumerate(map_data.get("warp_events", [])):
+            target_name = ids.get(warp["dest_map"])
+            if target_name is None:
+                continue
+            target_warps = maps[target_name].get("warp_events", [])
+            target_index = int(warp["dest_warp_id"])
+            if not 0 <= target_index < len(target_warps):
+                errors.append(f"{name}: warp {index} has invalid destination index {target_index}")
+                continue
+            reverse = target_warps[target_index]
+            if reverse["dest_map"] != map_data["id"] or int(reverse["dest_warp_id"]) != index:
+                errors.append(f"{name}: warp {index} does not have a reciprocal destination")
     if set(groups.get("gMapGroup_Eryon", [])) != set(NAMES):
         errors.append("Eryon map group does not match opening map files")
     wild = load("src/data/wild_encounters.json")
