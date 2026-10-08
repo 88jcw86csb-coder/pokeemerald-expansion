@@ -16996,3 +16996,24 @@ Level: 21
 - Howl
 - Sand Attack
 - Tackle
+
+
+=== TRAINER_ERYON_ROUTE01_YOUNGSTER ===
+Name: NICO
+Class: Youngster
+Pic: Youngster
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Zigzagoon
+Level: 6
+- Tackle
+- Growl
+- Tail Whip
+
+Pidgey
+Level: 7
+- Tackle
+- Sand Attack
+- Gust
