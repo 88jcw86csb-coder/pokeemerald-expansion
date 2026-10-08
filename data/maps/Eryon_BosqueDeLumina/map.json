@@ -62,15 +62,15 @@
   "connections": null,
   "warp_events": [
     {
-      "x": 0,
-      "y": 22,
+      "x": 16,
+      "y": 38,
       "elevation": 0,
       "dest_map": "MAP_ERYON_ROTA01",
       "dest_warp_id": "1"
     },
     {
-      "x": 47,
-      "y": 22,
+      "x": 14,
+      "y": 5,
       "elevation": 0,
       "dest_map": "MAP_ERYON_ROTA02",
       "dest_warp_id": "0"
