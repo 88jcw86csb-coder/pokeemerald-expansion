@@ -131,3 +131,27 @@ EryonSerra_Text_AbandonedCampBadge:
 	.string "simbolo de eclipse.\p"
 	.string "Ha sinais de cristais que\n"
 	.string "foram levados daqui.$"
+
+EryonSerra_EventScript_EclipseScout::
+	lock
+	faceplayer
+	trainerbattle_single TRAINER_ERYON_SERRA_ECLIPSE, EryonSerra_Text_TrainerChallenge, EryonSerra_Text_TrainerDefeat, EryonSerra_EventScript_TrainerVictory, FALSE
+	msgbox EryonSerra_Text_TrainerAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonSerra_EventScript_TrainerVictory::
+	msgbox EryonSerra_Text_TrainerAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonSerra_Text_TrainerChallenge:
+	.string "VIGIA: Ninguem deve ver\n"
+	.string "o que levamos da serra!$"
+
+EryonSerra_Text_TrainerDefeat:
+	.string "VIGIA: Fui derrotado!$"
+
+EryonSerra_Text_TrainerAfter:
+	.string "VIGIA: Voce nao deveria\n"
+	.string "ter chegado tao longe.$"
