@@ -176,8 +176,8 @@ def main():
         errors.append("Kael trainer party is missing")
     else:
         kael_party = trainer_parties.split("=== TRAINER_ERYON_KAEL ===", 1)[1].split("\\n=== ", 1)[0]
-        if not re.search(r"(?m)^Roserade\s*\nLevel:\s*14\s*$", kael_party):
-            errors.append("Kael must have level 14 Roserade")
+        if not re.search(r"(?m)^Roserade\s*\nLevel:\s*18\s*$", kael_party):
+            errors.append("Kael must have level 18 Roserade")
     if "trainerbattle_single TRAINER_ERYON_KAEL" not in town_script:
         errors.append("Kael battle is not linked to his NPC")
     if "setvar VAR_ERYON_KAEL_DEFEATED, 1" not in town_script:
