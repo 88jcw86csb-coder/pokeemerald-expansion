@@ -163,9 +163,14 @@ EryonVerdelume_EventScript_BotanistAfterKael::
 	end
 
 EryonVerdelume_Text_BotanistAfterBadge:
-	.string "Parabens pela insignia!\p"
-	.string "Kael contou sobre a marca.\n"
-	.string "Ainda ha pistas no bosque.$"
+	.string "BOTANICA: Depois da batalha,\\n"
+	.string "comparei amostras do bosque.\\p"
+	.string "As flores proximas a marca\\n"
+	.string "florescem fora de epoca.\\p"
+	.string "Alguem pode estar alterando\\n"
+	.string "a energia daquela floresta.\\p"
+	.string "Volte ao bosque e observe\\n"
+	.string "as pedras com atencao.$"
 
 EryonVerdelume_Text_BotanistWelcome:
 	.string "Estudo as plantas do bosque.\p"
