@@ -29,13 +29,7 @@
   "region_map_section": "MAPSEC_ROUTE101",
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_ROUTE",
-  "connections": [
-    {
-      "map": "MAP_ERYON_VILA_AURORA",
-      "offset": 0,
-      "direction": "down"
-    }
-  ],
+  "connections": null,
   "warp_events": [
     {
       "x": 0,
