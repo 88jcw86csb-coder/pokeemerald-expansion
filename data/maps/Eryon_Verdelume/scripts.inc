@@ -2,8 +2,14 @@
 EryonVerdelume_EventScript_Guide::
 	lock
 	faceplayer
+	goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonVerdelume_EventScript_GuideBadge
 	goto_if_ge VAR_ERYON_LUMINA_CLUE_FOUND, 1, EryonVerdelume_EventScript_GuideClue
 	msgbox EryonVerdelume_Text_Guide, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVerdelume_EventScript_GuideBadge::
+	msgbox EryonVerdelume_Text_GuideBadge, MSGBOX_DEFAULT
 	release
 	end
 
@@ -16,6 +22,11 @@ EryonVerdelume_Text_Guide:
 	.string "Bem-vindo a Verdelume!\p"
 	.string "Kael protege nosso ginasio, mas\n"
 	.string "o bosque preocupa a cidade.$"
+
+EryonVerdelume_Text_GuideBadge:
+	.string "Parabens pela primeira insignia!\p"
+	.string "Kael vai proteger o bosque.\n"
+	.string "Sua jornada continua adiante.$"
 
 EryonVerdelume_Text_GuideClue:
 	.string "Uma marca de eclipse no bosque?\p"
