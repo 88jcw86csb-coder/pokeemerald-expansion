@@ -5,6 +5,9 @@ Criar uma aventura original e completa para Game Boy Advance baseada em pokeemer
 
 ## Requisitos confirmados
 - Pokémon inicial: Riolu.
+- Idioma da aventura: português brasileiro (PT-BR) em todos os diálogos, avisos, missões e textos narrativos originais de Eryon.
+- Tradução de menus, mensagens de batalha, itens e demais textos herdados da engine será uma etapa específica de localização, com revisão de fontes, acentos e largura das caixas no GBA.
+- Manter nomes oficiais dos Pokémon; revisar termos e quebras de linha para evitar texto cortado na ROM.
 - Apenas Pokémon oficiais, com espécies até a sexta geração (Kalos) disponíveis ao longo da campanha e pós-game.
 - Oito ginásios, Equipe Eclipse, Liga Pokémon e pós-game.
 - Progressão gradual; regiões naturais entre assentamentos; sem sucessão artificial de cidades.
