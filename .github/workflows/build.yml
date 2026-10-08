@@ -76,9 +76,7 @@ jobs:
         if: github.ref == 'refs/heads/eryon-development'
         env:
           GAME_VERSION: EMERALD
-        run: |
-          set -o pipefail
-          make -j$(nproc) -O all 2>&1 | tee eryon-build.log
+        run: bash tools/build_eryon.sh
 
       - name: Smoke-test Eryon ROM header
         if: github.ref == 'refs/heads/eryon-development'
@@ -89,7 +87,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: eryon-build-diagnostics
-          path: eryon-build.log
+          path: |
+            build/eryon-build.log
+            build/eryon-rom.sha256
           if-no-files-found: warn
 
       - name: Upload Eryon ROM
@@ -97,7 +97,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: eryon-gba
-          path: pokeeryon.gba
+          path: |
+            pokeeryon.gba
+            build/eryon-rom.sha256
           if-no-files-found: error
 
   eryon-validation:
