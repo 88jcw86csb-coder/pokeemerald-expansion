@@ -350,16 +350,16 @@ def main():
     trainer_defs = {
         name: int(value)
         for name, value in re.findall(
-            r"(?m)^#define\\s+(TRAINER_ERYON_[A-Z0-9_]+)\\s+(\\d+)\\s*$",
+            r"(?m)^#define\s+(TRAINER_ERYON_[A-Z0-9_]+)\s+(\d+)\s*$",
             opponents,
         )
     }
-    battle_scripts = "\\n".join(
+    battle_scripts = "\n".join(
         (ROOT / "data/maps" / name / "scripts.inc").read_text(encoding="utf-8")
         for name in NAMES
     )
     referenced_trainers = set(re.findall(
-        r"\\btrainerbattle_single\\s+(TRAINER_ERYON_[A-Z0-9_]+)",
+        r"\btrainerbattle_single\s+(TRAINER_ERYON_[A-Z0-9_]+)",
         battle_scripts,
     ))
     for trainer in sorted(referenced_trainers):
@@ -370,8 +370,8 @@ def main():
     values = list(trainer_defs.values())
     if len(values) != len(set(values)):
         errors.append("Eryon trainer IDs overlap")
-    count_match = re.search(r"(?m)^#define TRAINERS_COUNT_EMERALD\\s+(\\d+)", opponents)
-    max_match = re.search(r"(?m)^#define MAX_TRAINERS_COUNT_EMERALD\\s+(\\d+)", opponents)
+    count_match = re.search(r"(?m)^#define TRAINERS_COUNT_EMERALD\s+(\d+)", opponents)
+    max_match = re.search(r"(?m)^#define MAX_TRAINERS_COUNT_EMERALD\s+(\d+)", opponents)
     if count_match and max_match:
         count, capacity = int(count_match.group(1)), int(max_match.group(1))
         if count > capacity:
