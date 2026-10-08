@@ -241,3 +241,35 @@ EryonVerdelume_Text_FieldMedicHealed:
 EryonVerdelume_Text_FieldMedicDecline:
 	.string "Tudo bem! Volte se precisar\n"
 	.string "de ajuda com sua equipe.$"
+
+
+@ A caravan witness introduces the eastern-trail investigation after Kael's badge.
+@ Dialogue is informational: the player may explore at their own pace.
+EryonVerdelume_EventScript_CaravanWitness::
+	lock
+	faceplayer
+	goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonVerdelume_EventScript_CaravanWitnessAfterBadge
+	msgbox EryonVerdelume_Text_CaravanWitnessBeforeBadge, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVerdelume_EventScript_CaravanWitnessAfterBadge::
+	msgbox EryonVerdelume_Text_CaravanWitnessAfterBadge, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVerdelume_Text_CaravanWitnessBeforeBadge:
+	.string "VIAJANTE: As carrocas nao\n"
+	.string "costumam passar tao tarde.\p"
+	.string "Ontem ouvi rodas e passos\n"
+	.string "seguindo para o leste.$"
+
+EryonVerdelume_Text_CaravanWitnessAfterBadge:
+	.string "VIAJANTE: Vi tres carrocas\n"
+	.string "saindo antes do amanhecer.\p"
+	.string "Uma levava caixas cobertas\n"
+	.string "com o simbolo do eclipse.\p"
+	.string "Perto das pedras, encontrei\n"
+	.string "um rastro de po brilhante.\p"
+	.string "A trilha segue para leste.\n"
+	.string "Mas ainda nao sei ate onde.$"
