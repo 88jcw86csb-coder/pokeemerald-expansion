@@ -57,7 +57,13 @@ EryonBosque_EventScript_SilentTraveler::
 	end
 
 EryonBosque_EventScript_TravelerAfterClue::
+	goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonBosque_EventScript_TravelerAfterBadge
 	msgbox EryonBosque_Text_TravelerAfterClue, MSGBOX_DEFAULT
+	release
+	end
+
+EryonBosque_EventScript_TravelerAfterBadge::
+	msgbox EryonBosque_Text_TravelerAfterBadge, MSGBOX_DEFAULT
 	release
 	end
 
@@ -66,6 +72,13 @@ EryonBosque_Text_TravelerBeforeClue:
 	.string "que surgem ao anoitecer.\p"
 	.string "Vi pessoas levando caixas para\n"
 	.string "dentro da mata. Estranho, nao?$"
+
+EryonBosque_Text_TravelerAfterBadge:
+	.string "VIAJANTE: As caixas sumiram.\p"
+	.string "Mas encontrei marcas de rodas\n"
+	.string "perto da trilha do norte.\p"
+	.string "Se alguem levou tudo embora,\n"
+	.string "por que deixou as pedras?$"
 
 EryonBosque_Text_TravelerAfterClue:
 	.string "VIAJANTE: A marca nas pedras?\p"
