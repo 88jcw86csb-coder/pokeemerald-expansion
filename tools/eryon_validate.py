@@ -346,6 +346,40 @@ def main():
         errors.append("Rota 02: Dario trainer constant must be 857")
     if not re.search(r"(?m)^#define TRAINERS_COUNT_EMERALD\s+858\s*$", opponents):
         errors.append("Rota 02: Emerald trainer count must include Dario")
+    # All Eryon trainer battles must have unique IDs, a party, and flag capacity.
+    trainer_defs = {
+        name: int(value)
+        for name, value in re.findall(
+            r"(?m)^#define\\s+(TRAINER_ERYON_[A-Z0-9_]+)\\s+(\\d+)\\s*$",
+            opponents,
+        )
+    }
+    battle_scripts = "\\n".join(
+        (ROOT / "data/maps" / name / "scripts.inc").read_text(encoding="utf-8")
+        for name in NAMES
+    )
+    referenced_trainers = set(re.findall(
+        r"\\btrainerbattle_single\\s+(TRAINER_ERYON_[A-Z0-9_]+)",
+        battle_scripts,
+    ))
+    for trainer in sorted(referenced_trainers):
+        if trainer not in trainer_defs:
+            errors.append(f"Missing trainer ID for {trainer}")
+        if trainers.count(f"=== {trainer} ===") != 1:
+            errors.append(f"Missing or duplicate party for {trainer}")
+    values = list(trainer_defs.values())
+    if len(values) != len(set(values)):
+        errors.append("Eryon trainer IDs overlap")
+    count_match = re.search(r"(?m)^#define TRAINERS_COUNT_EMERALD\\s+(\\d+)", opponents)
+    max_match = re.search(r"(?m)^#define MAX_TRAINERS_COUNT_EMERALD\\s+(\\d+)", opponents)
+    if count_match and max_match:
+        count, capacity = int(count_match.group(1)), int(max_match.group(1))
+        if count > capacity:
+            errors.append(f"Trainer count {count} exceeds flag capacity {capacity}")
+        if values and max(values) >= count:
+            errors.append("Trainer count does not include all Eryon trainer IDs")
+    else:
+        errors.append("Trainer count or maximum capacity constant missing")
     if errors:
         for error in errors:
             print("ERROR:", error)
