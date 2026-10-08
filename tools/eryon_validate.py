@@ -328,6 +328,24 @@ def main():
                 label = obj.get("script", "")
                 if not re.search(r"(?m)^" + re.escape(label) + r"::", script_text):
                     errors.append(f"{name}: missing NPC script {label}")
+    # Route 02's optional trainer must have a map placement and matching roster.
+    route02 = maps["Eryon_Rota02"]
+    dario_label = "EryonRota02_EventScript_Dario"
+    placements = [obj for obj in route02.get("object_events", [])
+                  if obj.get("script") == dario_label]
+    if len(placements) != 1:
+        errors.append(f"Rota 02: expected one Dario event, found {len(placements)}")
+    route02_script = (ROOT / "data/maps/Eryon_Rota02/scripts.inc").read_text(encoding="utf-8")
+    if "trainerbattle_single TRAINER_ERYON_ROUTE02_HIKER" not in route02_script:
+        errors.append("Rota 02: missing Dario trainer battle")
+    trainers = (ROOT / "src/data/trainers.party").read_text(encoding="utf-8")
+    if trainers.count("=== TRAINER_ERYON_ROUTE02_HIKER ===") != 1:
+        errors.append("Rota 02: missing or duplicate Dario trainer party")
+    opponents = (ROOT / "include/constants/opponents.h").read_text(encoding="utf-8")
+    if not re.search(r"(?m)^#define TRAINER_ERYON_ROUTE02_HIKER\\s+857\\s*$", opponents):
+        errors.append("Rota 02: Dario trainer constant must be 857")
+    if not re.search(r"(?m)^#define TRAINERS_COUNT_EMERALD\\s+858\\s*$", opponents):
+        errors.append("Rota 02: Emerald trainer count must include Dario")
     if errors:
         for error in errors:
             print("ERROR:", error)
