@@ -42,6 +42,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EryonBosque_EventScript_AncientStone"
+    },
+    {
+      "type": "sign",
+      "x": 19,
+      "y": 21,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EryonBosque_EventScript_SupplyCache"
     }
   ],
   "id": "MAP_ERYON_BOSQUE_DE_LUMINA",
