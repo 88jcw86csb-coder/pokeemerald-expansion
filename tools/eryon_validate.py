@@ -95,6 +95,18 @@ def main():
         errors.append("Kael does not react to the Eclipse clue")
     if not any(obj.get("script") == "EryonVerdelume_EventScript_Kael" for obj in maps["Eryon_Verdelume"]["object_events"]):
         errors.append("Kael's NPC is missing from Verdelume")
+    # Detect placeholder Hoenn map binaries: these are not original Eryon layouts.
+    inherited = {}
+    for name, m in maps.items():
+        layout = layouts.get(m["layout"])
+        if layout:
+            blockmap = layout["blockdata_filepath"]
+            if not blockmap.startswith("data/layouts/Eryon_"):
+                inherited[name] = blockmap
+    if inherited:
+        for name, blockmap in inherited.items():
+            print(f"WARNING: {name} still uses inherited map tiles: {blockmap}")
+        print("WARNING: Original Eryon terrain and collision must be implemented before gameplay sign-off")
     for name, m in maps.items():
         layout = layouts.get(m["layout"])
         if layout is None:
