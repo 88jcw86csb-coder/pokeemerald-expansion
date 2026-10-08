@@ -18,7 +18,7 @@ def validate_rom(path):
         header = rom.read(0xC0)
     # A 192-byte header alone is not a playable cartridge image.
     # Reject blank/truncated outputs even if their header checksum is forged.
-    if header[:4] == b"\\x00" * 4 or header[:4] == b"\\xff" * 4:
+    if header[:4] == b"\x00" * 4 or header[:4] == b"\xff" * 4:
         raise ValueError("Missing GBA entry-point instructions")
     if not all(0x20 <= byte <= 0x7E for byte in header[0xAC:0xB0]):
         raise ValueError("Invalid GBA game code in header")
