@@ -109,6 +109,14 @@ def main():
     ):
         if required not in route02_script:
             errors.append(f"Route 02 supply cache missing: {required}")
+    route01_script = (ROOT / "data/maps/Eryon_Rota01/scripts.inc").read_text(encoding="utf-8")
+    for required in (
+        "goto_if_eq VAR_ERYON_STARTER_RECEIVED, 0",
+        "goto_if_ge VAR_ERYON_LUMINA_CLUE_FOUND, 1",
+        "goto_if_ge VAR_ERYON_KAEL_BRIEFED, 1",
+    ):
+        if required not in route01_script:
+            errors.append(f"Route 01 explorer progress dialogue missing: {required}")
     if "EryonVerdelume_EventScript_Kael::" not in town_script:
         errors.append("Verdelume is missing Kael's first encounter")
     if "EryonVerdelume_EventScript_KaelClue::" not in town_script:
