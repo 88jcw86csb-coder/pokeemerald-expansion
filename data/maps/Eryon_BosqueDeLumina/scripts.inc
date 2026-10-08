@@ -54,3 +54,26 @@ EryonBosque_Text_TravelerAfterClue:
 	.string "VIAJANTE: A marca nas pedras?\\p"
 	.string "As caixas tinham o mesmo sinal.\\n"
 	.string "Nao pareciam pesquisadores.$"
+
+@ Environmental clue on an old stone, accessible independently of the researcher.
+EryonBosque_EventScript_AncientStone::
+	lock
+	goto_if_ge VAR_ERYON_LUMINA_CLUE_FOUND, 1, EryonBosque_EventScript_StoneRecognized
+	msgbox EryonBosque_Text_StoneUnknown, MSGBOX_DEFAULT
+	release
+	end
+
+EryonBosque_EventScript_StoneRecognized::
+	msgbox EryonBosque_Text_StoneRecognized, MSGBOX_DEFAULT
+	release
+	end
+
+EryonBosque_Text_StoneUnknown:
+	.string "Uma pedra coberta de musgo.\\p"
+	.string "Ha um circulo dividido em\\n"
+	.string "duas metades na superficie.$"
+
+EryonBosque_Text_StoneRecognized:
+	.string "E a mesma marca mencionada\\n"
+	.string "pelo pesquisador.\\p"
+	.string "Quem deixou esse simbolo aqui?$"
