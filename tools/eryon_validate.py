@@ -40,6 +40,12 @@ def main():
                 errors.append(f"{route}: unknown species constant {mon['species']}")
             if mon["min_level"] > mon["max_level"]:
                 errors.append(f"{route}: invalid encounter level range for {mon['species']}")
+    starter_script = (ROOT / "data/maps/Eryon_VilaAurora/scripts.inc").read_text(encoding="utf-8")
+    for required in ("givemon SPECIES_RIOLU, 5", "MON_GIVEN_TO_PARTY", "MON_GIVEN_TO_PC", "VAR_ERYON_STARTER_RECEIVED"):
+        if required not in starter_script:
+            errors.append(f"Vila Aurora: missing starter gift requirement: {required}")
+    if "goto_if_eq VAR_RESULT, FALSE" in starter_script:
+        errors.append("Vila Aurora: incorrect boolean check for givemon result")
     for name, m in maps.items():
         layout = layouts.get(m["layout"])
         if layout is None:
