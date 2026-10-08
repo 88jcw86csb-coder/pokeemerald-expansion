@@ -148,3 +148,40 @@ EryonRota02_Text_HikerHealed:
 EryonRota02_Text_HikerDeclined:
 	.string "Sem problemas! A trilha\n"
 	.string "estara aqui quando voltar.$"
+
+EryonRota02_EventScript_Courier::
+	lock
+	faceplayer
+	goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonRota02_EventScript_CourierBadge
+	msgbox EryonRota02_Text_Courier, MSGBOX_DEFAULT
+	release
+	end
+
+EryonRota02_EventScript_CourierBadge::
+	msgbox EryonRota02_Text_CourierBadge, MSGBOX_DEFAULT
+	release
+	end
+
+EryonRota02_Text_Courier:
+	.string "ENTREGADOR: Hoje as carrocas\n"
+	.string "estao atrasadas de novo.\p"
+	.string "Nunca vi tanto movimento\n"
+	.string "perto das pedras antigas.$"
+
+EryonRota02_Text_CourierBadge:
+	.string "ENTREGADOR: Voce venceu Kael?\p"
+	.string "A estrada do leste anda\n"
+	.string "cheia de gente suspeita.$"
+
+EryonRota02_EventScript_Collector::
+	lock
+	faceplayer
+	msgbox EryonRota02_Text_Collector, MSGBOX_DEFAULT
+	release
+	end
+
+EryonRota02_Text_Collector:
+	.string "Coleciono pedras comuns,\n"
+	.string "nao cristais brilhantes.\p"
+	.string "Algo esta mudando o solo\n"
+	.string "desta regiao.$"
