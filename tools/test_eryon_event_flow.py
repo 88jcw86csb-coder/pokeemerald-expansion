@@ -211,6 +211,21 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertLess(entry.index("VAR_ERYON_KAEL_DEFEATED"), entry.index("VAR_ERYON_LUMINA_CLUE_FOUND"))
         self.assertIn("EryonVerdelume_Text_GuideBadge:", script)
 
+    def test_scout_battle_remains_available_after_kael(self):
+        script = (ROOT / "data/maps/Eryon_BosqueDeLumina/scripts.inc").read_text(encoding="utf-8")
+        entry = script.split("EryonBosque_EventScript_EclipseScout::", 1)[1].split(
+            "EryonBosque_EventScript_EclipseScoutAfterClue::", 1
+        )[0]
+        self.assertIn(
+            "goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonBosque_EventScript_EclipseScoutAfterBadge",
+            entry,
+        )
+        after_badge = script.split("EryonBosque_EventScript_EclipseScoutAfterBadge::", 1)[1].split(
+            "EryonBosque_Text_EclipseScoutBeforeClue:", 1
+        )[0]
+        self.assertIn("trainerbattle_single TRAINER_ERYON_SCOUT", after_badge)
+        self.assertIn("EryonBosque_EventScript_EclipseScoutVictory, NO_MUSIC", after_badge)
+
     def test_eclipse_scout_has_optional_two_pokemon_battle(self):
         script = (ROOT / "data/maps/Eryon_BosqueDeLumina/scripts.inc").read_text(encoding="utf-8")
         entry = script.split("EryonBosque_EventScript_EclipseScoutAfterClue::", 1)[1].split(
