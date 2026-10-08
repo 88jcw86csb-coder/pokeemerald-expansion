@@ -168,6 +168,20 @@ def main():
         errors.append("Kael's NPC is missing from Verdelume")
     # Detect placeholder Hoenn map binaries: these are not original Eryon layouts.
     inherited = {}
+    opponent_constants = (ROOT / "include/constants/opponents.h").read_text(encoding="utf-8")
+    trainer_parties = (ROOT / "src/data/trainers.party").read_text(encoding="utf-8")
+    if not re.search(r"(?m)^#define TRAINER_ERYON_KAEL\\s+855\\b", opponent_constants):
+        errors.append("Kael trainer ID is missing")
+    if "=== TRAINER_ERYON_KAEL ===" not in trainer_parties:
+        errors.append("Kael trainer party is missing")
+    else:
+        kael_party = trainer_parties.split("=== TRAINER_ERYON_KAEL ===", 1)[1].split("\\n=== ", 1)[0]
+        if not re.search(r"(?m)^Roserade\\s*$", kael_party) or "Level: 14" not in kael_party:
+            errors.append("Kael must have level 14 Roserade")
+    if "trainerbattle_single TRAINER_ERYON_KAEL" not in town_script:
+        errors.append("Kael battle is not linked to his NPC")
+    if "setvar VAR_ERYON_KAEL_DEFEATED, 1" not in town_script:
+        errors.append("Kael victory is not persisted")
     for name, m in maps.items():
         layout = layouts.get(m["layout"])
         if layout:
