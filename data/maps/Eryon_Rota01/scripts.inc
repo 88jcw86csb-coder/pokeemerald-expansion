@@ -66,3 +66,28 @@ EryonRota01_Text_ExplorerAfterBadge:
 	.string "Sua primeira insignia! Parabens!\p"
 	.string "O bosque continua misterioso.\n"
 	.string "Talvez valha voltar com calma.$"
+
+EryonRota01_EventScript_Youngster::
+	lock
+	faceplayer
+	msgbox EryonRota01_Text_Youngster, MSGBOX_DEFAULT
+	release
+	end
+
+EryonRota01_Text_Youngster:
+	.string "Meu primeiro Pokemon ainda\n"
+	.string "tem medo do bosque.\p"
+	.string "Vamos treinar com calma.$"
+
+EryonRota01_EventScript_Birdwatcher::
+	lock
+	faceplayer
+	msgbox EryonRota01_Text_Birdwatcher, MSGBOX_DEFAULT
+	release
+	end
+
+EryonRota01_Text_Birdwatcher:
+	.string "Os Pokemon voadores cruzam\n"
+	.string "esta trilha pela manha.\p"
+	.string "As arvores do bosque estao\n"
+	.string "mais silenciosas hoje.$"
