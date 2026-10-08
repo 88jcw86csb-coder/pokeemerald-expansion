@@ -125,6 +125,15 @@ def main():
     ):
         if required not in route02_script:
             errors.append(f"Route 02 supply cache missing: {required}")
+    if not any(obj.get("script") == "EryonRota02_EventScript_Cartographer" for obj in maps["Eryon_Rota02"].get("object_events", [])):
+        errors.append("Route 02: cartographer NPC missing from map")
+    for required in (
+        "EryonRota02_EventScript_Cartographer::",
+        "goto_if_ge VAR_ERYON_KAEL_BRIEFED, 1, EryonRota02_EventScript_CartographerAfterKael",
+        "goto_if_ge VAR_ERYON_LUMINA_CLUE_FOUND, 1, EryonRota02_EventScript_CartographerAfterClue",
+    ):
+        if required not in route02_script:
+            errors.append(f"Route 02: cartographer dialogue missing: {required}")
     route01_script = (ROOT / "data/maps/Eryon_Rota01/scripts.inc").read_text(encoding="utf-8")
     for required in (
         "goto_if_eq VAR_ERYON_STARTER_RECEIVED, 0",
