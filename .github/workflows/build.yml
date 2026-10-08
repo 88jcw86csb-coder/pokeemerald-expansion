@@ -55,6 +55,10 @@ jobs:
           GAME_VERSION: EMERALD
         run: make -j$(nproc) -O all
 
+      - name: Check Eryon build script syntax
+        if: github.ref == 'refs/heads/eryon-development'
+        run: bash -n tools/build_eryon.sh
+
       - name: ROM (Eryon)
         if: github.ref == 'refs/heads/eryon-development'
         env:
