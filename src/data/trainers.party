@@ -16951,3 +16951,48 @@ Level: 14
 - Leer
 - Focus Energy
 - Karate Chop
+
+
+=== TRAINER_ERYON_ROUTE03_RANGER ===
+Name: LIA
+Class: PkMn Trainer
+Pic: Aroma Lady
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Oddish
+Level: 18
+- Absorb
+- Acid
+- Sleep Powder
+- Growth
+
+Pidgeotto
+Level: 19
+- Gust
+- Quick Attack
+- Sand Attack
+- Tackle
+
+=== TRAINER_ERYON_SERRA_ECLIPSE ===
+Name: VIGIA
+Class: PkMn Trainer
+Pic: Aqua Grunt M
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Zubat
+Level: 20
+- Bite
+- Supersonic
+- Wing Attack
+- Astonish
+
+Poochyena
+Level: 21
+- Bite
+- Howl
+- Sand Attack
+- Tackle
