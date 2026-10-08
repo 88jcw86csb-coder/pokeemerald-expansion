@@ -34,7 +34,16 @@
     }
   ],
   "coord_events": [],
-  "bg_events": [],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 13,
+      "y": 16,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EryonBosque_EventScript_AncientStone"
+    }
+  ],
   "id": "MAP_ERYON_BOSQUE_DE_LUMINA",
   "name": "Eryon_BosqueDeLumina",
   "layout": "LAYOUT_ERYON_BOSQUE_DE_LUMINA",
