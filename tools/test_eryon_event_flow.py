@@ -13,6 +13,40 @@ JUMP = re.compile(r"^\s*(?:goto|goto_if_eq|goto_if_ne|goto_if_ge|goto_if_le|goto
 
 
 class EryonEventFlowTests(unittest.TestCase):
+    def test_eryon_maps_are_registered_with_matching_layouts(self):
+        import json
+        groups = json.loads((ROOT / "data/maps/map_groups.json").read_text(encoding="utf-8"))
+        layouts = json.loads((ROOT / "data/layouts/layouts.json").read_text(encoding="utf-8"))
+        layout_by_id = {item["id"]: item for item in layouts["layouts"]}
+        self.assertEqual(set(groups["gMapGroup_Eryon"]), set(MAPS))
+        for name in MAPS:
+            with self.subTest(map=name):
+                path = ROOT / "data/maps" / name / "map.json"
+                data = json.loads(path.read_text(encoding="utf-8"))
+                self.assertIn(data["layout"], layout_by_id)
+                layout = layout_by_id[data["layout"]]
+                block = ROOT / layout["blockdata_filepath"]
+                self.assertTrue(block.is_file())
+                self.assertEqual(block.stat().st_size, 2 * layout["width"] * layout["height"])
+
+    def test_eryon_warps_are_reciprocal(self):
+        import json
+        maps = {
+            name: json.loads((ROOT / "data/maps" / name / "map.json").read_text(encoding="utf-8"))
+            for name in MAPS
+        }
+        by_id = {data["id"]: data for data in maps.values()}
+        for name, data in maps.items():
+            for index, warp in enumerate(data.get("warp_events", [])):
+                with self.subTest(map=name, warp=index):
+                    self.assertIn(warp["dest_map"], by_id)
+                    destination = by_id[warp["dest_map"]]
+                    dest_index = int(warp["dest_warp_id"])
+                    self.assertLess(dest_index, len(destination.get("warp_events", [])))
+                    back = destination["warp_events"][dest_index]
+                    self.assertEqual(back["dest_map"], data["id"])
+                    self.assertEqual(int(back["dest_warp_id"]), index)
+
     def test_validator_accepts_expanded_trainer_count(self):
         validator = (ROOT / "tools/eryon_validate.py").read_text(encoding="utf-8")
         opponents = (ROOT / "include/constants/opponents.h").read_text(encoding="utf-8")
