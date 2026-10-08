@@ -54,6 +54,22 @@ class EryonEventFlowTests(unittest.TestCase):
                     self.assertIn(args[4], ("NO_MUSIC", "TRUE", "FALSE"))
                     self.assertIn(args[3] + "::", script)
 
+    def test_scout_victory_does_not_grant_kael_badge(self):
+        forest = (ROOT / "data/maps/Eryon_BosqueDeLumina/scripts.inc").read_text(encoding="utf-8")
+        start = forest.index("EryonBosque_EventScript_EclipseScoutVictory::")
+        end = forest.index("EryonBosque_EventScript_EclipseScoutAfterBadge::", start)
+        victory = forest[start:end]
+        self.assertNotIn("FLAG_BADGE01_GET", victory)
+        self.assertNotIn("VAR_ERYON_KAEL_DEFEATED", victory)
+        self.assertNotIn("giveitem", victory)
+        self.assertIn("release", victory)
+        city = (ROOT / "data/maps/Eryon_Verdelume/scripts.inc").read_text(encoding="utf-8")
+        kael = city.split("EryonVerdelume_EventScript_KaelVictory::", 1)[1].split(
+            "EryonVerdelume_EventScript_KaelAfterBattle::", 1
+        )[0]
+        self.assertIn("setflag FLAG_BADGE01_GET", kael)
+        self.assertIn("setvar VAR_ERYON_KAEL_DEFEATED, 1", kael)
+
     def test_kael_battle_is_reachable_after_briefing(self):
         script = (ROOT / "data/maps/Eryon_Verdelume/scripts.inc").read_text()
         self.assertIn("goto_if_ge VAR_ERYON_KAEL_BRIEFED, 1, EryonVerdelume_EventScript_KaelFollowup", script)
