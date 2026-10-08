@@ -31,6 +31,29 @@ class EryonEventFlowTests(unittest.TestCase):
                 with self.subTest(map=name, escape=escape):
                     self.assertNotIn(escape, script)
 
+    def test_eryon_trainer_battles_use_supported_macro(self):
+        macro_source = (ROOT / "asm/macros/event.inc").read_text(encoding="utf-8")
+        macro = re.search(
+            r"(?m)^\\s*\\.macro trainerbattle_single\\s+([^\\n]+)",
+            macro_source,
+        )
+        self.assertIsNotNone(macro, "trainerbattle_single macro missing")
+        arguments = [part.strip() for part in macro.group(1).split(",")]
+        self.assertEqual(
+            [arg.split(":")[0].split("=")[0] for arg in arguments],
+            ["trainer", "intro_text", "lose_text", "event_script", "music"],
+        )
+        for name in ("Eryon_Verdelume", "Eryon_BosqueDeLumina"):
+            script = (ROOT / "data/maps" / name / "scripts.inc").read_text(encoding="utf-8")
+            for line in script.splitlines():
+                if not line.strip().startswith("trainerbattle_single "):
+                    continue
+                args = [part.strip() for part in line.split("trainerbattle_single", 1)[1].split(",")]
+                with self.subTest(map=name, trainer=args[0]):
+                    self.assertEqual(len(args), 5)
+                    self.assertIn(args[4], ("NO_MUSIC", "TRUE", "FALSE"))
+                    self.assertIn(args[3] + "::", script)
+
     def test_kael_battle_is_reachable_after_briefing(self):
         script = (ROOT / "data/maps/Eryon_Verdelume/scripts.inc").read_text()
         self.assertIn("goto_if_ge VAR_ERYON_KAEL_BRIEFED, 1, EryonVerdelume_EventScript_KaelFollowup", script)
