@@ -2,10 +2,16 @@
 EryonBosque_EventScript_Researcher::
 	lock
 	faceplayer
+	goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonBosque_EventScript_ResearcherAfterBadge
 	goto_if_ge VAR_ERYON_LUMINA_CLUE_FOUND, 1, EryonBosque_EventScript_ResearcherFollowup
 	msgbox EryonBosque_Text_Researcher, MSGBOX_DEFAULT
 	setvar VAR_ERYON_LUMINA_CLUE_FOUND, 1
 	msgbox EryonBosque_Text_ClueFound, MSGBOX_DEFAULT
+	release
+	end
+
+EryonBosque_EventScript_ResearcherAfterBadge::
+	msgbox EryonBosque_Text_ResearcherAfterBadge, MSGBOX_DEFAULT
 	release
 	end
 
@@ -24,6 +30,14 @@ EryonBosque_Text_ClueFound:
 	.string "Voce observou a marca!\p"
 	.string "Alguem esteve aqui antes de nos.\n"
 	.string "Procure respostas em Verdelume.$"
+
+EryonBosque_Text_ResearcherAfterBadge:
+	.string "PESQUISADOR: Kael contou que\n"
+	.string "voce ganhou sua insignia!\p"
+	.string "Comparei a marca com desenhos\n"
+	.string "de antigos mapas da regiao.\p"
+	.string "Ela parece indicar um caminho,\n"
+	.string "mas ainda faltam pistas.$"
 
 EryonBosque_Text_ResearcherFollowup:
 	.string "A marca de eclipse ainda esta\n"
