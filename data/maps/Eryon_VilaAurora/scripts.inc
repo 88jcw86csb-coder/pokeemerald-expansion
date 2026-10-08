@@ -15,8 +15,6 @@ EryonVilaAurora_EventScript_RioluToParty::
 	setvar VAR_ERYON_STARTER_RECEIVED, 1
 	msgbox EryonVilaAurora_Text_RioluReceived, MSGBOX_DEFAULT
 	goto EryonVilaAurora_EventScript_CaptureKit
-	release
-	end
 
 EryonVilaAurora_EventScript_RioluToPC::
 	setvar VAR_ERYON_STARTER_RECEIVED, 1
@@ -82,3 +80,37 @@ EryonVilaAurora_Text_CaptureKitFull:
 	.string "PROF. ELYA: Sua bolsa esta cheia.\p"
 	.string "Volte quando tiver espaco\n"
 	.string "para as POKE BALLS.$"
+
+@ The village notice introduces the route without forcing an early departure.
+EryonVilaAurora_EventScript_VillageNotice::
+	lock
+	goto_if_ge VAR_ERYON_STARTER_RECEIVED, 1, EryonVilaAurora_EventScript_VillageNoticeAfterStarter
+	msgbox EryonVilaAurora_Text_VillageNoticeBeforeStarter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVilaAurora_EventScript_VillageNoticeAfterStarter::
+	goto_if_ge VAR_ERYON_LUMINA_CLUE_FOUND, 1, EryonVilaAurora_EventScript_VillageNoticeAfterClue
+	msgbox EryonVilaAurora_Text_VillageNoticeAfterStarter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVilaAurora_EventScript_VillageNoticeAfterClue::
+	msgbox EryonVilaAurora_Text_VillageNoticeAfterClue, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVilaAurora_Text_VillageNoticeBeforeStarter:
+	.string "VILA AURORA - BOAS-VINDAS\p"
+	.string "Novos treinadores devem\n"
+	.string "conversar com a Prof. Elya.$"
+
+EryonVilaAurora_Text_VillageNoticeAfterStarter:
+	.string "TRILHA DA AURORA\p"
+	.string "Rota 01: siga para o bosque.\n"
+	.string "Prepare sua equipe antes.$"
+
+EryonVilaAurora_Text_VillageNoticeAfterClue:
+	.string "AVISO DA VILA\p"
+	.string "Relatos de luzes estranhas\n"
+	.string "chegaram do Bosque de Lumina.$"
