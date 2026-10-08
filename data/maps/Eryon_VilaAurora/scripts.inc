@@ -74,11 +74,11 @@ EryonVilaAurora_Text_ElyaAfterStarter:
 	.string "Explore com calma e cuide de RIOLU!$"
 
 EryonVilaAurora_Text_CaptureKit:
-	.string "PROF. ELYA: Leve estas cinco\\n"
-	.string "POKE BALLS para sua jornada!\\p"
+	.string "PROF. ELYA: Leve estas cinco\n"
+	.string "POKE BALLS para sua jornada!\p"
 	.string "Observe os Pokemon de cada rota.$"
 
 EryonVilaAurora_Text_CaptureKitFull:
-	.string "PROF. ELYA: Sua bolsa esta cheia.\\p"
-	.string "Volte quando tiver espaco\\n"
+	.string "PROF. ELYA: Sua bolsa esta cheia.\p"
+	.string "Volte quando tiver espaco\n"
 	.string "para as POKE BALLS.$"
