@@ -1,3 +1,6 @@
+Eryon_Rota02_MapScripts::
+	.byte 0
+
 @ Eryon: early route foreshadowing, no battles or story flags yet.
 EryonRota02_EventScript_Hiker::
 	lock
