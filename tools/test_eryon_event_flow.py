@@ -98,6 +98,29 @@ class EryonEventFlowTests(unittest.TestCase):
                     ]
                     self.assertEqual(len(reverse), 1, "Expected exactly one reciprocal connection")
 
+    def test_opening_warps_are_inside_layout_bounds(self):
+        import json
+        maps = {
+            name: json.loads((ROOT / "data/maps" / name / "map.json").read_text())
+            for name in MAPS
+        }
+        layouts = {
+            layout["id"]: layout
+            for layout in json.loads((ROOT / "data/layouts/layouts.json").read_text())["layouts"]
+        }
+        for name, data in maps.items():
+            with self.subTest(map=name, field="layout"):
+                self.assertIn(data["layout"], layouts)
+            if data["layout"] not in layouts:
+                continue
+            layout = layouts[data["layout"]]
+            for index, warp in enumerate(data.get("warp_events") or []):
+                with self.subTest(map=name, warp=index):
+                    self.assertGreaterEqual(int(warp["x"]), 0)
+                    self.assertLess(int(warp["x"]), int(layout["width"]))
+                    self.assertGreaterEqual(int(warp["y"]), 0)
+                    self.assertLess(int(warp["y"]), int(layout["height"]))
+
     def test_opening_warps_are_reciprocal(self):
         import json
         maps = {
