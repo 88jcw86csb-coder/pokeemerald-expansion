@@ -40,6 +40,14 @@ def main():
                 errors.append(f"{route}: unknown species constant {mon['species']}")
             if mon["min_level"] > mon["max_level"]:
                 errors.append(f"{route}: invalid encounter level range for {mon['species']}")
+    starter_ui = (ROOT / "src/starter_choose.c").read_text(encoding="utf-8")
+    if not re.search(r"#define STARTER_MON_COUNT\\s+1\\b", starter_ui):
+        errors.append("Starter selector must expose exactly one Pokemon")
+    if not re.search(r"tStarterSelection\\s*=\\s*0\\s*;", starter_ui):
+        errors.append("Starter selector must initialize cursor to slot zero")
+    for match in re.finditer(r"sPokeballCoords\\[(\\d+)\\]", starter_ui):
+        if int(match.group(1)) >= 1:
+            errors.append(f"Starter selector references invalid ball slot {match.group(1)}")
     starter_script = (ROOT / "data/maps/Eryon_VilaAurora/scripts.inc").read_text(encoding="utf-8")
     for required in ("givemon SPECIES_RIOLU, 5", "MON_GIVEN_TO_PARTY", "MON_GIVEN_TO_PC", "VAR_ERYON_STARTER_RECEIVED"):
         if required not in starter_script:
