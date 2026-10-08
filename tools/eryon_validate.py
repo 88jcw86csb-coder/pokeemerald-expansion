@@ -59,7 +59,7 @@ def main():
     clue_var = (ROOT / "include/constants/vars.h").read_text(encoding="utf-8")
     forest_script = (ROOT / "data/maps/Eryon_BosqueDeLumina/scripts.inc").read_text(encoding="utf-8")
     town_script = (ROOT / "data/maps/Eryon_Verdelume/scripts.inc").read_text(encoding="utf-8")
-    if not re.search(r"(?m)^#define VAR_ERYON_LUMINA_CLUE_FOUND\\s+0x40F8\\b", clue_var):
+    if not re.search(r"(?m)^#define VAR_ERYON_LUMINA_CLUE_FOUND\s+0x40F8\b", clue_var):
         errors.append("Lumina clue persistent variable missing")
     if "setvar VAR_ERYON_LUMINA_CLUE_FOUND, 1" not in forest_script:
         errors.append("Lumina clue discovery is not persisted")
