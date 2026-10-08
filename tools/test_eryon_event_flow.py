@@ -211,6 +211,29 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertLess(entry.index("VAR_ERYON_KAEL_DEFEATED"), entry.index("VAR_ERYON_LUMINA_CLUE_FOUND"))
         self.assertIn("EryonVerdelume_Text_GuideBadge:", script)
 
+    def test_professor_heals_without_skipping_starter_or_capture_kit(self):
+        script = (ROOT / "data/maps/Eryon_VilaAurora/scripts.inc").read_text(encoding="utf-8")
+        starter = script.split("EryonVilaAurora_EventScript_ProfessorElya::", 1)[1].split(
+            "EryonVilaAurora_EventScript_RioluToParty::", 1
+        )[0]
+        self.assertIn("givemon SPECIES_RIOLU, 5", starter)
+        after_starter = script.split("EryonVilaAurora_EventScript_ElyaAfterStarter::", 1)[1].split(
+            "EryonVilaAurora_EventScript_ElyaAfterBadge::", 1
+        )[0]
+        self.assertLess(
+            after_starter.index("VAR_ERYON_CAPTURE_KIT_RECEIVED"),
+            after_starter.index("EryonVilaAurora_EventScript_ElyaHealOffer"),
+        )
+        offer = script.split("EryonVilaAurora_EventScript_ElyaHealOffer::", 1)[1].split(
+            "EryonVilaAurora_EventScript_ElyaHealDeclined::", 1
+        )[0]
+        self.assertIn("MSGBOX_YESNO", offer)
+        self.assertIn("goto_if_eq VAR_RESULT, NO", offer)
+        self.assertIn("special HealPlayerParty", offer)
+        self.assertNotIn("setvar VAR_ERYON_", offer)
+        self.assertNotIn("giveitem", offer)
+        self.assertIn("def_special HealPlayerParty", (ROOT / "data/specials.inc").read_text())
+
     def test_verdelume_medic_offers_repeatable_optional_healing(self):
         import json
         data = json.loads((ROOT / "data/maps/Eryon_Verdelume/map.json").read_text(encoding="utf-8"))
