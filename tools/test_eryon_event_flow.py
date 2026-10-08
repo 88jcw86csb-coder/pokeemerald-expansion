@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 MAPS = ("Eryon_VilaAurora", "Eryon_Rota01", "Eryon_BosqueDeLumina",
         "Eryon_Rota02", "Eryon_Verdelume", "Eryon_Rota03",
-        "Eryon_SerraDosCristais")
+        "Eryon_SerraDosCristais", "Eryon_PassagemRochosa")
 LABEL = re.compile(r"(?m)^([A-Za-z][A-Za-z0-9_]*)::?\s*$")
 JUMP = re.compile(r"^\s*(?:goto|goto_if_eq|goto_if_ne|goto_if_ge|goto_if_le|goto_if_gt|goto_if_lt)\s+(.+)$")
 
@@ -49,6 +49,10 @@ class EryonEventFlowTests(unittest.TestCase):
              "EryonRota03_EventScript_Ranger"),
             ("Eryon_SerraDosCristais", "TRAINER_ERYON_SERRA_ECLIPSE",
              "EryonSerra_EventScript_EclipseScout"),
+            ("Eryon_PassagemRochosa", "TRAINER_ERYON_PASSAGEM_HIKER",
+             "EryonPassagem_EventScript_HikerBattle"),
+            ("Eryon_PassagemRochosa", "TRAINER_ERYON_PASSAGEM_ECLIPSE",
+             "EryonPassagem_EventScript_EclipseBattle"),
         )
         for map_name, trainer, script_label in cases:
             with self.subTest(map=map_name):
