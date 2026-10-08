@@ -59,7 +59,7 @@ EryonVilaAurora_Text_ElyaIntroduction:
 	.string "Nossa regiao guarda muitos\n"
 	.string "misterios por descobrir.\p"
 	.string "Este RIOLU sera seu parceiro.\n"
-	.string "Cuidem bem um do outro!"
+	.string "Cuidem bem um do outro!$"
 
 EryonVilaAurora_Text_RioluReceived:
 	.string "Voce recebeu RIOLU!\p"
