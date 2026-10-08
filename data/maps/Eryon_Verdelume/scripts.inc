@@ -21,3 +21,16 @@ EryonVerdelume_Text_GuideClue:
 	.string "Uma marca de eclipse no bosque?\p"
 	.string "Kael tambem ouviu rumores.\n"
 	.string "Talvez ele saiba de algo.$"
+
+@ A local resident introduces Kael without forcing the story forward.
+EryonVerdelume_EventScript_LocalKid::
+	lock
+	faceplayer
+	msgbox EryonVerdelume_Text_LocalKid, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVerdelume_Text_LocalKid:
+	.string "Kael treina Pokemon de planta!\p"
+	.string "Dizem que sua ROSERADE nunca\n"
+	.string "desiste de uma batalha.$"
