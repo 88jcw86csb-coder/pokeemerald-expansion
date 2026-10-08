@@ -98,6 +98,51 @@ class EryonEventFlowTests(unittest.TestCase):
                     ]
                     self.assertEqual(len(reverse), 1, "Expected exactly one reciprocal connection")
 
+    def test_opening_maps_form_one_connected_region(self):
+        import json
+        maps = {
+            name: json.loads((ROOT / "data/maps" / name / "map.json").read_text(encoding="utf-8"))
+            for name in MAPS
+        }
+        by_id = {data["id"]: name for name, data in maps.items()}
+        graph = {name: set() for name in maps}
+        for name, data in maps.items():
+            destinations = [
+                connection["map"] for connection in (data.get("connections") or [])
+            ] + [
+                warp["dest_map"] for warp in (data.get("warp_events") or [])
+            ]
+            for destination in destinations:
+                with self.subTest(source=name, destination=destination):
+                    self.assertIn(destination, by_id)
+                if destination in by_id:
+                    graph[name].add(by_id[destination])
+        visited = set()
+        pending = ["Eryon_VilaAurora"]
+        while pending:
+            name = pending.pop()
+            if name in visited:
+                continue
+            visited.add(name)
+            pending.extend(graph[name] - visited)
+        self.assertEqual(visited, set(MAPS), "An opening map is unreachable from Vila Aurora")
+
+    def test_opening_events_do_not_share_tile_coordinates(self):
+        import json
+        for name in MAPS:
+            data = json.loads((ROOT / "data/maps" / name / "map.json").read_text(encoding="utf-8"))
+            used = {}
+            for kind, events in (
+                ("NPC", data.get("object_events") or []),
+                ("warp", data.get("warp_events") or []),
+                ("background", data.get("bg_events") or []),
+            ):
+                for index, event in enumerate(events):
+                    position = (int(event["x"]), int(event["y"]))
+                    with self.subTest(map=name, kind=kind, index=index):
+                        self.assertNotIn(position, used, f"Event overlaps {used.get(position)}")
+                    used[position] = f"{kind} {index}"
+
     def test_opening_warps_are_inside_layout_bounds(self):
         import json
         maps = {
