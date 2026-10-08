@@ -9323,6 +9323,61 @@
       "border_filepath": "data/layouts/OneIsland_KindleRoad_EmberSpa_Frlg/border.bin",
       "blockdata_filepath": "data/layouts/OneIsland_KindleRoad_EmberSpa_Frlg/map.bin",
       "layout_version": "frlg"
+    },
+    {
+      "id": "LAYOUT_ERYON_VILA_AURORA",
+      "name": "ERYON_VILA_AURORA_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/LittlerootTown/border.bin",
+      "blockdata_filepath": "data/layouts/LittlerootTown/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ERYON_ROTA_01",
+      "name": "ERYON_ROTA_01_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/Route101/border.bin",
+      "blockdata_filepath": "data/layouts/Route101/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ERYON_BOSQUE_DE_LUMINA",
+      "name": "ERYON_BOSQUE_DE_LUMINA_Layout",
+      "width": 48,
+      "height": 44,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Rustboro",
+      "border_filepath": "data/layouts/PetalburgWoods/border.bin",
+      "blockdata_filepath": "data/layouts/PetalburgWoods/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ERYON_ROTA_02",
+      "name": "ERYON_ROTA_02_Layout",
+      "width": 50,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/Route102/border.bin",
+      "blockdata_filepath": "data/layouts/Route102/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ERYON_VERDELUME",
+      "name": "ERYON_VERDELUME_Layout",
+      "width": 40,
+      "height": 60,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Rustboro",
+      "border_filepath": "data/layouts/RustboroCity/border.bin",
+      "blockdata_filepath": "data/layouts/RustboroCity/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }
