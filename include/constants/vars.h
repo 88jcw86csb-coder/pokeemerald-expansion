@@ -272,10 +272,7 @@
 #define VAR_ERYON_KAEL_BRIEFED                           0x40FA // Eryon: reported forest clue to Kael
 #define VAR_ERYON_CAPTURE_KIT_RECEIVED                   0x40FB // Eryon: Elya's one-time Poke Ball kit
 #define VAR_ERYON_ROTA02_SUPPLY_FOUND                    0x40FC // Eryon: optional route 02 supply cache
-#define VAR_UNUSED_0x40FA                                0x40FA // Unused Var
-#define VAR_UNUSED_0x40FB                                0x40FB // Unused Var
-#define VAR_UNUSED_0x40FC                                0x40FC // Unused Var
-#define VAR_UNUSED_0x40FD                                0x40FD // Unused Var
+#define VAR_ERYON_KAEL_DEFEATED                          0x40FD // Eryon: defeated Kael
 #define VAR_UNUSED_0x40FE                                0x40FE // Unused Var
 #define VAR_UNUSED_0x40FF                                0x40FF // Unused Var
 
