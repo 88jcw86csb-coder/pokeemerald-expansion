@@ -111,6 +111,20 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertNotIn(r'TRAINER_ERYON_ROUTE02_HIKER\\\\s+', validator)
         self.assertNotIn(r'TRAINERS_COUNT_EMERALD\\\\s+', validator)
 
+    def test_route02_hiker_offers_repeatable_optional_healing(self):
+        script = (ROOT / "data/maps/Eryon_Rota02/scripts.inc").read_text()
+        hiker = script.split("EryonRota02_EventScript_Hiker::", 1)[1].split(
+            "EryonRota02_Text_Hiker:", 1
+        )[0]
+        self.assertIn("MSGBOX_YESNO", hiker)
+        self.assertIn("goto_if_eq VAR_RESULT, NO", hiker)
+        self.assertIn("special HealPlayerParty", hiker)
+        self.assertIn("EryonRota02_EventScript_HikerDecline::", hiker)
+        self.assertNotIn("setvar VAR_ERYON_", hiker)
+        self.assertNotIn("giveitem ", hiker)
+        self.assertIn("def_special HealPlayerParty",
+                      (ROOT / "data/specials.inc").read_text())
+
     def test_route02_dario_battle_is_optional_and_has_two_pokemon(self):
         import json
         map_data = json.loads((ROOT / "data/maps/Eryon_Rota02/map.json").read_text())
