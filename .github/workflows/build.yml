@@ -67,6 +67,7 @@ jobs:
         run: python3 tools/eryon_validate.py
 
       - name: ROM (Eryon)
+        if: github.ref == 'refs/heads/eryon-development'
         env:
           GAME_VERSION: EMERALD
         run: |
