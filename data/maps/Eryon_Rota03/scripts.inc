@@ -195,7 +195,7 @@ EryonRota03_Text_TrainerChallenge:
 	.string "mais dificil daqui em diante.$"
 
 EryonRota03_Text_TrainerDefeat:
-	.string "LIA: Fui derrotado!$"
+	.string "LIA: Fui derrotada!$"
 
 EryonRota03_Text_TrainerAfter:
 	.string "LIA: Boa batalha!\n"
