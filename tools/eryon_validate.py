@@ -349,6 +349,33 @@ def main():
             frontier.append(neighbor)
     for unreachable in sorted(set(NAMES) - reachable):
         errors.append(f"Opening route: {unreachable} cannot be reached from Vila Aurora")
+    # Verify a continuous bidirectional travel graph from the starting village.
+    # This checks event connections, not terrain collision or warp walkability.
+    neighbors = {name: set() for name in NAMES}
+    for name, map_data in maps.items():
+        for connection in map_data.get("connections") or []:
+            destination = ids.get(connection["map"])
+            if destination:
+                neighbors[name].add(destination)
+        for warp in map_data.get("warp_events", []):
+            destination = ids.get(warp["dest_map"])
+            if destination:
+                neighbors[name].add(destination)
+    visited = set()
+    frontier = ["Eryon_VilaAurora"]
+    while frontier:
+        current = frontier.pop()
+        if current in visited:
+            continue
+        visited.add(current)
+        frontier.extend(neighbors[current] - visited)
+    missing = set(NAMES) - visited
+    if missing:
+        errors.append("Maps unreachable from Vila Aurora: " + ", ".join(sorted(missing)))
+    for origin, destinations in neighbors.items():
+        for destination in destinations:
+            if origin not in neighbors[destination]:
+                errors.append(f"One-way map link: {origin} -> {destination}")
     # Route 02's optional trainer must have a map placement and matching roster.
     route02 = maps["Eryon_Rota02"]
     dario_label = "EryonRota02_EventScript_Dario"
