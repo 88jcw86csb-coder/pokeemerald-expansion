@@ -25,6 +25,7 @@ def main():
     wild = load("src/data/wild_encounters.json")
     wild_group = next((group for group in wild["wild_encounter_groups"] if group["label"] == "gWildMonHeaders"), None)
     wild_by_map = {entry.get("map"): entry for entry in wild_group["encounters"]} if wild_group else {}
+    species_constants = (ROOT / "include/constants/species.h").read_text(encoding="utf-8")
     for route in ("Eryon_Rota01", "Eryon_BosqueDeLumina", "Eryon_Rota02"):
         map_id = maps[route]["id"]
         encounter = wild_by_map.get(map_id)
@@ -35,6 +36,8 @@ def main():
         if len(mons) != 12:
             errors.append(f"{route}: expected 12 land encounter slots, found {len(mons)}")
         for mon in mons:
+            if not re.search(r"(?m)^#define\s+" + re.escape(mon["species"]) + r"\b", species_constants):
+                errors.append(f"{route}: unknown species constant {mon['species']}")
             if mon["min_level"] > mon["max_level"]:
                 errors.append(f"{route}: invalid encounter level range for {mon['species']}")
     for name, m in maps.items():
@@ -68,6 +71,10 @@ def main():
                 script_file = ROOT / "data/maps" / name / "scripts.inc"
                 if not script_file.exists() or not re.search(r"(?m)^" + re.escape(obj["script"]) + r"::", script_file.read_text(encoding="utf-8")):
                     errors.append(f"{name}: missing NPC script {obj['script']}")
+                if script_file.exists():
+                    script_text = script_file.read_text(encoding="utf-8")
+                    if "\\\\p" in script_text or "\\\\n" in script_text:
+                        errors.append(f"{name}: doubled dialogue escapes")
                 if f'data/maps/{name}/scripts.inc' not in scripts:
                     errors.append(f"{name}: NPC scripts not included by data/event_scripts.s")
     if errors:
