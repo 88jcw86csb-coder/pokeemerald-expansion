@@ -14,15 +14,21 @@ Projeto de ROM GBA completo construído sobre pokeemerald-expansion. Eryon não 
 ## Geografia principal
 Vila Aurora → Rota 01 → Bosque de Lúmina → Rota 02 → Verdelume → rotas e áreas naturais → Neonara → região montanhosa → Frostheim → desertos e ruínas → Arkhara → pântanos de Umbra → região vulcânica de Ignivar → observatório de Lunaris → montanhas de Drakonia → Victory Road → Liga Pokémon → pós-game.
 
-## Ginásios
-1. Kael — Grass — Verdelume — Roserade
-2. Lyra — Electric — Neonara — Jolteon
-3. Bjorn — Ice — Frostheim — Weavile
-4. Tessa — Rock — Arkhara — Armaldo
-5. Nox — Dark/Poison — Umbra — Drapion
-6. Ragna — Fire — Ignivar — Infernape
-7. Seraphine — Psychic/Fairy concept — Lunaris — Gardevoir
-8. Draven — Dragon — Drakonia — Garchomp
+## Ginásios e balanceamento aprovado
+A dificuldade deve crescer ao longo da campanha, sem exigir treinamento excessivo entre cidades. Cada nível abaixo é o **nível máximo do Pokémon principal** do respectivo líder, não o nível de todos os membros da equipe.
+
+| Ordem | Líder | Especialidade | Cidade | Pokémon principal | Nível máximo |
+| --- | --- | --- | --- | --- | ---: |
+| 1 | Kael | Planta | Verdelume | Roserade | 18 |
+| 2 | Lyra | Elétrico | Neonara | Jolteon | 26 |
+| 3 | Bjorn | Gelo | Frostheim | Weavile | 33 |
+| 4 | Tessa | Pedra | Arkhara | Armaldo | 39 |
+| 5 | Nox | Sombrio/Venenoso | Umbra | Drapion | 45 |
+| 6 | Ragna | Fogo | Ignivar | Infernape | 51 |
+| 7 | Seraphine | Psíquico/Fada | Lunaris | Gardevoir | 57 |
+| 8 | Draven | Dragão | Drakonia | Garchomp | 64 |
+
+**Status de implementação:** apenas Kael possui equipe de batalha cadastrada atualmente. Os níveis dos demais líderes são metas de balanceamento, ainda não implementadas em encontros ou scripts. A Liga Pokémon deve ter dificuldade superior à do oitavo ginásio, com níveis e equipes definidos antes da implementação.
 
 ## Liga
 Elite 4: Valen (Poison), Kaia (Water), Orion (Ghost), Aeron (Flying).
