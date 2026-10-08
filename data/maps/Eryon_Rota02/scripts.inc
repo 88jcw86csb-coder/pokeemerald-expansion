@@ -138,13 +138,13 @@ EryonRota02_Text_DarioAfterBattle:
 
 @ Optional roadside recovery lets players prepare before the Dario battle.
 EryonRota02_Text_HikerHealOffer:
-	.string "Quer descansar seus Pokemon\\n"
+	.string "Quer descansar seus Pokemon\n"
 	.string "antes de seguir viagem?$"
 
 EryonRota02_Text_HikerHealed:
-	.string "Pronto! Sua equipe esta\\n"
+	.string "Pronto! Sua equipe esta\n"
 	.string "recuperada. Boa caminhada!$"
 
 EryonRota02_Text_HikerDeclined:
-	.string "Sem problemas! A trilha\\n"
+	.string "Sem problemas! A trilha\n"
 	.string "estara aqui quando voltar.$"
