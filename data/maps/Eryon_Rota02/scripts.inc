@@ -3,6 +3,15 @@ EryonRota02_EventScript_Hiker::
 	lock
 	faceplayer
 	msgbox EryonRota02_Text_Hiker, MSGBOX_DEFAULT
+	msgbox EryonRota02_Text_HikerHealOffer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonRota02_EventScript_HikerDecline
+	special HealPlayerParty
+	msgbox EryonRota02_Text_HikerHealed, MSGBOX_DEFAULT
+	release
+	end
+
+EryonRota02_EventScript_HikerDecline::
+	msgbox EryonRota02_Text_HikerDeclined, MSGBOX_DEFAULT
 	release
 	end
 
@@ -126,3 +135,16 @@ EryonRota02_Text_DarioAfterBattle:
 	.string "DARIO: Continue treinando!\p"
 	.string "Kael e um adversario\n"
 	.string "que merece respeito.$"
+
+@ Optional roadside recovery lets players prepare before the Dario battle.
+EryonRota02_Text_HikerHealOffer:
+	.string "Quer descansar seus Pokemon\\n"
+	.string "antes de seguir viagem?$"
+
+EryonRota02_Text_HikerHealed:
+	.string "Pronto! Sua equipe esta\\n"
+	.string "recuperada. Boa caminhada!$"
+
+EryonRota02_Text_HikerDeclined:
+	.string "Sem problemas! A trilha\\n"
+	.string "estara aqui quando voltar.$"
