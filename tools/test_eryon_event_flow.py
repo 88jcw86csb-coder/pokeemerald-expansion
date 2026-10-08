@@ -61,6 +61,18 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertIn({"map": "MAP_ERYON_ROTA01", "offset": 0, "direction": "up"}, village["connections"])
         self.assertIn({"map": "MAP_ERYON_VILA_AURORA", "offset": 0, "direction": "down"}, route["connections"])
 
+    def test_opening_border_has_no_redundant_warps(self):
+        import json
+        village = json.loads((ROOT / "data/maps/Eryon_VilaAurora/map.json").read_text())
+        route = json.loads((ROOT / "data/maps/Eryon_Rota01/map.json").read_text())
+        forest = json.loads((ROOT / "data/maps/Eryon_BosqueDeLumina/map.json").read_text())
+        self.assertEqual(village["warp_events"], [])
+        self.assertEqual(len(route["warp_events"]), 1)
+        self.assertEqual(route["warp_events"][0]["dest_map"], "MAP_ERYON_BOSQUE_DE_LUMINA")
+        self.assertEqual(int(route["warp_events"][0]["dest_warp_id"]), 0)
+        self.assertEqual(forest["warp_events"][0]["dest_map"], "MAP_ERYON_ROTA01")
+        self.assertEqual(int(forest["warp_events"][0]["dest_warp_id"]), 0)
+
     def test_no_duplicate_labels(self):
         for name in MAPS:
             script = (ROOT / "data/maps" / name / "scripts.inc").read_text()
