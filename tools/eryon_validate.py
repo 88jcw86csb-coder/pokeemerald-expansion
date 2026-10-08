@@ -56,6 +56,17 @@ def main():
             errors.append(f"Vila Aurora: missing starter gift requirement: {required}")
     if "goto_if_eq VAR_RESULT, FALSE" in starter_script:
         errors.append("Vila Aurora: incorrect boolean check for givemon result")
+    clue_var = (ROOT / "include/constants/vars.h").read_text(encoding="utf-8")
+    forest_script = (ROOT / "data/maps/Eryon_BosqueDeLumina/scripts.inc").read_text(encoding="utf-8")
+    town_script = (ROOT / "data/maps/Eryon_Verdelume/scripts.inc").read_text(encoding="utf-8")
+    if not re.search(r"(?m)^#define VAR_ERYON_LUMINA_CLUE_FOUND\\s+0x40F8\\b", clue_var):
+        errors.append("Lumina clue persistent variable missing")
+    if "setvar VAR_ERYON_LUMINA_CLUE_FOUND, 1" not in forest_script:
+        errors.append("Lumina clue discovery is not persisted")
+    if "goto_if_ge VAR_ERYON_LUMINA_CLUE_FOUND, 1" not in forest_script:
+        errors.append("Lumina researcher lacks repeat-visit dialogue")
+    if "goto_if_ge VAR_ERYON_LUMINA_CLUE_FOUND, 1" not in town_script:
+        errors.append("Verdelume does not react to the Lumina clue")
     for name, m in maps.items():
         layout = layouts.get(m["layout"])
         if layout is None:
