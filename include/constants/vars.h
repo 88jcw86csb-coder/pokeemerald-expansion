@@ -269,6 +269,7 @@
 #define VAR_ERYON_STARTER_RECEIVED                        0x40F7 // Eryon: one-time Riolu gift
 #define VAR_ERYON_LUMINA_CLUE_FOUND                       0x40F8 // Eryon: discovered the eclipse symbol
 #define VAR_ERYON_LUMINA_SUPPLY_FOUND                     0x40F9 // Eryon: optional forest supply cache
+#define VAR_ERYON_KAEL_BRIEFED                           0x40FA // Eryon: reported forest clue to Kael
 #define VAR_UNUSED_0x40FA                                0x40FA // Unused Var
 #define VAR_UNUSED_0x40FB                                0x40FB // Unused Var
 #define VAR_UNUSED_0x40FC                                0x40FC // Unused Var
