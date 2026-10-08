@@ -67,9 +67,9 @@ EryonVerdelume_Text_KaelClue:
 	.string "Vamos investigar com cuidado.$"
 
 EryonVerdelume_Text_KaelFollowup:
-	.string "KAEL: Obrigado por avisar.\\p"
-	.string "Ainda nao sabemos quem marcou\\n"
-	.string "aquelas pedras antigas.\\p"
+	.string "KAEL: Obrigado por avisar.\p"
+	.string "Ainda nao sabemos quem marcou\n"
+	.string "aquelas pedras antigas.\p"
 	.string "Continue explorando com calma.$"
 
 @ A public notice changes once the player has investigated the forest.
