@@ -111,7 +111,7 @@ def main():
             errors.append(f"{name}: expected exactly one central event script include")
         map_data = maps[name]
         script_source = (ROOT / include).read_text(encoding="utf-8")
-        labels = set(re.findall(r"(?m)^([A-Za-z][A-Za-z0-9_]*):{1,2}\\s*$", script_source))
+        labels = set(re.findall(r"(?m)^([A-Za-z][A-Za-z0-9_]*):{1,2}\s*$", script_source))
         for kind in ("object_events", "bg_events", "coord_events"):
             for index, event in enumerate(map_data.get(kind, [])):
                 label = event.get("script", "")
@@ -124,7 +124,7 @@ def main():
     for name in NAMES:
         script_path = ROOT / f"data/maps/{name}/scripts.inc"
         for line_number, line in enumerate(script_path.read_text(encoding="utf-8").splitlines(), 1):
-            match = re.match(r"^([A-Za-z][A-Za-z0-9_]*):{1,2}\\s*$", line)
+            match = re.match(r"^([A-Za-z][A-Za-z0-9_]*):{1,2}\s*$", line)
             if match:
                 label = match.group(1)
                 if label in global_labels:
