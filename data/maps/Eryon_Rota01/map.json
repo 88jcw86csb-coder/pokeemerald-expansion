@@ -47,13 +47,6 @@
   ],
   "warp_events": [
     {
-      "x": 0,
-      "y": 10,
-      "elevation": 0,
-      "dest_map": "MAP_ERYON_VILA_AURORA",
-      "dest_warp_id": "0"
-    },
-    {
       "x": 19,
       "y": 10,
       "elevation": 0,
