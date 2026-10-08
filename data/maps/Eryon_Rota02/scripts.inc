@@ -7,6 +7,6 @@ EryonRota02_EventScript_Hiker::
 	end
 
 EryonRota02_Text_Hiker:
-	.string "O caminho ate Verdelume e longo.\\p"
-	.string "Nao se apresse: ha trilhas\\n"
+	.string "O caminho ate Verdelume e longo.\p"
+	.string "Nao se apresse: ha trilhas\n"
 	.string "escondidas entre estas colinas.$"
