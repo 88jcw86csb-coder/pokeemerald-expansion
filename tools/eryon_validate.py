@@ -46,7 +46,7 @@ def main():
     species_numbers = {
         name: int(number)
         for name, number in re.findall(
-            r"(?m)^\\s*(SPECIES_[A-Z0-9_]+)\\s*=\\s*(\\d+)\\s*,?",
+            r"(?m)^\s*(SPECIES_[A-Z0-9_]+)\s*=\s*(\d+)\s*,?",
             species_constants,
         )
     }
@@ -54,7 +54,9 @@ def main():
         encounter = wild_by_map.get(maps[route]["id"], {})
         for mon in encounter.get("land_mons", {}).get("mons", []):
             number = species_numbers.get(mon["species"])
-            if number is not None and not 1 <= number <= 721:
+            if number is None:
+                errors.append(f"{route}: cannot resolve National Dex number for {mon['species']}")
+            elif not 1 <= number <= 721:
                 errors.append(f"{route}: species outside National Dex 001-721: {mon['species']}")
     starter_ui = (ROOT / "src/starter_choose.c").read_text(encoding="utf-8")
     if not re.search(r"#define STARTER_MON_COUNT\s+1\b", starter_ui):
