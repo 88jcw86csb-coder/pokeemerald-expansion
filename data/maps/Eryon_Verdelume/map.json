@@ -55,13 +55,7 @@
   "region_map_section": "MAPSEC_RUSTBORO_CITY",
   "weather": "WEATHER_SUNNY",
   "map_type": "MAP_TYPE_TOWN",
-  "connections": [
-    {
-      "map": "MAP_ERYON_ROTA02",
-      "offset": 0,
-      "direction": "right"
-    }
-  ],
+  "connections": null,
   "warp_events": [
     {
       "x": 0,
