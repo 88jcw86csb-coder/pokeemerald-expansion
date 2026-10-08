@@ -312,6 +312,7 @@ def main():
         ("Eryon_Verdelume", 40, 60),
         ("Eryon_Rota03", 50, 20),
         ("Eryon_SerraDosCristais", 48, 44),
+        ("Eryon_PassagemRochosa", 48, 44),
     ):
         for index, warp in enumerate(maps[map_name].get("warp_events", [])):
             if warp["x"] in (0, width - 1) or warp["y"] in (0, height - 1):
