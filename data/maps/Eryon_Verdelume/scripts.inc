@@ -37,9 +37,20 @@ EryonVerdelume_Text_GuideClue:
 EryonVerdelume_EventScript_LocalKid::
 	lock
 	faceplayer
+	goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonVerdelume_EventScript_LocalKidBadge
 	msgbox EryonVerdelume_Text_LocalKid, MSGBOX_DEFAULT
 	release
 	end
+
+EryonVerdelume_EventScript_LocalKidBadge::
+	msgbox EryonVerdelume_Text_LocalKidBadge, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVerdelume_Text_LocalKidBadge:
+	.string "Voce venceu a ROSERADE do Kael!\p"
+	.string "Quero treinar bastante para\n"
+	.string "ser forte como voces dois.$"
 
 EryonVerdelume_Text_LocalKid:
 	.string "Kael treina Pokemon de planta!\p"
