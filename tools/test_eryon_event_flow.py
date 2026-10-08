@@ -75,6 +75,29 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertEqual(forest["warp_events"][0]["dest_map"], "MAP_ERYON_ROTA01")
         self.assertEqual(int(forest["warp_events"][0]["dest_warp_id"]), 0)
 
+    def test_opening_warps_are_reciprocal(self):
+        import json
+        maps = {
+            name: json.loads((ROOT / "data/maps" / name / "map.json").read_text())
+            for name in MAPS
+        }
+        by_constant = {data["id"]: name for name, data in maps.items()}
+        for name, data in maps.items():
+            for warp_id, warp in enumerate(data.get("warp_events", [])):
+                with self.subTest(map=name, warp=warp_id):
+                    target_name = by_constant.get(warp["dest_map"])
+                    self.assertIsNotNone(target_name, "Warp leaves opening map set")
+                    if target_name is None:
+                        continue
+                    target_warps = maps[target_name].get("warp_events", [])
+                    destination_id = int(warp["dest_warp_id"])
+                    self.assertLess(destination_id, len(target_warps))
+                    if destination_id >= len(target_warps):
+                        continue
+                    return_warp = target_warps[destination_id]
+                    self.assertEqual(return_warp["dest_map"], data["id"])
+                    self.assertEqual(int(return_warp["dest_warp_id"]), warp_id)
+
     def test_kael_badge_only_after_victory(self):
         script = (ROOT / "data/maps/Eryon_Verdelume/scripts.inc").read_text()
         entry = script.split("EryonVerdelume_EventScript_Kael::", 1)[1].split("EryonVerdelume_EventScript_KaelClue::", 1)[0]
