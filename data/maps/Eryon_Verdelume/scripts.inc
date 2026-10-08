@@ -96,3 +96,38 @@ EryonVerdelume_Text_ForestNoticeClue:
 	.string "A antiga marca de eclipse\n"
 	.string "esta sendo investigada.\p"
 	.string "Informe Kael sobre pistas.$"
+
+@ The town botanist offers optional worldbuilding after the forest investigation.
+EryonVerdelume_EventScript_Botanist::
+	lock
+	faceplayer
+	goto_if_ge VAR_ERYON_KAEL_BRIEFED, 1, EryonVerdelume_EventScript_BotanistAfterKael
+	goto_if_ge VAR_ERYON_LUMINA_CLUE_FOUND, 1, EryonVerdelume_EventScript_BotanistAfterClue
+	msgbox EryonVerdelume_Text_BotanistWelcome, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVerdelume_EventScript_BotanistAfterClue::
+	msgbox EryonVerdelume_Text_BotanistAfterClue, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVerdelume_EventScript_BotanistAfterKael::
+	msgbox EryonVerdelume_Text_BotanistAfterKael, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVerdelume_Text_BotanistWelcome:
+	.string "Estudo as plantas do bosque.\p"
+	.string "Algumas flores se fecham\n"
+	.string "quando as luzes aparecem.$"
+
+EryonVerdelume_Text_BotanistAfterClue:
+	.string "Uma marca antiga nas pedras?\p"
+	.string "Talvez a luz e as flores\n"
+	.string "estejam relacionadas.$"
+
+EryonVerdelume_Text_BotanistAfterKael:
+	.string "Kael vai investigar? Que bom!\p"
+	.string "Enquanto isso, vou comparar\n"
+	.string "as flores das duas trilhas.$"
