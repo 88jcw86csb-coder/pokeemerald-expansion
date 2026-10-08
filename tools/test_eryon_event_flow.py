@@ -70,6 +70,31 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertIn("setflag FLAG_BADGE01_GET", kael)
         self.assertIn("setvar VAR_ERYON_KAEL_DEFEATED, 1", kael)
 
+    def test_opening_maps_have_route_from_village_to_verdelume(self):
+        import json
+        maps = {
+            name: json.loads((ROOT / "data/maps" / name / "map.json").read_text())
+            for name in MAPS
+        }
+        by_id = {data["id"]: name for name, data in maps.items()}
+        adjacency = {name: set() for name in MAPS}
+        for name, data in maps.items():
+            for connection in data.get("connections") or []:
+                if connection["map"] in by_id:
+                    adjacency[name].add(by_id[connection["map"]])
+            for warp in data.get("warp_events", []):
+                if warp["dest_map"] in by_id:
+                    adjacency[name].add(by_id[warp["dest_map"]])
+        seen = {"Eryon_VilaAurora"}
+        queue = ["Eryon_VilaAurora"]
+        while queue:
+            current = queue.pop()
+            for neighbor in adjacency[current] - seen:
+                seen.add(neighbor)
+                queue.append(neighbor)
+        self.assertEqual(seen, set(MAPS))
+        self.assertIn("Eryon_Verdelume", seen)
+
     def test_all_eryon_battle_trainers_have_unique_party_and_id(self):
         scripts = "\n".join(
             (ROOT / "data/maps" / name / "scripts.inc").read_text()
