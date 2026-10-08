@@ -53,6 +53,10 @@ jobs:
         if: github.ref == 'refs/heads/eryon-development'
         run: python3 -m unittest discover -s tools -p 'test_eryon_species.py' -v
 
+      - name: Test Eryon event flow
+        if: github.ref == 'refs/heads/eryon-development'
+        run: python3 -m unittest discover -s tools -p 'test_eryon_event_flow.py' -v
+
       - name: Validate Eryon opening maps
         if: github.ref == 'refs/heads/eryon-development'
         run: python3 tools/eryon_validate.py
@@ -88,6 +92,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Test Eryon species boundaries
         run: python3 -m unittest discover -s tools -p 'test_eryon_species.py' -v
+      - name: Test Eryon event flow
+        run: python3 -m unittest discover -s tools -p 'test_eryon_event_flow.py' -v
       - name: Validate Eryon data
         run: python3 tools/eryon_validate.py
 
