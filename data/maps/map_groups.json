@@ -1,5 +1,6 @@
 {
   "group_order": [
+    "gMapGroup_Eryon",
     "gMapGroup_TownsAndRoutes",
     "gMapGroup_IndoorLittleroot",
     "gMapGroup_IndoorOldale",
@@ -1160,5 +1161,12 @@
   ],
   "gMapGroup_IndoorSevenIslandRoute_Frlg": [
     "SevenIsland_SevaultCanyon_House_Frlg"
+  ],
+  "gMapGroup_Eryon": [
+    "Eryon_VilaAurora",
+    "Eryon_Rota01",
+    "Eryon_BosqueDeLumina",
+    "Eryon_Rota02",
+    "Eryon_Verdelume"
   ]
 }
