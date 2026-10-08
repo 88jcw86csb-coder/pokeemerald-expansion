@@ -221,11 +221,11 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertIn("EryonBosque_Text_EclipseScoutChallenge:", script)
         self.assertIn("EryonBosque_Text_EclipseScoutDefeat:", script)
         opponents = (ROOT / "include/constants/opponents.h").read_text(encoding="utf-8")
-        self.assertRegex(opponents, r"(?m)^#define\\s+TRAINER_ERYON_SCOUT\\s+856\\b")
+        self.assertRegex(opponents, r"(?m)^#define\s+TRAINER_ERYON_SCOUT\s+856\b")
         parties = (ROOT / "src/data/trainers.party").read_text(encoding="utf-8")
-        team = parties.split("=== TRAINER_ERYON_SCOUT ===", 1)[1].split("\\n=== ", 1)[0]
-        self.assertRegex(team, r"(?m)^Poochyena\\nLevel: 12$")
-        self.assertRegex(team, r"(?m)^Zubat\\nLevel: 13$")
+        team = parties.split("=== TRAINER_ERYON_SCOUT ===", 1)[1].split("\n=== ", 1)[0]
+        self.assertRegex(team, r"(?m)^Poochyena\nLevel: 12$")
+        self.assertRegex(team, r"(?m)^Zubat\nLevel: 13$")
 
     def test_eclipse_scout_has_three_nonblocking_story_stages(self):
         import json
