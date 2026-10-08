@@ -16,7 +16,7 @@ class EryonEventFlowTests(unittest.TestCase):
     def test_validator_accepts_expanded_trainer_count(self):
         validator = (ROOT / "tools/eryon_validate.py").read_text(encoding="utf-8")
         opponents = (ROOT / "include/constants/opponents.h").read_text(encoding="utf-8")
-        count = int(re.search(r"(?m)^#define TRAINERS_COUNT_EMERALD\\s+(\\d+)", opponents).group(1))
+        count = int(re.search(r"(?m)^#define TRAINERS_COUNT_EMERALD\s+(\d+)", opponents).group(1))
         self.assertGreaterEqual(count, 863)
         self.assertNotIn('TRAINERS_COUNT_EMERALD\\s+858', validator)
 
