@@ -1,3 +1,6 @@
+Eryon_Rota03_MapScripts::
+	.byte 0
+
 @ Eryon Route 03: the eastern trail, following Kael's first badge.
 @ The route is exploratory; the next area is not yet connected.
 EryonRota03_EventScript_Prospector::
