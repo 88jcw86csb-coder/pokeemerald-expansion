@@ -622,6 +622,22 @@ class EryonEventFlowTests(unittest.TestCase):
                             f"Double-escaped GBA text control in {name}:{line_number}",
                         )
 
+    def test_ancient_stone_changes_after_first_badge(self):
+        forest = (ROOT / "data/maps/Eryon_BosqueDeLumina/scripts.inc").read_text(encoding="utf-8")
+        stone = forest.split("EryonBosque_EventScript_StoneRecognized::", 1)[1].split(
+            "EryonBosque_EventScript_StoneAfterBadge::", 1
+        )[0]
+        self.assertIn(
+            "goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonBosque_EventScript_StoneAfterBadge",
+            stone,
+        )
+        after_badge = forest.split("EryonBosque_EventScript_StoneAfterBadge::", 1)[1].split(
+            "EryonBosque_Text_StoneUnknown:", 1
+        )[0]
+        self.assertIn("msgbox EryonBosque_Text_StoneAfterBadge", after_badge)
+        self.assertIn("release", after_badge)
+        self.assertIn("EryonBosque_Text_StoneAfterBadge:", forest)
+
     def test_no_duplicate_text_symbols(self):
         for name in MAPS:
             script = (ROOT / "data/maps" / name / "scripts.inc").read_text()
