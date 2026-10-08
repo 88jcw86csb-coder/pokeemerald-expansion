@@ -56,9 +56,10 @@ EryonVilaAurora_EventScript_CaptureKitFull::
 
 EryonVilaAurora_Text_ElyaIntroduction:
 	.string "PROF. ELYA: Bem-vindo a Eryon!\p"
-	.string "Esta regiao guarda muitos segredos.\p"
-	.string "Riolu pode explorar esse mundo\n"
-	.string "ao seu lado. Cuide bem dele!$"
+	.string "Nossa regiao guarda muitos\n"
+	.string "misterios por descobrir.\p"
+	.string "Este RIOLU sera seu parceiro.\n"
+	.string "Cuidem bem um do outro!"
 
 EryonVilaAurora_Text_RioluReceived:
 	.string "Voce recebeu RIOLU!\p"
@@ -74,7 +75,8 @@ EryonVilaAurora_Text_PartyFull:
 EryonVilaAurora_Text_ElyaAfterStarter:
 	.string "PROF. ELYA: O Bosque de Lumina\n"
 	.string "fica alem da Rota 01.\p"
-	.string "Explore com calma e cuide de RIOLU!$"
+	.string "Explore sem pressa.\n"
+	.string "E cuide bem de RIOLU!$"
 
 EryonVilaAurora_Text_ElyaAfterBadge:
 	.string "PROF. ELYA: Sua primeira\n"
