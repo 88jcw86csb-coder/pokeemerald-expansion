@@ -45,7 +45,14 @@ EryonVerdelume_EventScript_Kael::
 	end
 
 EryonVerdelume_EventScript_KaelClue::
+	goto_if_ge VAR_ERYON_KAEL_BRIEFED, 1, EryonVerdelume_EventScript_KaelFollowup
 	msgbox EryonVerdelume_Text_KaelClue, MSGBOX_DEFAULT
+	setvar VAR_ERYON_KAEL_BRIEFED, 1
+	release
+	end
+
+EryonVerdelume_EventScript_KaelFollowup::
+	msgbox EryonVerdelume_Text_KaelFollowup, MSGBOX_DEFAULT
 	release
 	end
 
@@ -58,6 +65,12 @@ EryonVerdelume_Text_KaelClue:
 	.string "KAEL: Entao viu a marca antiga!\p"
 	.string "A floresta precisa de ajuda.\n"
 	.string "Vamos investigar com cuidado.$"
+
+EryonVerdelume_Text_KaelFollowup:
+	.string "KAEL: Obrigado por avisar.\\p"
+	.string "Ainda nao sabemos quem marcou\\n"
+	.string "aquelas pedras antigas.\\p"
+	.string "Continue explorando com calma.$"
 
 @ A public notice changes once the player has investigated the forest.
 EryonVerdelume_EventScript_ForestNotice::
