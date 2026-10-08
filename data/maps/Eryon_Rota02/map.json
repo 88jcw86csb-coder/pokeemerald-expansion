@@ -29,7 +29,13 @@
   "region_map_section": "MAPSEC_ROUTE102",
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_ROUTE",
-  "connections": null,
+  "connections": [
+    {
+      "map": "MAP_ERYON_VERDELUME",
+      "offset": 0,
+      "direction": "left"
+    }
+  ],
   "warp_events": [
     {
       "x": 0,
