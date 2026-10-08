@@ -35,10 +35,11 @@ EryonVerdelume_Text_LocalKid:
 	.string "Dizem que sua ROSERADE nunca\n"
 	.string "desiste de uma batalha.$"
 
-@ Kael's first encounter; the gym battle is not yet implemented.
+@ Kael challenges the player after they discover the forest clue.
 EryonVerdelume_EventScript_Kael::
 	lock
 	faceplayer
+	goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonVerdelume_EventScript_KaelAfterBattle
 	goto_if_ge VAR_ERYON_LUMINA_CLUE_FOUND, 1, EryonVerdelume_EventScript_KaelClue
 	msgbox EryonVerdelume_Text_KaelWelcome, MSGBOX_DEFAULT
 	release
@@ -131,3 +132,12 @@ EryonVerdelume_Text_BotanistAfterKael:
 	.string "Kael vai investigar? Que bom!\p"
 	.string "Enquanto isso, vou comparar\n"
 	.string "as flores das duas trilhas.$"
+
+EryonVerdelume_Text_KaelDefeat:
+	.string "KAEL: Voce e mais forte do que\n"
+	.string "eu imaginava!$"
+
+EryonVerdelume_Text_KaelAfterBattle:
+	.string "KAEL: Continue investigando.\p"
+	.string "A floresta guarda um segredo\n"
+	.string "maior do que pensamos.$"
