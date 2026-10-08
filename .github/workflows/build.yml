@@ -58,13 +58,24 @@ jobs:
       - name: ROM (Eryon)
         env:
           GAME_VERSION: EMERALD
-        run: make -j$(nproc) -O all
+        run: |
+          set -o pipefail
+          make -j$(nproc) -O all 2>&1 | tee eryon-build.log
+
+      - name: Upload build diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eryon-build-diagnostics
+          path: eryon-build.log
+          if-no-files-found: warn
 
       - name: Upload Eryon ROM
         uses: actions/upload-artifact@v4
         with:
           name: eryon-gba
           path: pokeeryon.gba
+          if-no-files-found: error
 
   eryon-validation:
     if: github.ref == 'refs/heads/eryon-development' && github.actor != 'allcontributors[bot]'
