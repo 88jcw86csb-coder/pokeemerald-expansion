@@ -27,7 +27,7 @@ class EryonEventFlowTests(unittest.TestCase):
     def test_dialogue_has_no_doubled_control_escapes(self):
         for name in MAPS:
             script = (ROOT / "data/maps" / name / "scripts.inc").read_text()
-            for escape in (r"\\\\n", r"\\\\p", r"\\\\l"):
+            for escape in (r"\\n", r"\\p", r"\\l"):
                 with self.subTest(map=name, escape=escape):
                     self.assertNotIn(escape, script)
 
