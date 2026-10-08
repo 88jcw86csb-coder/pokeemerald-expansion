@@ -70,6 +70,39 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertIn("setflag FLAG_BADGE01_GET", kael)
         self.assertIn("setvar VAR_ERYON_KAEL_DEFEATED, 1", kael)
 
+    def test_all_eryon_battle_trainers_have_unique_party_and_id(self):
+        scripts = "\\n".join(
+            (ROOT / "data/maps" / name / "scripts.inc").read_text()
+            for name in MAPS
+        )
+        referenced = set(re.findall(
+            r"\\btrainerbattle_single\\s+(TRAINER_ERYON_[A-Z0-9_]+)",
+            scripts,
+        ))
+        self.assertGreaterEqual(len(referenced), 3)
+        opponents = (ROOT / "include/constants/opponents.h").read_text()
+        ids = {
+            name: int(value)
+            for name, value in re.findall(
+                r"(?m)^#define\\s+(TRAINER_ERYON_[A-Z0-9_]+)\\s+(\\d+)\\s*$",
+                opponents,
+            )
+        }
+        party = (ROOT / "src/data/trainers.party").read_text()
+        for name in referenced:
+            with self.subTest(trainer=name):
+                self.assertIn(name, ids)
+                self.assertEqual(party.count(f"=== {name} ==="), 1)
+        self.assertEqual(len(ids), len(set(ids.values())))
+        count = int(re.search(
+            r"(?m)^#define TRAINERS_COUNT_EMERALD\\s+(\\d+)", opponents
+        ).group(1))
+        capacity = int(re.search(
+            r"(?m)^#define MAX_TRAINERS_COUNT_EMERALD\\s+(\\d+)", opponents
+        ).group(1))
+        self.assertLessEqual(count, capacity)
+        self.assertLess(max(ids.values()), count)
+
     def test_dario_validator_checks_match_trainer_definitions(self):
         validator = (ROOT / "tools/eryon_validate.py").read_text()
         self.assertIn('dario_label = "EryonRota02_EventScript_Dario"', validator)
