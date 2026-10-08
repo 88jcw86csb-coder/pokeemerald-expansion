@@ -13,6 +13,32 @@ JUMP = re.compile(r"^\s*(?:goto|goto_if_eq|goto_if_ne|goto_if_ge|goto_if_le|goto
 
 
 class EryonEventFlowTests(unittest.TestCase):
+    def test_new_eryon_trainers_are_connected_to_maps(self):
+        import json
+        opponents = (ROOT / "include/constants/opponents.h").read_text(encoding="utf-8")
+        parties = (ROOT / "src/data/trainers.party").read_text(encoding="utf-8")
+        cases = (
+            ("Eryon_Rota01", "TRAINER_ERYON_ROUTE01_YOUNGSTER",
+             "EryonRota01_EventScript_Youngster"),
+            ("Eryon_Rota03", "TRAINER_ERYON_ROUTE03_RANGER",
+             "EryonRota03_EventScript_Ranger"),
+            ("Eryon_SerraDosCristais", "TRAINER_ERYON_SERRA_ECLIPSE",
+             "EryonSerra_EventScript_EclipseScout"),
+        )
+        for map_name, trainer, script_label in cases:
+            with self.subTest(map=map_name):
+                self.assertIn("#define " + trainer, opponents)
+                self.assertIn("=== " + trainer + " ===", parties)
+                path = ROOT / "data/maps" / map_name
+                map_data = json.loads((path / "map.json").read_text(encoding="utf-8"))
+                self.assertTrue(any(
+                    npc.get("script") == script_label
+                    for npc in map_data["object_events"]
+                ))
+                scripts = (path / "scripts.inc").read_text(encoding="utf-8")
+                self.assertIn(script_label + "::", scripts)
+                self.assertIn("trainerbattle_single " + trainer, scripts)
+
     def test_caravan_witness_is_placed_and_reacts_to_badge(self):
         import json
         town = json.loads(
