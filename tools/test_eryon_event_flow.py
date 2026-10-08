@@ -54,6 +54,13 @@ class EryonEventFlowTests(unittest.TestCase):
             with self.subTest(name=name):
                 self.assertIn(name, dict(definitions), f"Undefined Eryon variable: {name}")
 
+    def test_village_route_boundary_connections(self):
+        import json
+        village = json.loads((ROOT / "data/maps/Eryon_VilaAurora/map.json").read_text())
+        route = json.loads((ROOT / "data/maps/Eryon_Rota01/map.json").read_text())
+        self.assertIn({"map": "MAP_ERYON_ROTA01", "offset": 0, "direction": "up"}, village["connections"])
+        self.assertIn({"map": "MAP_ERYON_VILA_AURORA", "offset": 0, "direction": "down"}, route["connections"])
+
     def test_no_duplicate_labels(self):
         for name in MAPS:
             script = (ROOT / "data/maps" / name / "scripts.inc").read_text()
