@@ -66,6 +66,12 @@ jobs:
         if: github.ref == 'refs/heads/eryon-development'
         run: python3 tools/eryon_validate.py
 
+      - name: ROM (Emerald baseline)
+        if: github.ref != 'refs/heads/eryon-development'
+        env:
+          GAME_VERSION: EMERALD
+        run: make -j$(nproc) -O all
+
       - name: ROM (Eryon)
         if: github.ref == 'refs/heads/eryon-development'
         env:
