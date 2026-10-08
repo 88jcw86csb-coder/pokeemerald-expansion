@@ -211,6 +211,27 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertLess(entry.index("VAR_ERYON_KAEL_DEFEATED"), entry.index("VAR_ERYON_LUMINA_CLUE_FOUND"))
         self.assertIn("EryonVerdelume_Text_GuideBadge:", script)
 
+    def test_verdelume_medic_offers_repeatable_optional_healing(self):
+        import json
+        data = json.loads((ROOT / "data/maps/Eryon_Verdelume/map.json").read_text(encoding="utf-8"))
+        medics = [
+            obj for obj in data["object_events"]
+            if obj["script"] == "EryonVerdelume_EventScript_FieldMedic"
+        ]
+        self.assertEqual(len(medics), 1)
+        script = (ROOT / "data/maps/Eryon_Verdelume/scripts.inc").read_text(encoding="utf-8")
+        entry = script.split("EryonVerdelume_EventScript_FieldMedic::", 1)[1].split(
+            "EryonVerdelume_EventScript_FieldMedicDecline::", 1
+        )[0]
+        self.assertIn("MSGBOX_YESNO", entry)
+        self.assertIn("goto_if_eq VAR_RESULT, NO, EryonVerdelume_EventScript_FieldMedicDecline", entry)
+        self.assertIn("special HealPlayerParty", entry)
+        self.assertNotIn("setvar VAR_ERYON_", entry)
+        self.assertNotIn("giveitem", entry)
+        self.assertIn("EryonVerdelume_Text_FieldMedicHealed:", script)
+        specials = (ROOT / "data/specials.inc").read_text(encoding="utf-8")
+        self.assertIn("def_special HealPlayerParty", specials)
+
     def test_trainer_slot_capacity_covers_eryon_scout(self):
         opponents = (ROOT / "include/constants/opponents.h").read_text(encoding="utf-8")
         def constant(name):
