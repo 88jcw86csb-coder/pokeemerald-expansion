@@ -6,6 +6,6 @@ EryonRota01_EventScript_Explorer::
 	end
 
 EryonRota01_Text_Explorer:
-	.string "O Bosque de Lumina fica adiante!\\p"
-	.string "Dizem que as luzes entre as arvores\\n"
+	.string "O Bosque de Lumina fica adiante!\p"
+	.string "Dizem que as luzes entre as arvores\n"
 	.string "mudaram nos ultimos dias.$"
