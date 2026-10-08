@@ -192,6 +192,14 @@ def main():
         for name, blockmap in inherited.items():
             print(f"WARNING: {name} still uses inherited map tiles: {blockmap}")
         print("WARNING: Original Eryon terrain and collision must be implemented before gameplay sign-off")
+    # Lumina currently borrows Petalburg Woods terrain. Its exits must use
+    # actual exit tiles until a custom Eryon forest layout replaces it.
+    woods = maps["Eryon_BosqueDeLumina"]
+    expected_forest_exits = {(16, 38), (14, 5)}
+    actual_forest_exits = {(warp["x"], warp["y"]) for warp in woods.get("warp_events", [])}
+    if actual_forest_exits != expected_forest_exits:
+        errors.append("Lumina: forest exits are not on the inherited woods' exit tiles")
+    print("WARNING: route-side warp positions still require terrain/collision verification")
     for name, m in maps.items():
         layout = layouts.get(m["layout"])
         if layout is None:
