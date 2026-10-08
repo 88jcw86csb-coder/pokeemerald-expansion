@@ -70,6 +70,14 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertIn("setflag FLAG_BADGE01_GET", kael)
         self.assertIn("setvar VAR_ERYON_KAEL_DEFEATED, 1", kael)
 
+    def test_dario_validator_checks_match_trainer_definitions(self):
+        validator = (ROOT / "tools/eryon_validate.py").read_text()
+        self.assertIn('dario_label = "EryonRota02_EventScript_Dario"', validator)
+        self.assertIn('TRAINER_ERYON_ROUTE02_HIKER', validator)
+        self.assertIn('TRAINERS_COUNT_EMERALD', validator)
+        self.assertNotIn(r'TRAINER_ERYON_ROUTE02_HIKER\\\\s+', validator)
+        self.assertNotIn(r'TRAINERS_COUNT_EMERALD\\\\s+', validator)
+
     def test_route02_dario_battle_is_optional_and_has_two_pokemon(self):
         import json
         map_data = json.loads((ROOT / "data/maps/Eryon_Rota02/map.json").read_text())
