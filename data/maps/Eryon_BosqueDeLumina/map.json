@@ -1,0 +1,35 @@
+{
+  "requires_flash": false,
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "object_events": [],
+  "coord_events": [],
+  "bg_events": [],
+  "id": "MAP_ERYON_BOSQUE_DE_LUMINA",
+  "name": "Eryon_BosqueDeLumina",
+  "layout": "LAYOUT_ERYON_BOSQUE_DE_LUMINA",
+  "music": "MUS_PETALBURG",
+  "region_map_section": "MAPSEC_PETALBURG_WOODS",
+  "weather": "WEATHER_RAIN",
+  "map_type": "MAP_TYPE_ROUTE",
+  "connections": null,
+  "warp_events": [
+    {
+      "x": 0,
+      "y": 22,
+      "elevation": 0,
+      "dest_map": "MAP_ERYON_ROTA01",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 47,
+      "y": 22,
+      "elevation": 0,
+      "dest_map": "MAP_ERYON_ROTA02",
+      "dest_warp_id": "0"
+    }
+  ]
+}
