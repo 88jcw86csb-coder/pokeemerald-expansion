@@ -17017,3 +17017,48 @@ Level: 7
 - Tackle
 - Sand Attack
 - Gust
+
+
+=== TRAINER_ERYON_PASSAGEM_HIKER ===
+Name: BRUNO
+Class: Hiker
+Pic: Hiker
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Geodude
+Level: 21
+- Rock Throw
+- Defense Curl
+- Magnitude
+- Tackle
+
+Machop
+Level: 22
+- Low Kick
+- Karate Chop
+- Leer
+- Focus Energy
+
+=== TRAINER_ERYON_PASSAGEM_ECLIPSE ===
+Name: VIGIA
+Class: PkMn Trainer
+Pic: Aqua Grunt M
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Zubat
+Level: 22
+- Bite
+- Wing Attack
+- Supersonic
+- Astonish
+
+Murkrow
+Level: 23
+- Peck
+- Pursuit
+- Haze
+- Wing Attack
