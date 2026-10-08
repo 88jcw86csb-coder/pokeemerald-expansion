@@ -63,6 +63,20 @@ def main():
 
     maps = {name: load(f"data/maps/{name}/map.json") for name in NAMES}
     ids = {m["id"]: name for name, m in maps.items()}
+    # Ensure the starting point remains within Vila Aurora and is not occupied
+    # by an NPC or an automatic map event.
+    village = maps["Eryon_VilaAurora"]
+    village_layout = layouts.get(village["layout"])
+    if village_layout is not None:
+        spawn_x, spawn_y = 10, 10
+        if not (0 <= spawn_x < village_layout["width"] and
+                0 <= spawn_y < village_layout["height"]):
+            errors.append("Vila Aurora: initial spawn outside map bounds")
+        for kind in ("object_events", "warp_events", "bg_events", "coord_events"):
+            for index, event in enumerate(village.get(kind, [])):
+                if (event["x"], event["y"]) == (spawn_x, spawn_y):
+                    errors.append(f"Vila Aurora: initial spawn overlaps {kind}[{index}]")
+
     # A misplaced event can be unreachable or cause invalid warp behavior.
     for name, map_data in maps.items():
         layout = layouts.get(map_data["layout"])
