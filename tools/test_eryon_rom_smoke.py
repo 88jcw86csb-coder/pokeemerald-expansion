@@ -10,6 +10,7 @@ from eryon_rom_smoke import validate_rom
 def header_rom():
     rom = bytearray(1024 * 1024)
     rom[:4] = bytes((0x00, 0x00, 0x00, 0xEA))
+    rom[0xA0:0xA5] = b"ERYON"
     rom[0xAC:0xB0] = b"BPEE"
     rom[0xB2] = 0x96
     rom[0xBD] = (-sum(rom[0xA0:0xBD]) - 0x19) & 0xFF
@@ -32,6 +33,26 @@ class EryonRomSmokeTests(unittest.TestCase):
             rom[0xBD] ^= 1
             path.write_bytes(rom)
             with self.assertRaisesRegex(ValueError, "checksum"):
+                validate_rom(path)
+
+    def test_other_game_title_is_rejected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "other.gba"
+            rom = header_rom()
+            rom[0xA0:0xA5] = b"OTHER"
+            rom[0xBD] = (-sum(rom[0xA0:0xBD]) - 0x19) & 0xFF
+            path.write_bytes(rom)
+            with self.assertRaisesRegex(ValueError, "ROM title"):
+                validate_rom(path)
+
+    def test_other_game_code_is_rejected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "wrong-code.gba"
+            rom = header_rom()
+            rom[0xAC:0xB0] = b"ABCD"
+            rom[0xBD] = (-sum(rom[0xA0:0xBD]) - 0x19) & 0xFF
+            path.write_bytes(rom)
+            with self.assertRaisesRegex(ValueError, "game code"):
                 validate_rom(path)
 
     def test_header_only_file_is_rejected(self):
