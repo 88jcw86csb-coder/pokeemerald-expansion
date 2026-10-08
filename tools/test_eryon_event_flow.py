@@ -149,6 +149,14 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertEqual(actual, expected)
         self.assertEqual([int(number) for number, *_ in rows], list(range(1, 9)))
 
+    def test_story_does_not_define_fake_legendary_species(self):
+        design = (ROOT / "docs/ERYON_DESIGN.md").read_text(encoding="utf-8")
+        checklist = (ROOT / "docs/ERYON_IMPLEMENTATION_CHECKLIST.md").read_text(encoding="utf-8")
+        self.assertIn("não criar espécies de Pokémon", design)
+        self.assertIn("não espécies ou formas de Pokémon", design)
+        self.assertIn("não são espécies de Pokémon", checklist)
+        self.assertIn("lendários oficiais até Kalos", checklist)
+
     def test_no_duplicate_text_symbols(self):
         for name in MAPS:
             script = (ROOT / "data/maps" / name / "scripts.inc").read_text()
