@@ -118,6 +118,21 @@ def main():
                 reverse = target["warp_events"][int(warp["dest_warp_id"])]
                 if reverse["dest_map"] != m["id"] or int(reverse["dest_warp_id"]) != index:
                     errors.append(f"{name}: warp {index} has no reciprocal return warp")
+        # Validate interactive background events as rigorously as NPC scripts.
+        script_file = ROOT / "data/maps" / name / "scripts.inc"
+        script_text = script_file.read_text(encoding="utf-8") if script_file.exists() else ""
+        for index, bg in enumerate(m.get("bg_events", [])):
+            if not (0 <= bg["x"] < width and 0 <= bg["y"] < height):
+                errors.append(f"{name}: background event {index} outside {width}x{height}")
+            if bg.get("type") == "sign":
+                label = bg.get("script", "")
+                if not re.search(r"(?m)^" + re.escape(label) + r"::", script_text):
+                    errors.append(f"{name}: missing background event script {label}")
+            elif bg.get("type") == "hidden_item":
+                if not bg.get("item") or not bg.get("flag"):
+                    errors.append(f"{name}: incomplete hidden item {index}")
+        if "\\\\p" in script_text or "\\\\n" in script_text:
+            errors.append(f"{name}: doubled dialogue escapes")
         for index, obj in enumerate(m.get("object_events", [])):
             if not (0 <= obj["x"] < width and 0 <= obj["y"] < height):
                 errors.append(f"{name}: NPC {index} outside {width}x{height}")
