@@ -34,12 +34,15 @@ A dificuldade deve crescer ao longo da campanha, sem exigir treinamento excessiv
 Elite 4: Valen (Poison), Kaia (Water), Orion (Ghost), Aeron (Flying).
 Champion: Elara, equipe balanceada, ace Metagross.
 
-## Equipe Eclipse e lendários
-Solarion — Fire/Psychic.
-Noctarion — Dark/Ghost.
-Eclipsion — entidade final ligada ao ciclo de luz e escuridão.
+## Equipe Eclipse e o mistério do eclipse
+**Regra inegociável:** não criar espécies de Pokémon. Todas as criaturas capturáveis, vistas em batalhas ou tratadas como Pokémon devem pertencer às gerações I a VI (até Kalos).
 
-A trama culmina no Templo do Eclipse, onde a separação/fusão forçada de Solarion e Noctarion ameaça o equilíbrio natural de Eryon.
+Solarion, Noctarion e Eclipsion são **nomes de símbolos e fenômenos antigos**, não espécies ou formas de Pokémon:
+- **Solarion:** símbolo da luz gravado nas ruínas de Eryon.
+- **Noctarion:** símbolo da escuridão, associado aos registros da Equipe Eclipse.
+- **Eclipsion:** nome dado ao evento de desequilíbrio que a equipe pretende provocar.
+
+A trama culmina no Templo do Eclipse, onde a Equipe Eclipse tenta provocar o fenômeno Eclipsion usando artefatos antigos. Eventuais encontros lendários usarão somente Pokémon oficiais até a sexta geração; as espécies e a função narrativa serão definidas antes de implementar os eventos.
 
 ## Primeira sequência de mapas
 Vila Aurora
