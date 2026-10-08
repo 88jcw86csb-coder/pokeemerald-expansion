@@ -75,7 +75,7 @@ EryonVerdelume_EventScript_KaelClue::
 	end
 
 EryonVerdelume_EventScript_KaelFollowup::
-	trainerbattle_single TRAINER_ERYON_KAEL, EryonVerdelume_Text_KaelChallenge, EryonVerdelume_Text_KaelDefeat, EryonVerdelume_EventScript_KaelVictory, NO_MUSIC
+	trainerbattle_single TRAINER_ERYON_KAEL, EryonVerdelume_Text_KaelChallenge, EryonVerdelume_Text_KaelDefeat, EryonVerdelume_EventScript_KaelVictory, FALSE
 	msgbox EryonVerdelume_Text_KaelAfterBattle, MSGBOX_DEFAULT
 	release
 	end
