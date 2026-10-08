@@ -32,14 +32,12 @@ EryonVilaAurora_EventScript_ElyaAfterStarter::
 	goto_if_eq VAR_ERYON_CAPTURE_KIT_RECEIVED, 0, EryonVilaAurora_EventScript_CaptureKit
 	goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonVilaAurora_EventScript_ElyaAfterBadge
 	msgbox EryonVilaAurora_Text_ElyaAfterStarter, MSGBOX_DEFAULT
-	release
-	end
+	goto EryonVilaAurora_EventScript_ElyaHealOffer
 
 @ Optional homecoming after the first badge; no additional rewards or forced travel.
 EryonVilaAurora_EventScript_ElyaAfterBadge::
 	msgbox EryonVilaAurora_Text_ElyaAfterBadge, MSGBOX_DEFAULT
-	release
-	end
+	goto EryonVilaAurora_EventScript_ElyaHealOffer
 
 @ The capture kit is offered again if the bag was full; no duplicate reward.
 EryonVilaAurora_EventScript_CaptureKit::
@@ -129,3 +127,31 @@ EryonVilaAurora_Text_VillageNoticeAfterClue:
 	.string "AVISO DA VILA\p"
 	.string "Relatos de luzes estranhas\n"
 	.string "chegaram do Bosque de Lumina.$"
+
+
+@ Repeatable recovery in the starting village. The starter and capture kit
+@ are handled first; this service never awards items or changes story flags.
+EryonVilaAurora_EventScript_ElyaHealOffer::
+	msgbox EryonVilaAurora_Text_ElyaHealOffer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonVilaAurora_EventScript_ElyaHealDeclined
+	special HealPlayerParty
+	msgbox EryonVilaAurora_Text_ElyaHealed, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVilaAurora_EventScript_ElyaHealDeclined::
+	msgbox EryonVilaAurora_Text_ElyaHealDeclined, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVilaAurora_Text_ElyaHealOffer:
+	.string "PROF. ELYA: Quer que eu\n"
+	.string "recupere sua equipe Pokemon?$"
+
+EryonVilaAurora_Text_ElyaHealed:
+	.string "Sua equipe esta recuperada!\p"
+	.string "Explore no seu proprio ritmo.$"
+
+EryonVilaAurora_Text_ElyaHealDeclined:
+	.string "Tudo bem! Pode voltar\n"
+	.string "quando precisar.$"
