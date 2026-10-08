@@ -55,11 +55,13 @@ EryonBosque_Text_TravelerAfterClue:
 	.string "As caixas tinham o mesmo sinal.\n"
 	.string "Nao pareciam pesquisadores.$"
 
-@ Environmental clue on an old stone, accessible independently of the researcher.
+@ The stone independently unlocks the forest clue, even if the researcher is skipped.
 EryonBosque_EventScript_AncientStone::
 	lock
 	goto_if_ge VAR_ERYON_LUMINA_CLUE_FOUND, 1, EryonBosque_EventScript_StoneRecognized
 	msgbox EryonBosque_Text_StoneUnknown, MSGBOX_DEFAULT
+	setvar VAR_ERYON_LUMINA_CLUE_FOUND, 1
+	msgbox EryonBosque_Text_StoneDiscovery, MSGBOX_DEFAULT
 	release
 	end
 
@@ -72,6 +74,11 @@ EryonBosque_Text_StoneUnknown:
 	.string "Uma pedra coberta de musgo.\p"
 	.string "Ha um circulo dividido em\n"
 	.string "duas metades na superficie.$"
+
+EryonBosque_Text_StoneDiscovery:
+	.string "Voce examinou a marca!\p"
+	.string "O simbolo parece recente.\n"
+	.string "Alguem esteve aqui.$"
 
 EryonBosque_Text_StoneRecognized:
 	.string "E a mesma marca mencionada\n"
