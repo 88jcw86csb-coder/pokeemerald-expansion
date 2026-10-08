@@ -83,7 +83,15 @@ EryonBosque_EventScript_AncientStone::
 	end
 
 EryonBosque_EventScript_StoneRecognized::
+	goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonBosque_EventScript_StoneAfterBadge
 	msgbox EryonBosque_Text_StoneRecognized, MSGBOX_DEFAULT
+	release
+	end
+
+@ Returning after the first badge reveals an environmental clue,
+@ without requiring an item or locking the next part of the story.
+EryonBosque_EventScript_StoneAfterBadge::
+	msgbox EryonBosque_Text_StoneAfterBadge, MSGBOX_DEFAULT
 	release
 	end
 
@@ -96,6 +104,14 @@ EryonBosque_Text_StoneDiscovery:
 	.string "Voce examinou a marca!\p"
 	.string "O simbolo parece recente.\n"
 	.string "Alguem esteve aqui.$"
+
+EryonBosque_Text_StoneAfterBadge:
+	.string "Ha flores novas entre as\n"
+	.string "rachaduras da pedra.\p"
+	.string "O simbolo do eclipse parece\n"
+	.string "mais nitido do que antes.\p"
+	.string "Talvez a botanica de\n"
+	.string "Verdelume saiba explicar.$"
 
 EryonBosque_Text_StoneRecognized:
 	.string "E a mesma marca mencionada\n"
