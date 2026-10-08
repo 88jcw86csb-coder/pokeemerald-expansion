@@ -13,6 +13,31 @@ JUMP = re.compile(r"^\s*(?:goto|goto_if_eq|goto_if_ne|goto_if_ge|goto_if_le|goto
 
 
 class EryonEventFlowTests(unittest.TestCase):
+    def test_serra_camp_clue_and_supply_are_persistent(self):
+        import json
+        vars_text = (ROOT / "include/constants/vars.h").read_text(encoding="utf-8")
+        scripts = (ROOT / "data/maps/Eryon_SerraDosCristais/scripts.inc").read_text(
+            encoding="utf-8"
+        )
+        map_data = json.loads(
+            (ROOT / "data/maps/Eryon_SerraDosCristais/map.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        self.assertIn("#define VAR_ERYON_SERRA_CLUE_FOUND", vars_text)
+        self.assertIn("#define VAR_ERYON_SERRA_SUPPLY_FOUND", vars_text)
+        self.assertIn("setvar VAR_ERYON_SERRA_CLUE_FOUND, 1", scripts)
+        self.assertIn("giveitem ITEM_SUPER_POTION", scripts)
+        self.assertIn("setvar VAR_ERYON_SERRA_SUPPLY_FOUND, 1", scripts)
+        self.assertIn(
+            "goto_if_eq VAR_RESULT, FALSE, EryonSerra_EventScript_SupplyCrateFull",
+            scripts,
+        )
+        self.assertTrue(any(
+            event.get("script") == "EryonSerra_EventScript_SupplyCrate"
+            for event in map_data["bg_events"]
+        ))
+
     def test_new_eryon_trainers_are_connected_to_maps(self):
         import json
         opponents = (ROOT / "include/constants/opponents.h").read_text(encoding="utf-8")
