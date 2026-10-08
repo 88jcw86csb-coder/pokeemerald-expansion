@@ -166,6 +166,19 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertLess(entry.index("VAR_ERYON_KAEL_DEFEATED"), entry.index("VAR_ERYON_LUMINA_CLUE_FOUND"))
         self.assertIn("EryonVerdelume_Text_GuideBadge:", script)
 
+    def test_cartographer_reacts_to_first_badge(self):
+        script = (ROOT / "data/maps/Eryon_Rota02/scripts.inc").read_text(encoding="utf-8")
+        entry = script.split("EryonRota02_EventScript_Cartographer::", 1)[1].split(
+            "EryonRota02_EventScript_CartographerAfterBadge::", 1
+        )[0]
+        self.assertIn(
+            "goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonRota02_EventScript_CartographerAfterBadge",
+            entry,
+        )
+        self.assertLess(entry.index("VAR_ERYON_KAEL_DEFEATED"), entry.index("VAR_ERYON_KAEL_BRIEFED"))
+        self.assertIn("EryonRota02_Text_CartographerAfterBadge:", script)
+        self.assertIn("msgbox EryonRota02_Text_CartographerAfterBadge", script)
+
     def test_local_kid_reacts_to_first_badge(self):
         script = (ROOT / "data/maps/Eryon_Verdelume/scripts.inc").read_text(encoding="utf-8")
         entry = script.split("EryonVerdelume_EventScript_LocalKid::", 1)[1].split(
