@@ -98,6 +98,17 @@ def main():
         errors.append("Kael briefing is not saved")
     if "goto_if_ge VAR_ERYON_KAEL_BRIEFED, 1" not in town_script:
         errors.append("Kael lacks repeat-visit dialogue after briefing")
+    route02_script = (ROOT / "data/maps/Eryon_Rota02/scripts.inc").read_text(encoding="utf-8")
+    if not re.search(r"(?m)^#define VAR_ERYON_ROTA02_SUPPLY_FOUND\\s+0x40FC\\b", clue_var):
+        errors.append("Route 02 supply cache persistent variable missing")
+    for required in (
+        "giveitem ITEM_ANTIDOTE",
+        "setvar VAR_ERYON_ROTA02_SUPPLY_FOUND, 1",
+        "goto_if_ge VAR_ERYON_ROTA02_SUPPLY_FOUND, 1",
+        "goto_if_eq VAR_RESULT, FALSE, EryonRota02_EventScript_RoadsideCacheFull",
+    ):
+        if required not in route02_script:
+            errors.append(f"Route 02 supply cache missing: {required}")
     if "EryonVerdelume_EventScript_Kael::" not in town_script:
         errors.append("Verdelume is missing Kael's first encounter")
     if "EryonVerdelume_EventScript_KaelClue::" not in town_script:
