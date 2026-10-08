@@ -13,11 +13,11 @@ EryonVerdelume_EventScript_GuideClue::
 	end
 
 EryonVerdelume_Text_Guide:
-	.string "Bem-vindo a Verdelume!\\p"
-	.string "Kael protege nosso ginasio, mas\\n"
+	.string "Bem-vindo a Verdelume!\p"
+	.string "Kael protege nosso ginasio, mas\n"
 	.string "o bosque preocupa a cidade.$"
 
 EryonVerdelume_Text_GuideClue:
-	.string "Uma marca de eclipse no bosque?\\p"
-	.string "Kael tambem ouviu rumores.\\n"
+	.string "Uma marca de eclipse no bosque?\p"
+	.string "Kael tambem ouviu rumores.\n"
 	.string "Talvez ele saiba de algo.$"
