@@ -211,6 +211,16 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertLess(entry.index("VAR_ERYON_KAEL_DEFEATED"), entry.index("VAR_ERYON_LUMINA_CLUE_FOUND"))
         self.assertIn("EryonVerdelume_Text_GuideBadge:", script)
 
+    def test_trainer_slot_capacity_covers_eryon_scout(self):
+        opponents = (ROOT / "include/constants/opponents.h").read_text(encoding="utf-8")
+        def constant(name):
+            match = re.search(r"(?m)^#define\s+" + re.escape(name) + r"\s+(\d+)\b", opponents)
+            self.assertIsNotNone(match, name)
+            return int(match.group(1))
+        self.assertEqual(constant("TRAINER_ERYON_SCOUT"), constant("TRAINER_ERYON_KAEL") + 1)
+        self.assertGreater(constant("TRAINERS_COUNT_EMERALD"), constant("TRAINER_ERYON_SCOUT"))
+        self.assertLessEqual(constant("TRAINERS_COUNT_EMERALD"), constant("MAX_TRAINERS_COUNT_EMERALD"))
+
     def test_scout_battle_remains_available_after_kael(self):
         script = (ROOT / "data/maps/Eryon_BosqueDeLumina/scripts.inc").read_text(encoding="utf-8")
         entry = script.split("EryonBosque_EventScript_EclipseScout::", 1)[1].split(
