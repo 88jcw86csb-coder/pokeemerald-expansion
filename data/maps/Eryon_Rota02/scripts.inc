@@ -92,3 +92,37 @@ EryonRota02_Text_CartographerAfterBadge:
 	.string "trilha alem de Verdelume.\p"
 	.string "Ainda preciso confirmar\n"
 	.string "onde ela comeca.$"
+
+
+@ Dario offers a one-time optional trainer battle on Route 02.
+@ Trainer defeat state is managed by the engine; no story flag is modified.
+EryonRota02_EventScript_Dario::
+	lock
+	faceplayer
+	trainerbattle_single TRAINER_ERYON_ROUTE02_HIKER, EryonRota02_Text_DarioChallenge, EryonRota02_Text_DarioDefeat, EryonRota02_EventScript_DarioVictory, FALSE
+	msgbox EryonRota02_Text_DarioAfterBattle, MSGBOX_DEFAULT
+	release
+	end
+
+EryonRota02_EventScript_DarioVictory::
+	msgbox EryonRota02_Text_DarioVictory, MSGBOX_DEFAULT
+	release
+	end
+
+EryonRota02_Text_DarioChallenge:
+	.string "DARIO: Estas pedras sao\n"
+	.string "otimas para treinar!\p"
+	.string "Quer testar sua equipe?$"
+
+EryonRota02_Text_DarioDefeat:
+	.string "DARIO: Que forca impressionante!$"
+
+EryonRota02_Text_DarioVictory:
+	.string "DARIO: Seus Pokemon estao\n"
+	.string "ficando muito fortes!\p"
+	.string "Verdelume fica logo adiante.$"
+
+EryonRota02_Text_DarioAfterBattle:
+	.string "DARIO: Continue treinando!\p"
+	.string "Kael e um adversario\n"
+	.string "que merece respeito.$"
