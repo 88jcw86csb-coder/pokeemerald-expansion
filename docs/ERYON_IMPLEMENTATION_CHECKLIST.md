@@ -7,7 +7,8 @@ Nenhuma ROM deve ser anunciada como final sem compilação, execução e valida�
 - [x] Registrar mapas iniciais no grupo Eryon
 - [x] Configurar Riolu como única opção de inicial na interface
 - [x] Ajustar identificador da Rota 02
-- [ ] Compilar a branch eryon-development sem erros
+- [x] Compilar a branch eryon-development sem erros (GitHub Actions 37841661556; artefato `eryon-gba` gerado)
+- [ ] Executar o artefato `eryon-gba` em emulador e registrar evidências de boot, save/load e eventos; compilação não comprova jogabilidade
 - [ ] Verificar boot, novo jogo, spawn e travessia dos mapas em emulador
 - [ ] Conferir limites de layout, warps, scripts e colisões
 - [ ] Passar na validação de prontidão: `python3 tools/eryon_validate.py --strict-ready` (bloqueada até substituir terrenos herdados e verificar passagens de borda)
