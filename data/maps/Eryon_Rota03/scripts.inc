@@ -126,3 +126,53 @@ EryonRota03_Text_FieldMedicHealed:
 EryonRota03_Text_FieldMedicDecline:
 	.string "Tudo bem. Estarei aqui\n"
 	.string "se precisar de ajuda.$"
+
+@ The eastern ridge foreshadows the next rocky area.
+EryonRota03_EventScript_RockGuide::
+	lock
+	faceplayer
+	goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonRota03_EventScript_RockGuideBadge
+	msgbox EryonRota03_Text_RockGuideBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonRota03_EventScript_RockGuideBadge::
+	msgbox EryonRota03_Text_RockGuideBadge, MSGBOX_DEFAULT
+	release
+	end
+
+EryonRota03_EventScript_CaravanDebris::
+	lock
+	goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonRota03_EventScript_CaravanDebrisBadge
+	msgbox EryonRota03_Text_CaravanDebrisBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonRota03_EventScript_CaravanDebrisBadge::
+	msgbox EryonRota03_Text_CaravanDebrisBadge, MSGBOX_DEFAULT
+	release
+	end
+
+EryonRota03_Text_RockGuideBefore:
+	.string "GUIA: As pedras desta trilha\n"
+	.string "ficam perigosas na chuva.\p"
+	.string "Volte a Verdelume se sua\n"
+	.string "equipe precisar descansar.$"
+
+EryonRota03_Text_RockGuideBadge:
+	.string "GUIA: Voce derrotou Kael!\p"
+	.string "Os rastros das carrocas\n"
+	.string "seguem ate a serra.\p"
+	.string "Alguem transportou pedras\n"
+	.string "durante a madrugada.$"
+
+EryonRota03_Text_CaravanDebrisBefore:
+	.string "Um pedaco de madeira foi\n"
+	.string "deixado perto da estrada.\p"
+	.string "Parece parte de uma carroca.$"
+
+EryonRota03_Text_CaravanDebrisBadge:
+	.string "A madeira tem um desenho\n"
+	.string "que lembra um eclipse.\p"
+	.string "Ha pequenos cristais presos\n"
+	.string "nas rachaduras.$"
