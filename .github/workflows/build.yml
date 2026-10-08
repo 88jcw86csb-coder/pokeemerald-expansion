@@ -48,6 +48,9 @@ jobs:
             tools/wav2agb/wav2agb
           key: tools-${{ runner.os }}-${{ hashFiles('tools/*/Makefile', 'tools/**/*.c', 'tools/**/*.cpp', 'tools/**/*.h') }}
 
+      - name: Test Eryon species boundaries
+        run: python3 -m unittest discover -s tools -p 'test_eryon_species.py' -v
+
       - name: Validate Eryon opening maps
         run: python3 tools/eryon_validate.py
 
@@ -68,6 +71,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Test Eryon species boundaries
+        run: python3 -m unittest discover -s tools -p 'test_eryon_species.py' -v
       - name: Validate Eryon data
         run: python3 tools/eryon_validate.py
 
