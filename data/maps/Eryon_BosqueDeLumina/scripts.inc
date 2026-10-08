@@ -6,7 +6,7 @@ EryonBosque_EventScript_Researcher::
 	end
 
 EryonBosque_Text_Researcher:
-	.string "PESQUISADOR: Que estranho...\\p"
-	.string "Os Pokemon daqui estao agitados.\\p"
-	.string "Encontrei uma marca em forma de\\n"
+	.string "PESQUISADOR: Que estranho...\p"
+	.string "Os Pokemon daqui estao agitados.\p"
+	.string "Encontrei uma marca em forma de\n"
 	.string "eclipse nas pedras antigas.$"
