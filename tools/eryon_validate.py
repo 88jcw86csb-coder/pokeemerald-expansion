@@ -112,6 +112,16 @@ def main():
         map_data = maps[name]
         script_source = (ROOT / include).read_text(encoding="utf-8")
         labels = set(re.findall(r"(?m)^([A-Za-z][A-Za-z0-9_]*):{1,2}\s*$", script_source))
+        # Map headers are referenced by generated map data at link time.
+        # Validate them here instead of waiting for a lengthy ROM link.
+        map_header = f"{name}_MapScripts"
+        if map_header not in labels:
+            errors.append(f"{name}: missing map script header {map_header}")
+        # These identifiers look plausible but are not defined by this base.
+        if map_data.get("music") == "MUS_ROUTE102":
+            errors.append(f"{name}: undefined music constant MUS_ROUTE102")
+        if map_data.get("region_map_section") in ("MAPSEC_ROUTE101", "MAPSEC_ROUTE102"):
+            errors.append(f"{name}: undefined region map section {map_data['region_map_section']}")
         for kind in ("object_events", "bg_events", "coord_events"):
             for index, event in enumerate(map_data.get(kind, [])):
                 label = event.get("script", "")
