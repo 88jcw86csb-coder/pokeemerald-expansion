@@ -47,7 +47,7 @@ def main():
         errors.append("Starter selector must expose exactly one Pokemon")
     if not re.search(r"tStarterSelection\s*=\s*0\s*;", starter_ui):
         errors.append("Starter selector must initialize cursor to slot zero")
-    for match in re.finditer(r"sPokeballCoords\\[(\\d+)\\]", starter_ui):
+    for match in re.finditer(r"sPokeballCoords\[(\d+)\]", starter_ui):
         if int(match.group(1)) >= 1:
             errors.append(f"Starter selector references invalid ball slot {match.group(1)}")
     starter_script = (ROOT / "data/maps/Eryon_VilaAurora/scripts.inc").read_text(encoding="utf-8")
