@@ -144,7 +144,13 @@ EryonBosque_EventScript_EclipseScout::
 	end
 
 EryonBosque_EventScript_EclipseScoutAfterClue::
+	trainerbattle_single TRAINER_ERYON_SCOUT, EryonBosque_Text_EclipseScoutChallenge, EryonBosque_Text_EclipseScoutDefeat, EryonBosque_EventScript_EclipseScoutVictory, NO_MUSIC
 	msgbox EryonBosque_Text_EclipseScoutAfterClue, MSGBOX_DEFAULT
+	release
+	end
+
+EryonBosque_EventScript_EclipseScoutVictory::
+	msgbox EryonBosque_Text_EclipseScoutVictory, MSGBOX_DEFAULT
 	release
 	end
 
@@ -167,3 +173,15 @@ EryonBosque_Text_EclipseScoutAfterBadge:
 	.string "ESTRANHO: Kael se envolveu?\p"
 	.string "Isso complica nossos planos...\p"
 	.string "Nao ouviu nada. Entendido?$"
+
+EryonBosque_Text_EclipseScoutChallenge:
+	.string "ESTRANHO: Nao vai embora?\p"
+	.string "Entao vou fazer voce desistir!$"
+
+EryonBosque_Text_EclipseScoutDefeat:
+	.string "Como conseguiu me vencer?!$"
+
+EryonBosque_Text_EclipseScoutVictory:
+	.string "ESTRANHO: Nao devia ter\n"
+	.string "chamado tanta atencao...\p"
+	.string "Nao conte isso a ninguem.$"
