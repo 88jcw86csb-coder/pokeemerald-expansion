@@ -95,6 +95,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Check Eryon Python source syntax
+        run: |
+          python3 -m py_compile tools/eryon_validate.py tools/test_eryon_event_flow.py tools/test_eryon_species.py tools/test_eryon_rom_smoke.py tools/eryon_rom_smoke.py
       - name: Test Eryon species boundaries
         run: python3 -m unittest discover -s tools -p 'test_eryon_species.py' -v
       - name: Test Eryon event flow
