@@ -77,3 +77,36 @@ EryonBosque_Text_StoneRecognized:
 	.string "E a mesma marca mencionada\n"
 	.string "pelo pesquisador.\p"
 	.string "Quem deixou esse simbolo aqui?$"
+
+@ Optional one-time supply cache. A full bag does not consume the reward.
+EryonBosque_EventScript_SupplyCache::
+	lock
+	goto_if_ge VAR_ERYON_LUMINA_SUPPLY_FOUND, 1, EryonBosque_EventScript_EmptyCache
+	msgbox EryonBosque_Text_SupplyCache, MSGBOX_DEFAULT
+	giveitem ITEM_POTION
+	goto_if_eq VAR_RESULT, FALSE, EryonBosque_EventScript_CacheBagFull
+	setvar VAR_ERYON_LUMINA_SUPPLY_FOUND, 1
+	release
+	end
+
+EryonBosque_EventScript_CacheBagFull::
+	msgbox EryonBosque_Text_CacheBagFull, MSGBOX_DEFAULT
+	release
+	end
+
+EryonBosque_EventScript_EmptyCache::
+	msgbox EryonBosque_Text_EmptyCache, MSGBOX_DEFAULT
+	release
+	end
+
+EryonBosque_Text_SupplyCache:
+	.string "Entre as raizes ha uma pequena\n"
+	.string "caixa de suprimentos esquecida.$"
+
+EryonBosque_Text_CacheBagFull:
+	.string "Sua bolsa esta cheia.\n"
+	.string "A caixa ficara aqui.$"
+
+EryonBosque_Text_EmptyCache:
+	.string "A caixa esta vazia.\n"
+	.string "Alguem a deixou ha muito tempo.$"
