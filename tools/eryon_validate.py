@@ -104,6 +104,15 @@ def main():
         errors.append("Lumina clue persistent variable missing")
     if "setvar VAR_ERYON_LUMINA_CLUE_FOUND, 1" not in forest_script:
         errors.append("Lumina clue discovery is not persisted")
+    stone_section = forest_script.split("EryonBosque_EventScript_AncientStone::", 1)
+    if len(stone_section) != 2:
+        errors.append("Lumina: ancient stone event missing")
+    else:
+        stone_intro = stone_section[1].split("EryonBosque_EventScript_StoneRecognized::", 1)[0]
+        if "setvar VAR_ERYON_LUMINA_CLUE_FOUND, 1" not in stone_intro:
+            errors.append("Lumina: examining the ancient stone must record the clue")
+        if "EryonBosque_Text_StoneDiscovery" not in stone_intro:
+            errors.append("Lumina: ancient stone discovery feedback missing")
     if "goto_if_ge VAR_ERYON_LUMINA_CLUE_FOUND, 1" not in forest_script:
         errors.append("Lumina researcher lacks repeat-visit dialogue")
     if "goto_if_ge VAR_ERYON_LUMINA_CLUE_FOUND, 1" not in town_script:
