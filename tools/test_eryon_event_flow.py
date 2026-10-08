@@ -81,12 +81,12 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertIn("trainerbattle_single TRAINER_ERYON_ROUTE02_HIKER", script)
         party = (ROOT / "src/data/trainers.party").read_text()
         team = party.split("=== TRAINER_ERYON_ROUTE02_HIKER ===", 1)[1]
-        self.assertIn("Geodude\\nLevel: 13", team)
-        self.assertIn("Machop\\nLevel: 14", team)
+        self.assertIn("Geodude\nLevel: 13", team)
+        self.assertIn("Machop\nLevel: 14", team)
         self.assertNotIn("setflag FLAG_BADGE01_GET", script)
         opponents = (ROOT / "include/constants/opponents.h").read_text()
-        self.assertRegex(opponents, r"TRAINER_ERYON_ROUTE02_HIKER\\s+857")
-        self.assertRegex(opponents, r"TRAINERS_COUNT_EMERALD\\s+858")
+        self.assertRegex(opponents, r"TRAINER_ERYON_ROUTE02_HIKER\s+857")
+        self.assertRegex(opponents, r"TRAINERS_COUNT_EMERALD\s+858")
 
     def test_kael_battle_is_reachable_after_briefing(self):
         script = (ROOT / "data/maps/Eryon_Verdelume/scripts.inc").read_text()
