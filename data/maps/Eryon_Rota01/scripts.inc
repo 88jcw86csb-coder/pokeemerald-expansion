@@ -41,16 +41,16 @@ EryonRota01_Text_TrailMarker:
 	.string "Observe as clareiras com calma.$"
 
 EryonRota01_Text_ExplorerNoStarter:
-	.string "Antes de entrar no bosque,\\n"
-	.string "visite a Prof. Elya na vila.\\p"
+	.string "Antes de entrar no bosque,\n"
+	.string "visite a Prof. Elya na vila.\p"
 	.string "Ela ajuda novos treinadores.$"
 
 EryonRota01_Text_ExplorerAfterClue:
-	.string "Voce encontrou uma marca\\n"
-	.string "estranha no bosque?\\p"
+	.string "Voce encontrou uma marca\n"
+	.string "estranha no bosque?\p"
 	.string "Conte a Kael em Verdelume!$"
 
 EryonRota01_Text_ExplorerAfterKael:
-	.string "Kael ja sabe sobre a marca?\\p"
-	.string "Otimo! Explore as trilhas,\\n"
+	.string "Kael ja sabe sobre a marca?\p"
+	.string "Otimo! Explore as trilhas,\n"
 	.string "mas nao se arrisque sozinho.$"
