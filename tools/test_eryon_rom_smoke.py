@@ -26,6 +26,15 @@ class EryonRomSmokeTests(unittest.TestCase):
             self.assertEqual(size, 1024 * 1024)
             self.assertEqual(len(digest), 64)
 
+    def test_null_padded_eryon_title_is_accepted(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "eryon.gba"
+            rom = header_rom()
+            self.assertEqual(rom[0xA0:0xAC], b"ERYON" + b"\\x00" * 7)
+            path.write_bytes(rom)
+            size, _ = validate_rom(path)
+            self.assertEqual(size, 1024 * 1024)
+
     def test_invalid_header_checksum(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "bad.gba"
