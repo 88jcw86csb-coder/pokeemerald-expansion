@@ -10,7 +10,10 @@ if [[ ! -f Makefile || ! -f tools/eryon_rom_smoke.py ]]; then
   exit 2
 fi
 
-echo "== Eryon: checking Python validator/test syntax =="\npython3 -m py_compile tools/eryon_validate.py tools/test_eryon_event_flow.py tools/test_eryon_species.py tools/test_eryon_rom_smoke.py tools/eryon_rom_smoke.py\n\necho "== Eryon: opening data validation =="
+echo "== Eryon: checking Python validator/test syntax =="
+python3 -m py_compile tools/eryon_validate.py tools/test_eryon_event_flow.py tools/test_eryon_species.py tools/test_eryon_rom_smoke.py tools/eryon_rom_smoke.py
+
+echo "== Eryon: opening data validation =="
 python3 tools/eryon_validate.py
 
 echo "== Eryon: species tests =="
