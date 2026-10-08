@@ -26,10 +26,13 @@ if command -v nproc >/dev/null 2>&1; then
   jobs="$(nproc)"
 fi
 mkdir -p build
+# Never accept a leftover ROM from an earlier build as evidence of this run.
+rm -f pokeeryon.gba
 set -o pipefail
 make -j"$jobs" -O all 2>&1 | tee build/eryon-build.log
 
 echo "== Eryon: validating ROM header and payload =="
 python3 tools/eryon_rom_smoke.py pokeeryon.gba
+sha256sum pokeeryon.gba | tee build/eryon-rom.sha256
 echo "PASS: build and static checks complete."
 echo "NOTE: this is NOT a gameplay/emulator test; test save/load, map traversal and battles separately."
