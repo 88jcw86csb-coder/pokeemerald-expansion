@@ -7,8 +7,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 MAPS = ("Eryon_VilaAurora", "Eryon_Rota01", "Eryon_BosqueDeLumina",
         "Eryon_Rota02", "Eryon_Verdelume")
-LABEL = re.compile(r"(?m)^([A-Za-z][A-Za-z0-9_]*)::?\\s*$")
-JUMP = re.compile(r"^\\s*(?:goto|goto_if_eq|goto_if_ne|goto_if_ge|goto_if_le|goto_if_gt|goto_if_lt)\\s+(.+)$")
+LABEL = re.compile(r"(?m)^([A-Za-z][A-Za-z0-9_]*)::?\s*$")
+JUMP = re.compile(r"^\s*(?:goto|goto_if_eq|goto_if_ne|goto_if_ge|goto_if_le|goto_if_gt|goto_if_lt)\s+(.+)$")
 
 
 class EryonEventFlowTests(unittest.TestCase):
