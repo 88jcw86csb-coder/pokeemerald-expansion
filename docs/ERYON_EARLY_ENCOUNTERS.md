@@ -44,7 +44,7 @@ Este documento define tabelas de encontro para integração futura no sistema de
 
 ## Estado de implementação
 - [x] Planejamento de espécies e pesos da abertura
-- [ ] Localizar e confirmar arquivo-fonte e formato de encontros no projeto
+- [x] Localizar arquivo-fonte `src/data/wild_encounters.json` e template `src/data/wild_encounters.constants.json.txt` (estrutura interna do JSON ainda não inspecionada: arquivo excede limite de leitura disponível)
 - [ ] Converter pesos em slots suportados
 - [ ] Inserir tabelas na base e compilar
 - [ ] Testar encontros, níveis e frequência no emulador
