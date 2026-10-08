@@ -29,15 +29,15 @@ class EryonRomSmokeTests(unittest.TestCase):
 
     def test_rom_identity_matches_makefile(self):
         makefile = (Path(__file__).resolve().parents[1] / "Makefile").read_text(encoding="utf-8")
-        self.assertRegex(makefile, r"(?m)^TITLE\\s*\\?=\\s*ERYON\\s*$")
-        self.assertRegex(makefile, r"(?m)^GAME_CODE\\s*\\?=\\s*BPEE\\s*$")
-        self.assertRegex(makefile, r"(?m)^BUILD_NAME\\s*\\?=\\s*eryon\\s*$")
+        self.assertRegex(makefile, r"(?m)^TITLE\s*\?=\s*ERYON\s*$")
+        self.assertRegex(makefile, r"(?m)^GAME_CODE\s*\?=\s*BPEE\s*$")
+        self.assertRegex(makefile, r"(?m)^BUILD_NAME\s*\?=\s*eryon\s*$")
 
     def test_null_padded_eryon_title_is_accepted(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "eryon.gba"
             rom = header_rom()
-            self.assertEqual(rom[0xA0:0xAC], b"ERYON" + b"\\x00" * 7)
+            self.assertEqual(rom[0xA0:0xAC], b"ERYON" + b"\x00" * 7)
             path.write_bytes(rom)
             size, _ = validate_rom(path)
             self.assertEqual(size, 1024 * 1024)
