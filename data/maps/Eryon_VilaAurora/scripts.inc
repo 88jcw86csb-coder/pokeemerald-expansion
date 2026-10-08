@@ -1,3 +1,6 @@
+Eryon_VilaAurora_MapScripts::
+	.byte 0
+
 @ Eryon: Professor Elya gives the one-time Riolu starter.
 @ Progress uses Eryon's own persistent variable, independent from Birch's story.
 EryonVilaAurora_EventScript_ProfessorElya::
