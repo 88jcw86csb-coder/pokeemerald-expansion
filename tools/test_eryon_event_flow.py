@@ -13,6 +13,34 @@ JUMP = re.compile(r"^\s*(?:goto|goto_if_eq|goto_if_ne|goto_if_ge|goto_if_le|goto
 
 
 class EryonEventFlowTests(unittest.TestCase):
+    def test_all_map_npc_and_sign_scripts_exist(self):
+        import json
+        for name in MAPS:
+            with self.subTest(map=name):
+                folder = ROOT / "data/maps" / name
+                data = json.loads((folder / "map.json").read_text(encoding="utf-8"))
+                script = (folder / "scripts.inc").read_text(encoding="utf-8")
+                labels = set(re.findall(r"(?m)^([A-Za-z][A-Za-z0-9_]*)::?\\s*$", script))
+                for kind in ("object_events", "bg_events", "coord_events"):
+                    for index, event in enumerate(data.get(kind, [])):
+                        label = event.get("script")
+                        if label and label.startswith("Eryon"):
+                            self.assertIn(label, labels, f"{name} {kind}[{index}] has no script")
+
+    def test_passagem_healer_and_two_trainers(self):
+        import json
+        folder = ROOT / "data/maps/Eryon_PassagemRochosa"
+        data = json.loads((folder / "map.json").read_text(encoding="utf-8"))
+        script = (folder / "scripts.inc").read_text(encoding="utf-8")
+        placements = [obj["script"] for obj in data["object_events"]]
+        for label in ("EryonPassagem_EventScript_HikerBattle",
+                      "EryonPassagem_EventScript_EclipseBattle",
+                      "EryonPassagem_EventScript_Medic"):
+            self.assertEqual(placements.count(label), 1)
+        self.assertIn("trainerbattle_single TRAINER_ERYON_PASSAGEM_HIKER", script)
+        self.assertIn("trainerbattle_single TRAINER_ERYON_PASSAGEM_ECLIPSE", script)
+        self.assertIn("special HealPlayerParty", script)
+
     def test_eryon_maps_are_registered_with_matching_layouts(self):
         import json
         groups = json.loads((ROOT / "data/maps/map_groups.json").read_text(encoding="utf-8"))
