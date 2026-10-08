@@ -328,6 +328,27 @@ def main():
                 label = obj.get("script", "")
                 if not re.search(r"(?m)^" + re.escape(label) + r"::", script_text):
                     errors.append(f"{name}: missing NPC script {label}")
+    # Verify the whole opening route is connected from the starting village.
+    # This is a graph check only; tile collision still requires emulator testing.
+    adjacency = {name: set() for name in NAMES}
+    for name, map_data in maps.items():
+        for connection in map_data.get("connections") or []:
+            neighbor = ids.get(connection.get("map"))
+            if neighbor:
+                adjacency[name].add(neighbor)
+        for warp in map_data.get("warp_events", []):
+            neighbor = ids.get(warp.get("dest_map"))
+            if neighbor:
+                adjacency[name].add(neighbor)
+    reachable = {"Eryon_VilaAurora"}
+    frontier = ["Eryon_VilaAurora"]
+    while frontier:
+        current = frontier.pop()
+        for neighbor in adjacency[current] - reachable:
+            reachable.add(neighbor)
+            frontier.append(neighbor)
+    for unreachable in sorted(set(NAMES) - reachable):
+        errors.append(f"Opening route: {unreachable} cannot be reached from Vila Aurora")
     # Route 02's optional trainer must have a map placement and matching roster.
     route02 = maps["Eryon_Rota02"]
     dario_label = "EryonRota02_EventScript_Dario"
