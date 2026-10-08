@@ -185,6 +185,31 @@ def main():
         team = re.findall(r"(?m)^([A-Za-z]+)\s*\nLevel:\s*(\d+)\s*$", kael_party)
         if team != [(species, str(level)) for species, level in expected_team]:
             errors.append(f"Kael team must be Budew 15, Roselia 17, Roserade 18; found {team}")
+    # The optional Eclipse scout consumes a real trainer slot and must remain
+    # available whether the player visits before or after defeating Kael.
+    scout_id = re.search(r"(?m)^#define\s+TRAINER_ERYON_SCOUT\s+(\d+)\b", opponent_constants)
+    kael_id = re.search(r"(?m)^#define\s+TRAINER_ERYON_KAEL\s+(\d+)\b", opponent_constants)
+    trainer_count = re.search(r"(?m)^#define\s+TRAINERS_COUNT_EMERALD\s+(\d+)\b", opponent_constants)
+    trainer_capacity = re.search(r"(?m)^#define\s+MAX_TRAINERS_COUNT_EMERALD\s+(\d+)\b", opponent_constants)
+    if not scout_id or not kael_id or int(scout_id.group(1)) != int(kael_id.group(1)) + 1:
+        errors.append("Eclipse scout must occupy the trainer slot immediately after Kael")
+    if not trainer_count or not scout_id or int(trainer_count.group(1)) <= int(scout_id.group(1)):
+        errors.append("TRAINERS_COUNT_EMERALD must include the Eclipse scout")
+    if not trainer_capacity or not trainer_count or int(trainer_count.group(1)) > int(trainer_capacity.group(1)):
+        errors.append("Eryon trainers exceed the allocated trainer flag capacity")
+    if "=== TRAINER_ERYON_SCOUT ===" not in trainer_parties:
+        errors.append("Eclipse scout trainer party is missing")
+    else:
+        scout_party = trainer_parties.split("=== TRAINER_ERYON_SCOUT ===", 1)[1].split("\n=== ", 1)[0]
+        scout_team = re.findall(r"(?m)^([A-Za-z]+)\s*\nLevel:\s*(\d+)\s*$", scout_party)
+        if scout_team != [("Poochyena", "12"), ("Zubat", "13")]:
+            errors.append(f"Eclipse scout team must be Poochyena 12, Zubat 13; found {scout_team}")
+    forest_script = (ROOT / "data/maps/Eryon_BosqueDeLumina/scripts.inc").read_text(encoding="utf-8")
+    for event in ("EryonBosque_EventScript_EclipseScoutAfterClue",
+                  "EryonBosque_EventScript_EclipseScoutAfterBadge"):
+        block = forest_script.split(event + "::", 1)
+        if len(block) < 2 or "trainerbattle_single TRAINER_ERYON_SCOUT" not in block[1].split("\nEryonBosque_EventScript_", 1)[0]:
+            errors.append(f"Eclipse scout battle missing from {event}")
     if "trainerbattle_single TRAINER_ERYON_KAEL" not in town_script:
         errors.append("Kael battle is not linked to his NPC")
     if "setvar VAR_ERYON_KAEL_DEFEATED, 1" not in town_script:
