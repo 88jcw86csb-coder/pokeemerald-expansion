@@ -5,6 +5,7 @@ on:
     branches:
       - master
       - upcoming
+      - eryon-development
   pull_request:
 
 env:
@@ -47,10 +48,16 @@ jobs:
             tools/wav2agb/wav2agb
           key: tools-${{ runner.os }}-${{ hashFiles('tools/*/Makefile', 'tools/**/*.c', 'tools/**/*.cpp', 'tools/**/*.h') }}
 
-      - name: ROM (Emerald)
+      - name: ROM (Eryon)
         env:
           GAME_VERSION: EMERALD
         run: make -j$(nproc) -O all
+
+      - name: Upload Eryon ROM
+        uses: actions/upload-artifact@v4
+        with:
+          name: eryon-gba
+          path: pokeeryon.gba
 
   build-firered:
     if: github.actor != 'allcontributors[bot]'
