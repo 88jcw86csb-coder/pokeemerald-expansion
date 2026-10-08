@@ -95,6 +95,30 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertEqual(seen, set(MAPS))
         self.assertIn("Eryon_Verdelume", seen)
 
+    def test_opening_warps_have_reciprocal_destinations(self):
+        import json
+
+        maps = {
+            name: json.loads((ROOT / "data/maps" / name / "map.json").read_text(encoding="utf-8"))
+            for name in MAPS
+        }
+        by_id = {data["id"]: data for data in maps.values()}
+        for source in maps.values():
+            for source_warp_id, warp in enumerate(source.get("warp_events", [])):
+                destination = by_id.get(warp["dest_map"])
+                if destination is None:
+                    continue
+                target_warps = destination.get("warp_events", [])
+                target_id = int(warp["dest_warp_id"])
+                with self.subTest(map=source["id"], warp=source_warp_id):
+                    self.assertGreaterEqual(target_id, 0)
+                    self.assertLess(target_id, len(target_warps))
+                    if target_id < 0 or target_id >= len(target_warps):
+                        continue
+                    reverse = target_warps[target_id]
+                    self.assertEqual(reverse["dest_map"], source["id"])
+                    self.assertEqual(int(reverse["dest_warp_id"]), source_warp_id)
+
     def test_all_eryon_battle_trainers_have_unique_party_and_id(self):
         scripts = "\n".join(
             (ROOT / "data/maps" / name / "scripts.inc").read_text()
