@@ -83,6 +83,12 @@ def main():
         errors.append("Lumina researcher lacks repeat-visit dialogue")
     if "goto_if_ge VAR_ERYON_LUMINA_CLUE_FOUND, 1" not in town_script:
         errors.append("Verdelume does not react to the Lumina clue")
+    if not re.search(r"(?m)^#define VAR_ERYON_KAEL_BRIEFED\\s+0x40FA\\b", clue_var):
+        errors.append("Kael briefing persistent variable missing")
+    if "setvar VAR_ERYON_KAEL_BRIEFED, 1" not in town_script:
+        errors.append("Kael briefing is not saved")
+    if "goto_if_ge VAR_ERYON_KAEL_BRIEFED, 1" not in town_script:
+        errors.append("Kael lacks repeat-visit dialogue after briefing")
     if "EryonVerdelume_EventScript_Kael::" not in town_script:
         errors.append("Verdelume is missing Kael's first encounter")
     if "EryonVerdelume_EventScript_KaelClue::" not in town_script:
