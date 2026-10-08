@@ -70,6 +70,24 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertIn("setflag FLAG_BADGE01_GET", kael)
         self.assertIn("setvar VAR_ERYON_KAEL_DEFEATED, 1", kael)
 
+    def test_route02_dario_battle_is_optional_and_has_two_pokemon(self):
+        import json
+        map_data = json.loads((ROOT / "data/maps/Eryon_Rota02/map.json").read_text())
+        self.assertEqual(
+            sum(e["script"] == "EryonRota02_EventScript_Dario"
+                for e in map_data["object_events"]), 1
+        )
+        script = (ROOT / "data/maps/Eryon_Rota02/scripts.inc").read_text()
+        self.assertIn("trainerbattle_single TRAINER_ERYON_ROUTE02_HIKER", script)
+        party = (ROOT / "src/data/trainers.party").read_text()
+        team = party.split("=== TRAINER_ERYON_ROUTE02_HIKER ===", 1)[1]
+        self.assertIn("Geodude\\nLevel: 13", team)
+        self.assertIn("Machop\\nLevel: 14", team)
+        self.assertNotIn("setflag FLAG_BADGE01_GET", script)
+        opponents = (ROOT / "include/constants/opponents.h").read_text()
+        self.assertRegex(opponents, r"TRAINER_ERYON_ROUTE02_HIKER\\s+857")
+        self.assertRegex(opponents, r"TRAINERS_COUNT_EMERALD\\s+858")
+
     def test_kael_battle_is_reachable_after_briefing(self):
         script = (ROOT / "data/maps/Eryon_Verdelume/scripts.inc").read_text()
         self.assertIn("goto_if_ge VAR_ERYON_KAEL_BRIEFED, 1, EryonVerdelume_EventScript_KaelFollowup", script)
