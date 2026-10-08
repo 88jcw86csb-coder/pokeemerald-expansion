@@ -15,17 +15,17 @@ EryonBosque_EventScript_ResearcherFollowup::
 	end
 
 EryonBosque_Text_Researcher:
-	.string "PESQUISADOR: Que estranho...\\p"
-	.string "Os Pokemon daqui estao agitados.\\p"
-	.string "Encontrei uma marca em forma de\\n"
+	.string "PESQUISADOR: Que estranho...\p"
+	.string "Os Pokemon daqui estao agitados.\p"
+	.string "Encontrei uma marca em forma de\n"
 	.string "eclipse nas pedras antigas.$"
 
 EryonBosque_Text_ClueFound:
-	.string "Voce observou a marca!\\p"
-	.string "Alguem esteve aqui antes de nos.\\n"
+	.string "Voce observou a marca!\p"
+	.string "Alguem esteve aqui antes de nos.\n"
 	.string "Procure respostas em Verdelume.$"
 
 EryonBosque_Text_ResearcherFollowup:
-	.string "A marca de eclipse ainda esta\\n"
-	.string "aqui. Nao e um sinal natural.\\p"
+	.string "A marca de eclipse ainda esta\n"
+	.string "aqui. Nao e um sinal natural.\p"
 	.string "Converse com o povo de Verdelume.$"
