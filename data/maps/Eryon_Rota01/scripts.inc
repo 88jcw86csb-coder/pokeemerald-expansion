@@ -1,10 +1,16 @@
 EryonRota01_EventScript_Explorer::
 	lock
 	faceplayer
+	goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonRota01_EventScript_ExplorerAfterBadge
 	goto_if_eq VAR_ERYON_STARTER_RECEIVED, 0, EryonRota01_EventScript_ExplorerNoStarter
 	goto_if_ge VAR_ERYON_KAEL_BRIEFED, 1, EryonRota01_EventScript_ExplorerAfterKael
 	goto_if_ge VAR_ERYON_LUMINA_CLUE_FOUND, 1, EryonRota01_EventScript_ExplorerAfterClue
 	msgbox EryonRota01_Text_Explorer, MSGBOX_DEFAULT
+	release
+	end
+
+EryonRota01_EventScript_ExplorerAfterBadge::
+	msgbox EryonRota01_Text_ExplorerAfterBadge, MSGBOX_DEFAULT
 	release
 	end
 
@@ -54,3 +60,9 @@ EryonRota01_Text_ExplorerAfterKael:
 	.string "Kael ja sabe sobre a marca?\p"
 	.string "Otimo! Explore as trilhas,\n"
 	.string "mas nao se arrisque sozinho.$"
+
+@ Revisiting the first route after Kael rewards attentive exploration.
+EryonRota01_Text_ExplorerAfterBadge:
+	.string "Sua primeira insignia! Parabens!\p"
+	.string "O bosque continua misterioso.\n"
+	.string "Talvez valha voltar com calma.$"
