@@ -42,14 +42,14 @@ class EryonEventFlowTests(unittest.TestCase):
 
     def test_eryon_progress_vars_are_unique_and_defined(self):
         vars_text = (ROOT / "include/constants/vars.h").read_text()
-        definitions = re.findall(r"(?m)^#define\\s+(VAR_[A-Z0-9_]+)\\s+(0x[0-9A-Fa-f]+)", vars_text)
+        definitions = re.findall(r"(?m)^#define\s+(VAR_[A-Z0-9_]+)\s+(0x[0-9A-Fa-f]+)", vars_text)
         by_value = {}
         for name, value in definitions:
             if name.startswith("VAR_ERYON_"):
                 with self.subTest(name=name):
                     self.assertNotIn(value, by_value, f"{name} shares {value} with {by_value.get(value)}")
                 by_value[value] = name
-        scripts = "\\n".join((ROOT / "data/maps" / name / "scripts.inc").read_text() for name in MAPS)
+        scripts = "\n".join((ROOT / "data/maps" / name / "scripts.inc").read_text() for name in MAPS)
         for name in set(re.findall(r"VAR_ERYON_[A-Z0-9_]+", scripts)):
             with self.subTest(name=name):
                 self.assertIn(name, dict(definitions), f"Undefined Eryon variable: {name}")
