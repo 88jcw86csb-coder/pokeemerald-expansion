@@ -582,6 +582,18 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertIn("não são espécies de Pokémon", checklist)
         self.assertIn("lendários oficiais até Kalos", checklist)
 
+    def test_route02_healer_dialogue_uses_valid_line_breaks(self):
+        script = (ROOT / "data/maps/Eryon_Rota02/scripts.inc").read_text(encoding="utf-8")
+        for label in (
+            "EryonRota02_Text_HikerHealOffer:",
+            "EryonRota02_Text_HikerHealed:",
+            "EryonRota02_Text_HikerDeclined:",
+        ):
+            section = script.split(label, 1)[1].split("\\n\\n", 1)[0]
+            with self.subTest(label=label):
+                self.assertNotIn(chr(92) * 2 + "n", section)
+                self.assertIn(chr(92) + "n", section)
+
     def test_no_duplicate_text_symbols(self):
         for name in MAPS:
             script = (ROOT / "data/maps" / name / "scripts.inc").read_text()
