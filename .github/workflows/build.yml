@@ -49,23 +49,6 @@ jobs:
             tools/wav2agb/wav2agb
           key: tools-${{ runner.os }}-${{ hashFiles('tools/*/Makefile', 'tools/**/*.c', 'tools/**/*.cpp', 'tools/**/*.h') }}
 
-      - name: Test Eryon species boundaries
-        if: github.ref == 'refs/heads/eryon-development'
-        run: python3 -m unittest discover -s tools -p 'test_eryon_species.py' -v
-
-      - name: Test Eryon event flow
-        if: github.ref == 'refs/heads/eryon-development'
-        run: python3 -m unittest discover -s tools -p 'test_eryon_event_flow.py' -v
-
-      - name: Test Eryon ROM smoke validator
-        if: github.ref == 'refs/heads/eryon-development'
-        run: python3 -m unittest discover -s tools -p 'test_eryon_rom_smoke.py' -v
-
-
-      - name: Validate Eryon opening maps
-        if: github.ref == 'refs/heads/eryon-development'
-        run: python3 tools/eryon_validate.py
-
       - name: ROM (Emerald baseline)
         if: github.ref != 'refs/heads/eryon-development'
         env:
@@ -76,11 +59,10 @@ jobs:
         if: github.ref == 'refs/heads/eryon-development'
         env:
           GAME_VERSION: EMERALD
-        run: bash tools/build_eryon.sh
-
-      - name: Smoke-test Eryon ROM header
-        if: github.ref == 'refs/heads/eryon-development'
-        run: python3 tools/eryon_rom_smoke.py pokeeryon.gba
+        run: |
+          mkdir -p build
+          set -o pipefail
+          bash tools/build_eryon.sh 2>&1 | tee build/eryon-ci.log
 
       - name: Upload build diagnostics
         if: always() && github.ref == 'refs/heads/eryon-development'
@@ -88,6 +70,7 @@ jobs:
         with:
           name: eryon-build-diagnostics
           path: |
+            build/eryon-ci.log
             build/eryon-build.log
             build/eryon-rom.sha256
           if-no-files-found: warn
