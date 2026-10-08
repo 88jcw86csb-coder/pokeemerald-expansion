@@ -8,7 +8,9 @@ from eryon_rom_smoke import validate_rom
 
 
 def header_rom():
-    rom = bytearray(192)
+    rom = bytearray(1024 * 1024)
+    rom[:4] = bytes((0x00, 0x00, 0x00, 0xEA))
+    rom[0xAC:0xB0] = b"BPEE"
     rom[0xB2] = 0x96
     rom[0xBD] = (-sum(rom[0xA0:0xBD]) - 0x19) & 0xFF
     return rom
@@ -20,7 +22,7 @@ class EryonRomSmokeTests(unittest.TestCase):
             path = Path(directory) / "test.gba"
             path.write_bytes(header_rom())
             size, digest = validate_rom(path)
-            self.assertEqual(size, 192)
+            self.assertEqual(size, 1024 * 1024)
             self.assertEqual(len(digest), 64)
 
     def test_invalid_header_checksum(self):
@@ -30,6 +32,22 @@ class EryonRomSmokeTests(unittest.TestCase):
             rom[0xBD] ^= 1
             path.write_bytes(rom)
             with self.assertRaisesRegex(ValueError, "checksum"):
+                validate_rom(path)
+
+    def test_header_only_file_is_rejected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "truncated.gba"
+            path.write_bytes(header_rom()[:192])
+            with self.assertRaisesRegex(ValueError, "size"):
+                validate_rom(path)
+
+    def test_blank_entry_point_is_rejected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "blank.gba"
+            rom = header_rom()
+            rom[:4] = b"\x00" * 4
+            path.write_bytes(rom)
+            with self.assertRaisesRegex(ValueError, "entry-point"):
                 validate_rom(path)
 
     def test_missing_rom(self):
