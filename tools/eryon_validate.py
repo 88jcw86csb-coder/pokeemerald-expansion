@@ -6,7 +6,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-NAMES = ["Eryon_VilaAurora", "Eryon_Rota01", "Eryon_BosqueDeLumina", "Eryon_Rota02", "Eryon_Verdelume"]
+NAMES = ["Eryon_VilaAurora", "Eryon_Rota01", "Eryon_BosqueDeLumina", "Eryon_Rota02", "Eryon_Verdelume", "Eryon_Rota03"]
 
 
 def load(path):
@@ -310,6 +310,7 @@ def main():
         ("Eryon_Rota01", 20, 20),
         ("Eryon_Rota02", 50, 20),
         ("Eryon_Verdelume", 40, 60),
+        ("Eryon_Rota03", 50, 20),
     ):
         for index, warp in enumerate(maps[map_name].get("warp_events", [])):
             if warp["x"] in (0, width - 1) or warp["y"] in (0, height - 1):
