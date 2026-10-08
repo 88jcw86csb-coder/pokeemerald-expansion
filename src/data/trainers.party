@@ -16888,14 +16888,22 @@ Items: Potion
 AI: Basic Trainer
 
 Budew
-Level: 11
-- Absorb
+Level: 15
+- Mega Drain
 - Growth
 - Stun Spore
+- Worry Seed
+
+Roselia
+Level: 17
+- Mega Drain
+- Leech Seed
+- Stun Spore
+- Growth
 
 Roserade
-Level: 14
-- Absorb
+Level: 18
+- Magical Leaf
+- Mega Drain
 - Poison Sting
 - Growth
-- Stun Spore
