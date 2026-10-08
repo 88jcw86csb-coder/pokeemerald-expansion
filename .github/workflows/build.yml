@@ -48,6 +48,9 @@ jobs:
             tools/wav2agb/wav2agb
           key: tools-${{ runner.os }}-${{ hashFiles('tools/*/Makefile', 'tools/**/*.c', 'tools/**/*.cpp', 'tools/**/*.h') }}
 
+      - name: Validate Eryon opening maps
+        run: python3 tools/eryon_validate.py
+
       - name: ROM (Eryon)
         env:
           GAME_VERSION: EMERALD
