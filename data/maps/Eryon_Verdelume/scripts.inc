@@ -6,6 +6,6 @@ EryonVerdelume_EventScript_Guide::
 	end
 
 EryonVerdelume_Text_Guide:
-	.string "Bem-vindo a Verdelume!\\p"
-	.string "Kael protege nosso ginasio, mas\\n"
+	.string "Bem-vindo a Verdelume!\p"
+	.string "Kael protege nosso ginasio, mas\n"
 	.string "o bosque preocupa a cidade.$"
