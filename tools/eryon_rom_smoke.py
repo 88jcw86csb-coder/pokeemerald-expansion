@@ -34,6 +34,14 @@ def validate_rom(path):
         raise ValueError(
             f"Invalid GBA header checksum: found {header[0xBD]:02X}, expected {expected:02X}"
         )
+    # Reject synthetic header-only padding masquerading as a full-size ROM.
+    with path.open("rb") as rom:
+        rom.seek(0xC0)
+        payload_sample = rom.read(min(size - 0xC0, 64 * 1024))
+    if not payload_sample or all(byte == 0 for byte in payload_sample):
+        raise ValueError("ROM payload appears blank (all zeroes)")
+    if all(byte == 0xFF for byte in payload_sample):
+        raise ValueError("ROM payload appears blank (all FF)")
     digest = hashlib.sha256()
     with path.open("rb") as rom:
         for chunk in iter(lambda: rom.read(1024 * 1024), b""):
