@@ -98,7 +98,7 @@ class EryonEventFlowTests(unittest.TestCase):
             ("Draven", "Garchomp", 64),
         ]
         section = design.split("## Ginásios e balanceamento aprovado", 1)[1].split("\n## ", 1)[0]
-        rows = re.findall(r"(?m)^\\|\\s*([1-8])\\s*\\|\\s*([^|]+)\\|[^\\n]*?\\|\\s*([^|]+)\\|\\s*(\\d+)\\s*\\|\\s*$", section)
+        rows = re.findall(r"(?m)^\|\s*([1-8])\s*\|\s*([^|]+)\|[^\n]*?\|\s*([^|]+)\|\s*(\d+)\s*\|\s*$", section)
         actual = [(name.strip(), ace.strip(), int(level)) for _, name, ace, level in rows]
         self.assertEqual(actual, expected)
         self.assertEqual([int(number) for number, *_ in rows], list(range(1, 9)))
