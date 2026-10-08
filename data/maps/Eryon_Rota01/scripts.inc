@@ -67,12 +67,30 @@ EryonRota01_Text_ExplorerAfterBadge:
 	.string "O bosque continua misterioso.\n"
 	.string "Talvez valha voltar com calma.$"
 
+@ Nico offers an optional early-game battle.
 EryonRota01_EventScript_Youngster::
 	lock
 	faceplayer
-	msgbox EryonRota01_Text_Youngster, MSGBOX_DEFAULT
+	trainerbattle_single TRAINER_ERYON_ROUTE01_YOUNGSTER, EryonRota01_Text_NicoChallenge, EryonRota01_Text_NicoDefeat, EryonRota01_EventScript_NicoVictory, FALSE
+	msgbox EryonRota01_Text_NicoAfter, MSGBOX_DEFAULT
 	release
 	end
+
+EryonRota01_EventScript_NicoVictory::
+	msgbox EryonRota01_Text_NicoAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonRota01_Text_NicoChallenge:
+	.string "NICO: Meu Pokemon ja esta\n"
+	.string "pronto para uma batalha!$"
+
+EryonRota01_Text_NicoDefeat:
+	.string "NICO: Preciso treinar mais!$"
+
+EryonRota01_Text_NicoAfter:
+	.string "NICO: Vou treinar antes de\n"
+	.string "entrar no Bosque de Lumina.$"
 
 EryonRota01_Text_Youngster:
 	.string "Meu primeiro Pokemon ainda\n"
