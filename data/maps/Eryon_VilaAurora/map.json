@@ -38,7 +38,13 @@
   "region_map_section": "MAPSEC_LITTLEROOT_TOWN",
   "weather": "WEATHER_SUNNY",
   "map_type": "MAP_TYPE_TOWN",
-  "connections": null,
+  "connections": [
+    {
+      "map": "MAP_ERYON_ROTA01",
+      "offset": 0,
+      "direction": "up"
+    }
+  ],
   "warp_events": [
     {
       "x": 19,
