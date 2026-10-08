@@ -85,6 +85,14 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertIn("setflag FLAG_BADGE01_GET", victory)
         self.assertIn("call Common_EventScript_PlayGymBadgeFanfare", victory)
 
+    def test_no_duplicate_text_symbols(self):
+        for name in MAPS:
+            script = (ROOT / "data/maps" / name / "scripts.inc").read_text()
+            symbols = re.findall(r"(?m)^([A-Za-z][A-Za-z0-9_]*):(?!=|:)", script)
+            duplicates = sorted({symbol for symbol in symbols if symbols.count(symbol) > 1})
+            with self.subTest(map=name):
+                self.assertEqual(duplicates, [], f"Duplicate script symbols: {duplicates}")
+
     def test_no_duplicate_labels(self):
         for name in MAPS:
             script = (ROOT / "data/maps" / name / "scripts.inc").read_text()
