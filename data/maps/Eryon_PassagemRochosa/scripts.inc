@@ -1,3 +1,6 @@
+Eryon_PassagemRochosa_MapScripts::
+	.byte 0
+
 @ Eryon: narrow trail after the crystal highlands.
 EryonPassagem_EventScript_Guard::
 	lock
