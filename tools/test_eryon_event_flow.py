@@ -31,6 +31,15 @@ class EryonEventFlowTests(unittest.TestCase):
                 with self.subTest(map=name, escape=escape):
                     self.assertNotIn(escape, script)
 
+    def test_kael_battle_is_reachable_after_briefing(self):
+        script = (ROOT / "data/maps/Eryon_Verdelume/scripts.inc").read_text()
+        self.assertIn("goto_if_ge VAR_ERYON_KAEL_BRIEFED, 1, EryonVerdelume_EventScript_KaelFollowup", script)
+        followup = script.split("EryonVerdelume_EventScript_KaelFollowup::", 1)[1].split("EryonVerdelume_EventScript_KaelVictory::", 1)[0]
+        self.assertIn("trainerbattle_single TRAINER_ERYON_KAEL", followup)
+        self.assertIn("EryonVerdelume_EventScript_KaelVictory", followup)
+        victory = script.split("EryonVerdelume_EventScript_KaelVictory::", 1)[1].split("EryonVerdelume_EventScript_KaelAfterBattle::", 1)[0]
+        self.assertIn("setvar VAR_ERYON_KAEL_DEFEATED, 1", victory)
+
     def test_no_duplicate_labels(self):
         for name in MAPS:
             script = (ROOT / "data/maps" / name / "scripts.inc").read_text()
