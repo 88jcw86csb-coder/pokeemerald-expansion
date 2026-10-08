@@ -62,6 +62,15 @@ jobs:
           name: eryon-gba
           path: pokeeryon.gba
 
+  eryon-validation:
+    if: github.ref == 'refs/heads/eryon-development' && github.actor != 'allcontributors[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Validate Eryon data
+        run: python3 tools/eryon_validate.py
+
   build-firered:
     if: github.actor != 'allcontributors[bot]' && github.ref != 'refs/heads/eryon-development'
     runs-on: ubuntu-latest
