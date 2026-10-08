@@ -26,7 +26,7 @@ def main():
     wild_group = next((group for group in wild["wild_encounter_groups"] if group["label"] == "gWildMonHeaders"), None)
     wild_by_map = {entry.get("map"): entry for entry in wild_group["encounters"]} if wild_group else {}
     species_constants = (ROOT / "include/constants/species.h").read_text(encoding="utf-8")
-    if not re.search(r"(?m)^\\s*SPECIES_RIOLU\\s*=", species_constants):
+    if not re.search(r"(?m)^\s*SPECIES_RIOLU\s*=", species_constants):
         errors.append("Riolu starter species is not defined in the species enum")
     for route in ("Eryon_Rota01", "Eryon_BosqueDeLumina", "Eryon_Rota02"):
         map_id = maps[route]["id"]
@@ -43,9 +43,9 @@ def main():
             if mon["min_level"] > mon["max_level"]:
                 errors.append(f"{route}: invalid encounter level range for {mon['species']}")
     starter_ui = (ROOT / "src/starter_choose.c").read_text(encoding="utf-8")
-    if not re.search(r"#define STARTER_MON_COUNT\\s+1\\b", starter_ui):
+    if not re.search(r"#define STARTER_MON_COUNT\s+1\b", starter_ui):
         errors.append("Starter selector must expose exactly one Pokemon")
-    if not re.search(r"tStarterSelection\\s*=\\s*0\\s*;", starter_ui):
+    if not re.search(r"tStarterSelection\s*=\s*0\s*;", starter_ui):
         errors.append("Starter selector must initialize cursor to slot zero")
     for match in re.finditer(r"sPokeballCoords\\[(\\d+)\\]", starter_ui):
         if int(match.group(1)) >= 1:
