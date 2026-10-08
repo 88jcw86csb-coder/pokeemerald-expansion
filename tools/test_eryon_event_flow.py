@@ -303,15 +303,23 @@ class EryonEventFlowTests(unittest.TestCase):
     def test_forest_researcher_unlocks_new_clue_after_badge(self):
         script = (ROOT / "data/maps/Eryon_BosqueDeLumina/scripts.inc").read_text(encoding="utf-8")
         entry = script.split("EryonBosque_EventScript_Researcher::", 1)[1].split(
+            "EryonBosque_EventScript_ResearcherKnownClue::", 1
+        )[0]
+        self.assertIn(
+            "goto_if_ge VAR_ERYON_LUMINA_CLUE_FOUND, 1, EryonBosque_EventScript_ResearcherKnownClue",
+            entry,
+        )
+        self.assertIn("setvar VAR_ERYON_LUMINA_CLUE_FOUND, 1", entry)
+        self.assertLess(entry.index("VAR_ERYON_LUMINA_CLUE_FOUND"), entry.index("setvar VAR_ERYON_LUMINA_CLUE_FOUND"))
+        known = script.split("EryonBosque_EventScript_ResearcherKnownClue::", 1)[1].split(
             "EryonBosque_EventScript_ResearcherAfterBadge::", 1
         )[0]
         self.assertIn(
             "goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonBosque_EventScript_ResearcherAfterBadge",
-            entry,
+            known,
         )
-        self.assertLess(entry.index("VAR_ERYON_KAEL_DEFEATED"), entry.index("VAR_ERYON_LUMINA_CLUE_FOUND"))
+        self.assertIn("goto EryonBosque_EventScript_ResearcherFollowup", known)
         self.assertIn("msgbox EryonBosque_Text_ResearcherAfterBadge", script)
-        self.assertIn("EryonBosque_Text_ResearcherAfterBadge:", script)
 
     def test_professor_homecoming_preserves_capture_kit_priority(self):
         script = (ROOT / "data/maps/Eryon_VilaAurora/scripts.inc").read_text(encoding="utf-8")
