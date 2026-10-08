@@ -96,9 +96,11 @@ EryonVerdelume_EventScript_KaelAfterBattle::
 	end
 
 EryonVerdelume_Text_KaelWelcome:
-	.string "KAEL: Eu cuido das trilhas daqui.\p"
-	.string "Se visitar o Bosque de Lumina,\n"
-	.string "preste atencao nas pedras.$"
+	.string "KAEL: Cuido das trilhas que\n"
+	.string "cercam Verdelume.\p"
+	.string "No Bosque de Lumina,\n"
+	.string "observe bem as pedras.\p"
+	.string "Algo estranho aconteceu la.$"
 
 EryonVerdelume_Text_KaelClue:
 	.string "KAEL: Entao viu a marca antiga!\p"
