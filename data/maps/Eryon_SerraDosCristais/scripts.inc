@@ -91,7 +91,14 @@ EryonSerra_EventScript_AbandonedCamp::
 	end
 
 EryonSerra_EventScript_AbandonedCampBadge::
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonSerra_EventScript_AbandonedCampKnown
 	msgbox EryonSerra_Text_AbandonedCampBadge, MSGBOX_DEFAULT
+	setvar VAR_ERYON_SERRA_CLUE_FOUND, 1
+	release
+	end
+
+EryonSerra_EventScript_AbandonedCampKnown::
+	msgbox EryonSerra_Text_AbandonedCampKnown, MSGBOX_DEFAULT
 	release
 	end
 
@@ -155,3 +162,41 @@ EryonSerra_Text_TrainerDefeat:
 EryonSerra_Text_TrainerAfter:
 	.string "VIGIA: Voce nao deveria\n"
 	.string "ter chegado tao longe.$"
+
+
+@ Optional one-time supply find, with retry if the bag is full.
+EryonSerra_EventScript_SupplyCrate::
+	lock
+	goto_if_ge VAR_ERYON_SERRA_SUPPLY_FOUND, 1, EryonSerra_EventScript_SupplyCrateEmpty
+	msgbox EryonSerra_Text_SupplyCrate, MSGBOX_DEFAULT
+	giveitem ITEM_SUPER_POTION
+	goto_if_eq VAR_RESULT, FALSE, EryonSerra_EventScript_SupplyCrateFull
+	setvar VAR_ERYON_SERRA_SUPPLY_FOUND, 1
+	release
+	end
+
+EryonSerra_EventScript_SupplyCrateFull::
+	msgbox EryonSerra_Text_SupplyCrateFull, MSGBOX_DEFAULT
+	release
+	end
+
+EryonSerra_EventScript_SupplyCrateEmpty::
+	msgbox EryonSerra_Text_SupplyCrateEmpty, MSGBOX_DEFAULT
+	release
+	end
+
+EryonSerra_Text_AbandonedCampKnown:
+	.string "Voce ja investigou o\n"
+	.string "simbolo do eclipse aqui.\p"
+	.string "As pistas seguem pela serra.$"
+
+EryonSerra_Text_SupplyCrate:
+	.string "Uma caixa esquecida contem\n"
+	.string "uma Super Pocao!$"
+
+EryonSerra_Text_SupplyCrateFull:
+	.string "Nao ha espaco na bolsa.\p"
+	.string "O item continuara aqui.$"
+
+EryonSerra_Text_SupplyCrateEmpty:
+	.string "A caixa esta vazia.$"
