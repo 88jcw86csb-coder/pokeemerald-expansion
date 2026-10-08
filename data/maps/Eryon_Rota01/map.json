@@ -31,5 +31,6 @@
       "dest_map": "MAP_ERYON_BOSQUE_DE_LUMINA",
       "dest_warp_id": "0"
     }
-  ]
+  ],
+  "region": "REGION_HOENN"
 }
