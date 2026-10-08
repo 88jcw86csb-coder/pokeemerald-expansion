@@ -655,50 +655,13 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertIn("EryonBosque_Text_TravelerAfterBadge:", forest)
 
     def test_dialogue_blocks_end_with_text_terminator(self):
-        # Each contiguous .string block defines a separate GBA dialogue.
-        # The final quoted fragment must end in '
-        for name in MAPS:
-            script = (ROOT / "data/maps" / name / "scripts.inc").read_text()
-            symbols = re.findall(r"(?m)^([A-Za-z][A-Za-z0-9_]*):(?!=|:)", script)
-            duplicates = sorted({symbol for symbol in symbols if symbols.count(symbol) > 1})
-            with self.subTest(map=name):
-                self.assertEqual(duplicates, [], f"Duplicate script symbols: {duplicates}")
-
-    def test_no_duplicate_labels(self):
-        for name in MAPS:
-            script = (ROOT / "data/maps" / name / "scripts.inc").read_text()
-            labels = LABEL.findall(script)
-            with self.subTest(map=name):
-                self.assertEqual(len(labels), len(set(labels)))
-
-
-if __name__ == "__main__":
-    unittest.main()
- or text can run onward.
+        # Every contiguous sequence of .string fragments needs a final terminator.
         for name in MAPS:
             script = (ROOT / "data/maps" / name / "scripts.inc").read_text(encoding="utf-8")
             fragments = []
             start_line = None
             for line_number, line in enumerate(script.splitlines() + [""], start=1):
-                match = re.match(r'^\\s*\\.string\\s+"(.*)"\\s*
-        for name in MAPS:
-            script = (ROOT / "data/maps" / name / "scripts.inc").read_text()
-            symbols = re.findall(r"(?m)^([A-Za-z][A-Za-z0-9_]*):(?!=|:)", script)
-            duplicates = sorted({symbol for symbol in symbols if symbols.count(symbol) > 1})
-            with self.subTest(map=name):
-                self.assertEqual(duplicates, [], f"Duplicate script symbols: {duplicates}")
-
-    def test_no_duplicate_labels(self):
-        for name in MAPS:
-            script = (ROOT / "data/maps" / name / "scripts.inc").read_text()
-            labels = LABEL.findall(script)
-            with self.subTest(map=name):
-                self.assertEqual(len(labels), len(set(labels)))
-
-
-if __name__ == "__main__":
-    unittest.main()
-, line)
+                match = re.match(r'^\s*\.string\s+"(.*)"\s*$', line)
                 if match:
                     if not fragments:
                         start_line = line_number
@@ -707,7 +670,7 @@ if __name__ == "__main__":
                     with self.subTest(map=name, line=start_line):
                         self.assertTrue(
                             fragments[-1].endswith("$"),
-                            f"{name}:{start_line}: dialogue block missing final $",
+                            f"{name}:{start_line}: dialogue block missing final terminator",
                         )
                     fragments = []
                     start_line = None
