@@ -1,13 +1,13 @@
 @ Eryon: Professor Elya gives the one-time Riolu starter.
-@ Temporary story-state variable; replace with an Eryon-specific variable during integration.
+@ Progress uses Eryon's own persistent variable, independent from Birch's story.
 EryonVilaAurora_EventScript_ProfessorElya::
 	lock
 	faceplayer
-	goto_if_ge VAR_BIRCH_LAB_STATE, 3, EryonVilaAurora_EventScript_ElyaAfterStarter
+	goto_if_ge VAR_ERYON_STARTER_RECEIVED, 1, EryonVilaAurora_EventScript_ElyaAfterStarter
 	msgbox EryonVilaAurora_Text_ElyaIntroduction, MSGBOX_DEFAULT
 	givemon SPECIES_RIOLU, 5
 	goto_if_eq VAR_RESULT, FALSE, EryonVilaAurora_EventScript_PartyFull
-	setvar VAR_BIRCH_LAB_STATE, 3
+	setvar VAR_ERYON_STARTER_RECEIVED, 1
 	msgbox EryonVilaAurora_Text_RioluReceived, MSGBOX_DEFAULT
 	release
 	end
