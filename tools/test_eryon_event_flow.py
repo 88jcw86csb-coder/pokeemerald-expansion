@@ -20,7 +20,7 @@ class EryonEventFlowTests(unittest.TestCase):
                 folder = ROOT / "data/maps" / name
                 data = json.loads((folder / "map.json").read_text(encoding="utf-8"))
                 script = (folder / "scripts.inc").read_text(encoding="utf-8")
-                labels = set(re.findall(r"(?m)^([A-Za-z][A-Za-z0-9_]*)::?\\s*$", script))
+                labels = set(LABEL.findall(script))
                 for kind in ("object_events", "bg_events", "coord_events"):
                     for index, event in enumerate(data.get(kind, [])):
                         label = event.get("script")
@@ -616,7 +616,7 @@ class EryonEventFlowTests(unittest.TestCase):
             "EryonBosque_Text_EclipseScoutBeforeClue:", 1
         )[0]
         self.assertIn("trainerbattle_single TRAINER_ERYON_SCOUT", after_badge)
-        self.assertIn("EryonBosque_EventScript_EclipseScoutVictory, NO_MUSIC", after_badge)
+        self.assertIn("EryonBosque_EventScript_EclipseScoutVictory, FALSE", after_badge)
 
     def test_eclipse_scout_has_optional_two_pokemon_battle(self):
         script = (ROOT / "data/maps/Eryon_BosqueDeLumina/scripts.inc").read_text(encoding="utf-8")
@@ -624,7 +624,7 @@ class EryonEventFlowTests(unittest.TestCase):
             "EryonBosque_EventScript_EclipseScoutVictory::", 1
         )[0]
         self.assertIn("trainerbattle_single TRAINER_ERYON_SCOUT", entry)
-        self.assertIn("EryonBosque_EventScript_EclipseScoutVictory, NO_MUSIC", entry)
+        self.assertIn("EryonBosque_EventScript_EclipseScoutVictory, FALSE", entry)
         self.assertIn("EryonBosque_Text_EclipseScoutChallenge:", script)
         self.assertIn("EryonBosque_Text_EclipseScoutDefeat:", script)
         opponents = (ROOT / "include/constants/opponents.h").read_text(encoding="utf-8")
