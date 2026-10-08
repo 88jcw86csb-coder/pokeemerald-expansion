@@ -118,9 +118,15 @@ EryonVerdelume_Text_ForestNoticeClue:
 EryonVerdelume_EventScript_Botanist::
 	lock
 	faceplayer
+	goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonVerdelume_EventScript_BotanistAfterBadge
 	goto_if_ge VAR_ERYON_KAEL_BRIEFED, 1, EryonVerdelume_EventScript_BotanistAfterKael
 	goto_if_ge VAR_ERYON_LUMINA_CLUE_FOUND, 1, EryonVerdelume_EventScript_BotanistAfterClue
 	msgbox EryonVerdelume_Text_BotanistWelcome, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVerdelume_EventScript_BotanistAfterBadge::
+	msgbox EryonVerdelume_Text_BotanistAfterBadge, MSGBOX_DEFAULT
 	release
 	end
 
@@ -133,6 +139,11 @@ EryonVerdelume_EventScript_BotanistAfterKael::
 	msgbox EryonVerdelume_Text_BotanistAfterKael, MSGBOX_DEFAULT
 	release
 	end
+
+EryonVerdelume_Text_BotanistAfterBadge:
+	.string "Parabens pela insignia!\p"
+	.string "Kael contou sobre a marca.\n"
+	.string "Ainda ha pistas no bosque.$"
 
 EryonVerdelume_Text_BotanistWelcome:
 	.string "Estudo as plantas do bosque.\p"
