@@ -53,7 +53,19 @@ EryonVerdelume_EventScript_KaelClue::
 	end
 
 EryonVerdelume_EventScript_KaelFollowup::
-	msgbox EryonVerdelume_Text_KaelFollowup, MSGBOX_DEFAULT
+	trainerbattle_single TRAINER_ERYON_KAEL, EryonVerdelume_Text_KaelChallenge, EryonVerdelume_Text_KaelDefeat, EryonVerdelume_EventScript_KaelVictory, NO_MUSIC
+	msgbox EryonVerdelume_Text_KaelAfterBattle, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVerdelume_EventScript_KaelVictory::
+	setvar VAR_ERYON_KAEL_DEFEATED, 1
+	msgbox EryonVerdelume_Text_KaelAfterBattle, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVerdelume_EventScript_KaelAfterBattle::
+	msgbox EryonVerdelume_Text_KaelAfterBattle, MSGBOX_DEFAULT
 	release
 	end
 
@@ -141,3 +153,15 @@ EryonVerdelume_Text_KaelAfterBattle:
 	.string "KAEL: Continue investigando.\p"
 	.string "A floresta guarda um segredo\n"
 	.string "maior do que pensamos.$"
+
+EryonVerdelume_Text_KaelChallenge:
+	.string "KAEL: Quero ver o que aprendeu\n"
+	.string "em sua viagem pelo bosque!$"
+
+EryonVerdelume_Text_KaelDefeat:
+	.string "KAEL: Sua coragem me surpreendeu!$"
+
+EryonVerdelume_Text_KaelAfterBattle:
+	.string "KAEL: Foi uma bela batalha!\p"
+	.string "Continue explorando Eryon.\n"
+	.string "Ainda temos muito a descobrir.$"
