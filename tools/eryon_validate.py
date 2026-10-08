@@ -21,7 +21,7 @@ def main():
     # Event text control codes must contain one backslash, not a doubled escape.
     for name in NAMES:
         dialogue = (ROOT / f"data/maps/{name}/scripts.inc").read_text(encoding="utf-8")
-        for malformed in (r"\\\\p", r"\\\\n", r"\\\\l"):
+        for malformed in (r"\\p", r"\\n", r"\\l"):
             if malformed in dialogue:
                 errors.append(f"{name}: doubled dialogue control escape {malformed}")
 
