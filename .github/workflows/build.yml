@@ -50,9 +50,11 @@ jobs:
           key: tools-${{ runner.os }}-${{ hashFiles('tools/*/Makefile', 'tools/**/*.c', 'tools/**/*.cpp', 'tools/**/*.h') }}
 
       - name: Test Eryon species boundaries
+        if: github.ref == 'refs/heads/eryon-development'
         run: python3 -m unittest discover -s tools -p 'test_eryon_species.py' -v
 
       - name: Validate Eryon opening maps
+        if: github.ref == 'refs/heads/eryon-development'
         run: python3 tools/eryon_validate.py
 
       - name: ROM (Eryon)
@@ -63,7 +65,7 @@ jobs:
           make -j$(nproc) -O all 2>&1 | tee eryon-build.log
 
       - name: Upload build diagnostics
-        if: always()
+        if: always() && github.ref == 'refs/heads/eryon-development'
         uses: actions/upload-artifact@v4
         with:
           name: eryon-build-diagnostics
@@ -71,6 +73,7 @@ jobs:
           if-no-files-found: warn
 
       - name: Upload Eryon ROM
+        if: github.ref == 'refs/heads/eryon-development'
         uses: actions/upload-artifact@v4
         with:
           name: eryon-gba
