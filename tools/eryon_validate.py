@@ -176,7 +176,7 @@ def main():
         errors.append("Kael trainer party is missing")
     else:
         kael_party = trainer_parties.split("=== TRAINER_ERYON_KAEL ===", 1)[1].split("\\n=== ", 1)[0]
-        if not re.search(r"(?m)^Roserade\\s*$", kael_party) or "Level: 14" not in kael_party:
+        if not re.search(r"(?m)^Roserade\s*\nLevel:\s*14\s*$", kael_party):
             errors.append("Kael must have level 14 Roserade")
     if "trainerbattle_single TRAINER_ERYON_KAEL" not in town_script:
         errors.append("Kael battle is not linked to his NPC")
@@ -199,6 +199,14 @@ def main():
     actual_forest_exits = {(warp["x"], warp["y"]) for warp in woods.get("warp_events", [])}
     if actual_forest_exits != expected_forest_exits:
         errors.append("Lumina: forest exits are not on the inherited woods' exit tiles")
+    for map_name, width, height in (
+        ("Eryon_Rota01", 20, 20),
+        ("Eryon_Rota02", 50, 20),
+        ("Eryon_Verdelume", 40, 60),
+    ):
+        for index, warp in enumerate(maps[map_name].get("warp_events", [])):
+            if warp["x"] in (0, width - 1) or warp["y"] in (0, height - 1):
+                print(f"WARNING: {map_name} warp {index} uses a border tile; collision and warp behavior not verified")
     print("WARNING: route-side warp positions still require terrain/collision verification")
     for name, m in maps.items():
         layout = layouts.get(m["layout"])
