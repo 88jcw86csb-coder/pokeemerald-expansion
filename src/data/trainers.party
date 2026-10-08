@@ -16910,7 +16910,7 @@ Level: 18
 
 === TRAINER_ERYON_SCOUT ===
 Name: VIGIA
-Class: PkMn Trainer
+Class: Team Aqua
 Pic: Aqua Grunt M
 Gender: Male
 Music: Male
@@ -16955,7 +16955,7 @@ Level: 14
 
 === TRAINER_ERYON_ROUTE03_RANGER ===
 Name: LIA
-Class: PkMn Trainer
+Class: Team Aqua
 Pic: Aroma Lady
 Gender: Female
 Music: Female
@@ -16977,7 +16977,7 @@ Level: 19
 
 === TRAINER_ERYON_SERRA_ECLIPSE ===
 Name: VIGIA
-Class: PkMn Trainer
+Class: Team Aqua
 Pic: Aqua Grunt M
 Gender: Male
 Music: Male
@@ -17043,7 +17043,7 @@ Level: 22
 
 === TRAINER_ERYON_PASSAGEM_ECLIPSE ===
 Name: VIGIA
-Class: PkMn Trainer
+Class: Team Aqua
 Pic: Aqua Grunt M
 Gender: Male
 Music: Male
