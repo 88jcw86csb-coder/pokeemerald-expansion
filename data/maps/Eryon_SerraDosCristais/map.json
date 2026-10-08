@@ -102,6 +102,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EryonSerra_EventScript_AbandonedCamp"
+    },
+    {
+      "type": "sign",
+      "x": 12,
+      "y": 14,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EryonSerra_EventScript_SupplyCrate"
     }
   ],
   "id": "MAP_ERYON_SERRA_DOS_CRISTAIS",
