@@ -127,6 +127,13 @@
       "elevation": 0,
       "dest_map": "MAP_ERYON_ROTA03",
       "dest_warp_id": "1"
+    },
+    {
+      "x": 47,
+      "y": 22,
+      "elevation": 0,
+      "dest_map": "MAP_ERYON_PASSAGEM_ROCHOSA",
+      "dest_warp_id": "0"
     }
   ],
   "region": "REGION_HOENN"
