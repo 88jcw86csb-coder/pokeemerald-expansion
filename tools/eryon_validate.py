@@ -28,6 +28,12 @@ def main():
             errors.append(f"{name}: missing layout {m['layout']}")
             continue
         width, height = layout["width"], layout["height"]
+        block_path = ROOT / layout["blockdata_filepath"]
+        if not block_path.exists():
+            errors.append(f"{name}: missing layout binary {block_path}")
+        elif block_path.stat().st_size != width * height * 2:
+            errors.append(f"{name}: layout binary has {block_path.stat().st_size} bytes; expected {width * height * 2}")
+
         for index, warp in enumerate(m.get("warp_events", [])):
             if not (0 <= warp["x"] < width and 0 <= warp["y"] < height):
                 errors.append(f"{name}: warp {index} outside {width}x{height}")
@@ -36,6 +42,10 @@ def main():
                 errors.append(f"{name}: warp {index} unknown destination {warp['dest_map']}")
             elif not (0 <= int(warp["dest_warp_id"]) < len(target.get("warp_events", []))):
                 errors.append(f"{name}: warp {index} invalid destination index")
+            else:
+                reverse = target["warp_events"][int(warp["dest_warp_id"])]
+                if reverse["dest_map"] != m["id"] or int(reverse["dest_warp_id"]) != index:
+                    errors.append(f"{name}: warp {index} has no reciprocal return warp")
         for index, obj in enumerate(m.get("object_events", [])):
             if not (0 <= obj["x"] < width and 0 <= obj["y"] < height):
                 errors.append(f"{name}: NPC {index} outside {width}x{height}")
