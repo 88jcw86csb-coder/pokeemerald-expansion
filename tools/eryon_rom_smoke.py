@@ -12,10 +12,16 @@ def validate_rom(path):
     if not path.is_file():
         raise ValueError(f"ROM not found: {path}")
     size = path.stat().st_size
-    if not 192 <= size <= 32 * 1024 * 1024:
+    if not 1024 * 1024 <= size <= 32 * 1024 * 1024:
         raise ValueError(f"Invalid GBA ROM size: {size} bytes")
     with path.open("rb") as rom:
         header = rom.read(0xC0)
+    # A 192-byte header alone is not a playable cartridge image.
+    # Reject blank/truncated outputs even if their header checksum is forged.
+    if header[:4] == b"\\x00" * 4 or header[:4] == b"\\xff" * 4:
+        raise ValueError("Missing GBA entry-point instructions")
+    if not all(0x20 <= byte <= 0x7E for byte in header[0xAC:0xB0]):
+        raise ValueError("Invalid GBA game code in header")
     if header[0xB2] != 0x96:
         raise ValueError("Invalid GBA fixed header value at 0xB2")
     expected = (-sum(header[0xA0:0xBD]) - 0x19) & 0xFF
