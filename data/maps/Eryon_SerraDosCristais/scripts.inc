@@ -1,3 +1,6 @@
+Eryon_SerraDosCristais_MapScripts::
+	.byte 0
+
 @ Eryon: the first foothills beyond the eastern trail.
 EryonSerra_EventScript_Geologist::
 	lock
