@@ -22,6 +22,21 @@ def main():
     ids = {m["id"]: name for name, m in maps.items()}
     if set(groups.get("gMapGroup_Eryon", [])) != set(NAMES):
         errors.append("Eryon map group does not match opening map files")
+    wild = load("src/data/wild_encounters.json")
+    wild_group = next((group for group in wild["wild_encounter_groups"] if group["label"] == "gWildMonHeaders"), None)
+    wild_by_map = {entry.get("map"): entry for entry in wild_group["encounters"]} if wild_group else {}
+    for route in ("Eryon_Rota01", "Eryon_BosqueDeLumina", "Eryon_Rota02"):
+        map_id = maps[route]["id"]
+        encounter = wild_by_map.get(map_id)
+        if not encounter or "land_mons" not in encounter:
+            errors.append(f"{route}: no land wild encounters")
+            continue
+        mons = encounter["land_mons"]["mons"]
+        if len(mons) != 12:
+            errors.append(f"{route}: expected 12 land encounter slots, found {len(mons)}")
+        for mon in mons:
+            if mon["min_level"] > mon["max_level"]:
+                errors.append(f"{route}: invalid encounter level range for {mon['species']}")
     for name, m in maps.items():
         layout = layouts.get(m["layout"])
         if layout is None:
@@ -59,7 +74,7 @@ def main():
         for error in errors:
             print("ERROR:", error)
         return 1
-    print(f"PASS: {len(maps)} Eryon opening maps; IDs, NPC scripts, and warp indices consistent")
+    print(f"PASS: {len(maps)} Eryon opening maps; IDs, NPC scripts, warp indices and encounter slots consistent")
     print("NOTE: collision, tiles, encounters, gameplay and compilation remain untested")
     return 0
 
