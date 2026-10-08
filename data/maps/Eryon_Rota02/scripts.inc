@@ -33,13 +33,13 @@ EryonRota02_EventScript_RoadsideCacheEmpty::
 	end
 
 EryonRota02_Text_RoadsideCache:
-	.string "Uma caixa de primeiros socorros\\n"
+	.string "Uma caixa de primeiros socorros\n"
 	.string "foi deixada perto da trilha.$"
 
 EryonRota02_Text_RoadsideCacheFull:
-	.string "Nao ha espaco na bolsa.\\p"
+	.string "Nao ha espaco na bolsa.\p"
 	.string "O antidoto continuara aqui.$"
 
 EryonRota02_Text_RoadsideCacheEmpty:
-	.string "A caixa esta vazia.\\p"
+	.string "A caixa esta vazia.\p"
 	.string "Alguem cuidou dos viajantes.$"
