@@ -176,3 +176,27 @@ EryonRota03_Text_CaravanDebrisBadge:
 	.string "que lembra um eclipse.\p"
 	.string "Ha pequenos cristais presos\n"
 	.string "nas rachaduras.$"
+
+EryonRota03_EventScript_Ranger::
+	lock
+	faceplayer
+	trainerbattle_single TRAINER_ERYON_ROUTE03_RANGER, EryonRota03_Text_TrainerChallenge, EryonRota03_Text_TrainerDefeat, EryonRota03_EventScript_TrainerVictory, FALSE
+	msgbox EryonRota03_Text_TrainerAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonRota03_EventScript_TrainerVictory::
+	msgbox EryonRota03_Text_TrainerAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonRota03_Text_TrainerChallenge:
+	.string "RANGER LIA: A trilha fica\n"
+	.string "mais dificil daqui em diante.$"
+
+EryonRota03_Text_TrainerDefeat:
+	.string "LIA: Fui derrotado!$"
+
+EryonRota03_Text_TrainerAfter:
+	.string "LIA: Boa batalha!\n"
+	.string "Sua equipe esta preparada.$"
