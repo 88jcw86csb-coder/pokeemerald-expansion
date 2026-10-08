@@ -36,7 +36,7 @@ def main():
         if len(mons) != 12:
             errors.append(f"{route}: expected 12 land encounter slots, found {len(mons)}")
         for mon in mons:
-            if not re.search(r"(?m)^#define\s+" + re.escape(mon["species"]) + r"\b", species_constants):
+            if not re.search(r"(?m)^\s*" + re.escape(mon["species"]) + r"\s*=", species_constants):
                 errors.append(f"{route}: unknown species constant {mon['species']}")
             if mon["min_level"] > mon["max_level"]:
                 errors.append(f"{route}: invalid encounter level range for {mon['species']}")
