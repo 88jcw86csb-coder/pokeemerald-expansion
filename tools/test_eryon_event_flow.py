@@ -34,7 +34,7 @@ class EryonEventFlowTests(unittest.TestCase):
     def test_eryon_trainer_battles_use_supported_macro(self):
         macro_source = (ROOT / "asm/macros/event.inc").read_text(encoding="utf-8")
         macro = re.search(
-            r"(?m)^\\s*\\.macro trainerbattle_single\\s+([^\\n]+)",
+            r"(?m)^\s*\.macro trainerbattle_single\s+([^\n]+)",
             macro_source,
         )
         self.assertIsNotNone(macro, "trainerbattle_single macro missing")
