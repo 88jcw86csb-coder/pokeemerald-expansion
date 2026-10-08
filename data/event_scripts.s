@@ -141,6 +141,7 @@ gStdScripts_End::
 	.include "data/maps/EverGrandeCity/scripts.inc"
 	.include "data/maps/Eryon_VilaAurora/scripts.inc"
 	.include "data/maps/Eryon_Rota01/scripts.inc"
+	.include "data/maps/Eryon_Rota02/scripts.inc"
 	.include "data/maps/Eryon_BosqueDeLumina/scripts.inc"
 	.include "data/maps/Eryon_Verdelume/scripts.inc"
 	.include "data/maps/LittlerootTown/scripts.inc"
