@@ -118,6 +118,21 @@ def main():
                 if label.startswith("Eryon") and label not in labels:
                     errors.append(f"{name}: {kind}[{index}] missing script {label}")
 
+    # All map scripts are assembled into a single symbol namespace.
+    # Duplicate labels across different maps cause assembler errors.
+    global_labels = {}
+    for name in NAMES:
+        script_path = ROOT / f"data/maps/{name}/scripts.inc"
+        for line_number, line in enumerate(script_path.read_text(encoding="utf-8").splitlines(), 1):
+            match = re.match(r"^([A-Za-z][A-Za-z0-9_]*):{1,2}\\s*$", line)
+            if match:
+                label = match.group(1)
+                if label in global_labels:
+                    previous = global_labels[label]
+                    errors.append(f"Duplicate Eryon symbol {label}: {previous} and {name}:{line_number}")
+                else:
+                    global_labels[label] = f"{name}:{line_number}"
+
     # Every in-region warp must target a real warp that points back.
     for name, map_data in maps.items():
         for index, warp in enumerate(map_data.get("warp_events", [])):
