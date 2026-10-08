@@ -119,6 +119,13 @@
       "elevation": 0,
       "dest_map": "MAP_ERYON_VERDELUME",
       "dest_warp_id": "1"
+    },
+    {
+      "x": 49,
+      "y": 10,
+      "elevation": 0,
+      "dest_map": "MAP_ERYON_SERRA_DOS_CRISTAIS",
+      "dest_warp_id": "0"
     }
   ],
   "region": "REGION_HOENN"
