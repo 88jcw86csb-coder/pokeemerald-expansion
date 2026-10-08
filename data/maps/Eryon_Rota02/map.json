@@ -31,5 +31,6 @@
       "dest_map": "MAP_ERYON_VERDELUME",
       "dest_warp_id": "0"
     }
-  ]
+  ],
+  "region": "REGION_HOENN"
 }
