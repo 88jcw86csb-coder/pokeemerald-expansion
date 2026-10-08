@@ -84,6 +84,21 @@ def inspect():
                 if not connected_by_collision_bits(raw, width, height, a_pos, b_pos):
                     print(f"  WARNING: warp {a_index} to warp {b_index} has no "
                           "four-direction zero-collision route; inspect in Porymap")
+        # NPCs can be placed on blocked tiles; check that at least one
+        # neighboring tile is reachable from a clear warp or a clear NPC tile.
+        for index, npc in enumerate(data.get("object_events", [])):
+            x, y = npc["x"], npc["y"]
+            if not (0 <= x < width and 0 <= y < height):
+                failures.append(f"{name}: NPC {index} outside map")
+                continue
+            neighbors = ((x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1))
+            clear_neighbors = [
+                pos for pos in neighbors
+                if 0 <= pos[0] < width and 0 <= pos[1] < height
+                and decode_block(raw, width, *pos)[1] == 0
+            ]
+            if not clear_neighbors:
+                print(f"  WARNING: NPC {index} ({x},{y}) has no adjacent zero-collision tile")
         if not source.startswith("data/layouts/Eryon_"):
             print("  WARNING: inherited Hoenn terrain; geometry not yet original")
     return failures
