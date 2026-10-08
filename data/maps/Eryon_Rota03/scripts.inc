@@ -96,3 +96,33 @@ EryonRota03_Text_ResearcherBadge:
 	.string "as marcas do eclipse?\p"
 	.string "Encontrei cristais parecidos\n"
 	.string "nas pegadas das carrocas.$"
+
+@ Optional field medic: repeatable healing before the rocky trail.
+EryonRota03_EventScript_FieldMedic::
+	lock
+	faceplayer
+	msgbox EryonRota03_Text_FieldMedicOffer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonRota03_EventScript_FieldMedicDecline
+	special HealPlayerParty
+	msgbox EryonRota03_Text_FieldMedicHealed, MSGBOX_DEFAULT
+	release
+	end
+
+EryonRota03_EventScript_FieldMedicDecline::
+	msgbox EryonRota03_Text_FieldMedicDecline, MSGBOX_DEFAULT
+	release
+	end
+
+EryonRota03_Text_FieldMedicOffer:
+	.string "SOCORRISTA: Esta trilha\n"
+	.string "pode ser cansativa.\p"
+	.string "Quer que eu cuide de seus\n"
+	.string "Pokemon antes de seguir?$"
+
+EryonRota03_Text_FieldMedicHealed:
+	.string "Pronto! Sua equipe esta\n"
+	.string "recuperada. Boa viagem!$"
+
+EryonRota03_Text_FieldMedicDecline:
+	.string "Tudo bem. Estarei aqui\n"
+	.string "se precisar de ajuda.$"
