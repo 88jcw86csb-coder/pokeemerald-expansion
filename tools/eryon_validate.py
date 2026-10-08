@@ -18,6 +18,13 @@ def main():
     groups = load("data/maps/map_groups.json")
     layouts = {entry["id"]: entry for entry in load("data/layouts/layouts.json")["layouts"]}
     scripts = (ROOT / "data/event_scripts.s").read_text(encoding="utf-8")
+    # Event text control codes must contain one backslash, not a doubled escape.
+    for name in NAMES:
+        dialogue = (ROOT / f"data/maps/{name}/scripts.inc").read_text(encoding="utf-8")
+        for malformed in (r"\\\\p", r"\\\\n", r"\\\\l"):
+            if malformed in dialogue:
+                errors.append(f"{name}: doubled dialogue control escape {malformed}")
+
     maps = {name: load(f"data/maps/{name}/map.json") for name in NAMES}
     ids = {m["id"]: name for name, m in maps.items()}
     if set(groups.get("gMapGroup_Eryon", [])) != set(NAMES):
