@@ -51,7 +51,7 @@ class EryonEventFlowTests(unittest.TestCase):
                 args = [part.strip() for part in line.split("trainerbattle_single", 1)[1].split(",")]
                 with self.subTest(map=name, trainer=args[0]):
                     self.assertEqual(len(args), 5)
-                    self.assertIn(args[4], ("NO_MUSIC", "TRUE", "FALSE"))
+                    self.assertIn(args[4], ("TRUE", "FALSE"))
                     self.assertIn(args[3] + "::", script)
 
     def test_scout_victory_does_not_grant_kael_badge(self):
