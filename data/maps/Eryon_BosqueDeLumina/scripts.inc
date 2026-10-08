@@ -2,13 +2,16 @@
 EryonBosque_EventScript_Researcher::
 	lock
 	faceplayer
-	goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonBosque_EventScript_ResearcherAfterBadge
-	goto_if_ge VAR_ERYON_LUMINA_CLUE_FOUND, 1, EryonBosque_EventScript_ResearcherFollowup
+	goto_if_ge VAR_ERYON_LUMINA_CLUE_FOUND, 1, EryonBosque_EventScript_ResearcherKnownClue
 	msgbox EryonBosque_Text_Researcher, MSGBOX_DEFAULT
 	setvar VAR_ERYON_LUMINA_CLUE_FOUND, 1
 	msgbox EryonBosque_Text_ClueFound, MSGBOX_DEFAULT
 	release
 	end
+
+EryonBosque_EventScript_ResearcherKnownClue::
+	goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonBosque_EventScript_ResearcherAfterBadge
+	goto EryonBosque_EventScript_ResearcherFollowup
 
 EryonBosque_EventScript_ResearcherAfterBadge::
 	msgbox EryonBosque_Text_ResearcherAfterBadge, MSGBOX_DEFAULT
