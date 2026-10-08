@@ -75,6 +75,29 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertEqual(forest["warp_events"][0]["dest_map"], "MAP_ERYON_ROTA01")
         self.assertEqual(int(forest["warp_events"][0]["dest_warp_id"]), 0)
 
+    def test_opening_map_connections_are_reciprocal(self):
+        import json
+        maps = {
+            name: json.loads((ROOT / "data/maps" / name / "map.json").read_text())
+            for name in MAPS
+        }
+        by_id = {data["id"]: data for data in maps.values()}
+        opposites = {"up": "down", "down": "up", "left": "right", "right": "left"}
+        for name, data in maps.items():
+            for connection in data.get("connections") or []:
+                with self.subTest(map=name, target=connection["map"]):
+                    self.assertIn(connection["map"], by_id)
+                    if connection["map"] not in by_id:
+                        continue
+                    self.assertIn(connection["direction"], opposites)
+                    reverse = [
+                        other for other in by_id[connection["map"]].get("connections") or []
+                        if other["map"] == data["id"]
+                        and other["direction"] == opposites.get(connection["direction"])
+                        and int(other["offset"]) == -int(connection["offset"])
+                    ]
+                    self.assertEqual(len(reverse), 1, "Expected exactly one reciprocal connection")
+
     def test_opening_warps_are_reciprocal(self):
         import json
         maps = {
