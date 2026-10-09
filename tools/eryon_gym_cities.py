@@ -12,13 +12,13 @@ W, H = 64, 56
 ROOT = Path(__file__).resolve().parents[1]
 CITIES = {
     "verdelume": ("Verdelume", "Grass", 1),
-    "porto_azul": ("Porto Azul", "Water", 2),
-    "aurora_dourada": ("Aurora Dourada", "Electric", 3),
-    "pedralta": ("Pedralta", "Rock", 4),
-    "floravento": ("Floravento", "Flying", 5),
-    "solaris": ("Solaris", "Fire", 6),
-    "nebulis": ("Nebulis", "Psychic", 7),
-    "eclipse": ("Eclipse", "Dark", 8),
+    "neonara": ("Neonara", "Electric", 2),
+    "frostheim": ("Frostheim", "Ice", 3),
+    "arkhara": ("Arkhara", "Rock", 4),
+    "umbra": ("Umbra", "Dark/Poison", 5),
+    "ignivar": ("Ignivar", "Fire", 6),
+    "lunaris": ("Lunaris", "Psychic/Fairy", 7),
+    "drakonia": ("Drakonia", "Dragon", 8),
 }
 BUILDINGS = {
     "G": (32, 11), "C": (14, 20), "M": (48, 20),
