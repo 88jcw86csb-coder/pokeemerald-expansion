@@ -9587,6 +9587,17 @@
       "border_filepath": "data/layouts/PetalburgWoods/border.bin",
       "blockdata_filepath": "data/layouts/Eryon_TrilhaDoOasis/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ERYON_DESERTO_DE_SOLARIS",
+      "name": "ERYON_DESERTO_DE_SOLARIS_Layout",
+      "width": 48,
+      "height": 44,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Rustboro",
+      "border_filepath": "data/layouts/PetalburgWoods/border.bin",
+      "blockdata_filepath": "data/layouts/Eryon_DesertoDeSolaris/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }
