@@ -160,6 +160,25 @@ class PomaresRouteTests(unittest.TestCase):
         self.assertNotEqual(passage_rows[manifest["y"]][manifest["x"]],"#")
         passage_scripts=(ROOT/"data/maps/Eryon_PassagemRochosa/scripts.inc").read_text()
         self.assertIn("EryonPassagem_EventScript_CargoManifestClue::",passage_scripts)
+        outpost=json.loads((ROOT/"data/maps/Eryon_PostoOriental/map.json").read_text())
+        east_road=json.loads((ROOT/"data/maps/Eryon_EstradaOriental/map.json").read_text())
+        branch=east_road["warp_events"][2]
+        back=outpost["warp_events"][0]
+        self.assertEqual((branch["dest_map"],branch["dest_warp_id"]),("MAP_ERYON_POSTO_ORIENTAL","0"))
+        self.assertEqual((back["dest_map"],back["dest_warp_id"]),("MAP_ERYON_ESTRADA_ORIENTAL","2"))
+        road_rows=(ROOT/"docs/eryon/estrada_oriental_terrain_plan.txt").read_text().splitlines()[4:]
+        outpost_plan=ROOT/"docs/eryon/vilas/posto_oriental_village_plan.txt"
+        outpost_rows=outpost_plan.read_text().splitlines()[4:]
+        self.assertNotEqual(road_rows[23][47],"#")
+        self.assertNotEqual(outpost_rows[13][0],"#")
+        village_tiles={**TILES,**{k:TILES["."] for k in "PCMHI"}}
+        self.assertEqual(len(compile_plan(outpost_plan,village_tiles,36,30)),2160)
+        outpost_scripts=(ROOT/"data/maps/Eryon_PostoOriental/scripts.inc").read_text()
+        for npc in outpost["object_events"]:
+            self.assertNotEqual(outpost_rows[npc["y"]][npc["x"]],"#")
+            self.assertIn(npc["script"]+"::",outpost_scripts)
+        self.assertIn("EryonPostoOriental_EventScript_QuartermasterClue::",outpost_scripts)
+
 
 
         for script in ("Eryon_TrilhaGlacial", "Eryon_Frostheim"):
