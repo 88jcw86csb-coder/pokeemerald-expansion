@@ -237,3 +237,29 @@ EryonPassagem_Text_BrokenCrateClue:
 	.string "visto no acampamento.\p"
 	.string "Ha poeira de cristal na\n"
 	.string "madeira. O rastro segue.$"
+
+@ The road survey adds world-building without advancing the main quest prematurely.
+EryonPassagem_EventScript_RoadSurvey::
+	lock
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonPassagem_EventScript_RoadSurveyClue
+	msgbox EryonPassagem_Text_RoadSurveyBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPassagem_EventScript_RoadSurveyClue::
+	msgbox EryonPassagem_Text_RoadSurveyClue, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPassagem_Text_RoadSurveyBefore:
+	.string "Uma placa de pesquisa\n"
+	.string "marca a antiga estrada.\p"
+	.string "O desfiladeiro e longo.\n"
+	.string "Leve suprimentos.$"
+
+EryonPassagem_Text_RoadSurveyClue:
+	.string "A placa registra carrocas\n"
+	.string "que cruzaram a serra.\p"
+	.string "Algumas cargas passaram\n"
+	.string "fora do horario normal.\p"
+	.string "A trilha oriental continua.$"
