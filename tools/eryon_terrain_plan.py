@@ -54,6 +54,7 @@ def route(kind):
             tiles[5][x] = "."
         for x in range(13, 17):
             tiles[16][x] = "."
+        tiles[14][15] = "."
         # Both forest warps are placed on explicit clear path tiles.
         tiles[5][14] = "."
         tiles[38][16] = "."
