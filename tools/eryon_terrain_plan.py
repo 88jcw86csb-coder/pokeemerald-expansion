@@ -168,8 +168,13 @@ def route(kind):
                 tiles[y][x] = ":"
     # The road/valley transitions must align with the fixed warp coordinates.
     if kind != "forest":
-        for x in (0, WIDTH - 1):
-            tiles[22][x] = "."
+        tiles[22][0] = "."
+        if kind != "valley":
+            tiles[22][WIDTH - 1] = "."
+    if kind == "valley":
+        # Terminal region: do not expose a walkable east edge without a warp.
+        for y in range(HEIGHT):
+            tiles[y][WIDTH - 1] = "#"
     return tiles
 
 def reachable(tiles, start=(0, 22)):
@@ -195,10 +200,14 @@ def main():
     ):
         tiles = route(kind)
         accessible = reachable(tiles, (16, 38) if kind == "forest" else (0, 22))
-        assert ((14, 5) if kind == "forest" else (47, 22)) in accessible, f"{name}: exit is unreachable"
+        if kind == "forest":
+            assert (14, 5) in accessible, f"{name}: north exit is unreachable"
+        elif kind != "valley":
+            assert (47, 22) in accessible, f"{name}: east exit is unreachable"
         map_path = ROOT / "data" / "maps" / MAP_NAMES[name] / "map.json"
         map_data = json.loads(map_path.read_text(encoding="utf-8"))
-        landmarks = [(0, 22), (47, 22)] if kind != "forest" else [(16, 38), (14, 5)]
+        landmarks = ([(16, 38), (14, 5)] if kind == "forest" else
+                     [(0, 22)] if kind == "valley" else [(0, 22), (47, 22)])
         for event in map_data.get("warp_events", []):
             landmarks.append((event["x"], event["y"]))
         for event in map_data.get("object_events", []):
