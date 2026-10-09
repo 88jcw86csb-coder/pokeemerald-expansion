@@ -1,6 +1,6 @@
 Posto Oriental | Eryon village concept 36x30
 # barrier; . path; , grove; : stone; P plaza; C center; M mart; H home; I inn
-Design only: buildings, encounters, warp links and interiors are not implemented.
+Registered provisional village: optional road warp and cargo investigation NPCs installed; buildings, encounters and interiors pending.
 
 ################....################
 ################....################
