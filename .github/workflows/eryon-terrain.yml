@@ -12,6 +12,8 @@ on:
       - 'tools/test_eryon_map_bins.py'
       - 'docs/eryon/*_terrain_plan.txt'
       - 'data/maps/Eryon_*/map.json'
+      - 'data/maps/Eryon_*/scripts.inc'
+      - 'data/event_scripts.s'
       - 'data/layouts/layouts.json'
       - 'map_data_rules.mk'
       - '.github/workflows/eryon-terrain.yml'
@@ -32,7 +34,7 @@ jobs:
         run: python3 -m unittest discover -s tools -p 'test_eryon_*py'
       - name: Audit 37-stage Eryon regional map inventory
         run: python3 tools/eryon_world_audit.py
-      - name: Verify ten unregistered terrain previews
+      - name: Verify unregistered route, village, city and league previews
         run: |
           python3 - <<'PY'
           from pathlib import Path
