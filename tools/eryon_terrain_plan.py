@@ -37,6 +37,13 @@ def route(kind):
             center = 16 + (2 if 12 <= y < 22 else 0)
             for x in range(center - 2, center + 3):
                 tiles[y][x] = "."
+        # Eastern fern grove: optional woodland spur.
+        for x in range(23, 39):
+            tiles[25][x] = ","
+        for y in range(20, 31):
+            for x in range(31, 42):
+                if (x - 36) ** 2 + (y - 25) ** 2 <= 25:
+                    tiles[y][x] = ","
         # Winding loop through the clearing, linking all existing events.
         for y in range(13, 27):
             for x in range(12, 26):
