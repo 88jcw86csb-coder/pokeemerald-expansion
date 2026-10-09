@@ -10,7 +10,7 @@ EryonVilaNeblina_EventScript_Elder::
 	end
 
 EryonVilaNeblina_Text_Elder:
-	.string "ANCIÃ: A neblina esconde\n"
+	.string "ANCIA: A neblina esconde\n"
 	.string "os caminhos mais antigos.\p"
 	.string "A Trilha Glacial fica alem\n"
 	.string "da vila, entre montanhas.$"
