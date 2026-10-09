@@ -9354,7 +9354,7 @@
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Rustboro",
       "border_filepath": "data/layouts/PetalburgWoods/border.bin",
-      "blockdata_filepath": "data/layouts/PetalburgWoods/map.bin",
+      "blockdata_filepath": "data/layouts/Eryon_BosqueDeLumina/map.bin",
       "layout_version": "emerald"
     },
     {
@@ -9398,7 +9398,7 @@
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Rustboro",
       "border_filepath": "data/layouts/PetalburgWoods/border.bin",
-      "blockdata_filepath": "data/layouts/PetalburgWoods/map.bin",
+      "blockdata_filepath": "data/layouts/Eryon_SerraDosCristais/map.bin",
       "layout_version": "emerald"
     },
     {
@@ -9409,7 +9409,7 @@
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Rustboro",
       "border_filepath": "data/layouts/PetalburgWoods/border.bin",
-      "blockdata_filepath": "data/layouts/PetalburgWoods/map.bin",
+      "blockdata_filepath": "data/layouts/Eryon_PassagemRochosa/map.bin",
       "layout_version": "emerald"
     },
     {
@@ -9420,7 +9420,7 @@
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Rustboro",
       "border_filepath": "data/layouts/PetalburgWoods/border.bin",
-      "blockdata_filepath": "data/layouts/PetalburgWoods/map.bin",
+      "blockdata_filepath": "data/layouts/Eryon_EstradaOriental/map.bin",
       "layout_version": "emerald"
     },
     {
@@ -9431,7 +9431,7 @@
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Rustboro",
       "border_filepath": "data/layouts/PetalburgWoods/border.bin",
-      "blockdata_filepath": "data/layouts/PetalburgWoods/map.bin",
+      "blockdata_filepath": "data/layouts/Eryon_ValeDosVentos/map.bin",
       "layout_version": "emerald"
     }
   ]
