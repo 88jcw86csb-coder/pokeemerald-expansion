@@ -31,6 +31,7 @@ STAGES = [
     ("umbra", "gym"),
     ("rota_das_cachoeiras", "route"),
     ("vila_das_aguas", "village"),
+    ("trilha_do_oasis", "route"),
     ("deserto_de_solaris", "desert"),
     ("ignivar", "gym"),
     ("floresta_dos_ecos", "forest"),
