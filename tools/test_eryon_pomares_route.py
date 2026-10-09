@@ -1,0 +1,31 @@
+#!/usr/bin/env python3
+"""Static regression for the Pomares-to-Route-04 expansion."""
+import json
+import unittest
+from pathlib import Path
+from build_eryon_map_bins import compile_plan
+
+ROOT=Path(__file__).resolve().parents[1]
+TILES={"#":0x3C01,".":0x3001,",":0x3002,":":0x3003}
+
+
+class PomaresRouteTests(unittest.TestCase):
+    def test_route_04_terrain_and_reciprocal_warps(self):
+        plan=ROOT/"docs/eryon/rota_04_terrain_plan.txt"
+        payload=compile_plan(plan,TILES,width=48,height=44)
+        self.assertEqual(len(payload),4224)
+        rows=plan.read_text(encoding="utf-8").splitlines()[4:]
+        self.assertEqual(rows[22][0],".")
+        self.assertEqual(rows[22][47],".")
+        village=json.loads((ROOT/"data/maps/Eryon_VilaDosPomares/map.json").read_text())
+        route=json.loads((ROOT/"data/maps/Eryon_Rota04/map.json").read_text())
+        out=village["warp_events"][1]
+        back=route["warp_events"][0]
+        self.assertEqual((out["dest_map"],out["dest_warp_id"]),("MAP_ERYON_ROTA04","0"))
+        self.assertEqual((back["dest_map"],back["dest_warp_id"]),("MAP_ERYON_VILA_DOS_POMARES","1"))
+        self.assertEqual((out["x"],out["y"]),(35,14))
+        self.assertEqual((back["x"],back["y"]),(0,22))
+
+
+if __name__=="__main__":
+    unittest.main()
