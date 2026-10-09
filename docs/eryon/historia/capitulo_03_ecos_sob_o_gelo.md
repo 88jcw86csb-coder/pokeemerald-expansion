@@ -11,7 +11,7 @@
 4. **Desvio do lago congelado — exploracao opcional.** Uma bifurcacao leva a itens de cura e a uma area de encontros selvagens de tipo Gelo; o caminho principal permanece livre. Pendente: tiles, itens e tabela de encontros.
 5. **Frostheim — denuncia cientifica.** Um pesquisador explica que a Equipe Eclipse levou amostras sem permissao e que Bjorn investiga o caso. Dialogo instalado.
 6. **Frostheim — desafio de Bjorn.** O terceiro ginasio sera uma prova de deslizamento em gelo, seguida de batalha equilibrada. Interior, quebra-cabeca, equipe e insignia ainda pendentes.
-7. **Serra dos Cristais — proximo capitulo.** As amostras apontam para uma instalacao nas cavernas cristalinas. A Equipe Eclipse procura uma fonte de energia que reage a luz e ao frio. Rota ja registrada anteriormente; conexao direta a partir de Frostheim ainda pendente.
+7. **Serra dos Cristais — proximo capitulo.** As amostras apontam para uma instalacao nas cavernas cristalinas. A Equipe Eclipse procura uma fonte de energia que reage a luz e ao frio. Rota ja registrada anteriormente; conexao reciproca entre Frostheim e Serra instalada; testar no emulador.
 
 ## Regras de progressao
 
@@ -19,3 +19,7 @@
 - NPCs opcionais nao devem bloquear a trilha nem as bordas de transicao.
 - Diferenciar descoberta (dialogo), conflito (batalha) e resolucao (evento com flag); nao anunciar batalhas como implementadas.
 - Antes da ROM de teste, conferir colisao real, sprites, musica, warp reciproco, textos, flags, encontros e salvamento.
+
+## Atualizacao de eventos
+
+A saida leste de Frostheim liga a Serra dos Cristais. Bjorn aparece na praca e reage a pista do acampamento. O pesquisador da Trilha Glacial e o cientista de Frostheim tambem mudam de dialogo conforme VAR_ERYON_SERRA_CLUE_FOUND. O interior do ginasio, as batalhas adicionais e os testes no emulador continuam pendentes.
