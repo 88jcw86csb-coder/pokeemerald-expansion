@@ -1,6 +1,6 @@
 Ignivar | Gym 6 (Fire) | Eryon concept 64x56
 # block; = avenue; , park; G gym; C Pokemon Center; M mart; H housing; P civic plaza
-Design only: not a registered map.bin. Gym, interiors, scripts and warps not implemented.
+Registered 64x56 terrain with Solaris return warp, engineer, gym steward, Eclipse technician and inspectable power-grid clues. Gym interior and trainer battles still pending.
 
 #############===###############===##############===#############
 #############===###############===##############===#############
