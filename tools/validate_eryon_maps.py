@@ -35,9 +35,14 @@ for name in registered:
         errors.append(f"{name}: missing layout {data['layout']}")
         continue
     width, height = layout["width"], layout["height"]
+    occupied = set()
     for kind in ("object_events", "bg_events", "warp_events", "coord_events"):
         for event in data.get(kind, []):
             x, y = event["x"], event["y"]
+            if kind == "object_events":
+                if (x, y) in occupied:
+                    errors.append(f"{name}: overlapping NPCs at ({x},{y})")
+                occupied.add((x, y))
             if not (0 <= x < width and 0 <= y < height):
                 errors.append(f"{name}: {kind} at ({x},{y}) outside {width}x{height}")
             script = event.get("script")
@@ -60,6 +65,28 @@ for name, data in maps.values():
             errors.append(f"{name}: warp {index} has invalid destination index {dest_index} in {dest_name}")
         elif dest_warps[dest_index]["dest_map"] != data["id"]:
             errors.append(f"{name}: warp {index} does not return from {dest_name}")
+# Connections must point back to the source map in the opposite direction.
+opposites = {"up": "down", "down": "up", "left": "right", "right": "left"}
+for name, data in maps.values():
+    for connection in data.get("connections") or []:
+        dest = maps.get(connection["map"])
+        if dest is None:
+            errors.append(f"{name}: connection to unregistered map {connection['map']}")
+            continue
+        dest_name, dest_map = dest
+        if not any(
+            other["map"] == data["id"]
+            and other["direction"] == opposites.get(connection["direction"])
+            for other in dest_map.get("connections") or []
+        ):
+            errors.append(f"{name}: connection to {dest_name} lacks reverse direction")
+
+# Shared base-game blockdata is temporary and must not be called original terrain.
+for name, data in maps.values():
+    layout = layout_by_id.get(data["layout"])
+    if layout and not layout["blockdata_filepath"].startswith("data/layouts/Eryon"):
+        print(f"WARNING: {name} still reuses base-game terrain: {layout['blockdata_filepath']}")
+
 if errors:
     print("Eryon static validation FAILED:")
     for error in errors:
