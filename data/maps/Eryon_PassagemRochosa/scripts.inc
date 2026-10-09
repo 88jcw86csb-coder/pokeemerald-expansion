@@ -78,13 +78,26 @@ EryonPassagem_EventScript_HikerVictory::
 EryonPassagem_EventScript_EclipseBattle::
 	lock
 	faceplayer
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonPassagem_EventScript_EclipseBattleAfterClue
 	trainerbattle_single TRAINER_ERYON_PASSAGEM_ECLIPSE, EryonPassagem_Text_EclipseChallenge, EryonPassagem_Text_EclipseDefeat, EryonPassagem_EventScript_EclipseVictory, FALSE
 	msgbox EryonPassagem_Text_EclipseAfter, MSGBOX_DEFAULT
 	release
 	end
 
+EryonPassagem_EventScript_EclipseBattleAfterClue::
+	trainerbattle_single TRAINER_ERYON_PASSAGEM_ECLIPSE, EryonPassagem_Text_EclipseClueChallenge, EryonPassagem_Text_EclipseDefeat, EryonPassagem_EventScript_EclipseVictory, FALSE
+	msgbox EryonPassagem_Text_EclipseAfterClue, MSGBOX_DEFAULT
+	release
+	end
+
 EryonPassagem_EventScript_EclipseVictory::
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonPassagem_EventScript_EclipseVictoryAfterClue
 	msgbox EryonPassagem_Text_EclipseAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPassagem_EventScript_EclipseVictoryAfterClue::
+	msgbox EryonPassagem_Text_EclipseAfterClue, MSGBOX_DEFAULT
 	release
 	end
 
@@ -124,6 +137,17 @@ EryonPassagem_Text_EclipseDefeat:
 EryonPassagem_Text_EclipseAfter:
 	.string "VIGIA: Nosso lider ja\n"
 	.string "levou os cristais daqui.$"
+
+EryonPassagem_Text_EclipseClueChallenge:
+	.string "VIGIA: Voce achou as caixas\n"
+	.string "na Serra dos Cristais?!\p"
+	.string "Nao pode seguir o comboio!$"
+
+EryonPassagem_Text_EclipseAfterClue:
+	.string "VIGIA: Os cristais ja foram\n"
+	.string "enviados para mais longe.\p"
+	.string "Nem eu sei o destino final.\n"
+	.string "A ordem veio de cima.$"
 
 EryonPassagem_Text_MedicOffer:
 	.string "SOCORRISTA: Quer recuperar\n"
