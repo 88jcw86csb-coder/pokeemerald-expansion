@@ -146,6 +146,21 @@ class PomaresRouteTests(unittest.TestCase):
         self.assertIn("goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND",refuge_scripts)
 
         self.assertIn("VAR_ERYON_SERRA_CLUE_FOUND",frostheim_scripts)
+        neonara=json.loads((ROOT/"data/maps/Eryon_Neonara/map.json").read_text())
+        neonara_rows=(ROOT/"docs/eryon/cidades/neonara_city_plan.txt").read_text().splitlines()[4:]
+        neonara_scripts=(ROOT/"data/maps/Eryon_Neonara/scripts.inc").read_text()
+        for npc in neonara["object_events"]:
+            self.assertNotEqual(neonara_rows[npc["y"]][npc["x"]],"#")
+            self.assertIn(npc["script"]+"::",neonara_scripts)
+        self.assertIn("EryonNeonara_EventScript_TechnicianAfterClue::",neonara_scripts)
+        self.assertIn("EryonNeonara_EventScript_GymStewardClue::",neonara_scripts)
+        passage=json.loads((ROOT/"data/maps/Eryon_PassagemRochosa/map.json").read_text())
+        passage_rows=(ROOT/"docs/eryon/passagem_rochosa_terrain_plan.txt").read_text().splitlines()[4:]
+        manifest=next(e for e in passage["bg_events"] if e["script"]=="EryonPassagem_EventScript_CargoManifest")
+        self.assertNotEqual(passage_rows[manifest["y"]][manifest["x"]],"#")
+        passage_scripts=(ROOT/"data/maps/Eryon_PassagemRochosa/scripts.inc").read_text()
+        self.assertIn("EryonPassagem_EventScript_CargoManifestClue::",passage_scripts)
+
 
         for script in ("Eryon_TrilhaGlacial", "Eryon_Frostheim"):
             content=(ROOT/f"data/maps/{script}/scripts.inc").read_text()
