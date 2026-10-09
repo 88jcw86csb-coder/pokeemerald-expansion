@@ -160,6 +160,7 @@ gStdScripts_End::
 	.include "data/maps/Eryon_RefugioCristal/scripts.inc"
 	.include "data/maps/Eryon_PostoOriental/scripts.inc"
 	.include "data/maps/Eryon_Umbra/scripts.inc"
+	.include "data/maps/Eryon_RotaDasCachoeiras/scripts.inc"
 	.include "data/maps/LittlerootTown/scripts.inc"
 	.include "data/maps/OldaleTown/scripts.inc"
 	.include "data/maps/DewfordTown/scripts.inc"
