@@ -27,7 +27,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Generate twenty registered Eryon map binaries and previews
+      - name: Generate twenty-one registered Eryon map binaries and previews
         run: |
           python3 tools/build_eryon_map_bins.py --wall 0x3c01 --path 0x3001 --meadow 0x3002 --stone 0x3003 --preview-unregistered
       - name: Test map connectivity and encoding
@@ -57,7 +57,7 @@ jobs:
               assert path.is_file() and path.stat().st_size == 36 * 30 * 2, path
               print(f"{name}: village preview OK")
           for name in CITIES:
-              if name in ("neonara", "frostheim", "umbra"):
+              if name in ("neonara", "frostheim", "umbra", "ignivar"):
                   continue
               path = Path("build/eryon-previews/cities") / name / "map.bin"
               assert path.is_file() and path.stat().st_size == 64 * 56 * 2, path
@@ -90,8 +90,9 @@ jobs:
               "LAYOUT_ERYON_VILA_DAS_AGUAS",
               "LAYOUT_ERYON_TRILHA_DO_OASIS",
               "LAYOUT_ERYON_DESERTO_DE_SOLARIS",
+              "LAYOUT_ERYON_IGNIVAR",
           }]
-          assert len(eryon) == 20
+          assert len(eryon) == 21
           for layout in eryon:
               path = Path(layout["blockdata_filepath"])
               expected = layout["width"] * layout["height"] * 2
