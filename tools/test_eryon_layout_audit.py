@@ -3,7 +3,7 @@
 import struct
 import unittest
 
-from eryon_layout_audit import connected_by_collision_bits, decode_block
+from eryon_layout_audit import connected_by_collision_bits, decode_block, zero_collision_edge_positions
 
 
 def grid(width, height, walls=()):
@@ -31,6 +31,21 @@ class EryonLayoutAuditTests(unittest.TestCase):
         raw = grid(3, 2, walls={(0, 0), (2, 1)})
         self.assertFalse(connected_by_collision_bits(raw, 3, 2, (0, 0), (1, 0)))
         self.assertFalse(connected_by_collision_bits(raw, 3, 2, (1, 0), (2, 1)))
+
+    def test_edge_collision_candidates_all_directions(self):
+        raw = grid(4, 3, walls={(0, 0), (3, 1), (2, 2)})
+        self.assertEqual(zero_collision_edge_positions(raw, 4, 3, "up"),
+                         [(1, 0), (2, 0), (3, 0)])
+        self.assertEqual(zero_collision_edge_positions(raw, 4, 3, "down"),
+                         [(0, 2), (1, 2), (3, 2)])
+        self.assertEqual(zero_collision_edge_positions(raw, 4, 3, "left"),
+                         [(0, 1), (0, 2)])
+        self.assertEqual(zero_collision_edge_positions(raw, 4, 3, "right"),
+                         [(3, 0), (3, 2)])
+
+    def test_edge_candidates_invalid_direction(self):
+        with self.assertRaises(ValueError):
+            zero_collision_edge_positions(grid(2, 2), 2, 2, "diagonal")
 
     def test_out_of_bounds_exit(self):
         raw = grid(3, 2)
