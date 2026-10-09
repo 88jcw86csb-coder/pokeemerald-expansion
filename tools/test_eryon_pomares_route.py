@@ -55,6 +55,17 @@ class PomaresRouteTests(unittest.TestCase):
         self.assertIn(resident["script"]+"::",city_scripts)
 
         self.assertNotIn(r"\\\\n", scripts)
+        hills=json.loads((ROOT/"data/maps/Eryon_ColinasDaNeblina/map.json").read_text())
+        city_exit=neonara["warp_events"][1]
+        hill_entry=hills["warp_events"][0]
+        self.assertEqual((city_exit["dest_map"],city_exit["dest_warp_id"]),("MAP_ERYON_COLINAS_DA_NEBLINA","0"))
+        self.assertEqual((hill_entry["dest_map"],hill_entry["dest_warp_id"]),("MAP_ERYON_NEONARA","1"))
+        self.assertEqual((city_exit["x"],city_exit["y"]),(63,28))
+        self.assertEqual((hill_entry["x"],hill_entry["y"]),(0,22))
+        hill_plan=ROOT/"docs/eryon/colinas_da_neblina_terrain_plan.txt"
+        self.assertEqual(len(compile_plan(hill_plan,TILES,48,44)),4224)
+        self.assertNotEqual(hill_plan.read_text(encoding="utf-8").splitlines()[4+22][0],"#")
+
 
 
 
