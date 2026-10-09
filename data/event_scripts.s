@@ -156,6 +156,7 @@ gStdScripts_End::
 	.include "data/maps/Eryon_ColinasDaNeblina/scripts.inc"
 	.include "data/maps/Eryon_VilaDaNeblina/scripts.inc"
 	.include "data/maps/Eryon_TrilhaGlacial/scripts.inc"
+	.include "data/maps/Eryon_Frostheim/scripts.inc"
 	.include "data/maps/LittlerootTown/scripts.inc"
 	.include "data/maps/OldaleTown/scripts.inc"
 	.include "data/maps/DewfordTown/scripts.inc"
