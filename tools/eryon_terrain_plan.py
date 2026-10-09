@@ -17,7 +17,11 @@ def route(kind):
         center = 22 + (2 if (x // 8) % 2 else 0)
         for y in range(center - 3, center + 4):
             tiles[y][x] = "."
-    # Keep investigation markers connected to the primary trail.\n    for x in ([23] if kind == "valley" else [8]):\n        for y in range(18, 25):\n            tiles[y][x] = "."\n    if kind == "valley":
+    # Keep investigation markers connected to the primary trail.
+    for x in ([23] if kind == "valley" else [8]):
+        for y in range(18, 25):
+            tiles[y][x] = "."
+    if kind == "valley":
         # Southern meadow and northern lookout are connected to the main path.
         for y in range(24, 36):
             for x in range(11, 39):
@@ -52,6 +56,13 @@ def main():
     for name, kind in (("estrada_oriental", "road"), ("vale_dos_ventos", "valley")):
         tiles = route(kind)
         assert reachable(tiles), f"{name}: no east-west walking corridor"
+        landmarks = (
+            [(0, 22), (47, 22), (8, 18), (16, 21), (33, 26)]
+            if kind == "road" else
+            [(0, 22), (14, 21), (32, 25), (39, 16), (23, 18), (37, 10)]
+        )
+        for x, y in landmarks:
+            assert tiles[y][x] != "#", f"{name}: landmark ({x},{y}) blocked"
         path = OUTPUT / f"{name}_terrain_plan.txt"
         path.write_text(
             f"{name} — terrain concept (48x44)\n"
