@@ -95,6 +95,27 @@ class PomaresRouteTests(unittest.TestCase):
         guide_script=(ROOT/"data/maps/Eryon_TrilhaGlacial/scripts.inc").read_text()
         self.assertIn(guide["script"]+"::",guide_script)
         self.assertIn("eclipse",guide_script.lower())
+        frostheim=json.loads((ROOT/"data/maps/Eryon_Frostheim/map.json").read_text())
+        east=glacial["warp_events"][1]
+        west=frostheim["warp_events"][0]
+        self.assertEqual((east["dest_map"],east["dest_warp_id"]),("MAP_ERYON_FROSTHEIM","0"))
+        self.assertEqual((west["dest_map"],west["dest_warp_id"]),("MAP_ERYON_TRILHA_GLACIAL","1"))
+        self.assertNotEqual(glacial_rows[22][47],"#")
+        frostheim_plan=ROOT/"docs/eryon/cidades/frostheim_city_plan.txt"
+        city_tiles={**TILES,"=":TILES["."],**{k:TILES["."] for k in "GCMHP"}}
+        self.assertEqual(len(compile_plan(frostheim_plan,city_tiles,64,56)),7168)
+        frostheim_rows=frostheim_plan.read_text(encoding="utf-8").splitlines()[4:]
+        self.assertNotEqual(frostheim_rows[12][0],"#")
+        for map_data,terrain,script_path in (
+            (glacial,glacial_rows,ROOT/"data/maps/Eryon_TrilhaGlacial/scripts.inc"),
+            (frostheim,frostheim_rows,ROOT/"data/maps/Eryon_Frostheim/scripts.inc"),
+        ):
+            scripts=script_path.read_text(encoding="utf-8")
+            for npc in map_data["object_events"]:
+                self.assertNotEqual(terrain[npc["y"]][npc["x"]],"#")
+                self.assertIn(npc["script"]+"::",scripts)
+        self.assertIn("Bjorn", (ROOT/"data/maps/Eryon_Frostheim/scripts.inc").read_text())
+
 
 
 
