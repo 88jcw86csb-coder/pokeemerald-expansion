@@ -1,0 +1,29 @@
+{
+  "requires_flash": false,
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "object_events": [],
+  "coord_events": [],
+  "bg_events": [],
+  "id": "MAP_ERYON_VILA_DA_NEBLINA",
+  "name": "Eryon_VilaDaNeblina",
+  "layout": "LAYOUT_ERYON_VILA_DA_NEBLINA",
+  "music": "MUS_LITTLEROOT",
+  "region_map_section": "MAPSEC_LITTLEROOT_TOWN",
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_TOWN",
+  "connections": null,
+  "warp_events": [
+    {
+      "x": 0,
+      "y": 14,
+      "elevation": 0,
+      "dest_map": "MAP_ERYON_COLINAS_DA_NEBLINA",
+      "dest_warp_id": "1"
+    }
+  ],
+  "region": "REGION_HOENN"
+}
