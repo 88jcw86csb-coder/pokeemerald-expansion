@@ -1,6 +1,6 @@
 floresta_dos_ecos — terrain concept (48x44)
 # = barrier; . = main trail; , = meadow; : = stone
-Design only: not a registered GBA map; requires tilesets, events, warps and ROM tests.
+Registered provisional forest: Ignivar return warp, researcher, Eclipse observer and resonant-stone clue implemented; wildlife, east village link and ROM playtest remain pending.
 
 ################################################
 ################################################
