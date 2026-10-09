@@ -71,6 +71,17 @@ def route(kind):
                     tiles[y][x] = ","
         for x in range(8, 17):
             tiles[30][x] = "."
+        # Northern moonlit pond clearing, with a loop back to the main trail.
+        for x in range(16, 37):
+            tiles[10][x] = ","
+        for x in range(16, 37):
+            tiles[17][x] = ","
+        for y in range(10, 18):
+            tiles[y][36] = ","
+        for y in range(8, 20):
+            for x in range(27, 39):
+                if (x - 33) ** 2 + (y - 14) ** 2 <= 20:
+                    tiles[y][x] = ","
         # Both forest warps are placed on explicit clear path tiles.
         tiles[5][14] = "."
         tiles[38][16] = "."
