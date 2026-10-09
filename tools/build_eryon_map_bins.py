@@ -28,7 +28,6 @@ PREVIEW_SPECS = {
     "floresta_dos_ecos": "FlorestaDosEcos",
     "trilha_dos_dragoes": "TrilhaDosDragoes",
     "trilha_lunar": "TrilhaLunar",
-    "trilha_do_oasis": "TrilhaDoOasis",
     "caminho_da_liga": "CaminhoDaLiga",
     "gruta_das_estrelas": "GrutaDasEstrelas",
 }
@@ -163,6 +162,13 @@ def main():
     umbra_dest.write_bytes(umbra_payload)
     generated["LAYOUT_ERYON_UMBRA"] = umbra_dest.relative_to(ROOT).as_posix()
     print(f"{umbra_dest.relative_to(ROOT)}: {len(umbra_payload)} bytes")
+    ignivar_src = ROOT / "docs/eryon/cidades/ignivar_city_plan.txt"
+    ignivar_dest = ROOT / "data/layouts/Eryon_Ignivar/map.bin"
+    ignivar_payload = compile_plan(ignivar_src, neonara_tiles, width=64, height=56)
+    ignivar_dest.parent.mkdir(parents=True, exist_ok=True)
+    ignivar_dest.write_bytes(ignivar_payload)
+    generated["LAYOUT_ERYON_IGNIVAR"] = ignivar_dest.relative_to(ROOT).as_posix()
+    print(f"{ignivar_dest.relative_to(ROOT)}: {len(ignivar_payload)} bytes")
     if args.preview_unregistered:
         # Village/city landmark symbols are only floor placeholders.
         # These previews are not functional buildings or gym interiors.
@@ -181,7 +187,7 @@ def main():
         city_tiles = {**tiles, "=": tiles["."],
                       **{mark: tiles["."] for mark in "GCMHP"}}
         for key in CITIES:
-            if key in ("neonara", "frostheim", "umbra"):
+            if key in ("neonara", "frostheim", "umbra", "ignivar"):
                 continue
             src = ROOT / "docs/eryon/cidades" / f"{key}_city_plan.txt"
             dest = ROOT / "build/eryon-previews/cities" / key / "map.bin"
