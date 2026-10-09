@@ -31,7 +31,13 @@ EryonPassagem_EventScript_TravelerAfterClue::
 EryonPassagem_EventScript_CrystalMark::
 	lock
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonPassagem_EventScript_CrystalMarkClue
+	goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonPassagem_EventScript_CrystalMarkBadge
 	msgbox EryonPassagem_Text_CrystalMarkBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPassagem_EventScript_CrystalMarkBadge::
+	msgbox EryonPassagem_Text_CrystalMarkBadge, MSGBOX_DEFAULT
 	release
 	end
 
@@ -68,6 +74,14 @@ EryonPassagem_Text_TravelerAfterClue:
 EryonPassagem_Text_CrystalMarkBefore:
 	.string "Ha sulcos fundos na pedra.\p"
 	.string "Talvez sejam marcas de rodas.$"
+
+EryonPassagem_Text_CrystalMarkBadge:
+	.string "Os sulcos sao recentes.\p"
+	.string "Entre as marcas de rodas ha\n"
+	.string "um brilho parecido com o po\n"
+	.string "visto na Rota 03.\p"
+	.string "Talvez a Serra dos Cristais\n"
+	.string "guarde mais respostas.$"
 
 EryonPassagem_Text_CrystalMarkClue:
 	.string "Os sulcos combinam com as\n"
