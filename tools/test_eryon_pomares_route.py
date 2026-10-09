@@ -54,7 +54,7 @@ class PomaresRouteTests(unittest.TestCase):
         city_scripts=(ROOT/"data/maps/Eryon_Neonara/scripts.inc").read_text()
         self.assertIn(resident["script"]+"::",city_scripts)
 
-        self.assertNotIn(r"\\\\n",scripts)
+        self.assertNotIn(r"\\\\n", scripts)
 
 
 
