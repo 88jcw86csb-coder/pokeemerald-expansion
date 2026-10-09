@@ -65,6 +65,21 @@ EryonIgnivar_EventScript_BurntFuseClue::
 	release
 	end
 
+@ Emergency medic helps travelers while Ignivar's grid is unstable.
+EryonIgnivar_EventScript_EmergencyMedic::
+	lock
+	faceplayer
+	msgbox EryonIgnivar_Text_Medic, MSGBOX_DEFAULT
+	special HealPlayerParty
+	release
+	end
+
+EryonIgnivar_Text_Medic:
+	.string "SOCORRISTA: A usina\\n"
+	.string "ainda esta instavel.\\p"
+	.string "Vou cuidar da sua equipe\\n"
+	.string "antes da travessia.$"
+
 EryonIgnivar_Text_EngineerBefore:
 	.string "ENGENHEIRA: O calor\n"
 	.string "mantem a cidade viva.\p"
