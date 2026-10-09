@@ -65,6 +65,19 @@ class PomaresRouteTests(unittest.TestCase):
         hill_plan=ROOT/"docs/eryon/colinas_da_neblina_terrain_plan.txt"
         self.assertEqual(len(compile_plan(hill_plan,TILES,48,44)),4224)
         self.assertNotEqual(hill_plan.read_text(encoding="utf-8").splitlines()[4+22][0],"#")
+        village2=json.loads((ROOT/"data/maps/Eryon_VilaDaNeblina/map.json").read_text())
+        hill_exit=hills["warp_events"][1]
+        village_entry=village2["warp_events"][0]
+        self.assertEqual((hill_exit["dest_map"],hill_exit["dest_warp_id"]),("MAP_ERYON_VILA_DA_NEBLINA","0"))
+        self.assertEqual((village_entry["dest_map"],village_entry["dest_warp_id"]),("MAP_ERYON_COLINAS_DA_NEBLINA","1"))
+        self.assertEqual((hill_exit["x"],hill_exit["y"]),(47,22))
+        self.assertEqual((village_entry["x"],village_entry["y"]),(0,14))
+        village_plan=ROOT/"docs/eryon/vilas/vila_da_neblina_village_plan.txt"
+        village_tiles={**TILES,**{k:TILES["."] for k in "PCMHI"}}
+        self.assertEqual(len(compile_plan(village_plan,village_tiles,36,30)),2160)
+        village_rows=village_plan.read_text(encoding="utf-8").splitlines()[4:]
+        self.assertNotEqual(village_rows[14][0],"#")
+
 
 
 
