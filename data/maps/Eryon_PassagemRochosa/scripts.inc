@@ -18,7 +18,13 @@ EryonPassagem_EventScript_GuardClue::
 EryonPassagem_EventScript_Traveler::
 	lock
 	faceplayer
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonPassagem_EventScript_TravelerAfterClue
 	msgbox EryonPassagem_Text_Traveler, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPassagem_EventScript_TravelerAfterClue::
+	msgbox EryonPassagem_Text_TravelerAfterClue, MSGBOX_DEFAULT
 	release
 	end
 
@@ -50,6 +56,14 @@ EryonPassagem_Text_Traveler:
 	.string "escondem caminhos antigos.\p"
 	.string "Ainda falta muito ate a\n"
 	.string "proxima cidade.$"
+
+EryonPassagem_Text_TravelerAfterClue:
+	.string "VIAJANTE: Voce encontrou\n"
+	.string "caixas marcadas na serra?\p"
+	.string "Ouvi carrocas seguindo\n"
+	.string "para alem do desfiladeiro.\p"
+	.string "A estrada adiante e longa.\n"
+	.string "Nao perca as pistas.$"
 
 EryonPassagem_Text_CrystalMarkBefore:
 	.string "Ha sulcos fundos na pedra.\p"
