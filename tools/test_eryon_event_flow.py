@@ -29,6 +29,38 @@ class EryonEventFlowTests(unittest.TestCase):
                         if label and label.startswith("Eryon"):
                             self.assertIn(label, labels, f"{name} {kind}[{index}] has no script")
 
+    def test_solaris_to_ignivar_story_and_emergency_medic(self):
+        import json
+        chain = ("Eryon_TrilhaDoOasis", "Eryon_DesertoDeSolaris",
+                 "Eryon_Ignivar", "Eryon_FlorestaDosEcos")
+        maps = {
+            name: json.loads((ROOT / "data/maps" / name / "map.json").read_text(encoding="utf-8"))
+            for name in chain
+        }
+        for left, right in zip(chain, chain[1:]):
+            with self.subTest(from_map=left, to_map=right):
+                exits = maps[left]["warp_events"]
+                entries = maps[right]["warp_events"]
+                self.assertTrue(any(
+                    warp["dest_map"] == maps[right]["id"]
+                    and entries[int(warp["dest_warp_id"])]["dest_map"] == maps[left]["id"]
+                    for warp in exits
+                ))
+        city = maps["Eryon_Ignivar"]
+        medic = "EryonIgnivar_EventScript_EmergencyMedic"
+        self.assertEqual(sum(npc.get("script") == medic for npc in city["object_events"]), 1)
+        script = (ROOT / "data/maps/Eryon_Ignivar/scripts.inc").read_text(encoding="utf-8")
+        self.assertIn(medic + "::", script)
+        self.assertIn("special HealPlayerParty", script)
+        for name, clue in (
+            ("Eryon_DesertoDeSolaris", "EryonSolaris_EventScript_BuriedDevice"),
+            ("Eryon_Ignivar", "EryonIgnivar_EventScript_PowerGridNotice"),
+            ("Eryon_FlorestaDosEcos", "EryonEcos_EventScript_ResonantStone"),
+        ):
+            with self.subTest(clue=name):
+                events = maps[name]["bg_events"]
+                self.assertTrue(any(event.get("script") == clue for event in events))
+
     def test_passagem_healer_and_two_trainers(self):
         import json
         folder = ROOT / "data/maps/Eryon_PassagemRochosa"
