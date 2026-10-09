@@ -5,11 +5,12 @@ ERYON_TERRAIN_PLANS := $(addprefix docs/eryon/,$(addsuffix _terrain_plan.txt,bos
 ERYON_MAP_STAMP := data/layouts/.eryon_maps_generated
 
 $(ERYON_MAP_STAMP): tools/build_eryon_map_bins.py $(ERYON_TERRAIN_PLANS)
-	python3 tools/build_eryon_map_bins.py --wall 0x0c01 --path 0x0001 --meadow 0x0002 --stone 0x0003
+	python3 tools/build_eryon_map_bins.py --wall 0x3c01 --path 0x3001 --meadow 0x3002 --stone 0x3003
 	@touch $@
 
 $(ERYON_MAP_BINS): $(ERYON_MAP_STAMP)
-	@test -f $@ || { rm -f $(ERYON_MAP_STAMP); echo "Missing Eryon map: $@; rerun make"; exit 1; }
+	@test -s $@ || { echo "Missing Eryon map: $@; run make eryon-maps after removing the stamp"; exit 1; }
+	@test "$(wc -c < $@)" -eq 4224 || { echo "Wrong map size: $@"; exit 1; }
 
 $(DATA_ASM_BUILDDIR)/maps.o: $(ERYON_MAP_BINS)
 
