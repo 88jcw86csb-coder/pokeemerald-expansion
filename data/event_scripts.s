@@ -162,6 +162,7 @@ gStdScripts_End::
 	.include "data/maps/Eryon_Umbra/scripts.inc"
 	.include "data/maps/Eryon_RotaDasCachoeiras/scripts.inc"
 	.include "data/maps/Eryon_VilaDasAguas/scripts.inc"
+	.include "data/maps/Eryon_TrilhaDoOasis/scripts.inc"
 	.include "data/maps/LittlerootTown/scripts.inc"
 	.include "data/maps/OldaleTown/scripts.inc"
 	.include "data/maps/DewfordTown/scripts.inc"
