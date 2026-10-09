@@ -1,0 +1,25 @@
+#!/usr/bin/env python3
+"""Regression checks for Eryon's proposed regional progression."""
+import unittest
+from eryon_world_progression import STAGES, GYMS, render, validate, ROOT
+
+
+class WorldProgressionTests(unittest.TestCase):
+    def test_interleaved_journey(self):
+        self.assertTrue(validate())
+        kinds = [kind for _, kind in STAGES]
+        self.assertEqual(kinds.count("gym"), 8)
+        self.assertGreaterEqual(kinds.count("village"), 7)
+        self.assertGreaterEqual(kinds.count("route"), 9)
+        self.assertEqual([name for name, kind in STAGES if kind == "gym"], GYMS)
+        self.assertEqual(STAGES[2][0], "bosque_de_lumina")
+        for i in range(len(kinds) - 1):
+            self.assertFalse(kinds[i] == kinds[i + 1] == "gym")
+
+    def test_document_is_current(self):
+        path = ROOT / "docs/eryon/progressao_regional.md"
+        self.assertEqual(path.read_text(encoding="utf-8"), render())
+
+
+if __name__ == "__main__":
+    unittest.main()
