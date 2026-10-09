@@ -53,6 +53,9 @@ def main():
     for symbol in ".,:":
         if tiles[symbol] & 0x0C00:
             parser.error(f"walkable {symbol!r} must have zero collision bits")
+    elevations = {value & 0xF000 for value in tiles.values()}
+    if elevations != {0x3000}:
+        parser.error("all terrain words must use elevation 3 to match Eryon NPCs")
     generated = {}
     for key, folder in SPECS.items():
         src = ROOT / "docs/eryon" / f"{key}_terrain_plan.txt"
