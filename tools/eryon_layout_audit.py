@@ -66,6 +66,30 @@ def inspect():
             continue
         source = layout["blockdata_filepath"]
         print(f"MAP {name}: {width}x{height}, terrain={source}")
+        # Edge connections need a traversable boundary, unlike scripted warps.
+        # Collision bits are only a preliminary diagnostic, not proof of passage.
+        for index, connection in enumerate(data.get("connections") or []):
+            direction = connection.get("direction")
+            if direction in ("up", "down"):
+                y = 0 if direction == "up" else height - 1
+                edge = [(x, y) for x in range(width)]
+            elif direction in ("left", "right"):
+                x = 0 if direction == "left" else width - 1
+                edge = [(x, y) for y in range(height)]
+            else:
+                failures.append(f"{name}: connection {index} invalid direction {direction}")
+                continue
+            clear = [pos for pos in edge if decode_block(raw, width, *pos)[1] == 0]
+            print(f"  edge connection {index} {direction} -> {connection['map']}: "
+                  f"{len(clear)}/{len(edge)} zero-collision boundary blocks")
+            if not clear:
+                print(f"  WARNING: connection {index} has no zero-collision edge tile; "
+                      "inspect border geometry in Porymap")
+        if name == "Eryon_VilaAurora":
+            tile, collision, elevation = decode_block(raw, width, 10, 10)
+            print(f"  initial spawn (10,10): tile={tile} collision={collision} elevation={elevation}")
+            if collision:
+                print("  WARNING: initial spawn has nonzero collision; inspect in Porymap")
         warps = data.get("warp_events", [])
         valid = []
         for index, warp in enumerate(warps):
