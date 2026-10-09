@@ -139,6 +139,17 @@ def route(kind):
         for y in range(10, 25):
             for x in range(35, 42):
                 tiles[y][x] = "."
+        # Wind-swept northern ridge and sheltered lookout alcove.
+        for x in range(18, 40):
+            tiles[7][x] = "."
+        for y in range(7, 19):
+            tiles[y][23] = "."
+        for y in range(7, 11):
+            tiles[y][39] = "."
+        for y in range(4, 10):
+            for x in range(28, 35):
+                if (x - 31) ** 2 + (y - 7) ** 2 <= 9:
+                    tiles[y][x] = ","
         # Join the lookout at (37,10) to the investigation marker at (23,18).
         for x in range(23, 38):
             tiles[18][x] = "."
