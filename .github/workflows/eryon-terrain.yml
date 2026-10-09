@@ -25,7 +25,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Generate eleven registered Eryon map binaries and previews
+      - name: Generate twelve registered Eryon map binaries and previews
         run: |
           python3 tools/build_eryon_map_bins.py --wall 0x3c01 --path 0x3001 --meadow 0x3002 --stone 0x3003 --preview-unregistered
       - name: Test map connectivity and encoding
@@ -79,8 +79,9 @@ jobs:
               "LAYOUT_ERYON_NEONARA",
               "LAYOUT_ERYON_COLINAS_DA_NEBLINA",
               "LAYOUT_ERYON_VILA_DA_NEBLINA",
+              "LAYOUT_ERYON_TRILHA_GLACIAL",
           }]
-          assert len(eryon) == 11
+          assert len(eryon) == 12
           for layout in eryon:
               path = Path(layout["blockdata_filepath"])
               expected = layout["width"] * layout["height"] * 2
