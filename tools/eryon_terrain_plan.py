@@ -77,6 +77,17 @@ def route(kind):
             for x in range(35, 43):
                 if (x - 39) ** 2 + (y - 39) ** 2 <= 12:
                     tiles[y][x] = ":"
+        # Northwest crystal overlook: a loop connecting the upper switchback.
+        for x in range(5, 25):
+            tiles[9][x] = ":"
+        for y in range(9, 21):
+            tiles[y][12] = ":"
+        for y in range(9, 21):
+            tiles[y][24] = ":"
+        for y in range(5, 12):
+            for x in range(5, 12):
+                if (x - 8) ** 2 + (y - 8) ** 2 <= 10:
+                    tiles[y][x] = ":"
         # Stepped ascent with accessible observation terraces.
         for x in range(WIDTH):
             for y in range(19, 27):
