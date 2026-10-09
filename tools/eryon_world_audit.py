@@ -16,7 +16,7 @@ KNOWN_EXISTING={
     "bosque_de_lumina", "serra_dos_cristais", "passagem_rochosa",
     "estrada_oriental", "vale_dos_ventos",
 }
-UNBUILT={"caminho_da_liga", "liga_eryon"}
+FINAL_PLANS={"caminho_da_liga", "liga_eryon"}
 
 
 def audit():
@@ -36,9 +36,12 @@ def audit():
             path=None
         if path is not None and name not in KNOWN_EXISTING and not path.is_file():
             errors.append(f"Missing concept plan: {name}: {path}")
-    for name in UNBUILT:
+    for name in FINAL_PLANS:
         if name not in planned:
             errors.append(f"Final stage missing: {name}")
+        path=ROOT/"docs/eryon"/f"{name}_terrain_plan.txt"
+        if not path.is_file():
+            errors.append(f"Final map concept missing: {name}")
     return errors
 
 
