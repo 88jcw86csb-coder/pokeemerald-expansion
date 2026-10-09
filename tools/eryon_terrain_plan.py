@@ -86,6 +86,15 @@ def route(kind):
         tiles[5][14] = "."
         tiles[38][16] = "."
     if kind == "mountain":
+        # Eastern high-altitude crystal shelf, linked to the ascent.
+        for x in range(38, 46):
+            tiles[12][x] = ":"
+        for y in range(12, 25):
+            tiles[y][44] = ":"
+        for y in range(7, 15):
+            for x in range(39, 47):
+                if (x - 43) ** 2 + (y - 11) ** 2 <= 12:
+                    tiles[y][x] = ":"
         # Southern crystal grotto, reached from the existing medic terrace.
         for x in range(26, 41):
             tiles[39][x] = ":"
