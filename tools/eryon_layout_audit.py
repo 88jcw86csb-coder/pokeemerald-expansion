@@ -101,6 +101,22 @@ def inspect():
             print(f"  initial spawn (10,10): tile={tile} collision={collision} elevation={elevation}")
             if collision:
                 print("  WARNING: initial spawn has nonzero collision; inspect in Porymap")
+            # A clear edge is not useful if the player cannot reach it from spawn.
+            # This is only a conservative collision-bit diagnostic.
+            for index, connection in enumerate(data.get("connections") or []):
+                direction = connection.get("direction")
+                if direction not in ("up", "down", "left", "right"):
+                    continue
+                candidates = zero_collision_edge_positions(raw, width, height, direction)
+                reachable = any(
+                    connected_by_collision_bits(raw, width, height, (10, 10), pos)
+                    for pos in candidates
+                )
+                print(f"  spawn -> edge connection {index} ({direction}): "
+                      f"{'candidate path found' if reachable else 'no zero-collision path'}")
+                if not reachable:
+                    print("  WARNING: no zero-collision route from spawn to this edge; "
+                          "inspect layout in Porymap")
         warps = data.get("warp_events", [])
         valid = []
         for index, warp in enumerate(warps):
