@@ -30,6 +30,13 @@ class TerrainPlansTests(unittest.TestCase):
                 self.assertEqual(rows, ["".join(row) for row in route(kind)],
                                  f"{name}: committed plan is out of sync")
 
+    def test_lumina_eastern_fern_grove(self):
+        tiles = route("forest")
+        accessible = reachable(tiles, (16, 38))
+        self.assertIn((36, 25), accessible)
+        self.assertIn((23, 25), accessible)
+        self.assertEqual(tiles[25][36], ",")
+
     def test_lumina_moss_sanctuary_has_accessible_detour(self):
         tiles = route("forest")
         accessible = reachable(tiles, (16, 38))
