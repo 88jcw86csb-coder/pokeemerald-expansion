@@ -70,6 +70,15 @@ def route(kind):
             for x in range(12, 40):
                 tiles[y][x] = ":"
     if kind == "passage":
+        # A northern ledge offers a second route around the central crossing.
+        for x in range(9, 43):
+            tiles[11][x] = ":"
+        for y in range(11, 23):
+            tiles[y][9] = ":"
+            tiles[y][42] = ":"
+        # A short ridge branch descends to the Eclipse checkpoint.
+        for y in range(11, 18):
+            tiles[y][37] = ":"
         # Mountain switchbacks and a sheltered central crossing.
         for x in range(7, 42):
             for y in range(17, 29):
