@@ -29,7 +29,7 @@ class TerrainCompilerTests(unittest.TestCase):
         root = Path(__file__).resolve().parents[1]
         village_tiles = {"#": 0x3C01, ".": 0x3001, ",": 0x3002,
                          ":": 0x3003, **dict.fromkeys("PCMHI", 0x3001)}
-        city_tiles = {"#": 0x3C01, "=": 0x3001, ",": 0x3002,
+        city_tiles = {"#": 0x3C01, "=": 0x3001, ",": 0x3002, ":": 0x3003,
                       **dict.fromkeys("GCMHP", 0x3001)}
         for name in ("vila_dos_pomares", "vila_do_pico"):
             with self.subTest(village=name):
