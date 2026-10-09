@@ -29,6 +29,19 @@ def route(kind):
                     tiles[y][x] = ":"
         for x in range(0, WIDTH):
             tiles[22][x] = "."
+        # Branching mountain trails connect the hiker, Eclipse guard and medic.
+        for x in (19, 34):
+            for y in range(22, 35):
+                tiles[y][x] = ":"
+        for x in range(19, 35):
+            tiles[32][x] = ":"
+        for y in range(14, 23):
+            tiles[y][37] = ":"
+        # Northern survey signs and crystal clues.
+        for x in range(15, 42):
+            tiles[18][x] = ":"
+        for y in range(18, 23):
+            tiles[y][15] = ":"
     if kind == "valley":
         # Southern meadow and northern lookout are connected to the main path.
         for y in range(24, 36):
@@ -72,7 +85,7 @@ def main():
         landmarks = (
             [(0, 22), (47, 22), (8, 18), (16, 21), (33, 26)] if kind == "road"
             else [(0, 22), (47, 22), (14, 21), (32, 25), (39, 16), (23, 18), (37, 10)] if kind == "valley"
-            else [(0, 22), (47, 22)]
+            else [(0, 22), (47, 22), (11, 22), (30, 24), (19, 32), (37, 14), (34, 34), (24, 18), (25, 18), (41, 18), (15, 18)]
         )
         for x, y in landmarks:
             assert (x, y) in accessible, f"{name}: landmark ({x},{y}) unreachable"
