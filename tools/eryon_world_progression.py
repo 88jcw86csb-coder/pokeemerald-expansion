@@ -15,6 +15,7 @@ STAGES = [
     ("verdelume", "gym"),
     ("estrada_dos_pomares", "route"),
     ("vila_dos_pomares", "village"),
+    ("rota_04", "route"),
     ("rota_03", "route"),
     ("neonara", "gym"),
     ("colinas_da_neblina", "route"),
