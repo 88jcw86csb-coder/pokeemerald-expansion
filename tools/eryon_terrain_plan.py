@@ -91,6 +91,19 @@ def route(kind):
         for y in range(18, 23):
             tiles[y][15] = ":"
     if kind == "valley":
+        # A sheltered southern loop makes the valley explorable beyond the main road.
+        for x in range(10, 42):
+            tiles[35][x] = ","
+        for y in range(22, 36):
+            tiles[y][10] = ","
+            tiles[y][41] = ","
+        for x in range(10, 42):
+            tiles[22][x] = "."
+        # Two openings into the meadow and the northern lookout.
+        for y in range(22, 36):
+            tiles[y][25] = ","
+        for y in range(10, 23):
+            tiles[y][39] = "."
         # Southern meadow and northern lookout are connected to the main path.
         for y in range(24, 36):
             for x in range(11, 39):
