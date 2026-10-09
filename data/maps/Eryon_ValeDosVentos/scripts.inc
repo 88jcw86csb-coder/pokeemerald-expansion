@@ -73,3 +73,51 @@ EryonVale_Text_CartWheelClue:
 	.string "selo com um eclipse.\p"
 	.string "O comboio passou por aqui,\n"
 	.string "mas seu destino e incerto.$"
+
+@ An Eclipse lookout foreshadows the next chapter without forcing an early climax.
+EryonVale_EventScript_Lookout::
+	lock
+	faceplayer
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonVale_EventScript_LookoutClue
+	msgbox EryonVale_Text_LookoutBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVale_EventScript_LookoutClue::
+	msgbox EryonVale_Text_LookoutClue, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVale_EventScript_WindMarker::
+	lock
+	goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonVale_EventScript_WindMarkerBadge
+	msgbox EryonVale_Text_WindMarkerBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVale_EventScript_WindMarkerBadge::
+	msgbox EryonVale_Text_WindMarkerBadge, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVale_Text_LookoutBefore:
+	.string "VIAJANTE: O vento daqui\n"
+	.string "esconde o som dos passos.\p"
+	.string "Nao siga estranhos sozinho.$"
+
+EryonVale_Text_LookoutClue:
+	.string "VIAJANTE: Homens de azul\n"
+	.string "escuro passaram ao amanhecer.\p"
+	.string "Levavam caixas com um\n"
+	.string "simbolo de eclipse.$"
+
+EryonVale_Text_WindMarkerBefore:
+	.string "Uma placa antiga aponta\n"
+	.string "para o alto do vale.\p"
+	.string "O vento apagou as letras.$"
+
+EryonVale_Text_WindMarkerBadge:
+	.string "A placa marca um antigo\n"
+	.string "posto de observacao.\p"
+	.string "Ha pegadas frescas na\n"
+	.string "direcao das montanhas.$"
