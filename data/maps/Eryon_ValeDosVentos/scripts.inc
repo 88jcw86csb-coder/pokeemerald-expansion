@@ -121,3 +121,27 @@ EryonVale_Text_WindMarkerBadge:
 	.string "posto de observacao.\p"
 	.string "Ha pegadas frescas na\n"
 	.string "direcao das montanhas.$"
+
+@ Optional inspection beside the Umbra approach; no route blocking.
+EryonVale_EventScript_SealedCargo::
+	lock
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonVale_EventScript_SealedCargoClue
+	msgbox EryonVale_Text_SealedCargoBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVale_EventScript_SealedCargoClue::
+	msgbox EryonVale_Text_SealedCargoClue, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVale_Text_SealedCargoBefore:
+	.string "Um lacre de carga esta\n"
+	.string "preso entre as rochas.\p"
+	.string "O simbolo foi raspado.$"
+
+EryonVale_Text_SealedCargoClue:
+	.string "O lacre tem residuos\n"
+	.string "dos cristais da serra!\p"
+	.string "O destino marcado e\n"
+	.string "a cidade de Umbra.$"
