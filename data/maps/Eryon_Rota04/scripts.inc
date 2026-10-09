@@ -10,7 +10,7 @@ EryonRota04_EventScript_OrchardScout::
 	end
 
 EryonRota04_Text_OrchardScout:
-	.string "EXPLORADOR: Os pomares ficam\\n"
-	.string "para oeste, perto da vila.\\p"
-	.string "A leste, a trilha encontra\\n"
+	.string "EXPLORADOR: Os pomares ficam\n"
+	.string "para oeste, perto da vila.\p"
+	.string "A leste, a trilha encontra\n"
 	.string "a antiga Rota 03.$"
