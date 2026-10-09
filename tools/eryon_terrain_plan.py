@@ -159,6 +159,15 @@ def route(kind):
             for x in range(39, 46):
                 if (x - 42) ** 2 + (y - 38) ** 2 <= 10:
                     tiles[y][x] = ":"
+        # Western abandoned quarry: a branching excavation loop.
+        for x in range(5, 20):
+            tiles[34][x] = ":"
+        for y in range(22, 35):
+            tiles[y][7] = ":"
+        for y in range(30, 40):
+            for x in range(3, 13):
+                if (x - 8) ** 2 + (y - 35) ** 2 <= 20:
+                    tiles[y][x] = ":"
         # Northern survey signs and crystal clues.
         for x in range(15, 42):
             tiles[18][x] = ":"
