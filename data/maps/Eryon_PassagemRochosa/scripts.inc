@@ -159,7 +159,16 @@ EryonPassagem_Text_CaravanLedgerClue:
 EryonPassagem_EventScript_Medic::
 	lock
 	faceplayer
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonPassagem_EventScript_MedicClue
 	msgbox EryonPassagem_Text_MedicOffer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonPassagem_EventScript_MedicDecline
+	special HealPlayerParty
+	msgbox EryonPassagem_Text_MedicHealed, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPassagem_EventScript_MedicClue::
+	msgbox EryonPassagem_Text_MedicClueOffer, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EryonPassagem_EventScript_MedicDecline
 	special HealPlayerParty
 	msgbox EryonPassagem_Text_MedicHealed, MSGBOX_DEFAULT
@@ -207,6 +216,12 @@ EryonPassagem_Text_EclipseAfterClue:
 EryonPassagem_Text_MedicOffer:
 	.string "SOCORRISTA: Quer recuperar\n"
 	.string "sua equipe Pokemon?$"
+
+EryonPassagem_Text_MedicClueOffer:
+	.string "SOCORRISTA: Vi carrocas\n"
+	.string "partirem antes do sol nascer.\p"
+	.string "Sua equipe precisa de\n"
+	.string "cuidados antes de seguir?$"
 
 EryonPassagem_Text_MedicHealed:
 	.string "Pronto! Boa sorte na trilha.$"
