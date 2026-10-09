@@ -18,9 +18,9 @@ def route(kind):
         for y in range(center - 3, center + 4):
             tiles[y][x] = "."
     # Keep investigation markers connected to the primary trail.
-    for x in ([23] if kind == "valley" else [8]):
+    if kind in ("valley", "road"):
         for y in range(18, 25):
-            tiles[y][x] = "."
+            tiles[y][23 if kind == "valley" else 8] = "."
     if kind == "passage":
         # Mountain switchbacks and a sheltered central crossing.
         for x in range(7, 42):
@@ -54,7 +54,7 @@ def route(kind):
         # Join the lookout at (37,10) to the investigation marker at (23,18).
         for x in range(23, 38):
             tiles[18][x] = "."
-    else:
+    elif kind == "road":
         # Distinctive stony pull-off around the roadside healer.
         for y in range(23, 31):
             for x in range(28, 39):
