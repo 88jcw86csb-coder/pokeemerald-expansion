@@ -32,6 +32,12 @@ class PomaresRouteTests(unittest.TestCase):
         self.assertEqual((reverse["dest_map"],reverse["dest_warp_id"]),("MAP_ERYON_ROTA04","1"))
         self.assertEqual((forward["x"],forward["y"]),(47,22))
         self.assertEqual((reverse["x"],reverse["y"]),(0,11))
+        scout=route["object_events"][0]
+        self.assertEqual((scout["x"],scout["y"]),(24,21))
+        self.assertNotEqual(rows[scout["y"]][scout["x"]],"#")
+        scripts=(ROOT/"data/maps/Eryon_Rota04/scripts.inc").read_text()
+        self.assertIn(scout["script"]+"::",scripts)
+
 
 
 if __name__=="__main__":
