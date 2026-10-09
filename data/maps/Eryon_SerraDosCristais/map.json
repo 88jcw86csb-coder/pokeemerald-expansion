@@ -134,6 +134,13 @@
       "elevation": 0,
       "dest_map": "MAP_ERYON_PASSAGEM_ROCHOSA",
       "dest_warp_id": "0"
+    },
+    {
+      "x": 0,
+      "y": 24,
+      "elevation": 0,
+      "dest_map": "MAP_ERYON_FROSTHEIM",
+      "dest_warp_id": "1"
     }
   ],
   "region": "REGION_HOENN"
