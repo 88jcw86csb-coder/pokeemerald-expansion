@@ -158,6 +158,15 @@ def route(kind):
             tiles[y][25] = ","
         for y in range(10, 23):
             tiles[y][39] = "."
+        # Southwest windmill ruins: a connected side trail and sheltered clearing.
+        for x in range(4, 12):
+            tiles[30][x] = ","
+        for y in range(22, 31):
+            tiles[y][10] = ","
+        for y in range(27, 36):
+            for x in range(3, 10):
+                if (x - 6) ** 2 + (y - 31) ** 2 <= 12:
+                    tiles[y][x] = ","
         # Southern meadow and northern lookout are connected to the main path.
         for y in range(24, 36):
             for x in range(11, 39):
