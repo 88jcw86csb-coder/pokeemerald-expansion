@@ -81,6 +81,21 @@ class PomaresRouteTests(unittest.TestCase):
         self.assertNotEqual(village_rows[elder["y"]][elder["x"]],"#")
         village_scripts=(ROOT/"data/maps/Eryon_VilaDaNeblina/scripts.inc").read_text(encoding="utf-8")
         self.assertIn(elder["script"]+"::",village_scripts)
+        glacial=json.loads((ROOT/"data/maps/Eryon_TrilhaGlacial/map.json").read_text())
+        village_exit=village2["warp_events"][1]
+        glacial_entry=glacial["warp_events"][0]
+        self.assertEqual((village_exit["dest_map"],village_exit["dest_warp_id"]),("MAP_ERYON_TRILHA_GLACIAL","0"))
+        self.assertEqual((glacial_entry["dest_map"],glacial_entry["dest_warp_id"]),("MAP_ERYON_VILA_DA_NEBLINA","1"))
+        glacial_plan=ROOT/"docs/eryon/trilha_glacial_terrain_plan.txt"
+        self.assertEqual(len(compile_plan(glacial_plan,TILES,48,44)),4224)
+        glacial_rows=glacial_plan.read_text(encoding="utf-8").splitlines()[4:]
+        self.assertNotEqual(glacial_rows[22][0],"#")
+        guide=glacial["object_events"][0]
+        self.assertNotEqual(glacial_rows[guide["y"]][guide["x"]],"#")
+        guide_script=(ROOT/"data/maps/Eryon_TrilhaGlacial/scripts.inc").read_text()
+        self.assertIn(guide["script"]+"::",guide_script)
+        self.assertIn("eclipse",guide_script.lower())
+
 
 
 
