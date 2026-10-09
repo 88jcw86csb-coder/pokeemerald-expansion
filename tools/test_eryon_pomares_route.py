@@ -25,6 +25,13 @@ class PomaresRouteTests(unittest.TestCase):
         self.assertEqual((back["dest_map"],back["dest_warp_id"]),("MAP_ERYON_VILA_DOS_POMARES","1"))
         self.assertEqual((out["x"],out["y"]),(35,14))
         self.assertEqual((back["x"],back["y"]),(0,22))
+        route03=json.loads((ROOT/"data/maps/Eryon_Rota03/map.json").read_text())
+        forward=route["warp_events"][1]
+        reverse=route03["warp_events"][2]
+        self.assertEqual((forward["dest_map"],forward["dest_warp_id"]),("MAP_ERYON_ROTA03","2"))
+        self.assertEqual((reverse["dest_map"],reverse["dest_warp_id"]),("MAP_ERYON_ROTA04","1"))
+        self.assertEqual((forward["x"],forward["y"]),(47,22))
+        self.assertEqual((reverse["x"],reverse["y"]),(0,11))
 
 
 if __name__=="__main__":
