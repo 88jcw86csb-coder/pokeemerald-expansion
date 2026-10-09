@@ -3,7 +3,10 @@ on:
   push:
     branches: [eryon-development]
     paths:
-      - 'tools/eryon_terrain_plan.py'
+      - 'tools/eryon_*.py'
+      - 'tools/test_eryon_*.py'
+      - 'docs/eryon/**/*.txt'
+      - 'docs/eryon/*.md'
       - 'tools/build_eryon_map_bins.py'
       - 'tools/test_eryon_terrain_plan.py'
       - 'tools/test_eryon_map_bins.py'
@@ -24,7 +27,7 @@ jobs:
           python-version: '3.11'
       - name: Test map connectivity and encoding
         run: python3 -m unittest discover -s tools -p 'test_eryon_*py'
-      - name: Generate five Eryon map binaries
+      - name: Generate five registered Eryon map binaries
         run: |
           python3 tools/build_eryon_map_bins.py --wall 0x3c01 --path 0x3001 --meadow 0x3002 --stone 0x3003
       - name: Verify dimensions and layout references
