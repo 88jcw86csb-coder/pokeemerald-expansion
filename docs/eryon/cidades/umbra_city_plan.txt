@@ -1,6 +1,6 @@
 Umbra | Gym 5 (Dark/Poison) | Eryon concept 64x56
 # block; = avenue; , park; G gym; C Pokemon Center; M mart; H housing; P civic plaza
-Design only: not a registered map.bin. Gym, interiors, scripts and warps not implemented.
+Registered provisional 64x56 city: Wind Valley warp and two story NPCs installed; Gym interior, battles and collision tests pending.
 
 #############===###############===##############===#############
 #############===###############===##############===#############
