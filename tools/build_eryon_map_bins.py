@@ -18,7 +18,9 @@ WIDTH, HEIGHT = 48, 44
 
 def compile_plan(path, tile_ids):
     lines = path.read_text(encoding="utf-8").splitlines()
-    rows = lines[4:]\n    if any(len(line) != WIDTH or not set(line) <= set("#.,:") for line in rows):\n        raise ValueError(f"{path}: invalid terrain symbol or row width")
+    rows = lines[4:]
+    if any(len(line) != WIDTH or not set(line) <= set("#.,:") for line in rows):
+        raise ValueError(f"{path}: invalid terrain symbol or row width")
     if len(rows) != HEIGHT:
         raise ValueError(f"{path}: expected {HEIGHT} rows of {WIDTH} symbols; got {len(rows)}")
     values = [tile_ids[symbol] for row in rows for symbol in row]
