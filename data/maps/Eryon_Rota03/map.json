@@ -139,6 +139,13 @@
       "elevation": 0,
       "dest_map": "MAP_ERYON_SERRA_DOS_CRISTAIS",
       "dest_warp_id": "0"
+    },
+    {
+      "x": 0,
+      "y": 11,
+      "elevation": 0,
+      "dest_map": "MAP_ERYON_ROTA04",
+      "dest_warp_id": "1"
     }
   ],
   "region": "REGION_HOENN"
