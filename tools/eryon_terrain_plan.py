@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 """Generate distinct Eryon route terrain plans for map artists.
 
-Produces ASCII tile plans and verifies that a connected walking corridor
-joins the west and east borders. This is NOT a GBA map.bin generator:
-collision/metatile properties must be authored and tested in Porymap.
+Produces ASCII tile plans and verifies registered map events are reachable.
+Lumina Forest has north/south exits; mountain, rocky passage and eastern
+road have west/east exits; Wind Valley has a west entrance and closed
+eastern boundary. This script writes plans, not GBA map.bin files.
+The separate map.bin converter uses provisional metatiles that still
+require collision and visual validation in Porymap.
 """
 from collections import deque
 import json
