@@ -15,6 +15,13 @@ class TerrainPlansTests(unittest.TestCase):
         for x, y in ((15, 14), (23, 18), (20, 25), (13, 16), (19, 21)):
             self.assertIn((x, y), reachable(tiles, (16, 38)))
 
+    def test_passage_northern_ridge_connects_to_eclipse_checkpoint(self):
+        tiles = route("passage")
+        accessible = reachable(tiles)
+        for position in ((9, 11), (37, 11), (42, 11), (37, 14), (37, 18)):
+            self.assertIn(position, accessible)
+        self.assertEqual(tiles[11][24], ":")
+
     def test_all_registered_events_reachable(self):
         kinds = {
             "bosque_de_lumina": "forest",
