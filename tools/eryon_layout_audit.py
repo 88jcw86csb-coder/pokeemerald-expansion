@@ -48,6 +48,21 @@ def connected_by_collision_bits(raw, width, height, start, goal):
     return False
 
 
+def zero_collision_edge_positions(raw, width, height, direction):
+    """Return candidate edge tiles; behavior/elevation still need emulator tests."""
+    if direction == "up":
+        edge = [(x, 0) for x in range(width)]
+    elif direction == "down":
+        edge = [(x, height - 1) for x in range(width)]
+    elif direction == "left":
+        edge = [(0, y) for y in range(height)]
+    elif direction == "right":
+        edge = [(width - 1, y) for y in range(height)]
+    else:
+        raise ValueError(f"invalid edge direction: {direction}")
+    return [pos for pos in edge if decode_block(raw, width, *pos)[1] == 0]
+
+
 def inspect():
     groups = read_json("data/maps/map_groups.json")
     layouts = {x["id"]: x for x in read_json("data/layouts/layouts.json")["layouts"]}
@@ -70,18 +85,14 @@ def inspect():
         # Collision bits are only a preliminary diagnostic, not proof of passage.
         for index, connection in enumerate(data.get("connections") or []):
             direction = connection.get("direction")
-            if direction in ("up", "down"):
-                y = 0 if direction == "up" else height - 1
-                edge = [(x, y) for x in range(width)]
-            elif direction in ("left", "right"):
-                x = 0 if direction == "left" else width - 1
-                edge = [(x, y) for y in range(height)]
-            else:
+            try:
+                clear = zero_collision_edge_positions(raw, width, height, direction)
+            except ValueError:
                 failures.append(f"{name}: connection {index} invalid direction {direction}")
                 continue
-            clear = [pos for pos in edge if decode_block(raw, width, *pos)[1] == 0]
+            edge_length = width if direction in ("up", "down") else height
             print(f"  edge connection {index} {direction} -> {connection['map']}: "
-                  f"{len(clear)}/{len(edge)} zero-collision boundary blocks")
+                  f"{len(clear)}/{edge_length} zero-collision boundary blocks")
             if not clear:
                 print(f"  WARNING: connection {index} has no zero-collision edge tile; "
                       "inspect border geometry in Porymap")
