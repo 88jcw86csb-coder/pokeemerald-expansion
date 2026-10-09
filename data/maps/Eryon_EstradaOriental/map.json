@@ -66,6 +66,13 @@
       "elevation": 0,
       "dest_map": "MAP_ERYON_VALE_DOS_VENTOS",
       "dest_warp_id": "0"
+    },
+    {
+      "x": 47,
+      "y": 23,
+      "elevation": 0,
+      "dest_map": "MAP_ERYON_POSTO_ORIENTAL",
+      "dest_warp_id": "0"
     }
   ],
   "region": "REGION_HOENN"
