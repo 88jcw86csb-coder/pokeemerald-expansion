@@ -46,6 +46,16 @@ jobs:
           assert league.is_file(), league
           assert league.stat().st_size == 64 * 56 * 2, league
           print("LigaEryon: 7168-byte preview encoding OK")
+          from tools.eryon_villages import VILLAGES
+          from tools.eryon_gym_cities import CITIES
+          for name in VILLAGES:
+              path = Path("build/eryon-previews/villages") / name / "map.bin"
+              assert path.is_file() and path.stat().st_size == 36 * 30 * 2, path
+              print(f"{name}: village preview OK")
+          for name in CITIES:
+              path = Path("build/eryon-previews/cities") / name / "map.bin"
+              assert path.is_file() and path.stat().st_size == 64 * 56 * 2, path
+              print(f"{name}: gym-city preview OK")
           PY
       - name: Verify dimensions and layout references
         run: |
