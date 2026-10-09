@@ -2,20 +2,22 @@
 # Provisional metatile IDs; inspect tileset visuals and collision in Porymap.
 ERYON_MAP_BINS := $(addprefix data/layouts/Eryon_,$(addsuffix /map.bin,BosqueDeLumina SerraDosCristais PassagemRochosa EstradaOriental ValeDosVentos EstradaDosPomares))
 ERYON_TERRAIN_PLANS := $(addprefix docs/eryon/,$(addsuffix _terrain_plan.txt,bosque_de_lumina serra_dos_cristais passagem_rochosa estrada_oriental vale_dos_ventos estrada_dos_pomares))
+ERYON_VILLAGE_BIN := data/layouts/Eryon_VilaDosPomares/map.bin
+ERYON_VILLAGE_PLAN := docs/eryon/vilas/vila_dos_pomares_village_plan.txt
 ERYON_MAP_STAMP := data/layouts/.eryon_maps_generated
 
-$(ERYON_MAP_STAMP): tools/build_eryon_map_bins.py $(ERYON_TERRAIN_PLANS)
+$(ERYON_MAP_STAMP): tools/build_eryon_map_bins.py $(ERYON_TERRAIN_PLANS) $(ERYON_VILLAGE_PLAN)
 	python3 tools/build_eryon_map_bins.py --wall 0x3c01 --path 0x3001 --meadow 0x3002 --stone 0x3003
 	@touch $@
 
-$(ERYON_MAP_BINS): $(ERYON_MAP_STAMP)
+$(ERYON_MAP_BINS) $(ERYON_VILLAGE_BIN): $(ERYON_MAP_STAMP)
 	@test -s $@ || { echo "Missing Eryon map: $@; run make eryon-maps after removing the stamp"; exit 1; }
-	@test "$(wc -c < "$@")" -eq 4224 || { echo "Wrong map size: $@"; exit 1; }
+	@test "$(wc -c < "$@")" -eq $(case "$@" in *VilaDosPomares*) echo 2160;; *) echo 4224;; esac) || { echo "Wrong map size: $@"; exit 1; }
 
-$(DATA_ASM_BUILDDIR)/maps.o: $(ERYON_MAP_BINS)
+$(DATA_ASM_BUILDDIR)/maps.o: $(ERYON_MAP_BINS) $(ERYON_VILLAGE_BIN)
 
 .PHONY: eryon-maps
-eryon-maps: $(ERYON_MAP_BINS)
+eryon-maps: $(ERYON_MAP_BINS) $(ERYON_VILLAGE_BIN)
 
 # Map JSON data
 
