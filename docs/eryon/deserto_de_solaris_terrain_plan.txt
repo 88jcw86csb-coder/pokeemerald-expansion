@@ -1,6 +1,6 @@
 deserto_de_solaris — terrain concept (48x44)
 # = barrier; . = main trail; , = meadow; : = stone
-Design only: not a registered GBA map; requires tilesets, events, warps and ROM tests.
+Registered provisional map: trail and Ignivar warps, Eclipse relay inspection and desert NPCs installed; real tileset art, encounters and full ROM tests pending.
 
 ################################################
 ################################################
