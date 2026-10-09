@@ -66,9 +66,9 @@ EryonSerra_Text_Explorer:
 	.string "entre as pedras da serra.$"
 
 EryonSerra_Text_ExplorerAfterClue:
-	.string "EXPLORADORA: As pegadas do\\n"
-	.string "acampamento seguem para leste.\\p"
-	.string "A passagem rochosa pode\\n"
+	.string "EXPLORADORA: As pegadas do\n"
+	.string "acampamento seguem para leste.\p"
+	.string "A passagem rochosa pode\n"
 	.string "esconder mais pistas.$"
 
 EryonSerra_Text_CrystalOutcrop:
