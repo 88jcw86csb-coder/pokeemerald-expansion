@@ -52,3 +52,54 @@ EryonUmbra_Text_GymGuideClue:
 	.string "anda pela cidade.\p"
 	.string "Nosso lider investiga\n"
 	.string "o movimento de cargas.$"
+
+@ The Eclipse courier hints at a larger network without forcing a premature boss fight.
+EryonUmbra_EventScript_EclipseCourier::
+	lock
+	faceplayer
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonUmbra_EventScript_EclipseCourierExposed
+	msgbox EryonUmbra_Text_EclipseCourierBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonUmbra_EventScript_EclipseCourierExposed::
+	msgbox EryonUmbra_Text_EclipseCourierExposed, MSGBOX_DEFAULT
+	release
+	end
+
+EryonUmbra_EventScript_IndustrialManifest::
+	lock
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonUmbra_EventScript_IndustrialManifestClue
+	msgbox EryonUmbra_Text_IndustrialManifestBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonUmbra_EventScript_IndustrialManifestClue::
+	msgbox EryonUmbra_Text_IndustrialManifestClue, MSGBOX_DEFAULT
+	release
+	end
+
+EryonUmbra_Text_EclipseCourierBefore:
+	.string "ENTREGADOR: Nao toque\n"
+	.string "nas caixas da fabrica.\p"
+	.string "O destino e assunto\n"
+	.string "exclusivo da empresa.$"
+
+EryonUmbra_Text_EclipseCourierExposed:
+	.string "ECLIPSE: Reconheceu\n"
+	.string "nosso simbolo?\p"
+	.string "O gelo e os cristais\n"
+	.string "sao so o comeco.\p"
+	.string "Nao interfira em Umbra.$"
+
+EryonUmbra_Text_IndustrialManifestBefore:
+	.string "Uma lista de remessas\n"
+	.string "esta presa no portao.\p"
+	.string "Os codigos estao\n"
+	.string "parcialmente apagados.$"
+
+EryonUmbra_Text_IndustrialManifestClue:
+	.string "O manifesto cita gelo\n"
+	.string "e cristais da serra!\p"
+	.string "Destino seguinte: a\n"
+	.string "regiao das cachoeiras.$"
