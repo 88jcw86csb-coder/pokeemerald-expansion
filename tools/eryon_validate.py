@@ -6,7 +6,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-NAMES = ["Eryon_VilaAurora", "Eryon_Rota01", "Eryon_BosqueDeLumina", "Eryon_Rota02", "Eryon_Verdelume", "Eryon_Rota03", "Eryon_SerraDosCristais", "Eryon_PassagemRochosa"]
+NAMES = ["Eryon_VilaAurora", "Eryon_Rota01", "Eryon_BosqueDeLumina", "Eryon_Rota02", "Eryon_Verdelume", "Eryon_Rota03", "Eryon_SerraDosCristais", "Eryon_PassagemRochosa", "Eryon_EstradaOriental", "Eryon_ValeDosVentos"]
 
 
 def load(path):
