@@ -1,18 +1,24 @@
-# Eryon terrain implementation status
+# Eryon — estado dos mapas (outubro de 2026)
 
-The route sketches produced by `python3 tools/eryon_terrain_plan.py` are **design-only**. They are not `map.bin` files and do not change the terrain shown in-game.
+## O que já existe
 
-## Current work
+- Cinco plantas de terreno 48 × 44 em `docs/eryon/*_terrain_plan.txt`, geradas por `tools/eryon_terrain_plan.py`.
+- Cinco layouts registrados em `data/layouts/layouts.json`, com caminhos próprios para `map.bin`.
+- Conversor `tools/build_eryon_map_bins.py` que transforma símbolos ASCII em palavras de metatile e gera os cinco arquivos binários.
+- Testes de conectividade e de sincronização entre o gerador e as plantas versionadas.
 
-- Estrada Oriental: west/east exits at (0,22) and (47,22); surveyor (16,21), medic (33,26), clue marker (8,18).
-- Vale dos Ventos: west exit at (0,22); ranger (14,21), researcher (32,25), lookout (39,16), markers (23,18) and (37,10).
-- The generator checks that each point is connected to the west entrance in its **abstract** walkability plan.
+## Limitações críticas
 
-## Required for playable terrain
+Os valores de metatile utilizados na geração são **provisórios**. A existência de um `map.bin` não comprova que o terreno tenha aparência adequada, colisões corretas ou que os mapas estejam jogáveis. As áreas chamadas de lago, ruínas, posto ou caverna são, por enquanto, **formas de terreno planejadas**; não incluem necessariamente gráficos, água, edifícios ou eventos próprios.
 
-1. Choose actual metatile IDs from the configured primary and secondary tilesets in Porymap.
-2. Author distinct 48×44 `map.bin` layouts for each route; update `data/layouts/layouts.json` to reference them.
-3. Confirm elevation, impassable metatiles, wild grass and warp arrival tiles in the engine.
-4. Configure wild encounters for the new map IDs and compile/test on a GBA emulator.
+O Bosque de Lumina usa entrada/saída norte-sul. Serra dos Cristais, Passagem Rochosa e Estrada Oriental usam conexões oeste-leste. O Vale dos Ventos tem entrada oeste e **borda leste fechada**, pois não há warp cadastrado ali.
 
-Do not mark these tasks complete based solely on the ASCII plans.
+## Próximas verificações obrigatórias
+
+1. Executar `python3 -m unittest discover -s tools -p 'test_eryon_*py'`.
+2. Regenerar os planos com `python3 tools/eryon_terrain_plan.py` e verificar se não há diferenças inesperadas.
+3. Gerar os binários com `python3 tools/build_eryon_map_bins.py --wall 0x3c01 --path 0x3001 --meadow 0x3002 --stone 0x3003`.
+4. Inspecionar os metatiles reais no Porymap, confirmar colisões e elevação 3, depois compilar e testar a ROM no emulador.
+5. Implementar gráficos, eventos e encontros selvagens para as novas áreas.
+
+**Não declarar a ROM pronta sem compilação e teste de jogo.**
