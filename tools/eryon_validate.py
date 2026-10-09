@@ -157,6 +157,26 @@ def main():
             reverse = target_warps[target_index]
             if reverse["dest_map"] != map_data["id"] or int(reverse["dest_warp_id"]) != index:
                 errors.append(f"{name}: warp {index} does not have a reciprocal destination")
+    # Edge connections are not warps: validate their reciprocal direction
+    # and offset independently so a typo cannot silently break the route.
+    opposite = {"up": "down", "down": "up", "left": "right", "right": "left"}
+    for name, map_data in maps.items():
+        for index, connection in enumerate(map_data.get("connections") or []):
+            direction = connection.get("direction")
+            target_name = ids.get(connection.get("map"))
+            if direction not in opposite:
+                errors.append(f"{name}: connection {index} has invalid direction {direction}")
+                continue
+            if target_name is None:
+                errors.append(f"{name}: connection {index} targets unknown Eryon map {connection.get('map')}")
+                continue
+            target_connections = maps[target_name].get("connections") or []
+            reciprocal = [other for other in target_connections
+                          if other.get("map") == map_data["id"]
+                          and other.get("direction") == opposite[direction]
+                          and other.get("offset") == connection.get("offset")]
+            if len(reciprocal) != 1:
+                errors.append(f"{name}: connection {index} to {target_name} lacks a unique reciprocal edge")
     if set(groups.get("gMapGroup_Eryon", [])) != set(NAMES):
         errors.append("Eryon map group does not match opening map files")
     wild = load("src/data/wild_encounters.json")
