@@ -124,6 +124,13 @@ def main():
     refuge_dest.write_bytes(refuge_payload)
     generated["LAYOUT_ERYON_REFUGIO_CRISTAL"] = refuge_dest.relative_to(ROOT).as_posix()
     print(f"{refuge_dest.relative_to(ROOT)}: {len(refuge_payload)} bytes")
+    outpost_src = ROOT / "docs/eryon/vilas/posto_oriental_village_plan.txt"
+    outpost_dest = ROOT / "data/layouts/Eryon_PostoOriental/map.bin"
+    outpost_payload = compile_plan(outpost_src, village_tiles, width=36, height=30)
+    outpost_dest.parent.mkdir(parents=True, exist_ok=True)
+    outpost_dest.write_bytes(outpost_payload)
+    generated["LAYOUT_ERYON_POSTO_ORIENTAL"] = outpost_dest.relative_to(ROOT).as_posix()
+    print(f"{outpost_dest.relative_to(ROOT)}: {len(outpost_payload)} bytes")
     # Neonara is the first registered gym city after Verdelume.
     neonara_tiles = {**tiles, "=": tiles["."],
                      **{mark: tiles["."] for mark in "GCMHP"}}
@@ -148,7 +155,7 @@ def main():
         from eryon_gym_cities import CITIES
         village_tiles = {**tiles, **{mark: tiles["."] for mark in "PC MHI".replace(" ", "")}}
         for key in VILLAGES:
-            if key in ("vila_dos_pomares", "vila_da_neblina", "refugio_cristal"):
+            if key in ("vila_dos_pomares", "vila_da_neblina", "refugio_cristal", "posto_oriental"):
                 continue
             src = ROOT / "docs/eryon/vilas" / f"{key}_village_plan.txt"
             dest = ROOT / "build/eryon-previews/villages" / key / "map.bin"
