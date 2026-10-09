@@ -77,6 +77,11 @@ class PomaresRouteTests(unittest.TestCase):
         self.assertEqual(len(compile_plan(village_plan,village_tiles,36,30)),2160)
         village_rows=village_plan.read_text(encoding="utf-8").splitlines()[4:]
         self.assertNotEqual(village_rows[14][0],"#")
+        elder=village2["object_events"][0]
+        self.assertNotEqual(village_rows[elder["y"]][elder["x"]],"#")
+        village_scripts=(ROOT/"data/maps/Eryon_VilaDaNeblina/scripts.inc").read_text(encoding="utf-8")
+        self.assertIn(elder["script"]+"::",village_scripts)
+
 
 
 
