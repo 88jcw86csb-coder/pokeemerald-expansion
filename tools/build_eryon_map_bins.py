@@ -99,6 +99,16 @@ def main():
         dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_bytes(payload)
         print(f"PREVIEW ONLY {dest.relative_to(ROOT)}: {len(payload)} bytes")
+    # First village is now engine-registered, not just a preview.
+    from eryon_villages import VILLAGES
+    village_tiles = {**tiles, **{mark: tiles["."] for mark in "PCMHI"}}
+    village_src = ROOT / "docs/eryon/vilas/vila_dos_pomares_village_plan.txt"
+    village_dest = ROOT / "data/layouts/Eryon_VilaDosPomares/map.bin"
+    village_payload = compile_plan(village_src, village_tiles, width=36, height=30)
+    village_dest.parent.mkdir(parents=True, exist_ok=True)
+    village_dest.write_bytes(village_payload)
+    generated["LAYOUT_ERYON_VILA_DOS_POMARES"] = village_dest.relative_to(ROOT).as_posix()
+    print(f"{village_dest.relative_to(ROOT)}: {len(village_payload)} bytes")
     if args.preview_unregistered:
         # Village/city landmark symbols are only floor placeholders.
         # These previews are not functional buildings or gym interiors.
@@ -106,6 +116,8 @@ def main():
         from eryon_gym_cities import CITIES
         village_tiles = {**tiles, **{mark: tiles["."] for mark in "PC MHI".replace(" ", "")}}
         for key in VILLAGES:
+            if key == "vila_dos_pomares":
+                continue
             src = ROOT / "docs/eryon/vilas" / f"{key}_village_plan.txt"
             dest = ROOT / "build/eryon-previews/villages" / key / "map.bin"
             payload = compile_plan(src, village_tiles, width=36, height=30)
