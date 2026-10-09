@@ -17,6 +17,14 @@ class TerrainCompilerTests(unittest.TestCase):
             self.assertEqual(len(payload), WIDTH * HEIGHT * 2)
             self.assertEqual(struct.unpack_from("<4H", payload), (0x3C01, 0x3002, 0x3003, 0x3001))
 
+    def test_league_hub_preview_dimensions(self):
+        source = Path(__file__).resolve().parents[1] / "docs/eryon/liga_eryon_terrain_plan.txt"
+        tiles = {"#": 0x3C01, ".": 0x3001, ":": 0x3003,
+                 "P": 0x3001, "C": 0x3001, "M": 0x3001,
+                 "L": 0x3001, "H": 0x3001}
+        payload = compile_plan(source, tiles, width=64, height=56)
+        self.assertEqual(len(payload), 64 * 56 * 2)
+
     def test_rejects_incomplete_plan(self):
         with tempfile.TemporaryDirectory() as folder:
             source = Path(folder) / "bad.txt"
