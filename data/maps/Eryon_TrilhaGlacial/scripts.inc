@@ -20,6 +20,7 @@ EryonTrilhaGlacial_Text_Hiker:
 EryonTrilhaGlacial_EventScript_EclipseResearcher::
 	lock
 	faceplayer
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonTrilhaGlacial_EventScript_EclipseResearcherExposed
 	msgbox EryonTrilhaGlacial_Text_EclipseResearcher, MSGBOX_DEFAULT
 	release
 	end
@@ -31,3 +32,15 @@ EryonTrilhaGlacial_Text_EclipseResearcher:
 	.string "desvendar esse segredo.\p"
 	.string "Voce nao deveria estar\n"
 	.string "investigando esta area.$"
+
+@ The same NPC reacts to the clue obtained from the abandoned Crystal Ridge camp.
+EryonTrilhaGlacial_EventScript_EclipseResearcherExposed::
+	msgbox EryonTrilhaGlacial_Text_EclipseResearcherExposed, MSGBOX_DEFAULT
+	release
+	end
+
+EryonTrilhaGlacial_Text_EclipseResearcherExposed:
+	.string "PESQUISADOR: Voce viu\n"
+	.string "nossas caixas na serra?\p"
+	.string "Nao conte a Frostheim\n"
+	.string "sobre os cristais!$"
