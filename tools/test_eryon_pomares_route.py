@@ -206,6 +206,26 @@ class PomaresRouteTests(unittest.TestCase):
             self.assertNotEqual(valley_rows[npc["y"]][npc["x"]],"#")
             self.assertIn(npc["script"]+"::",(ROOT/"data/maps/Eryon_ValeDosVentos/scripts.inc").read_text())
         self.assertIn("EryonVale_EventScript_CaravanWitnessClue::",(ROOT/"data/maps/Eryon_ValeDosVentos/scripts.inc").read_text())
+        waterfall=json.loads((ROOT/"data/maps/Eryon_RotaDasCachoeiras/map.json").read_text())
+        umbra_exit=umbra["warp_events"][1]
+        waterfall_return=waterfall["warp_events"][0]
+        self.assertEqual((umbra_exit["dest_map"],umbra_exit["dest_warp_id"]),(waterfall["id"],"0"))
+        self.assertEqual((waterfall_return["dest_map"],waterfall_return["dest_warp_id"]),(umbra["id"],"1"))
+        waterfall_plan=ROOT/"docs/eryon/rota_das_cachoeiras_terrain_plan.txt"
+        waterfall_rows=waterfall_plan.read_text().splitlines()[4:]
+        self.assertEqual(len(compile_plan(waterfall_plan,TILES,48,44)),4224)
+        self.assertNotEqual(waterfall_rows[22][0],"#")
+        self.assertNotEqual(waterfall_rows[22][47],"#")
+        self.assertNotEqual(umbra_rows[28][63],"#")
+        waterfall_scripts=(ROOT/"data/maps/Eryon_RotaDasCachoeiras/scripts.inc").read_text()
+        for npc in waterfall["object_events"]:
+            self.assertNotEqual(waterfall_rows[npc["y"]][npc["x"]],"#")
+            self.assertIn(npc["script"]+"::",waterfall_scripts)
+        for sign in waterfall["bg_events"]:
+            self.assertNotEqual(waterfall_rows[sign["y"]][sign["x"]],"#")
+            self.assertIn(sign["script"]+"::",waterfall_scripts)
+        self.assertIn("EryonCachoeiras_EventScript_EclipseScoutExposed::",waterfall_scripts)
+
 
 
 
