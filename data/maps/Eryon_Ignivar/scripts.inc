@@ -75,7 +75,7 @@ EryonIgnivar_Text_EngineerClue:
 	.string "ENGENHEIRA: Descobriu\n"
 	.string "a antena de Solaris?\p"
 	.string "Ela injeta energia na\n"
-	.string "rede sem autorizacao!$"
+	.string "rede sem permissao!$"
 
 EryonIgnivar_Text_GymStewardBefore:
 	.string "GUIA: O GINASIO de\n"
@@ -87,7 +87,7 @@ EryonIgnivar_Text_GymStewardClue:
 	.string "GUIA: O lider investiga\n"
 	.string "as falhas da usina.\p"
 	.string "A ECLIPSE pode estar\n"
-	.string "por tras dos apagoes.$"
+	.string "por tras de tudo isso.$"
 
 EryonIgnivar_Text_EclipseTechnicianBefore:
 	.string "TECNICO: Nao ha nada\n"
@@ -99,7 +99,7 @@ EryonIgnivar_Text_EclipseTechnicianClue:
 	.string "ECLIPSE: O deserto\n"
 	.string "so alimenta a maquina!\p"
 	.string "O sinal vai seguir\n"
-	.string "para a floresta.$"
+	.string "para a FLORESTA DOS ECOS.$"
 
 EryonIgnivar_Text_PowerGridNoticeBefore:
 	.string "REDE DE IGNIVAR:\n"
