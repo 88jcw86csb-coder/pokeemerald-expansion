@@ -8,6 +8,8 @@ ERYON_NEBLINA_BIN := data/layouts/Eryon_VilaDaNeblina/map.bin
 ERYON_NEBLINA_PLAN := docs/eryon/vilas/vila_da_neblina_village_plan.txt
 ERYON_CITY_BIN := data/layouts/Eryon_Neonara/map.bin
 ERYON_CITY_PLAN := docs/eryon/cidades/neonara_city_plan.txt
+ERYON_WATERS_BIN := data/layouts/Eryon_VilaDasAguas/map.bin
+ERYON_WATERS_PLAN := docs/eryon/vilas/vila_das_aguas_village_plan.txt
 ERYON_UMBRA_BIN := data/layouts/Eryon_Umbra/map.bin
 ERYON_UMBRA_PLAN := docs/eryon/cidades/umbra_city_plan.txt
 ERYON_OUTPOST_BIN := data/layouts/Eryon_PostoOriental/map.bin
@@ -18,18 +20,18 @@ ERYON_FROSTHEIM_BIN := data/layouts/Eryon_Frostheim/map.bin
 ERYON_FROSTHEIM_PLAN := docs/eryon/cidades/frostheim_city_plan.txt
 ERYON_MAP_STAMP := data/layouts/.eryon_maps_generated
 
-$(ERYON_MAP_STAMP): tools/build_eryon_map_bins.py $(ERYON_TERRAIN_PLANS) $(ERYON_VILLAGE_PLAN) $(ERYON_NEBLINA_PLAN) $(ERYON_CITY_PLAN) $(ERYON_FROSTHEIM_PLAN) $(ERYON_REFUGE_PLAN) $(ERYON_OUTPOST_PLAN) $(ERYON_UMBRA_PLAN)
+$(ERYON_MAP_STAMP): tools/build_eryon_map_bins.py $(ERYON_TERRAIN_PLANS) $(ERYON_VILLAGE_PLAN) $(ERYON_NEBLINA_PLAN) $(ERYON_CITY_PLAN) $(ERYON_FROSTHEIM_PLAN) $(ERYON_REFUGE_PLAN) $(ERYON_OUTPOST_PLAN) $(ERYON_UMBRA_PLAN) $(ERYON_WATERS_PLAN)
 	python3 tools/build_eryon_map_bins.py --wall 0x3c01 --path 0x3001 --meadow 0x3002 --stone 0x3003
 	@touch $@
 
-$(ERYON_MAP_BINS) $(ERYON_VILLAGE_BIN) $(ERYON_NEBLINA_BIN) $(ERYON_CITY_BIN) $(ERYON_FROSTHEIM_BIN) $(ERYON_REFUGE_BIN) $(ERYON_OUTPOST_BIN) $(ERYON_UMBRA_BIN): $(ERYON_MAP_STAMP)
+$(ERYON_MAP_BINS) $(ERYON_VILLAGE_BIN) $(ERYON_NEBLINA_BIN) $(ERYON_CITY_BIN) $(ERYON_FROSTHEIM_BIN) $(ERYON_REFUGE_BIN) $(ERYON_OUTPOST_BIN) $(ERYON_UMBRA_BIN) $(ERYON_WATERS_BIN): $(ERYON_MAP_STAMP)
 	@test -s $@ || { echo "Missing Eryon map: $@; run make eryon-maps after removing the stamp"; exit 1; }
-	@actual=$$(wc -c < "$@"); expected=4224; case "$@" in *VilaDosPomares*|*VilaDaNeblina*|*RefugioCristal*|*PostoOriental*) expected=2160;; *Neonara*|*Frostheim*|*Umbra*) expected=7168;; esac; test "$$actual" -eq "$$expected" || { echo "Wrong map size: $@ ($$actual bytes, expected $$expected)"; exit 1; }
+	@actual=$$(wc -c < "$@"); expected=4224; case "$@" in *VilaDosPomares*|*VilaDaNeblina*|*RefugioCristal*|*PostoOriental*|*VilaDasAguas*) expected=2160;; *Neonara*|*Frostheim*|*Umbra*) expected=7168;; esac; test "$$actual" -eq "$$expected" || { echo "Wrong map size: $@ ($$actual bytes, expected $$expected)"; exit 1; }
 
-$(DATA_ASM_BUILDDIR)/maps.o: $(ERYON_MAP_BINS) $(ERYON_VILLAGE_BIN) $(ERYON_NEBLINA_BIN) $(ERYON_CITY_BIN) $(ERYON_FROSTHEIM_BIN) $(ERYON_REFUGE_BIN) $(ERYON_OUTPOST_BIN) $(ERYON_UMBRA_BIN)
+$(DATA_ASM_BUILDDIR)/maps.o: $(ERYON_MAP_BINS) $(ERYON_VILLAGE_BIN) $(ERYON_NEBLINA_BIN) $(ERYON_CITY_BIN) $(ERYON_FROSTHEIM_BIN) $(ERYON_REFUGE_BIN) $(ERYON_OUTPOST_BIN) $(ERYON_UMBRA_BIN) $(ERYON_WATERS_BIN)
 
 .PHONY: eryon-maps
-eryon-maps: $(ERYON_MAP_BINS) $(ERYON_VILLAGE_BIN) $(ERYON_NEBLINA_BIN) $(ERYON_CITY_BIN) $(ERYON_FROSTHEIM_BIN) $(ERYON_REFUGE_BIN) $(ERYON_OUTPOST_BIN) $(ERYON_UMBRA_BIN)
+eryon-maps: $(ERYON_MAP_BINS) $(ERYON_VILLAGE_BIN) $(ERYON_NEBLINA_BIN) $(ERYON_CITY_BIN) $(ERYON_FROSTHEIM_BIN) $(ERYON_REFUGE_BIN) $(ERYON_OUTPOST_BIN) $(ERYON_UMBRA_BIN) $(ERYON_WATERS_BIN)
 
 # Map JSON data
 
