@@ -25,6 +25,21 @@ class TerrainCompilerTests(unittest.TestCase):
         payload = compile_plan(source, tiles, width=64, height=56)
         self.assertEqual(len(payload), 64 * 56 * 2)
 
+    def test_village_and_city_concepts_encode_to_expected_sizes(self):
+        root = Path(__file__).resolve().parents[1]
+        village_tiles = {"#": 0x3C01, ".": 0x3001, ",": 0x3002,
+                         ":": 0x3003, **dict.fromkeys("PCMHI", 0x3001)}
+        city_tiles = {"#": 0x3C01, "=": 0x3001, ",": 0x3002,
+                      **dict.fromkeys("GCMHP", 0x3001)}
+        for name in ("vila_dos_pomares", "vila_do_pico"):
+            with self.subTest(village=name):
+                path = root / "docs/eryon/vilas" / f"{name}_village_plan.txt"
+                self.assertEqual(len(compile_plan(path, village_tiles, 36, 30)), 2160)
+        for name in ("neonara", "drakonia"):
+            with self.subTest(city=name):
+                path = root / "docs/eryon/cidades" / f"{name}_city_plan.txt"
+                self.assertEqual(len(compile_plan(path, city_tiles, 64, 56)), 7168)
+
     def test_rejects_incomplete_plan(self):
         with tempfile.TemporaryDirectory() as folder:
             source = Path(folder) / "bad.txt"
