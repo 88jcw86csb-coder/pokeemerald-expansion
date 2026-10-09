@@ -112,6 +112,15 @@ def route(kind):
             tiles[32][x] = ":"
         for y in range(14, 23):
             tiles[y][37] = ":"
+        # Southern sheltered cavern: a detour beyond the field medic.
+        for x in range(34, 44):
+            tiles[37][x] = ":"
+        for y in range(32, 38):
+            tiles[y][34] = ":"
+        for y in range(35, 42):
+            for x in range(39, 46):
+                if (x - 42) ** 2 + (y - 38) ** 2 <= 10:
+                    tiles[y][x] = ":"
         # Northern survey signs and crystal clues.
         for x in range(15, 42):
             tiles[18][x] = ":"
