@@ -14,6 +14,7 @@ ROUTES={
     "trilha_glacial": "ice",
     "trilha_dos_dragoes": "dragon",
     "trilha_lunar": "lunar",
+    "trilha_do_oasis": "oasis",
 }
 
 
@@ -33,6 +34,8 @@ def route(kind):
         branches=[(8,8,":"),(37,35,":")]
     elif kind=="lunar":
         branches=[(9,35,","),(38,9,":")]
+    elif kind=="oasis":
+        branches=[(10,10,","),(37,34,":")]
     else:
         branches=[(13,9,":"),(37,34,":")]
     for cx,cy,ground in branches:
