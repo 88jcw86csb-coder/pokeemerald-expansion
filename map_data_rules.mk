@@ -1,7 +1,7 @@
 # Eryon: generate correctly sized terrain binaries before assembling maps.
 # Provisional metatile IDs; inspect tileset visuals and collision in Porymap.
-ERYON_MAP_BINS := $(addprefix data/layouts/Eryon_,$(addsuffix /map.bin,BosqueDeLumina SerraDosCristais PassagemRochosa EstradaOriental ValeDosVentos EstradaDosPomares Rota04 ColinasDaNeblina TrilhaGlacial RotaDasCachoeiras))
-ERYON_TERRAIN_PLANS := $(addprefix docs/eryon/,$(addsuffix _terrain_plan.txt,bosque_de_lumina serra_dos_cristais passagem_rochosa estrada_oriental vale_dos_ventos estrada_dos_pomares rota_04 colinas_da_neblina trilha_glacial rota_das_cachoeiras))
+ERYON_MAP_BINS := $(addprefix data/layouts/Eryon_,$(addsuffix /map.bin,BosqueDeLumina SerraDosCristais PassagemRochosa EstradaOriental ValeDosVentos EstradaDosPomares Rota04 ColinasDaNeblina TrilhaGlacial RotaDasCachoeiras TrilhaDoOasis))
+ERYON_TERRAIN_PLANS := $(addprefix docs/eryon/,$(addsuffix _terrain_plan.txt,bosque_de_lumina serra_dos_cristais passagem_rochosa estrada_oriental vale_dos_ventos estrada_dos_pomares rota_04 colinas_da_neblina trilha_glacial rota_das_cachoeiras trilha_do_oasis))
 ERYON_VILLAGE_BIN := data/layouts/Eryon_VilaDosPomares/map.bin
 ERYON_VILLAGE_PLAN := docs/eryon/vilas/vila_dos_pomares_village_plan.txt
 ERYON_NEBLINA_BIN := data/layouts/Eryon_VilaDaNeblina/map.bin
