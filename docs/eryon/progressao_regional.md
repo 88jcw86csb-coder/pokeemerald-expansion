@@ -32,13 +32,14 @@ Cada seta representa uma conexão FUTURA a implementar/testar no motor.
 | 24 | Deserto De Solaris | desert | Ignivar |
 | 25 | Ignivar | gym | Floresta Dos Ecos |
 | 26 | Floresta Dos Ecos | forest | Aldeia Dos Ecos |
-| 27 | Aldeia Dos Ecos | village | Lunaris |
-| 28 | Lunaris | gym | Trilha Dos Dragoes |
-| 29 | Trilha Dos Dragoes | route | Vila Do Pico |
-| 30 | Vila Do Pico | village | Drakonia |
-| 31 | Drakonia | gym | Caminho Da Liga |
-| 32 | Caminho Da Liga | route | Liga Eryon |
-| 33 | Liga Eryon | league | fim |
+| 27 | Aldeia Dos Ecos | village | Trilha Lunar |
+| 28 | Trilha Lunar | route | Lunaris |
+| 29 | Lunaris | gym | Trilha Dos Dragoes |
+| 30 | Trilha Dos Dragoes | route | Vila Do Pico |
+| 31 | Vila Do Pico | village | Drakonia |
+| 32 | Drakonia | gym | Caminho Da Liga |
+| 33 | Caminho Da Liga | route | Liga Eryon |
+| 34 | Liga Eryon | league | fim |
 
 ## Critérios de implementação
 - Não colocar cidades de ginásio consecutivas.
