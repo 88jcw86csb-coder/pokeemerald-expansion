@@ -21,6 +21,14 @@ def route(kind):
     for x in ([23] if kind == "valley" else [8]):
         for y in range(18, 25):
             tiles[y][x] = "."
+    if kind == "passage":
+        # Mountain switchbacks and a sheltered central crossing.
+        for x in range(7, 42):
+            for y in range(17, 29):
+                if abs(y - (22 + ((x // 7) % 3) - 1)) <= 2:
+                    tiles[y][x] = ":"
+        for x in range(0, WIDTH):
+            tiles[22][x] = "."
     if kind == "valley":
         # Southern meadow and northern lookout are connected to the main path.
         for y in range(24, 36):
@@ -57,14 +65,14 @@ def reachable(tiles, start=(0, 22)):
 
 def main():
     OUTPUT.mkdir(parents=True, exist_ok=True)
-    for name, kind in (("estrada_oriental", "road"), ("vale_dos_ventos", "valley")):
+    for name, kind in (("passagem_rochosa", "passage"), ("estrada_oriental", "road"), ("vale_dos_ventos", "valley")):
         tiles = route(kind)
         accessible = reachable(tiles)
         assert (47, 22) in accessible, f"{name}: east exit is unreachable"
         landmarks = (
-            [(0, 22), (47, 22), (8, 18), (16, 21), (33, 26)]
-            if kind == "road" else
-            [(0, 22), (14, 21), (32, 25), (39, 16), (23, 18), (37, 10)]
+            [(0, 22), (47, 22), (8, 18), (16, 21), (33, 26)] if kind == "road"
+            else [(0, 22), (47, 22), (14, 21), (32, 25), (39, 16), (23, 18), (37, 10)] if kind == "valley"
+            else [(0, 22), (47, 22)]
         )
         for x, y in landmarks:
             assert (x, y) in accessible, f"{name}: landmark ({x},{y}) unreachable"
