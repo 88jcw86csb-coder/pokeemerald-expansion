@@ -50,6 +50,30 @@ def city(name):
             for x in range(max(1, cx-3), min(W-1, cx+4)):
                 if (x-cx)**2+(y-cy)**2 <= 9 and t[y][x] == "#":
                     t[y][x] = ","
+    # Distinct walkable districts, tailored to each approved gym city.
+    # The shared street grid stays intact, but neighborhoods differ.
+    district = {
+        "verdelume": (7, 7, ","),
+        "neonara": (55, 7, "="),
+        "frostheim": (7, 48, ","),
+        "arkhara": (55, 48, ":"),
+        "umbra": (8, 8, ":"),
+        "ignivar": (55, 8, ":"),
+        "lunaris": (8, 47, ","),
+        "drakonia": (55, 47, ":"),
+    }
+    dx, dy, ground = district[name]
+    for y in range(max(1, dy - 5), min(H - 1, dy + 6)):
+        for x in range(max(1, dx - 5), min(W - 1, dx + 6)):
+            if (x - dx) ** 2 + (y - dy) ** 2 <= 25 and t[y][x] == "#":
+                t[y][x] = ground
+    # Link each district to the existing road network.
+    avenue_x = 14 if dx < 32 else 49
+    for x in range(min(dx, avenue_x), max(dx, avenue_x) + 1):
+        if t[dy][x] == "#":
+            t[dy][x] = "="
+    # The landmark is a walkable plaza tile, not a working interior.
+    t[dy][dx] = "P"
     # Buildings have accessible entrances on the adjacent avenue.
     for symbol, (x, y) in BUILDINGS.items():
         t[y][x] = symbol
@@ -69,7 +93,7 @@ def city(name):
 
 
 def accessible(t, start=(0, 28)):
-    passable = set("=,GCMHP")
+    passable = set("=,:GCMHP")
     q = deque([start])
     seen = {start}
     while q:
