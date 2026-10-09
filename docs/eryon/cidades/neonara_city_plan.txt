@@ -1,6 +1,6 @@
 Neonara | Gym 2 (Electric) | Eryon concept 64x56
 # block; = avenue; , park; G gym; C Pokemon Center; M mart; H housing; P civic plaza
-Design only: not a registered map.bin. Gym, interiors, scripts and warps not implemented.
+Registered overworld concept: provisional map.bin, city NPC and Route 03/Mist Hills warps installed; gym and interiors not implemented.
 
 #############===###############===##############===#############
 #############===###############===##############===#############
