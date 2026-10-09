@@ -9466,6 +9466,17 @@
       "border_filepath": "data/layouts/PetalburgWoods/border.bin",
       "blockdata_filepath": "data/layouts/Eryon_Rota04/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ERYON_NEONARA",
+      "name": "ERYON_NEONARA_Layout",
+      "width": 64,
+      "height": 56,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Rustboro",
+      "border_filepath": "data/layouts/PetalburgWoods/border.bin",
+      "blockdata_filepath": "data/layouts/Eryon_Neonara/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }
