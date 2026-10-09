@@ -25,7 +25,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Generate ten registered Eryon map binaries and previews
+      - name: Generate eleven registered Eryon map binaries and previews
         run: |
           python3 tools/build_eryon_map_bins.py --wall 0x3c01 --path 0x3001 --meadow 0x3002 --stone 0x3003 --preview-unregistered
       - name: Test map connectivity and encoding
@@ -49,7 +49,7 @@ jobs:
           from tools.eryon_villages import VILLAGES
           from tools.eryon_gym_cities import CITIES
           for name in VILLAGES:
-              if name == "vila_dos_pomares":
+              if name in ("vila_dos_pomares", "vila_da_neblina"):
                   continue
               path = Path("build/eryon-previews/villages") / name / "map.bin"
               assert path.is_file() and path.stat().st_size == 36 * 30 * 2, path
@@ -78,8 +78,9 @@ jobs:
               "LAYOUT_ERYON_ROTA_04",
               "LAYOUT_ERYON_NEONARA",
               "LAYOUT_ERYON_COLINAS_DA_NEBLINA",
+              "LAYOUT_ERYON_VILA_DA_NEBLINA",
           }]
-          assert len(eryon) == 10
+          assert len(eryon) == 11
           for layout in eryon:
               path = Path(layout["blockdata_filepath"])
               expected = layout["width"] * layout["height"] * 2
