@@ -17,7 +17,7 @@ def route(kind):
         center = 22 + (2 if (x // 8) % 2 else 0)
         for y in range(center - 3, center + 4):
             tiles[y][x] = "."
-    if kind == "valley":
+    # Keep investigation markers connected to the primary trail.\n    for x in ([23] if kind == "valley" else [8]):\n        for y in range(18, 25):\n            tiles[y][x] = "."\n    if kind == "valley":
         # Southern meadow and northern lookout are connected to the main path.
         for y in range(24, 36):
             for x in range(11, 39):
