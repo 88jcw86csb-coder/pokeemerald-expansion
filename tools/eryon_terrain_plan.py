@@ -116,6 +116,14 @@ def route(kind):
         for x in range(23, 38):
             tiles[18][x] = "."
     elif kind == "road":
+        # Eastern detour around a rocky lay-by; a loop offers optional exploration.
+        for x in range(10, 39):
+            tiles[32][x] = ":"
+        for y in range(22, 33):
+            tiles[y][10] = ":"
+            tiles[y][38] = ":"
+        for x in range(10, 39):
+            tiles[22][x] = "."
         # Distinctive stony pull-off around the roadside healer.
         for y in range(23, 31):
             for x in range(28, 39):
@@ -172,7 +180,7 @@ def main():
             + "\n".join("".join(row) for row in tiles) + "\n",
             encoding="utf-8",
         )
-        print(f"OK: {path.relative_to(OUTPUT.parents[1])} — traversable west/east corridor")
+        print(f"OK: {path.relative_to(OUTPUT.parents[1])} — verified traversable corridor and events")
 
 if __name__ == "__main__":
     main()
