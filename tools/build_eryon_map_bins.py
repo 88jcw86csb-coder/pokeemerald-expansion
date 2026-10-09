@@ -26,6 +26,7 @@ PREVIEW_SPECS = {
     "trilha_glacial": "TrilhaGlacial",
     "trilha_dos_dragoes": "TrilhaDosDragoes",
     "trilha_lunar": "TrilhaLunar",
+    "trilha_do_oasis": "TrilhaDoOasis",
     "caminho_da_liga": "CaminhoDaLiga",
 }
 WIDTH, HEIGHT = 48, 44
