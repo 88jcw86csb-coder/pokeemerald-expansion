@@ -63,6 +63,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EryonVale_EventScript_WindMarker"
+    },
+    {
+      "type": "sign",
+      "x": 43,
+      "y": 22,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EryonVale_EventScript_SealedCargo"
     }
   ],
   "id": "MAP_ERYON_VALE_DOS_VENTOS",
