@@ -1,0 +1,29 @@
+{
+  "requires_flash": false,
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "object_events": [],
+  "coord_events": [],
+  "bg_events": [],
+  "id": "MAP_ERYON_ROTA_DAS_CACHOEIRAS",
+  "name": "Eryon_RotaDasCachoeiras",
+  "layout": "LAYOUT_ERYON_ROTA_DAS_CACHOEIRAS",
+  "music": "MUS_ROUTE_119",
+  "region_map_section": "MAPSEC_ROUTE_119",
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_ROUTE",
+  "connections": null,
+  "warp_events": [
+    {
+      "x": 0,
+      "y": 22,
+      "elevation": 0,
+      "dest_map": "MAP_ERYON_UMBRA",
+      "dest_warp_id": "1"
+    }
+  ],
+  "region": "REGION_HOENN"
+}
