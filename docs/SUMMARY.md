@@ -158,7 +158,7 @@
     - [Pre-1.0.x]()
         - [Version 0.9.0](changelogs/0.9.x/0.9.0.md)
 - [Pokémon Eryon — Planejamento]()
-    - [Progressão regional (36 localidades)](eryon/progressao_regional.md)
+    - [Progressão regional (37 localidades)](eryon/progressao_regional.md)
 - [Team Procedures]()
     - [How to make an Expansion version](team_procedures/expansion_versions.md)
     - [Release Schedule and Process](team_procedures/schedule.md)
