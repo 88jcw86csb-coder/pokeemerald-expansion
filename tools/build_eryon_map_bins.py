@@ -11,6 +11,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SPECS = {
+    "bosque_de_lumina": "BosqueDeLumina",
+    "serra_dos_cristais": "SerraDosCristais",
     "passagem_rochosa": "PassagemRochosa",
     "estrada_oriental": "EstradaOriental",
     "vale_dos_ventos": "ValeDosVentos",
