@@ -5,6 +5,7 @@ The IDs below are provisional. Inspect metatiles in Porymap before declaring
 these maps playable. Each tile is a little-endian 16-bit map entry.
 """
 import argparse
+import json
 import struct
 from pathlib import Path
 
@@ -36,18 +37,35 @@ def main():
                         help="walkable meadow metatile word")
     parser.add_argument("--stone", type=lambda s: int(s, 0), required=True,
                         help="walkable stone metatile word")
+    parser.add_argument("--install-layouts", action="store_true",
+                        help="update layouts.json paths after generating all binaries")
     args = parser.parse_args()
     tiles = dict(zip("#.,:", (args.wall, args.path, args.meadow, args.stone)))
     for key, value in tiles.items():
         if not 0 <= value <= 0xFFFF:
             parser.error(f"{key} metatile word must be 0..65535")
+    generated = {}
     for key, folder in SPECS.items():
         src = ROOT / "docs/eryon" / f"{key}_terrain_plan.txt"
         dest = ROOT / "data/layouts" / f"Eryon_{folder}" / "map.bin"
         payload = compile_plan(src, tiles)
         dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_bytes(payload)
+        generated[f"LAYOUT_ERYON_{key.upper()}"] = dest.relative_to(ROOT).as_posix()
         print(f"{dest.relative_to(ROOT)}: {len(payload)} bytes")
+    if args.install_layouts:
+        layouts_path = ROOT / "data/layouts/layouts.json"
+        data = json.loads(layouts_path.read_text(encoding="utf-8"))
+        installed = set()
+        for layout in data["layouts"]:
+            layout_id = layout["id"]
+            if layout_id in generated:
+                layout["blockdata_filepath"] = generated[layout_id]
+                installed.add(layout_id)
+        if installed != set(generated):
+            raise ValueError(f"Missing layout registrations: {set(generated) - installed}")
+        layouts_path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        print("Updated data/layouts/layouts.json with generated map paths")
 
 if __name__ == "__main__":
     main()
