@@ -49,6 +49,11 @@ class PomaresRouteTests(unittest.TestCase):
         self.assertEqual(len(compile_plan(city_plan,city_tiles,64,56)),7168)
         city_rows=city_plan.read_text(encoding="utf-8").splitlines()[4:]
         self.assertNotEqual(city_rows[28][0],"#")
+        resident=neonara["object_events"][0]
+        self.assertNotEqual(city_rows[resident["y"]][resident["x"]],"#")
+        city_scripts=(ROOT/"data/maps/Eryon_Neonara/scripts.inc").read_text()
+        self.assertIn(resident["script"]+"::",city_scripts)
+
         self.assertNotIn(r"\\\\n",scripts)
 
 
