@@ -55,6 +55,15 @@ def route(kind):
         for x in range(13, 17):
             tiles[16][x] = "."
         tiles[14][15] = "."
+        # Western moss sanctuary: a small optional detour off the main path.
+        for x in range(5, 17):
+            tiles[30][x] = ","
+        for y in range(26, 35):
+            for x in range(5, 12):
+                if (x - 8) ** 2 + (y - 30) ** 2 <= 16:
+                    tiles[y][x] = ","
+        for x in range(8, 17):
+            tiles[30][x] = "."
         # Both forest warps are placed on explicit clear path tiles.
         tiles[5][14] = "."
         tiles[38][16] = "."
