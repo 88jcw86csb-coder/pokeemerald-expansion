@@ -1,0 +1,66 @@
+#!/usr/bin/env python3
+"""Generate distinct Eryon route terrain plans for map artists.
+
+Produces ASCII tile plans and verifies that a connected walking corridor
+joins the west and east borders. This is NOT a GBA map.bin generator:
+collision/metatile properties must be authored and tested in Porymap.
+"""
+from collections import deque
+from pathlib import Path
+
+WIDTH, HEIGHT = 48, 44
+OUTPUT = Path(__file__).resolve().parents[1] / "docs" / "eryon"
+
+def route(kind):
+    tiles = [["#" for _ in range(WIDTH)] for _ in range(HEIGHT)]
+    for x in range(WIDTH):
+        center = 22 + (2 if (x // 8) % 2 else 0)
+        for y in range(center - 3, center + 4):
+            tiles[y][x] = "."
+    if kind == "valley":
+        # Southern meadow and northern lookout are connected to the main path.
+        for y in range(24, 36):
+            for x in range(11, 39):
+                if (x - 25) ** 2 / 196 + (y - 29) ** 2 / 36 < 1:
+                    tiles[y][x] = ","
+        for y in range(10, 25):
+            for x in range(35, 42):
+                tiles[y][x] = "."
+    else:
+        # Distinctive stony pull-off around the roadside healer.
+        for y in range(23, 31):
+            for x in range(28, 39):
+                tiles[y][x] = ":"
+    return tiles
+
+def reachable(tiles):
+    start = (0, 22)
+    queue = deque([start])
+    seen = {start}
+    while queue:
+        x, y = queue.popleft()
+        if x == WIDTH - 1:
+            return True
+        for nx, ny in ((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)):
+            if 0 <= nx < WIDTH and 0 <= ny < HEIGHT and tiles[ny][nx] != "#" and (nx, ny) not in seen:
+                seen.add((nx, ny))
+                queue.append((nx, ny))
+    return False
+
+def main():
+    OUTPUT.mkdir(parents=True, exist_ok=True)
+    for name, kind in (("estrada_oriental", "road"), ("vale_dos_ventos", "valley")):
+        tiles = route(kind)
+        assert reachable(tiles), f"{name}: no east-west walking corridor"
+        path = OUTPUT / f"{name}_terrain_plan.txt"
+        path.write_text(
+            f"{name} — terrain concept (48x44)\n"
+            "# = cliff/forest barrier; . = main trail; , = meadow; : = stony rest area\n"
+            "Not compiled map data. Convert into Porymap metatiles and verify collision.\n\n"
+            + "\n".join("".join(row) for row in tiles) + "\n",
+            encoding="utf-8",
+        )
+        print(f"OK: {path.relative_to(OUTPUT.parents[1])} — traversable west/east corridor")
+
+if __name__ == "__main__":
+    main()
