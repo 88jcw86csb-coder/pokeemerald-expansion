@@ -110,6 +110,16 @@ def main():
     village_dest.write_bytes(village_payload)
     generated["LAYOUT_ERYON_VILA_DOS_POMARES"] = village_dest.relative_to(ROOT).as_posix()
     print(f"{village_dest.relative_to(ROOT)}: {len(village_payload)} bytes")
+    # Neonara is the first registered gym city after Verdelume.
+    neonara_tiles = {**tiles, "=": tiles["."],
+                     **{mark: tiles["."] for mark in "GCMHP"}}
+    neonara_src = ROOT / "docs/eryon/cidades/neonara_city_plan.txt"
+    neonara_dest = ROOT / "data/layouts/Eryon_Neonara/map.bin"
+    neonara_payload = compile_plan(neonara_src, neonara_tiles, width=64, height=56)
+    neonara_dest.parent.mkdir(parents=True, exist_ok=True)
+    neonara_dest.write_bytes(neonara_payload)
+    generated["LAYOUT_ERYON_NEONARA"] = neonara_dest.relative_to(ROOT).as_posix()
+    print(f"{neonara_dest.relative_to(ROOT)}: {len(neonara_payload)} bytes")
     if args.preview_unregistered:
         # Village/city landmark symbols are only floor placeholders.
         # These previews are not functional buildings or gym interiors.
@@ -128,6 +138,8 @@ def main():
         city_tiles = {**tiles, "=": tiles["."],
                       **{mark: tiles["."] for mark in "GCMHP"}}
         for key in CITIES:
+            if key == "neonara":
+                continue
             src = ROOT / "docs/eryon/cidades" / f"{key}_city_plan.txt"
             dest = ROOT / "build/eryon-previews/cities" / key / "map.bin"
             payload = compile_plan(src, city_tiles, width=64, height=56)
