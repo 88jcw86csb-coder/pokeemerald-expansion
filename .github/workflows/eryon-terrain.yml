@@ -29,7 +29,18 @@ jobs:
         run: python3 -m unittest discover -s tools -p 'test_eryon_*py'
       - name: Generate five registered Eryon map binaries
         run: |
-          python3 tools/build_eryon_map_bins.py --wall 0x3c01 --path 0x3001 --meadow 0x3002 --stone 0x3003
+          python3 tools/build_eryon_map_bins.py --wall 0x3c01 --path 0x3001 --meadow 0x3002 --stone 0x3003 --preview-unregistered
+      - name: Verify unregistered terrain previews
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from tools.build_eryon_map_bins import PREVIEW_SPECS, WIDTH, HEIGHT
+          for folder in PREVIEW_SPECS.values():
+              path = Path("build/eryon-previews") / folder / "map.bin"
+              assert path.is_file(), path
+              assert path.stat().st_size == WIDTH * HEIGHT * 2, path
+              print(f"{folder}: preview encoding OK")
+          PY
       - name: Verify dimensions and layout references
         run: |
           python3 - <<'PY'
