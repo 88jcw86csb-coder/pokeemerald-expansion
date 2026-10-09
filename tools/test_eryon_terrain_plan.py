@@ -99,6 +99,13 @@ class TerrainPlansTests(unittest.TestCase):
             self.assertIn(point, connected)
         self.assertEqual(tiles[38][42], ":")
 
+    def test_road_southwest_caravan_camp(self):
+        tiles = route("road")
+        connected = reachable(tiles)
+        for point in ((8, 22), (8, 30), (8, 33), (17, 30)):
+            self.assertIn(point, connected)
+        self.assertEqual(tiles[33][8], ":")
+
     def test_road_northern_watchpost_access(self):
         tiles = route("road")
         connected = reachable(tiles)
