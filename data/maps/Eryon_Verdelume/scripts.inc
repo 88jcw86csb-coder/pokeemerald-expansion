@@ -119,6 +119,8 @@ EryonVerdelume_Text_KaelFollowup:
 @ A public notice changes once the player has investigated the forest.
 EryonVerdelume_EventScript_ForestNotice::
 	lock
+	goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonVerdelume_EventScript_ForestNoticeAfterBadge
+	goto_if_ge VAR_ERYON_KAEL_BRIEFED, 1, EryonVerdelume_EventScript_ForestNoticeAfterBriefing
 	goto_if_ge VAR_ERYON_LUMINA_CLUE_FOUND, 1, EryonVerdelume_EventScript_ForestNoticeClue
 	msgbox EryonVerdelume_Text_ForestNotice, MSGBOX_DEFAULT
 	release
@@ -126,6 +128,16 @@ EryonVerdelume_EventScript_ForestNotice::
 
 EryonVerdelume_EventScript_ForestNoticeClue::
 	msgbox EryonVerdelume_Text_ForestNoticeClue, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVerdelume_EventScript_ForestNoticeAfterBriefing::
+	msgbox EryonVerdelume_Text_ForestNoticeAfterBriefing, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVerdelume_EventScript_ForestNoticeAfterBadge::
+	msgbox EryonVerdelume_Text_ForestNoticeAfterBadge, MSGBOX_DEFAULT
 	release
 	end
 
@@ -140,6 +152,20 @@ EryonVerdelume_Text_ForestNoticeClue:
 	.string "A antiga marca de eclipse\n"
 	.string "esta sendo investigada.\p"
 	.string "Informe Kael sobre pistas.$"
+
+EryonVerdelume_Text_ForestNoticeAfterBriefing:
+	.string "BOLETIM DE VERDELUME\p"
+	.string "Kael recebeu o relato sobre\n"
+	.string "a marca no Bosque de Lumina.\p"
+	.string "Moradores devem comunicar\n"
+	.string "qualquer nova pista.$"
+
+EryonVerdelume_Text_ForestNoticeAfterBadge:
+	.string "BOLETIM DE VERDELUME\p"
+	.string "Carrocas suspeitas seguiram\n"
+	.string "pela trilha do leste.\p"
+	.string "Cuidado nas rotas adiante.\n"
+	.string "A investigacao continua.$"
 
 @ The town botanist offers optional worldbuilding after the forest investigation.
 EryonVerdelume_EventScript_Botanist::
