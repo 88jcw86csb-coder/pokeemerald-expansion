@@ -21,10 +21,17 @@ EryonSerra_EventScript_GeologistAfterClue::
 	release
 	end
 
+@ The explorer reacts to the discovered Eclipse camp, preserving the slow investigation arc.
 EryonSerra_EventScript_Explorer::
 	lock
 	faceplayer
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonSerra_EventScript_ExplorerAfterClue
 	msgbox EryonSerra_Text_Explorer, MSGBOX_DEFAULT
+	release
+	end
+
+EryonSerra_EventScript_ExplorerAfterClue::
+	msgbox EryonSerra_Text_ExplorerAfterClue, MSGBOX_DEFAULT
 	release
 	end
 
@@ -57,6 +64,12 @@ EryonSerra_Text_Explorer:
 	.string "EXPLORADORA: Nao tenha pressa.\p"
 	.string "Ha caminhos escondidos\n"
 	.string "entre as pedras da serra.$"
+
+EryonSerra_Text_ExplorerAfterClue:
+	.string "EXPLORADORA: As pegadas do\\n"
+	.string "acampamento seguem para leste.\\p"
+	.string "A passagem rochosa pode\\n"
+	.string "esconder mais pistas.$"
 
 EryonSerra_Text_CrystalOutcrop:
 	.string "Uma rocha foi escavada.\p"
