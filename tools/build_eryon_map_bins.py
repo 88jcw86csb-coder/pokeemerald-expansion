@@ -46,6 +46,13 @@ def main():
     for key, value in tiles.items():
         if not 0 <= value <= 0xFFFF:
             parser.error(f"{key} metatile word must be 0..65535")
+    # GBA map entries: bits 0..9 metatile, 10..11 collision, 12..15 elevation.
+    # Prevent a provisional palette from accidentally turning walls into floors.
+    if not (tiles["#"] & 0x0C00):
+        parser.error("--wall must have a nonzero collision field (bits 10-11)")
+    for symbol in ".,:":
+        if tiles[symbol] & 0x0C00:
+            parser.error(f"walkable {symbol!r} must have zero collision bits")
     generated = {}
     for key, folder in SPECS.items():
         src = ROOT / "docs/eryon" / f"{key}_terrain_plan.txt"
