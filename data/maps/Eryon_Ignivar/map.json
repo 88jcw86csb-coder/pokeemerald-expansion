@@ -1,0 +1,29 @@
+{
+  "requires_flash": false,
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "object_events": [],
+  "coord_events": [],
+  "bg_events": [],
+  "id": "MAP_ERYON_IGNIVAR",
+  "name": "Eryon_Ignivar",
+  "layout": "LAYOUT_ERYON_IGNIVAR",
+  "music": "MUS_FORTREE",
+  "region_map_section": "MAPSEC_LAVARIDGE_TOWN",
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_CITY",
+  "connections": null,
+  "warp_events": [
+    {
+      "x": 0,
+      "y": 28,
+      "elevation": 0,
+      "dest_map": "MAP_ERYON_DESERTO_DE_SOLARIS",
+      "dest_warp_id": "1"
+    }
+  ],
+  "region": "REGION_HOENN"
+}
