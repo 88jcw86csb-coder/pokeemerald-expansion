@@ -31,18 +31,27 @@ def route(kind):
         for y in range(18, 25):
             tiles[y][23 if kind == "valley" else 8] = "."
     if kind == "forest":
-        # Forest entrance from the south, exit to the north.
+        # A north/south woodland route with an eastern glade and westward loop.
+        # Keep a narrow main path rather than the generic east/west road.
         for y in range(5, 39):
-            for x in range(12, 21):
+            center = 16 + (2 if 12 <= y < 22 else 0)
+            for x in range(center - 2, center + 3):
                 tiles[y][x] = "."
-        for x in range(12, 26):
-            for y in range(13, 27):
-                if (x + y) % 7 != 0:
+        # Winding loop through the clearing, linking all existing events.
+        for y in range(13, 27):
+            for x in range(12, 26):
+                if (x - 19) ** 2 / 49 + (y - 20) ** 2 / 49 < 1:
                     tiles[y][x] = ","
-        for y in range(5, 39):
-            tiles[y][16] = "."
-        for x in range(14, 24):
+        for x in range(15, 24):
             tiles[18][x] = "."
+            tiles[25][x] = "."
+        for y in range(18, 26):
+            tiles[y][23] = "."
+        for y in range(14, 39):
+            tiles[y][16] = "."
+        # Both forest warps are placed on explicit clear path tiles.
+        tiles[5][14] = "."
+        tiles[38][16] = "."
     if kind == "mountain":
         # Stepped ascent with accessible observation terraces.
         for x in range(WIDTH):
