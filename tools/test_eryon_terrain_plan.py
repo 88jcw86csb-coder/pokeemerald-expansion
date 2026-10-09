@@ -92,6 +92,13 @@ class TerrainPlansTests(unittest.TestCase):
             self.assertIn(point, accessible)
         self.assertEqual(tiles[8][8], ":")
 
+    def test_passage_western_quarry_remains_accessible(self):
+        tiles = route("passage")
+        connected = reachable(tiles)
+        for point in ((7, 22), (7, 34), (8, 35), (19, 34)):
+            self.assertIn(point, connected)
+        self.assertEqual(tiles[35][8], ":")
+
     def test_passage_southern_cavern_remains_accessible(self):
         tiles = route("passage")
         connected = reachable(tiles)
