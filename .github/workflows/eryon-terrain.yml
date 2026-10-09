@@ -25,7 +25,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Generate seven registered Eryon map binaries and previews
+      - name: Generate eight registered Eryon map binaries and previews
         run: |
           python3 tools/build_eryon_map_bins.py --wall 0x3c01 --path 0x3001 --meadow 0x3002 --stone 0x3003 --preview-unregistered
       - name: Test map connectivity and encoding
@@ -73,8 +73,9 @@ jobs:
               "LAYOUT_ERYON_VALE_DOS_VENTOS",
               "LAYOUT_ERYON_ESTRADA_DOS_POMARES",
               "LAYOUT_ERYON_VILA_DOS_POMARES",
+              "LAYOUT_ERYON_ROTA_04",
           }]
-          assert len(eryon) == 7
+          assert len(eryon) == 8
           for layout in eryon:
               path = Path(layout["blockdata_filepath"])
               expected = layout["width"] * layout["height"] * 2
