@@ -92,6 +92,13 @@ class TerrainPlansTests(unittest.TestCase):
             self.assertIn(point, connected)
         self.assertEqual(tiles[10][26], ":")
 
+    def test_valley_southwest_windmill_ruins(self):
+        tiles = route("valley")
+        accessible = reachable(tiles)
+        for point in ((6, 31), (10, 30), (10, 22)):
+            self.assertIn(point, accessible)
+        self.assertEqual(tiles[31][6], ",")
+
     def test_valley_has_no_unlinked_east_exit(self):
         tiles = route("valley")
         self.assertTrue(all(row[-1] == "#" for row in tiles))
