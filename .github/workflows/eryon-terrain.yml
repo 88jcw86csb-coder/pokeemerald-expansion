@@ -25,7 +25,8 @@ jobs:
       - name: Test map connectivity and encoding
         run: python3 -m unittest discover -s tools -p 'test_eryon_*py'
       - name: Generate five Eryon map binaries
-        run: make eryon-maps
+        run: |
+          python3 tools/build_eryon_map_bins.py --wall 0x3c01 --path 0x3001 --meadow 0x3002 --stone 0x3003
       - name: Verify dimensions and layout references
         run: |
           python3 - <<'PY'
