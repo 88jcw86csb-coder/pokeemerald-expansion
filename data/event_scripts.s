@@ -147,6 +147,8 @@ gStdScripts_End::
 	.include "data/maps/Eryon_Rota03/scripts.inc"
 	.include "data/maps/Eryon_SerraDosCristais/scripts.inc"
 	.include "data/maps/Eryon_PassagemRochosa/scripts.inc"
+	.include "data/maps/Eryon_EstradaOriental/scripts.inc"
+	.include "data/maps/Eryon_ValeDosVentos/scripts.inc"
 	.include "data/maps/LittlerootTown/scripts.inc"
 	.include "data/maps/OldaleTown/scripts.inc"
 	.include "data/maps/DewfordTown/scripts.inc"
