@@ -210,6 +210,15 @@ def route(kind):
         for x in range(23, 38):
             tiles[18][x] = "."
     elif kind == "road":
+        # Southwest caravan camp: an optional trail off the western approach.
+        for x in range(5, 18):
+            tiles[30][x] = ":"
+        for y in range(22, 31):
+            tiles[y][8] = ":"
+        for y in range(28, 39):
+            for x in range(3, 14):
+                if (x - 8) ** 2 + (y - 33) ** 2 <= 20:
+                    tiles[y][x] = ":"
         # Eastern detour around a rocky lay-by; a loop offers optional exploration.
         for x in range(10, 39):
             tiles[32][x] = ":"
