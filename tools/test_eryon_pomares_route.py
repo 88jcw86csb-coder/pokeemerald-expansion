@@ -198,6 +198,15 @@ class PomaresRouteTests(unittest.TestCase):
         cargo=next(e for e in valley["bg_events"] if e["script"]=="EryonVale_EventScript_SealedCargo")
         self.assertNotEqual(valley_rows[cargo["y"]][cargo["x"]],"#")
         self.assertIn("EryonVale_EventScript_SealedCargoClue::",(ROOT/"data/maps/Eryon_ValeDosVentos/scripts.inc").read_text())
+        umbra_manifest=next(e for e in umbra["bg_events"] if e["script"]=="EryonUmbra_EventScript_IndustrialManifest")
+        self.assertNotEqual(umbra_rows[umbra_manifest["y"]][umbra_manifest["x"]],"#")
+        self.assertIn("EryonUmbra_EventScript_IndustrialManifestClue::",umbra_scripts)
+        self.assertIn("EryonUmbra_EventScript_EclipseCourierExposed::",umbra_scripts)
+        for npc in valley["object_events"]:
+            self.assertNotEqual(valley_rows[npc["y"]][npc["x"]],"#")
+            self.assertIn(npc["script"]+"::",(ROOT/"data/maps/Eryon_ValeDosVentos/scripts.inc").read_text())
+        self.assertIn("EryonVale_EventScript_CaravanWitnessClue::",(ROOT/"data/maps/Eryon_ValeDosVentos/scripts.inc").read_text())
+
 
 
 
