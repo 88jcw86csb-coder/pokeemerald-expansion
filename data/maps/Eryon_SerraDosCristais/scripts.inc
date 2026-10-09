@@ -11,7 +11,13 @@ EryonSerra_EventScript_Geologist::
 	end
 
 EryonSerra_EventScript_GeologistBadge::
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonSerra_EventScript_GeologistAfterClue
 	msgbox EryonSerra_Text_GeologistBadge, MSGBOX_DEFAULT
+	release
+	end
+
+EryonSerra_EventScript_GeologistAfterClue::
+	msgbox EryonSerra_Text_GeologistAfterClue, MSGBOX_DEFAULT
 	release
 	end
 
@@ -38,6 +44,14 @@ EryonSerra_Text_GeologistBadge:
 	.string "apareceu nos meus estudos.\p"
 	.string "Alguem retirou cristais\n"
 	.string "desta encosta recentemente.$"
+
+EryonSerra_Text_GeologistAfterClue:
+	.string "GEOLOGO: Voce encontrou\n"
+	.string "o acampamento abandonado?\p"
+	.string "Os cristais foram retirados\n"
+	.string "com ferramentas recentes.\p"
+	.string "Nao e uma escavacao antiga.\n"
+	.string "Alguem planejou essa coleta.$"
 
 EryonSerra_Text_Explorer:
 	.string "EXPLORADORA: Nao tenha pressa.\p"
