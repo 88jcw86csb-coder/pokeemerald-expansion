@@ -50,7 +50,7 @@ EryonSolaris_Text_ExplorerClue:
 	.string "EXPLORADOR: Uma equipe\n"
 	.string "enterrou cabos na areia.\p"
 	.string "Levam energia para\n"
-	.string "uma estacao secreta.$"
+	.string "a usina de Ignivar.$"
 
 EryonSolaris_Text_GuardBefore:
 	.string "VIGIA: A passagem esta\n"
@@ -61,7 +61,7 @@ EryonSolaris_Text_GuardClue:
 	.string "ECLIPSE: Os cristais\n"
 	.string "alimentam nosso reator!\p"
 	.string "Ignivar nao imagina\n"
-	.string "o que esta por vir.$"
+	.string "quando vier o pulso.$"
 
 EryonSolaris_Text_DeviceBefore:
 	.string "Uma antena emerge\n"
@@ -72,4 +72,4 @@ EryonSolaris_Text_DeviceClue:
 	.string "O selo da ECLIPSE\n"
 	.string "cobre um transmissor.\p"
 	.string "Um cabo segue na\n"
-	.string "direcao de Ignivar.$"
+	.string "direcao da usina.$"
