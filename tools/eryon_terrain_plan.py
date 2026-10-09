@@ -6,10 +6,17 @@ joins the west and east borders. This is NOT a GBA map.bin generator:
 collision/metatile properties must be authored and tested in Porymap.
 """
 from collections import deque
+import json
 from pathlib import Path
 
 WIDTH, HEIGHT = 48, 44
-OUTPUT = Path(__file__).resolve().parents[1] / "docs" / "eryon"
+ROOT = Path(__file__).resolve().parents[1]
+OUTPUT = ROOT / "docs" / "eryon"
+MAP_NAMES = {
+    "passagem_rochosa": "Eryon_PassagemRochosa",
+    "estrada_oriental": "Eryon_EstradaOriental",
+    "vale_dos_ventos": "Eryon_ValeDosVentos",
+}
 
 def route(kind):
     tiles = [["#" for _ in range(WIDTH)] for _ in range(HEIGHT)]
@@ -82,13 +89,20 @@ def main():
         tiles = route(kind)
         accessible = reachable(tiles)
         assert (47, 22) in accessible, f"{name}: east exit is unreachable"
-        landmarks = (
-            [(0, 22), (47, 22), (8, 18), (16, 21), (33, 26)] if kind == "road"
-            else [(0, 22), (47, 22), (14, 21), (32, 25), (39, 16), (23, 18), (37, 10)] if kind == "valley"
-            else [(0, 22), (47, 22), (11, 22), (30, 24), (19, 32), (37, 14), (34, 34), (24, 18), (25, 18), (41, 18), (15, 18)]
-        )
+        map_path = ROOT / "data" / "maps" / MAP_NAMES[name] / "map.json"
+        map_data = json.loads(map_path.read_text(encoding="utf-8"))
+        landmarks = [(0, 22), (47, 22)]
+        for event in map_data.get("warp_events", []):
+            landmarks.append((event["x"], event["y"]))
+        for event in map_data.get("object_events", []):
+            landmarks.append((event["x"], event["y"]))
+        for event in map_data.get("bg_events", []):
+            landmarks.append((event["x"], event["y"]))
         for x, y in landmarks:
-            assert (x, y) in accessible, f"{name}: landmark ({x},{y}) unreachable"
+            assert 0 <= x < WIDTH and 0 <= y < HEIGHT, (
+                f"{name}: event ({x},{y}) outside terrain")
+            assert (x, y) in accessible, (
+                f"{name}: event ({x},{y}) unreachable from west entrance")
         path = OUTPUT / f"{name}_terrain_plan.txt"
         path.write_text(
             f"{name} — terrain concept (48x44)\n"
