@@ -75,6 +75,28 @@ class EryonEventFlowTests(unittest.TestCase):
                     self.assertEqual(back["dest_map"], data["id"])
                     self.assertEqual(int(back["dest_warp_id"]), index)
 
+    def test_eryon_border_connections_are_reciprocal(self):
+        import json
+        maps = {
+            name: json.loads((ROOT / "data/maps" / name / "map.json").read_text(encoding="utf-8"))
+            for name in MAPS
+        }
+        by_id = {data["id"]: data for data in maps.values()}
+        opposite = {"up": "down", "down": "up", "left": "right", "right": "left"}
+        for name, data in maps.items():
+            for index, connection in enumerate(data.get("connections") or []):
+                with self.subTest(map=name, connection=index):
+                    self.assertIn(connection["direction"], opposite)
+                    self.assertIn(connection["map"], by_id)
+                    destination = by_id[connection["map"]]
+                    matches = [
+                        back for back in (destination.get("connections") or [])
+                        if back.get("map") == data["id"]
+                        and back.get("direction") == opposite[connection["direction"]]
+                        and back.get("offset") == connection["offset"]
+                    ]
+                    self.assertEqual(len(matches), 1, "missing or ambiguous return connection")
+
     def test_validator_accepts_expanded_trainer_count(self):
         validator = (ROOT / "tools/eryon_validate.py").read_text(encoding="utf-8")
         opponents = (ROOT / "include/constants/opponents.h").read_text(encoding="utf-8")
