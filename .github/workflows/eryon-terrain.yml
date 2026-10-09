@@ -30,6 +30,8 @@ jobs:
           python3 tools/build_eryon_map_bins.py --wall 0x3c01 --path 0x3001 --meadow 0x3002 --stone 0x3003 --preview-unregistered
       - name: Test map connectivity and encoding
         run: python3 -m unittest discover -s tools -p 'test_eryon_*py'
+      - name: Audit 35-stage Eryon regional map inventory
+        run: python3 tools/eryon_world_audit.py
       - name: Verify ten unregistered terrain previews
         run: |
           python3 - <<'PY'
