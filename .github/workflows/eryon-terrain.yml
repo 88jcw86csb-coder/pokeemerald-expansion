@@ -1,0 +1,49 @@
+name: Eryon terrain maps
+on:
+  push:
+    branches: [eryon-development]
+    paths:
+      - 'tools/eryon_terrain_plan.py'
+      - 'tools/build_eryon_map_bins.py'
+      - 'tools/test_eryon_terrain_plan.py'
+      - 'tools/test_eryon_map_bins.py'
+      - 'docs/eryon/*_terrain_plan.txt'
+      - 'data/maps/Eryon_*/map.json'
+      - 'data/layouts/layouts.json'
+      - 'map_data_rules.mk'
+      - '.github/workflows/eryon-terrain.yml'
+  workflow_dispatch:
+
+jobs:
+  verify-terrain:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test map connectivity and encoding
+        run: python3 -m unittest discover -s tools -p 'test_eryon_*py'
+      - name: Generate five Eryon map binaries
+        run: make eryon-maps
+      - name: Verify dimensions and layout references
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          layouts = json.loads(Path("data/layouts/layouts.json").read_text())["layouts"]
+          eryon = [layout for layout in layouts if layout["id"] in {
+              "LAYOUT_ERYON_BOSQUE_DE_LUMINA",
+              "LAYOUT_ERYON_SERRA_DOS_CRISTAIS",
+              "LAYOUT_ERYON_PASSAGEM_ROCHOSA",
+              "LAYOUT_ERYON_ESTRADA_ORIENTAL",
+              "LAYOUT_ERYON_VALE_DOS_VENTOS",
+          }]
+          assert len(eryon) == 5
+          for layout in eryon:
+              path = Path(layout["blockdata_filepath"])
+              expected = layout["width"] * layout["height"] * 2
+              assert path.is_file(), path
+              assert path.stat().st_size == expected, (path, expected)
+              print(f"{layout['id']}: {expected} bytes OK")
+          PY
