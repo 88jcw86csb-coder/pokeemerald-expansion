@@ -59,6 +59,15 @@ def route(kind):
         tiles[5][14] = "."
         tiles[38][16] = "."
     if kind == "mountain":
+        # Southern crystal grotto, reached from the existing medic terrace.
+        for x in range(26, 41):
+            tiles[39][x] = ":"
+        for y in range(35, 40):
+            tiles[y][30] = ":"
+        for y in range(36, 42):
+            for x in range(35, 43):
+                if (x - 39) ** 2 + (y - 39) ** 2 <= 12:
+                    tiles[y][x] = ":"
         # Stepped ascent with accessible observation terraces.
         for x in range(WIDTH):
             for y in range(19, 27):
