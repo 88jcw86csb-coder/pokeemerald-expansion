@@ -37,32 +37,31 @@ def route(kind):
                 tiles[y][x] = ":"
     return tiles
 
-def reachable(tiles):
-    start = (0, 22)
+def reachable(tiles, start=(0, 22)):
+    """Return all walkable coordinates connected to a starting point."""
     queue = deque([start])
     seen = {start}
     while queue:
         x, y = queue.popleft()
-        if x == WIDTH - 1:
-            return True
         for nx, ny in ((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)):
             if 0 <= nx < WIDTH and 0 <= ny < HEIGHT and tiles[ny][nx] != "#" and (nx, ny) not in seen:
                 seen.add((nx, ny))
                 queue.append((nx, ny))
-    return False
+    return seen
 
 def main():
     OUTPUT.mkdir(parents=True, exist_ok=True)
     for name, kind in (("estrada_oriental", "road"), ("vale_dos_ventos", "valley")):
         tiles = route(kind)
-        assert reachable(tiles), f"{name}: no east-west walking corridor"
+        accessible = reachable(tiles)
+        assert (47, 22) in accessible, f"{name}: east exit is unreachable"
         landmarks = (
             [(0, 22), (47, 22), (8, 18), (16, 21), (33, 26)]
             if kind == "road" else
             [(0, 22), (14, 21), (32, 25), (39, 16), (23, 18), (37, 10)]
         )
         for x, y in landmarks:
-            assert tiles[y][x] != "#", f"{name}: landmark ({x},{y}) blocked"
+            assert (x, y) in accessible, f"{name}: landmark ({x},{y}) unreachable"
         path = OUTPUT / f"{name}_terrain_plan.txt"
         path.write_text(
             f"{name} — terrain concept (48x44)\n"
