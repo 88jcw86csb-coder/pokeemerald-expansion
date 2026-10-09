@@ -41,6 +41,7 @@ STAGES = [
     ("trilha_dos_dragoes", "route"),
     ("vila_do_pico", "village"),
     ("drakonia", "gym"),
+    ("gruta_das_estrelas", "mountain"),
     ("caminho_da_liga", "route"),
     ("liga_eryon", "league"),
 ]
