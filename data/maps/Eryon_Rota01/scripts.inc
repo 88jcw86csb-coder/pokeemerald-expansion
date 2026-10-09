@@ -40,7 +40,19 @@ EryonRota01_Text_Explorer:
 @ An optional trail marker encourages exploring the forest before reaching Verdelume.
 EryonRota01_EventScript_TrailMarker::
 	lock
+	goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonRota01_EventScript_TrailMarkerAfterBadge
+	goto_if_ge VAR_ERYON_LUMINA_CLUE_FOUND, 1, EryonRota01_EventScript_TrailMarkerAfterClue
 	msgbox EryonRota01_Text_TrailMarker, MSGBOX_DEFAULT
+	release
+	end
+
+EryonRota01_EventScript_TrailMarkerAfterClue::
+	msgbox EryonRota01_Text_TrailMarkerAfterClue, MSGBOX_DEFAULT
+	release
+	end
+
+EryonRota01_EventScript_TrailMarkerAfterBadge::
+	msgbox EryonRota01_Text_TrailMarkerAfterBadge, MSGBOX_DEFAULT
 	release
 	end
 
@@ -48,6 +60,16 @@ EryonRota01_Text_TrailMarker:
 	.string "ROTA 01 - TRILHA DA AURORA\p"
 	.string "Adiante: Bosque de Lumina.\n"
 	.string "Observe as clareiras com calma.$"
+
+EryonRota01_Text_TrailMarkerAfterClue:
+	.string "AVISO DA ROTA 01\p"
+	.string "Luzes incomuns no bosque.\n"
+	.string "Relate pistas a Kael, em Verdelume.$"
+
+EryonRota01_Text_TrailMarkerAfterBadge:
+	.string "TRILHA DA AURORA\p"
+	.string "Com a primeira insignia,\n"
+	.string "novas trilhas esperam por voce.$"
 
 EryonRota01_Text_ExplorerNoStarter:
 	.string "Antes de entrar no bosque,\n"
