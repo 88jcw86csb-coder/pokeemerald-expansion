@@ -9532,6 +9532,17 @@
       "border_filepath": "data/layouts/PetalburgWoods/border.bin",
       "blockdata_filepath": "data/layouts/Eryon_RefugioCristal/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ERYON_POSTO_ORIENTAL",
+      "name": "ERYON_POSTO_ORIENTAL_Layout",
+      "width": 36,
+      "height": 30,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Rustboro",
+      "border_filepath": "data/layouts/PetalburgWoods/border.bin",
+      "blockdata_filepath": "data/layouts/Eryon_PostoOriental/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }
