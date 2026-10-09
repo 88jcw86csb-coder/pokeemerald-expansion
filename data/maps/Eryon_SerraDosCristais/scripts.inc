@@ -145,13 +145,26 @@ EryonSerra_Text_AbandonedCampBadge:
 EryonSerra_EventScript_EclipseScout::
 	lock
 	faceplayer
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonSerra_EventScript_EclipseScoutAfterClue
 	trainerbattle_single TRAINER_ERYON_SERRA_ECLIPSE, EryonSerra_Text_TrainerChallenge, EryonSerra_Text_TrainerDefeat, EryonSerra_EventScript_TrainerVictory, FALSE
 	msgbox EryonSerra_Text_TrainerAfter, MSGBOX_DEFAULT
 	release
 	end
 
+EryonSerra_EventScript_EclipseScoutAfterClue::
+	trainerbattle_single TRAINER_ERYON_SERRA_ECLIPSE, EryonSerra_Text_TrainerClueChallenge, EryonSerra_Text_TrainerDefeat, EryonSerra_EventScript_TrainerVictory, FALSE
+	msgbox EryonSerra_Text_TrainerAfterClue, MSGBOX_DEFAULT
+	release
+	end
+
 EryonSerra_EventScript_TrainerVictory::
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonSerra_EventScript_TrainerVictoryAfterClue
 	msgbox EryonSerra_Text_TrainerAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonSerra_EventScript_TrainerVictoryAfterClue::
+	msgbox EryonSerra_Text_TrainerAfterClue, MSGBOX_DEFAULT
 	release
 	end
 
@@ -165,6 +178,17 @@ EryonSerra_Text_TrainerDefeat:
 EryonSerra_Text_TrainerAfter:
 	.string "VIGIA: Voce nao deveria\n"
 	.string "ter chegado tao longe.$"
+
+EryonSerra_Text_TrainerClueChallenge:
+	.string "VIGIA: Mexeu no acampamento?\p"
+	.string "Entao viu nossas caixas!\n"
+	.string "Nao vai passar daqui!$"
+
+EryonSerra_Text_TrainerAfterClue:
+	.string "VIGIA: Aquelas caixas ja\n"
+	.string "foram levadas daqui.\p"
+	.string "Nao sei para onde foram.\n"
+	.string "Pare de fazer perguntas!$"
 
 
 @ Optional one-time supply find, with retry if the bag is full.
