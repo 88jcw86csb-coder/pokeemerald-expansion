@@ -9543,6 +9543,17 @@
       "border_filepath": "data/layouts/PetalburgWoods/border.bin",
       "blockdata_filepath": "data/layouts/Eryon_PostoOriental/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ERYON_UMBRA",
+      "name": "ERYON_UMBRA_Layout",
+      "width": 64,
+      "height": 56,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Rustboro",
+      "border_filepath": "data/layouts/PetalburgWoods/border.bin",
+      "blockdata_filepath": "data/layouts/Eryon_Umbra/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }
