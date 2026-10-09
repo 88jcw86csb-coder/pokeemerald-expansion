@@ -78,6 +78,13 @@ class TerrainPlansTests(unittest.TestCase):
                     self.assertIn((event["x"], event["y"]), accessible,
                                   f"{name}: unreachable event {event}")
 
+    def test_serra_eastern_crystal_shelf(self):
+        tiles = route("mountain")
+        accessible = reachable(tiles)
+        for point in ((43, 11), (44, 12), (44, 22)):
+            self.assertIn(point, accessible)
+        self.assertEqual(tiles[11][43], ":")
+
     def test_serra_northwest_crystal_overlook(self):
         tiles = route("mountain")
         accessible = reachable(tiles)
