@@ -178,6 +178,27 @@ class PomaresRouteTests(unittest.TestCase):
             self.assertNotEqual(outpost_rows[npc["y"]][npc["x"]],"#")
             self.assertIn(npc["script"]+"::",outpost_scripts)
         self.assertIn("EryonPostoOriental_EventScript_QuartermasterClue::",outpost_scripts)
+        umbra=json.loads((ROOT/"data/maps/Eryon_Umbra/map.json").read_text())
+        valley=json.loads((ROOT/"data/maps/Eryon_ValeDosVentos/map.json").read_text())
+        to_umbra=valley["warp_events"][1]
+        to_valley=umbra["warp_events"][0]
+        self.assertEqual((to_umbra["dest_map"],to_umbra["dest_warp_id"]),("MAP_ERYON_UMBRA","0"))
+        self.assertEqual((to_valley["dest_map"],to_valley["dest_warp_id"]),("MAP_ERYON_VALE_DOS_VENTOS","1"))
+        umbra_plan=ROOT/"docs/eryon/cidades/umbra_city_plan.txt"
+        umbra_rows=umbra_plan.read_text().splitlines()[4:]
+        city_tiles={**TILES,"=":TILES["."],**{k:TILES["."] for k in "GCMHP"}}
+        self.assertEqual(len(compile_plan(umbra_plan,city_tiles,64,56)),7168)
+        self.assertNotEqual(umbra_rows[12][0],"#")
+        umbra_scripts=(ROOT/"data/maps/Eryon_Umbra/scripts.inc").read_text()
+        for npc in umbra["object_events"]:
+            self.assertNotEqual(umbra_rows[npc["y"]][npc["x"]],"#")
+            self.assertIn(npc["script"]+"::",umbra_scripts)
+        valley_rows=(ROOT/"docs/eryon/vale_dos_ventos_terrain_plan.txt").read_text().splitlines()[4:]
+        self.assertNotEqual(valley_rows[22][47],"#")
+        cargo=next(e for e in valley["bg_events"] if e["script"]=="EryonVale_EventScript_SealedCargo")
+        self.assertNotEqual(valley_rows[cargo["y"]][cargo["x"]],"#")
+        self.assertIn("EryonVale_EventScript_SealedCargoClue::",(ROOT/"data/maps/Eryon_ValeDosVentos/scripts.inc").read_text())
+
 
 
 
