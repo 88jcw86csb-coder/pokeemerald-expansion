@@ -17,6 +17,17 @@ SPECS = {
     "estrada_oriental": "EstradaOriental",
     "vale_dos_ventos": "ValeDosVentos",
 }
+PREVIEW_SPECS = {
+    "rota_das_cachoeiras": "RotaDasCachoeiras",
+    "deserto_de_solaris": "DesertoDeSolaris",
+    "floresta_dos_ecos": "FlorestaDosEcos",
+    "estrada_dos_pomares": "EstradaDosPomares",
+    "colinas_da_neblina": "ColinasDaNeblina",
+    "trilha_glacial": "TrilhaGlacial",
+    "trilha_dos_dragoes": "TrilhaDosDragoes",
+    "trilha_lunar": "TrilhaLunar",
+    "caminho_da_liga": "CaminhoDaLiga",
+}
 WIDTH, HEIGHT = 48, 44
 
 def compile_plan(path, tile_ids):
@@ -41,6 +52,8 @@ def main():
                         help="walkable stone metatile word")
     parser.add_argument("--install-layouts", action="store_true",
                         help="update layouts.json paths after generating all binaries")
+    parser.add_argument("--preview-unregistered", action="store_true",
+                        help="encode unregistered 48x44 concepts under build/eryon-previews")
     args = parser.parse_args()
     tiles = dict(zip("#.,:", (args.wall, args.path, args.meadow, args.stone)))
     for key, value in tiles.items():
@@ -65,6 +78,14 @@ def main():
         dest.write_bytes(payload)
         generated[f"LAYOUT_ERYON_{key.upper()}"] = dest.relative_to(ROOT).as_posix()
         print(f"{dest.relative_to(ROOT)}: {len(payload)} bytes")
+    if args.preview_unregistered:
+        for key, folder in PREVIEW_SPECS.items():
+            src = ROOT / "docs/eryon" / f"{key}_terrain_plan.txt"
+            dest = ROOT / "build/eryon-previews" / folder / "map.bin"
+            payload = compile_plan(src, tiles)
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            dest.write_bytes(payload)
+            print(f"PREVIEW ONLY {dest.relative_to(ROOT)}: {len(payload)} bytes")
     if args.install_layouts:
         layouts_path = ROOT / "data/layouts/layouts.json"
         data = json.loads(layouts_path.read_text(encoding="utf-8"))
