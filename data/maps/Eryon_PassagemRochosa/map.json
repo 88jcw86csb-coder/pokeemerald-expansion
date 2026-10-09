@@ -97,6 +97,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EryonPassagem_EventScript_CaravanLedger"
+    },
+    {
+      "type": "sign",
+      "x": 15,
+      "y": 18,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EryonPassagem_EventScript_RoadSurvey"
     }
   ],
   "id": "MAP_ERYON_PASSAGEM_ROCHOSA",
