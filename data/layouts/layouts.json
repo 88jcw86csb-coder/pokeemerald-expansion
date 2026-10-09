@@ -9433,6 +9433,17 @@
       "border_filepath": "data/layouts/PetalburgWoods/border.bin",
       "blockdata_filepath": "data/layouts/Eryon_ValeDosVentos/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ERYON_ESTRADA_DOS_POMARES",
+      "name": "ERYON_ESTRADA_DOS_POMARES_Layout",
+      "width": 48,
+      "height": 44,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Rustboro",
+      "border_filepath": "data/layouts/PetalburgWoods/border.bin",
+      "blockdata_filepath": "data/layouts/Eryon_EstradaDosPomares/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }
