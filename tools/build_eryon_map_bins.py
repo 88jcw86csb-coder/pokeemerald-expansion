@@ -31,13 +31,13 @@ PREVIEW_SPECS = {
 }
 WIDTH, HEIGHT = 48, 44
 
-def compile_plan(path, tile_ids):
+def compile_plan(path, tile_ids, width=WIDTH, height=HEIGHT):
     lines = path.read_text(encoding="utf-8").splitlines()
     rows = lines[4:]
-    if any(len(line) != WIDTH or not set(line) <= set("#.,:") for line in rows):
+    if any(len(line) != width or not set(line) <= set(tile_ids) for line in rows):
         raise ValueError(f"{path}: invalid terrain symbol or row width")
-    if len(rows) != HEIGHT:
-        raise ValueError(f"{path}: expected {HEIGHT} rows of {WIDTH} symbols; got {len(rows)}")
+    if len(rows) != height:
+        raise ValueError(f"{path}: expected {height} rows of {width} symbols; got {len(rows)}")
     values = [tile_ids[symbol] for row in rows for symbol in row]
     return struct.pack(f"<{len(values)}H", *values)
 
@@ -87,6 +87,17 @@ def main():
             dest.parent.mkdir(parents=True, exist_ok=True)
             dest.write_bytes(payload)
             print(f"PREVIEW ONLY {dest.relative_to(ROOT)}: {len(payload)} bytes")
+    if args.preview_unregistered:
+        src = ROOT / "docs/eryon/liga_eryon_terrain_plan.txt"
+        dest = ROOT / "build/eryon-previews/LigaEryon/map.bin"
+        # Reserved facility letters are placeholder floor until proper
+        # tilesets, buildings, NPCs and entrance warps are implemented.
+        league_tiles = {**tiles, "P": tiles["."], "C": tiles["."],
+                        "M": tiles["."], "L": tiles["."], "H": tiles["."]}
+        payload = compile_plan(src, league_tiles, width=64, height=56)
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_bytes(payload)
+        print(f"PREVIEW ONLY {dest.relative_to(ROOT)}: {len(payload)} bytes")
     if args.install_layouts:
         layouts_path = ROOT / "data/layouts/layouts.json"
         data = json.loads(layouts_path.read_text(encoding="utf-8"))
