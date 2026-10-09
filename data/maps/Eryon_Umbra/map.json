@@ -72,6 +72,13 @@
       "elevation": 0,
       "dest_map": "MAP_ERYON_VALE_DOS_VENTOS",
       "dest_warp_id": "1"
+    },
+    {
+      "x": 63,
+      "y": 28,
+      "elevation": 0,
+      "dest_map": "MAP_ERYON_ROTA_DAS_CACHOEIRAS",
+      "dest_warp_id": "0"
     }
   ],
   "region": "REGION_HOENN"
