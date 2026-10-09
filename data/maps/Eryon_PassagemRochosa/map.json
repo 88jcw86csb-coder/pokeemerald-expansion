@@ -105,6 +105,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EryonPassagem_EventScript_RoadSurvey"
+    },
+    {
+      "type": "sign",
+      "x": 40,
+      "y": 18,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EryonPassagem_EventScript_CargoManifest"
     }
   ],
   "id": "MAP_ERYON_PASSAGEM_ROCHOSA",
