@@ -61,7 +61,13 @@ EryonBosque_EventScript_SilentTraveler::
 
 EryonBosque_EventScript_TravelerAfterClue::
 	goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonBosque_EventScript_TravelerAfterBadge
+	goto_if_ge VAR_ERYON_KAEL_BRIEFED, 1, EryonBosque_EventScript_TravelerAfterKaelBriefed
 	msgbox EryonBosque_Text_TravelerAfterClue, MSGBOX_DEFAULT
+	release
+	end
+
+EryonBosque_EventScript_TravelerAfterKaelBriefed::
+	msgbox EryonBosque_Text_TravelerAfterKaelBriefed, MSGBOX_DEFAULT
 	release
 	end
 
@@ -87,6 +93,13 @@ EryonBosque_Text_TravelerAfterClue:
 	.string "VIAJANTE: A marca nas pedras?\p"
 	.string "As caixas tinham o mesmo sinal.\n"
 	.string "Nao pareciam pesquisadores.$"
+
+EryonBosque_Text_TravelerAfterKaelBriefed:
+	.string "VIAJANTE: Voce falou com Kael?\p"
+	.string "Entao ele conhece o simbolo.\n"
+	.string "Vou observar a trilha do norte.\p"
+	.string "Se as caixas voltarem,\n"
+	.string "precisamos avisar Verdelume.$"
 
 @ The stone independently unlocks the forest clue, even if the researcher is skipped.
 EryonBosque_EventScript_AncientStone::
