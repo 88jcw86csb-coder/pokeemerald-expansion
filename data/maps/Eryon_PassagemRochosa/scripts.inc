@@ -130,6 +130,32 @@ EryonPassagem_EventScript_EclipseVictoryAfterClue::
 	release
 	end
 
+@ Inspectable caravan ledger: gives the player a concrete destination clue.
+EryonPassagem_EventScript_CaravanLedger::
+	lock
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonPassagem_EventScript_CaravanLedgerClue
+	msgbox EryonPassagem_Text_CaravanLedgerBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPassagem_EventScript_CaravanLedgerClue::
+	msgbox EryonPassagem_Text_CaravanLedgerClue, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPassagem_Text_CaravanLedgerBefore:
+	.string "Um papel rasgado preso\n"
+	.string "entre as pedras.\p"
+	.string "Ha horarios de passagem,\n"
+	.string "mas o destino foi apagado.$"
+
+EryonPassagem_Text_CaravanLedgerClue:
+	.string "O registro fala de caixas\n"
+	.string "vindas da Serra dos Cristais.\p"
+	.string "Destino: estrada oriental.\n"
+	.string "Entrega antes do amanhecer.\p"
+	.string "O selo tem um eclipse.$"
+
 EryonPassagem_EventScript_Medic::
 	lock
 	faceplayer
