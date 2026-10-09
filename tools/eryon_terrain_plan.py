@@ -47,8 +47,13 @@ def route(kind):
             tiles[25][x] = "."
         for y in range(18, 26):
             tiles[y][23] = "."
-        for y in range(14, 39):
+        for y in range(5, 39):
             tiles[y][16] = "."
+        # Reach the northern exit from the spine and the western stone sign.
+        for x in range(14, 17):
+            tiles[5][x] = "."
+        for x in range(13, 17):
+            tiles[16][x] = "."
         # Both forest warps are placed on explicit clear path tiles.
         tiles[5][14] = "."
         tiles[38][16] = "."
