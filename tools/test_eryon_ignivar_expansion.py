@@ -99,5 +99,42 @@ class IgnivarExpansionTests(unittest.TestCase):
         self.assertEqual(layout["blockdata_filepath"], "data/layouts/Eryon_Ignivar/map.bin")
 
 
+    def test_echo_forest_terrain_warps_and_story_are_accessible(self):
+        city = load_map("Eryon_Ignivar")
+        forest = load_map("Eryon_FlorestaDosEcos")
+        self.assertEqual((city["warp_events"][1]["dest_map"],
+                          city["warp_events"][1]["dest_warp_id"]),
+                         (forest["id"], "0"))
+        self.assertEqual((forest["warp_events"][0]["dest_map"],
+                          forest["warp_events"][0]["dest_warp_id"]),
+                         (city["id"], "1"))
+        path = ROOT / "docs/eryon/floresta_dos_ecos_terrain_plan.txt"
+        self.assertEqual(len(compile_plan(path, TILES, 48, 44)), 4224)
+        rows = terrain_rows("docs/eryon/floresta_dos_ecos_terrain_plan.txt")
+        occupied = {(npc["x"], npc["y"]) for npc in forest["object_events"]}
+        accessible = reachable(rows, (0, 22), occupied)
+        self.assertIn((47, 22), accessible,
+                      "Echo Forest must be crossable despite stationary NPCs")
+        source = (ROOT / "data/maps/Eryon_FlorestaDosEcos/scripts.inc").read_text()
+        for event in forest["object_events"] + forest["bg_events"]:
+            with self.subTest(script=event["script"]):
+                x, y = event["x"], event["y"]
+                self.assertNotEqual(rows[y][x], "#")
+                self.assertIn(event["script"] + "::", source)
+                self.assertTrue(any((x + dx, y + dy) in accessible for dx, dy
+                                    in ((1, 0), (-1, 0), (0, 1), (0, -1))))
+        self.assertIn("VAR_ERYON_SERRA_CLUE_FOUND", source)
+
+    def test_echo_forest_layout_registration(self):
+        groups = json.loads((ROOT / "data/maps/map_groups.json").read_text())
+        layouts = json.loads((ROOT / "data/layouts/layouts.json").read_text())["layouts"]
+        self.assertIn("Eryon_FlorestaDosEcos", groups["gMapGroup_Eryon"])
+        forest = load_map("Eryon_FlorestaDosEcos")
+        layout = next(x for x in layouts if x["id"] == forest["layout"])
+        self.assertEqual((layout["width"], layout["height"]), (48, 44))
+        self.assertEqual(layout["blockdata_filepath"],
+                         "data/layouts/Eryon_FlorestaDosEcos/map.bin")
+
+
 if __name__ == "__main__":
     unittest.main()
