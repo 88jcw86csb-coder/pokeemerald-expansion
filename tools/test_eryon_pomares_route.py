@@ -115,6 +115,20 @@ class PomaresRouteTests(unittest.TestCase):
                 self.assertNotEqual(terrain[npc["y"]][npc["x"]],"#")
                 self.assertIn(npc["script"]+"::",scripts)
         self.assertIn("Bjorn", (ROOT/"data/maps/Eryon_Frostheim/scripts.inc").read_text())
+        ridge=json.loads((ROOT/"data/maps/Eryon_SerraDosCristais/map.json").read_text())
+        ridge_plan=ROOT/"docs/eryon/serra_dos_cristais_terrain_plan.txt"
+        ridge_rows=ridge_plan.read_text(encoding="utf-8").splitlines()[4:]
+        city_east=frostheim["warp_events"][1]
+        ridge_west=ridge["warp_events"][2]
+        self.assertEqual((city_east["dest_map"],city_east["dest_warp_id"]),("MAP_ERYON_SERRA_DOS_CRISTAIS","2"))
+        self.assertEqual((ridge_west["dest_map"],ridge_west["dest_warp_id"]),("MAP_ERYON_FROSTHEIM","1"))
+        self.assertNotEqual(frostheim_rows[12][63],"#")
+        self.assertNotEqual(ridge_rows[24][0],"#")
+        for script in ("Eryon_TrilhaGlacial", "Eryon_Frostheim"):
+            content=(ROOT/f"data/maps/{script}/scripts.inc").read_text()
+            self.assertIn("goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND",content)
+            self.assertIn("ResearcherExposed" if script=="Eryon_TrilhaGlacial" else "ResearcherAfterClue",content)
+
 
 
 
