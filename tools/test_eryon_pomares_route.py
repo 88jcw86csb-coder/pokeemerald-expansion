@@ -128,6 +128,23 @@ class PomaresRouteTests(unittest.TestCase):
         bjorn=next(n for n in frostheim["object_events"] if n["script"]=="EryonFrostheim_EventScript_Bjorn")
         self.assertNotEqual(frostheim_rows[bjorn["y"]][bjorn["x"]],"#")
         self.assertIn("EryonFrostheim_EventScript_BjornAfterClue::",frostheim_scripts)
+        refuge=json.loads((ROOT/"data/maps/Eryon_RefugioCristal/map.json").read_text())
+        ridge_to_refuge=ridge["warp_events"][3]
+        refuge_to_ridge=refuge["warp_events"][0]
+        self.assertEqual((ridge_to_refuge["dest_map"],ridge_to_refuge["dest_warp_id"]),("MAP_ERYON_REFUGIO_CRISTAL","0"))
+        self.assertEqual((refuge_to_ridge["dest_map"],refuge_to_ridge["dest_warp_id"]),("MAP_ERYON_SERRA_DOS_CRISTAIS","3"))
+        self.assertNotEqual(ridge_rows[27][47],"#")
+        refuge_plan=ROOT/"docs/eryon/vilas/refugio_cristal_village_plan.txt"
+        village_tiles={**TILES,**{k:TILES["."] for k in "PCMHI"}}
+        self.assertEqual(len(compile_plan(refuge_plan,village_tiles,36,30)),2160)
+        refuge_rows=refuge_plan.read_text(encoding="utf-8").splitlines()[4:]
+        self.assertNotEqual(refuge_rows[13][0],"#")
+        caretaker=refuge["object_events"][0]
+        self.assertNotEqual(refuge_rows[caretaker["y"]][caretaker["x"]],"#")
+        refuge_scripts=(ROOT/"data/maps/Eryon_RefugioCristal/scripts.inc").read_text()
+        self.assertIn(caretaker["script"]+"::",refuge_scripts)
+        self.assertIn("goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND",refuge_scripts)
+
         self.assertIn("VAR_ERYON_SERRA_CLUE_FOUND",frostheim_scripts)
 
         for script in ("Eryon_TrilhaGlacial", "Eryon_Frostheim"):
