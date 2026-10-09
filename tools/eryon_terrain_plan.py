@@ -13,6 +13,8 @@ WIDTH, HEIGHT = 48, 44
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "docs" / "eryon"
 MAP_NAMES = {
+    "bosque_de_lumina": "Eryon_BosqueDeLumina",
+    "serra_dos_cristais": "Eryon_SerraDosCristais",
     "passagem_rochosa": "Eryon_PassagemRochosa",
     "estrada_oriental": "Eryon_EstradaOriental",
     "vale_dos_ventos": "Eryon_ValeDosVentos",
@@ -28,6 +30,30 @@ def route(kind):
     if kind in ("valley", "road"):
         for y in range(18, 25):
             tiles[y][23 if kind == "valley" else 8] = "."
+    if kind == "forest":
+        # Forest entrance from the south, exit to the north.
+        for y in range(5, 39):
+            for x in range(12, 21):
+                tiles[y][x] = "."
+        for x in range(12, 26):
+            for y in range(13, 27):
+                if (x + y) % 7 != 0:
+                    tiles[y][x] = ","
+        for y in range(5, 39):
+            tiles[y][16] = "."
+        for x in range(14, 24):
+            tiles[18][x] = "."
+    if kind == "mountain":
+        # Stepped ascent with accessible observation terraces.
+        for x in range(WIDTH):
+            for y in range(19, 27):
+                tiles[y][x] = ":"
+        for x in (12, 24, 30, 35, 38, 39):
+            for y in range(13, 36):
+                tiles[y][x] = ":"
+        for y in (14, 16, 20, 24, 29, 31, 35):
+            for x in range(12, 40):
+                tiles[y][x] = ":"
     if kind == "passage":
         # Mountain switchbacks and a sheltered central crossing.
         for x in range(7, 42):
@@ -85,13 +111,19 @@ def reachable(tiles, start=(0, 22)):
 
 def main():
     OUTPUT.mkdir(parents=True, exist_ok=True)
-    for name, kind in (("passagem_rochosa", "passage"), ("estrada_oriental", "road"), ("vale_dos_ventos", "valley")):
+    for name, kind in (
+        ("bosque_de_lumina", "forest"),
+        ("serra_dos_cristais", "mountain"),
+        ("passagem_rochosa", "passage"),
+        ("estrada_oriental", "road"),
+        ("vale_dos_ventos", "valley"),
+    ):
         tiles = route(kind)
-        accessible = reachable(tiles)
-        assert (47, 22) in accessible, f"{name}: east exit is unreachable"
+        accessible = reachable(tiles, (16, 38) if kind == "forest" else (0, 22))
+        assert ((14, 5) if kind == "forest" else (47, 22)) in accessible, f"{name}: exit is unreachable"
         map_path = ROOT / "data" / "maps" / MAP_NAMES[name] / "map.json"
         map_data = json.loads(map_path.read_text(encoding="utf-8"))
-        landmarks = [(0, 22), (47, 22)]
+        landmarks = [(0, 22), (47, 22)] if kind != "forest" else [(16, 38), (14, 5)]
         for event in map_data.get("warp_events", []):
             landmarks.append((event["x"], event["y"]))
         for event in map_data.get("object_events", []):
