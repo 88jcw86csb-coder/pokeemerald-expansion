@@ -162,6 +162,16 @@ def route(kind):
             tiles[y][38] = ":"
         for x in range(10, 39):
             tiles[22][x] = "."
+        # Northern abandoned watchpost: optional route through a stony plateau.
+        for x in range(13, 35):
+            tiles[10][x] = ":"
+        for y in range(10, 23):
+            tiles[y][13] = ":"
+            tiles[y][34] = ":"
+        for y in range(7, 14):
+            for x in range(23, 30):
+                if (x - 26) ** 2 + (y - 10) ** 2 <= 9:
+                    tiles[y][x] = ":"
         # Distinctive stony pull-off around the roadside healer.
         for y in range(23, 31):
             for x in range(28, 39):
