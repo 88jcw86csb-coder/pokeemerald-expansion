@@ -28,18 +28,19 @@ Cada seta representa uma conexão FUTURA a implementar/testar no motor.
 | 20 | Vale Dos Ventos | valley | Umbra |
 | 21 | Umbra | gym | Rota Das Cachoeiras |
 | 22 | Rota Das Cachoeiras | route | Vila Das Aguas |
-| 23 | Vila Das Aguas | village | Deserto De Solaris |
-| 24 | Deserto De Solaris | desert | Ignivar |
-| 25 | Ignivar | gym | Floresta Dos Ecos |
-| 26 | Floresta Dos Ecos | forest | Aldeia Dos Ecos |
-| 27 | Aldeia Dos Ecos | village | Trilha Lunar |
-| 28 | Trilha Lunar | route | Lunaris |
-| 29 | Lunaris | gym | Trilha Dos Dragoes |
-| 30 | Trilha Dos Dragoes | route | Vila Do Pico |
-| 31 | Vila Do Pico | village | Drakonia |
-| 32 | Drakonia | gym | Caminho Da Liga |
-| 33 | Caminho Da Liga | route | Liga Eryon |
-| 34 | Liga Eryon | league | fim |
+| 23 | Vila Das Aguas | village | Trilha Do Oasis |
+| 24 | Trilha Do Oasis | route | Deserto De Solaris |
+| 25 | Deserto De Solaris | desert | Ignivar |
+| 26 | Ignivar | gym | Floresta Dos Ecos |
+| 27 | Floresta Dos Ecos | forest | Aldeia Dos Ecos |
+| 28 | Aldeia Dos Ecos | village | Trilha Lunar |
+| 29 | Trilha Lunar | route | Lunaris |
+| 30 | Lunaris | gym | Trilha Dos Dragoes |
+| 31 | Trilha Dos Dragoes | route | Vila Do Pico |
+| 32 | Vila Do Pico | village | Drakonia |
+| 33 | Drakonia | gym | Caminho Da Liga |
+| 34 | Caminho Da Liga | route | Liga Eryon |
+| 35 | Liga Eryon | league | fim |
 
 ## Critérios de implementação
 - Não colocar cidades de ginásio consecutivas.
