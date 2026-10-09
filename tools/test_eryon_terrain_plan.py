@@ -64,6 +64,13 @@ class TerrainPlansTests(unittest.TestCase):
                     self.assertIn((event["x"], event["y"]), accessible,
                                   f"{name}: unreachable event {event}")
 
+    def test_passage_southern_cavern_remains_accessible(self):
+        tiles = route("passage")
+        connected = reachable(tiles)
+        for point in ((34, 34), (34, 37), (42, 37), (42, 38)):
+            self.assertIn(point, connected)
+        self.assertEqual(tiles[38][42], ":")
+
     def test_road_northern_watchpost_access(self):
         tiles = route("road")
         connected = reachable(tiles)
