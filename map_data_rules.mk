@@ -26,10 +26,10 @@ $(ERYON_MAP_BINS) $(ERYON_VILLAGE_BIN) $(ERYON_NEBLINA_BIN) $(ERYON_CITY_BIN) $(
 	@test -s $@ || { echo "Missing Eryon map: $@; run make eryon-maps after removing the stamp"; exit 1; }
 	@actual=$$(wc -c < "$@"); expected=4224; case "$@" in *VilaDosPomares*|*VilaDaNeblina*|*RefugioCristal*|*PostoOriental*) expected=2160;; *Neonara*|*Frostheim*|*Umbra*) expected=7168;; esac; test "$$actual" -eq "$$expected" || { echo "Wrong map size: $@ ($$actual bytes, expected $$expected)"; exit 1; }
 
-$(DATA_ASM_BUILDDIR)/maps.o: $(ERYON_MAP_BINS) $(ERYON_VILLAGE_BIN) $(ERYON_CITY_BIN)
+$(DATA_ASM_BUILDDIR)/maps.o: $(ERYON_MAP_BINS) $(ERYON_VILLAGE_BIN) $(ERYON_NEBLINA_BIN) $(ERYON_CITY_BIN) $(ERYON_FROSTHEIM_BIN) $(ERYON_REFUGE_BIN) $(ERYON_OUTPOST_BIN) $(ERYON_UMBRA_BIN)
 
 .PHONY: eryon-maps
-eryon-maps: $(ERYON_MAP_BINS) $(ERYON_VILLAGE_BIN) $(ERYON_CITY_BIN)
+eryon-maps: $(ERYON_MAP_BINS) $(ERYON_VILLAGE_BIN) $(ERYON_NEBLINA_BIN) $(ERYON_CITY_BIN) $(ERYON_FROSTHEIM_BIN) $(ERYON_REFUGE_BIN) $(ERYON_OUTPOST_BIN) $(ERYON_UMBRA_BIN)
 
 # Map JSON data
 
