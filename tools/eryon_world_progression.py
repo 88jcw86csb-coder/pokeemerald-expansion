@@ -35,6 +35,7 @@ STAGES = [
     ("ignivar", "gym"),
     ("floresta_dos_ecos", "forest"),
     ("aldeia_dos_ecos", "village"),
+    ("trilha_lunar", "route"),
     ("lunaris", "gym"),
     ("trilha_dos_dragoes", "route"),
     ("vila_do_pico", "village"),
