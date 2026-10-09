@@ -30,11 +30,17 @@ def route(kind):
         for y in range(10, 25):
             for x in range(35, 42):
                 tiles[y][x] = "."
+        # Join the lookout at (37,10) to the investigation marker at (23,18).
+        for x in range(23, 38):
+            tiles[18][x] = "."
     else:
         # Distinctive stony pull-off around the roadside healer.
         for y in range(23, 31):
             for x in range(28, 39):
                 tiles[y][x] = ":"
+    # The road/valley transitions must align with the fixed warp coordinates.
+    for x in (0, WIDTH - 1):
+        tiles[22][x] = "."
     return tiles
 
 def reachable(tiles, start=(0, 22)):
