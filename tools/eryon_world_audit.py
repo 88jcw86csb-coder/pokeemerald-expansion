@@ -30,7 +30,7 @@ def audit():
             path=ROOT/"docs/eryon/cidades"/f"{name}_city_plan.txt"
         elif name in VILLAGES:
             path=ROOT/"docs/eryon/vilas"/f"{name}_village_plan.txt"
-        elif name in CONNECTORS or name in NEW_ROUTES or kind in ("forest","mountain","valley","route"):
+        elif name in CONNECTORS or name in NEW_ROUTES or kind in ("forest","mountain","valley","route","desert"):
             path=ROOT/"docs/eryon"/f"{name}_terrain_plan.txt"
         else:
             path=None
