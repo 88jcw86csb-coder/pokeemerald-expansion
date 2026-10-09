@@ -85,7 +85,13 @@ EryonRota03_EventScript_Researcher::
 	end
 
 EryonRota03_EventScript_ResearcherBadge::
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonRota03_EventScript_ResearcherSerraClue
 	msgbox EryonRota03_Text_ResearcherBadge, MSGBOX_DEFAULT
+	release
+	end
+
+EryonRota03_EventScript_ResearcherSerraClue::
+	msgbox EryonRota03_Text_ResearcherSerraClue, MSGBOX_DEFAULT
 	release
 	end
 
@@ -99,6 +105,14 @@ EryonRota03_Text_ResearcherBadge:
 	.string "as marcas do eclipse?\p"
 	.string "Encontrei cristais parecidos\n"
 	.string "nas pegadas das carrocas.$"
+
+EryonRota03_Text_ResearcherSerraClue:
+	.string "PESQUISADORA: Voce achou\n"
+	.string "um acampamento na serra?\p"
+	.string "Os fragmentos de cristal\n"
+	.string "parecem ter vindo de la.\p"
+	.string "Vou comparar as amostras\n"
+	.string "antes de seguir a trilha.$"
 
 @ Optional field medic: repeatable healing before the rocky trail.
 EryonRota03_EventScript_FieldMedic::
