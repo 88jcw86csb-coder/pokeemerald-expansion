@@ -6,7 +6,13 @@ EryonPassagem_EventScript_Guard::
 	lock
 	faceplayer
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonPassagem_EventScript_GuardClue
+	goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonPassagem_EventScript_GuardBadge
 	msgbox EryonPassagem_Text_GuardBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPassagem_EventScript_GuardBadge::
+	msgbox EryonPassagem_Text_GuardBadge, MSGBOX_DEFAULT
 	release
 	end
 
@@ -51,6 +57,13 @@ EryonPassagem_Text_GuardBefore:
 	.string "GUARDA: Os trilhos de pedra\n"
 	.string "levam a um velho desfiladeiro.\p"
 	.string "Cuidado com o terreno.$"
+
+EryonPassagem_Text_GuardBadge:
+	.string "GUARDA: Com a vitoria sobre\n"
+	.string "KAEL, voce pode explorar\n"
+	.string "as trilhas da serra.\p"
+	.string "Mas ha marcas de carrocas\n"
+	.string "estranhas pelo caminho.$"
 
 EryonPassagem_Text_GuardClue:
 	.string "GUARDA: Voce viu o simbolo\n"
