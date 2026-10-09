@@ -15,6 +15,21 @@ class TerrainPlansTests(unittest.TestCase):
         for x, y in ((15, 14), (23, 18), (20, 25), (13, 16), (19, 21)):
             self.assertIn((x, y), reachable(tiles, (16, 38)))
 
+    def test_committed_terrain_matches_generator(self):
+        kinds = {
+            "bosque_de_lumina": "forest",
+            "serra_dos_cristais": "mountain",
+            "passagem_rochosa": "passage",
+            "estrada_oriental": "road",
+            "vale_dos_ventos": "valley",
+        }
+        for name, kind in kinds.items():
+            with self.subTest(map=name):
+                plan = ROOT / "docs" / "eryon" / f"{name}_terrain_plan.txt"
+                rows = plan.read_text(encoding="utf-8").splitlines()[4:]
+                self.assertEqual(rows, ["".join(row) for row in route(kind)],
+                                 f"{name}: committed plan is out of sync")
+
     def test_passage_northern_ridge_connects_to_eclipse_checkpoint(self):
         tiles = route("passage")
         accessible = reachable(tiles)
