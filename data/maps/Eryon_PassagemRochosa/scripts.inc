@@ -28,6 +28,7 @@ EryonPassagem_EventScript_TravelerAfterClue::
 	release
 	end
 
+@ The cart tracks tell a different story once the Eclipse camp has been examined.
 EryonPassagem_EventScript_CrystalMark::
 	lock
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonPassagem_EventScript_CrystalMarkClue
@@ -186,3 +187,27 @@ EryonPassagem_Text_MedicHealed:
 
 EryonPassagem_Text_MedicDecline:
 	.string "Estarei aqui se precisar.$"
+
+@ A second optional observation connects the rocky passage to the stolen crystals.
+EryonPassagem_EventScript_BrokenCrate::
+	lock
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonPassagem_EventScript_BrokenCrateClue
+	msgbox EryonPassagem_Text_BrokenCrateBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPassagem_EventScript_BrokenCrateClue::
+	msgbox EryonPassagem_Text_BrokenCrateClue, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPassagem_Text_BrokenCrateBefore:
+	.string "Madeira quebrada e cordas\n"
+	.string "estao espalhadas na trilha.\p"
+	.string "Parece uma caixa de carga.$"
+
+EryonPassagem_Text_BrokenCrateClue:
+	.string "A caixa tem o mesmo simbolo\n"
+	.string "visto no acampamento.\p"
+	.string "Ha poeira de cristal na\n"
+	.string "madeira. O rastro segue.$"
