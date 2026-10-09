@@ -1,6 +1,6 @@
 Frostheim | Gym 3 (Ice) | Eryon concept 64x56
 # block; = avenue; , park; G gym; C Pokemon Center; M mart; H housing; P civic plaza
-Design only: not a registered map.bin. Gym, interiors, scripts and warps not implemented.
+Registered provisional 64x56 overworld: west/east warps, Bjorn and researcher scripts installed; Gym interior, battle and collision tests pending.
 
 #############===###############===##############===#############
 #############===###############===##############===#############
