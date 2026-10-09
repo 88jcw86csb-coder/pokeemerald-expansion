@@ -40,6 +40,10 @@ jobs:
               assert path.is_file(), path
               assert path.stat().st_size == WIDTH * HEIGHT * 2, path
               print(f"{folder}: preview encoding OK")
+          league = Path("build/eryon-previews/LigaEryon/map.bin")
+          assert league.is_file(), league
+          assert league.stat().st_size == 64 * 56 * 2, league
+          print("LigaEryon: 7168-byte preview encoding OK")
           PY
       - name: Verify dimensions and layout references
         run: |
