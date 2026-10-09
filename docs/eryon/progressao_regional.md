@@ -38,9 +38,10 @@ Cada seta representa uma conexão FUTURA a implementar/testar no motor.
 | 30 | Lunaris | gym | Trilha Dos Dragoes |
 | 31 | Trilha Dos Dragoes | route | Vila Do Pico |
 | 32 | Vila Do Pico | village | Drakonia |
-| 33 | Drakonia | gym | Caminho Da Liga |
-| 34 | Caminho Da Liga | route | Liga Eryon |
-| 35 | Liga Eryon | league | fim |
+| 33 | Drakonia | gym | Gruta Das Estrelas |
+| 34 | Gruta Das Estrelas | mountain | Caminho Da Liga |
+| 35 | Caminho Da Liga | route | Liga Eryon |
+| 36 | Liga Eryon | league | fim |
 
 ## Critérios de implementação
 - Não colocar cidades de ginásio consecutivas.
