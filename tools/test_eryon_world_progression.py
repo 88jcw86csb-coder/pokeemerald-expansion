@@ -13,6 +13,10 @@ class WorldProgressionTests(unittest.TestCase):
         self.assertGreaterEqual(kinds.count("route"), 9)
         self.assertEqual([name for name, kind in STAGES if kind == "gym"], GYMS)
         self.assertEqual(STAGES[2][0], "bosque_de_lumina")
+        self.assertEqual(len(STAGES), 34)
+        names = [name for name, _ in STAGES]
+        self.assertEqual(names[names.index("aldeia_dos_ecos")+1], "trilha_lunar")
+        self.assertEqual(names[names.index("trilha_lunar")+1], "lunaris")
         for i in range(len(kinds) - 1):
             self.assertFalse(kinds[i] == kinds[i + 1] == "gym")
 
