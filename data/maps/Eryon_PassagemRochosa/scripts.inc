@@ -291,3 +291,27 @@ EryonPassagem_Text_RoadSurveyClue:
 	.string "Algumas cargas passaram\n"
 	.string "fora do horario normal.\p"
 	.string "A trilha oriental continua.$"
+
+@ The wagon tracks form a continuing clue after the Crystal Ridge camp.
+EryonPassagem_EventScript_CargoManifest::
+	lock
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonPassagem_EventScript_CargoManifestClue
+	msgbox EryonPassagem_Text_CargoManifestBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPassagem_EventScript_CargoManifestClue::
+	msgbox EryonPassagem_Text_CargoManifestAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPassagem_Text_CargoManifestBefore:
+	.string "Um manifesto de carga\n"
+	.string "esta preso nas pedras.\p"
+	.string "Os nomes foram apagados.$"
+
+EryonPassagem_Text_CargoManifestAfter:
+	.string "As marcas das caixas\n"
+	.string "combinam com a serra!\p"
+	.string "Destino: Posto Oriental.\n"
+	.string "Remetente: ECLIPSE.$"
