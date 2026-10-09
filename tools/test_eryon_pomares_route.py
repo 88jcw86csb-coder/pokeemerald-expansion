@@ -37,6 +37,20 @@ class PomaresRouteTests(unittest.TestCase):
         self.assertNotEqual(rows[scout["y"]][scout["x"]],"#")
         scripts=(ROOT/"data/maps/Eryon_Rota04/scripts.inc").read_text()
         self.assertIn(scout["script"]+"::",scripts)
+        neonara=json.loads((ROOT/"data/maps/Eryon_Neonara/map.json").read_text())
+        east=route03["warp_events"][3]
+        west=neonara["warp_events"][0]
+        self.assertEqual((east["dest_map"],east["dest_warp_id"]),("MAP_ERYON_NEONARA","0"))
+        self.assertEqual((west["dest_map"],west["dest_warp_id"]),("MAP_ERYON_ROTA03","3"))
+        self.assertEqual((east["x"],east["y"]),(49,11))
+        self.assertEqual((west["x"],west["y"]),(0,28))
+        city_plan=ROOT/"docs/eryon/cidades/neonara_city_plan.txt"
+        city_tiles={**TILES,"=":TILES["."],**{k:TILES["."] for k in "GCMHP"}}
+        self.assertEqual(len(compile_plan(city_plan,city_tiles,64,56)),7168)
+        city_rows=city_plan.read_text(encoding="utf-8").splitlines()[4:]
+        self.assertNotEqual(city_rows[28][0],"#")
+        self.assertNotIn(r"\\\\n",scripts)
+
 
 
 
