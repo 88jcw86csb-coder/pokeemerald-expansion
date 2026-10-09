@@ -9477,6 +9477,17 @@
       "border_filepath": "data/layouts/PetalburgWoods/border.bin",
       "blockdata_filepath": "data/layouts/Eryon_Neonara/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ERYON_COLINAS_DA_NEBLINA",
+      "name": "ERYON_COLINAS_DA_NEBLINA_Layout",
+      "width": 48,
+      "height": 44,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Rustboro",
+      "border_filepath": "data/layouts/PetalburgWoods/border.bin",
+      "blockdata_filepath": "data/layouts/Eryon_ColinasDaNeblina/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }
