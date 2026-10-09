@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Regression checks for Eryon's five distinct terrain plans."""
 import unittest
-from eryon_terrain_plan import WIDTH, HEIGHT, route, reachable
+import json
+from pathlib import Path
+from eryon_terrain_plan import WIDTH, HEIGHT, ROOT, MAP_NAMES, route, reachable
 
 class TerrainPlansTests(unittest.TestCase):
     def test_forest_uses_north_south_trail_not_horizontal_highway(self):
@@ -12,6 +14,25 @@ class TerrainPlansTests(unittest.TestCase):
         self.assertEqual(tiles[22][WIDTH - 1], "#")
         for x, y in ((15, 14), (23, 18), (20, 25), (13, 16), (19, 21)):
             self.assertIn((x, y), reachable(tiles, (16, 38)))
+
+    def test_all_registered_events_reachable(self):
+        kinds = {
+            "bosque_de_lumina": "forest",
+            "serra_dos_cristais": "mountain",
+            "passagem_rochosa": "passage",
+            "estrada_oriental": "road",
+            "vale_dos_ventos": "valley",
+        }
+        for name, kind in kinds.items():
+            with self.subTest(map=name):
+                tiles = route(kind)
+                start = (16, 38) if kind == "forest" else (0, 22)
+                accessible = reachable(tiles, start)
+                data = json.loads((ROOT / "data/maps" / MAP_NAMES[name] / "map.json").read_text(encoding="utf-8"))
+                events = data["warp_events"] + data["object_events"] + data["bg_events"]
+                for event in events:
+                    self.assertIn((event["x"], event["y"]), accessible,
+                                  f"{name}: unreachable event {event}")
 
     def test_mountain_and_routes_have_connected_exits(self):
         for kind in ("mountain", "passage", "road", "valley"):
