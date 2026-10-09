@@ -1,3 +1,21 @@
+# Eryon: generate correctly sized terrain binaries before assembling maps.
+# Provisional metatile IDs; inspect tileset visuals and collision in Porymap.
+ERYON_MAP_BINS := $(addprefix data/layouts/Eryon_,$(addsuffix /map.bin,BosqueDeLumina SerraDosCristais PassagemRochosa EstradaOriental ValeDosVentos))
+ERYON_TERRAIN_PLANS := $(addprefix docs/eryon/,$(addsuffix _terrain_plan.txt,bosque_de_lumina serra_dos_cristais passagem_rochosa estrada_oriental vale_dos_ventos))
+ERYON_MAP_STAMP := data/layouts/.eryon_maps_generated
+
+$(ERYON_MAP_STAMP): tools/build_eryon_map_bins.py $(ERYON_TERRAIN_PLANS)
+	python3 tools/build_eryon_map_bins.py --wall 0x0c01 --path 0x0001 --meadow 0x0002 --stone 0x0003
+	@touch $@
+
+$(ERYON_MAP_BINS): $(ERYON_MAP_STAMP)
+	@test -f $@ || { rm -f $(ERYON_MAP_STAMP); echo "Missing Eryon map: $@; rerun make"; exit 1; }
+
+$(DATA_ASM_BUILDDIR)/maps.o: $(ERYON_MAP_BINS)
+
+.PHONY: eryon-maps
+eryon-maps: $(ERYON_MAP_BINS)
+
 # Map JSON data
 
 # Inputs
