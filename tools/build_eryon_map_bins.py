@@ -17,6 +17,7 @@ SPECS = {
     "estrada_oriental": "EstradaOriental",
     "vale_dos_ventos": "ValeDosVentos",
     "estrada_dos_pomares": "EstradaDosPomares",
+    "rota_04": "Rota04",
 }
 PREVIEW_SPECS = {
     "rota_das_cachoeiras": "RotaDasCachoeiras",
