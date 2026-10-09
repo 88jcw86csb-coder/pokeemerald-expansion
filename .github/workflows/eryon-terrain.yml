@@ -32,7 +32,7 @@ jobs:
         run: python3 -m unittest discover -s tools -p 'test_eryon_*py'
       - name: Audit 36-stage Eryon regional map inventory
         run: python3 tools/eryon_world_audit.py
-      - name: Verify ten unregistered terrain previews
+      - name: Verify eleven unregistered terrain previews
         run: |
           python3 - <<'PY'
           from pathlib import Path
