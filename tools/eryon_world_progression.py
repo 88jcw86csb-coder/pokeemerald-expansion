@@ -81,6 +81,7 @@ def render():
         "- Inserir trilhas, biomas, vilas de descanso e encontros selvagens entre marcos.",
         "- Manter Bosque de Lumina entre a primeira rota e Verdelume.",
         "- Preservar saídas já registradas: Serra → Passagem → Estrada → Vale.",
+        "- Refúgio Cristal e Posto Oriental são desvios laterais planejados; a tabela é ordem narrativa, não exige quebrar os warps diretos existentes.",
         "- Os novos locais são propostas de expansão; não alegar que possuem map.json, layout ou warp.",
         "- Confirmar em Porymap e no emulador cada transição antes de liberar a ROM.",
         "",
