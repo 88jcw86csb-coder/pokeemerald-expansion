@@ -145,3 +145,29 @@ EryonVale_Text_SealedCargoClue:
 	.string "dos cristais da serra!\p"
 	.string "O destino marcado e\n"
 	.string "a cidade de Umbra.$"
+
+@ A second route witness links the cargo trail to Umbra's factory.
+EryonVale_EventScript_CaravanWitness::
+	lock
+	faceplayer
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonVale_EventScript_CaravanWitnessClue
+	msgbox EryonVale_Text_CaravanWitnessBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVale_EventScript_CaravanWitnessClue::
+	msgbox EryonVale_Text_CaravanWitnessClue, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVale_Text_CaravanWitnessBefore:
+	.string "VIAJANTE: Carrocas\n"
+	.string "cruzaram o vale a noite.\p"
+	.string "Evitaram os postos\n"
+	.string "de fiscalizacao.$"
+
+EryonVale_Text_CaravanWitnessClue:
+	.string "VIAJANTE: As caixas\n"
+	.string "tinham marcas da ECLIPSE.\p"
+	.string "Foram descarregadas\n"
+	.string "perto da fabrica de Umbra.$"
