@@ -127,6 +127,13 @@ def main():
     neonara_dest.write_bytes(neonara_payload)
     generated["LAYOUT_ERYON_NEONARA"] = neonara_dest.relative_to(ROOT).as_posix()
     print(f"{neonara_dest.relative_to(ROOT)}: {len(neonara_payload)} bytes")
+    frostheim_src = ROOT / "docs/eryon/cidades/frostheim_city_plan.txt"
+    frostheim_dest = ROOT / "data/layouts/Eryon_Frostheim/map.bin"
+    frostheim_payload = compile_plan(frostheim_src, neonara_tiles, width=64, height=56)
+    frostheim_dest.parent.mkdir(parents=True, exist_ok=True)
+    frostheim_dest.write_bytes(frostheim_payload)
+    generated["LAYOUT_ERYON_FROSTHEIM"] = frostheim_dest.relative_to(ROOT).as_posix()
+    print(f"{frostheim_dest.relative_to(ROOT)}: {len(frostheim_payload)} bytes")
     if args.preview_unregistered:
         # Village/city landmark symbols are only floor placeholders.
         # These previews are not functional buildings or gym interiors.
@@ -145,7 +152,7 @@ def main():
         city_tiles = {**tiles, "=": tiles["."],
                       **{mark: tiles["."] for mark in "GCMHP"}}
         for key in CITIES:
-            if key == "neonara":
+            if key in ("neonara", "frostheim"):
                 continue
             src = ROOT / "docs/eryon/cidades" / f"{key}_city_plan.txt"
             dest = ROOT / "build/eryon-previews/cities" / key / "map.bin"
