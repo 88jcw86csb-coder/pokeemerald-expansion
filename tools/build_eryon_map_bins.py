@@ -20,9 +20,9 @@ SPECS = {
     "rota_04": "Rota04",
     "colinas_da_neblina": "ColinasDaNeblina",
     "trilha_glacial": "TrilhaGlacial",
+    "rota_das_cachoeiras": "RotaDasCachoeiras",
 }
 PREVIEW_SPECS = {
-    "rota_das_cachoeiras": "RotaDasCachoeiras",
     "deserto_de_solaris": "DesertoDeSolaris",
     "floresta_dos_ecos": "FlorestaDosEcos",
     "trilha_dos_dragoes": "TrilhaDosDragoes",
