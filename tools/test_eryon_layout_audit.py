@@ -3,7 +3,7 @@
 import struct
 import unittest
 
-from eryon_layout_audit import connected_by_collision_bits, decode_block, zero_collision_edge_positions
+from eryon_layout_audit import connected_by_collision_bits, decode_block, zero_collision_edge_positions, reachable_edge_positions
 
 
 def grid(width, height, walls=()):
@@ -46,6 +46,16 @@ class EryonLayoutAuditTests(unittest.TestCase):
     def test_edge_candidates_invalid_direction(self):
         with self.assertRaises(ValueError):
             zero_collision_edge_positions(grid(2, 2), 2, 2, "diagonal")
+
+    def test_reachable_edge_excludes_isolated_clear_exit(self):
+        raw = grid(5, 3, walls={(2, 0), (2, 1), (2, 2)})
+        self.assertEqual(reachable_edge_positions(raw, 5, 3, (0, 1), "right"), [])
+        self.assertEqual(reachable_edge_positions(raw, 5, 3, (0, 1), "left"),
+                         [(0, 0), (0, 1), (0, 2)])
+
+    def test_reachable_edge_from_blocked_spawn(self):
+        raw = grid(3, 3, walls={(1, 1)})
+        self.assertEqual(reachable_edge_positions(raw, 3, 3, (1, 1), "up"), [])
 
     def test_out_of_bounds_exit(self):
         raw = grid(3, 2)
