@@ -1,6 +1,6 @@
 trilha_glacial — Eryon terrain concept 48x44
 # blocked; . path; , vegetation; : rocky/special ground
-Design only: metatiles, collisions, wild encounters and warps not installed.
+Registered provisional route: west return to Neblina and guide script installed; metatiles, collision and encounters require testing.
 
 ################################################
 ################################################
