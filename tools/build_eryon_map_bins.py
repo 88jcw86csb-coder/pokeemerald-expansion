@@ -99,6 +99,28 @@ def main():
         dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_bytes(payload)
         print(f"PREVIEW ONLY {dest.relative_to(ROOT)}: {len(payload)} bytes")
+    if args.preview_unregistered:
+        # Village/city landmark symbols are only floor placeholders.
+        # These previews are not functional buildings or gym interiors.
+        from eryon_villages import VILLAGES
+        from eryon_gym_cities import CITIES
+        village_tiles = {**tiles, **{mark: tiles["."] for mark in "PC MHI".replace(" ", "")}}
+        for key in VILLAGES:
+            src = ROOT / "docs/eryon/vilas" / f"{key}_village_plan.txt"
+            dest = ROOT / "build/eryon-previews/villages" / key / "map.bin"
+            payload = compile_plan(src, village_tiles, width=36, height=30)
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            dest.write_bytes(payload)
+            print(f"PREVIEW VILLAGE {key}: {len(payload)} bytes")
+        city_tiles = {**tiles, "=": tiles["."],
+                      **{mark: tiles["."] for mark in "GCMHP"}}
+        for key in CITIES:
+            src = ROOT / "docs/eryon/cidades" / f"{key}_city_plan.txt"
+            dest = ROOT / "build/eryon-previews/cities" / key / "map.bin"
+            payload = compile_plan(src, city_tiles, width=64, height=56)
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            dest.write_bytes(payload)
+            print(f"PREVIEW CITY {key}: {len(payload)} bytes")
     if args.install_layouts:
         layouts_path = ROOT / "data/layouts/layouts.json"
         data = json.loads(layouts_path.read_text(encoding="utf-8"))
