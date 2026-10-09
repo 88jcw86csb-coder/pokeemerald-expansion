@@ -12,7 +12,7 @@ $(ERYON_MAP_STAMP): tools/build_eryon_map_bins.py $(ERYON_TERRAIN_PLANS) $(ERYON
 
 $(ERYON_MAP_BINS) $(ERYON_VILLAGE_BIN): $(ERYON_MAP_STAMP)
 	@test -s $@ || { echo "Missing Eryon map: $@; run make eryon-maps after removing the stamp"; exit 1; }
-	@test "$(wc -c < "$@")" -eq $(case "$@" in *VilaDosPomares*) echo 2160;; *) echo 4224;; esac) || { echo "Wrong map size: $@"; exit 1; }
+	@actual=$$(wc -c < "$@"); expected=4224; case "$@" in *VilaDosPomares*) expected=2160;; esac; test "$$actual" -eq "$$expected" || { echo "Wrong map size: $@ ($$actual bytes, expected $$expected)"; exit 1; }
 
 $(DATA_ASM_BUILDDIR)/maps.o: $(ERYON_MAP_BINS) $(ERYON_VILLAGE_BIN)
 
