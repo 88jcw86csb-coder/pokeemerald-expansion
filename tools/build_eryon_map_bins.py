@@ -21,6 +21,7 @@ SPECS = {
     "colinas_da_neblina": "ColinasDaNeblina",
     "trilha_glacial": "TrilhaGlacial",
     "rota_das_cachoeiras": "RotaDasCachoeiras",
+    "trilha_do_oasis": "TrilhaDoOasis",
 }
 PREVIEW_SPECS = {
     "deserto_de_solaris": "DesertoDeSolaris",
