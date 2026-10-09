@@ -8,19 +8,21 @@ ERYON_NEBLINA_BIN := data/layouts/Eryon_VilaDaNeblina/map.bin
 ERYON_NEBLINA_PLAN := docs/eryon/vilas/vila_da_neblina_village_plan.txt
 ERYON_CITY_BIN := data/layouts/Eryon_Neonara/map.bin
 ERYON_CITY_PLAN := docs/eryon/cidades/neonara_city_plan.txt
+ERYON_OUTPOST_BIN := data/layouts/Eryon_PostoOriental/map.bin
+ERYON_OUTPOST_PLAN := docs/eryon/vilas/posto_oriental_village_plan.txt
 ERYON_REFUGE_BIN := data/layouts/Eryon_RefugioCristal/map.bin
 ERYON_REFUGE_PLAN := docs/eryon/vilas/refugio_cristal_village_plan.txt
 ERYON_FROSTHEIM_BIN := data/layouts/Eryon_Frostheim/map.bin
 ERYON_FROSTHEIM_PLAN := docs/eryon/cidades/frostheim_city_plan.txt
 ERYON_MAP_STAMP := data/layouts/.eryon_maps_generated
 
-$(ERYON_MAP_STAMP): tools/build_eryon_map_bins.py $(ERYON_TERRAIN_PLANS) $(ERYON_VILLAGE_PLAN) $(ERYON_NEBLINA_PLAN) $(ERYON_CITY_PLAN) $(ERYON_FROSTHEIM_PLAN) $(ERYON_REFUGE_PLAN)
+$(ERYON_MAP_STAMP): tools/build_eryon_map_bins.py $(ERYON_TERRAIN_PLANS) $(ERYON_VILLAGE_PLAN) $(ERYON_NEBLINA_PLAN) $(ERYON_CITY_PLAN) $(ERYON_FROSTHEIM_PLAN) $(ERYON_REFUGE_PLAN) $(ERYON_OUTPOST_PLAN)
 	python3 tools/build_eryon_map_bins.py --wall 0x3c01 --path 0x3001 --meadow 0x3002 --stone 0x3003
 	@touch $@
 
-$(ERYON_MAP_BINS) $(ERYON_VILLAGE_BIN) $(ERYON_NEBLINA_BIN) $(ERYON_CITY_BIN) $(ERYON_FROSTHEIM_BIN) $(ERYON_REFUGE_BIN): $(ERYON_MAP_STAMP)
+$(ERYON_MAP_BINS) $(ERYON_VILLAGE_BIN) $(ERYON_NEBLINA_BIN) $(ERYON_CITY_BIN) $(ERYON_FROSTHEIM_BIN) $(ERYON_REFUGE_BIN) $(ERYON_OUTPOST_BIN): $(ERYON_MAP_STAMP)
 	@test -s $@ || { echo "Missing Eryon map: $@; run make eryon-maps after removing the stamp"; exit 1; }
-	@actual=$$(wc -c < "$@"); expected=4224; case "$@" in *VilaDosPomares*|*VilaDaNeblina*|*RefugioCristal*) expected=2160;; *Neonara*|*Frostheim*) expected=7168;; esac; test "$$actual" -eq "$$expected" || { echo "Wrong map size: $@ ($$actual bytes, expected $$expected)"; exit 1; }
+	@actual=$$(wc -c < "$@"); expected=4224; case "$@" in *VilaDosPomares*|*VilaDaNeblina*|*RefugioCristal*|*PostoOriental*) expected=2160;; *Neonara*|*Frostheim*) expected=7168;; esac; test "$$actual" -eq "$$expected" || { echo "Wrong map size: $@ ($$actual bytes, expected $$expected)"; exit 1; }
 
 $(DATA_ASM_BUILDDIR)/maps.o: $(ERYON_MAP_BINS) $(ERYON_VILLAGE_BIN) $(ERYON_CITY_BIN)
 
