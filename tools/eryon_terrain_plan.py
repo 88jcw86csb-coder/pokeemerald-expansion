@@ -22,7 +22,7 @@ MAP_NAMES = {
 
 def route(kind):
     tiles = [["#" for _ in range(WIDTH)] for _ in range(HEIGHT)]
-    for x in range(WIDTH):
+    for x in range(WIDTH) if kind != "forest" else ():
         center = 22 + (2 if (x // 8) % 2 else 0)
         for y in range(center - 3, center + 4):
             tiles[y][x] = "."
@@ -102,8 +102,9 @@ def route(kind):
             for x in range(28, 39):
                 tiles[y][x] = ":"
     # The road/valley transitions must align with the fixed warp coordinates.
-    for x in (0, WIDTH - 1):
-        tiles[22][x] = "."
+    if kind != "forest":
+        for x in (0, WIDTH - 1):
+            tiles[22][x] = "."
     return tiles
 
 def reachable(tiles, start=(0, 22)):
