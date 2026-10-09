@@ -124,6 +124,12 @@ class PomaresRouteTests(unittest.TestCase):
         self.assertEqual((ridge_west["dest_map"],ridge_west["dest_warp_id"]),("MAP_ERYON_FROSTHEIM","1"))
         self.assertNotEqual(frostheim_rows[12][63],"#")
         self.assertNotEqual(ridge_rows[24][0],"#")
+        frostheim_scripts=(ROOT/"data/maps/Eryon_Frostheim/scripts.inc").read_text()
+        bjorn=next(n for n in frostheim["object_events"] if n["script"]=="EryonFrostheim_EventScript_Bjorn")
+        self.assertNotEqual(frostheim_rows[bjorn["y"]][bjorn["x"]],"#")
+        self.assertIn("EryonFrostheim_EventScript_BjornAfterClue::",frostheim_scripts)
+        self.assertIn("VAR_ERYON_SERRA_CLUE_FOUND",frostheim_scripts)
+
         for script in ("Eryon_TrilhaGlacial", "Eryon_Frostheim"):
             content=(ROOT/f"data/maps/{script}/scripts.inc").read_text()
             self.assertIn("goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND",content)
