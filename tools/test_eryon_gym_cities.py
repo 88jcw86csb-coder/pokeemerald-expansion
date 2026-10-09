@@ -5,6 +5,19 @@ from eryon_gym_cities import ROOT, CITIES, W, H, BUILDINGS, city, accessible, re
 
 
 class GymCityTests(unittest.TestCase):
+    def test_each_city_has_its_own_accessible_district(self):
+        landmarks = {
+            "verdelume": (7, 7), "neonara": (55, 7),
+            "frostheim": (7, 48), "arkhara": (55, 48),
+            "umbra": (8, 8), "ignivar": (55, 8),
+            "lunaris": (8, 47), "drakonia": (55, 47),
+        }
+        for name, point in landmarks.items():
+            with self.subTest(city=name):
+                tiles = city(name)
+                self.assertEqual(tiles[point[1]][point[0]], "P")
+                self.assertIn(point, accessible(tiles))
+
     def test_cities_have_reachable_facilities_and_exits(self):
         for name in CITIES:
             with self.subTest(city=name):
