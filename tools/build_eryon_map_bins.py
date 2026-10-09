@@ -23,9 +23,9 @@ SPECS = {
     "rota_das_cachoeiras": "RotaDasCachoeiras",
     "trilha_do_oasis": "TrilhaDoOasis",
     "deserto_de_solaris": "DesertoDeSolaris",
+    "floresta_dos_ecos": "FlorestaDosEcos",
 }
 PREVIEW_SPECS = {
-    "floresta_dos_ecos": "FlorestaDosEcos",
     "trilha_dos_dragoes": "TrilhaDosDragoes",
     "trilha_lunar": "TrilhaLunar",
     "caminho_da_liga": "CaminhoDaLiga",
