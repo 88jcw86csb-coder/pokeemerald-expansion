@@ -9,6 +9,7 @@ from eryon_gym_cities import CITIES
 from eryon_villages import VILLAGES
 from eryon_connector_routes import ROUTES as CONNECTORS
 from eryon_new_routes import ROUTES as NEW_ROUTES
+from build_eryon_map_bins import SPECS, PREVIEW_SPECS
 
 ROOT=Path(__file__).resolve().parents[1]
 KNOWN_EXISTING={
@@ -36,6 +37,10 @@ def audit():
             path=None
         if path is not None and name not in KNOWN_EXISTING and not path.is_file():
             errors.append(f"Missing concept plan: {name}: {path}")
+    for name in set(SPECS) | set(PREVIEW_SPECS):
+        path=ROOT/"docs/eryon"/f"{name}_terrain_plan.txt"
+        if not path.is_file():
+            errors.append(f"Map encoder input missing: {name}")
     for name in FINAL_PLANS:
         if name not in planned:
             errors.append(f"Final stage missing: {name}")
