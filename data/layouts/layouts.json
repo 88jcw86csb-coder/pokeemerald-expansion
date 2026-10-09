@@ -9598,6 +9598,17 @@
       "border_filepath": "data/layouts/PetalburgWoods/border.bin",
       "blockdata_filepath": "data/layouts/Eryon_DesertoDeSolaris/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ERYON_IGNIVAR",
+      "name": "ERYON_IGNIVAR_Layout",
+      "width": 64,
+      "height": 56,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Rustboro",
+      "border_filepath": "data/layouts/PetalburgWoods/border.bin",
+      "blockdata_filepath": "data/layouts/Eryon_Ignivar/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }
