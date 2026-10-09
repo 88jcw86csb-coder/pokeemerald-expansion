@@ -9,7 +9,7 @@ MAPS = ("Eryon_VilaAurora", "Eryon_Rota01", "Eryon_BosqueDeLumina",
         "Eryon_Rota02", "Eryon_Verdelume", "Eryon_Rota03",
         "Eryon_SerraDosCristais", "Eryon_PassagemRochosa",
         "Eryon_EstradaOriental", "Eryon_ValeDosVentos",
-        "Eryon_EstradaDosPomares", "Eryon_VilaDosPomares", "Eryon_Rota04", "Eryon_Neonara", "Eryon_ColinasDaNeblina", "Eryon_VilaDaNeblina", "Eryon_TrilhaGlacial", "Eryon_Frostheim", "Eryon_RefugioCristal", "Eryon_PostoOriental", "Eryon_Umbra", "Eryon_RotaDasCachoeiras", "Eryon_VilaDasAguas", "Eryon_TrilhaDoOasis", "Eryon_DesertoDeSolaris")
+        "Eryon_EstradaDosPomares", "Eryon_VilaDosPomares", "Eryon_Rota04", "Eryon_Neonara", "Eryon_ColinasDaNeblina", "Eryon_VilaDaNeblina", "Eryon_TrilhaGlacial", "Eryon_Frostheim", "Eryon_RefugioCristal", "Eryon_PostoOriental", "Eryon_Umbra", "Eryon_RotaDasCachoeiras", "Eryon_VilaDasAguas", "Eryon_TrilhaDoOasis", "Eryon_DesertoDeSolaris", "Eryon_Ignivar")
 LABEL = re.compile(r"(?m)^([A-Za-z][A-Za-z0-9_]*)::?\s*$")
 JUMP = re.compile(r"^\s*(?:goto|goto_if_eq|goto_if_ne|goto_if_ge|goto_if_le|goto_if_gt|goto_if_lt)\s+(.+)$")
 
