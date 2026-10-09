@@ -37,6 +37,10 @@ def village(name):
     for x in (8,27):
         for y in range(8,24):
             t[y][x]="."
+    # Access lanes keep the inn and houses reachable from the main street.
+    for x in (12,24):
+        for y in range(8,24):
+            t[y][x]="."
     for y in range(12,19):
         for x in range(14,22):
             t[y][x]="P"
