@@ -63,6 +63,14 @@ def zero_collision_edge_positions(raw, width, height, direction):
     return [pos for pos in edge if decode_block(raw, width, *pos)[1] == 0]
 
 
+def reachable_edge_positions(raw, width, height, start, direction):
+    """Find boundary candidates connected to start by zero-collision tiles."""
+    return [
+        pos for pos in zero_collision_edge_positions(raw, width, height, direction)
+        if connected_by_collision_bits(raw, width, height, start, pos)
+    ]
+
+
 def inspect():
     groups = read_json("data/maps/map_groups.json")
     layouts = {x["id"]: x for x in read_json("data/layouts/layouts.json")["layouts"]}
@@ -107,11 +115,7 @@ def inspect():
                 direction = connection.get("direction")
                 if direction not in ("up", "down", "left", "right"):
                     continue
-                candidates = zero_collision_edge_positions(raw, width, height, direction)
-                reachable = any(
-                    connected_by_collision_bits(raw, width, height, (10, 10), pos)
-                    for pos in candidates
-                )
+                reachable = reachable_edge_positions(raw, width, height, (10, 10), direction)
                 print(f"  spawn -> edge connection {index} ({direction}): "
                       f"{'candidate path found' if reachable else 'no zero-collision path'}")
                 if not reachable:
