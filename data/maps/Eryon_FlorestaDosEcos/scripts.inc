@@ -179,3 +179,43 @@ EryonEcos_Text_EasternSurveyInformed:
 	.string "os cabos as pedras!\p"
 	.string "Precisamos avisar a\n"
 	.string "ALDEIA DOS ECOS.$"
+
+@ Makes the expedition sustainable while pursuing Eclipse through the woods.
+EryonEcos_EventScript_RescueMedic::
+	lock
+	faceplayer
+	msgbox EryonEcos_Text_RescueMedic, MSGBOX_DEFAULT
+	special HealPlayerParty
+	release
+	end
+
+EryonEcos_Text_RescueMedic:
+	.string "SOCORRISTA: Os ecos\n"
+	.string "assustam os viajantes.\p"
+	.string "Vou recuperar sua equipe\n"
+	.string "antes da proxima trilha.$"
+
+@ A second clue extends the investigation beyond simple dialogue.
+EryonEcos_EventScript_RelayRecord::
+	lock
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonEcos_EventScript_RelayRecordExposed
+	msgbox EryonEcos_Text_RelayRecordHidden, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEcos_EventScript_RelayRecordExposed::
+	msgbox EryonEcos_Text_RelayRecordExposed, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEcos_Text_RelayRecordHidden:
+	.string "Um pequeno terminal\n"
+	.string "esta coberto de musgo.\p"
+	.string "O visor mostra uma\n"
+	.string "onda interrompida.$"
+
+EryonEcos_Text_RelayRecordExposed:
+	.string "TERMINAL ECLIPSE:\n"
+	.string "Rede SOLARIS-IGNIVAR.\p"
+	.string "Proximo ponto: VALE\n"
+	.string "DOS ECOS. Sinal ativo.$"
