@@ -141,6 +141,25 @@ class EryonEventFlowTests(unittest.TestCase):
         )
         self.assertIn("EryonEcos_Text_OldTrailSign:", scripts)
 
+    def test_eastern_forest_survey_is_connected_to_story(self):
+        import json
+        folder = ROOT / "data/maps/Eryon_FlorestaDosEcos"
+        map_data = json.loads((folder / "map.json").read_text(encoding="utf-8"))
+        scripts = (folder / "scripts.inc").read_text(encoding="utf-8")
+        label = "EryonEcos_EventScript_EasternSurvey"
+        surveyors = [obj for obj in map_data["object_events"]
+                     if obj.get("script") == label]
+        self.assertEqual(len(surveyors), 1)
+        self.assertEqual((surveyors[0]["x"], surveyors[0]["y"]), (39, 23))
+        self.assertIn(label + "::", scripts)
+        self.assertIn(label + "Informed::", scripts)
+        self.assertIn(
+            "goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, " + label + "Informed",
+            scripts,
+        )
+        for suffix in ("Before", "Informed"):
+            self.assertIn("EryonEcos_Text_EasternSurvey" + suffix + ":", scripts)
+
     def test_passagem_healer_and_two_trainers(self):
         import json
         folder = ROOT / "data/maps/Eryon_PassagemRochosa"
