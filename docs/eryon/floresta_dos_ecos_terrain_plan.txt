@@ -1,6 +1,6 @@
 floresta_dos_ecos — terrain concept (48x44)
 # = barrier; . = main trail; , = meadow; : = stone
-Registered provisional forest: Ignivar return warp, researcher, Eclipse observer and resonant-stone clue implemented; wildlife, east village link and ROM playtest remain pending.
+Registered forest: Ignivar and Vale dos Ecos reciprocal warps, Eclipse research clues and healing support installed; full ROM playtest remains pending.
 
 ################################################
 ################################################
@@ -23,9 +23,9 @@ Registered provisional forest: Ignivar return warp, researcher, Eclipse observer
 ############,#######################,###########
 ############,#######################,###########
 ############,#######################,###########
-############,#######################,###########
-............,......,................,.....,.....
-###################,######################,#####
+................................................
+................................................
+................................................
 ###################,######################,#####
 ###################,######################,#####
 ###################,######################,#####

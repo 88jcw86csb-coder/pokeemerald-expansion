@@ -73,6 +73,11 @@ def build(kind):
                     if (x-cx)**2+(y-cy)**2 <= 14:
                         t[y][x] = ","
         t[22][0] = t[22][47] = "."
+    # Crossable three-tile lane: field NPCs no longer block the only passage.
+    if kind in ("desert", "echoes"):
+        for y in (21, 22, 23):
+            for x in range(W):
+                t[y][x] = "."
     return t
 
 
@@ -92,7 +97,11 @@ def connected(tiles, start):
 def render(name, tiles):
     return (f"{name} — terrain concept (48x44)\n"
             "# = barrier; . = main trail; , = meadow; : = stone\n"
-            "Design only: not a registered GBA map; requires tilesets, events, warps and ROM tests.\n\n"
+            {
+                "rota_das_cachoeiras": "Registered provisional route: Umbra and Vila das Aguas connections planned; events and interior art are in progress.\\n\\n",
+                "deserto_de_solaris": "Registered provisional map: trail and Ignivar warps, Eclipse relay inspection and desert NPCs installed; real tileset art, encounters and full ROM tests pending.\\n\\n",
+                "floresta_dos_ecos": "Registered forest: Ignivar and Vale dos Ecos reciprocal warps, Eclipse research clues and healing support installed; full ROM playtest remains pending.\\n\\n",
+            }[name]
             + "\n".join("".join(row) for row in tiles) + "\n")
 
 
