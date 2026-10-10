@@ -166,6 +166,8 @@ gStdScripts_End::
 	.include "data/maps/Eryon_DesertoDeSolaris/scripts.inc"
 	.include "data/maps/Eryon_Ignivar/scripts.inc"
 	.include "data/maps/Eryon_FlorestaDosEcos/scripts.inc"
+	.include "data/maps/Eryon_ValeDosEcos/scripts.inc"
+	.include "data/maps/Eryon_AldeiaDosEcos/scripts.inc"
 	.include "data/maps/LittlerootTown/scripts.inc"
 	.include "data/maps/OldaleTown/scripts.inc"
 	.include "data/maps/DewfordTown/scripts.inc"
