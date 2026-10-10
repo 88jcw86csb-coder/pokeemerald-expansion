@@ -139,3 +139,17 @@ EryonIgnivar_Text_BurntFuseClue:
 	.string "selo da ECLIPSE.\p"
 	.string "Um cabo segue para\n"
 	.string "a FLORESTA DOS ECOS.$"
+
+@ Additional local witness to the Eclipse signal crossing Eryon.
+EryonIgnivar_EventScript_GridInspector::
+	lock
+	faceplayer
+	msgbox EryonIgnivar_Text_GridInspector, MSGBOX_DEFAULT
+	release
+	end
+
+EryonIgnivar_Text_GridInspector:
+	.string "INSPETORA: A usina sofre pulsos\n"
+	.string "vindos de Solaris.\p"
+	.string "A rede da floresta\n"
+	.string "tambem foi atingida.$"
