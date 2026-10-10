@@ -115,3 +115,40 @@ EryonEcos_Text_SignalSurveyor:
 	.string "reagem em sequencia.\p"
 	.string "O ultimo pulso segue\n"
 	.string "alem destas arvores.$"
+
+@ Investigation stations along the eastern forest path.
+EryonEcos_EventScript_CableJunction::
+	lock
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonEcos_EventScript_CableJunctionClue
+	msgbox EryonEcos_Text_CableJunctionBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEcos_EventScript_CableJunctionClue::
+	msgbox EryonEcos_Text_CableJunctionClue, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEcos_EventScript_OldTrailSign::
+	lock
+	msgbox EryonEcos_Text_OldTrailSign, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEcos_Text_CableJunctionBefore:
+	.string "Um cabo escuro surge\n"
+	.string "entre as raizes.\p"
+	.string "Ha pegadas recentes\n"
+	.string "junto a trilha.$"
+
+EryonEcos_Text_CableJunctionClue:
+	.string "A marca ECLIPSE esta\n"
+	.string "gravada no conector.\p"
+	.string "O fio segue para alem\n"
+	.string "da floresta.$"
+
+EryonEcos_Text_OldTrailSign:
+	.string "TRILHA DOS ECOS:\n"
+	.string "Siga as pedras antigas.\p"
+	.string "A aldeia fica adiante,\n"
+	.string "apos o vale.$"
