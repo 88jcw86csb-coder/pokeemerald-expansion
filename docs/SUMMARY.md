@@ -10,6 +10,11 @@
     - [ERYON TECHNICAL AUDIT 2026-10-08](./ERYON_TECHNICAL_AUDIT_2026-10-08.md)
     - [ERYON IMPLEMENTATION PLAN](./ERYON_IMPLEMENTATION_PLAN.md)
     - [ERYON MAP VALIDATION](./ERYON_MAP_VALIDATION.md)
+    - [ERYON TERRAIN PROGRESS](./ERYON_TERRAIN_PROGRESS.md)
+    - [Eryon — documentação regional](./eryon/README.md)
+    - [Eryon — ginásios oficiais](./eryon/ginasios_oficiais.md)
+    - [Eryon — Pokémon por rotas](./eryon/distribuicao_pokemon_rotas.md)
+    - [Eryon — capítulo 03](./eryon/historia/capitulo_03_ecos_sob_o_gelo.md)
 
 - [README](./README.md)
 - [FEATURES](./FEATURES.md)
