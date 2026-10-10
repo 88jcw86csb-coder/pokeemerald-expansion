@@ -61,6 +61,31 @@ class EryonEventFlowTests(unittest.TestCase):
                 events = maps[name]["bg_events"]
                 self.assertTrue(any(event.get("script") == clue for event in events))
 
+    def test_solaris_ignivar_ecos_additional_witnesses(self):
+        import json
+        cases = (
+            ("Eryon_DesertoDeSolaris", "EryonSolaris_EventScript_CaravanScout"),
+            ("Eryon_Ignivar", "EryonIgnivar_EventScript_GridInspector"),
+            ("Eryon_FlorestaDosEcos", "EryonEcos_EventScript_ForestRanger"),
+        )
+        for map_name, label in cases:
+            with self.subTest(map=map_name):
+                folder = ROOT / "data/maps" / map_name
+                data = json.loads((folder / "map.json").read_text(encoding="utf-8"))
+                scripts = (folder / "scripts.inc").read_text(encoding="utf-8")
+                self.assertEqual(sum(
+                    event.get("script") == label for event in data["object_events"]
+                ), 1)
+                self.assertIn(label + "::", scripts)
+                text_label = label.replace("_EventScript_", "_Text_")
+                self.assertIn(text_label + ":", scripts)
+                self.assertIn("msgbox " + text_label, scripts)
+
+    def test_ignivar_medic_text_escapes_are_single(self):
+        source = (ROOT / "data/maps/Eryon_Ignivar/scripts.inc").read_text(encoding="utf-8")
+        self.assertIn('SOCORRISTA: A usina\\n', source)
+        self.assertNotIn('SOCORRISTA: A usina\\\\n', source)
+
     def test_passagem_healer_and_two_trainers(self):
         import json
         folder = ROOT / "data/maps/Eryon_PassagemRochosa"
