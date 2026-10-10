@@ -55,6 +55,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EryonUmbra_EventScript_IndustrialManifest"
+    },
+    {
+      "type": "sign",
+      "x": 47,
+      "y": 27,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EryonUmbra_EventScript_DesertCargoLedger"
     }
   ],
   "id": "MAP_ERYON_UMBRA",
