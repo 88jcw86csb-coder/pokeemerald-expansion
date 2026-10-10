@@ -102,6 +102,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EryonIgnivar_EventScript_BurntFuse"
+    },
+    {
+      "type": "sign",
+      "x": 51,
+      "y": 28,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EryonIgnivar_EventScript_EmergencyBoard"
     }
   ],
   "id": "MAP_ERYON_IGNIVAR",
