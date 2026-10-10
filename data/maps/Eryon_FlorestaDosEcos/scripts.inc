@@ -89,3 +89,29 @@ EryonEcos_Text_ForestRanger:
 	.string "quando o sinal toca.\p"
 	.string "Procure as pedras que\n"
 	.string "vibram junto ao vento.$"
+
+@ Regional aftermath of Eclipse's transmission experiment.
+EryonEcos_EventScript_SignalSurveyor::
+	lock
+	faceplayer
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonEcos_EventScript_SignalSurveyorInformed
+	msgbox EryonEcos_Text_SignalSurveyorBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEcos_EventScript_SignalSurveyorInformed::
+	msgbox EryonEcos_Text_SignalSurveyor, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEcos_Text_SignalSurveyorBefore:
+	.string "MORADOR: A cidade e\n"
+	.string "a floresta mudaram.\p"
+	.string "Ha um ruido estranho\n"
+	.string "perto das trilhas.$"
+
+EryonEcos_Text_SignalSurveyor:
+	.string "TECNICO: Os cristais\n"
+	.string "reagem em sequencia.\p"
+	.string "O ultimo pulso segue\n"
+	.string "alem destas arvores.$"
