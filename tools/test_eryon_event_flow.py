@@ -178,6 +178,23 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertIn("EryonUmbra_Text_DesertCargoLedgerBefore:", scripts)
         self.assertIn("EryonUmbra_Text_DesertCargoLedgerClue:", scripts)
 
+    def test_echo_forest_medic_and_relay_terminal(self):
+        import json
+        folder = ROOT / "data/maps/Eryon_FlorestaDosEcos"
+        data = json.loads((folder / "map.json").read_text(encoding="utf-8"))
+        scripts = (folder / "scripts.inc").read_text(encoding="utf-8")
+        medic = "EryonEcos_EventScript_RescueMedic"
+        terminal = "EryonEcos_EventScript_RelayRecord"
+        self.assertEqual(sum(e.get("script") == medic for e in data["object_events"]), 1)
+        self.assertEqual(sum(e.get("script") == terminal for e in data["bg_events"]), 1)
+        self.assertIn(medic + "::", scripts)
+        self.assertIn("special HealPlayerParty", scripts)
+        self.assertIn(terminal + "::", scripts)
+        self.assertIn(terminal + "Exposed::", scripts)
+        self.assertIn("goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, " + terminal + "Exposed", scripts)
+        self.assertIn("EryonEcos_Text_RelayRecordHidden:", scripts)
+        self.assertIn("EryonEcos_Text_RelayRecordExposed:", scripts)
+
     def test_passagem_healer_and_two_trainers(self):
         import json
         folder = ROOT / "data/maps/Eryon_PassagemRochosa"
