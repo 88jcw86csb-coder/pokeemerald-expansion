@@ -75,3 +75,17 @@ EryonEcos_Text_StoneClue:
 	.string "responde ao sinal.\p"
 	.string "As marcas apontam\n"
 	.string "para ALDEIA DOS ECOS.$"
+
+@ Additional local witness to the Eclipse signal crossing Eryon.
+EryonEcos_EventScript_ForestRanger::
+	lock
+	faceplayer
+	msgbox EryonEcos_Text_ForestRanger, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEcos_Text_ForestRanger:
+	.string "GUARDA: Os Pokemon se agitam\n"
+	.string "quando o sinal toca.\p"
+	.string "Procure as pedras que\n"
+	.string "vibram junto ao vento.$"
