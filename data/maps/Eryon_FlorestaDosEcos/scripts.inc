@@ -152,3 +152,30 @@ EryonEcos_Text_OldTrailSign:
 	.string "Siga as pedras antigas.\p"
 	.string "A aldeia fica adiante,\n"
 	.string "apos o vale.$"
+
+@ The eastern survey gives the player a concrete objective before leaving
+@ the forest. This encounter deliberately uses the existing Serra clue.
+EryonEcos_EventScript_EasternSurvey::
+	lock
+	faceplayer
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonEcos_EventScript_EasternSurveyInformed
+	msgbox EryonEcos_Text_EasternSurveyBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEcos_EventScript_EasternSurveyInformed::
+	msgbox EryonEcos_Text_EasternSurveyInformed, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEcos_Text_EasternSurveyBefore:
+	.string "VIGIA: O vale adiante\n"
+	.string "esta cheio de ecos.\p"
+	.string "Os moradores pediram\n"
+	.string "ajuda em Ignivar.$"
+
+EryonEcos_Text_EasternSurveyInformed:
+	.string "VIGIA: A ECLIPSE ligou\n"
+	.string "os cabos as pedras!\p"
+	.string "Precisamos avisar a\n"
+	.string "ALDEIA DOS ECOS.$"
