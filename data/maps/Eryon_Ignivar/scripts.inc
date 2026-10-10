@@ -75,9 +75,9 @@ EryonIgnivar_EventScript_EmergencyMedic::
 	end
 
 EryonIgnivar_Text_Medic:
-	.string "SOCORRISTA: A usina\\n"
-	.string "ainda esta instavel.\\p"
-	.string "Vou cuidar da sua equipe\\n"
+	.string "SOCORRISTA: A usina\n"
+	.string "ainda esta instavel.\p"
+	.string "Vou cuidar da sua equipe\n"
 	.string "antes da travessia.$"
 
 EryonIgnivar_Text_EngineerBefore:
