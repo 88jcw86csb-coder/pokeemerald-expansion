@@ -103,3 +103,28 @@ EryonUmbra_Text_IndustrialManifestClue:
 	.string "e cristais da serra!\p"
 	.string "Destino seguinte: a\n"
 	.string "regiao das cachoeiras.$"
+
+@ Umbra's port manifest foreshadows the relay installation at Solaris.
+EryonUmbra_EventScript_DesertCargoLedger::
+	lock
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonUmbra_EventScript_DesertCargoLedgerClue
+	msgbox EryonUmbra_Text_DesertCargoLedgerBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonUmbra_EventScript_DesertCargoLedgerClue::
+	msgbox EryonUmbra_Text_DesertCargoLedgerClue, MSGBOX_DEFAULT
+	release
+	end
+
+EryonUmbra_Text_DesertCargoLedgerBefore:
+	.string "REGISTRO: Maquinas de\n"
+	.string "medicao foram enviadas.\p"
+	.string "Destino: SOLARIS.\n"
+	.string "Remetente: desconhecido.$"
+
+EryonUmbra_Text_DesertCargoLedgerClue:
+	.string "REGISTRO: Material\n"
+	.string "cristalino de Umbra.\p"
+	.string "Transporte via SOLARIS\n"
+	.string "ate a usina de IGNIVAR.$"
