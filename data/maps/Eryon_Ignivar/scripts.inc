@@ -149,7 +149,7 @@ EryonIgnivar_EventScript_GridInspector::
 	end
 
 EryonIgnivar_Text_GridInspector:
-	.string "INSPETORA: A usina sofre pulsos\n"
+	.string "TECNICA: A usina sofre pulsos\n"
 	.string "vindos de Solaris.\p"
 	.string "A rede da floresta\n"
 	.string "tambem foi atingida.$"
