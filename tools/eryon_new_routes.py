@@ -97,7 +97,7 @@ def connected(tiles, start):
 def render(name, tiles):
     return (f"{name} — terrain concept (48x44)\n"
             "# = barrier; . = main trail; , = meadow; : = stone\n"
-            {
+            + {
                 "rota_das_cachoeiras": "Registered provisional route: Umbra and Vila das Aguas connections planned; events and interior art are in progress.\n\n",
                 "deserto_de_solaris": "Registered provisional map: trail and Ignivar warps, Eclipse relay inspection and desert NPCs installed; real tileset art, encounters and full ROM tests pending.\n\n",
                 "floresta_dos_ecos": "Registered forest: Ignivar and Vale dos Ecos reciprocal warps, Eclipse research clues and healing support installed; full ROM playtest remains pending.\n\n",
