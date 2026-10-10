@@ -120,6 +120,27 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertIn("EryonIgnivar_Text_EmergencyBoardAlert:", scripts)
         self.assertIn("EryonIgnivar_Text_EmergencyBoardQuiet:", scripts)
 
+    def test_echo_forest_eastern_story_landmarks(self):
+        import json
+        directory = ROOT / "data/maps/Eryon_FlorestaDosEcos"
+        data = json.loads((directory / "map.json").read_text(encoding="utf-8"))
+        scripts = (directory / "scripts.inc").read_text(encoding="utf-8")
+        required = {
+            "EryonEcos_EventScript_CableJunction": (34, 23),
+            "EryonEcos_EventScript_OldTrailSign": (44, 22),
+        }
+        for label, position in required.items():
+            with self.subTest(label=label):
+                matches = [e for e in data["bg_events"] if e.get("script") == label]
+                self.assertEqual(len(matches), 1)
+                self.assertEqual((matches[0]["x"], matches[0]["y"]), position)
+                self.assertIn(label + "::", scripts)
+        self.assertIn(
+            "goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, "
+            "EryonEcos_EventScript_CableJunctionClue", scripts
+        )
+        self.assertIn("EryonEcos_Text_OldTrailSign:", scripts)
+
     def test_passagem_healer_and_two_trainers(self):
         import json
         folder = ROOT / "data/maps/Eryon_PassagemRochosa"
