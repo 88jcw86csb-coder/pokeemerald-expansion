@@ -108,6 +108,18 @@ class EryonEventFlowTests(unittest.TestCase):
                 self.assertIn(text_label + "Before:", script)
                 self.assertIn(text_label + ":", script)
 
+    def test_ignivar_emergency_board_is_placed_and_reactive(self):
+        import json
+        root = ROOT / "data/maps/Eryon_Ignivar"
+        data = json.loads((root / "map.json").read_text(encoding="utf-8"))
+        scripts = (root / "scripts.inc").read_text(encoding="utf-8")
+        label = "EryonIgnivar_EventScript_EmergencyBoard"
+        self.assertEqual(sum(e.get("script") == label for e in data["bg_events"]), 1)
+        self.assertIn(label + "::", scripts)
+        self.assertIn("goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, " + label + "Alert", scripts)
+        self.assertIn("EryonIgnivar_Text_EmergencyBoardAlert:", scripts)
+        self.assertIn("EryonIgnivar_Text_EmergencyBoardQuiet:", scripts)
+
     def test_passagem_healer_and_two_trainers(self):
         import json
         folder = ROOT / "data/maps/Eryon_PassagemRochosa"
