@@ -86,6 +86,28 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertIn('SOCORRISTA: A usina\\n', source)
         self.assertNotIn('SOCORRISTA: A usina\\\\n', source)
 
+    def test_post_ignivar_story_npcs_and_clue_branch(self):
+        import json
+        cases = (
+            ("Eryon_Ignivar", "EryonIgnivar_EventScript_EvacuationCoordinator"),
+            ("Eryon_FlorestaDosEcos", "EryonEcos_EventScript_SignalSurveyor"),
+        )
+        for name, label in cases:
+            with self.subTest(map=name):
+                folder = ROOT / "data/maps" / name
+                data = json.loads((folder / "map.json").read_text(encoding="utf-8"))
+                script = (folder / "scripts.inc").read_text(encoding="utf-8")
+                self.assertEqual(sum(e.get("script") == label for e in data["object_events"]), 1)
+                self.assertIn(label + "::", script)
+                self.assertIn(label + "Informed::", script)
+                self.assertIn(
+                    "goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, " + label + "Informed",
+                    script,
+                )
+                text_label = label.replace("_EventScript_", "_Text_")
+                self.assertIn(text_label + "Before:", script)
+                self.assertIn(text_label + ":", script)
+
     def test_passagem_healer_and_two_trainers(self):
         import json
         folder = ROOT / "data/maps/Eryon_PassagemRochosa"
