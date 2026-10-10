@@ -63,6 +63,15 @@ def main():
 
     maps = {name: load(f"data/maps/{name}/map.json") for name in NAMES}
     ids = {m["id"]: name for name, m in maps.items()}
+    # Resolve every song against this expansion's actual constants, not old
+    # Hoenn aliases. Invalid music symbols otherwise fail at ROM link time.
+    valid_music = set(re.findall(
+        r"(?m)^#define\\s+(MUS_[A-Z0-9_]+)\\b",
+        (ROOT / "include/constants/songs.h").read_text(encoding="utf-8")
+    ))
+    for map_name, map_data in maps.items():
+        if map_data["music"] not in valid_music:
+            errors.append(f"{map_name}: unknown music symbol {map_data['music']}")
     # Ensure the starting point remains within Vila Aurora and is not occupied
     # by an NPC or an automatic map event.
     village = maps["Eryon_VilaAurora"]
