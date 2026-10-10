@@ -85,7 +85,7 @@ EryonEcos_EventScript_ForestRanger::
 	end
 
 EryonEcos_Text_ForestRanger:
-	.string "GUARDA: Os Pokemon se agitam\n"
+	.string "GUARDA: Pokemon se agitam\n"
 	.string "quando o sinal toca.\p"
 	.string "Procure as pedras que\n"
 	.string "vibram junto ao vento.$"
