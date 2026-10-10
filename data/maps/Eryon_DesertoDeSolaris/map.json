@@ -60,7 +60,7 @@
   "id": "MAP_ERYON_DESERTO_DE_SOLARIS",
   "name": "Eryon_DesertoDeSolaris",
   "layout": "LAYOUT_ERYON_DESERTO_DE_SOLARIS",
-  "music": "MUS_ROUTE_111",
+  "music": "MUS_ROUTE110",
   "region_map_section": "MAPSEC_ROUTE_111",
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_ROUTE",

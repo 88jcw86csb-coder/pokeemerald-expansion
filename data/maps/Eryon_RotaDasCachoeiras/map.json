@@ -47,7 +47,7 @@
   "id": "MAP_ERYON_ROTA_DAS_CACHOEIRAS",
   "name": "Eryon_RotaDasCachoeiras",
   "layout": "LAYOUT_ERYON_ROTA_DAS_CACHOEIRAS",
-  "music": "MUS_ROUTE_119",
+  "music": "MUS_ROUTE119",
   "region_map_section": "MAPSEC_ROUTE_119",
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_ROUTE",

@@ -68,7 +68,7 @@
   "id": "MAP_ERYON_VALE_DOS_ECOS",
   "name": "Eryon_ValeDosEcos",
   "layout": "LAYOUT_ERYON_VALE_DOS_ECOS",
-  "music": "MUS_ROUTE_111",
+  "music": "MUS_ROUTE110",
   "region_map_section": "MAPSEC_ROUTE_111",
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_ROUTE",
