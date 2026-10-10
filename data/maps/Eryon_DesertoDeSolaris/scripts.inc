@@ -83,7 +83,7 @@ EryonSolaris_EventScript_CaravanScout::
 	end
 
 EryonSolaris_Text_CaravanScout:
-	.string "BATEDORA: As marcas na areia\n"
+	.string "GUIA: As marcas na areia\n"
 	.string "nao sao de Pokemon.\p"
 	.string "Um comboio ECLIPSE\n"
 	.string "seguiu para Ignivar.$"
