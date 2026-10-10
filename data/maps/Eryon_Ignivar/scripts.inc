@@ -153,3 +153,29 @@ EryonIgnivar_Text_GridInspector:
 	.string "vindos de Solaris.\p"
 	.string "A rede da floresta\n"
 	.string "tambem foi atingida.$"
+
+@ Regional aftermath of Eclipse's transmission experiment.
+EryonIgnivar_EventScript_EvacuationCoordinator::
+	lock
+	faceplayer
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonIgnivar_EventScript_EvacuationCoordinatorInformed
+	msgbox EryonIgnivar_Text_EvacuationCoordinatorBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonIgnivar_EventScript_EvacuationCoordinatorInformed::
+	msgbox EryonIgnivar_Text_EvacuationCoordinator, MSGBOX_DEFAULT
+	release
+	end
+
+EryonIgnivar_Text_EvacuationCoordinatorBefore:
+	.string "MORADOR: A cidade e\n"
+	.string "a floresta mudaram.\p"
+	.string "Ha um ruido estranho\n"
+	.string "perto das trilhas.$"
+
+EryonIgnivar_Text_EvacuationCoordinator:
+	.string "COORDENADOR: O bairro\n"
+	.string "leste ficou sem luz.\p"
+	.string "A equipe de resgate\n"
+	.string "espera perto da mata.$"
