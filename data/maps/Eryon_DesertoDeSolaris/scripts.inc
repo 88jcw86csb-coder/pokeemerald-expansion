@@ -73,3 +73,17 @@ EryonSolaris_Text_DeviceClue:
 	.string "cobre um transmissor.\p"
 	.string "Um cabo segue na\n"
 	.string "direcao da usina.$"
+
+@ Additional local witness to the Eclipse signal crossing Eryon.
+EryonSolaris_EventScript_CaravanScout::
+	lock
+	faceplayer
+	msgbox EryonSolaris_Text_CaravanScout, MSGBOX_DEFAULT
+	release
+	end
+
+EryonSolaris_Text_CaravanScout:
+	.string "BATEDORA: As marcas na areia\n"
+	.string "nao sao de Pokemon.\p"
+	.string "Um comboio ECLIPSE\n"
+	.string "seguiu para Ignivar.$"
