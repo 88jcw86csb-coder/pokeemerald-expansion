@@ -179,3 +179,28 @@ EryonIgnivar_Text_EvacuationCoordinator:
 	.string "leste ficou sem luz.\p"
 	.string "A equipe de resgate\n"
 	.string "espera perto da mata.$"
+
+@ Public emergency board tracks the same mission thread as the city witnesses.
+EryonIgnivar_EventScript_EmergencyBoard::
+	lock
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonIgnivar_EventScript_EmergencyBoardAlert
+	msgbox EryonIgnivar_Text_EmergencyBoardQuiet, MSGBOX_DEFAULT
+	release
+	end
+
+EryonIgnivar_EventScript_EmergencyBoardAlert::
+	msgbox EryonIgnivar_Text_EmergencyBoardAlert, MSGBOX_DEFAULT
+	release
+	end
+
+EryonIgnivar_Text_EmergencyBoardQuiet:
+	.string "AVISO: A subestacao\n"
+	.string "esta em manutencao.\p"
+	.string "Siga pela trilha leste\n"
+	.string "com cuidado.$"
+
+EryonIgnivar_Text_EmergencyBoardAlert:
+	.string "ALERTA: Sinal vindo\n"
+	.string "do deserto detectado!\p"
+	.string "A equipe tecnica segue\n"
+	.string "para a floresta.$"
