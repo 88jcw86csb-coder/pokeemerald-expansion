@@ -160,6 +160,24 @@ class EryonEventFlowTests(unittest.TestCase):
         for suffix in ("Before", "Informed"):
             self.assertIn("EryonEcos_Text_EasternSurvey" + suffix + ":", scripts)
 
+    def test_umbra_desert_cargo_ledger_connects_regions(self):
+        import json
+        folder = ROOT / "data/maps/Eryon_Umbra"
+        data = json.loads((folder / "map.json").read_text(encoding="utf-8"))
+        scripts = (folder / "scripts.inc").read_text(encoding="utf-8")
+        label = "EryonUmbra_EventScript_DesertCargoLedger"
+        entries = [event for event in data["bg_events"]
+                   if event.get("script") == label]
+        self.assertEqual(len(entries), 1)
+        self.assertIn(label + "::", scripts)
+        self.assertIn(label + "Clue::", scripts)
+        self.assertIn(
+            "goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, " + label + "Clue",
+            scripts,
+        )
+        self.assertIn("EryonUmbra_Text_DesertCargoLedgerBefore:", scripts)
+        self.assertIn("EryonUmbra_Text_DesertCargoLedgerClue:", scripts)
+
     def test_passagem_healer_and_two_trainers(self):
         import json
         folder = ROOT / "data/maps/Eryon_PassagemRochosa"
