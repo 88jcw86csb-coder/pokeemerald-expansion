@@ -195,6 +195,54 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertIn("EryonEcos_Text_RelayRecordHidden:", scripts)
         self.assertIn("EryonEcos_Text_RelayRecordExposed:", scripts)
 
+    def test_echo_valley_and_village_are_recognized_and_reciprocal(self):
+        import json
+        group = json.loads((ROOT / "data/maps/map_groups.json").read_text(encoding="utf-8"))
+        for name in ("Eryon_ValeDosEcos", "Eryon_AldeiaDosEcos"):
+            self.assertIn(name, group["gMapGroup_Eryon"])
+        chain = ("Eryon_FlorestaDosEcos", "Eryon_ValeDosEcos", "Eryon_AldeiaDosEcos")
+        maps = {
+            name: json.loads((ROOT / "data/maps" / name / "map.json").read_text(encoding="utf-8"))
+            for name in chain
+        }
+        for source, destination in zip(chain, chain[1:]):
+            with self.subTest(source=source, destination=destination):
+                self.assertTrue(any(
+                    w["dest_map"] == maps[destination]["id"]
+                    and 0 <= int(w["dest_warp_id"]) < len(maps[destination]["warp_events"])
+                    and maps[destination]["warp_events"][int(w["dest_warp_id"])]["dest_map"] == maps[source]["id"]
+                    for w in maps[source]["warp_events"]
+                ))
+        healer = "EryonAldeia_EventScript_Healer"
+        village = maps["Eryon_AldeiaDosEcos"]
+        self.assertEqual(sum(n["script"] == healer for n in village["object_events"]), 1)
+        village_script = (ROOT / "data/maps/Eryon_AldeiaDosEcos/scripts.inc").read_text(encoding="utf-8")
+        self.assertIn("special HealPlayerParty", village_script)
+        valley_script = (ROOT / "data/maps/Eryon_ValeDosEcos/scripts.inc").read_text(encoding="utf-8")
+        self.assertIn("EryonEcoVale_EventScript_CrystalArray::", valley_script)
+        self.assertNotIn("EryonVale_EventScript_Researcher::", valley_script)
+        for name in chain:
+            data = maps[name]
+            scripts = (ROOT / "data/maps" / name / "scripts.inc").read_text(encoding="utf-8")
+            labels = set(LABEL.findall(scripts))
+            for kind in ("object_events", "bg_events"):
+                for event in data[kind]:
+                    with self.subTest(map=name, script=event["script"]):
+                        self.assertIn(event["script"], labels)
+
+    def test_new_echo_terrain_files_have_correct_binary_sizes(self):
+        import json
+        layouts = json.loads((ROOT / "data/layouts/layouts.json").read_text(encoding="utf-8"))
+        by_id = {lay["id"]: lay for lay in layouts["layouts"]}
+        for name in ("Eryon_DesertoDeSolaris", "Eryon_Ignivar",
+                     "Eryon_FlorestaDosEcos", "Eryon_ValeDosEcos", "Eryon_AldeiaDosEcos"):
+            with self.subTest(map=name):
+                info = json.loads((ROOT / "data/maps" / name / "map.json").read_text(encoding="utf-8"))
+                lay = by_id[info["layout"]]
+                binary = ROOT / lay["blockdata_filepath"]
+                self.assertTrue(binary.is_file())
+                self.assertEqual(binary.stat().st_size, 2 * lay["width"] * lay["height"])
+
     def test_passagem_healer_and_two_trainers(self):
         import json
         folder = ROOT / "data/maps/Eryon_PassagemRochosa"
