@@ -149,8 +149,8 @@ EryonIgnivar_EventScript_GridInspector::
 	end
 
 EryonIgnivar_Text_GridInspector:
-	.string "TECNICA: A usina pulsa\n"
-	.string "vindos de Solaris.\p"
+	.string "TECNICA: A usina sofre\n"
+	.string "pulsos de Solaris.\p"
 	.string "A rede da floresta\n"
 	.string "tambem foi atingida.$"
 
