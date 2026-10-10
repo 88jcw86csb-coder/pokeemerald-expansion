@@ -66,7 +66,7 @@ def main():
     # Resolve every song against this expansion's actual constants, not old
     # Hoenn aliases. Invalid music symbols otherwise fail at ROM link time.
     valid_music = set(re.findall(
-        r"(?m)^#define\\s+(MUS_[A-Z0-9_]+)\\b",
+        r"(?m)^#define\s+(MUS_[A-Z0-9_]+)\b",
         (ROOT / "include/constants/songs.h").read_text(encoding="utf-8")
     ))
     for map_name, map_data in maps.items():
