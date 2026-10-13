@@ -39,6 +39,8 @@ EryonLunaris_EventScript_AstronomerClue::
 EryonLunaris_EventScript_EclipseAnalyst::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonLunaris_EventScript_AnalystAfterReport
+	goto_if_set FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ, EryonLunaris_EventScript_AnalystManifest
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonLunaris_EventScript_EclipseAnalystExposed
 	msgbox EryonLunaris_Text_AnalystBefore, MSGBOX_DEFAULT
 	release
@@ -57,6 +59,7 @@ EryonLunaris_EventScript_ObservatorySign::
 
 EryonLunaris_EventScript_CrystalGenerator::
 	lock
+	goto_if_set FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ, EryonLunaris_EventScript_GeneratorManifest
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonLunaris_EventScript_CrystalGeneratorClue
 	msgbox EryonLunaris_Text_GeneratorBefore, MSGBOX_DEFAULT
 	release
@@ -126,3 +129,37 @@ EryonLunaris_Text_GeneratorClue:
 	.string "aparece no gerador.\p"
 	.string "Cabos levam energia\n"
 	.string "de IGNIVAR ate ca.$"
+
+@ The Lunar observatory reacts to shipments documented later on Dragon Trail.
+EryonLunaris_EventScript_AnalystManifest::
+	msgbox EryonLunaris_Text_AnalystManifest, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLunaris_EventScript_AnalystAfterReport::
+	msgbox EryonLunaris_Text_AnalystAfterReport, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLunaris_EventScript_GeneratorManifest::
+	msgbox EryonLunaris_Text_GeneratorManifest, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLunaris_Text_AnalystManifest:
+	.string "ECLIPSE: Encontrou\n"
+	.string "nossa lista de cargas!\p"
+	.string "Nao sabe o que\n"
+	.string "esses cristais fazem.$"
+
+EryonLunaris_Text_AnalystAfterReport:
+	.string "ECLIPSE: A LIGA ja\n"
+	.string "sabe das remessas?!\p"
+	.string "Os chefes vao mudar\n"
+	.string "o plano da operacao.$"
+
+EryonLunaris_Text_GeneratorManifest:
+	.string "O registro da trilha\n"
+	.string "cita este gerador.\p"
+	.string "Seu numero coincide\n"
+	.string "com o manifesto.$"
