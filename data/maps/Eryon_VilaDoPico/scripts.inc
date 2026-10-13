@@ -111,6 +111,7 @@ EryonPico_Text_Road:
 EryonPico_EventScript_RadioOperator::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_PICO_SIGNAL_REPAIRED, EryonPico_EventScript_RadioRepaired
 	goto_if_set FLAG_ERYON_DRAKONIA_ECLIPSE_DEFEATED, EryonPico_EventScript_RadioCommanderDefeated
 	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonPico_EventScript_RadioReport
 	goto_if_set FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ, EryonPico_EventScript_RadioManifest
@@ -234,3 +235,67 @@ EryonPico_Text_ElderAxew:
 	.string "retornam a DRAKONIA.\p"
 	.string "Sua jornada protegeu\n"
 	.string "o equilibrio do pico.$"
+
+
+@ Repairing the village's exposed radio relay is a small optional quest.
+@ It requires discovering the Eclipse shipment manifest on Dragon Trail.
+EryonPico_EventScript_SignalRelay::
+	lock
+	goto_if_set FLAG_ERYON_PICO_SIGNAL_REPAIRED, EryonPico_EventScript_SignalRelayRestored
+	goto_if_unset FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ, EryonPico_EventScript_SignalRelayUnidentified
+	msgbox EryonPico_Text_SignalRelayRepair, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonPico_EventScript_SignalRelayDecline
+	closemessage
+	setflag FLAG_ERYON_PICO_SIGNAL_REPAIRED
+	msgbox EryonPico_Text_SignalRelaySuccess, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPico_EventScript_SignalRelayUnidentified::
+	msgbox EryonPico_Text_SignalRelayUnidentified, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPico_EventScript_SignalRelayDecline::
+	closemessage
+	release
+	end
+
+EryonPico_EventScript_SignalRelayRestored::
+	msgbox EryonPico_Text_SignalRelayRestored, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPico_EventScript_RadioRepaired::
+	msgbox EryonPico_Text_RadioRepaired, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPico_Text_SignalRelayUnidentified:
+	.string "REPETIDOR: A antena\n"
+	.string "recebe sinais estranhos.\p"
+	.string "Falta identificar\n"
+	.string "a origem das cargas.$"
+
+EryonPico_Text_SignalRelayRepair:
+	.string "O manifesto ECLIPSE\n"
+	.string "revela a frequencia!\p"
+	.string "Reajustar a antena\n"
+	.string "da VILA DO PICO?$"
+
+EryonPico_Text_SignalRelaySuccess:
+	.string "O repetidor volta\n"
+	.string "a funcionar!\p"
+	.string "A vila agora recebe\n"
+	.string "avisos de DRAKONIA.$"
+
+EryonPico_Text_SignalRelayRestored:
+	.string "REPETIDOR: Sinal\n"
+	.string "estavel. Sem interferencia.$"
+
+EryonPico_Text_RadioRepaired:
+	.string "OPERADOR: Excelente!\p"
+	.string "O repetidor voltou\n"
+	.string "a transmitir avisos.\p"
+	.string "A VILA DO PICO pode\n"
+	.string "acompanhar a ECLIPSE.$"
