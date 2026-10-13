@@ -51,13 +51,13 @@ EryonVerdelume_EventScript_LocalKidBadge::
 	end
 
 EryonVerdelume_Text_LocalKidBadge:
-	.string "Voce venceu a ROSERADE do Kael!\p"
+	.string "Voce venceu a IVYSAUR do Kael!\p"
 	.string "Quero treinar bastante para\n"
 	.string "ser forte como voces dois.$"
 
 EryonVerdelume_Text_LocalKid:
 	.string "Kael treina Pokemon de planta!\p"
-	.string "Dizem que sua ROSERADE nunca\n"
+	.string "Dizem que sua IVYSAUR nunca\n"
 	.string "desiste de uma batalha.$"
 
 @ Kael challenges the player after they discover the forest clue.
