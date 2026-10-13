@@ -17778,3 +17778,32 @@ Level: 56
 - Slash
 - Rock Slide
 - Dragon Dance
+
+=== TRAINER_ERYON_GLACIAL_ECLIPSE_RESEARCHER ===
+Name: PESQUISADOR
+Class: Team Aqua
+Pic: Aqua Grunt M
+Gender: Male
+Music: Male
+AI: Check Bad Move
+
+Sneasel
+Level: 27
+- Ice Shard
+- Feint Attack
+- Quick Attack
+- Metal Claw
+
+Snorunt
+Level: 28
+- Icy Wind
+- Bite
+- Headbutt
+- Protect
+
+Glalie
+Level: 29
+- Ice Shard
+- Bite
+- Icy Wind
+- Protect
