@@ -129,6 +129,22 @@ class EryonSerraResonance(unittest.TestCase):
         self.assertLess(reward.index("goto_if_eq VAR_RESULT, FALSE"),
                         reward.index(f"setflag {REWARD}"))
 
+    def test_frostheim_badge_three_unlocks_sierra_investigation_hints(self):
+        frostheim = (MAPS / "Eryon_Frostheim/scripts.inc").read_text(
+            encoding="utf-8")
+        researcher = script_body(
+            frostheim, "EryonFrostheim_EventScript_Researcher")
+        self.assertIn(
+            "goto_if_set FLAG_ERYON_SERRA_ECLIPSE_SIGNAL_DISABLED, "
+            "EryonFrostheim_EventScript_ResearcherSerraQuiet", researcher)
+        self.assertIn(
+            "goto_if_set FLAG_BADGE03_GET, "
+            "EryonFrostheim_EventScript_ResearcherSerraHint", researcher)
+        self.assertIn("EryonFrostheim_EventScript_ResearcherSerraHint::",
+                      frostheim)
+        self.assertIn("EryonFrostheim_EventScript_ResearcherSerraQuiet::",
+                      frostheim)
+
     def test_neighboring_maps_react_but_badge_four_is_still_available(self):
         passage = (MAPS / "Eryon_PassagemRochosa/scripts.inc").read_text(encoding="utf-8")
         arkhara = (MAPS / "Eryon_Arkhara/scripts.inc").read_text(encoding="utf-8")
