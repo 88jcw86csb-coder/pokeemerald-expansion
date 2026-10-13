@@ -47,6 +47,7 @@ EryonDrakonia_EventScript_SageAfterChart::
 EryonDrakonia_EventScript_RuneResearcher::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_DRAGON_TRAIL_NOIBAT_RESOLVED, EryonDrakonia_EventScript_ResearcherNoibat
 	goto_if_set FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED, EryonDrakonia_EventScript_ResearcherRelayOff
 	msgbox EryonDrakonia_Text_Researcher, MSGBOX_DEFAULT
 	release
@@ -392,3 +393,18 @@ EryonDrakonia_Text_CourierEscortBeaten:
 	.string "carga na trilha oeste.\p"
 	.string "Os guardioes do pico\n"
 	.string "ja estao avisados.$"
+
+
+@ The dragon sanctuary receives ecological findings from the northern cliff.
+EryonDrakonia_EventScript_ResearcherNoibat::
+	msgbox EryonDrakonia_Text_ResearcherNoibat, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_Text_ResearcherNoibat:
+	.string "PESQUISADOR: Um NOIBAT\n"
+	.string "foi observado na trilha!\p"
+	.string "O eco das asas ajuda\n"
+	.string "a localizar cristais.\p"
+	.string "O santuário ira\n"
+	.string "proteger esse habitat.$"
