@@ -102,3 +102,44 @@ EryonPico_Text_Road:
 	.string "O caminho esta aberto!\p"
 	.string "Descubra o segredo\n"
 	.string "do santuario dos dragoes.$"
+
+@ The mountain village responds to the Star Chart discovery.
+@ These events provide clues without an HM gate or mandatory battle.
+EryonPico_EventScript_RadioOperator::
+	lock
+	faceplayer
+	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonPico_EventScript_RadioAfterChart
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonPico_EventScript_RadioAfterSerra
+	msgbox EryonPico_Text_RadioBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPico_EventScript_RadioAfterSerra::
+	msgbox EryonPico_Text_RadioAfterSerra, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPico_EventScript_RadioAfterChart::
+	msgbox EryonPico_Text_RadioAfterChart, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPico_Text_RadioBefore:
+	.string "OPERADOR: As radios\n"
+	.string "captam um sinal novo.\p"
+	.string "Ele vem das montanhas\n"
+	.string "a leste da vila.$"
+
+EryonPico_Text_RadioAfterSerra:
+	.string "OPERADOR: A ECLIPSE\n"
+	.string "esta usando cristais!\p"
+	.string "Nosso sinal aponta\n"
+	.string "para DRAKONIA.$"
+
+EryonPico_Text_RadioAfterChart:
+	.string "OPERADOR: A carta\n"
+	.string "revelou uma rede!\p"
+	.string "O ultimo transmissor\n"
+	.string "fica perto da LIGA.\p"
+	.string "A vila continua\n"
+	.string "vigiando o sinal.$"
