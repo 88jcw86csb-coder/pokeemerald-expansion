@@ -125,5 +125,15 @@ class EryonLateRouteCollision(unittest.TestCase):
                 self.assertIn(label + "::", source)
 
 
+    def test_drakonia_historian_connects_cave_victory_to_league(self):
+        drakonia = (MAPS / "Eryon_Drakonia" / "scripts.inc").read_text(encoding="utf-8")
+        self.assertIn(
+            "goto_if_set FLAG_ERYON_GROTTO_ECLIPSE_SCOUT_DEFEATED, "
+            "EryonDrakonia_EventScript_HistorianScoutVictory", drakonia)
+        self.assertIn(
+            "EryonDrakonia_EventScript_HistorianScoutVictory::", drakonia)
+
+
+
 if __name__ == "__main__":
     unittest.main()
