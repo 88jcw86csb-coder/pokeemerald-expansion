@@ -9,7 +9,7 @@ MAPS = ("Eryon_VilaAurora", "Eryon_Rota01", "Eryon_BosqueDeLumina",
         "Eryon_Rota02", "Eryon_Verdelume", "Eryon_Rota03",
         "Eryon_SerraDosCristais", "Eryon_PassagemRochosa",
         "Eryon_EstradaOriental", "Eryon_ValeDosVentos",
-        "Eryon_EstradaDosPomares", "Eryon_VilaDosPomares", "Eryon_Rota04", "Eryon_Neonara", "Eryon_ColinasDaNeblina", "Eryon_VilaDaNeblina", "Eryon_TrilhaGlacial", "Eryon_Frostheim", "Eryon_RefugioCristal", "Eryon_PostoOriental", "Eryon_Umbra", "Eryon_RotaDasCachoeiras", "Eryon_VilaDasAguas", "Eryon_TrilhaDoOasis", "Eryon_DesertoDeSolaris", "Eryon_Ignivar", "Eryon_FlorestaDosEcos", "Eryon_ValeDosEcos", "Eryon_AldeiaDosEcos")
+        "Eryon_EstradaDosPomares", "Eryon_VilaDosPomares", "Eryon_Rota04", "Eryon_Neonara", "Eryon_ColinasDaNeblina", "Eryon_VilaDaNeblina", "Eryon_TrilhaGlacial", "Eryon_Frostheim", "Eryon_RefugioCristal", "Eryon_PostoOriental", "Eryon_Umbra", "Eryon_RotaDasCachoeiras", "Eryon_VilaDasAguas", "Eryon_TrilhaDoOasis", "Eryon_DesertoDeSolaris", "Eryon_Ignivar", "Eryon_FlorestaDosEcos", "Eryon_ValeDosEcos", "Eryon_AldeiaDosEcos", "Eryon_TrilhaLunar")
 LABEL = re.compile(r"(?m)^([A-Za-z][A-Za-z0-9_]*)::?\s*$")
 JUMP = re.compile(r"^\s*(?:goto|goto_if_eq|goto_if_ne|goto_if_ge|goto_if_le|goto_if_gt|goto_if_lt)\s+(.+)$")
 
@@ -261,6 +261,27 @@ class EryonEventFlowTests(unittest.TestCase):
         team = parties.split("=== " + name + " ===", 1)[1]
         for species in ("Houndour", "Golbat", "Magneton"):
             self.assertIn(species + "\nLevel:", team)
+
+    def test_lunar_trail_continues_echo_village_without_dangling_warps(self):
+        import json
+        origin = ROOT / "data/maps/Eryon_AldeiaDosEcos"
+        lunar = ROOT / "data/maps/Eryon_TrilhaLunar"
+        village = json.loads((origin / "map.json").read_text(encoding="utf-8"))
+        route = json.loads((lunar / "map.json").read_text(encoding="utf-8"))
+        self.assertEqual(village["warp_events"][1]["dest_map"], route["id"])
+        self.assertEqual(route["warp_events"][0]["dest_map"], village["id"])
+        self.assertEqual(int(route["warp_events"][0]["dest_warp_id"]), 1)
+        self.assertEqual(len(route["warp_events"]), 1)
+        layouts = json.loads((ROOT / "data/layouts/layouts.json").read_text(encoding="utf-8"))
+        by_id = {layout["id"]: layout for layout in layouts["layouts"]}
+        layout = by_id[route["layout"]]
+        self.assertEqual((layout["width"], layout["height"]), (48, 44))
+        self.assertEqual((ROOT / layout["blockdata_filepath"]).stat().st_size, 4224)
+        script = (lunar / "scripts.inc").read_text(encoding="utf-8")
+        for event in route["object_events"] + route["bg_events"]:
+            self.assertIn(event["script"] + "::", script)
+        self.assertIn("EryonLunar_EventScript_EclipseSurveyorExposed::", script)
+        self.assertIn("VAR_ERYON_SERRA_CLUE_FOUND", script)
 
     def test_passagem_healer_and_two_trainers(self):
         import json

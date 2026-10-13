@@ -93,6 +93,13 @@
       "elevation": 0,
       "dest_map": "MAP_ERYON_VALE_DOS_ECOS",
       "dest_warp_id": "1"
+    },
+    {
+      "x": 35,
+      "y": 14,
+      "elevation": 0,
+      "dest_map": "MAP_ERYON_TRILHA_LUNAR",
+      "dest_warp_id": "0"
     }
   ],
   "region": "REGION_HOENN"
