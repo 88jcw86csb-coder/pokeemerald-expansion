@@ -253,15 +253,11 @@ def route(kind):
         for y in range(23, 31):
             for x in range(28, 39):
                 tiles[y][x] = ":"
-    # The road/valley transitions must align with the fixed warp coordinates.
+    # Both ends now have registered reciprocal warps, including Wind Valley
+    # to Umbra; avoid blocking the eastern destination in the terrain plan.
     if kind != "forest":
         tiles[22][0] = "."
-        if kind != "valley":
-            tiles[22][WIDTH - 1] = "."
-    if kind == "valley":
-        # Terminal region: do not expose a walkable east edge without a warp.
-        for y in range(HEIGHT):
-            tiles[y][WIDTH - 1] = "#"
+        tiles[22][WIDTH - 1] = "."
     return tiles
 
 def reachable(tiles, start=(0, 22)):
