@@ -81,7 +81,7 @@ class EryonGrottoPlayability(unittest.TestCase):
         self.assertIn(f"#define {DEFEAT_FLAG} 0x42", flags)
         self.assertIn(f"#define {BATTLE} 872", opponents)
         self.assertGreaterEqual(
-            int(re.search(r"(?m)^#define TRAINERS_COUNT_EMERALD\\s+(\\d+)", opponents).group(1)),
+            int(re.search(r"(?m)^#define TRAINERS_COUNT_EMERALD\s+(\d+)", opponents).group(1)),
             873,
         )
         self.assertIn(f"if (trainerId == {BATTLE})", setup)
