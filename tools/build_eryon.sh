@@ -26,6 +26,9 @@ echo "== Eryon: species tests =="
 python3 -m unittest discover -s tools -p 'test_eryon_species.py' -v
 echo "== Eryon: event flow tests =="
 python3 -m unittest discover -s tools -p 'test_eryon_event_flow.py' -v
+echo "== Eryon: Elite Four tournament integrity =="
+python3 -m unittest discover -s tests -p 'test_eryon_elite_four.py' -v
+
 echo "== Eryon: ROM smoke validator unit tests =="
 python3 -m unittest discover -s tools -p 'test_eryon_rom_smoke.py' -v
 
