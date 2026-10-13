@@ -31,7 +31,7 @@ def neighbors(p):
 
 def body(src, name):
     m = re.search(
-        rf"(?ms)^{re.escape(name)}::\n(.*?)(?=^[A-Za-z_][A-Za-z_0-9]*::?\s*$|\Z)",
+        rf"(?ms)^{re.escape(name)}::?\n(.*?)(?=^[A-Za-z_][A-Za-z_0-9]*::?\s*$|\Z)",
         src,
     )
     if m is None:
