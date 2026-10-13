@@ -27,7 +27,13 @@ class TerrainPlansTests(unittest.TestCase):
             with self.subTest(map=name):
                 plan = ROOT / "docs" / "eryon" / f"{name}_terrain_plan.txt"
                 rows = plan.read_text(encoding="utf-8").splitlines()[4:]
-                self.assertEqual(rows, ["".join(row) for row in route(kind)],
+                expected = ["".join(row) for row in route(kind)]
+                if rows != expected:
+                    print(f"ERYON_PLAN_DRIFT {name}: " + repr([
+                        (y, old, new) for y, (old, new) in enumerate(zip(rows, expected))
+                        if old != new
+                    ]), flush=True)
+                self.assertEqual(rows, expected,
                                  f"{name}: committed plan is out of sync")
 
     def test_lumina_northern_pond_loop(self):
