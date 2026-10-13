@@ -16,13 +16,39 @@ EryonTrilhaGlacial_Text_Hiker:
 	.string "Vi pessoas com um simbolo\n"
 	.string "de eclipse nas montanhas.$"
 
-@ Optional route encounter: an Eclipse agent surveys anomalous ice.
-@ Story setup only; the full battle and quest flag are not yet installed.
+@ Optional battle as the story advances from Neonara toward Frostheim.
+@ Level 27-29 opponents provide trainer experience before the level-31 Gym.
 EryonTrilhaGlacial_EventScript_EclipseResearcher::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_GLACIAL_ECLIPSE_RESEARCHER_DEFEATED, EryonTrilhaGlacial_EventScript_ResearcherAfterBattle
+	goto_if_set FLAG_BADGE02_GET, EryonTrilhaGlacial_EventScript_ResearcherBattleOffer
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonTrilhaGlacial_EventScript_EclipseResearcherExposed
 	msgbox EryonTrilhaGlacial_Text_EclipseResearcher, MSGBOX_DEFAULT
+	release
+	end
+
+EryonTrilhaGlacial_EventScript_ResearcherBattleOffer::
+	msgbox EryonTrilhaGlacial_Text_ResearcherBattleOffer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonTrilhaGlacial_EventScript_ResearcherDecline
+	closemessage
+	trainerbattle_single TRAINER_ERYON_GLACIAL_ECLIPSE_RESEARCHER, EryonTrilhaGlacial_Text_ResearcherIntro, EryonTrilhaGlacial_Text_ResearcherLoss, EryonTrilhaGlacial_EventScript_ResearcherVictory, FALSE
+	msgbox EryonTrilhaGlacial_Text_ResearcherAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonTrilhaGlacial_EventScript_ResearcherVictory::
+	msgbox EryonTrilhaGlacial_Text_ResearcherVictory, MSGBOX_DEFAULT
+	release
+	end
+
+EryonTrilhaGlacial_EventScript_ResearcherDecline::
+	closemessage
+	release
+	end
+
+EryonTrilhaGlacial_EventScript_ResearcherAfterBattle::
+	msgbox EryonTrilhaGlacial_Text_ResearcherAfter, MSGBOX_DEFAULT
 	release
 	end
 
@@ -108,3 +134,80 @@ EryonTrilhaGlacial_Text_HikerAfterSignal:
 	.string "trilha guarda remedios.\p"
 	.string "A ECLIPSE ja nao pode\n"
 	.string "se esconder no sinal.$"
+
+
+@ Hidden lab cache on the new upper route. Open after the optional battle;
+@ a full bag preserves the reward and never blocks access to Frostheim.
+EryonTrilhaGlacial_EventScript_EclipseIceSample::
+	lock
+	goto_if_set FLAG_ERYON_GLACIAL_ECLIPSE_SAMPLE_TAKEN, EryonTrilhaGlacial_EventScript_IceSampleEmpty
+	goto_if_unset FLAG_ERYON_GLACIAL_ECLIPSE_RESEARCHER_DEFEATED, EryonTrilhaGlacial_EventScript_IceSampleSealed
+	msgbox EryonTrilhaGlacial_Text_IceSampleFound, MSGBOX_DEFAULT
+	giveitem ITEM_NEVER_MELT_ICE
+	goto_if_eq VAR_RESULT, FALSE, EryonTrilhaGlacial_EventScript_IceSampleFull
+	setflag FLAG_ERYON_GLACIAL_ECLIPSE_SAMPLE_TAKEN
+	release
+	end
+
+EryonTrilhaGlacial_EventScript_IceSampleSealed::
+	msgbox EryonTrilhaGlacial_Text_IceSampleSealed, MSGBOX_DEFAULT
+	release
+	end
+
+EryonTrilhaGlacial_EventScript_IceSampleFull::
+	msgbox EryonTrilhaGlacial_Text_IceSampleFull, MSGBOX_DEFAULT
+	release
+	end
+
+EryonTrilhaGlacial_EventScript_IceSampleEmpty::
+	msgbox EryonTrilhaGlacial_Text_IceSampleEmpty, MSGBOX_DEFAULT
+	release
+	end
+
+EryonTrilhaGlacial_Text_ResearcherBattleOffer:
+	.string "ECLIPSE: A INSIGNIA de\n"
+	.string "NEONARA lhe deu coragem?\p"
+	.string "Quer enfrentar minha\n"
+	.string "equipe no gelo?$"
+
+EryonTrilhaGlacial_Text_ResearcherIntro:
+	.string "ECLIPSE: Nossos estudos\n"
+	.string "nao serao interrompidos!$"
+
+EryonTrilhaGlacial_Text_ResearcherLoss:
+	.string "ECLIPSE: A equipe\n"
+	.string "perdeu o controle do gelo!$"
+
+EryonTrilhaGlacial_Text_ResearcherVictory:
+	.string "ECLIPSE: Voce venceu!\p"
+	.string "Abandonamos amostras\n"
+	.string "na encosta ao norte.\p"
+	.string "Mas nossa pesquisa\n"
+	.string "ainda nao acabou.$"
+
+EryonTrilhaGlacial_Text_ResearcherAfter:
+	.string "ECLIPSE: Recuamos\n"
+	.string "para as montanhas.\p"
+	.string "As amostras ficaram\n"
+	.string "na encosta ao norte.$"
+
+EryonTrilhaGlacial_Text_IceSampleFound:
+	.string "Um laboratorio abandonado\n"
+	.string "contem NEVER-MELT ICE!\p"
+	.string "Pode fortalecer\n"
+	.string "ataques de gelo.$"
+
+EryonTrilhaGlacial_Text_IceSampleSealed:
+	.string "Caixas marcadas com\n"
+	.string "o simbolo ECLIPSE.\p"
+	.string "A equipe ainda vigia\n"
+	.string "os materiais.$"
+
+EryonTrilhaGlacial_Text_IceSampleFull:
+	.string "Sua BOLSA esta cheia!\p"
+	.string "A amostra pode ser\n"
+	.string "recolhida depois.$"
+
+EryonTrilhaGlacial_Text_IceSampleEmpty:
+	.string "As caixas estao vazias.\p"
+	.string "A amostra foi recolhida.$"
