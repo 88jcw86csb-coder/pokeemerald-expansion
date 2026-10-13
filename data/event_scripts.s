@@ -180,6 +180,7 @@ gStdScripts_End::
 	.include "data/maps/Eryon_LigaRecepcao/scripts.inc"
 	.include "data/maps/Eryon_LigaClassificatoria/scripts.inc"
 	.include "data/maps/Eryon_LigaRecuperacao/scripts.inc"
+	.include "data/maps/Eryon_LigaEliteFour/scripts.inc"
 	.include "data/maps/LittlerootTown/scripts.inc"
 	.include "data/maps/OldaleTown/scripts.inc"
 	.include "data/maps/DewfordTown/scripts.inc"
