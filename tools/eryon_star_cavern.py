@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Optional cave labyrinth before Eryon's Victory Road; design, not a ROM map."""
+"""Walkable Star Cavern map, connected to Drakonia and League Road."""
 from collections import deque
 from pathlib import Path
 
@@ -36,7 +36,7 @@ def reachable(t):
 def render(t):
     return ("gruta_das_estrelas — Eryon terrain concept 48x44\n"
             "# blocked; . path; : cave chamber\n"
-            "Design only: cave graphics, encounters, warps and collision not installed.\n\n"
+            "Mapa registrado: tunel a pe com carta estelar, investigacao Eclipse e caminho alternativo sem HMs.\n\n"
             +"\n".join("".join(row) for row in t)+"\n")
 
 def main():

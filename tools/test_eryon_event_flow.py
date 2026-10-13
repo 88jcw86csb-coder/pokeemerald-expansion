@@ -327,7 +327,7 @@ class EryonEventFlowTests(unittest.TestCase):
                 self.assertEqual(back["dest_map"], maps[left]["id"])
                 self.assertEqual(int(back["dest_warp_id"]), index)
         self.assertEqual(len(maps["Eryon_VilaDoPico"]["warp_events"]), 2)
-        self.assertEqual(len(maps["Eryon_Drakonia"]["warp_events"]), 1)
+        self.assertEqual(len(maps["Eryon_Drakonia"]["warp_events"]), 2)
         layouts = json.loads((ROOT / "data/layouts/layouts.json").read_text(encoding="utf-8"))
         by_id = {x["id"]: x for x in layouts["layouts"]}
         tiles = {"#": 0x3c01, ".": 0x3001, ",": 0x3002, ":": 0x3003,

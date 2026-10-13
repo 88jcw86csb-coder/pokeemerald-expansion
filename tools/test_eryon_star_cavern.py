@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the Star Cavern concept before it is installed in the game."""
+"""Validate the registered HM-free Star Cavern and its generated plan."""
 import unittest
 from eryon_star_cavern import ROOT, W, H, cavern, reachable, render
 

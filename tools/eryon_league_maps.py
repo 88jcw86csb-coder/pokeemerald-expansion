@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the final Eryon League approach and summit hub (design only)."""
+"""Generate the registered HM-free League approach and planned summit hub."""
 from collections import deque
 from pathlib import Path
 
@@ -23,6 +23,9 @@ def route():
                     t[y][x]="."
     for x in range(w):
         t[22][x]=":"
+    # The League building is not yet registered; do not expose a false exit.
+    for y in range(h):
+        t[y][w - 1]="#"
     return t
 
 
@@ -61,13 +64,15 @@ def connected(t,start):
 def render(name,t):
     return (f"{name} | Eryon final approach design {len(t[0])}x{len(t)}\n"
             "# blocked; . floor; : mountain path; P plaza; C center; M mart; L league; H hall\n"
-            "Concept only: no map registration, tileset, interior, warp or league battles.\n\n"
+            ("Mapa registrado: rota principal a pe ate o portao da Liga; interiores e batalhas ainda pendentes.\n\n"
+             if name == "caminho_da_liga" else
+             "Concept only: no map registration, tileset, interior, warp or league battles.\n\n")
             +"\n".join("".join(row) for row in t)+"\n")
 
 
 def main():
     for name,fn,start,exit in (
-        ("caminho_da_liga",route,(0,22),(47,22)),
+        ("caminho_da_liga",route,(0,22),(46,22)),
         ("liga_eryon",league,(32,55),(32,0)),
     ):
         t=fn();seen=connected(t,start)

@@ -7,7 +7,7 @@ from eryon_league_maps import ROOT, route, league, connected, render
 class LeagueMapTests(unittest.TestCase):
     def test_league_approach_and_hub(self):
         for name, fn, start, exit in (
-            ("caminho_da_liga", route, (0,22), (47,22)),
+            ("caminho_da_liga", route, (0,22), (46,22)),
             ("liga_eryon", league, (32,55), (32,0)),
         ):
             with self.subTest(name=name):
