@@ -179,3 +179,50 @@ EryonEstrelas_Text_ArchivistReported:
 	.string "Agora podemos estudar\n"
 	.string "esta gruta sem medo\n"
 	.string "dos agentes ECLIPSE.$"
+
+@ Optional interaction after discovering the Star Chart. Shutdown is persistent.
+EryonEstrelas_EventScript_RelayConsole::
+	lock
+	goto_if_set FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED, EryonEstrelas_EventScript_RelayOff
+	goto_if_unset FLAG_ERYON_STAR_CHART_READ, EryonEstrelas_EventScript_RelayUnknown
+	msgbox EryonEstrelas_Text_RelayPrompt, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonEstrelas_EventScript_RelayLeave
+	setflag FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED
+	msgbox EryonEstrelas_Text_RelayDisabled, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEstrelas_EventScript_RelayUnknown::
+	msgbox EryonEstrelas_Text_RelayUnknown, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEstrelas_EventScript_RelayOff::
+	msgbox EryonEstrelas_Text_RelayOff, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEstrelas_EventScript_RelayLeave::
+	release
+	end
+
+EryonEstrelas_Text_RelayPrompt:
+	.string "Terminal da ECLIPSE.\p"
+	.string "A Carta Estelar revela\n"
+	.string "o codigo de acesso.\p"
+	.string "Desligar o transmissor?$"
+
+EryonEstrelas_Text_RelayDisabled:
+	.string "Transmissor desligado!\p"
+	.string "Os cristais param\n"
+	.string "de emitir sinais.\p"
+	.string "A gruta fica em paz.$"
+
+EryonEstrelas_Text_RelayUnknown:
+	.string "Um terminal estranho.\p"
+	.string "Ha um codigo celeste\n"
+	.string "que voce nao conhece.$"
+
+EryonEstrelas_Text_RelayOff:
+	.string "O transmissor da\n"
+	.string "ECLIPSE esta inativo.$"
