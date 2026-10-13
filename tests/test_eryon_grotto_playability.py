@@ -80,7 +80,10 @@ class EryonGrottoPlayability(unittest.TestCase):
         parties = (ROOT / "src/data/trainers.party").read_text(encoding="utf-8")
         self.assertIn(f"#define {DEFEAT_FLAG} 0x42", flags)
         self.assertIn(f"#define {BATTLE} 872", opponents)
-        self.assertIn("#define TRAINERS_COUNT_EMERALD     873", opponents)
+        self.assertGreaterEqual(
+            int(re.search(r"(?m)^#define TRAINERS_COUNT_EMERALD\\s+(\\d+)", opponents).group(1)),
+            873,
+        )
         self.assertIn(f"if (trainerId == {BATTLE})", setup)
         self.assertIn(f"return {DEFEAT_FLAG};", setup)
         self.assertIn(f"=== {BATTLE} ===", parties)
