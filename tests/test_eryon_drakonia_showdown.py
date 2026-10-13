@@ -68,7 +68,7 @@ class EryonDrakoniaShowdown(unittest.TestCase):
         self.assertIn(f"#define {CACHE_FLAG} 0x45", flags)
         self.assertIn(f"#define {TRAINER} 873", opponents)
         self.assertGreaterEqual(
-            int(re.search(r"(?m)^#define TRAINERS_COUNT_EMERALD\\s+(\\d+)", opponents).group(1)),
+            int(re.search(r"(?m)^#define TRAINERS_COUNT_EMERALD\s+(\d+)", opponents).group(1)),
             874,
         )
         self.assertIn(f"if (trainerId == {TRAINER})", engine)
