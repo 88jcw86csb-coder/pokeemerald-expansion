@@ -128,3 +128,74 @@ EryonUmbra_Text_DesertCargoLedgerClue:
 	.string "cristalino de Umbra.\p"
 	.string "Transporte via SOLARIS\n"
 	.string "ate a usina de IGNIVAR.$"
+
+@ Eryon: NYX is the city leader, separate from the Gym guide.
+EryonUmbra_EventScript_GymLeader::
+	lock
+	faceplayer
+	goto_if_set FLAG_BADGE05_GET, EryonUmbra_EventScript_GymAfter
+	goto_if_unset FLAG_BADGE04_GET, EryonUmbra_EventScript_GymNotReady
+	goto EryonUmbra_EventScript_GymOffer
+	end
+
+@ Tactical badge battle — Umbra: ace level 41, badge 5.
+EryonUmbra_EventScript_GymOffer::
+	msgbox EryonUmbra_Text_GymOffer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonUmbra_EventScript_GymDecline
+	closemessage
+	trainerbattle_single TRAINER_ERYON_GYM_UMBRA, EryonUmbra_Text_GymIntro, EryonUmbra_Text_GymLoss, EryonUmbra_EventScript_GymVictory, FALSE
+	msgbox EryonUmbra_Text_GymAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonUmbra_EventScript_GymVictory::
+	message EryonUmbra_Text_GymBadge
+	waitmessage
+	call Common_EventScript_PlayGymBadgeFanfare
+	setflag FLAG_BADGE05_GET
+	msgbox EryonUmbra_Text_GymAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonUmbra_EventScript_GymDecline::
+	closemessage
+	release
+	end
+
+EryonUmbra_EventScript_GymNotReady::
+	msgbox EryonUmbra_Text_GymNotReady, MSGBOX_DEFAULT
+	release
+	end
+
+EryonUmbra_EventScript_GymAfter::
+	msgbox EryonUmbra_Text_GymAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonUmbra_Text_GymOffer:
+	.string "NYX: Meu GINASIO\n"
+	.string "treina com sombras.\p"
+	.string "Desafiar meu time\n"
+	.string "de Pokemon agora?$"
+
+EryonUmbra_Text_GymIntro:
+	.string "NYX: Mostre sua\n"
+	.string "forca e estrategia!$"
+
+EryonUmbra_Text_GymLoss:
+	.string "NYX: Voce encontrou\n"
+	.string "uma boa resposta!$"
+
+EryonUmbra_Text_GymBadge:
+	.string "Venceu o 5o GINASIO!\p"
+	.string "Recebeu a INSIGNIA\n"
+	.string "de numero 5!$"
+
+EryonUmbra_Text_GymAfter:
+	.string "NYX: Bela vitoria!\p"
+	.string "Investigue os selos da ECLIPSE.$"
+
+EryonUmbra_Text_GymNotReady:
+	.string "NYX: Primeiro,\n"
+	.string "conquiste a INSIGNIA\n"
+	.string "do GINASIO anterior.$"
