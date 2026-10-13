@@ -37,6 +37,7 @@ EryonDragoes_EventScript_WildlifeResearcherClue::
 
 EryonDragoes_EventScript_SupplyCrate::
 	lock
+	goto_if_set FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ, EryonDragoes_EventScript_SupplyCrateRecorded
 	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonDragoes_EventScript_SupplyCrateChart
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonDragoes_EventScript_SupplyCrateClue
 	msgbox EryonDragoes_Text_CrateBefore, MSGBOX_DEFAULT
@@ -105,12 +106,14 @@ EryonDragoes_Text_Marker:
 @ Optional clues become clearer as the player investigates the Eclipse network.
 EryonDragoes_EventScript_SupplyCrateChart::
 	msgbox EryonDragoes_Text_CrateChart, MSGBOX_DEFAULT
+	setflag FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ
 	release
 	end
 
 EryonDragoes_EventScript_Ranger::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ, EryonDragoes_EventScript_RangerManifest
 	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonDragoes_EventScript_RangerChart
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonDragoes_EventScript_RangerClue
 	msgbox EryonDragoes_Text_RangerBefore, MSGBOX_DEFAULT
@@ -153,3 +156,26 @@ EryonDragoes_Text_RangerChart:
 	.string "nosso alerta!\p"
 	.string "A rede chega a LIGA.\n"
 	.string "Precisamos vigiar.$"
+
+@ Once decoded, the manifest stays registered in the player's save.
+EryonDragoes_EventScript_SupplyCrateRecorded::
+	msgbox EryonDragoes_Text_CrateRecorded, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDragoes_EventScript_RangerManifest::
+	msgbox EryonDragoes_Text_RangerManifest, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDragoes_Text_CrateRecorded:
+	.string "Voce ja copiou\n"
+	.string "o manifesto ECLIPSE.\p"
+	.string "As provas ligam\n"
+	.string "LUNARIS a DRAKONIA.$"
+
+EryonDragoes_Text_RangerManifest:
+	.string "GUARDA: Seu manifesto\n"
+	.string "confirma o transporte!\p"
+	.string "Vamos avisar os\n"
+	.string "guardioes de DRAKONIA.$"
