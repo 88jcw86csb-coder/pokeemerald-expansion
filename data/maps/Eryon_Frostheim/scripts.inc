@@ -5,6 +5,8 @@ Eryon_Frostheim_MapScripts::
 EryonFrostheim_EventScript_Researcher::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_SERRA_ECLIPSE_SIGNAL_DISABLED, EryonFrostheim_EventScript_ResearcherSerraQuiet
+	goto_if_set FLAG_BADGE03_GET, EryonFrostheim_EventScript_ResearcherSerraHint
 	goto_if_set FLAG_ERYON_GLACIAL_ECLIPSE_RESEARCHER_DEFEATED, EryonFrostheim_EventScript_ResearcherEclipseDefeated
 	goto_if_set FLAG_ERYON_MIST_SIGNAL_REPAIRED, EryonFrostheim_EventScript_ResearcherSignal
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonFrostheim_EventScript_ResearcherAfterClue
@@ -156,3 +158,33 @@ EryonFrostheim_Text_ResearcherEclipseDefeated:
 	.string "na TRILHA GLACIAL.\p"
 	.string "BJORN podera analisar\n"
 	.string "os cristais com seguranca.$"
+
+
+@ After Badge 3, researchers point the player back to Serra's new
+@ optional two-seal resonance quest. Completing it changes the report again.
+EryonFrostheim_EventScript_ResearcherSerraHint::
+	msgbox EryonFrostheim_Text_ResearcherSerraHint, MSGBOX_DEFAULT
+	release
+	end
+
+EryonFrostheim_EventScript_ResearcherSerraQuiet::
+	msgbox EryonFrostheim_Text_ResearcherSerraQuiet, MSGBOX_DEFAULT
+	release
+	end
+
+EryonFrostheim_Text_ResearcherSerraHint:
+	.string "CIENTISTA: Sua INSIGNIA\n"
+	.string "pode decifrar as runas!\p"
+	.string "Na SERRA DOS CRISTAIS,\n"
+	.string "dois selos ocultos\n"
+	.string "alimentam a ECLIPSE.\p"
+	.string "Procure o norte\n"
+	.string "e depois o sul.$"
+
+EryonFrostheim_Text_ResearcherSerraQuiet:
+	.string "CIENTISTA: A SERRA\n"
+	.string "parou de transmitir!\p"
+	.string "As amostras voltaram\n"
+	.string "ao seu estado natural.\p"
+	.string "ARKHARA deve saber\n"
+	.string "dessa descoberta.$"
