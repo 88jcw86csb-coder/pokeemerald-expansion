@@ -71,6 +71,7 @@ EryonCidadeLiga_Text_Notice:
 EryonCidadeLiga_EventScript_Reporter::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_DRAKONIA_ECLIPSE_DEFEATED, EryonCidadeLiga_EventScript_ReporterDrakonia
 	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonCidadeLiga_EventScript_ReporterEvidence
 	msgbox EryonCidadeLiga_Text_Reporter, MSGBOX_DEFAULT
 	release
@@ -260,3 +261,18 @@ EryonCidadeLiga_Text_ScoutRewardFull:
 	.string "BOLSA esta cheia!\p"
 	.string "Volte para receber\n"
 	.string "a recompensa.$"
+
+
+@ News from the Dragon sanctuary reaches the League capital.
+EryonCidadeLiga_EventScript_ReporterDrakonia::
+	msgbox EryonCidadeLiga_Text_ReporterDrakonia, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_Text_ReporterDrakonia:
+	.string "REPORTER: Ultimas\n"
+	.string "noticias de DRAKONIA!\p"
+	.string "O comandante ECLIPSE\n"
+	.string "perdeu um duelo Pokemon.\p"
+	.string "Mesmo com essa vitoria,\n"
+	.string "a LIGA continua alerta.$"
