@@ -189,6 +189,7 @@ EryonDrakonia_EventScript_HistorianAfter::
 EryonDrakonia_EventScript_Courier::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_DRAGON_TRAIL_COURIER_DEFEATED, EryonDrakonia_EventScript_CourierEscortBeaten
 	goto_if_set FLAG_ERYON_QUALIFIED, EryonDrakonia_EventScript_CourierAfter
 	msgbox EryonDrakonia_Text_CourierBefore, MSGBOX_DEFAULT
 	release
@@ -376,3 +377,18 @@ EryonDrakonia_Text_DepotBagFull:
 EryonDrakonia_Text_DepotEmpty:
 	.string "As caixas foram\n"
 	.string "revistadas. Estao vazias.$"
+
+
+@ The dragon sanctuary is alerted to the stopped Eclipse shipments.
+EryonDrakonia_EventScript_CourierEscortBeaten::
+	msgbox EryonDrakonia_Text_CourierEscortBeaten, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_Text_CourierEscortBeaten:
+	.string "MENSAGEIRO: Recebemos\n"
+	.string "a noticia da escolta!\p"
+	.string "A ECLIPSE perdeu sua\n"
+	.string "carga na trilha oeste.\p"
+	.string "Os guardioes do pico\n"
+	.string "ja estao avisados.$"
