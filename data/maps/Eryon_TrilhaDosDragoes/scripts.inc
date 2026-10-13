@@ -37,6 +37,7 @@ EryonDragoes_EventScript_WildlifeResearcherClue::
 
 EryonDragoes_EventScript_SupplyCrate::
 	lock
+	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonDragoes_EventScript_SupplyCrateChart
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonDragoes_EventScript_SupplyCrateClue
 	msgbox EryonDragoes_Text_CrateBefore, MSGBOX_DEFAULT
 	release
@@ -100,3 +101,55 @@ EryonDragoes_Text_Marker:
 	.string "LESTE: VILA DO PICO.\p"
 	.string "Cuidado com os ventos\n"
 	.string "na estrada elevada.$"
+
+@ Optional clues become clearer as the player investigates the Eclipse network.
+EryonDragoes_EventScript_SupplyCrateChart::
+	msgbox EryonDragoes_Text_CrateChart, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDragoes_EventScript_Ranger::
+	lock
+	faceplayer
+	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonDragoes_EventScript_RangerChart
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonDragoes_EventScript_RangerClue
+	msgbox EryonDragoes_Text_RangerBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDragoes_EventScript_RangerClue::
+	msgbox EryonDragoes_Text_RangerClue, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDragoes_EventScript_RangerChart::
+	msgbox EryonDragoes_Text_RangerChart, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDragoes_Text_CrateChart:
+	.string "As etiquetas mostram\n"
+	.string "uma rota de cristais.\p"
+	.string "LUNARIS, VILA DO PICO,\n"
+	.string "DRAKONIA e a LIGA.\p"
+	.string "A ECLIPSE organizou\n"
+	.string "todas as remessas.$"
+
+EryonDragoes_Text_RangerBefore:
+	.string "GUARDA: O vento muda\n"
+	.string "perto deste penhasco.\p"
+	.string "A trilha ate a vila\n"
+	.string "segue aberta a pe.$"
+
+EryonDragoes_Text_RangerClue:
+	.string "GUARDA: Encontramos\n"
+	.string "marcas da ECLIPSE.\p"
+	.string "O transporte segue\n"
+	.string "ate VILA DO PICO.$"
+
+EryonDragoes_Text_RangerChart:
+	.string "GUARDA: A Carta\n"
+	.string "Estelar confirmou\n"
+	.string "nosso alerta!\p"
+	.string "A rede chega a LIGA.\n"
+	.string "Precisamos vigiar.$"
