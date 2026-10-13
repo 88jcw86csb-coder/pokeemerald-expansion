@@ -69,13 +69,13 @@ EryonLunar_Text_Watchman:
 	.string "VIGIA: A trilha passa\n"
 	.string "por claros e bosques.\p"
 	.string "LUNARIS fica adiante,\n"
-	.string "mas a ponte caiu.$"
+	.string "use o desvio leste.$"
 
 EryonLunar_Text_SurveyorBefore:
 	.string "TECNICO: O observatorio\n"
 	.string "esta em reparos.\p"
 	.string "A area leste segue\n"
-	.string "temporariamente fechada.$"
+	.string "aberta sob vigilancia.$"
 
 EryonLunar_Text_SurveyorExposed:
 	.string "ECLIPSE: O arquivo da\n"
@@ -96,7 +96,7 @@ EryonLunar_Text_MoonMarkerClue:
 	.string "para LUNARIS.$"
 
 EryonLunar_Text_ClosedPass:
-	.string "PASSAGEM INTERDITADA!\n"
-	.string "Ponte de LUNARIS fechada.\p"
-	.string "A equipe do vale\n"
-	.string "ainda avalia os danos.$"
+	.string "PONTE EM MANUTENCAO!\n"
+	.string "Desvio para LUNARIS aberto.\p"
+	.string "Os viajantes podem\n"
+	.string "seguir pela trilha.$"
