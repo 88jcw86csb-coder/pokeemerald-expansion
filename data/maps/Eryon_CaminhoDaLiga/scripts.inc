@@ -5,6 +5,7 @@ Eryon_CaminhoDaLiga_MapScripts::
 EryonLigaCaminho_EventScript_RouteGuardian::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_GROTTO_ECLIPSE_SCOUT_DEFEATED, EryonLigaCaminho_EventScript_GuardianScoutDefeated
 	msgbox EryonLigaCaminho_Text_Guardian, MSGBOX_DEFAULT
 	release
 	end
@@ -197,3 +198,16 @@ EryonLigaCaminho_Text_CacheEmpty:
 	.string "O estojo esta vazio.\p"
 	.string "Voce ja recolheu\n"
 	.string "os suprimentos.$"
+
+@ After the optional Star Grotto battle, the last route recognizes the victory.
+EryonLigaCaminho_EventScript_GuardianScoutDefeated::
+	msgbox EryonLigaCaminho_Text_GuardianScoutDefeated, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_Text_GuardianScoutDefeated:
+	.string "GUARDIAO: Soube que\n"
+	.string "venceu um ECLIPSE\n"
+	.string "na Gruta das Estrelas!\p"
+	.string "A estrada esta livre.\n"
+	.string "Siga para a LIGA!$"
