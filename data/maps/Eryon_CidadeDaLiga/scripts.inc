@@ -20,6 +20,7 @@ EryonCidadeLiga_EventScript_Guide::
 EryonCidadeLiga_EventScript_Fan::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonCidadeLiga_EventScript_FanChampion
 	msgbox EryonCidadeLiga_Text_Fan, MSGBOX_DEFAULT
 	release
 	end
@@ -71,6 +72,7 @@ EryonCidadeLiga_Text_Notice:
 EryonCidadeLiga_EventScript_Reporter::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonCidadeLiga_EventScript_ReporterChampion
 	goto_if_set FLAG_ERYON_DRAKONIA_ECLIPSE_DEFEATED, EryonCidadeLiga_EventScript_ReporterDrakonia
 	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonCidadeLiga_EventScript_ReporterEvidence
 	msgbox EryonCidadeLiga_Text_Reporter, MSGBOX_DEFAULT
@@ -413,3 +415,30 @@ EryonCidadeLiga_Text_ParkRewardDone:
 	.string "pesquisa continua!\p"
 	.string "Visite o jardim\n"
 	.string "sempre que quiser.$"
+
+
+@ The capital celebrates the new champion without overwriting Eclipse investigation.
+EryonCidadeLiga_EventScript_FanChampion::
+	msgbox EryonCidadeLiga_Text_FanChampion, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_ReporterChampion::
+	msgbox EryonCidadeLiga_Text_ReporterChampion, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_Text_FanChampion:
+	.string "TORCEDORA: ERYON tem\n"
+	.string "um novo CAMPEAO!\p"
+	.string "O torneio no predio\n"
+	.string "central foi historico.$"
+
+EryonCidadeLiga_Text_ReporterChampion:
+	.string "REPORTER: A regiao\n"
+	.string "celebra seu CAMPEAO!\p"
+	.string "Oito classificatorias,\n"
+	.string "quatro membros da ELITE\n"
+	.string "e uma vitoria final!\p"
+	.string "O trabalho contra a\n"
+	.string "ECLIPSE ainda continua.$"
