@@ -17336,3 +17336,197 @@ Level: 46
 - Dragon Pulse
 - Roost
 - Supersonic
+
+=== TRAINER_ERYON_ELITE_1 ===
+Name: ARIA
+Class: Elite Four
+Pic: Elite Four Glacia
+Gender: Female
+Music: Elite Four
+AI: Check Bad Move
+
+Froslass
+Level: 72
+- Shadow Ball
+- Ice Beam
+- Confuse Ray
+- Destiny Bond
+
+Mamoswine
+Level: 73
+- Earthquake
+- Ice Shard
+- Rock Slide
+- Hail
+
+Walrein
+Level: 73
+- Surf
+- Ice Beam
+- Rest
+- Body Slam
+
+Weavile
+Level: 74
+- Night Slash
+- Ice Punch
+- Swords Dance
+- Quick Attack
+
+=== TRAINER_ERYON_ELITE_2 ===
+Name: BASTIAN
+Class: Elite Four
+Pic: Elite Four Sidney
+Gender: Male
+Music: Elite Four
+AI: Check Bad Move
+
+Krookodile
+Level: 74
+- Earthquake
+- Crunch
+- Rock Slide
+- Swagger
+
+Excadrill
+Level: 75
+- Earthquake
+- Iron Head
+- Rock Slide
+- Swords Dance
+
+Rhyperior
+Level: 75
+- Earthquake
+- Stone Edge
+- Megahorn
+- Rock Blast
+
+Garchomp
+Level: 76
+- Dragon Claw
+- Earthquake
+- Flamethrower
+- Swords Dance
+
+=== TRAINER_ERYON_ELITE_3 ===
+Name: SELENE
+Class: Elite Four
+Pic: Elite Four Phoebe
+Gender: Female
+Music: Elite Four
+AI: Check Bad Move
+
+Chandelure
+Level: 76
+- Flamethrower
+- Shadow Ball
+- Energy Ball
+- Will-O-Wisp
+
+Aegislash
+Level: 77
+- Shadow Sneak
+- Iron Head
+- Sacred Sword
+- Protect
+
+Spiritomb
+Level: 77
+- Dark Pulse
+- Shadow Ball
+- Will-O-Wisp
+- Rest
+
+Gengar
+Level: 78
+- Sludge Bomb
+- Shadow Ball
+- Thunderbolt
+- Hypnosis
+
+=== TRAINER_ERYON_ELITE_4 ===
+Name: DARIUS
+Class: Elite Four
+Pic: Elite Four Drake
+Gender: Male
+Music: Elite Four
+AI: Check Bad Move
+
+Goodra
+Level: 78
+- Dragon Pulse
+- Flamethrower
+- Thunderbolt
+- Ice Beam
+
+Flygon
+Level: 79
+- Dragon Claw
+- Earthquake
+- Rock Slide
+- Flamethrower
+
+Salamence
+Level: 79
+- Dragon Claw
+- Fly
+- Flamethrower
+- Crunch
+
+Dragonite
+Level: 80
+- Dragon Dance
+- Dragon Claw
+- Thunder Punch
+- Earthquake
+
+=== TRAINER_ERYON_CHAMPION ===
+Name: AURELIO
+Class: Champion
+Pic: Champion Wallace
+Gender: Male
+Music: Elite Four
+AI: Check Bad Move
+
+Lucario
+Level: 81
+- Aura Sphere
+- Flash Cannon
+- Dark Pulse
+- Extreme Speed
+
+Milotic
+Level: 81
+- Surf
+- Ice Beam
+- Recover
+- Toxic
+
+Tyranitar
+Level: 82
+- Crunch
+- Rock Slide
+- Earthquake
+- Dragon Dance
+
+Gardevoir
+Level: 82
+- Psychic
+- Moonblast
+- Calm Mind
+- Thunderbolt
+
+Volcarona
+Level: 83
+- Bug Buzz
+- Flamethrower
+- Quiver Dance
+- Giga Drain
+
+Metagross
+Level: 84
+- Meteor Mash
+- Zen Headbutt
+- Earthquake
+- Bullet Punch
