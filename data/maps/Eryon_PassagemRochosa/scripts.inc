@@ -5,6 +5,7 @@ Eryon_PassagemRochosa_MapScripts::
 EryonPassagem_EventScript_Guard::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_SERRA_ECLIPSE_SIGNAL_DISABLED, EryonPassagem_EventScript_GuardSerraQuiet
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonPassagem_EventScript_GuardClue
 	goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonPassagem_EventScript_GuardBadge
 	msgbox EryonPassagem_Text_GuardBefore, MSGBOX_DEFAULT
@@ -37,6 +38,7 @@ EryonPassagem_EventScript_TravelerAfterClue::
 @ The cart tracks tell a different story once the Eclipse camp has been examined.
 EryonPassagem_EventScript_CrystalMark::
 	lock
+	goto_if_set FLAG_ERYON_SERRA_ECLIPSE_SIGNAL_DISABLED, EryonPassagem_EventScript_CrystalMarkSerraQuiet
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonPassagem_EventScript_CrystalMarkClue
 	goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonPassagem_EventScript_CrystalMarkBadge
 	msgbox EryonPassagem_Text_CrystalMarkBefore, MSGBOX_DEFAULT
@@ -315,3 +317,29 @@ EryonPassagem_Text_CargoManifestAfter:
 	.string "combinam com a serra!\p"
 	.string "Destino: Posto Oriental.\n"
 	.string "Remetente: ECLIPSE.$"
+
+
+@ The border road recognizes the three-stage Sierra signal shutdown.
+EryonPassagem_EventScript_GuardSerraQuiet::
+	msgbox EryonPassagem_Text_GuardSerraQuiet, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPassagem_EventScript_CrystalMarkSerraQuiet::
+	msgbox EryonPassagem_Text_CrystalMarkSerraQuiet, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPassagem_Text_GuardSerraQuiet:
+	.string "GUARDA: Os cristais\n"
+	.string "da SERRA silenciaram!\p"
+	.string "A ECLIPSE perdeu\n"
+	.string "o contato nesta rota.\p"
+	.string "A passagem para\n"
+	.string "ARKHARA esta segura.$"
+
+EryonPassagem_Text_CrystalMarkSerraQuiet:
+	.string "As marcas de carroca\n"
+	.string "continuam na pedra.\p"
+	.string "Mas os cristais ja\n"
+	.string "nao emitem sinais.$"
