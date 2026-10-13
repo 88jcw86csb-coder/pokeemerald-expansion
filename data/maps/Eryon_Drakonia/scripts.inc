@@ -52,6 +52,7 @@ EryonDrakonia_EventScript_RuneResearcher::
 EryonDrakonia_EventScript_EclipseAgent::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonDrakonia_EventScript_EclipseAgentChart
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonDrakonia_EventScript_EclipseAgentExposed
 	msgbox EryonDrakonia_Text_AgentBefore, MSGBOX_DEFAULT
 	release
@@ -194,3 +195,17 @@ EryonDrakonia_Text_CourierAfter:
 	.string "venceu oito duelos!\p"
 	.string "Os guardioes torcem\n"
 	.string "pela sua vitoria.$"
+
+@ The disguised technician reacts once the player knows the crystal network.
+EryonDrakonia_EventScript_EclipseAgentChart::
+	msgbox EryonDrakonia_Text_AgentChart, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_Text_AgentChart:
+	.string "ECLIPSE: Voce leu\n"
+	.string "a Carta Estelar?!\p"
+	.string "Entao sabe que nossa\n"
+	.string "rede chega ate a LIGA.\p"
+	.string "Nao vai conseguir\n"
+	.string "parar a transmissao!$"
