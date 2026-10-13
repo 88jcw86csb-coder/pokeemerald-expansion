@@ -204,3 +204,74 @@ EryonIgnivar_Text_EmergencyBoardAlert:
 	.string "do deserto detectado!\p"
 	.string "A equipe tecnica segue\n"
 	.string "para a floresta.$"
+
+@ Eryon: KAIO is the city leader, separate from the Gym guide.
+EryonIgnivar_EventScript_GymLeader::
+	lock
+	faceplayer
+	goto_if_set FLAG_BADGE06_GET, EryonIgnivar_EventScript_GymAfter
+	goto_if_unset FLAG_BADGE05_GET, EryonIgnivar_EventScript_GymNotReady
+	goto EryonIgnivar_EventScript_GymOffer
+	end
+
+@ Tactical badge battle — Ignivar: ace level 46, badge 6.
+EryonIgnivar_EventScript_GymOffer::
+	msgbox EryonIgnivar_Text_GymOffer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonIgnivar_EventScript_GymDecline
+	closemessage
+	trainerbattle_single TRAINER_ERYON_GYM_IGNIVAR, EryonIgnivar_Text_GymIntro, EryonIgnivar_Text_GymLoss, EryonIgnivar_EventScript_GymVictory, FALSE
+	msgbox EryonIgnivar_Text_GymAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonIgnivar_EventScript_GymVictory::
+	message EryonIgnivar_Text_GymBadge
+	waitmessage
+	call Common_EventScript_PlayGymBadgeFanfare
+	setflag FLAG_BADGE06_GET
+	msgbox EryonIgnivar_Text_GymAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonIgnivar_EventScript_GymDecline::
+	closemessage
+	release
+	end
+
+EryonIgnivar_EventScript_GymNotReady::
+	msgbox EryonIgnivar_Text_GymNotReady, MSGBOX_DEFAULT
+	release
+	end
+
+EryonIgnivar_EventScript_GymAfter::
+	msgbox EryonIgnivar_Text_GymAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonIgnivar_Text_GymOffer:
+	.string "KAIO: Meu GINASIO\n"
+	.string "treina com fogo.\p"
+	.string "Desafiar meu time\n"
+	.string "de Pokemon agora?$"
+
+EryonIgnivar_Text_GymIntro:
+	.string "KAIO: Mostre sua\n"
+	.string "forca e estrategia!$"
+
+EryonIgnivar_Text_GymLoss:
+	.string "KAIO: Voce encontrou\n"
+	.string "uma boa resposta!$"
+
+EryonIgnivar_Text_GymBadge:
+	.string "Venceu o 6o GINASIO!\p"
+	.string "Recebeu a INSIGNIA\n"
+	.string "de numero 6!$"
+
+EryonIgnivar_Text_GymAfter:
+	.string "KAIO: Bela vitoria!\p"
+	.string "Ajude a cidade a manter a luz.$"
+
+EryonIgnivar_Text_GymNotReady:
+	.string "KAIO: Primeiro,\n"
+	.string "conquiste a INSIGNIA\n"
+	.string "do GINASIO anterior.$"
