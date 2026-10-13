@@ -110,7 +110,8 @@ def render(name, t):
         "neonara": "Registered overworld concept: provisional map.bin, city NPC and Route 03/Mist Hills warps installed; gym and interiors not implemented.",
         "frostheim": "Registered provisional 64x56 overworld: west/east warps, Bjorn and researcher scripts installed; Gym interior, battle and collision tests pending.",
         "umbra": "Registered provisional 64x56 city: Wind Valley warp and two story NPCs installed; Gym interior, battles and collision tests pending.",
-        "ignivar": "Registered 64x56 terrain with Solaris return warp, engineer, gym steward, Eclipse technician and inspectable power-grid clues. Gym interior and trainer battles still pending."
+        "ignivar": "Registered 64x56 terrain with Solaris return warp, engineer, gym steward, Eclipse technician and inspectable power-grid clues. Gym interior and trainer battles still pending.",
+        "drakonia": "Registered Drakonia city: Peak Village warp, Dragon Gym guide, healer, sanctuary and Eclipse events; gym battle and interiors pending."
     }.get(name, "Design only: not a registered map.bin. Gym, interiors, scripts and warps not implemented.")
     city_name, typ, badge = CITIES[name]
     return (f"{city_name} | Gym {badge} ({typ}) | Eryon concept 64x56\n"

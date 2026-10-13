@@ -98,7 +98,7 @@ EryonPico_Text_Notice:
 	.string "estranho aos vigias.$"
 
 EryonPico_Text_Road:
-	.string "CAMINHO DE DRAKONIA:\n"
-	.string "acesso em preparacao.\p"
-	.string "A saida adiante ainda\n"
-	.string "nao esta liberada.$"
+	.string "LESTE: DRAKONIA.\n"
+	.string "O caminho esta aberto!\p"
+	.string "Descubra o segredo\n"
+	.string "do santuario dos dragoes.$"

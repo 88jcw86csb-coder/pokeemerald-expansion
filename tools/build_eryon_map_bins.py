@@ -177,6 +177,14 @@ def main():
     ignivar_dest.write_bytes(ignivar_payload)
     generated["LAYOUT_ERYON_IGNIVAR"] = ignivar_dest.relative_to(ROOT).as_posix()
     print(f"{ignivar_dest.relative_to(ROOT)}: {len(ignivar_payload)} bytes")
+    # Eighth gym city now has a registered overworld and reciprocal warp.
+    dragon_src = ROOT / "docs/eryon/cidades/drakonia_city_plan.txt"
+    dragon_dest = ROOT / "data/layouts/Eryon_Drakonia/map.bin"
+    dragon_payload = compile_plan(dragon_src, neonara_tiles, width=64, height=56)
+    dragon_dest.parent.mkdir(parents=True, exist_ok=True)
+    dragon_dest.write_bytes(dragon_payload)
+    generated["LAYOUT_ERYON_DRAKONIA"] = dragon_dest.relative_to(ROOT).as_posix()
+    print(f"{dragon_dest.relative_to(ROOT)}: {len(dragon_payload)} bytes")
     if args.preview_unregistered:
         # Village/city landmark symbols are only floor placeholders.
         # These previews are not functional buildings or gym interiors.
@@ -195,7 +203,7 @@ def main():
         city_tiles = {**tiles, "=": tiles["."],
                       **{mark: tiles["."] for mark in "GCMHP"}}
         for key in CITIES:
-            if key in ("neonara", "frostheim", "umbra", "ignivar"):
+            if key in ("neonara", "frostheim", "umbra", "ignivar", "drakonia"):
                 continue
             src = ROOT / "docs/eryon/cidades" / f"{key}_city_plan.txt"
             dest = ROOT / "build/eryon-previews/cities" / key / "map.bin"

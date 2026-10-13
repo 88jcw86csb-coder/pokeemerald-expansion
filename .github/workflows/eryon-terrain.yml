@@ -57,7 +57,7 @@ jobs:
               assert path.is_file() and path.stat().st_size == 36 * 30 * 2, path
               print(f"{name}: village preview OK")
           for name in CITIES:
-              if name in ("neonara", "frostheim", "umbra", "ignivar"):
+              if name in ("neonara", "frostheim", "umbra", "ignivar", "drakonia"):
                   continue
               path = Path("build/eryon-previews/cities") / name / "map.bin"
               assert path.is_file() and path.stat().st_size == 64 * 56 * 2, path

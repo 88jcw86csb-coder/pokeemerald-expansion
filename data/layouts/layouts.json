@@ -9686,6 +9686,17 @@
       "border_filepath": "data/layouts/PetalburgWoods/border.bin",
       "blockdata_filepath": "data/layouts/Eryon_VilaDoPico/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ERYON_DRAKONIA",
+      "name": "ERYON_DRAKONIA_Layout",
+      "width": 64,
+      "height": 56,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Rustboro",
+      "border_filepath": "data/layouts/PetalburgWoods/border.bin",
+      "blockdata_filepath": "data/layouts/Eryon_Drakonia/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

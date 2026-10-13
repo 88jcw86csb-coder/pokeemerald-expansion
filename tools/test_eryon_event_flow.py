@@ -9,7 +9,7 @@ MAPS = ("Eryon_VilaAurora", "Eryon_Rota01", "Eryon_BosqueDeLumina",
         "Eryon_Rota02", "Eryon_Verdelume", "Eryon_Rota03",
         "Eryon_SerraDosCristais", "Eryon_PassagemRochosa",
         "Eryon_EstradaOriental", "Eryon_ValeDosVentos",
-        "Eryon_EstradaDosPomares", "Eryon_VilaDosPomares", "Eryon_Rota04", "Eryon_Neonara", "Eryon_ColinasDaNeblina", "Eryon_VilaDaNeblina", "Eryon_TrilhaGlacial", "Eryon_Frostheim", "Eryon_RefugioCristal", "Eryon_PostoOriental", "Eryon_Umbra", "Eryon_RotaDasCachoeiras", "Eryon_VilaDasAguas", "Eryon_TrilhaDoOasis", "Eryon_DesertoDeSolaris", "Eryon_Ignivar", "Eryon_FlorestaDosEcos", "Eryon_ValeDosEcos", "Eryon_AldeiaDosEcos", "Eryon_TrilhaLunar", "Eryon_Lunaris", "Eryon_TrilhaDosDragoes", "Eryon_VilaDoPico")
+        "Eryon_EstradaDosPomares", "Eryon_VilaDosPomares", "Eryon_Rota04", "Eryon_Neonara", "Eryon_ColinasDaNeblina", "Eryon_VilaDaNeblina", "Eryon_TrilhaGlacial", "Eryon_Frostheim", "Eryon_RefugioCristal", "Eryon_PostoOriental", "Eryon_Umbra", "Eryon_RotaDasCachoeiras", "Eryon_VilaDasAguas", "Eryon_TrilhaDoOasis", "Eryon_DesertoDeSolaris", "Eryon_Ignivar", "Eryon_FlorestaDosEcos", "Eryon_ValeDosEcos", "Eryon_AldeiaDosEcos", "Eryon_TrilhaLunar", "Eryon_Lunaris", "Eryon_TrilhaDosDragoes", "Eryon_VilaDoPico", "Eryon_Drakonia")
 LABEL = re.compile(r"(?m)^([A-Za-z][A-Za-z0-9_]*)::?\s*$")
 JUMP = re.compile(r"^\s*(?:goto|goto_if_eq|goto_if_ne|goto_if_ge|goto_if_le|goto_if_gt|goto_if_lt)\s+(.+)$")
 
@@ -356,6 +356,33 @@ class EryonEventFlowTests(unittest.TestCase):
                       (ROOT / "data/maps/Eryon_VilaDoPico/scripts.inc").read_text(encoding="utf-8"))
         self.assertIn("VAR_ERYON_SERRA_CLUE_FOUND",
                       (ROOT / "data/maps/Eryon_TrilhaDosDragoes/scripts.inc").read_text(encoding="utf-8"))
+
+    def test_drakonia_is_connected_to_peak_village(self):
+        import json
+        village = json.loads((ROOT / "data/maps/Eryon_VilaDoPico/map.json").read_text(encoding="utf-8"))
+        drakonia = json.loads((ROOT / "data/maps/Eryon_Drakonia/map.json").read_text(encoding="utf-8"))
+        self.assertEqual(village["warp_events"][1]["dest_map"], drakonia["id"])
+        self.assertEqual(int(village["warp_events"][1]["dest_warp_id"]), 0)
+        self.assertEqual(drakonia["warp_events"][0]["dest_map"], village["id"])
+        self.assertEqual(int(drakonia["warp_events"][0]["dest_warp_id"]), 1)
+        layouts = json.loads((ROOT / "data/layouts/layouts.json").read_text(encoding="utf-8"))
+        layout = next(x for x in layouts["layouts"] if x["id"] == drakonia["layout"])
+        self.assertEqual((layout["width"], layout["height"]), (64, 56))
+        payload = (ROOT / layout["blockdata_filepath"]).read_bytes()
+        self.assertEqual(len(payload), 7168)
+        plan = (ROOT / "docs/eryon/cidades/drakonia_city_plan.txt").read_text(encoding="utf-8").splitlines()[4:]
+        import struct
+        from build_eryon_map_bins import compile_plan
+        values = {"#": 0x3c01, "=": 0x3001, ",": 0x3002, ":": 0x3003,
+                  "G": 0x3001, "C": 0x3001, "M": 0x3001, "H": 0x3001, "P": 0x3001}
+        expected = compile_plan(ROOT / "docs/eryon/cidades/drakonia_city_plan.txt", values, 64, 56)
+        self.assertEqual(payload, expected)
+        source = (ROOT / "data/maps/Eryon_Drakonia/scripts.inc").read_text(encoding="utf-8")
+        for event in drakonia["object_events"] + drakonia["bg_events"]:
+            self.assertNotEqual(plan[event["y"]][event["x"]], "#")
+            self.assertIn(event["script"] + "::", source)
+        self.assertIn("special HealPlayerParty", source)
+        self.assertIn("EryonDrakonia_EventScript_EclipseAgentExposed::", source)
 
     def test_passagem_healer_and_two_trainers(self):
         import json
