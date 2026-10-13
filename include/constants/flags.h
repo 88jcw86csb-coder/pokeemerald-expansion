@@ -92,7 +92,7 @@
 #define FLAG_ERYON_DRAGON_TRAIL_COURIER_DEFEATED 0x46 // Dedicated Eclipse courier trainer flag
 #define FLAG_ERYON_DRAGON_TRAIL_LOOKOUT_REWARD 0x47 // One-time Dragon Trail lookout reward
 #define FLAG_ERYON_DRAGON_TRAIL_NOIBAT_RESOLVED 0x48 // Noibat nest encounter caught or defeated
-#define FLAG_UNUSED_0x049    0x49 // Unused Flag
+#define FLAG_ERYON_DRAKONIA_AXEW_RESOLVED 0x49 // Axew sanctuary encounter caught or defeated
 #define FLAG_UNUSED_0x04A    0x4A // Unused Flag
 #define FLAG_UNUSED_0x04B    0x4B // Unused Flag
 #define FLAG_UNUSED_0x04C    0x4C // Unused Flag
