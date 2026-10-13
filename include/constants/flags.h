@@ -53,8 +53,8 @@
 
 #define FLAG_ERYON_MIST_SIGNAL_REPAIRED 0x20 // Neonara badge restores the fog lookout transmitter
 #define FLAG_ERYON_GLACIAL_SUPPLY_RETRIEVED 0x21 // One-time northern ice pass supply reward
-#define FLAG_UNUSED_0x022    0x22 // Unused Flag
-#define FLAG_UNUSED_0x023    0x23 // Unused Flag
+#define FLAG_ERYON_GLACIAL_ECLIPSE_RESEARCHER_DEFEATED 0x22 // Dedicated optional northern Eclipse trainer flag
+#define FLAG_ERYON_GLACIAL_ECLIPSE_SAMPLE_TAKEN 0x23 // Glacial Eclipse sample reward collected
 #define FLAG_UNUSED_0x024    0x24 // Unused Flag
 #define FLAG_UNUSED_0x025    0x25 // Unused Flag
 #define FLAG_UNUSED_0x026    0x26 // Unused Flag
