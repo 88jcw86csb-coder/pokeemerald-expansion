@@ -9774,6 +9774,17 @@
       "border_filepath": "data/layouts/PetalburgWoods/border.bin",
       "blockdata_filepath": "data/layouts/Eryon_LigaRecuperacao/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ERYON_LIGA_ELITE_FOUR",
+      "name": "ERYON_LIGA_ELITE_FOUR_Layout",
+      "width": 56,
+      "height": 40,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Rustboro",
+      "border_filepath": "data/layouts/PetalburgWoods/border.bin",
+      "blockdata_filepath": "data/layouts/Eryon_LigaEliteFour/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }
