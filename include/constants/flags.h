@@ -94,8 +94,8 @@
 #define FLAG_ERYON_DRAGON_TRAIL_NOIBAT_RESOLVED 0x48 // Noibat nest encounter caught or defeated
 #define FLAG_ERYON_DRAKONIA_AXEW_RESOLVED 0x49 // Axew sanctuary encounter caught or defeated
 #define FLAG_ERYON_PICO_SIGNAL_REPAIRED 0x4A // Mountain village radio repeater repaired
-#define FLAG_UNUSED_0x04B    0x4B // Unused Flag
-#define FLAG_UNUSED_0x04C    0x4C // Unused Flag
+#define FLAG_ERYON_LEAGUE_PARK_ESPURR_RESOLVED 0x4B // Optional Espurr garden encounter
+#define FLAG_ERYON_LEAGUE_PARK_REWARD_CLAIMED 0x4C // One-time League park research reward
 #define FLAG_UNUSED_0x04D    0x4D // Unused Flag
 #define FLAG_UNUSED_0x04E    0x4E // Unused Flag
 #define FLAG_UNUSED_0x04F    0x4F // Unused Flag
