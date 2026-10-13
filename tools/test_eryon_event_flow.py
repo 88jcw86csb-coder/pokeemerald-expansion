@@ -408,7 +408,7 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertIn("special HealPlayerParty", script)
         self.assertIn("setflag FLAG_ERYON_ARKHARA_RELAY_READ", script)
         flags = (ROOT / "include/constants/flags.h").read_text(encoding="utf-8")
-        self.assertRegex(flags, r"(?m)^#define\\s+FLAG_ERYON_ARKHARA_RELAY_READ\\s+0x2B\\b")
+        self.assertRegex(flags, r"(?m)^#define\s+FLAG_ERYON_ARKHARA_RELAY_READ\s+0x2B\b")
 
     def test_passagem_healer_and_two_trainers(self):
         import json
