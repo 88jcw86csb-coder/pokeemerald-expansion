@@ -50,5 +50,5 @@ Cada seta representa uma conexão FUTURA a implementar/testar no motor.
 - Manter Bosque de Lumina entre a primeira rota e Verdelume.
 - Preservar saídas já registradas: Serra → Passagem → Estrada → Vale.
 - Refúgio Cristal e Posto Oriental são desvios laterais planejados; a tabela é ordem narrativa, não exige quebrar os warps diretos existentes.
-- Os novos locais são propostas de expansão; não alegar que possuem map.json, layout ou warp.
+- Alguns locais planejados já têm map.json, layout e warp. Confirmar quais interiores e batalhas continuam pendentes.
 - Confirmar em Porymap e no emulador cada transição antes de liberar a ROM.

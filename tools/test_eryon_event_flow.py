@@ -15,6 +15,33 @@ JUMP = re.compile(r"^\s*(?:goto|goto_if_eq|goto_if_ne|goto_if_ge|goto_if_le|goto
 
 
 class EryonEventFlowTests(unittest.TestCase):
+    def test_every_registered_map_has_actual_story_content(self):
+        import json
+        groups = json.loads(
+            (ROOT / "data/maps/map_groups.json").read_text(encoding="utf-8")
+        )["gMapGroup_Eryon"]
+        self.assertEqual(len(groups), 37)
+        self.assertEqual(set(groups), set(MAPS))
+        for name in groups:
+            with self.subTest(map=name):
+                m = json.loads(
+                    (ROOT / "data/maps" / name / "map.json").read_text(encoding="utf-8")
+                )
+                self.assertTrue(
+                    m["object_events"] or m["bg_events"],
+                    f"{name}: no story NPC, sign or interactable event"
+                )
+        gyms = ("Eryon_Verdelume", "Eryon_Neonara", "Eryon_Frostheim",
+                "Eryon_Arkhara", "Eryon_Umbra", "Eryon_Ignivar",
+                "Eryon_Lunaris", "Eryon_Drakonia")
+        for city in gyms:
+            with self.subTest(gym_city=city):
+                self.assertIn(city, groups)
+                script = (ROOT / "data/maps" / city / "scripts.inc").read_text(
+                    encoding="utf-8"
+                )
+                self.assertTrue(script.strip())
+
     def test_all_map_npc_and_sign_scripts_exist(self):
         import json
         for name in MAPS:

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate eight distinct LARGE gym-city concept maps for Pokemon Eryon.
 
-These are 64x56 ASCII planning layouts, NOT registered engine maps.
+These are 64x56 ASCII planning layouts; several have provisional registered GBA overworld maps.
 City plans reserve G (gym), C (Pokemon Center), M (mart), H (houses),
 P (plaza), = (streets), # (blocks), and park vegetation (comma).
 """

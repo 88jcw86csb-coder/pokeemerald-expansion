@@ -142,6 +142,37 @@ class NoMandatoryHMsTests(unittest.TestCase):
                 if name == "Eryon_CaminhoDaLiga":
                     self.assertIn((44, 22), walkable)
 
+    def test_arkhara_stone_city_open_on_foot(self):
+        import json
+        chain = ("Eryon_PassagemRochosa", "Eryon_Arkhara",
+                 "Eryon_EstradaOriental")
+        for source, destination in zip(chain, chain[1:]):
+            with self.subTest(pair=source + " -> " + destination):
+                src = self.maps[source]
+                dst = self.maps[destination]
+                outgoing = [(i, w) for i, w in enumerate(src["warp_events"])
+                            if w["dest_map"] == dst["id"]]
+                self.assertEqual(len(outgoing), 1)
+                i, w = outgoing[0]
+                reverse = dst["warp_events"][int(w["dest_warp_id"])]
+                self.assertEqual(reverse["dest_map"], src["id"])
+                self.assertEqual(int(reverse["dest_warp_id"]), i)
+        city = self.maps["Eryon_Arkhara"]
+        layout = self.layouts[city["layout"]]
+        raw = (ROOT / layout["blockdata_filepath"]).read_bytes()
+        self.assertEqual(len(raw), 64 * 56 * 2)
+        start = city["warp_events"][0]
+        end = city["warp_events"][1]
+        reachable = walkable_region(
+            raw, layout["width"], layout["height"], (start["x"], start["y"])
+        )
+        self.assertIn((end["x"], end["y"]), reachable)
+        scripts = (ROOT / "data/maps/Eryon_Arkhara/scripts.inc").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("setflag FLAG_ERYON_ARKHARA_RELAY_READ", scripts)
+        self.assertNotRegex(scripts, FORBIDDEN_MOVE)
+
     def test_optional_star_chart_not_a_gate(self):
         cave_script = (ROOT / "data/maps/Eryon_GrutaDasEstrelas/scripts.inc").read_text(
             encoding="utf-8"
