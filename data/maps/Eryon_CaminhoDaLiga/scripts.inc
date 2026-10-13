@@ -21,6 +21,7 @@ EryonLigaCaminho_EventScript_Medic::
 EryonLigaCaminho_EventScript_Observer::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_LEAGUE_PARK_ESPURR_RESOLVED, EryonLigaCaminho_EventScript_ObserverParkRestored
 	goto_if_set FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED, EryonLigaCaminho_EventScript_ObserverRelayOff
 	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonLigaCaminho_EventScript_ObserverReported
 	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonLigaCaminho_EventScript_ObserverClue
@@ -211,3 +212,17 @@ EryonLigaCaminho_Text_GuardianScoutDefeated:
 	.string "na Gruta das Estrelas!\p"
 	.string "A estrada esta livre.\n"
 	.string "Siga para a LIGA!$"
+
+
+@ The final road ecosystem responds after the League capital garden recovers.
+EryonLigaCaminho_EventScript_ObserverParkRestored::
+	msgbox EryonLigaCaminho_Text_ObserverParkRestored, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_Text_ObserverParkRestored:
+	.string "PESQUISADOR: O ESPURR\n"
+	.string "da LIGA foi estudado!\p"
+	.string "A natureza se recupera\n"
+	.string "quando o sinal da\n"
+	.string "ECLIPSE desaparece.$"
