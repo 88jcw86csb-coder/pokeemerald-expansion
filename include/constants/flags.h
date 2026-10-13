@@ -96,9 +96,9 @@
 #define FLAG_ERYON_PICO_SIGNAL_REPAIRED 0x4A // Mountain village radio repeater repaired
 #define FLAG_ERYON_LEAGUE_PARK_ESPURR_RESOLVED 0x4B // Optional Espurr garden encounter
 #define FLAG_ERYON_LEAGUE_PARK_REWARD_CLAIMED 0x4C // One-time League park research reward
-#define FLAG_UNUSED_0x04D    0x4D // Unused Flag
-#define FLAG_UNUSED_0x04E    0x4E // Unused Flag
-#define FLAG_UNUSED_0x04F    0x4F // Unused Flag
+#define FLAG_ERYON_ELITE_TRAINER_1_DEFEATED 0x4D // Eryon Elite 4 round 1
+#define FLAG_ERYON_ELITE_TRAINER_2_DEFEATED 0x4E // Eryon Elite 4 round 2
+#define FLAG_ERYON_ELITE_TRAINER_3_DEFEATED 0x4F // Eryon Elite 4 round 3
 
 // Scripts
 #define FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL  0x50
@@ -106,8 +106,8 @@
 #define FLAG_RESCUED_BIRCH                       0x52
 #define FLAG_LEGENDARIES_IN_SOOTOPOLIS           0x53
 
-#define FLAG_UNUSED_0x054                    0x54  // Unused Flag
-#define FLAG_UNUSED_0x055                    0x55  // Unused Flag
+#define FLAG_ERYON_ELITE_TRAINER_4_DEFEATED 0x54 // Eryon Elite 4 round 4
+#define FLAG_ERYON_CHAMPION_TRAINER_DEFEATED 0x55 // Eryon champion battle flag
 
 #define FLAG_HIDE_CONTEST_POKE_BALL          0x56  // Always set after new game, object it hides is added directly
 #define FLAG_MET_RIVAL_MOM                   0x57
@@ -128,7 +128,7 @@
 #define FLAG_MOSSDEEP_GYM_SWITCH_3           0x66 //
 #define FLAG_MOSSDEEP_GYM_SWITCH_4           0x67 //
 
-#define FLAG_UNUSED_0x068                    0x68  // Unused Flag
+#define FLAG_ERYON_CHAMPION_CROWNED 0x68 // Eryon League championship complete
 
 #define FLAG_OCEANIC_MUSEUM_MET_REPORTER     0x69
 #define FLAG_RECEIVED_HM_STRENGTH            0x6A
