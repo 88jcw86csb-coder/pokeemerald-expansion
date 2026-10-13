@@ -17530,3 +17530,251 @@ Level: 84
 - Zen Headbutt
 - Earthquake
 - Bullet Punch
+
+
+@ Eryon balance: 7 real badge battles, ace curve 25 / 31 / 36 / 41 / 46 / 51 / 56.
+
+=== TRAINER_ERYON_GYM_NEONARA ===
+Name: VOLT
+Class: Leader
+Pic: Leader Wattson
+Gender: Male
+Music: Male
+Items: Super Potion
+AI: Check Bad Move
+
+Magnemite
+Level: 22
+- Spark
+- Thunder Wave
+- Sonic Boom
+- Supersonic
+
+Flaaffy
+Level: 23
+- Thunder Shock
+- Cotton Spore
+- Tackle
+- Thunder Wave
+
+Luxio
+Level: 25
+- Spark
+- Bite
+- Charge
+- Quick Attack
+
+=== TRAINER_ERYON_GYM_FROSTHEIM ===
+Name: BJORN
+Class: Leader
+Pic: Elite Four Glacia
+Gender: Male
+Music: Male
+Items: Super Potion
+AI: Check Bad Move
+
+Snover
+Level: 28
+- Razor Leaf
+- Icy Wind
+- Leech Seed
+- Mist
+
+Piloswine
+Level: 29
+- Ice Shard
+- Mud Bomb
+- Rock Tomb
+- Endure
+
+Glaceon
+Level: 31
+- Icy Wind
+- Quick Attack
+- Bite
+- Sand Attack
+
+=== TRAINER_ERYON_GYM_ARKHARA ===
+Name: TESSA
+Class: Leader
+Pic: Leader Roxanne
+Gender: Female
+Music: Female
+Items: Super Potion
+AI: Check Bad Move
+
+Sandshrew
+Level: 33
+- Dig
+- Rock Tomb
+- Sand Attack
+- Rapid Spin
+
+Gligar
+Level: 34
+- Aerial Ace
+- Dig
+- Quick Attack
+- Sand Attack
+
+Camerupt
+Level: 35
+- Flame Burst
+- Magnitude
+- Rock Slide
+- Amnesia
+
+Claydol
+Level: 36
+- Extrasensory
+- Earth Power
+- Ancient Power
+- Cosmic Power
+
+=== TRAINER_ERYON_GYM_UMBRA ===
+Name: NYX
+Class: Leader
+Pic: Elite Four Sidney
+Gender: Female
+Music: Female
+Items: Hyper Potion
+AI: Check Bad Move
+
+Murkrow
+Level: 38
+- Wing Attack
+- Feint Attack
+- Haze
+- Confuse Ray
+
+Sneasel
+Level: 39
+- Ice Shard
+- Feint Attack
+- Quick Attack
+- Metal Claw
+
+Houndoom
+Level: 40
+- Flamethrower
+- Bite
+- Roar
+- Smog
+
+Umbreon
+Level: 41
+- Dark Pulse
+- Moonlight
+- Confuse Ray
+- Quick Attack
+
+=== TRAINER_ERYON_GYM_IGNIVAR ===
+Name: KAIO
+Class: Leader
+Pic: Leader Flannery
+Gender: Male
+Music: Male
+Items: Hyper Potion
+AI: Check Bad Move
+
+Magcargo
+Level: 43
+- Flame Burst
+- Ancient Power
+- Amnesia
+- Smog
+
+Ninetales
+Level: 44
+- Flamethrower
+- Will-O-Wisp
+- Quick Attack
+- Safeguard
+
+Arcanine
+Level: 45
+- Fire Fang
+- Crunch
+- Extreme Speed
+- Roar
+
+Chandelure
+Level: 46
+- Flamethrower
+- Shadow Ball
+- Confuse Ray
+- Will-O-Wisp
+
+=== TRAINER_ERYON_GYM_LUNARIS ===
+Name: LYRA
+Class: Leader
+Pic: Leader Winona
+Gender: Female
+Music: Female
+Items: Hyper Potion
+AI: Check Bad Move
+
+Espeon
+Level: 48
+- Psychic
+- Swift
+- Calm Mind
+- Reflect
+
+Clefable
+Level: 49
+- Moonblast
+- Flamethrower
+- Encore
+- Moonlight
+
+Gardevoir
+Level: 50
+- Psychic
+- Moonblast
+- Thunderbolt
+- Calm Mind
+
+Sylveon
+Level: 51
+- Moonblast
+- Quick Attack
+- Light Screen
+- Draining Kiss
+
+=== TRAINER_ERYON_GYM_DRAKONIA ===
+Name: RYU
+Class: Leader
+Pic: Elite Four Drake
+Gender: Male
+Music: Male
+Items: Hyper Potion
+AI: Check Bad Move
+
+Gabite
+Level: 53
+- Dragon Claw
+- Dig
+- Rock Slide
+- Sand Tomb
+
+Kingdra
+Level: 54
+- Surf
+- Dragon Pulse
+- Ice Beam
+- Smokescreen
+
+Flygon
+Level: 55
+- Earthquake
+- Dragon Claw
+- Rock Slide
+- Flamethrower
+
+Haxorus
+Level: 56
+- Dragon Claw
+- Slash
+- Rock Slide
+- Dragon Dance
