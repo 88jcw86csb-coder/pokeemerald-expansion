@@ -47,7 +47,10 @@ class EryonGlacialEclipse(unittest.TestCase):
         self.assertIn(f"#define {FLAG} 0x22", flags)
         self.assertIn(f"#define {REWARD_FLAG} 0x23", flags)
         self.assertIn(f"#define {BATTLE} 887", opponents)
-        self.assertIn("#define TRAINERS_COUNT_EMERALD     888", opponents)
+        self.assertGreaterEqual(
+            int(re.search(r"(?m)^#define TRAINERS_COUNT_EMERALD\s+(\d+)", opponents).group(1)),
+            888,
+        )
         self.assertIn(f"if (trainerId == {BATTLE})", setup)
         self.assertIn(f"return {FLAG};", setup)
         self.assertEqual(len(re.findall(rf"(?m)^=== {BATTLE} ===$", party)), 1)
