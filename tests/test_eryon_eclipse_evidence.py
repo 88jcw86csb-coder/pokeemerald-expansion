@@ -14,6 +14,8 @@ TRAIL = ROOT / "data/maps/Eryon_TrilhaDosDragoes/scripts.inc"
 CITY = ROOT / "data/maps/Eryon_CidadeDaLiga/scripts.inc"
 DRAKONIA = ROOT / "data/maps/Eryon_Drakonia/scripts.inc"
 LUNARIS = ROOT / "data/maps/Eryon_Lunaris/scripts.inc"
+PICO = ROOT / "data/maps/Eryon_VilaDoPico/scripts.inc"
+LEAGUE_ROAD = ROOT / "data/maps/Eryon_CaminhoDaLiga/scripts.inc"
 
 
 class EclipseEvidenceQuest(unittest.TestCase):
@@ -24,6 +26,8 @@ class EclipseEvidenceQuest(unittest.TestCase):
         cls.city = CITY.read_text(encoding="utf-8")
         cls.drakonia = DRAKONIA.read_text(encoding="utf-8")
         cls.lunaris = LUNARIS.read_text(encoding="utf-8")
+        cls.pico = PICO.read_text(encoding="utf-8")
+        cls.league_road = LEAGUE_ROAD.read_text(encoding="utf-8")
 
     def test_persistent_flags_have_distinct_ids(self):
         self.assertIn("#define FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ 0x3D", self.flags)
@@ -73,6 +77,17 @@ class EclipseEvidenceQuest(unittest.TestCase):
             "goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, "
             "EryonLunaris_EventScript_AnalystAfterReport", self.lunaris)
         self.assertIn("EryonLunaris_EventScript_GeneratorManifest::", self.lunaris)
+
+    def test_village_and_league_road_react_to_evidence(self):
+        self.assertIn(
+            "goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, "
+            "EryonPico_EventScript_RadioReport", self.pico)
+        self.assertIn(
+            "goto_if_set FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ, "
+            "EryonPico_EventScript_RadioManifest", self.pico)
+        self.assertIn(
+            "goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, "
+            "EryonLigaCaminho_EventScript_ObserverReported", self.league_road)
 
 
 if __name__ == "__main__":
