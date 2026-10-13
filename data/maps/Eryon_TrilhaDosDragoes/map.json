@@ -70,6 +70,19 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EryonDragoes_EventScript_CliffResearcher",
       "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_POKEFAN_F",
+      "x": 26,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EryonDragoes_EventScript_NestResearcher",
+      "flag": "0"
     }
   ],
   "coord_events": [],
@@ -97,6 +110,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EryonDragoes_EventScript_SummitCache"
+    },
+    {
+      "type": "sign",
+      "x": 30,
+      "y": 8,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EryonDragoes_EventScript_NoibatNest"
     }
   ],
   "id": "MAP_ERYON_TRILHA_DOS_DRAGOES",
