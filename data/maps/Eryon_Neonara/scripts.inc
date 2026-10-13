@@ -19,6 +19,8 @@ EryonNeonara_Text_Resident:
 EryonNeonara_EventScript_Technician::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_MIST_SIGNAL_REPAIRED, EryonNeonara_EventScript_TechnicianRestored
+	goto_if_set FLAG_BADGE02_GET, EryonNeonara_EventScript_TechnicianBadge
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonNeonara_EventScript_TechnicianAfterClue
 	msgbox EryonNeonara_Text_TechnicianBefore, MSGBOX_DEFAULT
 	release
@@ -136,3 +138,28 @@ EryonNeonara_Text_GymNotReady:
 	.string "VOLT: Primeiro,\n"
 	.string "conquiste a INSIGNIA\n"
 	.string "do GINASIO anterior.$"
+
+@ Gym 2 victory opens a non-mandatory weather transmitter quest.
+EryonNeonara_EventScript_TechnicianBadge::
+	msgbox EryonNeonara_Text_TechnicianBadge, MSGBOX_DEFAULT
+	release
+	end
+
+EryonNeonara_EventScript_TechnicianRestored::
+	msgbox EryonNeonara_Text_TechnicianRestored, MSGBOX_DEFAULT
+	release
+	end
+
+EryonNeonara_Text_TechnicianBadge:
+	.string "TECNICO: Essa INSIGNIA\n"
+	.string "permite usar meu painel!\p"
+	.string "Visite o observatorio\n"
+	.string "nas COLINAS DA NEBLINA.\p"
+	.string "O sinal pode revelar\n"
+	.string "a carga da ECLIPSE.$"
+
+EryonNeonara_Text_TechnicianRestored:
+	.string "TECNICO: O sinal voltou!\p"
+	.string "A VILA DA NEBLINA e\n"
+	.string "FROSTHEIM receberam\n"
+	.string "avisos sobre a ECLIPSE.$"
