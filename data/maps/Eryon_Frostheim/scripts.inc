@@ -5,6 +5,7 @@ Eryon_Frostheim_MapScripts::
 EryonFrostheim_EventScript_Researcher::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_MIST_SIGNAL_REPAIRED, EryonFrostheim_EventScript_ResearcherSignal
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonFrostheim_EventScript_ResearcherAfterClue
 	msgbox EryonFrostheim_Text_Researcher, MSGBOX_DEFAULT
 	release
@@ -126,3 +127,17 @@ EryonFrostheim_Text_GymNotReady:
 	.string "BJORN: Primeiro,\n"
 	.string "conquiste a INSIGNIA\n"
 	.string "do GINASIO anterior.$"
+
+@ New signal at the village enables the Frostheim crystal study.
+EryonFrostheim_EventScript_ResearcherSignal::
+	msgbox EryonFrostheim_Text_ResearcherSignal, MSGBOX_DEFAULT
+	release
+	end
+
+EryonFrostheim_Text_ResearcherSignal:
+	.string "CIENTISTA: Obrigado por\n"
+	.string "recuperar o observatorio!\p"
+	.string "O radio detectou sinais\n"
+	.string "da ECLIPSE no gelo.\p"
+	.string "BJORN treina esperando\n"
+	.string "proteger nossa cidade.$"
