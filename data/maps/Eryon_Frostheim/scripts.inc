@@ -5,6 +5,7 @@ Eryon_Frostheim_MapScripts::
 EryonFrostheim_EventScript_Researcher::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_GLACIAL_ECLIPSE_RESEARCHER_DEFEATED, EryonFrostheim_EventScript_ResearcherEclipseDefeated
 	goto_if_set FLAG_ERYON_MIST_SIGNAL_REPAIRED, EryonFrostheim_EventScript_ResearcherSignal
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonFrostheim_EventScript_ResearcherAfterClue
 	msgbox EryonFrostheim_Text_Researcher, MSGBOX_DEFAULT
@@ -32,15 +33,14 @@ EryonFrostheim_Text_ResearcherAfterClue:
 	.string "o gelo tem a mesma energia.\p"
 	.string "Bjorn precisa saber disso.$"
 
-@ Bjorn appears in the plaza before his Gym interior is built.
-@ Dialogue responds to the existing Serra investigation flag.
+@ Bjorn challenges the player after the Serra investigation and Badge 2.
+@ The battle is held in Frostheim's plaza until an indoor Gym is built.
 EryonFrostheim_EventScript_Bjorn::
 	lock
 	faceplayer
 	goto_if_set FLAG_BADGE03_GET, EryonFrostheim_EventScript_GymAfter
 	goto_if_unset FLAG_BADGE02_GET, EryonFrostheim_EventScript_GymNotReady
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonFrostheim_EventScript_GymOffer
-	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonFrostheim_EventScript_BjornAfterClue
 	msgbox EryonFrostheim_Text_BjornBefore, MSGBOX_DEFAULT
 	release
 	end
@@ -141,3 +141,18 @@ EryonFrostheim_Text_ResearcherSignal:
 	.string "da ECLIPSE no gelo.\p"
 	.string "BJORN treina esperando\n"
 	.string "proteger nossa cidade.$"
+
+
+@ The Glacial Trail defeat reaches Frostheim's research laboratory.
+EryonFrostheim_EventScript_ResearcherEclipseDefeated::
+	msgbox EryonFrostheim_Text_ResearcherEclipseDefeated, MSGBOX_DEFAULT
+	release
+	end
+
+EryonFrostheim_Text_ResearcherEclipseDefeated:
+	.string "CIENTISTA: A ECLIPSE\n"
+	.string "perdeu sua escolta no gelo!\p"
+	.string "Os materiais ficaram\n"
+	.string "na TRILHA GLACIAL.\p"
+	.string "BJORN podera analisar\n"
+	.string "os cristais com seguranca.$"
