@@ -310,7 +310,7 @@ class EryonEventFlowTests(unittest.TestCase):
 
     def test_dragon_trail_and_peak_village_are_connected_and_writable(self):
         import json
-        chain = ("Eryon_Lunaris", "Eryon_TrilhaDosDragoes", "Eryon_VilaDoPico")
+        chain = ("Eryon_Lunaris", "Eryon_TrilhaDosDragoes", "Eryon_VilaDoPico", "Eryon_Drakonia")
         maps = {}
         for name in chain:
             directory = ROOT / "data/maps" / name
@@ -326,7 +326,8 @@ class EryonEventFlowTests(unittest.TestCase):
                 back = maps[right]["warp_events"][back_index]
                 self.assertEqual(back["dest_map"], maps[left]["id"])
                 self.assertEqual(int(back["dest_warp_id"]), index)
-        self.assertEqual(len(maps["Eryon_VilaDoPico"]["warp_events"]), 1)
+        self.assertEqual(len(maps["Eryon_VilaDoPico"]["warp_events"]), 2)
+        self.assertEqual(len(maps["Eryon_Drakonia"]["warp_events"]), 1)
         layouts = json.loads((ROOT / "data/layouts/layouts.json").read_text(encoding="utf-8"))
         by_id = {x["id"]: x for x in layouts["layouts"]}
         tiles = {"#": 0x3c01, ".": 0x3001, ",": 0x3002, ":": 0x3003,
