@@ -108,6 +108,7 @@ EryonPico_Text_Road:
 EryonPico_EventScript_RadioOperator::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_DRAKONIA_ECLIPSE_DEFEATED, EryonPico_EventScript_RadioCommanderDefeated
 	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonPico_EventScript_RadioReport
 	goto_if_set FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ, EryonPico_EventScript_RadioManifest
 	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonPico_EventScript_RadioAfterChart
@@ -170,3 +171,18 @@ EryonPico_Text_RadioReport:
 	.string "ja foram entregues.\p"
 	.string "A vila esta segura,\n"
 	.string "mas seguimos atentos.$"
+
+
+@ The village receives a real bulletin after the commander loses in Drakonia.
+EryonPico_EventScript_RadioCommanderDefeated::
+	msgbox EryonPico_Text_RadioCommanderDefeated, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPico_Text_RadioCommanderDefeated:
+	.string "OPERADOR: A radio\n"
+	.string "recebeu uma noticia!\p"
+	.string "O comandante ECLIPSE\n"
+	.string "foi vencido em DRAKONIA.\p"
+	.string "Os vigias da vila\n"
+	.string "ja podem descansar.$"
