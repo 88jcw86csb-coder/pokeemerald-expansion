@@ -54,6 +54,15 @@ class EryonGymBalance(unittest.TestCase):
                 (LAYOUTS / "layouts.json").read_text(encoding="utf-8"))["layouts"]
         }
 
+    def test_every_eryon_trainer_name_fits_gba_limit(self):
+        constants = (ROOT / "include/constants/global.h").read_text(encoding="utf-8")
+        limit = int(re.search(r"(?m)^#define TRAINER_NAME_LENGTH\\s+(\\d+)", constants).group(1))
+        for trainer, team in self.party.items():
+            if not trainer.startswith("TRAINER_ERYON_"):
+                continue
+            name = re.search(r"(?m)^Name:\\s*(.+)$", team).group(1).strip()
+            self.assertLessEqual(len(name), limit, f"{trainer} name is too long")
+
     def test_gym_levels_rise_without_large_spikes(self):
         for i, (city, trainer, ace) in enumerate(
                 zip(CITIES, GYM_TRAINERS, ACE_LEVELS), 1):
