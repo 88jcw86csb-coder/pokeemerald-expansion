@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 FLAGS = ROOT / "include/constants/flags.h"
 TRAIL = ROOT / "data/maps/Eryon_TrilhaDosDragoes/scripts.inc"
 CITY = ROOT / "data/maps/Eryon_CidadeDaLiga/scripts.inc"
+DRAKONIA = ROOT / "data/maps/Eryon_Drakonia/scripts.inc"
 
 
 class EclipseEvidenceQuest(unittest.TestCase):
@@ -20,6 +21,7 @@ class EclipseEvidenceQuest(unittest.TestCase):
         cls.flags = FLAGS.read_text(encoding="utf-8")
         cls.trail = TRAIL.read_text(encoding="utf-8")
         cls.city = CITY.read_text(encoding="utf-8")
+        cls.drakonia = DRAKONIA.read_text(encoding="utf-8")
 
     def test_persistent_flags_have_distinct_ids(self):
         self.assertIn("#define FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ 0x3D", self.flags)
@@ -47,6 +49,19 @@ class EclipseEvidenceQuest(unittest.TestCase):
             self.city,
         )
         self.assertIn("EryonCidadeLiga_EventScript_InvestigatorEvidenceFiled::", self.city)
+
+    def test_evidence_has_consequences_in_both_cities(self):
+        flag = "FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED"
+        self.assertIn(
+            f"goto_if_set {flag}, EryonCidadeLiga_EventScript_ReporterEvidence",
+            self.city,
+        )
+        self.assertIn("EryonCidadeLiga_EventScript_ReporterEvidence::", self.city)
+        self.assertIn(
+            f"goto_if_set {flag}, EryonDrakonia_EventScript_SageEvidenceReported",
+            self.drakonia,
+        )
+        self.assertIn("EryonDrakonia_EventScript_SageEvidenceReported::", self.drakonia)
 
 
 if __name__ == "__main__":
