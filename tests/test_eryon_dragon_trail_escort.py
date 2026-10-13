@@ -81,7 +81,7 @@ class DragonTrailEscortContract(unittest.TestCase):
         self.assertIn(f"#define {LOOTED} 0x47", flags)
         self.assertIn(f"#define {TRAINER} 874", opponents)
         self.assertGreaterEqual(
-            int(re.search(r"(?m)^#define TRAINERS_COUNT_EMERALD\\s+(\\d+)", opponents).group(1)),
+            int(re.search(r"(?m)^#define TRAINERS_COUNT_EMERALD\s+(\d+)", opponents).group(1)),
             875,
         )
         self.assertIn(f"if (trainerId == {TRAINER})", engine)
