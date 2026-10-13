@@ -17307,3 +17307,32 @@ Level: 50
 - Night Slash
 - Swords Dance
 - Brick Break
+
+=== TRAINER_ERYON_DRAGON_TRAIL_COURIER ===
+Name: ESCOLTA
+Class: Team Aqua
+Pic: Aqua Grunt M
+Gender: Male
+Music: Intense
+AI: Check Bad Move
+
+Sneasel
+Level: 43
+- Ice Shard
+- Feint Attack
+- Quick Attack
+- Metal Claw
+
+Skarmory
+Level: 44
+- Steel Wing
+- Aerial Ace
+- Sand Attack
+- Spikes
+
+Noivern
+Level: 46
+- Air Slash
+- Dragon Pulse
+- Roost
+- Supersonic
