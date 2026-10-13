@@ -28,14 +28,18 @@ EryonLigaRecover_EventScript_ReturnLobby::
 	end
 
 EryonLigaRecover_EventScript_Stay::
+	closemessage
 	release
 	end
 
 EryonLigaRecover_EventScript_EliteGate::
 	lock
 	goto_if_unset FLAG_ERYON_QUALIFIED, EryonLigaRecover_EventScript_NotQualified
-	msgbox EryonLigaRecover_Text_EliteGate, MSGBOX_DEFAULT
-	release
+	msgbox EryonLigaRecover_Text_EliteGate, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonLigaRecover_EventScript_Stay
+	closemessage
+	warp MAP_ERYON_LIGA_ELITE_FOUR, 28, 37
+	waitstate
 	end
 
 EryonLigaRecover_EventScript_NotQualified::
@@ -57,9 +61,10 @@ EryonLigaRecover_Text_Official:
 
 EryonLigaRecover_Text_EliteGate:
 	.string "PORTA DA ELITE FOUR:\n"
-	.string "credencial aprovada.\p"
-	.string "As salas dos 4 mestres\n"
-	.string "ainda serao finalizadas.$"
+	.string "Credencial aprovada!\p"
+	.string "Quatro mestres e um\n"
+	.string "CAMPEAO aguardam.\p"
+	.string "Entrar no desafio?$"
 
 EryonLigaRecover_Text_NotQualified:
 	.string "OFICIAL: Primeiro,\n"
