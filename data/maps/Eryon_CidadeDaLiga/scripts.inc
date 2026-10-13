@@ -276,3 +276,140 @@ EryonCidadeLiga_Text_ReporterDrakonia:
 	.string "perdeu um duelo Pokemon.\p"
 	.string "Mesmo com essa vitoria,\n"
 	.string "a LIGA continua alerta.$"
+
+
+@ Optional Kalos encounter at the new civic garden.
+@ The restored Star Grotto relay stops Eclipse interference with Pokemon.
+@ Capturing or defeating Espurr resolves the encounter, escape permits a retry.
+EryonCidadeLiga_EventScript_ParkEspurr::
+	lock
+	goto_if_set FLAG_ERYON_LEAGUE_PARK_ESPURR_RESOLVED, EryonCidadeLiga_EventScript_ParkEspurrQuiet
+	goto_if_unset FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED, EryonCidadeLiga_EventScript_ParkEspurrDisturbed
+	msgbox EryonCidadeLiga_Text_ParkEspurrPrompt, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonCidadeLiga_EventScript_ParkLeave
+	closemessage
+	setwildbattle SPECIES_ESPURR, 47
+	waitse
+	playmoncry SPECIES_ESPURR, CRY_MODE_ENCOUNTER
+	delay 30
+	waitmoncry
+	dowildbattle
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, EryonCidadeLiga_EventScript_ParkEspurrResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, EryonCidadeLiga_EventScript_ParkEspurrResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, EryonCidadeLiga_EventScript_ParkEspurrEscaped
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, EryonCidadeLiga_EventScript_ParkEspurrEscaped
+	release
+	end
+
+EryonCidadeLiga_EventScript_ParkEspurrResolved::
+	setflag FLAG_ERYON_LEAGUE_PARK_ESPURR_RESOLVED
+	msgbox EryonCidadeLiga_Text_ParkEspurrResolved, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_ParkEspurrDisturbed::
+	msgbox EryonCidadeLiga_Text_ParkEspurrDisturbed, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_ParkEspurrEscaped::
+	msgbox EryonCidadeLiga_Text_ParkEspurrEscaped, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_ParkEspurrQuiet::
+	msgbox EryonCidadeLiga_Text_ParkEspurrQuiet, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_ParkLeave::
+	closemessage
+	release
+	end
+
+@ The public botanist observes the garden and provides a single research reward.
+@ A full bag never consumes the Dawn Stone reward.
+EryonCidadeLiga_EventScript_ParkBotanist::
+	lock
+	faceplayer
+	goto_if_set FLAG_ERYON_LEAGUE_PARK_REWARD_CLAIMED, EryonCidadeLiga_EventScript_ParkRewardDone
+	goto_if_unset FLAG_ERYON_LEAGUE_PARK_ESPURR_RESOLVED, EryonCidadeLiga_EventScript_ParkResearchPending
+	msgbox EryonCidadeLiga_Text_ParkResearchReward, MSGBOX_DEFAULT
+	giveitem ITEM_DAWN_STONE
+	goto_if_eq VAR_RESULT, FALSE, EryonCidadeLiga_EventScript_ParkBagFull
+	setflag FLAG_ERYON_LEAGUE_PARK_REWARD_CLAIMED
+	msgbox EryonCidadeLiga_Text_ParkRewardThankYou, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_ParkResearchPending::
+	msgbox EryonCidadeLiga_Text_ParkResearchPending, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_ParkBagFull::
+	msgbox EryonCidadeLiga_Text_ParkBagFull, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_ParkRewardDone::
+	msgbox EryonCidadeLiga_Text_ParkRewardDone, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_Text_ParkEspurrDisturbed:
+	.string "JARDIM DA LIGA:\p"
+	.string "Uma interferencia\n"
+	.string "assusta os Pokemon.\p"
+	.string "Investigue o sinal\n"
+	.string "na GRUTA DAS ESTRELAS.$"
+
+EryonCidadeLiga_Text_ParkEspurrPrompt:
+	.string "Um ESPURR observa\n"
+	.string "voce entre as flores!\p"
+	.string "Investigar o jardim?$"
+
+EryonCidadeLiga_Text_ParkEspurrResolved:
+	.string "O jardim esta calmo.\p"
+	.string "A pesquisa sobre\n"
+	.string "ESPURR foi concluida.$"
+
+EryonCidadeLiga_Text_ParkEspurrEscaped:
+	.string "ESPURR desapareceu\n"
+	.string "entre os arbustos!\p"
+	.string "Talvez retorne depois.$"
+
+EryonCidadeLiga_Text_ParkEspurrQuiet:
+	.string "As flores se movem\n"
+	.string "com o vento da LIGA.\p"
+	.string "Nenhum Pokemon aparece.$"
+
+EryonCidadeLiga_Text_ParkResearchPending:
+	.string "BOTANICA: Os ESPURR\n"
+	.string "sentem os cristais.\p"
+	.string "Quando a interferencia\n"
+	.string "cessar, observe o jardim.$"
+
+EryonCidadeLiga_Text_ParkResearchReward:
+	.string "BOTANICA: Obrigada\n"
+	.string "por estudar ESPURR!\p"
+	.string "Receba esta pedra\n"
+	.string "da nossa pesquisa.$"
+
+EryonCidadeLiga_Text_ParkRewardThankYou:
+	.string "BOTANICA: A LIGA\n"
+	.string "protege os Pokemon\n"
+	.string "e a natureza da regiao.$"
+
+EryonCidadeLiga_Text_ParkBagFull:
+	.string "BOTANICA: Sua BOLSA\n"
+	.string "esta cheia!\p"
+	.string "Guardo a recompensa\n"
+	.string "ate voce retornar.$"
+
+EryonCidadeLiga_Text_ParkRewardDone:
+	.string "BOTANICA: Nossa\n"
+	.string "pesquisa continua!\p"
+	.string "Visite o jardim\n"
+	.string "sempre que quiser.$"
