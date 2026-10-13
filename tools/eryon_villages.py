@@ -80,9 +80,13 @@ def reachable(t,start=(0,14)):
 
 
 def render(name,t):
+    status = {
+        "refugio_cristal": "Registered provisional village: reciprocal Crystal Ridge warp and caretaker event installed; buildings, encounters and interiors pending.",
+        "posto_oriental": "Registered provisional village: optional road warp and cargo investigation NPCs installed; buildings, encounters and interiors pending."
+    }.get(name, "Design only: buildings, encounters, warp links and interiors are not implemented.")
     return (f"{VILLAGES[name][0]} | Eryon village concept 36x30\n"
             "# barrier; . path; , grove; : stone; P plaza; C center; M mart; H home; I inn\n"
-            "Design only: buildings, encounters, warp links and interiors are not implemented.\n\n"
+            f"{status}\n\n"
             +"\n".join("".join(row) for row in t)+"\n")
 
 
