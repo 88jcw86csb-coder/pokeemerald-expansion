@@ -133,11 +133,16 @@ class TerrainPlansTests(unittest.TestCase):
             self.assertIn(point, accessible)
         self.assertEqual(tiles[31][6], ",")
 
-    def test_valley_has_no_unlinked_east_exit(self):
+    def test_valley_east_exit_is_linked_to_umbra(self):
         tiles = route("valley")
-        self.assertTrue(all(row[-1] == "#" for row in tiles))
         self.assertIn((31, 7), reachable(tiles))
         self.assertIn((0, 22), reachable(tiles))
+        self.assertIn((47, 22), reachable(tiles))
+        import json
+        valley = json.loads((ROOT / "data/maps/Eryon_ValeDosVentos/map.json").read_text(encoding="utf-8"))
+        east = [warp for warp in valley["warp_events"] if (warp["x"], warp["y"]) == (47, 22)]
+        self.assertEqual(len(east), 1)
+        self.assertEqual(east[0]["dest_map"], "MAP_ERYON_UMBRA")
 
     def test_mountain_and_routes_have_connected_exits(self):
         for kind in ("mountain", "passage", "road"):
