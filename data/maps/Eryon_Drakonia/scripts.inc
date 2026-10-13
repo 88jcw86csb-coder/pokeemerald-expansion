@@ -190,6 +190,7 @@ EryonDrakonia_EventScript_HistorianAfter::
 EryonDrakonia_EventScript_Courier::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_PICO_SIGNAL_REPAIRED, EryonDrakonia_EventScript_CourierSignalRestored
 	goto_if_set FLAG_ERYON_DRAGON_TRAIL_COURIER_DEFEATED, EryonDrakonia_EventScript_CourierEscortBeaten
 	goto_if_set FLAG_ERYON_QUALIFIED, EryonDrakonia_EventScript_CourierAfter
 	msgbox EryonDrakonia_Text_CourierBefore, MSGBOX_DEFAULT
@@ -489,3 +490,18 @@ EryonDrakonia_Text_AxewShrineQuiet:
 	.string "quietas novamente.\p"
 	.string "Nao ha Pokemon\n"
 	.string "aqui por enquanto.$"
+
+
+@ Drakonia's sanctuary receives the repaired Pico relay transmission.
+EryonDrakonia_EventScript_CourierSignalRestored::
+	msgbox EryonDrakonia_Text_CourierSignalRestored, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_Text_CourierSignalRestored:
+	.string "MENSAGEIRO: A antena\n"
+	.string "da VILA DO PICO voltou!\p"
+	.string "Os guardioes agora\n"
+	.string "recebem avisos da serra.\p"
+	.string "DRAKONIA esta mais\n"
+	.string "preparada para a ECLIPSE.$"
