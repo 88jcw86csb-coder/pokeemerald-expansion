@@ -19,6 +19,9 @@ EryonArkhara_EventScript_GymSteward::
 EryonArkhara_EventScript_Tessa::
 	lock
 	faceplayer
+	goto_if_set FLAG_BADGE04_GET, EryonArkhara_EventScript_GymAfter
+	goto_if_unset FLAG_BADGE03_GET, EryonArkhara_EventScript_GymNotReady
+	goto_if_set FLAG_ERYON_ARKHARA_RELAY_READ, EryonArkhara_EventScript_GymOffer
 	goto_if_set FLAG_ERYON_ARKHARA_RELAY_READ, EryonArkhara_EventScript_TessaInformed
 	msgbox EryonArkhara_Text_TessaBefore, MSGBOX_DEFAULT
 	release
@@ -141,3 +144,65 @@ EryonArkhara_Text_CitySign:
 	.string "OESTE: PASSAGEM ROCHOSA.\p"
 	.string "LESTE: ESTRADA ORIENTAL.\n"
 	.string "Nao e preciso HM.$"
+
+@ Tactical badge battle — Arkhara: ace level 36, badge 4.
+EryonArkhara_EventScript_GymOffer::
+	msgbox EryonArkhara_Text_GymOffer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonArkhara_EventScript_GymDecline
+	closemessage
+	trainerbattle_single TRAINER_ERYON_GYM_ARKHARA, EryonArkhara_Text_GymIntro, EryonArkhara_Text_GymLoss, EryonArkhara_EventScript_GymVictory, FALSE
+	msgbox EryonArkhara_Text_GymAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonArkhara_EventScript_GymVictory::
+	message EryonArkhara_Text_GymBadge
+	waitmessage
+	call Common_EventScript_PlayGymBadgeFanfare
+	setflag FLAG_BADGE04_GET
+	msgbox EryonArkhara_Text_GymAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonArkhara_EventScript_GymDecline::
+	closemessage
+	release
+	end
+
+EryonArkhara_EventScript_GymNotReady::
+	msgbox EryonArkhara_Text_GymNotReady, MSGBOX_DEFAULT
+	release
+	end
+
+EryonArkhara_EventScript_GymAfter::
+	msgbox EryonArkhara_Text_GymAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonArkhara_Text_GymOffer:
+	.string "TESSA: Meu GINASIO\n"
+	.string "treina com rochas antigas.\p"
+	.string "Desafiar meu time\n"
+	.string "de Pokemon agora?$"
+
+EryonArkhara_Text_GymIntro:
+	.string "TESSA: Mostre sua\n"
+	.string "forca e estrategia!$"
+
+EryonArkhara_Text_GymLoss:
+	.string "TESSA: Voce encontrou\n"
+	.string "uma boa resposta!$"
+
+EryonArkhara_Text_GymBadge:
+	.string "Venceu o 4o GINASIO!\p"
+	.string "Recebeu a INSIGNIA\n"
+	.string "de numero 4!$"
+
+EryonArkhara_Text_GymAfter:
+	.string "TESSA: Bela vitoria!\p"
+	.string "Guarde as runas de ARKHARA.$"
+
+EryonArkhara_Text_GymNotReady:
+	.string "TESSA: Primeiro,\n"
+	.string "conquiste a INSIGNIA\n"
+	.string "do GINASIO anterior.$"
