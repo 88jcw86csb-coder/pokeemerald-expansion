@@ -55,9 +55,9 @@
 #define FLAG_ERYON_GLACIAL_SUPPLY_RETRIEVED 0x21 // One-time northern ice pass supply reward
 #define FLAG_ERYON_GLACIAL_ECLIPSE_RESEARCHER_DEFEATED 0x22 // Dedicated optional northern Eclipse trainer flag
 #define FLAG_ERYON_GLACIAL_ECLIPSE_SAMPLE_TAKEN 0x23 // Glacial Eclipse sample reward collected
-#define FLAG_UNUSED_0x024    0x24 // Unused Flag
-#define FLAG_UNUSED_0x025    0x25 // Unused Flag
-#define FLAG_UNUSED_0x026    0x26 // Unused Flag
+#define FLAG_ERYON_SERRA_NORTH_CRYSTAL_CALIBRATED 0x24 // First Serra resonance seal
+#define FLAG_ERYON_SERRA_SOUTH_CRYSTAL_CALIBRATED 0x25 // Second Serra resonance seal
+#define FLAG_ERYON_SERRA_ECLIPSE_SIGNAL_DISABLED 0x26 // Serra Eclipse crystal network disabled
 #define FLAG_UNUSED_0x027    0x27 // Unused Flag
 #define FLAG_UNUSED_0x028    0x28 // Unused Flag
 #define FLAG_UNUSED_0x029    0x29 // Unused Flag
