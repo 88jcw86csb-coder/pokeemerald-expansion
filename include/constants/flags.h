@@ -58,7 +58,7 @@
 #define FLAG_ERYON_SERRA_NORTH_CRYSTAL_CALIBRATED 0x24 // First Serra resonance seal
 #define FLAG_ERYON_SERRA_SOUTH_CRYSTAL_CALIBRATED 0x25 // Second Serra resonance seal
 #define FLAG_ERYON_SERRA_ECLIPSE_SIGNAL_DISABLED 0x26 // Serra Eclipse crystal network disabled
-#define FLAG_UNUSED_0x027    0x27 // Unused Flag
+#define FLAG_ERYON_SERRA_SURVEY_REWARD_CLAIMED 0x27 // Arkhara reward for completed crystal signal survey
 #define FLAG_UNUSED_0x028    0x28 // Unused Flag
 #define FLAG_UNUSED_0x029    0x29 // Unused Flag
 #define FLAG_ERYON_STAR_CHART_READ  0x2A // Persistent Eryon cave discovery
