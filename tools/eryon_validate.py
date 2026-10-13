@@ -502,7 +502,7 @@ def main():
         script_text = (ROOT / "data/maps" / name / "scripts.inc").read_text(
             encoding="utf-8"
         )
-        for script_target in re.findall(r"(?m)^\\s*warp\\s+(MAP_ERYON_[A-Z0-9_]+)", script_text):
+        for script_target in re.findall(r"(?m)^\s*warp\s+(MAP_ERYON_[A-Z0-9_]+)", script_text):
             target = ids.get(script_target)
             if target:
                 adjacency[name].add(target)

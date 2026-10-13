@@ -696,6 +696,10 @@ class EryonEventFlowTests(unittest.TestCase):
             for warp in data.get("warp_events", []):
                 if warp["dest_map"] in by_id:
                     adjacency[name].add(by_id[warp["dest_map"]])
+            script = (ROOT / "data/maps" / name / "scripts.inc").read_text(encoding="utf-8")
+            for destination in re.findall(r"(?m)^\s*warp\s+(MAP_ERYON_[A-Z0-9_]+)", script):
+                if destination in by_id:
+                    adjacency[name].add(by_id[destination])
         seen = {"Eryon_VilaAurora"}
         queue = ["Eryon_VilaAurora"]
         while queue:
@@ -884,6 +888,10 @@ class EryonEventFlowTests(unittest.TestCase):
             ] + [
                 warp["dest_map"] for warp in (data.get("warp_events") or [])
             ]
+            # Tournament rooms use badge-gated scripted warp commands,
+            # not ordinary walk-through warps that could skip registration.
+            script = (ROOT / "data/maps" / name / "scripts.inc").read_text(encoding="utf-8")
+            destinations += re.findall(r"(?m)^\s*warp\s+(MAP_ERYON_[A-Z0-9_]+)", script)
             for destination in destinations:
                 with self.subTest(source=name, destination=destination):
                     self.assertIn(destination, by_id)
