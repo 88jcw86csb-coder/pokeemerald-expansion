@@ -16,6 +16,7 @@ DRAKONIA = ROOT / "data/maps/Eryon_Drakonia/scripts.inc"
 LUNARIS = ROOT / "data/maps/Eryon_Lunaris/scripts.inc"
 PICO = ROOT / "data/maps/Eryon_VilaDoPico/scripts.inc"
 LEAGUE_ROAD = ROOT / "data/maps/Eryon_CaminhoDaLiga/scripts.inc"
+GROTTO = ROOT / "data/maps/Eryon_GrutaDasEstrelas/scripts.inc"
 
 
 class EclipseEvidenceQuest(unittest.TestCase):
@@ -28,6 +29,7 @@ class EclipseEvidenceQuest(unittest.TestCase):
         cls.lunaris = LUNARIS.read_text(encoding="utf-8")
         cls.pico = PICO.read_text(encoding="utf-8")
         cls.league_road = LEAGUE_ROAD.read_text(encoding="utf-8")
+        cls.grotto = GROTTO.read_text(encoding="utf-8")
 
     def test_persistent_flags_have_distinct_ids(self):
         self.assertIn("#define FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ 0x3D", self.flags)
@@ -88,6 +90,17 @@ class EclipseEvidenceQuest(unittest.TestCase):
         self.assertIn(
             "goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, "
             "EryonLigaCaminho_EventScript_ObserverReported", self.league_road)
+
+    def test_star_grotto_reacts_to_evidence(self):
+        self.assertIn(
+            "goto_if_set FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ, "
+            "EryonEstrelas_EventScript_ScoutManifest", self.grotto)
+        self.assertIn(
+            "goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, "
+            "EryonEstrelas_EventScript_ScoutAfterReport", self.grotto)
+        self.assertIn(
+            "goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, "
+            "EryonEstrelas_EventScript_ArchivistReported", self.grotto)
 
 
 if __name__ == "__main__":
