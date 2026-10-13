@@ -1066,6 +1066,8 @@ static u16 GetEryonTrainerFlagId(u16 trainerId)
         return FLAG_ERYON_GROTTO_ECLIPSE_SCOUT_DEFEATED;
     if (trainerId == TRAINER_ERYON_DRAKONIA_ECLIPSE)
         return FLAG_ERYON_DRAKONIA_ECLIPSE_DEFEATED;
+    if (trainerId == TRAINER_ERYON_DRAGON_TRAIL_COURIER)
+        return FLAG_ERYON_DRAGON_TRAIL_COURIER_DEFEATED;
     return TRAINER_FLAGS_START + trainerId;
 }
 
