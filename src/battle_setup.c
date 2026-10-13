@@ -1074,6 +1074,10 @@ static u16 GetEryonTrainerFlagId(u16 trainerId)
         return FLAG_ERYON_ELITE_TRAINER_4_DEFEATED;
     if (trainerId == TRAINER_ERYON_CHAMPION)
         return FLAG_ERYON_CHAMPION_TRAINER_DEFEATED;
+    // New Eryon gym leaders use their matching persistent Badge flags.
+    // This avoids overflowing into the existing vanilla/system trainer flags.
+    if (trainerId >= TRAINER_ERYON_GYM_NEONARA && trainerId <= TRAINER_ERYON_GYM_DRAKONIA)
+        return FLAG_BADGE02_GET + trainerId - TRAINER_ERYON_GYM_NEONARA;
     return TRAINER_FLAGS_START + trainerId;
 }
 
