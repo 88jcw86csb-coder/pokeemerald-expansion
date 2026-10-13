@@ -163,3 +163,74 @@ EryonLunaris_Text_GeneratorManifest:
 	.string "cita este gerador.\p"
 	.string "Seu numero coincide\n"
 	.string "com o manifesto.$"
+
+@ Eryon: LYRA is the city leader, separate from the Gym guide.
+EryonLunaris_EventScript_GymLeader::
+	lock
+	faceplayer
+	goto_if_set FLAG_BADGE07_GET, EryonLunaris_EventScript_GymAfter
+	goto_if_unset FLAG_BADGE06_GET, EryonLunaris_EventScript_GymNotReady
+	goto EryonLunaris_EventScript_GymOffer
+	end
+
+@ Tactical badge battle — Lunaris: ace level 51, badge 7.
+EryonLunaris_EventScript_GymOffer::
+	msgbox EryonLunaris_Text_GymOffer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonLunaris_EventScript_GymDecline
+	closemessage
+	trainerbattle_single TRAINER_ERYON_GYM_LUNARIS, EryonLunaris_Text_GymIntro, EryonLunaris_Text_GymLoss, EryonLunaris_EventScript_GymVictory, FALSE
+	msgbox EryonLunaris_Text_GymAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLunaris_EventScript_GymVictory::
+	message EryonLunaris_Text_GymBadge
+	waitmessage
+	call Common_EventScript_PlayGymBadgeFanfare
+	setflag FLAG_BADGE07_GET
+	msgbox EryonLunaris_Text_GymAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLunaris_EventScript_GymDecline::
+	closemessage
+	release
+	end
+
+EryonLunaris_EventScript_GymNotReady::
+	msgbox EryonLunaris_Text_GymNotReady, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLunaris_EventScript_GymAfter::
+	msgbox EryonLunaris_Text_GymAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLunaris_Text_GymOffer:
+	.string "LYRA: Meu GINASIO\n"
+	.string "treina com psiquismo.\p"
+	.string "Desafiar meu time\n"
+	.string "de Pokemon agora?$"
+
+EryonLunaris_Text_GymIntro:
+	.string "LYRA: Mostre sua\n"
+	.string "forca e estrategia!$"
+
+EryonLunaris_Text_GymLoss:
+	.string "LYRA: Voce encontrou\n"
+	.string "uma boa resposta!$"
+
+EryonLunaris_Text_GymBadge:
+	.string "Venceu o 7o GINASIO!\p"
+	.string "Recebeu a INSIGNIA\n"
+	.string "de numero 7!$"
+
+EryonLunaris_Text_GymAfter:
+	.string "LYRA: Bela vitoria!\p"
+	.string "Siga os sinais das estrelas.$"
+
+EryonLunaris_Text_GymNotReady:
+	.string "LYRA: Primeiro,\n"
+	.string "conquiste a INSIGNIA\n"
+	.string "do GINASIO anterior.$"
