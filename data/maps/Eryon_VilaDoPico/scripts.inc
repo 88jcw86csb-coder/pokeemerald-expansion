@@ -26,6 +26,7 @@ EryonPico_EventScript_ElderClue::
 EryonPico_EventScript_Messenger::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_DRAGON_TRAIL_COURIER_DEFEATED, EryonPico_EventScript_MessengerEscortBeaten
 	msgbox EryonPico_Text_Messenger, MSGBOX_DEFAULT
 	release
 	end
@@ -186,3 +187,18 @@ EryonPico_Text_RadioCommanderDefeated:
 	.string "foi vencido em DRAKONIA.\p"
 	.string "Os vigias da vila\n"
 	.string "ja podem descansar.$"
+
+
+@ The village learns the escort was defeated on Dragon Trail.
+EryonPico_EventScript_MessengerEscortBeaten::
+	msgbox EryonPico_Text_MessengerEscortBeaten, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPico_Text_MessengerEscortBeaten:
+	.string "VIAJANTE: A escolta\n"
+	.string "da ECLIPSE foi vencida!\p"
+	.string "As remessas deixaram\n"
+	.string "de cruzar a trilha.\p"
+	.string "O mirante do sul\n"
+	.string "agora esta em paz.$"
