@@ -1068,6 +1068,12 @@ static u16 GetEryonTrainerFlagId(u16 trainerId)
         return FLAG_ERYON_DRAKONIA_ECLIPSE_DEFEATED;
     if (trainerId == TRAINER_ERYON_DRAGON_TRAIL_COURIER)
         return FLAG_ERYON_DRAGON_TRAIL_COURIER_DEFEATED;
+    if (trainerId >= TRAINER_ERYON_ELITE_1 && trainerId <= TRAINER_ERYON_ELITE_3)
+        return FLAG_ERYON_ELITE_TRAINER_1_DEFEATED + trainerId - TRAINER_ERYON_ELITE_1;
+    if (trainerId == TRAINER_ERYON_ELITE_4)
+        return FLAG_ERYON_ELITE_TRAINER_4_DEFEATED;
+    if (trainerId == TRAINER_ERYON_CHAMPION)
+        return FLAG_ERYON_CHAMPION_TRAINER_DEFEATED;
     return TRAINER_FLAGS_START + trainerId;
 }
 
