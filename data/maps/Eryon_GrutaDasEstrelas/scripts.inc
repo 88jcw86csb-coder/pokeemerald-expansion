@@ -187,6 +187,7 @@ EryonEstrelas_EventScript_RelayConsole::
 	goto_if_unset FLAG_ERYON_STAR_CHART_READ, EryonEstrelas_EventScript_RelayUnknown
 	msgbox EryonEstrelas_Text_RelayPrompt, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EryonEstrelas_EventScript_RelayLeave
+	closemessage
 	setflag FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED
 	msgbox EryonEstrelas_Text_RelayDisabled, MSGBOX_DEFAULT
 	special HealPlayerParty
@@ -201,12 +202,14 @@ EryonEstrelas_EventScript_RelayUnknown::
 EryonEstrelas_EventScript_RelayOff::
 	msgbox EryonEstrelas_Text_RelayOff, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EryonEstrelas_EventScript_RelayLeave
+	closemessage
 	special HealPlayerParty
 	msgbox EryonEstrelas_Text_RelayRestored, MSGBOX_DEFAULT
 	release
 	end
 
 EryonEstrelas_EventScript_RelayLeave::
+	closemessage
 	release
 	end
 
