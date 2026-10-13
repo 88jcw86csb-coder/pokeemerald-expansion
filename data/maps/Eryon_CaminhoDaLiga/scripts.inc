@@ -20,6 +20,7 @@ EryonLigaCaminho_EventScript_Medic::
 EryonLigaCaminho_EventScript_Observer::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonLigaCaminho_EventScript_ObserverReported
 	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonLigaCaminho_EventScript_ObserverClue
 	msgbox EryonLigaCaminho_Text_ObserverBefore, MSGBOX_DEFAULT
 	release
@@ -131,3 +132,16 @@ EryonLigaCaminho_Text_LigaCourierAfter:
 	.string "venceu as oito fases!\p"
 	.string "A equipe da LIGA\n"
 	.string "aguarda na cidade.$"
+
+@ The final route acknowledges the League investigation outcome.
+EryonLigaCaminho_EventScript_ObserverReported::
+	msgbox EryonLigaCaminho_Text_ObserverReported, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_Text_ObserverReported:
+	.string "PESQUISADOR: A LIGA\n"
+	.string "recebeu as provas!\p"
+	.string "Os guardas seguem\n"
+	.string "a rede da ECLIPSE.\p"
+	.string "Boa sorte no torneio!$"
