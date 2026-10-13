@@ -116,6 +116,7 @@ EryonEstrelas_Text_Bridge:
 EryonEstrelas_EventScript_ExpeditionArchivist::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonEstrelas_EventScript_ArchivistReported
 	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonEstrelas_EventScript_ArchivistAfter
 	msgbox EryonEstrelas_Text_ArchivistBefore, MSGBOX_DEFAULT
 	release
@@ -166,3 +167,15 @@ EryonEstrelas_Text_ScoutAfterReport:
 	.string "rotas de cristais!\p"
 	.string "Esta gruta ja nao\n"
 	.string "e um esconderijo.$"
+
+EryonEstrelas_EventScript_ArchivistReported::
+	msgbox EryonEstrelas_Text_ArchivistReported, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEstrelas_Text_ArchivistReported:
+	.string "ARQUIVISTA: A LIGA\n"
+	.string "arquivou suas provas!\p"
+	.string "Agora podemos estudar\n"
+	.string "esta gruta sem medo\n"
+	.string "dos agentes ECLIPSE.$"
