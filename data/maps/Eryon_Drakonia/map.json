@@ -106,6 +106,13 @@
       "elevation": 0,
       "dest_map": "MAP_ERYON_VILA_DO_PICO",
       "dest_warp_id": "1"
+    },
+    {
+      "x": 63,
+      "y": 28,
+      "elevation": 0,
+      "dest_map": "MAP_ERYON_GRUTA_DAS_ESTRELAS",
+      "dest_warp_id": "0"
     }
   ],
   "region": "REGION_HOENN"

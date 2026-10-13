@@ -9697,6 +9697,28 @@
       "border_filepath": "data/layouts/PetalburgWoods/border.bin",
       "blockdata_filepath": "data/layouts/Eryon_Drakonia/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ERYON_GRUTA_DAS_ESTRELAS",
+      "name": "ERYON_GRUTA_DAS_ESTRELAS_Layout",
+      "width": 48,
+      "height": 44,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Rustboro",
+      "border_filepath": "data/layouts/PetalburgWoods/border.bin",
+      "blockdata_filepath": "data/layouts/Eryon_GrutaDasEstrelas/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ERYON_CAMINHO_DA_LIGA",
+      "name": "ERYON_CAMINHO_DA_LIGA_Layout",
+      "width": 48,
+      "height": 44,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Rustboro",
+      "border_filepath": "data/layouts/PetalburgWoods/border.bin",
+      "blockdata_filepath": "data/layouts/Eryon_CaminhoDaLiga/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

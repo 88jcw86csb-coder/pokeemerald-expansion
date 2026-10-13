@@ -11,6 +11,7 @@
     - [ERYON IMPLEMENTATION PLAN](./ERYON_IMPLEMENTATION_PLAN.md)
     - [ERYON MAP VALIDATION](./ERYON_MAP_VALIDATION.md)
     - [ERYON TERRAIN PROGRESS](./ERYON_TERRAIN_PROGRESS.md)
+    - [Eryon sem HMs obrigatórias](./eryon/SEM_HMS_OBRIGATORIAS.md)
     - [Eryon — documentação regional](./eryon/README.md)
     - [Eryon — ginásios oficiais](./eryon/ginasios_oficiais.md)
     - [Eryon — Pokémon por rotas](./eryon/distribuicao_pokemon_rotas.md)

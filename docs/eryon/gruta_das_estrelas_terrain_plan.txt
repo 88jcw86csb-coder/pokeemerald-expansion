@@ -1,6 +1,6 @@
 gruta_das_estrelas — Eryon terrain concept 48x44
 # blocked; . path; : cave chamber
-Design only: cave graphics, encounters, warps and collision not installed.
+Mapa registrado: tunel a pe com carta estelar, investigacao Eclipse e caminho alternativo sem HMs.
 
 ################################################
 ################################################

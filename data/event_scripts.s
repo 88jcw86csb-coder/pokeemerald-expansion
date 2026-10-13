@@ -173,6 +173,8 @@ gStdScripts_End::
 	.include "data/maps/Eryon_TrilhaDosDragoes/scripts.inc"
 	.include "data/maps/Eryon_VilaDoPico/scripts.inc"
 	.include "data/maps/Eryon_Drakonia/scripts.inc"
+	.include "data/maps/Eryon_GrutaDasEstrelas/scripts.inc"
+	.include "data/maps/Eryon_CaminhoDaLiga/scripts.inc"
 	.include "data/maps/LittlerootTown/scripts.inc"
 	.include "data/maps/OldaleTown/scripts.inc"
 	.include "data/maps/DewfordTown/scripts.inc"

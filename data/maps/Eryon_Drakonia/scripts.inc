@@ -26,6 +26,7 @@ EryonDrakonia_EventScript_GymGuideInformed::
 EryonDrakonia_EventScript_Sage::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonDrakonia_EventScript_SageAfterChart
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonDrakonia_EventScript_SageClue
 	msgbox EryonDrakonia_Text_SageBefore, MSGBOX_DEFAULT
 	release
@@ -33,6 +34,11 @@ EryonDrakonia_EventScript_Sage::
 
 EryonDrakonia_EventScript_SageClue::
 	msgbox EryonDrakonia_Text_SageClue, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_EventScript_SageAfterChart::
+	msgbox EryonDrakonia_Text_SageAfterChart, MSGBOX_DEFAULT
 	release
 	end
 
@@ -123,7 +129,13 @@ EryonDrakonia_Text_Sanctuary:
 	.string "as pedras antigas.$"
 
 EryonDrakonia_Text_League:
-	.string "A LIGA DE ERYON fica\n"
-	.string "alem das montanhas.\p"
-	.string "A rota final ainda\n"
-	.string "nao esta aberta.$"
+	.string "LESTE: GRUTA DAS ESTRELAS.\n"
+	.string "Depois, CAMINHO DA LIGA.\p"
+	.string "Travessia a pe;\n"
+	.string "nenhuma HM e exigida.$"
+
+EryonDrakonia_Text_SageAfterChart:
+	.string "ANCIA: Voce decifrou\n"
+	.string "a carta das estrelas!\p"
+	.string "Os cristais de ERYON\n"
+	.string "nao devem ser forjados.$"

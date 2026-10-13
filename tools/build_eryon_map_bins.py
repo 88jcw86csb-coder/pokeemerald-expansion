@@ -24,12 +24,11 @@ SPECS = {
     "trilha_do_oasis": "TrilhaDoOasis",
     "deserto_de_solaris": "DesertoDeSolaris",
     "floresta_dos_ecos": "FlorestaDosEcos",
+    "gruta_das_estrelas": "GrutaDasEstrelas",
     "trilha_dos_dragoes": "TrilhaDosDragoes",
 }
 PREVIEW_SPECS = {
     "trilha_lunar": "TrilhaLunar",
-    "caminho_da_liga": "CaminhoDaLiga",
-    "gruta_das_estrelas": "GrutaDasEstrelas",
 }
 WIDTH, HEIGHT = 48, 44
 
@@ -185,6 +184,15 @@ def main():
     dragon_dest.write_bytes(dragon_payload)
     generated["LAYOUT_ERYON_DRAKONIA"] = dragon_dest.relative_to(ROOT).as_posix()
     print(f"{dragon_dest.relative_to(ROOT)}: {len(dragon_payload)} bytes")
+    # Registered League approach: facility letters are walkable floor markers.
+    league_road_tiles = {**tiles, **{mark: tiles["."] for mark in "PCMLH"}}
+    league_road_src = ROOT / "docs/eryon/caminho_da_liga_terrain_plan.txt"
+    league_road_dest = ROOT / "data/layouts/Eryon_CaminhoDaLiga/map.bin"
+    league_road_payload = compile_plan(league_road_src, league_road_tiles)
+    league_road_dest.parent.mkdir(parents=True, exist_ok=True)
+    league_road_dest.write_bytes(league_road_payload)
+    generated["LAYOUT_ERYON_CAMINHO_DA_LIGA"] = league_road_dest.relative_to(ROOT).as_posix()
+    print(f"{league_road_dest.relative_to(ROOT)}: {len(league_road_payload)} bytes")
     if args.preview_unregistered:
         # Village/city landmark symbols are only floor placeholders.
         # These previews are not functional buildings or gym interiors.
