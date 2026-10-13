@@ -17279,3 +17279,31 @@ Level: 53
 - Thunder Wave
 - Flash Cannon
 - Tri Attack
+=== TRAINER_ERYON_DRAKONIA_ECLIPSE ===
+Name: COMANDANTE
+Class: Team Aqua
+Pic: Aqua Grunt M
+Gender: Male
+Music: Intense
+AI: Check Bad Move
+
+Heliolisk
+Level: 47
+- Thunderbolt
+- Volt Switch
+- Quick Attack
+- Thunder Wave
+
+Honchkrow
+Level: 48
+- Night Slash
+- Air Slash
+- Roost
+- Swagger
+
+Bisharp
+Level: 50
+- Iron Head
+- Night Slash
+- Swords Dance
+- Brick Break
