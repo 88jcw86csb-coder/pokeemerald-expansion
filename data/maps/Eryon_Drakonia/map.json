@@ -123,6 +123,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EryonDrakonia_EventScript_EclipseDepot"
+    },
+    {
+      "type": "sign",
+      "x": 58,
+      "y": 48,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EryonDrakonia_EventScript_AxewShrine"
     }
   ],
   "id": "MAP_ERYON_DRAKONIA",
