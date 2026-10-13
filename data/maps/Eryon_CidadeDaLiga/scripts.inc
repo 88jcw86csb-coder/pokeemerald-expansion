@@ -12,6 +12,7 @@ EryonCidadeLiga_EventScript_Medic::
 EryonCidadeLiga_EventScript_Guide::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED, EryonCidadeLiga_EventScript_GuideRelayOff
 	msgbox EryonCidadeLiga_Text_Guide, MSGBOX_DEFAULT
 	release
 	end
@@ -168,3 +169,17 @@ EryonCidadeLiga_Text_ReporterEvidence:
 	.string "perto do edificio.\p"
 	.string "O torneio continua,\n"
 	.string "mas todos estao alertas.$"
+
+@ The League guide acknowledges the optional Star Grotto relay shutdown.
+EryonCidadeLiga_EventScript_GuideRelayOff::
+	msgbox EryonCidadeLiga_Text_GuideRelayOff, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_Text_GuideRelayOff:
+	.string "GUIA: O sinal estranho\n"
+	.string "da gruta desapareceu!\p"
+	.string "A LIGA agradece\n"
+	.string "sua ajuda na regiao.\p"
+	.string "O torneio acontece\n"
+	.string "no edificio central.$"
