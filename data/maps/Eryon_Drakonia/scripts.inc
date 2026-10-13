@@ -26,6 +26,7 @@ EryonDrakonia_EventScript_GymGuideInformed::
 EryonDrakonia_EventScript_Sage::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ, EryonDrakonia_EventScript_SageManifest
 	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonDrakonia_EventScript_SageAfterChart
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonDrakonia_EventScript_SageClue
 	msgbox EryonDrakonia_Text_SageBefore, MSGBOX_DEFAULT
@@ -209,3 +210,17 @@ EryonDrakonia_Text_AgentChart:
 	.string "rede chega ate a LIGA.\p"
 	.string "Nao vai conseguir\n"
 	.string "parar a transmissao!$"
+
+@ The mountain shipment evidence reaches the dragon sanctuary.
+EryonDrakonia_EventScript_SageManifest::
+	msgbox EryonDrakonia_Text_SageManifest, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_Text_SageManifest:
+	.string "ANCIA: Voce trouxe\n"
+	.string "o manifesto da trilha!\p"
+	.string "As cargas da ECLIPSE\n"
+	.string "vinham de LUNARIS.\p"
+	.string "Vou alertar os\n"
+	.string "guardioes do santuario.$"
