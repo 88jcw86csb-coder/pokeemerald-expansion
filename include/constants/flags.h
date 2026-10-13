@@ -80,7 +80,7 @@
 #define FLAG_ERYON_QUALIFIER_ROUND_7 0x3A // Eryon League qualifying event
 #define FLAG_ERYON_QUALIFIER_ROUND_8 0x3B // Eryon League qualifying event
 #define FLAG_ERYON_QUALIFIED 0x3C // Eryon League qualifying event
-#define FLAG_UNUSED_0x03D    0x3D // Unused Flag
+#define FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ 0x3D // Persistent Eclipse supply manifest discovery
 #define FLAG_UNUSED_0x03E    0x3E // Unused Flag
 #define FLAG_UNUSED_0x03F    0x3F // Unused Flag
 #define FLAG_UNUSED_0x040    0x40 // Unused Flag
