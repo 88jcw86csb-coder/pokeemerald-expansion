@@ -9664,6 +9664,28 @@
       "border_filepath": "data/layouts/PetalburgWoods/border.bin",
       "blockdata_filepath": "data/layouts/Eryon_Lunaris/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ERYON_TRILHA_DOS_DRAGOES",
+      "name": "ERYON_TRILHA_DOS_DRAGOES_Layout",
+      "width": 48,
+      "height": 44,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Rustboro",
+      "border_filepath": "data/layouts/PetalburgWoods/border.bin",
+      "blockdata_filepath": "data/layouts/Eryon_TrilhaDosDragoes/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ERYON_VILA_DO_PICO",
+      "name": "ERYON_VILA_DO_PICO_Layout",
+      "width": 36,
+      "height": 30,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Rustboro",
+      "border_filepath": "data/layouts/PetalburgWoods/border.bin",
+      "blockdata_filepath": "data/layouts/Eryon_VilaDoPico/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

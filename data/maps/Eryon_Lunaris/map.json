@@ -93,6 +93,13 @@
       "elevation": 0,
       "dest_map": "MAP_ERYON_TRILHA_LUNAR",
       "dest_warp_id": "1"
+    },
+    {
+      "x": 63,
+      "y": 28,
+      "elevation": 0,
+      "dest_map": "MAP_ERYON_TRILHA_DOS_DRAGOES",
+      "dest_warp_id": "0"
     }
   ],
   "region": "REGION_HOENN"
