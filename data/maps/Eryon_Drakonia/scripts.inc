@@ -55,9 +55,36 @@ EryonDrakonia_EventScript_RuneResearcher::
 EryonDrakonia_EventScript_EclipseAgent::
 	lock
 	faceplayer
-	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonDrakonia_EventScript_EclipseAgentChart
-	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonDrakonia_EventScript_EclipseAgentExposed
+	goto_if_set FLAG_ERYON_DRAKONIA_ECLIPSE_DEFEATED, EryonDrakonia_EventScript_AgentAfterBattle
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonDrakonia_EventScript_AgentBattleOffer
 	msgbox EryonDrakonia_Text_AgentBefore, MSGBOX_DEFAULT
+	release
+	end
+
+@ The showdown is optional, offered only after the mountain investigation.
+@ Losing follows normal trainer whiteout and payment rules.
+EryonDrakonia_EventScript_AgentBattleOffer::
+	msgbox EryonDrakonia_Text_AgentChallenge, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonDrakonia_EventScript_AgentDecline
+	closemessage
+	trainerbattle_single TRAINER_ERYON_DRAKONIA_ECLIPSE, EryonDrakonia_Text_AgentIntro, EryonDrakonia_Text_AgentLoss, EryonDrakonia_EventScript_AgentVictory, FALSE
+	msgbox EryonDrakonia_Text_AgentAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_EventScript_AgentDecline::
+	closemessage
+	msgbox EryonDrakonia_Text_AgentDecline, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_EventScript_AgentVictory::
+	msgbox EryonDrakonia_Text_AgentVictory, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_EventScript_AgentAfterBattle::
+	msgbox EryonDrakonia_Text_AgentAfter, MSGBOX_DEFAULT
 	release
 	end
 
@@ -270,3 +297,82 @@ EryonDrakonia_Text_HistorianScoutVictory:
 	.string "podem proteger as runas.\p"
 	.string "Leve sua vitoria\n"
 	.string "a Cidade da Liga.$"
+
+
+@ Optional crystal shipment depot on Drakonia's southeast plateau.
+@ No forced battle; winning against the commander unlocks supplies.
+EryonDrakonia_EventScript_EclipseDepot::
+	lock
+	goto_if_set FLAG_ERYON_DRAKONIA_DEPOT_SUPPLIES_TAKEN, EryonDrakonia_EventScript_DepotEmpty
+	goto_if_unset FLAG_ERYON_DRAKONIA_ECLIPSE_DEFEATED, EryonDrakonia_EventScript_DepotSealed
+	msgbox EryonDrakonia_Text_DepotOpen, MSGBOX_DEFAULT
+	giveitem ITEM_MAX_REVIVE
+	goto_if_eq VAR_RESULT, FALSE, EryonDrakonia_EventScript_DepotBagFull
+	setflag FLAG_ERYON_DRAKONIA_DEPOT_SUPPLIES_TAKEN
+	release
+	end
+
+EryonDrakonia_EventScript_DepotSealed::
+	msgbox EryonDrakonia_Text_DepotSealed, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_EventScript_DepotBagFull::
+	msgbox EryonDrakonia_Text_DepotBagFull, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_EventScript_DepotEmpty::
+	msgbox EryonDrakonia_Text_DepotEmpty, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_Text_AgentChallenge:
+	.string "ECLIPSE: Os cristais\n"
+	.string "do santuario sao nossos!\p"
+	.string "Quer enfrentar o\n"
+	.string "comandante da operacao?$"
+
+EryonDrakonia_Text_AgentIntro:
+	.string "ECLIPSE: O poder das\n"
+	.string "runas nao sera seu!$"
+
+EryonDrakonia_Text_AgentLoss:
+	.string "ECLIPSE: Nao esperava\n"
+	.string "perder aqui!$"
+
+EryonDrakonia_Text_AgentVictory:
+	.string "ECLIPSE: Meu posto\n"
+	.string "caiu em DRAKONIA!\p"
+	.string "O deposito no sudeste\n"
+	.string "esta abandonado.$"
+
+EryonDrakonia_Text_AgentDecline:
+	.string "ECLIPSE: Entao saia\n"
+	.string "do meu caminho.$"
+
+EryonDrakonia_Text_AgentAfter:
+	.string "ECLIPSE: Recolhemos\n"
+	.string "o que restou.\p"
+	.string "Va ao deposito se\n"
+	.string "quiser. Nos recuamos.$"
+
+EryonDrakonia_Text_DepotSealed:
+	.string "DEPOSITO DA ECLIPSE:\p"
+	.string "Caixas lacradas pelo\n"
+	.string "comandante de DRAKONIA.$"
+
+EryonDrakonia_Text_DepotOpen:
+	.string "As caixas abandonadas\n"
+	.string "contem suprimentos!\p"
+	.string "Um MAX REVIVE esta\n"
+	.string "no fundo do deposito.$"
+
+EryonDrakonia_Text_DepotBagFull:
+	.string "A BOLSA esta cheia!\p"
+	.string "O remedio pode ser\n"
+	.string "retirado depois.$"
+
+EryonDrakonia_Text_DepotEmpty:
+	.string "As caixas foram\n"
+	.string "revistadas. Estao vazias.$"
