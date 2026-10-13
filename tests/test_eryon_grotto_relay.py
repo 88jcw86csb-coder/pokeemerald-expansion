@@ -6,6 +6,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CAVE = ROOT / "data/maps/Eryon_GrutaDasEstrelas"
 CITY = ROOT / "data/maps/Eryon_CidadeDaLiga"
+DRAKONIA = ROOT / "data/maps/Eryon_Drakonia"
+LEAGUE_ROAD = ROOT / "data/maps/Eryon_CaminhoDaLiga"
 
 
 class EryonRelayContract(unittest.TestCase):
@@ -27,6 +29,14 @@ class EryonRelayContract(unittest.TestCase):
         self.assertIn("goto_if_set FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED, "
                       "EryonCidadeLiga_EventScript_GuideRelayOff", script)
         self.assertIn("EryonCidadeLiga_EventScript_GuideRelayOff::", script)
+
+    def test_neighboring_areas_react_to_shutdown(self):
+        drakonia = (DRAKONIA / "scripts.inc").read_text(encoding="utf-8")
+        road = (LEAGUE_ROAD / "scripts.inc").read_text(encoding="utf-8")
+        self.assertIn("goto_if_set FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED, EryonDrakonia_EventScript_ResearcherRelayOff", drakonia)
+        self.assertIn("EryonDrakonia_EventScript_ResearcherRelayOff::", drakonia)
+        self.assertIn("goto_if_set FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED, EryonLigaCaminho_EventScript_ObserverRelayOff", road)
+        self.assertIn("EryonLigaCaminho_EventScript_ObserverRelayOff::", road)
 
 
 if __name__ == "__main__":
