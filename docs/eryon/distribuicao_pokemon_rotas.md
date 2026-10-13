@@ -25,3 +25,7 @@
 - Pokémon lendários e míticos terão eventos próprios, não encontros comuns na grama.
 - O restante da Pokédex até Kalos será distribuído entre rotas adicionais, áreas pós-jogo, pesca, surf, cavernas e eventos; esta tabela **não** afirma cobrir todas as espécies.
 - A ordem final de cidades, ginásios, tipos e níveis é provisória e deve ser reconciliada com os líderes e equipes aprovados antes da implementação.
+
+## Auditoria da implementação — 13/10/2026
+
+A checagem da branch `eryon-development` apontou **18 das 21 rotas/cavernas sem encontros selvagens terrestres** em `src/data/wild_encounters.json`. Só Rota 01, Bosque de Lumina e Rota 02 possuem `land_mons` entre essas áreas. As espécies listadas acima continuam sendo um plano; precisam ser cadastradas de fato antes de considerar a aventura completa. Não confundir os 37 mapas registrados com 37 mapas prontos para capturas.

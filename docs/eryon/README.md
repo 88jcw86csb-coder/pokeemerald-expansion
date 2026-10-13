@@ -1,24 +1,30 @@
-# Eryon — estado dos mapas (outubro de 2026)
+# Pokémon Eryon — estado real do desenvolvimento (13/10/2026)
 
-## O que já existe
+Este diretório reúne os projetos e arquivos de documentação dos mapas de Eryon. O jogo está **em desenvolvimento**, sem teste completo confirmado no emulador Delta.
 
-- Cinco plantas de terreno 48 × 44 em `docs/eryon/*_terrain_plan.txt`, geradas por `tools/eryon_terrain_plan.py`.
-- Cinco layouts registrados em `data/layouts/layouts.json`, com caminhos próprios para `map.bin`.
-- Conversor `tools/build_eryon_map_bins.py` que transforma símbolos ASCII em palavras de metatile e gera os cinco arquivos binários.
-- Testes de conectividade e de sincronização entre o gerador e as plantas versionadas.
+## Região implementada no repositório
 
-## Limitações críticas
+- **37 mapas registrados** no grupo Eryon, com layouts e arquivos binários próprios. Estão incluídos Vila Aurora, Bosque de Lumina, Verdelume, Neonara, Frostheim, Arkhara, Umbra, Ignivar, Lunaris, Drakonia, Gruta das Estrelas e Caminho da Liga.
+- Os cinco mapas de abertura que ainda reutilizavam blocos de Hoenn (Vila Aurora, Rota 01, Rota 02, Verdelume e Rota 03) receberam terrenos exclusivos com dimensões corrigidas e acessos a pé verificados por testes estáticos.
+- A Cidade de Arkhara ocupa o quarto ginásio, sob responsabilidade de Tessa (Pedra, Armaldo); sua investigação Eclipse e ligações leste-oeste já existem, mas seu combate oficial ainda não foi implementado.
+- Todos os mapas possuem algum NPC ou ponto investigável, mas vários encontros e sistemas de progressão ainda estão incompletos.
+- O plano é usar **Riolu como inicial, sem fakemon**, e oferecer espécies oficiais até Kalos.
 
-Os valores de metatile utilizados na geração são **provisórios**. A existência de um `map.bin` não comprova que o terreno tenha aparência adequada, colisões corretas ou que os mapas estejam jogáveis. As áreas chamadas de lago, ruínas, posto ou caverna são, por enquanto, **formas de terreno planejadas**; não incluem necessariamente gráficos, água, edifícios ou eventos próprios.
+## Limitações funcionais detectadas
 
-O Bosque de Lumina usa entrada/saída norte-sul. Serra dos Cristais, Passagem Rochosa e Estrada Oriental usam conexões oeste-leste. O Vale dos Ventos tem entrada oeste e **borda leste fechada**, pois não há warp cadastrado ali.
+- **Ginásios:** somente Kael, de Verdelume, possui confronto de líder e concessão de insígnia nos scripts atuais. Os outros **sete** ainda precisam de batalhas, insígnias e interiores.
+- **Encontros selvagens:** **18 de 21** áreas registradas como rotas ou cavernas não possuem tabelas `land_mons`. As distribuições em `distribuicao_pokemon_rotas.md` não estão todas codificadas no jogo.
+- **Liga:** Caminho da Liga é explorável no esquema de terreno, mas o edifício, Elite Four, campeão e final não estão implementados.
+- **Arte:** os metatiles e cenários são provisórios, não representam uma região inteiramente desenhada no Porymap.
+- **HMs:** a progressão principal não deve exigir Cut, Rock Smash, Strength, Surf, Waterfall, Dive ou Flash. O código possui validações para scripts e colisões, mas é necessário testar esses acessos no emulador.
+- **Game testing:** compilação e testes estáticos não substituem jogar do início ao fim, testar capturas, salvamento, batalhas, transições e estabilidade no Delta.
 
-## Próximas verificações obrigatórias
+## Para acompanhar os trabalhos
 
-1. Executar `python3 -m unittest discover -s tools -p 'test_eryon_*py'`.
-2. Regenerar os planos com `python3 tools/eryon_terrain_plan.py` e verificar se não há diferenças inesperadas.
-3. Gerar os binários com `python3 tools/build_eryon_map_bins.py --wall 0x3c01 --path 0x3001 --meadow 0x3002 --stone 0x3003`.
-4. Inspecionar os metatiles reais no Porymap, confirmar colisões e elevação 3, depois compilar e testar a ROM no emulador.
-5. Implementar gráficos, eventos e encontros selvagens para as novas áreas.
+- `docs/eryon/AUDITORIA_TECNICA_2026-10-13.md`: defeitos encontrados, correções e pendências.
+- `docs/eryon/SEM_HMS_OBRIGATORIAS.md`: regra de progressão sem HMs.
+- `tools/eryon_readiness_report.py`: contagem automática de mapas, ginásios e capturas por implementar.
+- `tools/test_eryon_opening_terrain.py`: verificação de tamanhos e acessibilidade dos cinco mapas iniciais.
+- `tools/build_eryon.sh`: validações, compilação e teste básico do arquivo GBA.
 
-**Não declarar a ROM pronta sem compilação e teste de jogo.**
+**Critério de conclusão:** entregar uma ROM somente após oito ginásios jogáveis, história completa da Eclipse, Liga, encontros distribuídos e teste final no emulador. Os próximos passos devem reduzir essas pendências reais.
