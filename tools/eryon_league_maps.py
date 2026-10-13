@@ -64,7 +64,7 @@ def connected(t,start):
 def render(name,t):
     return (f"{name} | Eryon final approach design {len(t[0])}x{len(t)}\n"
             "# blocked; . floor; : mountain path; P plaza; C center; M mart; L league; H hall\n"
-            ("Mapa registrado: rota principal a pe ate o portao da Liga; interiores e batalhas ainda pendentes.\n\n"
+            + ("Mapa registrado: rota principal a pe ate o portao da Liga; interiores e batalhas ainda pendentes.\n\n"
              if name == "caminho_da_liga" else
              "Concept only: no map registration, tileset, interior, warp or league battles.\n\n")
             +"\n".join("".join(row) for row in t)+"\n")
