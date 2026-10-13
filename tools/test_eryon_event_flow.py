@@ -243,6 +243,25 @@ class EryonEventFlowTests(unittest.TestCase):
                 self.assertTrue(binary.is_file())
                 self.assertEqual(binary.stat().st_size, 2 * lay["width"] * lay["height"])
 
+    def test_echo_valley_eclipse_operator_has_real_battle(self):
+        import json
+        valley = ROOT / "data/maps/Eryon_ValeDosEcos"
+        map_data = json.loads((valley / "map.json").read_text(encoding="utf-8"))
+        script = (valley / "scripts.inc").read_text(encoding="utf-8")
+        name = "TRAINER_ERYON_ECHO_VALLEY_ECLIPSE"
+        battle = "trainerbattle_single " + name
+        self.assertEqual(script.count(battle), 2)
+        self.assertIn("EryonEcoVale_EventScript_EclipseOperatorVictory::", script)
+        self.assertEqual(sum(n["script"] == "EryonEcoVale_EventScript_EclipseOperator"
+                             for n in map_data["object_events"]), 1)
+        constants = (ROOT / "include/constants/opponents.h").read_text(encoding="utf-8")
+        self.assertRegex(constants, r"(?m)^#define\\s+" + name + r"\\s+863\\s*$")
+        parties = (ROOT / "src/data/trainers.party").read_text(encoding="utf-8")
+        self.assertEqual(parties.count("=== " + name + " ==="), 1)
+        team = parties.split("=== " + name + " ===", 1)[1]
+        for species in ("Houndour", "Golbat", "Magneton"):
+            self.assertIn(species + "\\nLevel:", team)
+
     def test_passagem_healer_and_two_trainers(self):
         import json
         folder = ROOT / "data/maps/Eryon_PassagemRochosa"

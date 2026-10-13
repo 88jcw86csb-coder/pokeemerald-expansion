@@ -26,12 +26,19 @@ EryonEcoVale_EventScript_EclipseOperator::
 	lock
 	faceplayer
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonEcoVale_EventScript_EclipseOperatorExposed
-	msgbox EryonEcoVale_Text_OperatorBefore, MSGBOX_DEFAULT
+	trainerbattle_single TRAINER_ERYON_ECHO_VALLEY_ECLIPSE, EryonEcoVale_Text_OperatorBefore, EryonEcoVale_Text_OperatorDefeat, EryonEcoVale_EventScript_EclipseOperatorVictory, FALSE
+	msgbox EryonEcoVale_Text_OperatorAfter, MSGBOX_DEFAULT
 	release
 	end
 
 EryonEcoVale_EventScript_EclipseOperatorExposed::
-	msgbox EryonEcoVale_Text_OperatorExposed, MSGBOX_DEFAULT
+	trainerbattle_single TRAINER_ERYON_ECHO_VALLEY_ECLIPSE, EryonEcoVale_Text_OperatorExposed, EryonEcoVale_Text_OperatorDefeat, EryonEcoVale_EventScript_EclipseOperatorVictory, FALSE
+	msgbox EryonEcoVale_Text_OperatorAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEcoVale_EventScript_EclipseOperatorVictory::
+	msgbox EryonEcoVale_Text_OperatorAfter, MSGBOX_DEFAULT
 	release
 	end
 
@@ -72,15 +79,26 @@ EryonEcoVale_Text_ResearcherInformed:
 	.string "o vale como antena.$"
 
 EryonEcoVale_Text_OperatorBefore:
-	.string "TECNICO: A passagem\n"
-	.string "esta em manutencao.\p"
-	.string "Nao mexa nas pedras.$"
+	.string "TECNICO: Nao toque\n"
+	.string "no nosso equipamento!\p"
+	.string "Vou impedir sua\n"
+	.string "passagem pelo vale!$"
 
 EryonEcoVale_Text_OperatorExposed:
-	.string "ECLIPSE: O sinal veio\n"
-	.string "de SOLARIS e IGNIVAR!\p"
-	.string "Logo a aldeia ouvira\n"
-	.string "nossa frequencia.$"
+	.string "ECLIPSE: Descobriu\n"
+	.string "nosso sinal de Ignivar?\p"
+	.string "Entao enfrente minha\n"
+	.string "equipe Pokemon!$"
+
+EryonEcoVale_Text_OperatorDefeat:
+	.string "O reator perdeu\n"
+	.string "a frequencia...$"
+
+EryonEcoVale_Text_OperatorAfter:
+	.string "ECLIPSE: O arquivo da\n"
+	.string "aldeia e nosso alvo.\p"
+	.string "Outros membros ainda\n"
+	.string "estao investigando.$"
 
 EryonEcoVale_Text_CrystalBefore:
 	.string "Cristais antigos\n"

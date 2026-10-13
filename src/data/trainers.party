@@ -17062,3 +17062,32 @@ Level: 23
 - Pursuit
 - Haze
 - Wing Attack
+
+=== TRAINER_ERYON_ECHO_VALLEY_ECLIPSE ===
+Name: OPERADOR
+Class: Team Aqua
+Pic: Aqua Grunt M
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Houndour
+Level: 34
+- Bite
+- Ember
+- Roar
+- Smog
+
+Golbat
+Level: 35
+- Wing Attack
+- Bite
+- Confuse Ray
+- Leech Life
+
+Magneton
+Level: 36
+- Spark
+- Thunder Wave
+- Supersonic
+- Sonic Boom
