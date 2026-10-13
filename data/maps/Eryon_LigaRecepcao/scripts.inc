@@ -30,6 +30,7 @@ EryonLigaLobby_EventScript_Register::
 
 EryonLigaLobby_EventScript_Qualified::
 	msgbox EryonLigaLobby_Text_Qualified, MSGBOX_DEFAULT
+	closemessage
 	warp MAP_ERYON_LIGA_RECUPERACAO, 12, 14
 	waitstate
 	end
