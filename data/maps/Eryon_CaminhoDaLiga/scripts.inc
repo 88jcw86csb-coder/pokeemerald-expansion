@@ -20,6 +20,7 @@ EryonLigaCaminho_EventScript_Medic::
 EryonLigaCaminho_EventScript_Observer::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED, EryonLigaCaminho_EventScript_ObserverRelayOff
 	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonLigaCaminho_EventScript_ObserverReported
 	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonLigaCaminho_EventScript_ObserverClue
 	msgbox EryonLigaCaminho_Text_ObserverBefore, MSGBOX_DEFAULT
@@ -145,3 +146,17 @@ EryonLigaCaminho_Text_ObserverReported:
 	.string "Os guardas seguem\n"
 	.string "a rede da ECLIPSE.\p"
 	.string "Boa sorte no torneio!$"
+
+@ The League road observer confirms the optional relay sabotage.
+EryonLigaCaminho_EventScript_ObserverRelayOff::
+	msgbox EryonLigaCaminho_Text_ObserverRelayOff, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_Text_ObserverRelayOff:
+	.string "PESQUISADOR: O sinal\n"
+	.string "na gruta se apagou!\p"
+	.string "A rede da ECLIPSE\n"
+	.string "perdeu uma antena.\p"
+	.string "Continue sua jornada\n"
+	.string "ate a CIDADE DA LIGA.$"
