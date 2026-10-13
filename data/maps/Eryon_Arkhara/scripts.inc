@@ -22,7 +22,6 @@ EryonArkhara_EventScript_Tessa::
 	goto_if_set FLAG_BADGE04_GET, EryonArkhara_EventScript_GymAfter
 	goto_if_unset FLAG_BADGE03_GET, EryonArkhara_EventScript_GymNotReady
 	goto_if_set FLAG_ERYON_ARKHARA_RELAY_READ, EryonArkhara_EventScript_GymOffer
-	goto_if_set FLAG_ERYON_ARKHARA_RELAY_READ, EryonArkhara_EventScript_TessaInformed
 	msgbox EryonArkhara_Text_TessaBefore, MSGBOX_DEFAULT
 	release
 	end
@@ -85,8 +84,8 @@ EryonArkhara_Text_Medic:
 EryonArkhara_Text_GymSteward:
 	.string "GUIA: O quarto GINASIO\n"
 	.string "pertence a TESSA.\p"
-	.string "Ela treina tipo PEDRA;\n"
-	.string "seu principal e ARMALDO.$"
+	.string "Ela treina com rochas;\n"
+	.string "seu principal e CLAYDOL.$"
 
 EryonArkhara_Text_TessaBefore:
 	.string "TESSA: Protejo as\n"
@@ -98,7 +97,7 @@ EryonArkhara_Text_TessaInformed:
 	.string "TESSA: As provas ligam\n"
 	.string "a ECLIPSE a ARKHARA!\p"
 	.string "Meu desafio oficial\n"
-	.string "ainda nao esta pronto.$"
+	.string "ja esta disponivel!$"
 
 EryonArkhara_Text_GeologistBefore:
 	.string "GEOLOGO: Ha cabos\n"
