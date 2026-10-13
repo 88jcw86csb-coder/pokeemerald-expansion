@@ -71,6 +71,15 @@ class EryonRouteIntegrity(unittest.TestCase):
                     self.assertEqual(left_warps[dest]["dest_map"], IDS[right])
                     self.assertEqual(int(left_warps[dest]["dest_warp_id"]), index)
 
+    def test_league_road_supply_cache_does_not_consume_on_full_bag(self):
+        data = self.maps["Eryon_CaminhoDaLiga"]
+        script = (MAPS / "Eryon_CaminhoDaLiga" / "scripts.inc").read_text(encoding="utf-8")
+        self.assertIn("EryonLigaCaminho_EventScript_SupplyCache",
+                      [e["script"] for e in data["bg_events"]])
+        self.assertIn("giveitem ITEM_MAX_POTION", script)
+        self.assertIn("goto_if_eq VAR_RESULT, FALSE, EryonLigaCaminho_EventScript_CacheFull", script)
+        self.assertIn("setflag FLAG_ERYON_LEAGUE_ROAD_CACHE_TAKEN", script)
+
 
 if __name__ == "__main__":
     unittest.main()
