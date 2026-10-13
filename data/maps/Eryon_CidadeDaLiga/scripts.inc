@@ -77,6 +77,7 @@ EryonCidadeLiga_EventScript_Reporter::
 EryonCidadeLiga_EventScript_Investigator::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ, EryonCidadeLiga_EventScript_InvestigatorManifest
 	goto_if_set FLAG_ERYON_QUALIFIED, EryonCidadeLiga_EventScript_InvestigatorQualified
 	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonCidadeLiga_EventScript_InvestigatorChart
 	msgbox EryonCidadeLiga_Text_InvestigatorBefore, MSGBOX_DEFAULT
@@ -124,3 +125,17 @@ EryonCidadeLiga_Text_InvestigatorChart:
 	.string "DRAKONIA e a LIGA.\p"
 	.string "Estamos vigiando os\n"
 	.string "tecnicos da ECLIPSE.$"
+
+@ Optional evidence collected on Dragon Trail changes the capital investigation.
+EryonCidadeLiga_EventScript_InvestigatorManifest::
+	msgbox EryonCidadeLiga_Text_InvestigatorManifest, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_Text_InvestigatorManifest:
+	.string "INVESTIGADOR: O\n"
+	.string "manifesto e a prova!\p"
+	.string "A ECLIPSE enviou\n"
+	.string "cristais ate DRAKONIA.\p"
+	.string "Vamos seguir os\n"
+	.string "agentes na LIGA.$"
