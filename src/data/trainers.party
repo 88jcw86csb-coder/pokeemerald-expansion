@@ -17101,15 +17101,15 @@ Music: Male
 AI: Check Bad Move
 
 Luxray
-Level: 62
+Level: 58
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 Staraptor
-Level: 63
+Level: 59
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 Floatzel
-Level: 64
+Level: 60
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 === TRAINER_ERYON_QUALIFIER_2 ===
@@ -17121,15 +17121,15 @@ Music: Female
 AI: Check Bad Move
 
 Roserade
-Level: 63
+Level: 59
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 Milotic
-Level: 64
+Level: 60
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 Gardevoir
-Level: 65
+Level: 61
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 === TRAINER_ERYON_QUALIFIER_3 ===
@@ -17141,15 +17141,15 @@ Music: Hiker
 AI: Check Bad Move
 
 Golem
-Level: 64
+Level: 60
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 Camerupt
-Level: 65
+Level: 61
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 Rhyperior
-Level: 66
+Level: 62
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 === TRAINER_ERYON_QUALIFIER_4 ===
@@ -17161,15 +17161,15 @@ Music: Intense
 AI: Check Bad Move
 
 Alakazam
-Level: 65
+Level: 61
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 Espeon
-Level: 66
+Level: 62
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 Reuniclus
-Level: 67
+Level: 63
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 === TRAINER_ERYON_QUALIFIER_5 ===
@@ -17181,15 +17181,15 @@ Music: Male
 AI: Check Bad Move
 
 Lucario
-Level: 66
+Level: 62
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 Conkeldurr
-Level: 67
+Level: 63
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 Mienshao
-Level: 68
+Level: 64
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 === TRAINER_ERYON_QUALIFIER_6 ===
@@ -17201,15 +17201,15 @@ Music: Female
 AI: Check Bad Move
 
 Togekiss
-Level: 67
+Level: 63
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 Whimsicott
-Level: 68
+Level: 64
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 Sylveon
-Level: 69
+Level: 65
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 === TRAINER_ERYON_QUALIFIER_7 ===
@@ -17221,15 +17221,15 @@ Music: Intense
 AI: Check Bad Move
 
 Flygon
-Level: 68
+Level: 64
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 Kingdra
-Level: 69
+Level: 65
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 Haxorus
-Level: 70
+Level: 66
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 === TRAINER_ERYON_QUALIFIER_8 ===
@@ -17241,15 +17241,15 @@ Music: Intense
 AI: Check Bad Move
 
 Aegislash
-Level: 69
+Level: 65
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 Volcarona
-Level: 70
+Level: 66
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 Metagross
-Level: 71
+Level: 67
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 === TRAINER_ERYON_GROTTO_ECLIPSE ===
 Name: AGENTE
@@ -17346,28 +17346,28 @@ Music: Elite Four
 AI: Check Bad Move
 
 Froslass
-Level: 72
+Level: 67
 - Shadow Ball
 - Ice Beam
 - Confuse Ray
 - Destiny Bond
 
 Mamoswine
-Level: 73
+Level: 68
 - Earthquake
 - Ice Shard
 - Rock Slide
 - Hail
 
 Walrein
-Level: 73
+Level: 68
 - Surf
 - Ice Beam
 - Rest
 - Body Slam
 
 Weavile
-Level: 74
+Level: 69
 - Night Slash
 - Ice Punch
 - Swords Dance
@@ -17382,28 +17382,28 @@ Music: Elite Four
 AI: Check Bad Move
 
 Krookodile
-Level: 74
+Level: 68
 - Earthquake
 - Crunch
 - Rock Slide
 - Swagger
 
 Excadrill
-Level: 75
+Level: 69
 - Earthquake
 - Iron Head
 - Rock Slide
 - Swords Dance
 
 Rhyperior
-Level: 75
+Level: 69
 - Earthquake
 - Stone Edge
 - Megahorn
 - Rock Blast
 
 Garchomp
-Level: 76
+Level: 70
 - Dragon Claw
 - Earthquake
 - Flamethrower
@@ -17418,28 +17418,28 @@ Music: Elite Four
 AI: Check Bad Move
 
 Chandelure
-Level: 76
+Level: 69
 - Flamethrower
 - Shadow Ball
 - Energy Ball
 - Will-O-Wisp
 
 Aegislash
-Level: 77
+Level: 70
 - Shadow Sneak
 - Iron Head
 - Sacred Sword
 - Protect
 
 Spiritomb
-Level: 77
+Level: 70
 - Dark Pulse
 - Shadow Ball
 - Will-O-Wisp
 - Rest
 
 Gengar
-Level: 78
+Level: 71
 - Sludge Bomb
 - Shadow Ball
 - Thunderbolt
@@ -17454,28 +17454,28 @@ Music: Elite Four
 AI: Check Bad Move
 
 Goodra
-Level: 78
+Level: 70
 - Dragon Pulse
 - Flamethrower
 - Thunderbolt
 - Ice Beam
 
 Flygon
-Level: 79
+Level: 71
 - Dragon Claw
 - Earthquake
 - Rock Slide
 - Flamethrower
 
 Salamence
-Level: 79
+Level: 71
 - Dragon Claw
 - Fly
 - Flamethrower
 - Crunch
 
 Dragonite
-Level: 80
+Level: 72
 - Dragon Dance
 - Dragon Claw
 - Thunder Punch
@@ -17490,42 +17490,42 @@ Music: Elite Four
 AI: Check Bad Move
 
 Lucario
-Level: 81
+Level: 72
 - Aura Sphere
 - Flash Cannon
 - Dark Pulse
 - Extreme Speed
 
 Milotic
-Level: 81
+Level: 72
 - Surf
 - Ice Beam
 - Recover
 - Toxic
 
 Tyranitar
-Level: 82
+Level: 73
 - Crunch
 - Rock Slide
 - Earthquake
 - Dragon Dance
 
 Gardevoir
-Level: 82
+Level: 73
 - Psychic
 - Moonblast
 - Calm Mind
 - Thunderbolt
 
 Volcarona
-Level: 83
+Level: 74
 - Bug Buzz
 - Flamethrower
 - Quiver Dance
 - Giga Drain
 
 Metagross
-Level: 84
+Level: 75
 - Meteor Mash
 - Zen Headbutt
 - Earthquake
