@@ -1062,6 +1062,8 @@ static u16 GetEryonTrainerFlagId(u16 trainerId)
 {
     if (trainerId >= TRAINER_ERYON_QUALIFIER_1 && trainerId <= TRAINER_ERYON_QUALIFIER_8)
         return FLAG_ERYON_QUALIFIER_TRAINER_1 + trainerId - TRAINER_ERYON_QUALIFIER_1;
+    if (trainerId == TRAINER_ERYON_GROTTO_ECLIPSE)
+        return FLAG_ERYON_GROTTO_ECLIPSE_SCOUT_DEFEATED;
     return TRAINER_FLAGS_START + trainerId;
 }
 
