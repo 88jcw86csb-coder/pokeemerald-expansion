@@ -408,3 +408,84 @@ EryonDrakonia_Text_ResearcherNoibat:
 	.string "a localizar cristais.\p"
 	.string "O santuario ira\n"
 	.string "proteger esse habitat.$"
+
+
+@ Ancient dragon sanctuary: optional Kalos-compatible Axew encounter.
+@ Defeating the local Eclipse commander calms the shrine enough to approach.
+@ Catch/defeat is saved; fleeing or teleporting does not consume the encounter.
+EryonDrakonia_EventScript_AxewShrine::
+	lock
+	goto_if_set FLAG_ERYON_DRAKONIA_AXEW_RESOLVED, EryonDrakonia_EventScript_AxewShrineQuiet
+	goto_if_unset FLAG_ERYON_DRAKONIA_ECLIPSE_DEFEATED, EryonDrakonia_EventScript_AxewShrineDisturbed
+	msgbox EryonDrakonia_Text_AxewShrineOffer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonDrakonia_EventScript_AxewShrineLeave
+	closemessage
+	setwildbattle SPECIES_AXEW, 42
+	waitse
+	playmoncry SPECIES_AXEW, CRY_MODE_ENCOUNTER
+	delay 30
+	waitmoncry
+	dowildbattle
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, EryonDrakonia_EventScript_AxewShrineResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, EryonDrakonia_EventScript_AxewShrineResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, EryonDrakonia_EventScript_AxewShrineEscaped
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, EryonDrakonia_EventScript_AxewShrineEscaped
+	release
+	end
+
+EryonDrakonia_EventScript_AxewShrineResolved::
+	setflag FLAG_ERYON_DRAKONIA_AXEW_RESOLVED
+	msgbox EryonDrakonia_Text_AxewShrineResolved, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_EventScript_AxewShrineDisturbed::
+	msgbox EryonDrakonia_Text_AxewShrineDisturbed, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_EventScript_AxewShrineEscaped::
+	msgbox EryonDrakonia_Text_AxewShrineEscaped, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_EventScript_AxewShrineQuiet::
+	msgbox EryonDrakonia_Text_AxewShrineQuiet, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_EventScript_AxewShrineLeave::
+	closemessage
+	release
+	end
+
+EryonDrakonia_Text_AxewShrineOffer:
+	.string "Um pequeno dragao\n"
+	.string "surge das ruinas!\p"
+	.string "E um AXEW selvagem!\p"
+	.string "Aproximar-se dele?$"
+
+EryonDrakonia_Text_AxewShrineDisturbed:
+	.string "RUINAS DOS DRAGOES:\p"
+	.string "Cristais da ECLIPSE\n"
+	.string "assustam os Pokemon.\p"
+	.string "Derrote o comandante\n"
+	.string "para acalmar a area.$"
+
+EryonDrakonia_Text_AxewShrineEscaped:
+	.string "AXEW correu para\n"
+	.string "tras de uma pedra!\p"
+	.string "Ele pode voltar\n"
+	.string "em outra visita.$"
+
+EryonDrakonia_Text_AxewShrineResolved:
+	.string "O encontro terminou.\p"
+	.string "O santuario agora\n"
+	.string "descansa em silencio.$"
+
+EryonDrakonia_Text_AxewShrineQuiet:
+	.string "As ruinas estao\n"
+	.string "quietas novamente.\p"
+	.string "Nao ha Pokemon\n"
+	.string "aqui por enquanto.$"
