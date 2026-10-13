@@ -14,7 +14,7 @@ EryonLigaElite_OnTransition:
 EryonLigaElite_OnTransitionDone:
 	end
 
-@ Aria — sequence position 1.
+@ Aria - sequence position 1.
 EryonLigaElite_EventScript_Aria::
 	lock
 	faceplayer
@@ -31,7 +31,7 @@ EryonLigaElite_EventScript_Win1::
 	release
 	end
 
-@ Bastian — sequence position 2.
+@ Bastian - sequence position 2.
 EryonLigaElite_EventScript_Bastian::
 	lock
 	faceplayer
@@ -49,7 +49,7 @@ EryonLigaElite_EventScript_Win2::
 	release
 	end
 
-@ Selene — sequence position 3.
+@ Selene - sequence position 3.
 EryonLigaElite_EventScript_Selene::
 	lock
 	faceplayer
@@ -67,7 +67,7 @@ EryonLigaElite_EventScript_Win3::
 	release
 	end
 
-@ Darius — sequence position 4.
+@ Darius - sequence position 4.
 EryonLigaElite_EventScript_Darius::
 	lock
 	faceplayer
@@ -85,7 +85,7 @@ EryonLigaElite_EventScript_Win4::
 	release
 	end
 
-@ Champion — sequence position 5.
+@ Champion - sequence position 5.
 EryonLigaElite_EventScript_Champion::
 	lock
 	faceplayer
@@ -187,7 +187,7 @@ EryonLigaElite_Text_NotQualified:
 
 EryonLigaElite_Text_Locked:
 	.string "MESTRE: Primeiro,\n"
-	.string "vença o membro anterior\n"
+	.string "venca o membro anterior\n"
 	.string "da ELITE FOUR.$"
 
 EryonLigaElite_Text_Already:
