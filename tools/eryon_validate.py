@@ -497,6 +497,15 @@ def main():
             neighbor = ids.get(warp.get("dest_map"))
             if neighbor:
                 adjacency[name].add(neighbor)
+        # Script-controlled league doors are real travel links too.
+        # They cannot be ordinary walkable warps or players bypass the badge gate.
+        script_text = (ROOT / "data/maps" / name / "scripts.inc").read_text(
+            encoding="utf-8"
+        )
+        for script_target in re.findall(r"(?m)^\\s*warp\\s+(MAP_ERYON_[A-Z0-9_]+)", script_text):
+            target = ids.get(script_target)
+            if target:
+                adjacency[name].add(target)
     reachable = {"Eryon_VilaAurora"}
     frontier = ["Eryon_VilaAurora"]
     while frontier:
@@ -518,6 +527,11 @@ def main():
             destination = ids.get(warp["dest_map"])
             if destination:
                 neighbors[name].add(destination)
+    # Reachability includes scripted transfers, but the reciprocal-link
+    # check below applies only to physical warps/connections. Arena progression
+    # intentionally has one-way scripted moves after a qualifying victory.
+    traversal = {name: set(edges) | adjacency[name]
+                 for name, edges in neighbors.items()}
     visited = set()
     frontier = ["Eryon_VilaAurora"]
     while frontier:
@@ -525,7 +539,7 @@ def main():
         if current in visited:
             continue
         visited.add(current)
-        frontier.extend(neighbors[current] - visited)
+        frontier.extend(traversal[current] - visited)
     missing = set(NAMES) - visited
     if missing:
         errors.append("Maps unreachable from Vila Aurora: " + ", ".join(sorted(missing)))

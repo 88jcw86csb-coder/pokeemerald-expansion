@@ -88,17 +88,6 @@ def main():
             dest.parent.mkdir(parents=True, exist_ok=True)
             dest.write_bytes(payload)
             print(f"PREVIEW ONLY {dest.relative_to(ROOT)}: {len(payload)} bytes")
-    if args.preview_unregistered:
-        src = ROOT / "docs/eryon/liga_eryon_terrain_plan.txt"
-        dest = ROOT / "build/eryon-previews/LigaEryon/map.bin"
-        # Reserved facility letters are placeholder floor until proper
-        # tilesets, buildings, NPCs and entrance warps are implemented.
-        league_tiles = {**tiles, "P": tiles["."], "C": tiles["."],
-                        "M": tiles["."], "L": tiles["."], "H": tiles["."]}
-        payload = compile_plan(src, league_tiles, width=64, height=56)
-        dest.parent.mkdir(parents=True, exist_ok=True)
-        dest.write_bytes(payload)
-        print(f"PREVIEW ONLY {dest.relative_to(ROOT)}: {len(payload)} bytes")
     # First village is now engine-registered, not just a preview.
     from eryon_villages import VILLAGES
     village_tiles = {**tiles, **{mark: tiles["."] for mark in "PCMHI"}}
