@@ -148,6 +148,7 @@ EryonDrakonia_Text_SageAfterChart:
 EryonDrakonia_EventScript_SanctuaryHistorian::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_GROTTO_ECLIPSE_SCOUT_DEFEATED, EryonDrakonia_EventScript_HistorianScoutVictory
 	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonDrakonia_EventScript_HistorianAfter
 	msgbox EryonDrakonia_Text_HistorianBefore, MSGBOX_DEFAULT
 	release
@@ -254,3 +255,18 @@ EryonDrakonia_Text_ResearcherRelayOff:
 	.string "voltam ao ritmo normal.\p"
 	.string "A ECLIPSE perdeu uma\n"
 	.string "parte da sua rede.$"
+
+
+@ After the cave confrontation, the formerly isolated historian connects the event to the sanctuary.
+EryonDrakonia_EventScript_HistorianScoutVictory::
+	msgbox EryonDrakonia_Text_HistorianScoutVictory, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_Text_HistorianScoutVictory:
+	.string "HISTORIADOR: Um agente\n"
+	.string "da ECLIPSE caiu na gruta!\p"
+	.string "Os guardioes agora\n"
+	.string "podem proteger as runas.\p"
+	.string "Leve sua vitoria\n"
+	.string "a Cidade da Liga.$"
