@@ -321,3 +321,109 @@ EryonDragoes_Text_CliffResearcherAfter:
 	.string "da ECLIPSE recuou!\p"
 	.string "Agora podemos estudar\n"
 	.string "o voo dos Pokemon.$"
+
+
+@ Kalos wildlife encounter in the newly connected northern nesting terrace.
+@ Captured or defeated Noibat is persistent; fleeing or teleporting permits retry.
+@ No new wild-encounter table entries are required for this scripted encounter.
+EryonDragoes_EventScript_NoibatNest::
+	lock
+	goto_if_set FLAG_ERYON_DRAGON_TRAIL_NOIBAT_RESOLVED, EryonDragoes_EventScript_NoibatNestQuiet
+	msgbox EryonDragoes_Text_NoibatNestIntro, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonDragoes_EventScript_NoibatNestLeave
+	closemessage
+	setwildbattle SPECIES_NOIBAT, 38
+	waitse
+	playmoncry SPECIES_NOIBAT, CRY_MODE_ENCOUNTER
+	delay 30
+	waitmoncry
+	dowildbattle
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, EryonDragoes_EventScript_NoibatNestResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, EryonDragoes_EventScript_NoibatNestResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, EryonDragoes_EventScript_NoibatNestEscaped
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, EryonDragoes_EventScript_NoibatNestEscaped
+	release
+	end
+
+EryonDragoes_EventScript_NoibatNestResolved::
+	setflag FLAG_ERYON_DRAGON_TRAIL_NOIBAT_RESOLVED
+	msgbox EryonDragoes_Text_NoibatNestResolved, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDragoes_EventScript_NoibatNestEscaped::
+	msgbox EryonDragoes_Text_NoibatNestEscaped, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDragoes_EventScript_NoibatNestQuiet::
+	msgbox EryonDragoes_Text_NoibatNestQuiet, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDragoes_EventScript_NoibatNestLeave::
+	closemessage
+	release
+	end
+
+@ Optional researcher interprets the nesting disturbance without blocking travel.
+EryonDragoes_EventScript_NestResearcher::
+	lock
+	faceplayer
+	goto_if_set FLAG_ERYON_DRAGON_TRAIL_NOIBAT_RESOLVED, EryonDragoes_EventScript_NestResearcherAfter
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonDragoes_EventScript_NestResearcherEclipse
+	msgbox EryonDragoes_Text_NestResearcherBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDragoes_EventScript_NestResearcherEclipse::
+	msgbox EryonDragoes_Text_NestResearcherEclipse, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDragoes_EventScript_NestResearcherAfter::
+	msgbox EryonDragoes_Text_NestResearcherAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDragoes_Text_NoibatNestIntro:
+	.string "Um som agudo vem\n"
+	.string "do ninho entre pedras!\p"
+	.string "Um NOIBAT selvagem\n"
+	.string "observa voce.\p"
+	.string "Investigar o ninho?$"
+
+EryonDragoes_Text_NoibatNestResolved:
+	.string "O encontro terminou.\p"
+	.string "O eco do ninho\n"
+	.string "agora esta calmo.$"
+
+EryonDragoes_Text_NoibatNestEscaped:
+	.string "NOIBAT fugiu entre\n"
+	.string "as pedras do pico!\p"
+	.string "Talvez volte depois.$"
+
+EryonDragoes_Text_NoibatNestQuiet:
+	.string "Um pequeno ninho\n"
+	.string "fica entre as rochas.\p"
+	.string "Nao ha mais Pokemon\n"
+	.string "aqui por enquanto.$"
+
+EryonDragoes_Text_NestResearcherBefore:
+	.string "ORNITOLOGA: Ha uma\n"
+	.string "colonia de NOIBAT!\p"
+	.string "Os ecos os ajudam\n"
+	.string "a voar no escuro.$"
+
+EryonDragoes_Text_NestResearcherEclipse:
+	.string "ORNITOLOGA: A ECLIPSE\n"
+	.string "perturba o voo deles.\p"
+	.string "O ninho ao norte\n"
+	.string "guarda um NOIBAT raro.$"
+
+EryonDragoes_Text_NestResearcherAfter:
+	.string "ORNITOLOGA: O ninho\n"
+	.string "finalmente sossegou!\p"
+	.string "Vou registrar a sua\n"
+	.string "descoberta na vila.$"
