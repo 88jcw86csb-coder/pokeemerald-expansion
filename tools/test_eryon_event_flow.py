@@ -11,7 +11,7 @@ MAPS = ("Eryon_VilaAurora", "Eryon_Rota01", "Eryon_BosqueDeLumina",
         "Eryon_EstradaOriental", "Eryon_ValeDosVentos",
         "Eryon_EstradaDosPomares", "Eryon_VilaDosPomares", "Eryon_Rota04", "Eryon_Neonara", "Eryon_ColinasDaNeblina", "Eryon_VilaDaNeblina", "Eryon_TrilhaGlacial", "Eryon_Frostheim", "Eryon_RefugioCristal", "Eryon_PostoOriental", "Eryon_Umbra", "Eryon_RotaDasCachoeiras", "Eryon_VilaDasAguas", "Eryon_TrilhaDoOasis", "Eryon_DesertoDeSolaris", "Eryon_Ignivar", "Eryon_FlorestaDosEcos", "Eryon_ValeDosEcos", "Eryon_AldeiaDosEcos", "Eryon_TrilhaLunar", "Eryon_Lunaris", "Eryon_TrilhaDosDragoes", "Eryon_VilaDoPico", "Eryon_Drakonia", "Eryon_GrutaDasEstrelas", "Eryon_CaminhoDaLiga", "Eryon_Arkhara",
         "Eryon_CidadeDaLiga", "Eryon_LigaRecepcao",
-        "Eryon_LigaClassificatoria", "Eryon_LigaRecuperacao")
+        "Eryon_LigaClassificatoria", "Eryon_LigaRecuperacao", "Eryon_LigaEliteFour")
 LABEL = re.compile(r"(?m)^([A-Za-z][A-Za-z0-9_]*)::?\s*$")
 JUMP = re.compile(r"^\s*(?:goto|goto_if_eq|goto_if_ne|goto_if_ge|goto_if_le|goto_if_gt|goto_if_lt)\s+(.+)$")
 
@@ -22,7 +22,7 @@ class EryonEventFlowTests(unittest.TestCase):
         groups = json.loads(
             (ROOT / "data/maps/map_groups.json").read_text(encoding="utf-8")
         )["gMapGroup_Eryon"]
-        self.assertEqual(len(groups), 41)
+        self.assertEqual(len(groups), 42)
         self.assertEqual(set(groups), set(MAPS))
         for name in groups:
             with self.subTest(map=name):
