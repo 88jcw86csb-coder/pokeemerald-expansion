@@ -34,6 +34,7 @@ EryonArkhara_EventScript_TessaInformed::
 EryonArkhara_EventScript_Geologist::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_SERRA_ECLIPSE_SIGNAL_DISABLED, EryonArkhara_EventScript_GeologistResonance
 	goto_if_set FLAG_ERYON_ARKHARA_RELAY_READ, EryonArkhara_EventScript_GeologistInformed
 	msgbox EryonArkhara_Text_GeologistBefore, MSGBOX_DEFAULT
 	release
@@ -47,6 +48,7 @@ EryonArkhara_EventScript_GeologistInformed::
 EryonArkhara_EventScript_EclipseCourier::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_SERRA_ECLIPSE_SIGNAL_DISABLED, EryonArkhara_EventScript_EclipseCourierResonance
 	goto_if_set FLAG_ERYON_ARKHARA_RELAY_READ, EryonArkhara_EventScript_CourierExposed
 	msgbox EryonArkhara_Text_CourierBefore, MSGBOX_DEFAULT
 	release
@@ -174,6 +176,7 @@ EryonArkhara_EventScript_GymNotReady::
 	end
 
 EryonArkhara_EventScript_GymAfter::
+	goto_if_set FLAG_ERYON_SERRA_ECLIPSE_SIGNAL_DISABLED, EryonArkhara_EventScript_TessaResonance
 	msgbox EryonArkhara_Text_GymAfter, MSGBOX_DEFAULT
 	release
 	end
@@ -205,3 +208,74 @@ EryonArkhara_Text_GymNotReady:
 	.string "TESSA: Primeiro,\n"
 	.string "conquiste a INSIGNIA\n"
 	.string "do GINASIO anterior.$"
+
+
+@ Successful Serra signal shutdown is acknowledged by Arkhara's geology team.
+@ Optional PP UP reward is available exactly once and retryable if Bag is full.
+EryonArkhara_EventScript_GeologistResonance::
+	goto_if_set FLAG_ERYON_SERRA_SURVEY_REWARD_CLAIMED, EryonArkhara_EventScript_GeologistResonanceDone
+	msgbox EryonArkhara_Text_GeologistReward, MSGBOX_DEFAULT
+	giveitem ITEM_PP_UP
+	goto_if_eq VAR_RESULT, FALSE, EryonArkhara_EventScript_GeologistRewardFull
+	setflag FLAG_ERYON_SERRA_SURVEY_REWARD_CLAIMED
+	msgbox EryonArkhara_Text_GeologistRewardSuccess, MSGBOX_DEFAULT
+	release
+	end
+
+EryonArkhara_EventScript_GeologistRewardFull::
+	msgbox EryonArkhara_Text_GeologistRewardFull, MSGBOX_DEFAULT
+	release
+	end
+
+EryonArkhara_EventScript_GeologistResonanceDone::
+	msgbox EryonArkhara_Text_GeologistResonanceDone, MSGBOX_DEFAULT
+	release
+	end
+
+EryonArkhara_EventScript_EclipseCourierResonance::
+	msgbox EryonArkhara_Text_EclipseCourierResonance, MSGBOX_DEFAULT
+	release
+	end
+
+EryonArkhara_EventScript_TessaResonance::
+	msgbox EryonArkhara_Text_TessaResonance, MSGBOX_DEFAULT
+	release
+	end
+
+EryonArkhara_Text_GeologistReward:
+	.string "GEOLOGO: Voce desligou\n"
+	.string "a rede da ECLIPSE!\p"
+	.string "As pedras da serra\n"
+	.string "voltaram ao normal.\p"
+	.string "Receba nossa ajuda\n"
+	.string "pela pesquisa.$"
+
+EryonArkhara_Text_GeologistRewardSuccess:
+	.string "GEOLOGO: Os dados\n"
+	.string "ja chegaram a ARKHARA.\p"
+	.string "Agora podemos vigiar\n"
+	.string "as rotas com seguranca.$"
+
+EryonArkhara_Text_GeologistRewardFull:
+	.string "GEOLOGO: Sua BOLSA\n"
+	.string "esta cheia.\p"
+	.string "Volte para receber\n"
+	.string "a recompensa.$"
+
+EryonArkhara_Text_GeologistResonanceDone:
+	.string "GEOLOGO: Os cristais\n"
+	.string "estao silenciosos.\p"
+	.string "A rede da ECLIPSE\n"
+	.string "na serra foi interrompida.$"
+
+EryonArkhara_Text_EclipseCourierResonance:
+	.string "ECLIPSE: A frequencia\n"
+	.string "da serra desapareceu!\p"
+	.string "Nao consigo rastrear\n"
+	.string "nossa proxima carga.$"
+
+EryonArkhara_Text_TessaResonance:
+	.string "TESSA: Voce protegeu\n"
+	.string "ARKHARA e a serra!\p"
+	.string "Minha INSIGNIA e sua\n"
+	.string "prova de coragem.$"
