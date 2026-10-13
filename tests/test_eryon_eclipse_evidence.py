@@ -13,6 +13,7 @@ FLAGS = ROOT / "include/constants/flags.h"
 TRAIL = ROOT / "data/maps/Eryon_TrilhaDosDragoes/scripts.inc"
 CITY = ROOT / "data/maps/Eryon_CidadeDaLiga/scripts.inc"
 DRAKONIA = ROOT / "data/maps/Eryon_Drakonia/scripts.inc"
+LUNARIS = ROOT / "data/maps/Eryon_Lunaris/scripts.inc"
 
 
 class EclipseEvidenceQuest(unittest.TestCase):
@@ -22,6 +23,7 @@ class EclipseEvidenceQuest(unittest.TestCase):
         cls.trail = TRAIL.read_text(encoding="utf-8")
         cls.city = CITY.read_text(encoding="utf-8")
         cls.drakonia = DRAKONIA.read_text(encoding="utf-8")
+        cls.lunaris = LUNARIS.read_text(encoding="utf-8")
 
     def test_persistent_flags_have_distinct_ids(self):
         self.assertIn("#define FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ 0x3D", self.flags)
@@ -62,6 +64,15 @@ class EclipseEvidenceQuest(unittest.TestCase):
             self.drakonia,
         )
         self.assertIn("EryonDrakonia_EventScript_SageEvidenceReported::", self.drakonia)
+
+    def test_lunaris_reacts_to_manifest_and_report(self):
+        self.assertIn(
+            "goto_if_set FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ, "
+            "EryonLunaris_EventScript_AnalystManifest", self.lunaris)
+        self.assertIn(
+            "goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, "
+            "EryonLunaris_EventScript_AnalystAfterReport", self.lunaris)
+        self.assertIn("EryonLunaris_EventScript_GeneratorManifest::", self.lunaris)
 
 
 if __name__ == "__main__":
