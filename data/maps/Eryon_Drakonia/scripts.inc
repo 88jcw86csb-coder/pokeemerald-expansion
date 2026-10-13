@@ -505,3 +505,74 @@ EryonDrakonia_Text_CourierSignalRestored:
 	.string "recebem avisos da serra.\p"
 	.string "DRAKONIA esta mais\n"
 	.string "preparada para a ECLIPSE.$"
+
+@ Eryon: RYU is the city leader, separate from the Gym guide.
+EryonDrakonia_EventScript_GymLeader::
+	lock
+	faceplayer
+	goto_if_set FLAG_BADGE08_GET, EryonDrakonia_EventScript_GymAfter
+	goto_if_unset FLAG_BADGE07_GET, EryonDrakonia_EventScript_GymNotReady
+	goto EryonDrakonia_EventScript_GymOffer
+	end
+
+@ Tactical badge battle — Drakonia: ace level 56, badge 8.
+EryonDrakonia_EventScript_GymOffer::
+	msgbox EryonDrakonia_Text_GymOffer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonDrakonia_EventScript_GymDecline
+	closemessage
+	trainerbattle_single TRAINER_ERYON_GYM_DRAKONIA, EryonDrakonia_Text_GymIntro, EryonDrakonia_Text_GymLoss, EryonDrakonia_EventScript_GymVictory, FALSE
+	msgbox EryonDrakonia_Text_GymAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_EventScript_GymVictory::
+	message EryonDrakonia_Text_GymBadge
+	waitmessage
+	call Common_EventScript_PlayGymBadgeFanfare
+	setflag FLAG_BADGE08_GET
+	msgbox EryonDrakonia_Text_GymAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_EventScript_GymDecline::
+	closemessage
+	release
+	end
+
+EryonDrakonia_EventScript_GymNotReady::
+	msgbox EryonDrakonia_Text_GymNotReady, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_EventScript_GymAfter::
+	msgbox EryonDrakonia_Text_GymAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_Text_GymOffer:
+	.string "RYU: Meu GINASIO\n"
+	.string "treina com dragoes.\p"
+	.string "Desafiar meu time\n"
+	.string "de Pokemon agora?$"
+
+EryonDrakonia_Text_GymIntro:
+	.string "RYU: Mostre sua\n"
+	.string "forca e estrategia!$"
+
+EryonDrakonia_Text_GymLoss:
+	.string "RYU: Voce encontrou\n"
+	.string "uma boa resposta!$"
+
+EryonDrakonia_Text_GymBadge:
+	.string "Venceu o 8o GINASIO!\p"
+	.string "Recebeu a INSIGNIA\n"
+	.string "de numero 8!$"
+
+EryonDrakonia_Text_GymAfter:
+	.string "RYU: Bela vitoria!\p"
+	.string "A LIGA agora espera por voce.$"
+
+EryonDrakonia_Text_GymNotReady:
+	.string "RYU: Primeiro,\n"
+	.string "conquiste a INSIGNIA\n"
+	.string "do GINASIO anterior.$"
