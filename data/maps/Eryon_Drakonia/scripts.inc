@@ -406,5 +406,5 @@ EryonDrakonia_Text_ResearcherNoibat:
 	.string "foi observado na trilha!\p"
 	.string "O eco das asas ajuda\n"
 	.string "a localizar cristais.\p"
-	.string "O santuário ira\n"
+	.string "O santuario ira\n"
 	.string "proteger esse habitat.$"
