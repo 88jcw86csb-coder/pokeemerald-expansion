@@ -139,3 +139,58 @@ EryonDrakonia_Text_SageAfterChart:
 	.string "a carta das estrelas!\p"
 	.string "Os cristais de ERYON\n"
 	.string "nao devem ser forjados.$"
+
+@ The dragon city reacts to the Star Chart discovery without blocking exploration.
+EryonDrakonia_EventScript_SanctuaryHistorian::
+	lock
+	faceplayer
+	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonDrakonia_EventScript_HistorianAfter
+	msgbox EryonDrakonia_Text_HistorianBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_EventScript_HistorianAfter::
+	msgbox EryonDrakonia_Text_HistorianAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_EventScript_Courier::
+	lock
+	faceplayer
+	goto_if_set FLAG_ERYON_QUALIFIED, EryonDrakonia_EventScript_CourierAfter
+	msgbox EryonDrakonia_Text_CourierBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_EventScript_CourierAfter::
+	msgbox EryonDrakonia_Text_CourierAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_Text_HistorianBefore:
+	.string "HISTORIADOR: As runas\n"
+	.string "de DRAKONIA apontam\n"
+	.string "para a gruta a leste.\p"
+	.string "A ECLIPSE deseja usar\n"
+	.string "seu poder antigo.$"
+
+EryonDrakonia_Text_HistorianAfter:
+	.string "HISTORIADOR: A carta\n"
+	.string "mostra o plano deles!\p"
+	.string "Os sinais vao ate\n"
+	.string "a CIDADE DA LIGA.\p"
+	.string "Avise os guardioes\n"
+	.string "antes do torneio.$"
+
+EryonDrakonia_Text_CourierBefore:
+	.string "MENSAGEIRA: A estrada\n"
+	.string "da LIGA segue pela\n"
+	.string "GRUTA DAS ESTRELAS.\p"
+	.string "Toda a travessia\n"
+	.string "e possivel a pe.$"
+
+EryonDrakonia_Text_CourierAfter:
+	.string "MENSAGEIRA: Voce\n"
+	.string "venceu oito duelos!\p"
+	.string "Os guardioes torcem\n"
+	.string "pela sua vitoria.$"
