@@ -183,3 +183,40 @@ EryonCidadeLiga_Text_GuideRelayOff:
 	.string "sua ajuda na regiao.\p"
 	.string "O torneio acontece\n"
 	.string "no edificio central.$"
+
+@ Optional emergency supplies in the central League plaza.
+@ If the bag is full, the supplies remain available.
+EryonCidadeLiga_EventScript_AidStation::
+	lock
+	goto_if_set FLAG_ERYON_LEAGUE_CITY_AID_COLLECTED, EryonCidadeLiga_EventScript_AidEmpty
+	msgbox EryonCidadeLiga_Text_AidFound, MSGBOX_DEFAULT
+	giveitem ITEM_FULL_RESTORE
+	goto_if_eq VAR_RESULT, FALSE, EryonCidadeLiga_EventScript_AidFull
+	setflag FLAG_ERYON_LEAGUE_CITY_AID_COLLECTED
+	release
+	end
+
+EryonCidadeLiga_EventScript_AidFull::
+	msgbox EryonCidadeLiga_Text_AidFull, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_AidEmpty::
+	msgbox EryonCidadeLiga_Text_AidEmpty, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_Text_AidFound:
+	.string "POSTO DE APOIO:\p"
+	.string "Um FULL RESTORE\n"
+	.string "para treinadores\n"
+	.string "da classificatoria!$"
+
+EryonCidadeLiga_Text_AidFull:
+	.string "Sua BOLSA esta cheia.\p"
+	.string "O remedio ficara\n"
+	.string "guardado no posto.$"
+
+EryonCidadeLiga_Text_AidEmpty:
+	.string "Voce ja retirou\n"
+	.string "seu remedio gratuito.$"
