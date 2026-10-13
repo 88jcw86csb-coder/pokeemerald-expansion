@@ -12,6 +12,8 @@ EryonEstrelas_EventScript_TrailEngineer::
 EryonEstrelas_EventScript_EclipseScout::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonEstrelas_EventScript_ScoutAfterReport
+	goto_if_set FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ, EryonEstrelas_EventScript_ScoutManifest
 	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonEstrelas_EventScript_ScoutAfterChart
 	msgbox EryonEstrelas_Text_ScoutBefore, MSGBOX_DEFAULT
 	release
@@ -140,3 +142,27 @@ EryonEstrelas_Text_ArchivistAfter:
 	.string "mesma rede antiga.\p"
 	.string "Leve essa descoberta\n"
 	.string "ate a CIDADE DA LIGA.$"
+
+@ Eclipse scouts retreat from their cave outpost when the shipment network is exposed.
+EryonEstrelas_EventScript_ScoutManifest::
+	msgbox EryonEstrelas_Text_ScoutManifest, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEstrelas_EventScript_ScoutAfterReport::
+	msgbox EryonEstrelas_Text_ScoutAfterReport, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEstrelas_Text_ScoutManifest:
+	.string "ECLIPSE: Esse papel\n"
+	.string "e o manifesto?!\p"
+	.string "O transporte era\n"
+	.string "segredo da equipe.$"
+
+EryonEstrelas_Text_ScoutAfterReport:
+	.string "ECLIPSE: A LIGA\n"
+	.string "descobriu nossas\n"
+	.string "rotas de cristais!\p"
+	.string "Esta gruta ja nao\n"
+	.string "e um esconderijo.$"
