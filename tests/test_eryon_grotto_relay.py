@@ -38,6 +38,16 @@ class EryonRelayContract(unittest.TestCase):
         self.assertIn("goto_if_set FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED, EryonLigaCaminho_EventScript_ObserverRelayOff", road)
         self.assertIn("EryonLigaCaminho_EventScript_ObserverRelayOff::", road)
 
+    def test_shutdown_unlocks_optional_party_healing(self):
+        script = (CAVE / "scripts.inc").read_text(encoding="utf-8")
+        start = script.index("EryonEstrelas_EventScript_RelayOff::")
+        end = script.index("EryonEstrelas_EventScript_RelayLeave::", start)
+        branch = script[start:end]
+        self.assertIn("MSGBOX_YESNO", branch)
+        self.assertIn("goto_if_eq VAR_RESULT, NO", branch)
+        self.assertIn("special HealPlayerParty", branch)
+        self.assertIn("EryonEstrelas_Text_RelayRestored:", script)
+
 
 if __name__ == "__main__":
     unittest.main()
