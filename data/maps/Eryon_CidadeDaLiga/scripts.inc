@@ -70,6 +70,7 @@ EryonCidadeLiga_Text_Notice:
 EryonCidadeLiga_EventScript_Reporter::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonCidadeLiga_EventScript_ReporterEvidence
 	msgbox EryonCidadeLiga_Text_Reporter, MSGBOX_DEFAULT
 	release
 	end
@@ -152,3 +153,18 @@ EryonCidadeLiga_Text_EvidenceFiled:
 	.string "foi registrada!\p"
 	.string "Agora investigamos\n"
 	.string "a ECLIPSE na LIGA.$"
+
+@ The League capital publicly acknowledges the optional evidence quest.
+EryonCidadeLiga_EventScript_ReporterEvidence::
+	msgbox EryonCidadeLiga_Text_ReporterEvidence, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_Text_ReporterEvidence:
+	.string "REPORTER: As provas\n"
+	.string "da ECLIPSE vieram\n"
+	.string "a publico na LIGA!\p"
+	.string "A seguranca aumentou\n"
+	.string "perto do edificio.\p"
+	.string "O torneio continua,\n"
+	.string "mas todos estao alertas.$"
