@@ -83,7 +83,7 @@
 #define FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ 0x3D // Persistent Eclipse supply manifest discovery
 #define FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED 0x3E // Dragon Trail evidence delivered to League investigator
 #define FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED 0x3F // Optional Eclipse relay sabotage in Star Grotto
-#define FLAG_UNUSED_0x040    0x40 // Unused Flag
+#define FLAG_ERYON_LEAGUE_ROAD_CACHE_TAKEN 0x40 // Optional final-route supply cache
 #define FLAG_UNUSED_0x041    0x41 // Unused Flag
 #define FLAG_UNUSED_0x042    0x42 // Unused Flag
 #define FLAG_UNUSED_0x043    0x43 // Unused Flag
