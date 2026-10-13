@@ -17251,3 +17251,31 @@ IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 Metagross
 Level: 71
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+=== TRAINER_ERYON_GROTTO_ECLIPSE ===
+Name: AGENTE
+Class: Team Aqua
+Pic: Aqua Grunt M
+Gender: Male
+Music: Male
+AI: Check Bad Move
+
+Houndoom
+Level: 51
+- Dark Pulse
+- Flamethrower
+- Bite
+- Roar
+
+Golbat
+Level: 52
+- Wing Attack
+- Confuse Ray
+- Bite
+- Leech Life
+
+Magneton
+Level: 53
+- Discharge
+- Thunder Wave
+- Flash Cannon
+- Tri Attack
