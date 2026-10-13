@@ -34,6 +34,7 @@ EryonPico_EventScript_Messenger::
 EryonPico_EventScript_Geologist::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_DRAGON_TRAIL_NOIBAT_RESOLVED, EryonPico_EventScript_GeologistNoibat
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonPico_EventScript_GeologistClue
 	msgbox EryonPico_Text_GeologistBefore, MSGBOX_DEFAULT
 	release
@@ -202,3 +203,18 @@ EryonPico_Text_MessengerEscortBeaten:
 	.string "de cruzar a trilha.\p"
 	.string "O mirante do sul\n"
 	.string "agora esta em paz.$"
+
+
+@ The village geologist studies changes after the rare Noibat nesting encounter.
+EryonPico_EventScript_GeologistNoibat::
+	msgbox EryonPico_Text_GeologistNoibat, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPico_Text_GeologistNoibat:
+	.string "GEOLOGO: Soube do\n"
+	.string "ninho de NOIBAT!\p"
+	.string "Os ecos da montanha\n"
+	.string "voltaram ao normal.\p"
+	.string "Os dados ajudarao\n"
+	.string "nosso estudo do pico.$"
