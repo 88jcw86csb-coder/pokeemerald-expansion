@@ -12,10 +12,43 @@ EryonEstrelas_EventScript_TrailEngineer::
 EryonEstrelas_EventScript_EclipseScout::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED, EryonEstrelas_EventScript_ScoutRelayOff
+	goto_if_set FLAG_ERYON_GROTTO_ECLIPSE_SCOUT_DEFEATED, EryonEstrelas_EventScript_ScoutDefeated
+	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonEstrelas_EventScript_ScoutBattleOffer
+	msgbox EryonEstrelas_Text_ScoutBefore, MSGBOX_DEFAULT
+	release
+	end
+
+@ Optional battle only after the chart is decoded; disabling the relay remains possible without battle.
+EryonEstrelas_EventScript_ScoutBattleOffer::
+	msgbox EryonEstrelas_Text_ScoutBattleOffer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonEstrelas_EventScript_ScoutDecline
+	closemessage
+	trainerbattle_single TRAINER_ERYON_GROTTO_ECLIPSE, EryonEstrelas_Text_ScoutIntro, EryonEstrelas_Text_ScoutLoss, EryonEstrelas_EventScript_ScoutVictory, FALSE
+	msgbox EryonEstrelas_Text_ScoutDefeated, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEstrelas_EventScript_ScoutDecline::
+	closemessage
+	msgbox EryonEstrelas_Text_ScoutDecline, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEstrelas_EventScript_ScoutVictory::
+	msgbox EryonEstrelas_Text_ScoutVictory, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEstrelas_EventScript_ScoutDefeated::
 	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonEstrelas_EventScript_ScoutAfterReport
 	goto_if_set FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ, EryonEstrelas_EventScript_ScoutManifest
-	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonEstrelas_EventScript_ScoutAfterChart
-	msgbox EryonEstrelas_Text_ScoutBefore, MSGBOX_DEFAULT
+	msgbox EryonEstrelas_Text_ScoutDefeated, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEstrelas_EventScript_ScoutRelayOff::
+	msgbox EryonEstrelas_Text_ScoutRelayOff, MSGBOX_DEFAULT
 	release
 	end
 
@@ -239,3 +272,38 @@ EryonEstrelas_Text_RelayOff:
 EryonEstrelas_Text_RelayRestored:
 	.string "A energia limpa\n"
 	.string "recuperou seus Pokemon!$"
+
+
+EryonEstrelas_Text_ScoutBattleOffer:
+	.string "ECLIPSE: Decifrou\n"
+	.string "a Carta Estelar?!\p"
+	.string "Vamos resolver isso\n"
+	.string "num duelo Pokemon?$"
+
+EryonEstrelas_Text_ScoutIntro:
+	.string "ECLIPSE: Nosso sinal\n"
+	.string "nao sera interrompido!$"
+
+EryonEstrelas_Text_ScoutLoss:
+	.string "ECLIPSE: Voce venceu\n"
+	.string "minha equipe?!$"
+
+EryonEstrelas_Text_ScoutVictory:
+	.string "ECLIPSE: O terminal\n"
+	.string "fica atras da gruta!\p"
+	.string "Mas nao pense que\n"
+	.string "derrotou a organizacao.$"
+
+EryonEstrelas_Text_ScoutDefeated:
+	.string "ECLIPSE: Ja perdi!\p"
+	.string "Nao vou impedir\n"
+	.string "sua investigacao.$"
+
+EryonEstrelas_Text_ScoutDecline:
+	.string "ECLIPSE: Entao\n"
+	.string "nao atrapalhe a equipe!$"
+
+EryonEstrelas_Text_ScoutRelayOff:
+	.string "ECLIPSE: Voce cortou\n"
+	.string "o sinal da antena?!\p"
+	.string "Vamos ter de recuar.$"
