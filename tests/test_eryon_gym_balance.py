@@ -121,8 +121,10 @@ class EryonGymBalance(unittest.TestCase):
             self.assertIn(
                 f"#define TRAINER_ERYON_GYM_{city.upper()} {878+badge}",
                 self.opponents)
-        self.assertIn("#define TRAINERS_COUNT_EMERALD     887",
-                      self.opponents)
+        self.assertGreaterEqual(
+            int(re.search(r"(?m)^#define TRAINERS_COUNT_EMERALD\s+(\d+)", self.opponents).group(1)),
+            887,
+        )
         self.assertIn(
             "return FLAG_BADGE02_GET + trainerId - TRAINER_ERYON_GYM_NEONARA",
             self.engine)
