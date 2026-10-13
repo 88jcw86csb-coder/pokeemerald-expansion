@@ -1056,7 +1056,7 @@ static void TryUpdateGymLeaderRematchFromTrainer(void)
         UpdateGymLeaderRematch();
 }
 
-static // Eryon qualifiers use reserved early flags, not the system flag range.
+// Eryon qualifiers use reserved early flags, not the system flag range.
 // This preserves existing saves and permits 8 repeatable tournament battles.
 static u16 GetEryonTrainerFlagId(u16 trainerId)
 {
