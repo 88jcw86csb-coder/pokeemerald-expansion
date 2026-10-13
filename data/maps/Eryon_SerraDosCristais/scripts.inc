@@ -5,6 +5,7 @@ Eryon_SerraDosCristais_MapScripts::
 EryonSerra_EventScript_Geologist::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_SERRA_ECLIPSE_SIGNAL_DISABLED, EryonSerra_EventScript_GeologistResonanceQuiet
 	goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonSerra_EventScript_GeologistBadge
 	msgbox EryonSerra_Text_GeologistBefore, MSGBOX_DEFAULT
 	release
@@ -25,6 +26,7 @@ EryonSerra_EventScript_GeologistAfterClue::
 EryonSerra_EventScript_Explorer::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_SERRA_ECLIPSE_SIGNAL_DISABLED, EryonSerra_EventScript_ExplorerResonanceQuiet
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonSerra_EventScript_ExplorerAfterClue
 	msgbox EryonSerra_Text_Explorer, MSGBOX_DEFAULT
 	release
@@ -254,3 +256,182 @@ EryonSerra_Text_SupplyCrateFull:
 
 EryonSerra_Text_SupplyCrateEmpty:
 	.string "A caixa esta vazia.$"
+
+
+@ The player investigates Serra's three Eclipse resonance stations in order.
+@ The optional investigation is unlocked by the abandoned camp clue and Badge 3.
+@ All four Serra exits stay open; no compulsory route blocker is introduced.
+EryonSerra_EventScript_NorthCrystalSeal::
+	lock
+	goto_if_set FLAG_ERYON_SERRA_ECLIPSE_SIGNAL_DISABLED, EryonSerra_EventScript_ResonanceQuiet
+	goto_if_set FLAG_ERYON_SERRA_NORTH_CRYSTAL_CALIBRATED, EryonSerra_EventScript_NorthCrystalCalibrated
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonSerra_EventScript_NorthClueFound
+	msgbox EryonSerra_Text_NorthCrystalUnknown, MSGBOX_DEFAULT
+	release
+	end
+
+EryonSerra_EventScript_NorthClueFound::
+	goto_if_unset FLAG_BADGE03_GET, EryonSerra_EventScript_NorthNeedsBadge
+	msgbox EryonSerra_Text_NorthCrystalPrompt, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonSerra_EventScript_ResonanceLeave
+	closemessage
+	setflag FLAG_ERYON_SERRA_NORTH_CRYSTAL_CALIBRATED
+	msgbox EryonSerra_Text_NorthCrystalDone, MSGBOX_DEFAULT
+	release
+	end
+
+EryonSerra_EventScript_NorthNeedsBadge::
+	msgbox EryonSerra_Text_NorthNeedsBadge, MSGBOX_DEFAULT
+	release
+	end
+
+EryonSerra_EventScript_NorthCrystalCalibrated::
+	msgbox EryonSerra_Text_NorthCrystalCalibrated, MSGBOX_DEFAULT
+	release
+	end
+
+EryonSerra_EventScript_SouthCrystalSeal::
+	lock
+	goto_if_set FLAG_ERYON_SERRA_ECLIPSE_SIGNAL_DISABLED, EryonSerra_EventScript_ResonanceQuiet
+	goto_if_set FLAG_ERYON_SERRA_SOUTH_CRYSTAL_CALIBRATED, EryonSerra_EventScript_SouthCrystalCalibrated
+	goto_if_unset FLAG_ERYON_SERRA_NORTH_CRYSTAL_CALIBRATED, EryonSerra_EventScript_SouthNeedsNorth
+	msgbox EryonSerra_Text_SouthCrystalPrompt, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonSerra_EventScript_ResonanceLeave
+	closemessage
+	setflag FLAG_ERYON_SERRA_SOUTH_CRYSTAL_CALIBRATED
+	msgbox EryonSerra_Text_SouthCrystalDone, MSGBOX_DEFAULT
+	release
+	end
+
+EryonSerra_EventScript_SouthNeedsNorth::
+	msgbox EryonSerra_Text_SouthNeedsNorth, MSGBOX_DEFAULT
+	release
+	end
+
+EryonSerra_EventScript_SouthCrystalCalibrated::
+	msgbox EryonSerra_Text_SouthCrystalCalibrated, MSGBOX_DEFAULT
+	release
+	end
+
+EryonSerra_EventScript_EclipseResonanceCore::
+	lock
+	goto_if_set FLAG_ERYON_SERRA_ECLIPSE_SIGNAL_DISABLED, EryonSerra_EventScript_ResonanceQuiet
+	goto_if_unset FLAG_ERYON_SERRA_NORTH_CRYSTAL_CALIBRATED, EryonSerra_EventScript_CoreNeedsSeals
+	goto_if_unset FLAG_ERYON_SERRA_SOUTH_CRYSTAL_CALIBRATED, EryonSerra_EventScript_CoreNeedsSeals
+	msgbox EryonSerra_Text_CorePrompt, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonSerra_EventScript_ResonanceLeave
+	closemessage
+	setflag FLAG_ERYON_SERRA_ECLIPSE_SIGNAL_DISABLED
+	msgbox EryonSerra_Text_CoreDisabled, MSGBOX_DEFAULT
+	release
+	end
+
+EryonSerra_EventScript_CoreNeedsSeals::
+	msgbox EryonSerra_Text_CoreNeedsSeals, MSGBOX_DEFAULT
+	release
+	end
+
+EryonSerra_EventScript_ResonanceQuiet::
+	msgbox EryonSerra_Text_ResonanceQuiet, MSGBOX_DEFAULT
+	release
+	end
+
+EryonSerra_EventScript_ResonanceLeave::
+	closemessage
+	release
+	end
+
+@ Persistent field reports react to the completed optional investigation.
+EryonSerra_EventScript_GeologistResonanceQuiet::
+	msgbox EryonSerra_Text_GeologistResonanceQuiet, MSGBOX_DEFAULT
+	release
+	end
+
+EryonSerra_EventScript_ExplorerResonanceQuiet::
+	msgbox EryonSerra_Text_ExplorerResonanceQuiet, MSGBOX_DEFAULT
+	release
+	end
+
+EryonSerra_Text_NorthCrystalUnknown:
+	.string "Um selo brilha\n"
+	.string "junto a rocha.\p"
+	.string "Investigue as caixas\n"
+	.string "do acampamento.$"
+
+EryonSerra_Text_NorthNeedsBadge:
+	.string "SINAL DESCONHECIDO:\p"
+	.string "A INSIGNIA de\n"
+	.string "FROSTHEIM pode ajudar.$"
+
+EryonSerra_Text_NorthCrystalPrompt:
+	.string "Selo de cristal norte.\p"
+	.string "Usar os dados de gelo\n"
+	.string "para alinhar a runa?$"
+
+EryonSerra_Text_NorthCrystalDone:
+	.string "O primeiro selo\n"
+	.string "foi alinhado!\p"
+	.string "O segundo fica\n"
+	.string "ao sul da serra.$"
+
+EryonSerra_Text_NorthCrystalCalibrated:
+	.string "SELO NORTE:\n"
+	.string "alinhamento estavel.$"
+
+EryonSerra_Text_SouthNeedsNorth:
+	.string "SELO SUL:\n"
+	.string "O cristal norte\n"
+	.string "ainda esta ativo.$"
+
+EryonSerra_Text_SouthCrystalPrompt:
+	.string "SELO SUL:\n"
+	.string "O sinal do norte\n"
+	.string "esta sincronizado.\p"
+	.string "Alinhar o cristal?$"
+
+EryonSerra_Text_SouthCrystalDone:
+	.string "Os dois selos\n"
+	.string "estao alinhados!\p"
+	.string "O nucleo central\n"
+	.string "agora esta exposto.$"
+
+EryonSerra_Text_SouthCrystalCalibrated:
+	.string "SELO SUL:\n"
+	.string "alinhamento estavel.$"
+
+EryonSerra_Text_CoreNeedsSeals:
+	.string "NUCLEO DA ECLIPSE:\p"
+	.string "Sinais misturados\n"
+	.string "nos cristais.\p"
+	.string "Dois selos devem\n"
+	.string "ser alinhados.$"
+
+EryonSerra_Text_CorePrompt:
+	.string "NUCLEO DA ECLIPSE:\p"
+	.string "Os selos estao\n"
+	.string "sincronizados.\p"
+	.string "Desligar a rede?$"
+
+EryonSerra_Text_CoreDisabled:
+	.string "A rede de cristais\n"
+	.string "foi desligada!\p"
+	.string "A ECLIPSE perdeu\n"
+	.string "o sinal nesta serra.$"
+
+EryonSerra_Text_ResonanceQuiet:
+	.string "Os cristais estao\n"
+	.string "silenciosos.\p"
+	.string "A rede da ECLIPSE\n"
+	.string "continua desligada.$"
+
+EryonSerra_Text_GeologistResonanceQuiet:
+	.string "GEOLOGO: Conseguimos!\p"
+	.string "As rochas nao enviam\n"
+	.string "mais dados a ECLIPSE.\p"
+	.string "Avisarei ARKHARA.$"
+
+EryonSerra_Text_ExplorerResonanceQuiet:
+	.string "EXPLORADORA: A serra\n"
+	.string "esta mais tranquila!\p"
+	.string "A passagem rochosa\n"
+	.string "esta pronta para voce.$"
