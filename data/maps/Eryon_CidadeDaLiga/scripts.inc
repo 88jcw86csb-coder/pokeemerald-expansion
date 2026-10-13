@@ -88,24 +88,24 @@ EryonCidadeLiga_EventScript_InvestigatorQualified::
 	end
 
 EryonCidadeLiga_Text_Reporter:
-	.string "REPORTER: A cidade vive\\n"
-	.string "o grande torneio!\\p"
-	.string "Mas testemunhas viram\\n"
-	.string "agentes da ECLIPSE\\n"
+	.string "REPORTER: A cidade vive\n"
+	.string "o grande torneio!\p"
+	.string "Mas testemunhas viram\n"
+	.string "agentes da ECLIPSE\n"
 	.string "perto do estadio.$"
 
 EryonCidadeLiga_Text_InvestigatorBefore:
-	.string "INVESTIGADOR: A ECLIPSE\\n"
-	.string "procura algo na LIGA.\\p"
-	.string "Fique atento aos\\n"
-	.string "rumores nas ruas.\\p"
-	.string "Sua prioridade agora\\n"
+	.string "INVESTIGADOR: A ECLIPSE\n"
+	.string "procura algo na LIGA.\p"
+	.string "Fique atento aos\n"
+	.string "rumores nas ruas.\p"
+	.string "Sua prioridade agora\n"
 	.string "e a classificatoria.$"
 
 EryonCidadeLiga_Text_InvestigatorAfter:
-	.string "INVESTIGADOR: Oito\\n"
-	.string "vitorias confirmadas!\\p"
-	.string "A ECLIPSE observou\\n"
-	.string "todo o torneio.\\p"
-	.string "A investigacao ainda\\n"
+	.string "INVESTIGADOR: Oito\n"
+	.string "vitorias confirmadas!\p"
+	.string "A ECLIPSE observou\n"
+	.string "todo o torneio.\p"
+	.string "A investigacao ainda\n"
 	.string "nao terminou.$"
