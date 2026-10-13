@@ -26,6 +26,7 @@ EryonDrakonia_EventScript_GymGuideInformed::
 EryonDrakonia_EventScript_Sage::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonDrakonia_EventScript_SageEvidenceReported
 	goto_if_set FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ, EryonDrakonia_EventScript_SageManifest
 	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonDrakonia_EventScript_SageAfterChart
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonDrakonia_EventScript_SageClue
@@ -224,3 +225,17 @@ EryonDrakonia_Text_SageManifest:
 	.string "vinham de LUNARIS.\p"
 	.string "Vou alertar os\n"
 	.string "guardioes do santuario.$"
+
+@ Authorities at the League inform Drakonia after the player files the evidence.
+EryonDrakonia_EventScript_SageEvidenceReported::
+	msgbox EryonDrakonia_Text_SageEvidenceReported, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_Text_SageEvidenceReported:
+	.string "ANCIA: A LIGA recebeu\n"
+	.string "seu manifesto ECLIPSE!\p"
+	.string "Os guardioes reforcaram\n"
+	.string "a vigia do santuario.\p"
+	.string "Agora podemos estudar\n"
+	.string "os cristais com calma.$"
