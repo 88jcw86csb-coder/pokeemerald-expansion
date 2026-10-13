@@ -65,3 +65,74 @@ EryonNeonara_Text_GymStewardClue:
 	.string "apareceu no bosque?\p"
 	.string "As luzes da cidade\n"
 	.string "tambem estao estranhas.$"
+
+@ Eryon: VOLT is the city leader, separate from the Gym guide.
+EryonNeonara_EventScript_GymLeader::
+	lock
+	faceplayer
+	goto_if_set FLAG_BADGE02_GET, EryonNeonara_EventScript_GymAfter
+	goto_if_unset FLAG_BADGE01_GET, EryonNeonara_EventScript_GymNotReady
+	goto EryonNeonara_EventScript_GymOffer
+	end
+
+@ Tactical badge battle — Neonara: ace level 25, badge 2.
+EryonNeonara_EventScript_GymOffer::
+	msgbox EryonNeonara_Text_GymOffer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonNeonara_EventScript_GymDecline
+	closemessage
+	trainerbattle_single TRAINER_ERYON_GYM_NEONARA, EryonNeonara_Text_GymIntro, EryonNeonara_Text_GymLoss, EryonNeonara_EventScript_GymVictory, FALSE
+	msgbox EryonNeonara_Text_GymAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonNeonara_EventScript_GymVictory::
+	message EryonNeonara_Text_GymBadge
+	waitmessage
+	call Common_EventScript_PlayGymBadgeFanfare
+	setflag FLAG_BADGE02_GET
+	msgbox EryonNeonara_Text_GymAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonNeonara_EventScript_GymDecline::
+	closemessage
+	release
+	end
+
+EryonNeonara_EventScript_GymNotReady::
+	msgbox EryonNeonara_Text_GymNotReady, MSGBOX_DEFAULT
+	release
+	end
+
+EryonNeonara_EventScript_GymAfter::
+	msgbox EryonNeonara_Text_GymAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonNeonara_Text_GymOffer:
+	.string "VOLT: Meu GINASIO\n"
+	.string "treina com eletricidade.\p"
+	.string "Desafiar meu time\n"
+	.string "de Pokemon agora?$"
+
+EryonNeonara_Text_GymIntro:
+	.string "VOLT: Mostre sua\n"
+	.string "forca e estrategia!$"
+
+EryonNeonara_Text_GymLoss:
+	.string "VOLT: Voce encontrou\n"
+	.string "uma boa resposta!$"
+
+EryonNeonara_Text_GymBadge:
+	.string "Venceu o 2o GINASIO!\p"
+	.string "Recebeu a INSIGNIA\n"
+	.string "de numero 2!$"
+
+EryonNeonara_Text_GymAfter:
+	.string "VOLT: Bela vitoria!\p"
+	.string "As luzes voltarao a brilhar.$"
+
+EryonNeonara_Text_GymNotReady:
+	.string "VOLT: Primeiro,\n"
+	.string "conquiste a INSIGNIA\n"
+	.string "do GINASIO anterior.$"
