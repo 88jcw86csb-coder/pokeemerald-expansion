@@ -1,6 +1,6 @@
 trilha_dos_dragoes — Eryon terrain concept 48x44
 # blocked; . path; , vegetation; : rocky/special ground
-Design only: metatiles, collisions, wild encounters and warps not installed.
+Registered Dragon Trail: Lunaris and Peak Village exits, Eclipse couriers, GBA terrain and story clues installed; battles and art polish remain pending.
 
 ################################################
 ################################################

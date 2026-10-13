@@ -308,6 +308,55 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertIn("DRAKONIA", scripts)
         self.assertIn("VAR_ERYON_SERRA_CLUE_FOUND", scripts)
 
+    def test_dragon_trail_and_peak_village_are_connected_and_writable(self):
+        import json
+        chain = ("Eryon_Lunaris", "Eryon_TrilhaDosDragoes", "Eryon_VilaDoPico")
+        maps = {}
+        for name in chain:
+            directory = ROOT / "data/maps" / name
+            maps[name] = json.loads((directory / "map.json").read_text(encoding="utf-8"))
+        for left, right in zip(chain, chain[1:]):
+            with self.subTest(link=left + " -> " + right):
+                forwards = [(index, w) for index, w in enumerate(maps[left]["warp_events"])
+                            if w["dest_map"] == maps[right]["id"]]
+                self.assertEqual(len(forwards), 1)
+                index, w = forwards[0]
+                back_index = int(w["dest_warp_id"])
+                self.assertLess(back_index, len(maps[right]["warp_events"]))
+                back = maps[right]["warp_events"][back_index]
+                self.assertEqual(back["dest_map"], maps[left]["id"])
+                self.assertEqual(int(back["dest_warp_id"]), index)
+        self.assertEqual(len(maps["Eryon_VilaDoPico"]["warp_events"]), 1)
+        layouts = json.loads((ROOT / "data/layouts/layouts.json").read_text(encoding="utf-8"))
+        by_id = {x["id"]: x for x in layouts["layouts"]}
+        tiles = {"#": 0x3c01, ".": 0x3001, ",": 0x3002, ":": 0x3003,
+                 "P": 0x3001, "C": 0x3001, "M": 0x3001, "H": 0x3001, "I": 0x3001}
+        import struct
+        for name, plan in (
+            ("Eryon_TrilhaDosDragoes", "docs/eryon/trilha_dos_dragoes_terrain_plan.txt"),
+            ("Eryon_VilaDoPico", "docs/eryon/vilas/vila_do_pico_village_plan.txt"),
+        ):
+            with self.subTest(map=name):
+                info = maps[name]
+                layout = by_id[info["layout"]]
+                rows = (ROOT / plan).read_text(encoding="utf-8").splitlines()[4:]
+                self.assertEqual((len(rows), len(rows[0])), (layout["height"], layout["width"]))
+                payload = (ROOT / layout["blockdata_filepath"]).read_bytes()
+                self.assertEqual(len(payload), 2 * layout["height"] * layout["width"])
+                expected = [tiles[symbol] for row in rows for symbol in row]
+                self.assertEqual(list(struct.unpack("<" + str(len(expected)) + "H", payload)),
+                                 expected)
+                scripts = (ROOT / "data/maps" / name / "scripts.inc").read_text(encoding="utf-8")
+                for event in info["warp_events"] + info["object_events"] + info["bg_events"]:
+                    x, y = event["x"], event["y"]
+                    self.assertNotEqual(rows[y][x], "#", f"{name}: blocked event {x},{y}")
+                for event in info["object_events"] + info["bg_events"]:
+                    self.assertIn(event["script"] + "::", scripts)
+        self.assertIn("special HealPlayerParty",
+                      (ROOT / "data/maps/Eryon_VilaDoPico/scripts.inc").read_text(encoding="utf-8"))
+        self.assertIn("VAR_ERYON_SERRA_CLUE_FOUND",
+                      (ROOT / "data/maps/Eryon_TrilhaDosDragoes/scripts.inc").read_text(encoding="utf-8"))
+
     def test_passagem_healer_and_two_trainers(self):
         import json
         folder = ROOT / "data/maps/Eryon_PassagemRochosa"

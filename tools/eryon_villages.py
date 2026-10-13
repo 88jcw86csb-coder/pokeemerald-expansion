@@ -82,7 +82,8 @@ def reachable(t,start=(0,14)):
 def render(name,t):
     status = {
         "refugio_cristal": "Registered provisional village: reciprocal Crystal Ridge warp and caretaker event installed; buildings, encounters and interiors pending.",
-        "posto_oriental": "Registered provisional village: optional road warp and cargo investigation NPCs installed; buildings, encounters and interiors pending."
+        "posto_oriental": "Registered provisional village: optional road warp and cargo investigation NPCs installed; buildings, encounters and interiors pending.",
+        "vila_do_pico": "Registered Peak Village: connected Dragon Trail entrance, caretaker, elders and Eclipse investigation; interiors and Drakonia connection remain pending."
     }.get(name, "Design only: buildings, encounters, warp links and interiors are not implemented.")
     return (f"{VILLAGES[name][0]} | Eryon village concept 36x30\n"
             "# barrier; . path; , grove; : stone; P plaza; C center; M mart; H home; I inn\n"

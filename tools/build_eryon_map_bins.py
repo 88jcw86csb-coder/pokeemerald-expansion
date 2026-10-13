@@ -24,9 +24,9 @@ SPECS = {
     "trilha_do_oasis": "TrilhaDoOasis",
     "deserto_de_solaris": "DesertoDeSolaris",
     "floresta_dos_ecos": "FlorestaDosEcos",
+    "trilha_dos_dragoes": "TrilhaDosDragoes",
 }
 PREVIEW_SPECS = {
-    "trilha_dos_dragoes": "TrilhaDosDragoes",
     "trilha_lunar": "TrilhaLunar",
     "caminho_da_liga": "CaminhoDaLiga",
     "gruta_das_estrelas": "GrutaDasEstrelas",
@@ -138,6 +138,14 @@ def main():
     waters_dest.write_bytes(waters_payload)
     generated["LAYOUT_ERYON_VILA_DAS_AGUAS"] = waters_dest.relative_to(ROOT).as_posix()
     print(f"{waters_dest.relative_to(ROOT)}: {len(waters_payload)} bytes")
+    # The mountain settlement is now a registered rest village.
+    peak_src = ROOT / "docs/eryon/vilas/vila_do_pico_village_plan.txt"
+    peak_dest = ROOT / "data/layouts/Eryon_VilaDoPico/map.bin"
+    peak_payload = compile_plan(peak_src, village_tiles, width=36, height=30)
+    peak_dest.parent.mkdir(parents=True, exist_ok=True)
+    peak_dest.write_bytes(peak_payload)
+    generated["LAYOUT_ERYON_VILA_DO_PICO"] = peak_dest.relative_to(ROOT).as_posix()
+    print(f"{peak_dest.relative_to(ROOT)}: {len(peak_payload)} bytes")
     # Neonara is the first registered gym city after Verdelume.
     neonara_tiles = {**tiles, "=": tiles["."],
                      **{mark: tiles["."] for mark in "GCMHP"}}
@@ -176,7 +184,7 @@ def main():
         from eryon_gym_cities import CITIES
         village_tiles = {**tiles, **{mark: tiles["."] for mark in "PC MHI".replace(" ", "")}}
         for key in VILLAGES:
-            if key in ("vila_dos_pomares", "vila_da_neblina", "refugio_cristal", "posto_oriental", "vila_das_aguas"):
+            if key in ("vila_dos_pomares", "vila_da_neblina", "refugio_cristal", "posto_oriental", "vila_das_aguas", "vila_do_pico"):
                 continue
             src = ROOT / "docs/eryon/vilas" / f"{key}_village_plan.txt"
             dest = ROOT / "build/eryon-previews/villages" / key / "map.bin"
