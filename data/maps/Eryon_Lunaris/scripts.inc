@@ -106,8 +106,8 @@ EryonLunaris_Text_AnalystBefore:
 EryonLunaris_Text_AnalystExposed:
 	.string "ECLIPSE: A LUA pode\n"
 	.string "ampliar nosso sinal!\p"
-	.string "A proxima etapa sera\n"
-	.string "muito mais perigosa.$"
+	.string "As caixas ja seguem\n"
+	.string "para DRAKONIA.$"
 
 EryonLunaris_Text_ObservatorySign:
 	.string "OBSERVATORIO LUNAR:\n"

@@ -66,7 +66,8 @@ def reachable(t,start=(0,22)):
 def render(name,t):
     status = {
         "colinas_da_neblina": "Registered provisional overworld: Neonara return warp and blockdata generation installed; tiles, collision and encounters require testing.",
-        "trilha_glacial": "Registered provisional route: west return to Neblina and guide script installed; metatiles, collision and encounters require testing."
+        "trilha_glacial": "Registered provisional route: west return to Neblina and guide script installed; metatiles, collision and encounters require testing.",
+        "trilha_lunar": "Registered provisional Lunar Trail: Echo Village and Lunaris warps, NPC events and GBA blockdata are installed; tile polish, encounters and emulator testing remain pending."
     }.get(name, "Design only: metatiles, collisions, wild encounters and warps not installed.")
     return (f"{name} — Eryon terrain concept 48x44\n"
             "# blocked; . path; , vegetation; : rocky/special ground\n"

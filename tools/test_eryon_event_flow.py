@@ -283,6 +283,30 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertIn("EryonLunar_EventScript_EclipseSurveyorExposed::", script)
         self.assertIn("VAR_ERYON_SERRA_CLUE_FOUND", script)
 
+    def test_lunaris_city_and_lunar_route_are_reciprocal(self):
+        import json
+        city_folder = ROOT / "data/maps/Eryon_Lunaris"
+        lunar_folder = ROOT / "data/maps/Eryon_TrilhaLunar"
+        city = json.loads((city_folder / "map.json").read_text(encoding="utf-8"))
+        route = json.loads((lunar_folder / "map.json").read_text(encoding="utf-8"))
+        self.assertEqual(route["warp_events"][1]["dest_map"], city["id"])
+        self.assertEqual(int(route["warp_events"][1]["dest_warp_id"]), 0)
+        self.assertEqual(city["warp_events"][0]["dest_map"], route["id"])
+        self.assertEqual(int(city["warp_events"][0]["dest_warp_id"]), 1)
+        layouts = json.loads((ROOT / "data/layouts/layouts.json").read_text(encoding="utf-8"))
+        by_id = {x["id"]: x for x in layouts["layouts"]}
+        city_layout = by_id[city["layout"]]
+        self.assertEqual((city_layout["width"], city_layout["height"]), (64, 56))
+        self.assertEqual((ROOT / city_layout["blockdata_filepath"]).stat().st_size, 7168)
+        scripts = (city_folder / "scripts.inc").read_text(encoding="utf-8")
+        for event in city["object_events"] + city["bg_events"]:
+            with self.subTest(event=event["script"]):
+                self.assertIn(event["script"] + "::", scripts)
+        self.assertIn("special HealPlayerParty", scripts)
+        self.assertIn("EryonLunaris_EventScript_EclipseAnalystExposed::", scripts)
+        self.assertIn("DRAKONIA", scripts)
+        self.assertIn("VAR_ERYON_SERRA_CLUE_FOUND", scripts)
+
     def test_passagem_healer_and_two_trainers(self):
         import json
         folder = ROOT / "data/maps/Eryon_PassagemRochosa"
