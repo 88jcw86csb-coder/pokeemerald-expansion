@@ -86,7 +86,7 @@
 #define FLAG_ERYON_LEAGUE_ROAD_CACHE_TAKEN 0x40 // Optional final-route supply cache
 #define FLAG_ERYON_LEAGUE_CITY_AID_COLLECTED 0x41 // Optional league plaza emergency supplies
 #define FLAG_ERYON_GROTTO_ECLIPSE_SCOUT_DEFEATED 0x42 // Isolated trainer flag for cave scout
-#define FLAG_UNUSED_0x043    0x43 // Unused Flag
+#define FLAG_ERYON_GROTTO_SCOUT_REWARD_CLAIMED 0x43 // League recognition for cave victory
 #define FLAG_UNUSED_0x044    0x44 // Unused Flag
 #define FLAG_UNUSED_0x045    0x45 // Unused Flag
 #define FLAG_UNUSED_0x046    0x46 // Unused Flag
