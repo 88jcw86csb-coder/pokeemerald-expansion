@@ -9730,6 +9730,50 @@
       "border_filepath": "data/layouts/PetalburgWoods/border.bin",
       "blockdata_filepath": "data/layouts/Eryon_Arkhara/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ERYON_CIDADE_DA_LIGA",
+      "name": "ERYON_CIDADE_DA_LIGA_Layout",
+      "width": 96,
+      "height": 72,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Rustboro",
+      "border_filepath": "data/layouts/PetalburgWoods/border.bin",
+      "blockdata_filepath": "data/layouts/Eryon_CidadeDaLiga/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ERYON_LIGA_RECEPCAO",
+      "name": "ERYON_LIGA_RECEPCAO_Layout",
+      "width": 24,
+      "height": 18,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Rustboro",
+      "border_filepath": "data/layouts/PetalburgWoods/border.bin",
+      "blockdata_filepath": "data/layouts/Eryon_LigaRecepcao/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ERYON_LIGA_CLASSIFICATORIA",
+      "name": "ERYON_LIGA_CLASSIFICATORIA_Layout",
+      "width": 44,
+      "height": 32,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Rustboro",
+      "border_filepath": "data/layouts/PetalburgWoods/border.bin",
+      "blockdata_filepath": "data/layouts/Eryon_LigaClassificatoria/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ERYON_LIGA_RECUPERACAO",
+      "name": "ERYON_LIGA_RECUPERACAO_Layout",
+      "width": 24,
+      "height": 18,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Rustboro",
+      "border_filepath": "data/layouts/PetalburgWoods/border.bin",
+      "blockdata_filepath": "data/layouts/Eryon_LigaRecuperacao/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

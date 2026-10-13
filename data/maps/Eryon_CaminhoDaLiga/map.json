@@ -80,6 +80,13 @@
       "elevation": 0,
       "dest_map": "MAP_ERYON_GRUTA_DAS_ESTRELAS",
       "dest_warp_id": "1"
+    },
+    {
+      "x": 47,
+      "y": 22,
+      "elevation": 0,
+      "dest_map": "MAP_ERYON_CIDADE_DA_LIGA",
+      "dest_warp_id": "0"
     }
   ],
   "region": "REGION_HOENN"

@@ -878,8 +878,19 @@
 
 #define TRAINER_ERYON_ECHO_VALLEY_ECLIPSE  863
 
-#define TRAINERS_COUNT_EMERALD     864
-#define MAX_TRAINERS_COUNT_EMERALD 864
+// Eryon's eight sequential League qualifiers use dedicated reserved flag IDs.
+// Do not grow the trainer-flag region into SYSTEM_FLAGS: old saves depend on it.
+#define TRAINER_ERYON_QUALIFIER_1 864
+#define TRAINER_ERYON_QUALIFIER_2 865
+#define TRAINER_ERYON_QUALIFIER_3 866
+#define TRAINER_ERYON_QUALIFIER_4 867
+#define TRAINER_ERYON_QUALIFIER_5 868
+#define TRAINER_ERYON_QUALIFIER_6 869
+#define TRAINER_ERYON_QUALIFIER_7 870
+#define TRAINER_ERYON_QUALIFIER_8 871
+
+#define TRAINERS_COUNT_EMERALD     872
+#define MAX_TRAINERS_COUNT_EMERALD 872
 
 #if IS_FRLG
 #define TRAINERS_COUNT                      TRAINERS_COUNT_FRLG

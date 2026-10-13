@@ -73,7 +73,7 @@ EryonLigaCaminho_Text_BadgeBoard:
 	.string "Nao bloqueiam a rota.$"
 
 EryonLigaCaminho_Text_LeagueGate:
-	.string "PORTAO DA LIGA:\n"
-	.string "complexo em construcao.\p"
-	.string "O caminho ate aqui\n"
-	.string "permanece liberado.$"
+	.string "LESTE: CIDADE DA LIGA!\n"
+	.string "Entrada da competicao.\p"
+	.string "O edificio principal\n"
+	.string "fica na praca central.$"

@@ -1,6 +1,6 @@
 caminho_da_liga | Eryon final approach design 48x44
 # blocked; . floor; : mountain path; P plaza; C center; M mart; L league; H hall
-Mapa registrado: rota principal a pe ate o portao da Liga; interiores e batalhas ainda pendentes.
+Registered HM-free route between Star Cave and the full-size League City; battles inside central building.
 
 ################################################
 ################################################
@@ -24,7 +24,7 @@ Mapa registrado: rota principal a pe ate o portao da Liga; interiores e batalhas
 ::::::::##:#############::::::::######:#########
 ::::::::::::::::########::::::::::::::::########
 :::::::::::::::::::::::::::::::::::::::::::::::#
-:::::::::::::::::::::::::::::::::::::::::::::::#
+::::::::::::::::::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::::::::::::::::::::::::::#
 ########::::::::::::::::#:######:::::::::::::::#
 ################::::::::#:##############:::::::#

@@ -17091,3 +17091,163 @@ Level: 36
 - Thunder Wave
 - Supersonic
 - Sonic Boom
+
+=== TRAINER_ERYON_QUALIFIER_1 ===
+Name: IVO
+Class: Youngster
+Pic: Youngster
+Gender: Male
+Music: Male
+AI: Check Bad Move
+
+Luxray
+Level: 62
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Staraptor
+Level: 63
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Floatzel
+Level: 64
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ERYON_QUALIFIER_2 ===
+Name: MARTA
+Class: Beauty
+Pic: Beauty
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Roserade
+Level: 63
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Milotic
+Level: 64
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Gardevoir
+Level: 65
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ERYON_QUALIFIER_3 ===
+Name: PEDRO
+Class: Hiker
+Pic: Hiker
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Golem
+Level: 64
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Camerupt
+Level: 65
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Rhyperior
+Level: 66
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ERYON_QUALIFIER_4 ===
+Name: NOAH
+Class: Psychic
+Pic: Psychic M
+Gender: Male
+Music: Intense
+AI: Check Bad Move
+
+Alakazam
+Level: 65
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Espeon
+Level: 66
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Reuniclus
+Level: 67
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ERYON_QUALIFIER_5 ===
+Name: RAVI
+Class: Black Belt
+Pic: Black Belt
+Gender: Male
+Music: Male
+AI: Check Bad Move
+
+Lucario
+Level: 66
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Conkeldurr
+Level: 67
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Mienshao
+Level: 68
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ERYON_QUALIFIER_6 ===
+Name: LUNA
+Class: Aroma Lady
+Pic: Aroma Lady
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Togekiss
+Level: 67
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Whimsicott
+Level: 68
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Sylveon
+Level: 69
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ERYON_QUALIFIER_7 ===
+Name: DANTE
+Class: Dragon Tamer
+Pic: Dragon Tamer
+Gender: Male
+Music: Intense
+AI: Check Bad Move
+
+Flygon
+Level: 68
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kingdra
+Level: 69
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Haxorus
+Level: 70
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ERYON_QUALIFIER_8 ===
+Name: ELISA
+Class: Expert
+Pic: Expert F
+Gender: Female
+Music: Intense
+AI: Check Bad Move
+
+Aegislash
+Level: 69
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Volcarona
+Level: 70
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Metagross
+Level: 71
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe

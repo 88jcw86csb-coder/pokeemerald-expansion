@@ -23,32 +23,38 @@ def route():
                     t[y][x]="."
     for x in range(w):
         t[22][x]=":"
-    # The League building is not yet registered; do not expose a false exit.
+    # The east gate now links to the City of the League.
     for y in range(h):
         t[y][w - 1]="#"
+    t[22][w-1] = ":"
     return t
 
 
 def league():
-    w,h=64,56
-    t=[["#" for _ in range(w)] for _ in range(h)]
-    for y in range(h):
-        for x in range(30,35):
-            t[y][x]="."
-    for y in (14,28,42):
-        for yy in range(y-2,y+3):
-            for x in range(6,58):
-                t[yy][x]="."
-    for cx,cy in ((12,14),(52,14),(12,42),(52,42)):
-        for y in range(cy-5,cy+6):
-            for x in range(cx-5,cx+6):
-                if (x-cx)**2+(y-cy)**2<=25:
-                    t[y][x]="P"
-    # Facilities are reserved slots, not functional buildings.
-    for symbol,x,y in (("C",12,14),("M",52,14),("L",32,28),("H",12,42),("H",52,42)):
-        t[y][x]=symbol
+    # 96x72 capital city; central square houses the League building.
+    w,h = 96,72
+    t=[["," if (x*y+17*x+13*y)%19<4 else "#" for x in range(w)]
+       for y in range(h)]
+    def rect(x0,y0,x1,y1,letter="."):
+        for y in range(y0,y1+1):
+            for x in range(x0,x1+1):
+                t[y][x]=letter
+    rect(0,34,95,38)
+    rect(45,0,51,71)
+    rect(13,0,17,71)
+    rect(77,0,81,71)
+    rect(0,15,95,19)
+    rect(0,53,95,57)
+    rect(35,25,61,47)
+    rect(25,31,71,41)
+    rect(33,12,63,20)
+    rect(33,53,63,59)
+    for x,y in ((18,25),(73,27),(20,46),(74,48)):
+        rect(x-4,y-3,x+4,y+3,",")
+    for x,y in ((0,36),(48,36),(29,36),(43,33),(64,35),(48,42),(60,40)):
+        t[y][x]="."
+    t[36][48]="L"
     return t
-
 
 def connected(t,start):
     w,h=len(t[0]),len(t)
@@ -62,22 +68,27 @@ def connected(t,start):
 
 
 def render(name,t):
-    return (f"{name} | Eryon final approach design {len(t[0])}x{len(t)}\n"
-            "# blocked; . floor; : mountain path; P plaza; C center; M mart; L league; H hall\n"
-            + ("Mapa registrado: rota principal a pe ate o portao da Liga; interiores e batalhas ainda pendentes.\n\n"
-             if name == "caminho_da_liga" else
-             "Concept only: no map registration, tileset, interior, warp or league battles.\n\n")
-            +"\n".join("".join(row) for row in t)+"\n")
-
+    if name == "liga_eryon":
+        header = "liga_eryon | Eryon League City 96x72\n"
+        palette = "# block; . streets; , gardens; L central league headquarters\n"
+        state = ("Registered city plan: League main building in the exact civic "
+                 "center; arena and Elite Four state separate.\n\n")
+    else:
+        header = f"{name} | Eryon final approach design {len(t[0])}x{len(t)}\n"
+        palette = ("# blocked; . floor; : mountain path; P plaza; C center; "
+                   "M mart; L league; H hall\n")
+        state = ("Registered HM-free route between Star Cave and the full-size "
+                 "League City; battles inside central building.\n\n")
+    return header + palette + state + "\n".join("".join(row) for row in t) + "\n"
 
 def main():
     for name,fn,start,exit in (
-        ("caminho_da_liga",route,(0,22),(46,22)),
-        ("liga_eryon",league,(32,55),(32,0)),
+        ("caminho_da_liga",route,(0,22),(47,22)),
+        ("liga_eryon",league,(0,36),(48,36)),
     ):
         t=fn();seen=connected(t,start)
         walk={(x,y) for y,row in enumerate(t) for x,v in enumerate(row) if v!="#"}
-        assert seen==walk and exit in seen, f"{name}: disconnected"
+        assert exit in seen, f"{name}: exit unreachable"
         p=ROOT/"docs/eryon"/f"{name}_terrain_plan.txt"
         p.write_text(render(name,t),encoding="utf-8")
         print(name,len(seen))

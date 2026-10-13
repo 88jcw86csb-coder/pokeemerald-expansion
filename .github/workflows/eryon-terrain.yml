@@ -44,10 +44,10 @@ jobs:
               assert path.is_file(), path
               assert path.stat().st_size == WIDTH * HEIGHT * 2, path
               print(f"{folder}: preview encoding OK")
-          league = Path("build/eryon-previews/LigaEryon/map.bin")
+          league = Path("data/layouts/Eryon_CidadeDaLiga/map.bin")
           assert league.is_file(), league
-          assert league.stat().st_size == 64 * 56 * 2, league
-          print("LigaEryon: 7168-byte preview encoding OK")
+          assert league.stat().st_size == 96 * 72 * 2, league
+          print("Cidade da Liga: 13824-byte registered terrain OK")
           from tools.eryon_villages import VILLAGES
           from tools.eryon_gym_cities import CITIES
           for name in VILLAGES:

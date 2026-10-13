@@ -25,6 +25,7 @@ MAIN_CHAIN = (
     "Eryon_Drakonia",
     "Eryon_GrutaDasEstrelas",
     "Eryon_CaminhoDaLiga",
+    "Eryon_CidadeDaLiga",
 )
 FORBIDDEN_MOVE = re.compile(
     r"\bMOVE_(?:CUT|ROCK_SMASH|STRENGTH|SURF|WATERFALL|DIVE|FLASH)\b"

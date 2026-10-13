@@ -1056,14 +1056,23 @@ static void TryUpdateGymLeaderRematchFromTrainer(void)
         UpdateGymLeaderRematch();
 }
 
-static u16 GetTrainerAFlag(void)
+static // Eryon qualifiers use reserved early flags, not the system flag range.
+// This preserves existing saves and permits 8 repeatable tournament battles.
+static u16 GetEryonTrainerFlagId(u16 trainerId)
 {
-    return TRAINER_FLAGS_START + TRAINER_BATTLE_PARAM.opponentA;
+    if (trainerId >= TRAINER_ERYON_QUALIFIER_1 && trainerId <= TRAINER_ERYON_QUALIFIER_8)
+        return FLAG_ERYON_QUALIFIER_TRAINER_1 + trainerId - TRAINER_ERYON_QUALIFIER_1;
+    return TRAINER_FLAGS_START + trainerId;
+}
+
+u16 GetTrainerAFlag(void)
+{
+    return GetEryonTrainerFlagId(TRAINER_BATTLE_PARAM.opponentA);
 }
 
 static u16 GetTrainerBFlag(void)
 {
-    return TRAINER_FLAGS_START + TRAINER_BATTLE_PARAM.opponentB;
+    return GetEryonTrainerFlagId(TRAINER_BATTLE_PARAM.opponentB);
 }
 
 static bool32 IsPlayerDefeated(u32 battleOutcome)
@@ -1373,7 +1382,7 @@ void ConfigureApproachingFacilityTrainerBattle(struct ApproachingTrainer *approa
 bool32 GetTrainerFlagFromScriptPointer(const u8 *data)
 {
     TrainerBattleParameter *temp = (TrainerBattleParameter*)(data + TRAINERBATTLE_OPCODE_OFFSET);
-    return FlagGet(TRAINER_FLAGS_START + temp->params.opponentA);
+    return FlagGet(GetEryonTrainerFlagId(temp->params.opponentA));
 }
 
 bool32 GetRematchFromScriptPointer(const u8 *data)
@@ -1428,17 +1437,17 @@ static void UNUSED SetBattledTrainerFlag(void)
 
 bool8 HasTrainerBeenFought(u16 trainerId)
 {
-    return FlagGet(TRAINER_FLAGS_START + trainerId);
+    return FlagGet(GetEryonTrainerFlagId(trainerId));
 }
 
 void SetTrainerFlag(u16 trainerId)
 {
-    FlagSet(TRAINER_FLAGS_START + trainerId);
+    FlagSet(GetEryonTrainerFlagId(trainerId));
 }
 
 void ClearTrainerFlag(u16 trainerId)
 {
-    FlagClear(TRAINER_FLAGS_START + trainerId);
+    FlagClear(GetEryonTrainerFlagId(trainerId));
 }
 
 void BattleSetup_StartTrainerBattle(void)

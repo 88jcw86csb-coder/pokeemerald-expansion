@@ -201,6 +201,16 @@ def main():
     league_road_dest.write_bytes(league_road_payload)
     generated["LAYOUT_ERYON_CAMINHO_DA_LIGA"] = league_road_dest.relative_to(ROOT).as_posix()
     print(f"{league_road_dest.relative_to(ROOT)}: {len(league_road_payload)} bytes")
+    # The League is now a real 96x72 city, not an unregistered preview.
+    league_src = ROOT / "docs/eryon/liga_eryon_terrain_plan.txt"
+    league_dest = ROOT / "data/layouts/Eryon_CidadeDaLiga/map.bin"
+    league_tiles = {"#": tiles["#"], ".": tiles["."],
+                    ",": tiles[","], "L": tiles["."]}
+    league_payload = compile_plan(league_src, league_tiles, width=96, height=72)
+    league_dest.parent.mkdir(parents=True, exist_ok=True)
+    league_dest.write_bytes(league_payload)
+    generated["LAYOUT_ERYON_CIDADE_DA_LIGA"] = league_dest.relative_to(ROOT).as_posix()
+    print(f"{league_dest.relative_to(ROOT)}: {len(league_payload)} bytes")
     if args.preview_unregistered:
         # Village/city landmark symbols are only floor placeholders.
         # These previews are not functional buildings or gym interiors.

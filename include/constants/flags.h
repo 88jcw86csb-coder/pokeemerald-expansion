@@ -63,23 +63,23 @@
 #define FLAG_UNUSED_0x029    0x29 // Unused Flag
 #define FLAG_ERYON_STAR_CHART_READ  0x2A // Persistent Eryon cave discovery
 #define FLAG_ERYON_ARKHARA_RELAY_READ 0x2B // Persistent Eryon fourth-city investigation
-#define FLAG_UNUSED_0x02C    0x2C // Unused Flag
-#define FLAG_UNUSED_0x02D    0x2D // Unused Flag
-#define FLAG_UNUSED_0x02E    0x2E // Unused Flag
-#define FLAG_UNUSED_0x02F    0x2F // Unused Flag
-#define FLAG_UNUSED_0x030    0x30 // Unused Flag
-#define FLAG_UNUSED_0x031    0x31 // Unused Flag
-#define FLAG_UNUSED_0x032    0x32 // Unused Flag
-#define FLAG_UNUSED_0x033    0x33 // Unused Flag
-#define FLAG_UNUSED_0x034    0x34 // Unused Flag
-#define FLAG_UNUSED_0x035    0x35 // Unused Flag
-#define FLAG_UNUSED_0x036    0x36 // Unused Flag
-#define FLAG_UNUSED_0x037    0x37 // Unused Flag
-#define FLAG_UNUSED_0x038    0x38 // Unused Flag
-#define FLAG_UNUSED_0x039    0x39 // Unused Flag
-#define FLAG_UNUSED_0x03A    0x3A // Unused Flag
-#define FLAG_UNUSED_0x03B    0x3B // Unused Flag
-#define FLAG_UNUSED_0x03C    0x3C // Unused Flag
+#define FLAG_ERYON_QUALIFIER_TRAINER_1 0x2C // Eryon League qualifying event
+#define FLAG_ERYON_QUALIFIER_TRAINER_2 0x2D // Eryon League qualifying event
+#define FLAG_ERYON_QUALIFIER_TRAINER_3 0x2E // Eryon League qualifying event
+#define FLAG_ERYON_QUALIFIER_TRAINER_4 0x2F // Eryon League qualifying event
+#define FLAG_ERYON_QUALIFIER_TRAINER_5 0x30 // Eryon League qualifying event
+#define FLAG_ERYON_QUALIFIER_TRAINER_6 0x31 // Eryon League qualifying event
+#define FLAG_ERYON_QUALIFIER_TRAINER_7 0x32 // Eryon League qualifying event
+#define FLAG_ERYON_QUALIFIER_TRAINER_8 0x33 // Eryon League qualifying event
+#define FLAG_ERYON_QUALIFIER_ROUND_1 0x34 // Eryon League qualifying event
+#define FLAG_ERYON_QUALIFIER_ROUND_2 0x35 // Eryon League qualifying event
+#define FLAG_ERYON_QUALIFIER_ROUND_3 0x36 // Eryon League qualifying event
+#define FLAG_ERYON_QUALIFIER_ROUND_4 0x37 // Eryon League qualifying event
+#define FLAG_ERYON_QUALIFIER_ROUND_5 0x38 // Eryon League qualifying event
+#define FLAG_ERYON_QUALIFIER_ROUND_6 0x39 // Eryon League qualifying event
+#define FLAG_ERYON_QUALIFIER_ROUND_7 0x3A // Eryon League qualifying event
+#define FLAG_ERYON_QUALIFIER_ROUND_8 0x3B // Eryon League qualifying event
+#define FLAG_ERYON_QUALIFIED 0x3C // Eryon League qualifying event
 #define FLAG_UNUSED_0x03D    0x3D // Unused Flag
 #define FLAG_UNUSED_0x03E    0x3E // Unused Flag
 #define FLAG_UNUSED_0x03F    0x3F // Unused Flag
@@ -1341,7 +1341,7 @@
 // See constants/opponents.h. The values there + FLAG_TRAINER_FLAG_START are the flag IDs
 
 #define TRAINER_FLAGS_START                                         0x500
-#define TRAINER_FLAGS_END                                           (TRAINER_FLAGS_START + MAX_TRAINERS_COUNT - 1) // 0x85F
+#define TRAINER_FLAGS_END                                           (TRAINER_FLAGS_START + 864 - 1) // Stable 0x85F: qualifier flags are separate
 
 // System Flags
 

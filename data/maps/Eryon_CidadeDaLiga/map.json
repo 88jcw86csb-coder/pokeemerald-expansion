@@ -1,0 +1,93 @@
+{
+  "requires_flash": false,
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "object_events": [
+    {
+      "graphics_id": "OBJ_EVENT_GFX_NURSE",
+      "x": 29,
+      "y": 36,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EryonCidadeLiga_EventScript_Medic",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_HIKER",
+      "x": 43,
+      "y": 33,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EryonCidadeLiga_EventScript_Guide",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_1",
+      "x": 64,
+      "y": 35,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EryonCidadeLiga_EventScript_Fan",
+      "flag": "0"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 48,
+      "y": 42,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EryonCidadeLiga_EventScript_PlazaSign"
+    },
+    {
+      "type": "sign",
+      "x": 60,
+      "y": 40,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EryonCidadeLiga_EventScript_Notice"
+    }
+  ],
+  "id": "MAP_ERYON_CIDADE_DA_LIGA",
+  "name": "Eryon_CidadeDaLiga",
+  "layout": "LAYOUT_ERYON_CIDADE_DA_LIGA",
+  "music": "MUS_EVER_GRANDE",
+  "region_map_section": "MAPSEC_EVER_GRANDE_CITY",
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_CITY",
+  "connections": null,
+  "warp_events": [
+    {
+      "x": 0,
+      "y": 36,
+      "elevation": 0,
+      "dest_map": "MAP_ERYON_CAMINHO_DA_LIGA",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 48,
+      "y": 36,
+      "elevation": 0,
+      "dest_map": "MAP_ERYON_LIGA_RECEPCAO",
+      "dest_warp_id": "0"
+    }
+  ],
+  "region": "REGION_HOENN"
+}

@@ -15,3 +15,5 @@ Drakonia (64x56) agora possui mapa registrado e warp reciproco com Vila do Pico,
 Gruta das Estrelas e Caminho da Liga estao registrados e conectados, com progressao a pe sem HM obrigatoria. A Liga ainda nao tem interior nem batalhas finais.
 
 Arkhara, cidade do quarto ginasio, agora e conectada entre Passagem Rochosa e Estrada Oriental, com pistas da ECLIPSE e cura. O desafio de Tessa permanece pendente.
+
+Cidade da Liga (96x72) e edificio com recepcao, classificatoria de 8 treinadores e recuperacao: estrutura registrada. O desafio de oito fases usa batalhas normais, progresso por flags reservadas e reinicio apos sair/perder; Elite Four ainda pendente.
