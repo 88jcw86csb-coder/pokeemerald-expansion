@@ -89,7 +89,7 @@ class EryonRouteIntegrity(unittest.TestCase):
         self.assertIn("giveitem ITEM_FULL_RESTORE", scripts)
         self.assertIn("goto_if_eq VAR_RESULT, FALSE, EryonCidadeLiga_EventScript_AidFull", scripts)
         self.assertIn("setflag FLAG_ERYON_LEAGUE_CITY_AID_COLLECTED", scripts)
-        self.assertIn("EryonLigaLobby_Text_Qualified, MSGBOX_DEFAULT\\n\\tclosemessage\\n\\twarp", lobby)
+        self.assertIn("EryonLigaLobby_Text_Qualified, MSGBOX_DEFAULT\n\tclosemessage\n\twarp", lobby)
 
 
 if __name__ == "__main__":
