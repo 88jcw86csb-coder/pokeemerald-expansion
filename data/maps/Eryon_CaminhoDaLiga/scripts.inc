@@ -160,3 +160,40 @@ EryonLigaCaminho_Text_ObserverRelayOff:
 	.string "perdeu uma antena.\p"
 	.string "Continue sua jornada\n"
 	.string "ate a CIDADE DA LIGA.$"
+
+@ Optional supplies are granted once; a full bag does not consume the cache.
+EryonLigaCaminho_EventScript_SupplyCache::
+	lock
+	goto_if_set FLAG_ERYON_LEAGUE_ROAD_CACHE_TAKEN, EryonLigaCaminho_EventScript_CacheEmpty
+	msgbox EryonLigaCaminho_Text_CacheFound, MSGBOX_DEFAULT
+	giveitem ITEM_MAX_POTION
+	goto_if_eq VAR_RESULT, FALSE, EryonLigaCaminho_EventScript_CacheFull
+	setflag FLAG_ERYON_LEAGUE_ROAD_CACHE_TAKEN
+	release
+	end
+
+EryonLigaCaminho_EventScript_CacheFull::
+	msgbox EryonLigaCaminho_Text_CacheFull, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_CacheEmpty::
+	msgbox EryonLigaCaminho_Text_CacheEmpty, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_Text_CacheFound:
+	.string "Um estojo de socorro\n"
+	.string "escondido na trilha!\p"
+	.string "Ha um MAX POTION\n"
+	.string "guardado aqui.$"
+
+EryonLigaCaminho_Text_CacheFull:
+	.string "Sua BOLSA esta cheia.\p"
+	.string "O remedio ficara\n"
+	.string "aqui ate voce voltar.$"
+
+EryonLigaCaminho_Text_CacheEmpty:
+	.string "O estojo esta vazio.\p"
+	.string "Voce ja recolheu\n"
+	.string "os suprimentos.$"
