@@ -80,6 +80,17 @@ class EryonRouteIntegrity(unittest.TestCase):
         self.assertIn("goto_if_eq VAR_RESULT, FALSE, EryonLigaCaminho_EventScript_CacheFull", script)
         self.assertIn("setflag FLAG_ERYON_LEAGUE_ROAD_CACHE_TAKEN", script)
 
+    def test_league_city_aid_station_and_safe_lobby_warp(self):
+        city = self.maps["Eryon_CidadeDaLiga"]
+        scripts = (MAPS / "Eryon_CidadeDaLiga" / "scripts.inc").read_text(encoding="utf-8")
+        lobby = (MAPS / "Eryon_LigaRecepcao" / "scripts.inc").read_text(encoding="utf-8")
+        self.assertIn("EryonCidadeLiga_EventScript_AidStation",
+                      [e["script"] for e in city["bg_events"]])
+        self.assertIn("giveitem ITEM_FULL_RESTORE", scripts)
+        self.assertIn("goto_if_eq VAR_RESULT, FALSE, EryonCidadeLiga_EventScript_AidFull", scripts)
+        self.assertIn("setflag FLAG_ERYON_LEAGUE_CITY_AID_COLLECTED", scripts)
+        self.assertIn("EryonLigaLobby_Text_Qualified, MSGBOX_DEFAULT\\n\\tclosemessage\\n\\twarp", lobby)
+
 
 if __name__ == "__main__":
     unittest.main()
