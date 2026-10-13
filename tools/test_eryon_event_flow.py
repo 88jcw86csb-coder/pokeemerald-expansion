@@ -255,12 +255,12 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertEqual(sum(n["script"] == "EryonEcoVale_EventScript_EclipseOperator"
                              for n in map_data["object_events"]), 1)
         constants = (ROOT / "include/constants/opponents.h").read_text(encoding="utf-8")
-        self.assertRegex(constants, r"(?m)^#define\\s+" + name + r"\\s+863\\s*$")
+        self.assertRegex(constants, r"(?m)^#define\s+" + name + r"\s+863\s*$")
         parties = (ROOT / "src/data/trainers.party").read_text(encoding="utf-8")
         self.assertEqual(parties.count("=== " + name + " ==="), 1)
         team = parties.split("=== " + name + " ===", 1)[1]
         for species in ("Houndour", "Golbat", "Magneton"):
-            self.assertIn(species + "\\nLevel:", team)
+            self.assertIn(species + "\nLevel:", team)
 
     def test_passagem_healer_and_two_trainers(self):
         import json
