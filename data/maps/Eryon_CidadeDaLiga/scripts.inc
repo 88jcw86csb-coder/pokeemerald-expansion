@@ -78,6 +78,7 @@ EryonCidadeLiga_EventScript_Investigator::
 	lock
 	faceplayer
 	goto_if_set FLAG_ERYON_QUALIFIED, EryonCidadeLiga_EventScript_InvestigatorQualified
+	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonCidadeLiga_EventScript_InvestigatorChart
 	msgbox EryonCidadeLiga_Text_InvestigatorBefore, MSGBOX_DEFAULT
 	release
 	end
@@ -109,3 +110,17 @@ EryonCidadeLiga_Text_InvestigatorAfter:
 	.string "todo o torneio.\p"
 	.string "A investigacao ainda\n"
 	.string "nao terminou.$"
+
+@ Optional story reveal after decoding the cave chart, before qualifying.
+EryonCidadeLiga_EventScript_InvestigatorChart::
+	msgbox EryonCidadeLiga_Text_InvestigatorChart, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_Text_InvestigatorChart:
+	.string "INVESTIGADOR: Voce\n"
+	.string "achou a Carta Estelar!\p"
+	.string "A rede une SOLARIS,\n"
+	.string "DRAKONIA e a LIGA.\p"
+	.string "Estamos vigiando os\n"
+	.string "tecnicos da ECLIPSE.$"
