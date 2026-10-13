@@ -1,7 +1,7 @@
 Eryon_CaminhoDaLiga_MapScripts::
 	.byte 0
 
-@ League road accessible on foot; the League facility is not yet built.
+@ League road accessible on foot, linking the Star Grotto to the League capital.
 EryonLigaCaminho_EventScript_RouteGuardian::
 	lock
 	faceplayer
@@ -77,3 +77,57 @@ EryonLigaCaminho_Text_LeagueGate:
 	.string "Entrada da competicao.\p"
 	.string "O edificio principal\n"
 	.string "fica na praca central.$"
+
+@ Optional route investigation: the Eclipse scouts trail the Star Chart.
+@ These events do not require HMs or block access to the League.
+EryonLigaCaminho_EventScript_ScoutWitness::
+	lock
+	faceplayer
+	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonLigaCaminho_EventScript_ScoutWitnessAfter
+	msgbox EryonLigaCaminho_Text_ScoutWitnessBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_ScoutWitnessAfter::
+	msgbox EryonLigaCaminho_Text_ScoutWitnessAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_LigaCourier::
+	lock
+	faceplayer
+	goto_if_set FLAG_ERYON_QUALIFIED, EryonLigaCaminho_EventScript_LigaCourierAfter
+	msgbox EryonLigaCaminho_Text_LigaCourierBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_LigaCourierAfter::
+	msgbox EryonLigaCaminho_Text_LigaCourierAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_Text_ScoutWitnessBefore:
+	.string "VIAJANTE: Vi pessoas\n"
+	.string "de preto perto da\n"
+	.string "GRUTA DAS ESTRELAS.\p"
+	.string "Pareciam procurar\n"
+	.string "um mapa antigo.$"
+
+EryonLigaCaminho_Text_ScoutWitnessAfter:
+	.string "VIAJANTE: A ECLIPSE\n"
+	.string "seguiu a Carta Estelar!\p"
+	.string "Um deles foi para a\n"
+	.string "grande CIDADE DA LIGA.$"
+
+EryonLigaCaminho_Text_LigaCourierBefore:
+	.string "MENSAGEIRO: A LIGA\n"
+	.string "recebe treinadores\n"
+	.string "de toda a regiao.\p"
+	.string "Siga a leste para a\n"
+	.string "cidade e o torneio.$"
+
+EryonLigaCaminho_Text_LigaCourierAfter:
+	.string "MENSAGEIRO: Voce\n"
+	.string "venceu as oito fases!\p"
+	.string "A equipe da LIGA\n"
+	.string "aguarda na cidade.$"
