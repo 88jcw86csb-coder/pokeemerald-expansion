@@ -889,8 +889,11 @@
 #define TRAINER_ERYON_QUALIFIER_7 870
 #define TRAINER_ERYON_QUALIFIER_8 871
 
-#define TRAINERS_COUNT_EMERALD     872
-#define MAX_TRAINERS_COUNT_EMERALD 872
+// Dedicated trainer flag is mapped outside the contiguous trainer flag region.
+#define TRAINER_ERYON_GROTTO_ECLIPSE 872
+
+#define TRAINERS_COUNT_EMERALD     873
+#define MAX_TRAINERS_COUNT_EMERALD 873
 
 #if IS_FRLG
 #define TRAINERS_COUNT                      TRAINERS_COUNT_FRLG
