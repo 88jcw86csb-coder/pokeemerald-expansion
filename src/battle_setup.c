@@ -1078,6 +1078,8 @@ static u16 GetEryonTrainerFlagId(u16 trainerId)
     // This avoids overflowing into the existing vanilla/system trainer flags.
     if (trainerId >= TRAINER_ERYON_GYM_NEONARA && trainerId <= TRAINER_ERYON_GYM_DRAKONIA)
         return FLAG_BADGE02_GET + trainerId - TRAINER_ERYON_GYM_NEONARA;
+    if (trainerId == TRAINER_ERYON_GLACIAL_ECLIPSE_RESEARCHER)
+        return FLAG_ERYON_GLACIAL_ECLIPSE_RESEARCHER_DEFEATED;
     return TRAINER_FLAGS_START + trainerId;
 }
 
