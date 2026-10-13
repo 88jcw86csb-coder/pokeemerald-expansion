@@ -79,6 +79,8 @@ EryonCidadeLiga_EventScript_Reporter::
 EryonCidadeLiga_EventScript_Investigator::
 	lock
 	faceplayer
+	goto_if_unset FLAG_ERYON_GROTTO_SCOUT_REWARD_CLAIMED, EryonCidadeLiga_EventScript_InvestigatorScoutRewardCheck
+EryonCidadeLiga_EventScript_InvestigatorNormal::
 	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonCidadeLiga_EventScript_InvestigatorEvidenceFiled
 	goto_if_set FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ, EryonCidadeLiga_EventScript_InvestigatorManifest
 	goto_if_set FLAG_ERYON_QUALIFIED, EryonCidadeLiga_EventScript_InvestigatorQualified
@@ -220,3 +222,41 @@ EryonCidadeLiga_Text_AidFull:
 EryonCidadeLiga_Text_AidEmpty:
 	.string "Voce ja retirou\n"
 	.string "seu remedio gratuito.$"
+
+
+@ Optional battle at Star Grotto is recognized in the League capital.
+@ Full bags can retry. Reporting the transport manifest remains independently possible.
+EryonCidadeLiga_EventScript_InvestigatorScoutRewardCheck::
+	goto_if_set FLAG_ERYON_GROTTO_ECLIPSE_SCOUT_DEFEATED, EryonCidadeLiga_EventScript_InvestigatorScoutReward
+	goto EryonCidadeLiga_EventScript_InvestigatorNormal
+
+EryonCidadeLiga_EventScript_InvestigatorScoutReward::
+	msgbox EryonCidadeLiga_Text_ScoutRewardOffer, MSGBOX_DEFAULT
+	giveitem ITEM_RARE_CANDY
+	goto_if_eq VAR_RESULT, FALSE, EryonCidadeLiga_EventScript_InvestigatorScoutRewardFull
+	setflag FLAG_ERYON_GROTTO_SCOUT_REWARD_CLAIMED
+	msgbox EryonCidadeLiga_Text_ScoutRewardComplete, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_InvestigatorScoutRewardFull::
+	msgbox EryonCidadeLiga_Text_ScoutRewardFull, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_Text_ScoutRewardOffer:
+	.string "INVESTIGADOR: Soube\n"
+	.string "de sua vitoria na gruta!\p"
+	.string "A LIGA reservou\n"
+	.string "uma recompensa.$"
+
+EryonCidadeLiga_Text_ScoutRewardComplete:
+	.string "INVESTIGADOR: Otimo!\p"
+	.string "A ECLIPSE perdeu\n"
+	.string "mais um agente.$"
+
+EryonCidadeLiga_Text_ScoutRewardFull:
+	.string "INVESTIGADOR: Sua\n"
+	.string "BOLSA esta cheia!\p"
+	.string "Volte para receber\n"
+	.string "a recompensa.$"
