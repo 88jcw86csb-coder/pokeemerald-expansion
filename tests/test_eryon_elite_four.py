@@ -130,7 +130,7 @@ class EliteFourContract(unittest.TestCase):
             self.assertIn(f"#define {trainer} {875+i}", opponents)
             self.assertEqual(parties.count(f"=== {trainer} ==="), 1)
         self.assertGreaterEqual(
-            int(re.search(r"(?m)^#define TRAINERS_COUNT_EMERALD\\s+(\\d+)", opponents).group(1)),
+            int(re.search(r"(?m)^#define TRAINERS_COUNT_EMERALD\s+(\d+)", opponents).group(1)),
             880,
         )
         for fl, value in zip(FLAGS, (0x4D, 0x4E, 0x4F, 0x54, 0x55)):
