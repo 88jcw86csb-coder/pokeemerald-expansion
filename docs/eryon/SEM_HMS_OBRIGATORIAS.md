@@ -15,4 +15,4 @@
 
 Ignivar → Floresta dos Ecos → Vale dos Ecos → Aldeia dos Ecos → Trilha Lunar → Lunaris → Trilha dos Dragões → Vila do Pico → Drakonia → Gruta das Estrelas → Caminho da Liga.
 
-A Liga, seus interiores e batalhas finais ainda são etapas de implementação. A verificação atual não certifica todas as interações de metatiles no emulador nem as saídas herdadas de Hoenn; elas continuam sujeitas a testes práticos antes da conclusão.
+A Liga, seus interiores e batalhas finais ainda são etapas de implementação. A verificação atual não certifica todas as interações de metatiles no emulador nem os caminhos dos cinco mapas iniciais recem-corrigidos; todos continuam sujeitos a testes praticos antes da conclusao.

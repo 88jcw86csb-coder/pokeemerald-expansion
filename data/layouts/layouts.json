@@ -9332,7 +9332,7 @@
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/LittlerootTown/border.bin",
-      "blockdata_filepath": "data/layouts/LittlerootTown/map.bin",
+      "blockdata_filepath": "data/layouts/Eryon_VilaAurora/map.bin",
       "layout_version": "emerald"
     },
     {
@@ -9343,7 +9343,7 @@
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/Route101/border.bin",
-      "blockdata_filepath": "data/layouts/Route101/map.bin",
+      "blockdata_filepath": "data/layouts/Eryon_Rota01/map.bin",
       "layout_version": "emerald"
     },
     {
@@ -9365,7 +9365,7 @@
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/Route102/border.bin",
-      "blockdata_filepath": "data/layouts/Route102/map.bin",
+      "blockdata_filepath": "data/layouts/Eryon_Rota02/map.bin",
       "layout_version": "emerald"
     },
     {
@@ -9376,7 +9376,7 @@
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Rustboro",
       "border_filepath": "data/layouts/RustboroCity/border.bin",
-      "blockdata_filepath": "data/layouts/RustboroCity/map.bin",
+      "blockdata_filepath": "data/layouts/Eryon_Verdelume/map.bin",
       "layout_version": "emerald"
     },
     {
@@ -9387,7 +9387,7 @@
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/Route102/border.bin",
-      "blockdata_filepath": "data/layouts/Route102/map.bin",
+      "blockdata_filepath": "data/layouts/Eryon_Rota03/map.bin",
       "layout_version": "emerald"
     },
     {
