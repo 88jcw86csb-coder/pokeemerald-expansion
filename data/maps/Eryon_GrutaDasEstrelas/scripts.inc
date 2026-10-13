@@ -108,3 +108,35 @@ EryonEstrelas_Text_Bridge:
 	.string "passagem segura a pe.\p"
 	.string "O desvio evita pedras\n"
 	.string "e blocos quebraveis.$"
+
+@ The cave expedition ties the Solaris/Drakonia crystal network to the League.
+@ Optional lore event: reading the chart remains optional and no HM is required.
+EryonEstrelas_EventScript_ExpeditionArchivist::
+	lock
+	faceplayer
+	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonEstrelas_EventScript_ArchivistAfter
+	msgbox EryonEstrelas_Text_ArchivistBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEstrelas_EventScript_ArchivistAfter::
+	msgbox EryonEstrelas_Text_ArchivistAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEstrelas_Text_ArchivistBefore:
+	.string "ARQUIVISTA: A gruta\n"
+	.string "guarda mapas antigos.\p"
+	.string "Os cristais brilham\n"
+	.string "quando o ceu muda.\p"
+	.string "Observe a carta no\n"
+	.string "fundo da caverna.$"
+
+EryonEstrelas_Text_ArchivistAfter:
+	.string "ARQUIVISTA: Entao\n"
+	.string "voce leu a carta!\p"
+	.string "SOLARIS e DRAKONIA\n"
+	.string "fazem parte de uma\n"
+	.string "mesma rede antiga.\p"
+	.string "Leve essa descoberta\n"
+	.string "ate a CIDADE DA LIGA.$"
