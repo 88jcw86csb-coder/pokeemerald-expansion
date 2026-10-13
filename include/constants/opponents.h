@@ -892,9 +892,10 @@
 // Dedicated trainer flag is mapped outside the contiguous trainer flag region.
 #define TRAINER_ERYON_GROTTO_ECLIPSE 872
 #define TRAINER_ERYON_DRAKONIA_ECLIPSE 873
+#define TRAINER_ERYON_DRAGON_TRAIL_COURIER 874
 
-#define TRAINERS_COUNT_EMERALD     874
-#define MAX_TRAINERS_COUNT_EMERALD 874
+#define TRAINERS_COUNT_EMERALD     875
+#define MAX_TRAINERS_COUNT_EMERALD 875
 
 #if IS_FRLG
 #define TRAINERS_COUNT                      TRAINERS_COUNT_FRLG
