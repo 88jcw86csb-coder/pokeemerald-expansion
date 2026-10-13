@@ -78,6 +78,12 @@ def build(kind):
         for y in (21, 22, 23):
             for x in range(W):
                 t[y][x] = "."
+    if kind == "waterfalls":
+        # Actual Umbra/Aguas exits are on the west/east edges at y=22;
+        # three passable lanes prevent stationary NPCs blocking passage.
+        for y in (21, 22, 23):
+            for x in range(W):
+                t[y][x] = "."
     return t
 
 
