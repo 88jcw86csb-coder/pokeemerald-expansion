@@ -147,6 +147,7 @@ gStdScripts_End::
 	.include "data/maps/Eryon_Rota03/scripts.inc"
 	.include "data/maps/Eryon_SerraDosCristais/scripts.inc"
 	.include "data/maps/Eryon_PassagemRochosa/scripts.inc"
+	.include "data/maps/Eryon_Arkhara/scripts.inc"
 	.include "data/maps/Eryon_EstradaOriental/scripts.inc"
 	.include "data/maps/Eryon_ValeDosVentos/scripts.inc"
 	.include "data/maps/Eryon_EstradaDosPomares/scripts.inc"

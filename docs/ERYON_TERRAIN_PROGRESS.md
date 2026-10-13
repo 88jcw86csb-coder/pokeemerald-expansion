@@ -8,8 +8,10 @@ Os mapas que continuam apontando para terreno herdado de Hoenn ainda precisam de
 
 Lunaris esta registrada como cidade 64x56, com acesso reciproco pela Trilha Lunar, NPCs e posto de cura. O interior do ginasio, os combates do lider e a validacao no emulador permanecem pendentes.
 
-A Trilha dos Dragoes (48x44) liga Lunaris a Vila do Pico (36x30), com terrain, eventos, personagens e pontos de investigacao registrados. Drakonia e o oitavo ginasio ainda nao possuem acesso fisico por esta vila.
+A Trilha dos Dragoes (48x44) liga Lunaris a Vila do Pico (36x30), com terrain, eventos, personagens e pontos de investigacao registrados. Drakonia ja possui acesso fisico pela Vila do Pico, mas o ginásio ainda nao foi implementado.
 
 Drakonia (64x56) agora possui mapa registrado e warp reciproco com Vila do Pico, com moradores, posto de cura, pesquisa de runas e suspeitos Eclipse. O ginásio de Dragao ainda precisa de interior e batalha.
 
 Gruta das Estrelas e Caminho da Liga estao registrados e conectados, com progressao a pe sem HM obrigatoria. A Liga ainda nao tem interior nem batalhas finais.
+
+Arkhara, cidade do quarto ginasio, agora e conectada entre Passagem Rochosa e Estrada Oriental, com pistas da ECLIPSE e cura. O desafio de Tessa permanece pendente.

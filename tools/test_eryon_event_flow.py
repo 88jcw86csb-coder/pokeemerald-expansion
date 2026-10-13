@@ -9,7 +9,7 @@ MAPS = ("Eryon_VilaAurora", "Eryon_Rota01", "Eryon_BosqueDeLumina",
         "Eryon_Rota02", "Eryon_Verdelume", "Eryon_Rota03",
         "Eryon_SerraDosCristais", "Eryon_PassagemRochosa",
         "Eryon_EstradaOriental", "Eryon_ValeDosVentos",
-        "Eryon_EstradaDosPomares", "Eryon_VilaDosPomares", "Eryon_Rota04", "Eryon_Neonara", "Eryon_ColinasDaNeblina", "Eryon_VilaDaNeblina", "Eryon_TrilhaGlacial", "Eryon_Frostheim", "Eryon_RefugioCristal", "Eryon_PostoOriental", "Eryon_Umbra", "Eryon_RotaDasCachoeiras", "Eryon_VilaDasAguas", "Eryon_TrilhaDoOasis", "Eryon_DesertoDeSolaris", "Eryon_Ignivar", "Eryon_FlorestaDosEcos", "Eryon_ValeDosEcos", "Eryon_AldeiaDosEcos", "Eryon_TrilhaLunar", "Eryon_Lunaris", "Eryon_TrilhaDosDragoes", "Eryon_VilaDoPico", "Eryon_Drakonia", "Eryon_GrutaDasEstrelas", "Eryon_CaminhoDaLiga")
+        "Eryon_EstradaDosPomares", "Eryon_VilaDosPomares", "Eryon_Rota04", "Eryon_Neonara", "Eryon_ColinasDaNeblina", "Eryon_VilaDaNeblina", "Eryon_TrilhaGlacial", "Eryon_Frostheim", "Eryon_RefugioCristal", "Eryon_PostoOriental", "Eryon_Umbra", "Eryon_RotaDasCachoeiras", "Eryon_VilaDasAguas", "Eryon_TrilhaDoOasis", "Eryon_DesertoDeSolaris", "Eryon_Ignivar", "Eryon_FlorestaDosEcos", "Eryon_ValeDosEcos", "Eryon_AldeiaDosEcos", "Eryon_TrilhaLunar", "Eryon_Lunaris", "Eryon_TrilhaDosDragoes", "Eryon_VilaDoPico", "Eryon_Drakonia", "Eryon_GrutaDasEstrelas", "Eryon_CaminhoDaLiga", "Eryon_Arkhara")
 LABEL = re.compile(r"(?m)^([A-Za-z][A-Za-z0-9_]*)::?\s*$")
 JUMP = re.compile(r"^\s*(?:goto|goto_if_eq|goto_if_ne|goto_if_ge|goto_if_le|goto_if_gt|goto_if_lt)\s+(.+)$")
 
@@ -384,6 +384,31 @@ class EryonEventFlowTests(unittest.TestCase):
             self.assertIn(event["script"] + "::", source)
         self.assertIn("special HealPlayerParty", source)
         self.assertIn("EryonDrakonia_EventScript_EclipseAgentExposed::", source)
+
+    def test_arkhara_fourth_gym_city_and_eclipse_investigation(self):
+        import json
+        load = lambda n: json.loads(
+            (ROOT / "data/maps" / n / "map.json").read_text(encoding="utf-8")
+        )
+        passage = load("Eryon_PassagemRochosa")
+        city = load("Eryon_Arkhara")
+        road = load("Eryon_EstradaOriental")
+        self.assertEqual(passage["warp_events"][1]["dest_map"], city["id"])
+        self.assertEqual(city["warp_events"][0]["dest_map"], passage["id"])
+        self.assertEqual(city["warp_events"][1]["dest_map"], road["id"])
+        self.assertEqual(road["warp_events"][0]["dest_map"], city["id"])
+        layout = next(x for x in json.loads(
+            (ROOT / "data/layouts/layouts.json").read_text(encoding="utf-8")
+        )["layouts"] if x["id"] == city["layout"])
+        self.assertEqual((layout["width"], layout["height"]), (64, 56))
+        self.assertEqual((ROOT / layout["blockdata_filepath"]).stat().st_size, 7168)
+        script = (ROOT / "data/maps/Eryon_Arkhara/scripts.inc").read_text(encoding="utf-8")
+        for event in city["object_events"] + city["bg_events"]:
+            self.assertIn(event["script"] + "::", script)
+        self.assertIn("special HealPlayerParty", script)
+        self.assertIn("setflag FLAG_ERYON_ARKHARA_RELAY_READ", script)
+        flags = (ROOT / "include/constants/flags.h").read_text(encoding="utf-8")
+        self.assertRegex(flags, r"(?m)^#define\\s+FLAG_ERYON_ARKHARA_RELAY_READ\\s+0x2B\\b")
 
     def test_passagem_healer_and_two_trainers(self):
         import json

@@ -111,6 +111,7 @@ def render(name, t):
         "frostheim": "Registered provisional 64x56 overworld: west/east warps, Bjorn and researcher scripts installed; Gym interior, battle and collision tests pending.",
         "umbra": "Registered provisional 64x56 city: Wind Valley warp and two story NPCs installed; Gym interior, battles and collision tests pending.",
         "ignivar": "Registered 64x56 terrain with Solaris return warp, engineer, gym steward, Eclipse technician and inspectable power-grid clues. Gym interior and trainer battles still pending.",
+        "arkhara": "Registered Arkhara overworld: fourth gym city, healer, Tessa, relay investigation and reciprocal warps; gym interior and badge battle pending.",
         "drakonia": "Registered Drakonia city: Peak Village warp, Dragon Gym guide, healer, sanctuary and Eclipse events; gym battle and interiors pending."
     }.get(name, "Design only: not a registered map.bin. Gym, interiors, scripts and warps not implemented.")
     city_name, typ, badge = CITIES[name]

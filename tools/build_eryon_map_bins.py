@@ -176,6 +176,14 @@ def main():
     ignivar_dest.write_bytes(ignivar_payload)
     generated["LAYOUT_ERYON_IGNIVAR"] = ignivar_dest.relative_to(ROOT).as_posix()
     print(f"{ignivar_dest.relative_to(ROOT)}: {len(ignivar_payload)} bytes")
+    # Fourth gym city: Arkhara is now a registered route waypoint.
+    arkhara_src = ROOT / "docs/eryon/cidades/arkhara_city_plan.txt"
+    arkhara_dest = ROOT / "data/layouts/Eryon_Arkhara/map.bin"
+    arkhara_payload = compile_plan(arkhara_src, neonara_tiles, width=64, height=56)
+    arkhara_dest.parent.mkdir(parents=True, exist_ok=True)
+    arkhara_dest.write_bytes(arkhara_payload)
+    generated["LAYOUT_ERYON_ARKHARA"] = arkhara_dest.relative_to(ROOT).as_posix()
+    print(f"{arkhara_dest.relative_to(ROOT)}: {len(arkhara_payload)} bytes")
     # Eighth gym city now has a registered overworld and reciprocal warp.
     dragon_src = ROOT / "docs/eryon/cidades/drakonia_city_plan.txt"
     dragon_dest = ROOT / "data/layouts/Eryon_Drakonia/map.bin"

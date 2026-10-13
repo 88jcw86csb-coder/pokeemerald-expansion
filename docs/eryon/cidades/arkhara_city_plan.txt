@@ -1,6 +1,6 @@
 Arkhara | Gym 4 (Rock) | Eryon concept 64x56
 # block; = avenue; , park; G gym; C Pokemon Center; M mart; H housing; P civic plaza
-Design only: not a registered map.bin. Gym, interiors, scripts and warps not implemented.
+Registered Arkhara overworld: fourth gym city, healer, Tessa, relay investigation and reciprocal warps; gym interior and badge battle pending.
 
 #############===###############===##############===#############
 #############===###############===##############===#############
