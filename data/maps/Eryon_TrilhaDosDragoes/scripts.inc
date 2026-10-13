@@ -12,8 +12,35 @@ EryonDragoes_EventScript_RidgeGuide::
 EryonDragoes_EventScript_EclipseCourier::
 	lock
 	faceplayer
-	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonDragoes_EventScript_EclipseCourierExposed
+	goto_if_set FLAG_ERYON_DRAGON_TRAIL_COURIER_DEFEATED, EryonDragoes_EventScript_CourierAfterBattle
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonDragoes_EventScript_CourierBattleOffer
 	msgbox EryonDragoes_Text_CourierBefore, MSGBOX_DEFAULT
+	release
+	end
+
+@ Defeating the escort is optional; the eastern exit stays open.
+EryonDragoes_EventScript_CourierBattleOffer::
+	msgbox EryonDragoes_Text_CourierChallenge, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonDragoes_EventScript_CourierDecline
+	closemessage
+	trainerbattle_single TRAINER_ERYON_DRAGON_TRAIL_COURIER, EryonDragoes_Text_CourierIntro, EryonDragoes_Text_CourierLoss, EryonDragoes_EventScript_CourierVictory, FALSE
+	msgbox EryonDragoes_Text_CourierAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDragoes_EventScript_CourierDecline::
+	closemessage
+	msgbox EryonDragoes_Text_CourierDecline, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDragoes_EventScript_CourierVictory::
+	msgbox EryonDragoes_Text_CourierVictory, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDragoes_EventScript_CourierAfterBattle::
+	msgbox EryonDragoes_Text_CourierAfter, MSGBOX_DEFAULT
 	release
 	end
 
@@ -179,3 +206,118 @@ EryonDragoes_Text_RangerManifest:
 	.string "confirma o transporte!\p"
 	.string "Vamos avisar os\n"
 	.string "guardioes de DRAKONIA.$"
+
+
+@ Southeastern overlook: a hidden one-time reward for stopping the escort.
+@ There is no mandatory battle or progression gate on the main road.
+EryonDragoes_EventScript_SummitCache::
+	lock
+	goto_if_set FLAG_ERYON_DRAGON_TRAIL_LOOKOUT_REWARD, EryonDragoes_EventScript_CacheEmpty
+	goto_if_unset FLAG_ERYON_DRAGON_TRAIL_COURIER_DEFEATED, EryonDragoes_EventScript_CacheLocked
+	msgbox EryonDragoes_Text_CacheOpened, MSGBOX_DEFAULT
+	giveitem ITEM_DRAGON_FANG
+	goto_if_eq VAR_RESULT, FALSE, EryonDragoes_EventScript_CacheBagFull
+	setflag FLAG_ERYON_DRAGON_TRAIL_LOOKOUT_REWARD
+	release
+	end
+
+EryonDragoes_EventScript_CacheLocked::
+	msgbox EryonDragoes_Text_CacheLocked, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDragoes_EventScript_CacheBagFull::
+	msgbox EryonDragoes_Text_CacheBagFull, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDragoes_EventScript_CacheEmpty::
+	msgbox EryonDragoes_Text_CacheEmpty, MSGBOX_DEFAULT
+	release
+	end
+
+@ Explorer at the cliffside links the local ecology to Eclipse's network.
+EryonDragoes_EventScript_CliffResearcher::
+	lock
+	faceplayer
+	goto_if_set FLAG_ERYON_DRAGON_TRAIL_COURIER_DEFEATED, EryonDragoes_EventScript_CliffResearcherAfter
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonDragoes_EventScript_CliffResearcherClue
+	msgbox EryonDragoes_Text_CliffResearcherBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDragoes_EventScript_CliffResearcherClue::
+	msgbox EryonDragoes_Text_CliffResearcherClue, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDragoes_EventScript_CliffResearcherAfter::
+	msgbox EryonDragoes_Text_CliffResearcherAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDragoes_Text_CourierChallenge:
+	.string "ECLIPSE: Conhece o\n"
+	.string "segredo de IGNIVAR?!\p"
+	.string "Quer enfrentar minha\n"
+	.string "escolta Pokemon?$"
+
+EryonDragoes_Text_CourierIntro:
+	.string "ECLIPSE: Ninguem\n"
+	.string "interrompe a entrega!$"
+
+EryonDragoes_Text_CourierLoss:
+	.string "ECLIPSE: Meus Pokemon\n"
+	.string "perderam no desfiladeiro!$"
+
+EryonDragoes_Text_CourierVictory:
+	.string "ECLIPSE: A remessa\n"
+	.string "ficou desprotegida!\p"
+	.string "Deixamos um estojo\n"
+	.string "no mirante do sul.$"
+
+EryonDragoes_Text_CourierDecline:
+	.string "ECLIPSE: Entao nao\n"
+	.string "atrapalhe meu trabalho.$"
+
+EryonDragoes_Text_CourierAfter:
+	.string "ECLIPSE: Voce venceu.\p"
+	.string "O mirante ao sul\n"
+	.string "ainda guarda uma caixa.$"
+
+EryonDragoes_Text_CacheLocked:
+	.string "Um estojo lacrado\n"
+	.string "com o selo ECLIPSE.\p"
+	.string "A escolta ainda\n"
+	.string "controla a carga.$"
+
+EryonDragoes_Text_CacheOpened:
+	.string "A remessa abandonada\n"
+	.string "guarda um DRAGON FANG!$"
+
+EryonDragoes_Text_CacheBagFull:
+	.string "Sua BOLSA esta cheia.\p"
+	.string "O item ficara aqui\n"
+	.string "ate sua volta.$"
+
+EryonDragoes_Text_CacheEmpty:
+	.string "O estojo esta vazio.\p"
+	.string "A remessa foi recolhida.$"
+
+EryonDragoes_Text_CliffResearcherBefore:
+	.string "BIOLOGO: Os ventos\n"
+	.string "da encosta sao fortes.\p"
+	.string "Pokemon voadores\n"
+	.string "costumam passar aqui.$"
+
+EryonDragoes_Text_CliffResearcherClue:
+	.string "BIOLOGO: O som\n"
+	.string "das pedras mudou!\p"
+	.string "A ECLIPSE controla\n"
+	.string "algum tipo de carga.$"
+
+EryonDragoes_Text_CliffResearcherAfter:
+	.string "BIOLOGO: A escolta\n"
+	.string "da ECLIPSE recuou!\p"
+	.string "Agora podemos estudar\n"
+	.string "o voo dos Pokemon.$"
