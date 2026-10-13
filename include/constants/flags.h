@@ -51,8 +51,8 @@
 
 #else
 
-#define FLAG_UNUSED_0x020    0x20 // Unused Flag
-#define FLAG_UNUSED_0x021    0x21 // Unused Flag
+#define FLAG_ERYON_MIST_SIGNAL_REPAIRED 0x20 // Neonara badge restores the fog lookout transmitter
+#define FLAG_ERYON_GLACIAL_SUPPLY_RETRIEVED 0x21 // One-time northern ice pass supply reward
 #define FLAG_UNUSED_0x022    0x22 // Unused Flag
 #define FLAG_UNUSED_0x023    0x23 // Unused Flag
 #define FLAG_UNUSED_0x024    0x24 // Unused Flag
