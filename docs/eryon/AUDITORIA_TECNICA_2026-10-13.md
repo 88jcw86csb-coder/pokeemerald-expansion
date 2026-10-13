@@ -17,7 +17,7 @@
 
 ## Pendências — não declarar ROM concluída
 
-- **Ginásios:** cidades no mapa não equivalem a oito batalhas oficiais; interiores, quebra-cabeças, equipes, insígnias e pós-batalha requerem desenvolvimento e testes específicos. Tessa existe como personagem, mas o combate do quarto ginásio ainda não está implantado.
+- **Ginásios:** o confronto oficial de Kael em Verdelume tem script de batalha e insígnia. Os outros **sete** ginásios ainda não têm batalha oficial nem entrega de insígnia nos scripts das cidades. Interiores, quebra-cabeças, equipes, insígnias e pós-batalha seguem como trabalho prioritário. Tessa existe como personagem, mas o desafio de Arkhara não está implantado.
 - **Liga:** Caminho da Liga está registrado, porém edifício, Elite Four, campeão, final da história e pós-jogo ainda não foram implementados e aprovados.
 - **Encontros selvagens:** verificador atual assegura espécies e tabelas somente nas três primeiras áreas com capturas. É preciso completar e revisar a disponibilidade por toda a região, garantindo os Pokémon oficiais até Kalos e sem fakemon.
 - **Mapas herdados:** Vila Aurora, Rota 01, Rota 02, Verdelume e Rota 03 reutilizam terrenos de Hoenn e precisam de auditoria in-game de acessos e metatiles.
