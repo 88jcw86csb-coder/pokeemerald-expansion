@@ -108,6 +108,8 @@ EryonPico_Text_Road:
 EryonPico_EventScript_RadioOperator::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonPico_EventScript_RadioReport
+	goto_if_set FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ, EryonPico_EventScript_RadioManifest
 	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonPico_EventScript_RadioAfterChart
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonPico_EventScript_RadioAfterSerra
 	msgbox EryonPico_Text_RadioBefore, MSGBOX_DEFAULT
@@ -143,3 +145,28 @@ EryonPico_Text_RadioAfterChart:
 	.string "fica perto da LIGA.\p"
 	.string "A vila continua\n"
 	.string "vigiando o sinal.$"
+
+@ The radio station relays updates as the Eclipse investigation progresses.
+EryonPico_EventScript_RadioManifest::
+	msgbox EryonPico_Text_RadioManifest, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPico_EventScript_RadioReport::
+	msgbox EryonPico_Text_RadioReport, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPico_Text_RadioManifest:
+	.string "OPERADOR: O registro\n"
+	.string "das cargas confirma\n"
+	.string "o sinal da ECLIPSE!\p"
+	.string "Vou avisar Drakonia.$"
+
+EryonPico_Text_RadioReport:
+	.string "OPERADOR: Recebemos\n"
+	.string "noticias da LIGA!\p"
+	.string "As provas da ECLIPSE\n"
+	.string "ja foram entregues.\p"
+	.string "A vila esta segura,\n"
+	.string "mas seguimos atentos.$"
