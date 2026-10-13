@@ -13,6 +13,7 @@ EryonPico_EventScript_Caretaker::
 EryonPico_EventScript_Elder::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_DRAKONIA_AXEW_RESOLVED, EryonPico_EventScript_ElderAxew
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonPico_EventScript_ElderClue
 	msgbox EryonPico_Text_ElderBefore, MSGBOX_DEFAULT
 	release
@@ -218,3 +219,18 @@ EryonPico_Text_GeologistNoibat:
 	.string "voltaram ao normal.\p"
 	.string "Os dados ajudarao\n"
 	.string "nosso estudo do pico.$"
+
+
+@ The mountain village hears about the restored Drakonia dragon habitat.
+EryonPico_EventScript_ElderAxew::
+	msgbox EryonPico_Text_ElderAxew, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPico_Text_ElderAxew:
+	.string "ANCIA: Dizem que um\n"
+	.string "AXEW apareceu nas ruinas!\p"
+	.string "Os dragaozinhos\n"
+	.string "retornam a DRAKONIA.\p"
+	.string "Sua jornada protegeu\n"
+	.string "o equilibrio do pico.$"
