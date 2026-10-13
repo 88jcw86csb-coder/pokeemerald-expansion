@@ -47,6 +47,7 @@ EryonDrakonia_EventScript_SageAfterChart::
 EryonDrakonia_EventScript_RuneResearcher::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED, EryonDrakonia_EventScript_ResearcherRelayOff
 	msgbox EryonDrakonia_Text_Researcher, MSGBOX_DEFAULT
 	release
 	end
@@ -239,3 +240,17 @@ EryonDrakonia_Text_SageEvidenceReported:
 	.string "a vigia do santuario.\p"
 	.string "Agora podemos estudar\n"
 	.string "os cristais com calma.$"
+
+@ The sanctuary's measurements respond to the disabled cave transmitter.
+EryonDrakonia_EventScript_ResearcherRelayOff::
+	msgbox EryonDrakonia_Text_ResearcherRelayOff, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_Text_ResearcherRelayOff:
+	.string "PESQUISADOR: O pulso\n"
+	.string "da gruta desapareceu!\p"
+	.string "Agora os cristais\n"
+	.string "voltam ao ritmo normal.\p"
+	.string "A ECLIPSE perdeu uma\n"
+	.string "parte da sua rede.$"
