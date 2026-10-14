@@ -131,6 +131,32 @@ class LeagueMapTests(unittest.TestCase):
         self.assertIn("EryonLigaCaminho_Text_NorthShortcutQualified:", script)
         self.assertNotIn("setflag ", entry)
 
+    def test_northern_ridge_fletchling_battle_is_optional_and_accessible(self):
+        import json
+        terrain = route()
+        map_data = json.loads((ROOT / "data/maps/Eryon_CaminhoDaLiga/map.json").read_text())
+        signs = [e for e in map_data["bg_events"] if
+                 e["script"] == "EryonLigaCaminho_EventScript_RidgeFletchling"]
+        self.assertEqual(len(signs), 1)
+        self.assertEqual((signs[0]["x"], signs[0]["y"]), (27, 11))
+        self.assertEqual(terrain[11][27], ":")
+        reached = connected(terrain, (0, 22))
+        self.assertIn((27, 11), reached)
+        self.assertIn((47, 22), reached)
+        script = (ROOT / "data/maps/Eryon_CaminhoDaLiga/scripts.inc").read_text()
+        body = script.split("EryonLigaCaminho_EventScript_RidgeFletchling::", 1)[1].split(
+            "EryonLigaCaminho_EventScript_RidgeFletchlingDone::", 1)[0]
+        self.assertIn("MSGBOX_YESNO", body)
+        self.assertIn("setwildbattle SPECIES_FLETCHLING, 56", body)
+        self.assertIn("dowildbattle", body)
+        self.assertIn("specialvar VAR_RESULT, GetBattleOutcome", body)
+        for outcome in ("B_OUTCOME_CAUGHT", "B_OUTCOME_WON",
+                        "B_OUTCOME_RAN", "B_OUTCOME_PLAYER_TELEPORTED"):
+            self.assertIn(outcome, body)
+        self.assertNotIn("setflag ", body)
+        species = (ROOT / "include/constants/species.h").read_text()
+        self.assertIn("SPECIES_FLETCHLING", species)
+
     def test_summit_alcove_event_walkability_and_unique_script(self):
         import json
         t = route()
