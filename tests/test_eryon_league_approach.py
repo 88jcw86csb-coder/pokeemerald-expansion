@@ -139,6 +139,26 @@ class EryonLeagueApproach(unittest.TestCase):
         self.assertEqual(road["warp_events"][0]["dest_map"], "MAP_ERYON_GRUTA_DAS_ESTRELAS")
         self.assertEqual(road["warp_events"][1]["dest_map"], "MAP_ERYON_CIDADE_DA_LIGA")
 
+    def test_eclipse_reporting_updates_city_and_road_without_resetting_progress(self):
+        road = (MAP_ROOT / "Eryon_CaminhoDaLiga" / "scripts.inc").read_text(encoding="utf-8")
+        city = (MAP_ROOT / "Eryon_CidadeDaLiga" / "scripts.inc").read_text(encoding="utf-8")
+        witness = road.split("EryonLigaCaminho_EventScript_ScoutWitness::", 1)[1].split(
+            "EryonLigaCaminho_EventScript_ScoutWitnessAfter::", 1)[0]
+        reporter = city.split("EryonCidadeLiga_EventScript_Reporter::", 1)[1].split(
+            "EryonCidadeLiga_EventScript_Investigator::", 1)[0]
+        self.assertLess(
+            witness.index("goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED"),
+            witness.index("goto_if_set FLAG_ERYON_STAR_CHART_READ"),
+        )
+        self.assertLess(
+            reporter.index("goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED"),
+            reporter.index("goto_if_set FLAG_ERYON_DRAKONIA_ECLIPSE_DEFEATED"),
+        )
+        self.assertIn("EryonLigaCaminho_EventScript_ScoutWitnessReported::", road)
+        self.assertIn("EryonLigaCaminho_Text_ScoutWitnessReported:", road)
+        self.assertNotIn("setflag ", witness)
+        self.assertNotIn("setflag ", reporter)
+
 
 if __name__ == "__main__":
     unittest.main()
