@@ -177,6 +177,34 @@ class LeagueMapTests(unittest.TestCase):
             render("caminho_da_liga", terrain),
         )
 
+    def test_optional_birdwatcher_trainer_is_registered_and_reachable(self):
+        import json
+        terrain = route()
+        data = json.loads((ROOT / "data/maps/Eryon_CaminhoDaLiga/map.json").read_text())
+        people = [e for e in data["object_events"] if
+                  e["script"] == "EryonLigaCaminho_EventScript_RidgeBirdwatcher"]
+        self.assertEqual(len(people), 1)
+        self.assertEqual((people[0]["x"], people[0]["y"]), (28, 8))
+        reached = connected(terrain, (0, 22))
+        self.assertIn((28, 8), reached)
+        self.assertIn((27, 8), reached)
+        self.assertIn((47, 22), reached)
+        script = (ROOT / "data/maps/Eryon_CaminhoDaLiga/scripts.inc").read_text()
+        entry = script.split("EryonLigaCaminho_EventScript_RidgeBirdwatcher::", 1)[1].split(
+            "EryonLigaCaminho_EventScript_RidgeBirdwatcherDecline::", 1)[0]
+        self.assertIn("MSGBOX_YESNO", entry)
+        self.assertIn("trainerbattle_single TRAINER_ERYON_RIDGE_BIRDWATCHER", entry)
+        self.assertIn("FLAG_ERYON_RIDGE_BIRDWATCHER_DEFEATED", entry)
+        opponents = (ROOT / "include/constants/opponents.h").read_text()
+        flags = (ROOT / "include/constants/flags.h").read_text()
+        engine = (ROOT / "src/battle_setup.c").read_text()
+        party = (ROOT / "src/data/trainers.party").read_text()
+        self.assertIn("#define TRAINER_ERYON_RIDGE_BIRDWATCHER 889", opponents)
+        self.assertIn("#define TRAINERS_COUNT_EMERALD     890", opponents)
+        self.assertIn("#define FLAG_ERYON_RIDGE_BIRDWATCHER_DEFEATED", flags)
+        self.assertIn("return FLAG_ERYON_RIDGE_BIRDWATCHER_DEFEATED;", engine)
+        self.assertIn("=== TRAINER_ERYON_RIDGE_BIRDWATCHER ===", party)
+
     def test_summit_alcove_event_walkability_and_unique_script(self):
         import json
         t = route()
