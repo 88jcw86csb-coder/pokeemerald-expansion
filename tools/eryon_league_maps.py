@@ -75,6 +75,12 @@ def route():
         for x in range(27, 30):
             t[y][x] = "."
     t[11][28] = ":"
+    # Original western ravine loop: a second winding descent reaches the
+    # southern summit through its west flank rather than mirroring Hoenn roads.
+    for y in range(25, 32):
+        t[y][20] = ":"
+    for x in range(20, 26):
+        t[31][x] = ":"
     # The east gate now links to the City of the League.
     for y in range(h):
         t[y][w - 1]="#"
