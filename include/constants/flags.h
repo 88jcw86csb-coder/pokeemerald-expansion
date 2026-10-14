@@ -1237,8 +1237,8 @@
 #define FLAG_UNUSED_0x49F                                           0x49F // Unused Flag
 #define FLAG_ERYON_RIVER_SAMPLE_RECORDED                             0x4A0 // Optional waterfall sample for Vila das Aguas
 #define FLAG_ERYON_RIVER_SAMPLE_REWARD_CLAIMED                       0x4A1 // Unique Mystic Water reward from Vila das Aguas
-#define FLAG_UNUSED_0x4A2                                           0x4A2 // Unused Flag
-#define FLAG_UNUSED_0x4A3                                           0x4A3 // Unused Flag
+#define FLAG_ERYON_ECHO_TRACE_RECORDED                               0x4A2 // Optional valley oscillator study
+#define FLAG_ERYON_ECHO_ARCHIVE_REWARD_CLAIMED                       0x4A3 // Unique Aldeia research reward
 #define FLAG_UNUSED_0x4A4                                           0x4A4 // Unused Flag
 #define FLAG_UNUSED_0x4A5                                           0x4A5 // Unused Flag
 #define FLAG_UNUSED_0x4A6                                           0x4A6 // Unused Flag
