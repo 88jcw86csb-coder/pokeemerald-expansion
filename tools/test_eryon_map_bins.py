@@ -39,6 +39,20 @@ class TerrainCompilerTests(unittest.TestCase):
                 path = root / "docs/eryon/cidades" / f"{name}_city_plan.txt"
                 self.assertEqual(len(compile_plan(path, city_tiles, 64, 56)), 7168)
 
+    def test_league_road_eastern_summit_alcove_is_connected(self):
+        root = Path(__file__).resolve().parents[1]
+        source = root / "docs/eryon/caminho_da_liga_terrain_plan.txt"
+        tiles = {"#": 0x3C01, ".": 0x3001, ":": 0x3003,
+                 **dict.fromkeys("PCMLH", 0x3001)}
+        binary = compile_plan(source, tiles)
+        self.assertEqual(len(binary), 48 * 44 * 2)
+        for y in (12, 13, 14):
+            for x in range(35, 40):
+                word = struct.unpack_from("<H", binary, 2 * (y * 48 + x))[0]
+                self.assertEqual(word, 0x3003, (x, y))
+        self.assertEqual(struct.unpack_from("<H", binary, 2 * (15 * 48 + 38))[0],
+                         0x3003)
+
     def test_rejects_incomplete_plan(self):
         with tempfile.TemporaryDirectory() as folder:
             source = Path(folder) / "bad.txt"
