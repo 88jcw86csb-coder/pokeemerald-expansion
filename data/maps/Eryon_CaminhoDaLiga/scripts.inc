@@ -794,3 +794,58 @@ EryonLigaCaminho_Text_RidgeBirdwatcherAfter:
 	.string "ao longo do atalho.\p"
 	.string "Proteja os Pokemon\n"
 	.string "desta montanha.$"
+
+
+@ Optional discovery on the original western ravine descent.
+@ No new flags or gates: this landmark tracks story progress safely.
+EryonLigaCaminho_EventScript_WestRavine::
+	lock
+	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonLigaCaminho_EventScript_WestRavineChampion
+	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonLigaCaminho_EventScript_WestRavineReported
+	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonLigaCaminho_EventScript_WestRavineChart
+	msgbox EryonLigaCaminho_Text_WestRavineBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_WestRavineChart::
+	msgbox EryonLigaCaminho_Text_WestRavineChart, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_WestRavineReported::
+	msgbox EryonLigaCaminho_Text_WestRavineReported, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_WestRavineChampion::
+	msgbox EryonLigaCaminho_Text_WestRavineChampion, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_Text_WestRavineBefore:
+	.string "DESFILADEIRO OESTE:\p"
+	.string "A rocha tem marcas\n"
+	.string "de antigos cristais.\p"
+	.string "O vento segue por\n"
+	.string "um caminho oculto.$"
+
+EryonLigaCaminho_Text_WestRavineChart:
+	.string "DESFILADEIRO OESTE:\p"
+	.string "As marcas lembram\n"
+	.string "a CARTA ESTELAR!\p"
+	.string "A ECLIPSE pode ter\n"
+	.string "usado esta passagem.$"
+
+EryonLigaCaminho_Text_WestRavineReported:
+	.string "DESFILADEIRO OESTE:\p"
+	.string "A LIGA estuda as\n"
+	.string "marcas da ECLIPSE.\p"
+	.string "O desfiladeiro esta\n"
+	.string "livre para viajantes.$"
+
+EryonLigaCaminho_Text_WestRavineChampion:
+	.string "DESFILADEIRO OESTE:\p"
+	.string "O CAMPEAO contempla\n"
+	.string "os picos de ERYON.\p"
+	.string "Ainda ha misterios\n"
+	.string "alem desta trilha.$"
