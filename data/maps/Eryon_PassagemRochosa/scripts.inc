@@ -5,8 +5,8 @@ Eryon_PassagemRochosa_MapScripts::
 EryonPassagem_EventScript_Guard::
 	lock
 	faceplayer
-	goto_if_set FLAG_ERYON_SERRA_CORE_GUARD_DEFEATED, EryonPassagem_EventScript_GuardSerraSentryDefeated
 	goto_if_set FLAG_ERYON_SERRA_ECLIPSE_SIGNAL_DISABLED, EryonPassagem_EventScript_GuardSerraQuiet
+	goto_if_set FLAG_ERYON_SERRA_CORE_GUARD_DEFEATED, EryonPassagem_EventScript_GuardSerraSentryDefeated
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonPassagem_EventScript_GuardClue
 	goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonPassagem_EventScript_GuardBadge
 	msgbox EryonPassagem_Text_GuardBefore, MSGBOX_DEFAULT

@@ -805,7 +805,13 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertNotIn("setflag FLAG_BADGE01_GET", script)
         opponents = (ROOT / "include/constants/opponents.h").read_text()
         self.assertRegex(opponents, r"TRAINER_ERYON_ROUTE02_HIKER\s+857")
-        self.assertRegex(opponents, r"TRAINERS_COUNT_EMERALD\s+872")
+        # Trainer IDs grow with new Eryon encounters: test the actual capacity.
+        count = re.search(r"(?m)^#define\s+TRAINERS_COUNT_EMERALD\s+(\d+)\s*$", opponents)
+        self.assertIsNotNone(count)
+        ids = [int(value) for value in re.findall(
+            r"(?m)^#define\s+TRAINER_ERYON_[A-Z0-9_]+\s+(\d+)\s*$", opponents)]
+        self.assertTrue(ids)
+        self.assertGreater(int(count.group(1)), max(ids))
 
     def test_kael_battle_is_reachable_after_briefing(self):
         script = (ROOT / "data/maps/Eryon_Verdelume/scripts.inc").read_text()

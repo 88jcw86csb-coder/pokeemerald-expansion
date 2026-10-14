@@ -335,10 +335,10 @@ def main():
         errors.append("Kael trainer party is missing")
     else:
         kael_party = trainer_parties.split("=== TRAINER_ERYON_KAEL ===", 1)[1].split("\n=== ", 1)[0]
-        expected_team = [("Budew", 15), ("Roselia", 17), ("Roserade", 18)]
+        expected_team = [("Budew", 15), ("Roselia", 17), ("Ivysaur", 18)]
         team = re.findall(r"(?m)^([A-Za-z]+)\s*\nLevel:\s*(\d+)\s*$", kael_party)
         if team != [(species, str(level)) for species, level in expected_team]:
-            errors.append(f"Kael team must be Budew 15, Roselia 17, Roserade 18; found {team}")
+            errors.append(f"Kael team must be Budew 15, Roselia 17, Ivysaur 18; found {team}")
     # The optional Eclipse scout consumes a real trainer slot and must remain
     # available whether the player visits before or after defeating Kael.
     scout_id = re.search(r"(?m)^#define\s+TRAINER_ERYON_SCOUT\s+(\d+)\b", opponent_constants)

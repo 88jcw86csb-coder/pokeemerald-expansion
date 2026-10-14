@@ -34,8 +34,8 @@ EryonArkhara_EventScript_TessaInformed::
 EryonArkhara_EventScript_Geologist::
 	lock
 	faceplayer
-	goto_if_set FLAG_ERYON_SERRA_CORE_GUARD_DEFEATED, EryonArkhara_EventScript_GeologistGuardDefeated
 	goto_if_set FLAG_ERYON_SERRA_ECLIPSE_SIGNAL_DISABLED, EryonArkhara_EventScript_GeologistResonance
+	goto_if_set FLAG_ERYON_SERRA_CORE_GUARD_DEFEATED, EryonArkhara_EventScript_GeologistGuardDefeated
 	goto_if_set FLAG_ERYON_ARKHARA_RELAY_READ, EryonArkhara_EventScript_GeologistInformed
 	msgbox EryonArkhara_Text_GeologistBefore, MSGBOX_DEFAULT
 	release
