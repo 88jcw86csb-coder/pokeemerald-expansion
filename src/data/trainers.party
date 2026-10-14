@@ -17807,3 +17807,32 @@ Level: 29
 - Bite
 - Icy Wind
 - Protect
+
+=== TRAINER_ERYON_SERRA_CORE_GUARD ===
+Name: VIGIA
+Class: Team Aqua
+Pic: Aqua Grunt M
+Gender: Male
+Music: Male
+AI: Check Bad Move
+
+Nosepass
+Level: 32
+- Rock Tomb
+- Thunder Wave
+- Block
+- Rock Slide
+
+Golbat
+Level: 33
+- Wing Attack
+- Bite
+- Confuse Ray
+- Air Cutter
+
+Klang
+Level: 34
+- Gear Grind
+- Charge Beam
+- Bind
+- Metal Sound
