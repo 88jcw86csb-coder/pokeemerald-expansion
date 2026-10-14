@@ -295,3 +295,58 @@ EryonArkhara_Text_GeologistGuardDefeated:
 	.string "na SERRA DOS CRISTAIS.\p"
 	.string "Desligar o sinal\n"
 	.string "protegera ARKHARA.$"
+
+@ Public shipment ledger connects the Crystal Serra survey to later Eclipse cities.
+@ No duplicate reward/flag: all conclusions follow existing saved milestones.
+EryonArkhara_EventScript_CaravanBoard::
+	lock
+	goto_if_set FLAG_ERYON_SERRA_ECLIPSE_SIGNAL_DISABLED, EryonArkhara_EventScript_CaravanBoardQuiet
+	goto_if_set FLAG_ERYON_SERRA_CORE_GUARD_DEFEATED, EryonArkhara_EventScript_CaravanBoardGuard
+	goto_if_set FLAG_BADGE04_GET, EryonArkhara_EventScript_CaravanBoardBadge
+	msgbox EryonArkhara_Text_CaravanBoardBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonArkhara_EventScript_CaravanBoardBadge::
+	msgbox EryonArkhara_Text_CaravanBoardBadge, MSGBOX_DEFAULT
+	release
+	end
+
+EryonArkhara_EventScript_CaravanBoardGuard::
+	msgbox EryonArkhara_Text_CaravanBoardGuard, MSGBOX_DEFAULT
+	release
+	end
+
+EryonArkhara_EventScript_CaravanBoardQuiet::
+	msgbox EryonArkhara_Text_CaravanBoardQuiet, MSGBOX_DEFAULT
+	release
+	end
+
+EryonArkhara_Text_CaravanBoardBefore:
+	.string "QUADRO DE CARGAS:\n"
+	.string "Cristais desapareceram\n"
+	.string "da rota da SERRA.\p"
+	.string "Destino da remessa:\n"
+	.string "ainda desconhecido.$"
+
+EryonArkhara_Text_CaravanBoardBadge:
+	.string "QUADRO DE CARGAS:\n"
+	.string "A liga local recebeu\n"
+	.string "um alerta de TESSA.\p"
+	.string "Verifique as trilhas\n"
+	.string "da SERRA DOS CRISTAIS.$"
+
+EryonArkhara_Text_CaravanBoardGuard:
+	.string "QUADRO DE CARGAS:\n"
+	.string "Sentinela ECLIPSE\n"
+	.string "afastado do NUCLEO.\p"
+	.string "A estacao continua\n"
+	.string "ligada nas montanhas.$"
+
+EryonArkhara_Text_CaravanBoardQuiet:
+	.string "QUADRO DE CARGAS:\n"
+	.string "Sinal da SERRA: OFF.\p"
+	.string "Carrocas da ECLIPSE\n"
+	.string "seguiram para UMBRA.\p"
+	.string "Outros relatorios citam\n"
+	.string "a usina de IGNIVAR.$"
