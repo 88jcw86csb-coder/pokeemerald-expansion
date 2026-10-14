@@ -50,6 +50,11 @@ def route():
         for x in range(34,40):
             if (x-36.5)**2/6.25+(y-33)**2/5 <= 1:
                 t[y][x] = ":"
+    # Newly carved eastern summit alcove above the existing lookout path.
+    # Keep the generator authoritative so regeneration preserves the new terrain.
+    for y in (12, 13, 14):
+        for x in range(35, 40):
+            t[y][x] = ":"
     # The east gate now links to the City of the League.
     for y in range(h):
         t[y][w - 1]="#"
