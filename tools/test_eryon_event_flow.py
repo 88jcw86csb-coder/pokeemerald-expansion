@@ -1328,5 +1328,51 @@ class EryonEventFlowTests(unittest.TestCase):
                 self.assertEqual(len(labels), len(set(labels)))
 
 
+    def test_serra_eclipse_aftermath_in_route_and_two_capitals(self):
+        # New interactions must be physical, scriptable and saved-state-aware.
+        import json
+        layouts = json.loads((ROOT / "data/layouts/layouts.json").read_text(encoding="utf-8"))
+        by_id = {layout["id"]: layout for layout in layouts["layouts"]}
+        events = (
+            ("Eryon_PassagemRochosa", "object_events",
+             "EryonPassagem_EventScript_FrequencyEngineer", (33, 22)),
+            ("Eryon_Arkhara", "bg_events",
+             "EryonArkhara_EventScript_CaravanBoard", (38, 28)),
+            ("Eryon_CidadeDaLiga", "object_events",
+             "EryonCidadeLiga_EventScript_ResonanceDelegate", (56, 39)),
+        )
+        for name, kind, label, (x, y) in events:
+            with self.subTest(map=name):
+                folder = ROOT / "data/maps" / name
+                info = json.loads((folder / "map.json").read_text(encoding="utf-8"))
+                positions = [(e["x"], e["y"]) for e in info[kind]
+                             if e["script"] == label]
+                self.assertEqual(positions, [(x, y)])
+                self.assertIn(label + "::",
+                              (folder / "scripts.inc").read_text(encoding="utf-8"))
+                layout = by_id[info["layout"]]
+                raw = (ROOT / layout["blockdata_filepath"]).read_bytes()
+                offset = 2 * (y * layout["width"] + x)
+                tile = int.from_bytes(raw[offset:offset + 2], "little")
+                self.assertEqual(tile & 0x0C00, 0, f"{name}: blocked landmark")
+
+        passage = (ROOT / "data/maps/Eryon_PassagemRochosa/scripts.inc").read_text()
+        arkhara = (ROOT / "data/maps/Eryon_Arkhara/scripts.inc").read_text()
+        league = (ROOT / "data/maps/Eryon_CidadeDaLiga/scripts.inc").read_text()
+        for source in (passage, arkhara, league):
+            self.assertIn("FLAG_ERYON_SERRA_ECLIPSE_SIGNAL_DISABLED", source)
+        self.assertIn("FLAG_ERYON_SERRA_CORE_GUARD_DEFEATED", passage)
+        self.assertIn("FLAG_ERYON_SERRA_CORE_GUARD_DEFEATED", arkhara)
+        self.assertIn("FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED", league)
+        geologist = arkhara.split("EryonArkhara_EventScript_Geologist::", 1)[1]
+        geologist = geologist.split("EryonArkhara_EventScript_GeologistInformed::", 1)[0]
+        # Reward must take priority over the earlier guard battle milestone.
+        self.assertLess(
+            geologist.index("FLAG_ERYON_SERRA_ECLIPSE_SIGNAL_DISABLED"),
+            geologist.index("FLAG_ERYON_SERRA_CORE_GUARD_DEFEATED"),
+        )
+        self.assertIn("giveitem ITEM_PP_UP", arkhara)
+
+
 if __name__ == "__main__":
     unittest.main()
