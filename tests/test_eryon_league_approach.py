@@ -193,6 +193,17 @@ class EryonLeagueApproach(unittest.TestCase):
             self.assertIn("EryonCidadeLiga_Text_Guide" + suffix + ":", script)
         self.assertNotIn("setflag ", entry)
 
+    def test_league_notice_prioritizes_qualified_players_over_evidence(self):
+        city = (MAP_ROOT / "Eryon_CidadeDaLiga" / "scripts.inc").read_text(encoding="utf-8")
+        entry = city.split("EryonCidadeLiga_EventScript_Notice::", 1)[1].split(
+            "EryonCidadeLiga_Text_Medic:", 1)[0]
+        champion = entry.index("FLAG_ERYON_CHAMPION_CROWNED")
+        qualified = entry.index("FLAG_ERYON_QUALIFIED")
+        evidence = entry.index("FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED")
+        self.assertLess(champion, qualified)
+        self.assertLess(qualified, evidence)
+        self.assertNotIn("setflag ", entry)
+
 
 if __name__ == "__main__":
     unittest.main()
