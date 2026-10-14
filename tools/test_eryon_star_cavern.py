@@ -5,6 +5,37 @@ from eryon_star_cavern import ROOT, W, H, cavern, reachable, render
 
 
 class StarCavernTests(unittest.TestCase):
+    def test_lower_switchback_prevents_straight_crossing(self):
+        """New lower bypass remains reachable while the upper gallery persists."""
+        import json
+        from collections import deque
+        from build_eryon_map_bins import compile_plan
+
+        t = cavern()
+        self.assertEqual(t[22][21], "#")
+        self.assertIn((23, 28), reachable(t))
+        self.assertIn((29, 9), reachable(t))
+        self.assertIn((47, 22), reachable(t))
+        info = json.loads((ROOT / "data/maps/Eryon_GrutaDasEstrelas/map.json").read_text())
+        occupied = {(e["x"], e["y"]) for e in info["object_events"]}
+        q = deque([(0, 22)])
+        seen = {(0, 22)}
+        while q:
+            x, y = q.popleft()
+            for p in ((x-1,y),(x+1,y),(x,y-1),(x,y+1)):
+                a,b = p
+                if 0 <= a < W and 0 <= b < H and t[b][a] != "#" and p not in occupied and p not in seen:
+                    seen.add(p)
+                    q.append(p)
+        self.assertIn((47, 22), seen, "An NPC must not seal the route")
+        for group in ("object_events", "bg_events", "warp_events"):
+            for e in info[group]:
+                with self.subTest(group=group, coordinate=(e["x"],e["y"])):
+                    self.assertIn((e["x"], e["y"]), reachable(t))
+        source = ROOT / "docs/eryon/gruta_das_estrelas_terrain_plan.txt"
+        binary = (ROOT / "data/layouts/Eryon_GrutaDasEstrelas/map.bin").read_bytes()
+        self.assertEqual(binary, compile_plan(source, {"#":0x3C01,".":0x3001,":":0x3003}))
+
     def test_connected_cavern_and_synchronized_plan(self):
         terrain=cavern()
         self.assertEqual(len(terrain),H)

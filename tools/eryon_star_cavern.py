@@ -61,6 +61,18 @@ def cavern():
     # Keep the already-registered Eclipse relay terminal at (42, 29) reachable.
     # Its previous block collision was nonzero; do not move the saved event.
     t[29][42] = ":"
+    # Lower echo gallery branches around a natural ridge, then rejoins
+    # the original main cave. The northern Star Gallery remains unchanged.
+    for y in range(23, 29):
+        for x in (17, 18, 27, 28):
+            t[y][x] = ":"
+    for x in range(17, 29):
+        for y in (27, 28):
+            t[y][x] = ":"
+    # Break the Hoenn-like straight line; both alternatives require no HMs.
+    for y in range(20, 25):
+        for x in range(20, 26):
+            t[y][x] = "#"
     return t
 
 def reachable(t):
@@ -75,7 +87,7 @@ def reachable(t):
 def render(t):
     return ("gruta_das_estrelas — Eryon terrain concept 48x44\n"
             "# blocked; . path; : cave chamber\n"
-            "Mapa registrado: galeria superior em curva, camara estelar opcional, tunel livre de HMs e Eclipse investigavel.\n\n"
+            "Mapa registrado: galeria superior e desvio inferior ao redor da rocha, com encontros opcionais e acesso livre de HMs.\n\n"
             +"\n".join("".join(row) for row in t)+"\n")
 
 def main():
