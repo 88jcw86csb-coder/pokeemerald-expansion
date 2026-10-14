@@ -50,6 +50,43 @@ def route(kind):
     # Restore a continuous east-west corridor after optional side areas.
     for x in range(W):
         t[22][x]="."
+    # Preserve the Dragon Trail's northern nesting terrace and southern overlooks.
+    if kind == "dragon":
+        for y, left, right in (
+            (6, 22, 35),
+            (7, 22, 35),
+            (8, 22, 35),
+            (9, 22, 35),
+            (10, 22, 35),
+            (11, 18, 35),
+            (12, 18, 35),
+            (13, 17, 35),
+            (14, 28, 31),
+            (15, 28, 31),
+            (16, 28, 31),
+            (17, 28, 31),
+            (18, 28, 31),
+            (31, 27, 33),
+            (31, 42, 46),
+            (32, 27, 33),
+            (32, 42, 46),
+            (33, 27, 33),
+            (33, 42, 46),
+            (34, 27, 32),
+            (34, 43, 46),
+            (35, 27, 33),
+            (35, 42, 46),
+            (36, 27, 33),
+            (36, 42, 46),
+            (37, 30, 33),
+            (37, 42, 45),
+            (38, 30, 34),
+            (38, 41, 45),
+            (39, 30, 37),
+            (39, 38, 45),
+        ):
+            for x in range(left, right):
+                t[y][x] = ":"
     return t
 
 
