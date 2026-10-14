@@ -676,3 +676,58 @@ EryonCidadeLiga_Text_PlazaChampion:
 	.string "ERYON TEM UM CAMPEAO!\p"
 	.string "A investigacao segue\n"
 	.string "por toda a regiao.$"
+
+
+@ Public archive marker in the city center, revealing the evidence chain after
+@ the Star Grotto and Eclipse reports. The League gate remains unaffected.
+EryonCidadeLiga_EventScript_CrystalArchive::
+	lock
+	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonCidadeLiga_EventScript_CrystalArchiveChampion
+	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonCidadeLiga_EventScript_CrystalArchiveFiled
+	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonCidadeLiga_EventScript_CrystalArchiveChart
+	msgbox EryonCidadeLiga_Text_CrystalArchiveBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_CrystalArchiveChart::
+	msgbox EryonCidadeLiga_Text_CrystalArchiveChart, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_CrystalArchiveFiled::
+	msgbox EryonCidadeLiga_Text_CrystalArchiveFiled, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_CrystalArchiveChampion::
+	msgbox EryonCidadeLiga_Text_CrystalArchiveChampion, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_Text_CrystalArchiveBefore:
+	.string "ARQUIVO DE CRISTAIS:\p"
+	.string "Antigos mapas de ERYON\n"
+	.string "estao em estudo.\p"
+	.string "Uma carta estelar\n"
+	.string "foi vista na gruta.$"
+
+EryonCidadeLiga_Text_CrystalArchiveChart:
+	.string "ARQUIVO DE CRISTAIS:\p"
+	.string "A carta da gruta liga\n"
+	.string "SOLARIS a DRAKONIA!\p"
+	.string "A ECLIPSE pode estar\n"
+	.string "usando as mesmas rotas.$"
+
+EryonCidadeLiga_Text_CrystalArchiveFiled:
+	.string "ARQUIVO DE CRISTAIS:\p"
+	.string "As provas da ECLIPSE\n"
+	.string "chegaram a esta cidade.\p"
+	.string "O arquivo esta aberto\n"
+	.string "a pesquisadores.$"
+
+EryonCidadeLiga_Text_CrystalArchiveChampion:
+	.string "ARQUIVO DE CRISTAIS:\p"
+	.string "O CAMPEAO ajudou\n"
+	.string "a revelar esta rede!\p"
+	.string "Outros misterios\n"
+	.string "ainda esperam em ERYON.$"
