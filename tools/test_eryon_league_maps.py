@@ -157,6 +157,26 @@ class LeagueMapTests(unittest.TestCase):
         species = (ROOT / "include/constants/species.h").read_text()
         self.assertIn("SPECIES_FLETCHLING", species)
 
+    def test_birdwatch_clearing_is_generated_and_accessible(self):
+        import json
+        terrain = route()
+        for y in range(8, 11):
+            for x in range(27, 30):
+                self.assertEqual(terrain[y][x], ".")
+        self.assertIn((28, 9), connected(terrain, (0, 22)))
+        self.assertIn((47, 22), connected(terrain, (0, 22)))
+        map_file = ROOT / "data/maps/Eryon_CaminhoDaLiga/map.json"
+        info = json.loads(map_file.read_text())
+        signs = [e for e in info["bg_events"] if
+                 e["script"] == "EryonLigaCaminho_EventScript_BirdwatchClearing"]
+        self.assertEqual([(e["x"], e["y"]) for e in signs], [(28, 9)])
+        scripts = (ROOT / "data/maps/Eryon_CaminhoDaLiga/scripts.inc").read_text()
+        self.assertEqual(scripts.count("EryonLigaCaminho_EventScript_BirdwatchClearing::"), 1)
+        self.assertEqual(
+            (ROOT / "docs/eryon/caminho_da_liga_terrain_plan.txt").read_text(),
+            render("caminho_da_liga", terrain),
+        )
+
     def test_summit_alcove_event_walkability_and_unique_script(self):
         import json
         t = route()
