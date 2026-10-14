@@ -243,6 +243,28 @@ class LeagueMapTests(unittest.TestCase):
             render("caminho_da_liga", terrain),
         )
 
+    def test_western_ravine_inscription_on_distinct_accessible_branch(self):
+        import json
+        terrain = route()
+        data = json.loads((ROOT / "data/maps/Eryon_CaminhoDaLiga/map.json").read_text())
+        events = [e for e in data["bg_events"] if
+                  e["script"] == "EryonLigaCaminho_EventScript_WestRavine"]
+        self.assertEqual([(e["x"], e["y"]) for e in events], [(20, 29)])
+        self.assertEqual(terrain[29][20], ":")
+        connected_tiles = connected(terrain, (0, 22))
+        self.assertIn((20, 29), connected_tiles)
+        self.assertIn((25, 36), connected_tiles)
+        self.assertIn((47, 22), connected_tiles)
+        script = (ROOT / "data/maps/Eryon_CaminhoDaLiga/scripts.inc").read_text()
+        entry = script.split("EryonLigaCaminho_EventScript_WestRavine::", 1)[1].split(
+            "EryonLigaCaminho_EventScript_WestRavineChart::", 1)[0]
+        for flag in ("FLAG_ERYON_CHAMPION_CROWNED",
+                     "FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED",
+                     "FLAG_ERYON_STAR_CHART_READ"):
+            self.assertIn(flag, entry)
+        self.assertNotIn("setflag ", entry)
+        self.assertNotIn("trainerbattle_", entry)
+
     def test_eight_stars_terrace_connected_city(self):
         """Check the new skyline park, unchanged League building, and exact terrain."""
         import json,struct
