@@ -21,6 +21,13 @@ A ROM de GBA segue em desenvolvimento na branch `eryon-development`. **Ter arqui
 - Corrigidos testes obsoletos de capacidade de treinadores e discrepância entre a validação e a equipe real de Kael.
 - Verifique o build atual do GitHub Actions antes de declarar a ROM compilada; alterações recentes atacam falhas de sintaxe no arquivo de equipes.
 
+## Capturas e nova história regional — 14/10/2026
+
+- As **21 rotas/cavernas** no grupo Eryon receberam tabelas terrestres `land_mons`; nenhuma das três primeiras tabelas foi substituída. Os 18 novos habitats usam somente espécies oficiais até Kalos e níveis previstos para sua fase na jornada.
+- A missão opcional **O Rio Contaminado** conecta a Rota das Cachoeiras, Vila das Águas, Trilha do Oásis, Deserto de Solaris e Ignivar. Suas pistas reagem a flags persistentes sem alterar os ginásios ou a Liga.
+- Foi criada uma coleta de amostra com prêmio único `Mystic Water` na vila; a recompensa pode ser resgatada depois, caso a Bolsa esteja cheia.
+- Os testes de mapa e o validador de espécies cobrem as tabelas, locais e flags. Ainda é preciso comprovar no **Delta** os encontros no terreno, a entrega da recompensa, o salvamento e a jornada completa.
+
 ## Pendências prioritárias
 1. Compilação limpa e verificação da ROM GBA via `tools/build_eryon.sh` e GitHub Actions.
 2. Auditoria das tabelas `land_mons`, evolução, disponibilidade e distribuição de capturas por rota.

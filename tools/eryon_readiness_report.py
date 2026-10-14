@@ -62,10 +62,12 @@ def main():
         if not wild_by_map.get(maps[name]["id"], {}).get("land_mons")
     ]
     print(f"ROUTES/CAVES AUDITED FOR LAND ENCOUNTERS: {len(outdoor)}")
+    print(f"WITH LAND ENCOUNTERS: {len(outdoor) - len(missing_land)}/{len(outdoor)}")
     print(f"WITHOUT LAND ENCOUNTERS: {len(missing_land)}")
     for name in missing_land:
         print(f"  ENCOUNTER TODO: {name}")
-    print("STILL REQUIRED: emulator traversal, saves, leader fights, League and ending.")
+    print("NOTE: encounter headers do not confirm metatile-based wild battles.")
+    print("STILL REQUIRED: Delta traversal, captures, saves, gym fights, League and ending.")
     return 0
 
 

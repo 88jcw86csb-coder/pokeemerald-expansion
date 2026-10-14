@@ -1,6 +1,6 @@
 # Eryon — distribuição planejada de Pokémon selvagens
 
-**Estado:** tabela de design, NÃO é tabela de encontros compilada na ROM. Apenas espécies oficiais até Kalos (gerações 1–6). O Riolu permanece o inicial da história; encontros selvagens não substituem o inicial.
+**Estado:** referência de design e faixas históricas de captura. Em 14/10/2026, todas as 21 rotas/cavernas registradas receberam tabelas terrestres reais em `src/data/wild_encounters.json`. A composição compilada varia desta proposta original; verificar no jogo os metatiles que ativam os encontros. Apenas espécies oficiais até Kalos; Riolu permanece o inicial.
 
 | Área | Níveis previstos | Encontros comuns | Incomuns | Raros / especiais |
 |---|---:|---|---|---|
@@ -26,6 +26,10 @@
 - O restante da Pokédex até Kalos será distribuído entre rotas adicionais, áreas pós-jogo, pesca, surf, cavernas e eventos; esta tabela **não** afirma cobrir todas as espécies.
 - A ordem final de cidades, ginásios, tipos e níveis é provisória e deve ser reconciliada com os líderes e equipes aprovados antes da implementação.
 
-## Auditoria da implementação — 13/10/2026
+## Auditoria da implementação — 14/10/2026
 
-A checagem da branch `eryon-development` apontou **18 das 21 rotas/cavernas sem encontros selvagens terrestres** em `src/data/wild_encounters.json`. Só Rota 01, Bosque de Lumina e Rota 02 possuem `land_mons` entre essas áreas. As espécies listadas acima continuam sendo um plano; precisam ser cadastradas de fato antes de considerar a aventura completa. Não confundir os 37 mapas registrados com 37 mapas prontos para capturas.
+- **21 de 21** mapas do tipo rota/caverna possuem agora `land_mons` (12 posições por mapa, com chance padronizada de espécies comuns e raras); foram preservados os três mapas iniciais previamente registrados.
+- **18 mapas** ganharam tabelas nesta etapa; as áreas incluem Serra dos Cristais, Passagem Rochosa, Estrada Oriental, trilhas intermediárias, Oásis, Solaris, Floresta dos Ecos, Trilha Lunar, Trilha dos Dragões, Gruta das Estrelas e Caminho da Liga.
+- Os níveis variam de 11–16 na Rota 03 até 50–57 na Gruta das Estrelas. O Caminho da Liga conserva por enquanto a faixa anterior de 44–52.
+- O pequeno mistério do rio entre Rota das Cachoeiras, Vila das Águas, Trilha do Oásis, Deserto de Solaris e Ignivar foi implementado em scripts. Na vila, uma amostra coletada rende `ITEM_MYSTIC_WATER` somente uma vez.
+- **Pendente:** confirmação de encontros disparando em grama/solo/caverna; artes e comportamento de metatiles provisórios podem não acionar encontros automaticamente. Também faltam fontes para várias espécies, pesca/Surf, trocas, evoluções e eventos especiais até completar a Pokédex de Kalos. Testes estáticos e ROM compilada não substituem o teste no Delta.
