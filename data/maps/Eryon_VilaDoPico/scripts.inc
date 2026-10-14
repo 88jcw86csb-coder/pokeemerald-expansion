@@ -48,6 +48,9 @@ EryonPico_EventScript_GeologistClue::
 
 EryonPico_EventScript_VillageNotice::
 	lock
+	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonPico_EventScript_NoticeAfterReport
+	goto_if_set FLAG_ERYON_PICO_SIGNAL_REPAIRED, EryonPico_EventScript_NoticeAfterRelay
+	goto_if_set FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ, EryonPico_EventScript_NoticeAfterManifest
 	msgbox EryonPico_Text_Notice, MSGBOX_DEFAULT
 	release
 	end
@@ -299,3 +302,39 @@ EryonPico_Text_RadioRepaired:
 	.string "a transmitir avisos.\p"
 	.string "A VILA DO PICO pode\n"
 	.string "acompanhar a ECLIPSE.$"
+
+
+@ Village board reflects prior decisions without changing travel, battles or save flags.
+
+EryonPico_EventScript_NoticeAfterReport::
+	msgbox EryonPico_Text_NoticeAfterReport, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPico_Text_NoticeAfterReport:
+	.string "VILA DO PICO:\n"
+	.string "COMUNICADO DA LIGA!\p"
+	.string "A rede ECLIPSE esta\n"
+	.string "sob investigacao.$"
+
+EryonPico_EventScript_NoticeAfterRelay::
+	msgbox EryonPico_Text_NoticeAfterRelay, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPico_Text_NoticeAfterRelay:
+	.string "VILA DO PICO:\n"
+	.string "RADIO EM OPERACAO!\p"
+	.string "Avisos do santuario\n"
+	.string "chegam sem interferencia.$"
+
+EryonPico_EventScript_NoticeAfterManifest::
+	msgbox EryonPico_Text_NoticeAfterManifest, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPico_Text_NoticeAfterManifest:
+	.string "VILA DO PICO:\n"
+	.string "AVISO AOS VIAJANTES!\p"
+	.string "Cargas da ECLIPSE\n"
+	.string "seguem para DRAKONIA.$"
