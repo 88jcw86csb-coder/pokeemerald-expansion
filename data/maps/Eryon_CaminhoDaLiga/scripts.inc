@@ -226,3 +226,56 @@ EryonLigaCaminho_Text_ObserverParkRestored:
 	.string "A natureza se recupera\n"
 	.string "quando o sinal da\n"
 	.string "ECLIPSE desaparece.$"
+
+
+@ Optional memorial reached by the new northern path between both summits.
+@ Does not award items, set flags, block access or modify League battles.
+EryonLigaCaminho_EventScript_StarMemorial::
+	lock
+	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonLigaCaminho_EventScript_StarMemorialReported
+	goto_if_set FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED, EryonLigaCaminho_EventScript_StarMemorialSilent
+	goto_if_set FLAG_BADGE08_GET, EryonLigaCaminho_EventScript_StarMemorialBadges
+	msgbox EryonLigaCaminho_Text_StarMemorialBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_StarMemorialReported::
+	msgbox EryonLigaCaminho_Text_StarMemorialReported, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_StarMemorialSilent::
+	msgbox EryonLigaCaminho_Text_StarMemorialSilent, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_StarMemorialBadges::
+	msgbox EryonLigaCaminho_Text_StarMemorialBadges, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_Text_StarMemorialBefore:
+	.string "MEMORIAL ESTELAR:\p"
+	.string "Oito caminhos antigos\n"
+	.string "se encontram no cume.\p"
+	.string "Dois mirantes revelam\n"
+	.string "a rota por Eryon.$"
+
+EryonLigaCaminho_Text_StarMemorialBadges:
+	.string "Suas oito INSIGNIAS\n"
+	.string "brilham diante do arco!\p"
+	.string "A LIGA fica alem\n"
+	.string "da estrada do leste.$"
+
+EryonLigaCaminho_Text_StarMemorialSilent:
+	.string "O eco artificial\n"
+	.string "da ECLIPSE se calou.\p"
+	.string "As estrelas agora\n"
+	.string "refletem na montanha.$"
+
+EryonLigaCaminho_Text_StarMemorialReported:
+	.string "MEMORIAL ESTELAR:\p"
+	.string "A LIGA conhece a rede\n"
+	.string "secreta da ECLIPSE.\p"
+	.string "Os viajantes voltam\n"
+	.string "a subir estes montes.$"

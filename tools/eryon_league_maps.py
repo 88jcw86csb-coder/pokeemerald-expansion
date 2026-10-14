@@ -23,6 +23,33 @@ def route():
                     t[y][x]="."
     for x in range(w):
         t[22][x]=":"
+    # Keep 24 pre-existing terrain adjustments that were saved only in map.bin.
+    for y, spans in (
+        (18, ((16, 16), (17, 17), (18, 18), (33, 33), (34, 34), (35, 35))),
+        (19, ((16, 16), (17, 17), (18, 18), (33, 33), (34, 34), (35, 35))),
+        (20, ((16, 16), (17, 17), (18, 18))),
+        (24, ((29, 29), (30, 30), (31, 31))),
+        (25, ((29, 29), (30, 30), (31, 31))),
+        (26, ((29, 29), (30, 30), (31, 31))),
+    ):
+        for x0, x1 in spans:
+            for x in range(x0, x1 + 1):
+                t[y][x] = ":"
+    # Upper twin-summit rim, northern stargazer plaza, southern return loop.
+    for y, a, b in ((10,10,16),(14,16,25),(7,25,38),(34,25,32),(31,32,40)):
+        for x in range(a,b+1):
+            t[y][x] = ":"
+    for x, a, b in ((16,10,14),(25,7,14),(32,31,34),(40,23,31)):
+        for y in range(a,b+1):
+            t[y][x] = ":"
+    for y in range(6,11):
+        for x in range(20,27):
+            if (x-23)**2/9+(y-8)**2/4 <= 1:
+                t[y][x] = ":"
+    for y in range(30,36):
+        for x in range(34,40):
+            if (x-36.5)**2/6.25+(y-33)**2/5 <= 1:
+                t[y][x] = ":"
     # The east gate now links to the City of the League.
     for y in range(h):
         t[y][w - 1]="#"
