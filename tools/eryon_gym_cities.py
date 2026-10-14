@@ -89,6 +89,20 @@ def city(name):
     # Explicit street exits; avoid implying routes are wired yet.
     t[28][0] = t[28][W-1] = "="
     t[0][32] = t[H-1][32] = "="
+    # Retain Drakonia's western research court and eastern sanctuary paths.
+    if name == "drakonia":
+        for y in range(19, 22):
+            for x in range(16, 31):
+                t[y][x] = "="
+        for y in range(35, 38):
+            for x in range(55, 63):
+                t[y][x] = ":"
+        for y in range(38, 41):
+            for left, right, tile in ((46, 48, "="), (51, 60, "="), (60, 63, ":")):
+                for x in range(left, right):
+                    t[y][x] = tile
+        for x in list(range(46, 48)) + list(range(51, 60)):
+            t[41][x] = "="
     return t
 
 
