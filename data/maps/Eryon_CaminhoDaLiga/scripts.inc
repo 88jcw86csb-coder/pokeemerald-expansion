@@ -323,25 +323,25 @@ EryonLigaCaminho_EventScript_LigaCourierChampion::
 
 EryonLigaCaminho_Text_GuardianQualified:
 	.string "GUARDIAO: Oito duelos\n"
-	.string "vencidos na LIGA!\\p"
+	.string "vencidos na LIGA!\p"
 	.string "Recupere seus Pokemon\n"
 	.string "antes da ELITE FOUR.$"
 
 EryonLigaCaminho_Text_GuardianChampion:
 	.string "GUARDIAO: O CAMPEAO\n"
-	.string "retorna a esta trilha!\\p"
+	.string "retorna a esta trilha!\p"
 	.string "A estrada continua\n"
 	.string "aberta para explorar.$"
 
 EryonLigaCaminho_Text_LigaCourierEvidence:
 	.string "MENSAGEIRO: A LIGA\n"
 	.string "recebeu as provas\n"
-	.string "contra a ECLIPSE.\\p"
+	.string "contra a ECLIPSE.\p"
 	.string "O torneio segue\n"
 	.string "na cidade a leste.$"
 
 EryonLigaCaminho_Text_LigaCourierChampion:
 	.string "MENSAGEIRO: A LIGA\n"
-	.string "tem um novo CAMPEAO!\\p"
+	.string "tem um novo CAMPEAO!\p"
 	.string "Os oito duelos e a\n"
 	.string "ELITE foram superados.$"
