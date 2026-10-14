@@ -176,6 +176,23 @@ class EryonLeagueApproach(unittest.TestCase):
             self.assertIn("EryonLigaCaminho_Text_" + name + ":", script)
         self.assertNotIn("setflag ", entry)
 
+    def test_city_guide_acknowledges_qualifier_and_champion(self):
+        city, _ = self.areas["Eryon_CidadeDaLiga"]
+        guides = [npc for npc in city["object_events"]
+                  if npc["script"] == "EryonCidadeLiga_EventScript_Guide"]
+        self.assertEqual(len(guides), 1)
+        script = (MAP_ROOT / "Eryon_CidadeDaLiga" / "scripts.inc").read_text(encoding="utf-8")
+        entry = script.split("EryonCidadeLiga_EventScript_Guide::", 1)[1].split(
+            "EryonCidadeLiga_EventScript_Fan::", 1)[0]
+        self.assertLess(entry.index("FLAG_ERYON_CHAMPION_CROWNED"),
+                        entry.index("FLAG_ERYON_QUALIFIED"))
+        self.assertLess(entry.index("FLAG_ERYON_QUALIFIED"),
+                        entry.index("FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED"))
+        for suffix in ("Qualified", "Champion"):
+            self.assertIn("EryonCidadeLiga_EventScript_Guide" + suffix + "::", script)
+            self.assertIn("EryonCidadeLiga_Text_Guide" + suffix + ":", script)
+        self.assertNotIn("setflag ", entry)
+
 
 if __name__ == "__main__":
     unittest.main()
