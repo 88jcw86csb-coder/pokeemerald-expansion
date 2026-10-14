@@ -80,7 +80,7 @@ class SerraSentry(unittest.TestCase):
         party = (ROOT / "src/data/trainers.party").read_text(encoding="utf-8")
         self.assertIn(f"#define {GUARD_FLAG} 0x28", flags)
         self.assertIn(f"#define {TRAINER} 888", opponents)
-        self.assertRegex(opponents, r"(?m)^#define TRAINERS_COUNT_EMERALD\s+889$")
+        self.assertRegex(opponents, r"(?m)^#define TRAINERS_COUNT_EMERALD\s+890$")
         self.assertIn(f"if (trainerId == {TRAINER})", setup)
         self.assertIn(f"return {GUARD_FLAG};", setup)
         self.assertEqual(len(re.findall(rf"(?m)^=== {TRAINER} ===$", party)), 1)
