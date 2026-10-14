@@ -29,6 +29,9 @@ EryonCidadeLiga_EventScript_Fan::
 
 EryonCidadeLiga_EventScript_PlazaSign::
 	lock
+	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonCidadeLiga_EventScript_PlazaChampion
+	goto_if_set FLAG_ERYON_QUALIFIED, EryonCidadeLiga_EventScript_PlazaQualified
+	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonCidadeLiga_EventScript_PlazaEvidence
 	msgbox EryonCidadeLiga_Text_CitySign, MSGBOX_DEFAULT
 	release
 	end
@@ -636,3 +639,40 @@ EryonCidadeLiga_Text_GuideChampion:
 	.string "volta, CAMPEAO!\p"
 	.string "O predio central\n"
 	.string "celebra sua historia.$"
+
+
+@ The established central plaza sign reports key milestones without altering
+@ access to the League building, the eight matches, or Eclipse investigation.
+EryonCidadeLiga_EventScript_PlazaEvidence::
+	msgbox EryonCidadeLiga_Text_PlazaEvidence, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_PlazaQualified::
+	msgbox EryonCidadeLiga_Text_PlazaQualified, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_PlazaChampion::
+	msgbox EryonCidadeLiga_Text_PlazaChampion, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_Text_PlazaEvidence:
+	.string "PRACA CENTRAL:\p"
+	.string "A LIGA investiga os\n"
+	.string "cristais da ECLIPSE.\p"
+	.string "O torneio continua\n"
+	.string "no edificio central.$"
+
+EryonCidadeLiga_Text_PlazaQualified:
+	.string "PRACA CENTRAL:\p"
+	.string "OITO FASES VENCIDAS!\p"
+	.string "Recupere sua equipe\n"
+	.string "antes da ELITE FOUR.$"
+
+EryonCidadeLiga_Text_PlazaChampion:
+	.string "PRACA CENTRAL:\p"
+	.string "ERYON TEM UM CAMPEAO!\p"
+	.string "A investigacao segue\n"
+	.string "por toda a regiao.$"
