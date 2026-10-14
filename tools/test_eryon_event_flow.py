@@ -1481,5 +1481,38 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertTrue(is_walkable(60, 28))
 
 
+
+    def test_eight_gym_ace_levels_and_scaled_experience_config(self):
+        """Preserve the agreed eight-gym curve and level-sensitive EXP rules."""
+        expected = (
+            ("TRAINER_ERYON_KAEL", 18),
+            ("TRAINER_ERYON_GYM_NEONARA", 25),
+            ("TRAINER_ERYON_GYM_FROSTHEIM", 31),
+            ("TRAINER_ERYON_GYM_ARKHARA", 36),
+            ("TRAINER_ERYON_GYM_UMBRA", 41),
+            ("TRAINER_ERYON_GYM_IGNIVAR", 46),
+            ("TRAINER_ERYON_GYM_LUNARIS", 51),
+            ("TRAINER_ERYON_GYM_DRAKONIA", 56),
+        )
+        parties = (ROOT / "src/data/trainers.party").read_text(encoding="utf-8")
+        for trainer, max_level in expected:
+            with self.subTest(trainer=trainer):
+                section = parties.split("=== " + trainer + " ===", 1)
+                self.assertEqual(len(section), 2, "Gym leader party missing")
+                team = section[1].split("\n=== ", 1)[0]
+                levels = [int(value) for value in re.findall(r"(?m)^Level: (\\d+)$", team)]
+                self.assertGreaterEqual(len(levels), 3)
+                self.assertLessEqual(len(levels), 6)
+                self.assertEqual(max(levels), max_level)
+
+        config = (ROOT / "include/config/battle.h").read_text(encoding="utf-8")
+        self.assertRegex(config, r"(?m)^#define\\s+B_SCALED_EXP\\s+GEN_LATEST\\b")
+        self.assertRegex(config, r"(?m)^#define\\s+B_TRAINER_EXP_MULTIPLIER\\s+GEN_6\\b")
+        engine = (ROOT / "src/battle_script_commands.c").read_text(encoding="utf-8")
+        self.assertIn("GetConfig(B_SCALED_EXP)", engine)
+        self.assertIn("ApplyExperienceMultipliers(", engine)
+        self.assertIn("sExperienceScalingFactors", engine)
+
+
 if __name__ == "__main__":
     unittest.main()
