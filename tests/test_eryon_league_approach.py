@@ -219,6 +219,27 @@ class EryonLeagueApproach(unittest.TestCase):
         self.assertNotIn("setflag ", entry)
         self.assertNotIn("trainerbattle_", entry)
 
+    def test_crystal_survey_is_reachable_and_never_gates_the_road(self):
+        data, walkable = self.areas["Eryon_CaminhoDaLiga"]
+        signs = [e for e in data["bg_events"] if
+                 e["script"] == "EryonLigaCaminho_EventScript_CrystalSurvey"]
+        self.assertEqual(len(signs), 1)
+        pos = (signs[0]["x"], signs[0]["y"])
+        self.assertIn(pos, walkable)
+        blockers = {(o["x"], o["y"]) for o in data["object_events"]}
+        warp = data["warp_events"][0]
+        reachable = reachable_tiles(walkable, (warp["x"], warp["y"]), blockers)
+        self.assertTrue(any(p in reachable for p in neighbors(pos)))
+        script = (MAP_ROOT / "Eryon_CaminhoDaLiga" / "scripts.inc").read_text(encoding="utf-8")
+        entry = script.split("EryonLigaCaminho_EventScript_CrystalSurvey::", 1)[1].split(
+            "EryonLigaCaminho_EventScript_CrystalSurveyQuiet::", 1)[0]
+        for flag in ("FLAG_ERYON_CHAMPION_CROWNED",
+                     "FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED",
+                     "FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED"):
+            self.assertIn(flag, entry)
+        self.assertNotIn("setflag ", entry)
+        self.assertNotIn("trainerbattle_", entry)
+
 
 if __name__ == "__main__":
     unittest.main()
