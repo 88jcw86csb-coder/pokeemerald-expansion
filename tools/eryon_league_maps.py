@@ -69,6 +69,12 @@ def route():
         t[y][26] = ":"
     for x in range(25, 27):
         t[14][x] = ":"
+    # An optional summit birdwatching clearing branches north of the existing
+    # shortcut without touching the main path or any object event.
+    for y in range(8, 11):
+        for x in range(27, 30):
+            t[y][x] = "."
+    t[11][28] = ":"
     # The east gate now links to the City of the League.
     for y in range(h):
         t[y][w - 1]="#"
