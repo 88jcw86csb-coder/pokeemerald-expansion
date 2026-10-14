@@ -11,7 +11,9 @@
 - Nenhum arquivo de sprite ou tileset com nome Eryon foi encontrado na inspeção do diretório de gráficos da branch nesta data.
 - O fluxo de história, os oito ginásios, as classificatórias e os saves são sistemas existentes: a remodelação visual deverá respeitar seus scripts, flags, colisões e entradas/saídas.
 
-**Não confundir:** mapa independente, arte gráfica inédita e jogo visualmente finalizado são marcos de qualidade diferentes. A ausência de duplicatas binárias exatas de Hoenn não certifica originalidade estética.
+**Não confundir:** mapa independente, arte gráfica inédita e jogo visualmente finalizado são marcos de qualidade diferentes.
+
+**Inventário automático inicial (GitHub Actions, 14/10/2026):** 42/42 layouts marcados para revisão de terreno por uma heurística de diversidade de metatiles; tilesets secundários herdados: 38 Rustboro e 4 Petalburg; 0 referências a gráficos de campo prefixados `OBJ_EVENT_GFX_ERYON_`; 34 treinadores Eryon com campo de retrato `Pic` herdado; 0 arquivos `map.bin` de Eryon exatamente iguais por hash a mapas binários da base. Estes números **não provam** que todos os mapas sejam cópias nem que qualquer arte seja original; apenas identificam trabalho visual pendente. Execute `python3 tools/eryon_visual_audit.py` para refazer o inventário. A ausência de duplicatas binárias exatas de Hoenn não certifica originalidade estética.
 
 ## Identidade-mãe
 
