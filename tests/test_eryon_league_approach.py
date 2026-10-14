@@ -308,6 +308,19 @@ class EryonLeagueApproach(unittest.TestCase):
         self.assertNotIn("trainerbattle_", entry)
         self.assertIn((48, 36), visited)
 
+    def test_summit_alcove_tracks_qualification_before_evidence(self):
+        road = (MAP_ROOT / "Eryon_CaminhoDaLiga" / "scripts.inc").read_text(encoding="utf-8")
+        entry = road.split("EryonLigaCaminho_EventScript_SummitAlcove::", 1)[1].split(
+            "EryonLigaCaminho_EventScript_SummitAlcoveFiled::", 1)[0]
+        self.assertLess(entry.index("FLAG_ERYON_CHAMPION_CROWNED"),
+                        entry.index("FLAG_ERYON_QUALIFIED"))
+        self.assertLess(entry.index("FLAG_ERYON_QUALIFIED"),
+                        entry.index("FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED"))
+        self.assertIn("EryonLigaCaminho_EventScript_SummitAlcoveQualified::", road)
+        self.assertIn("EryonLigaCaminho_Text_SummitAlcoveQualified:", road)
+        self.assertNotIn("setflag ", entry)
+        self.assertNotIn("trainerbattle_", entry)
+
 
 if __name__ == "__main__":
     unittest.main()
