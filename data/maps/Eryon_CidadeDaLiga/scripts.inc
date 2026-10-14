@@ -36,8 +36,8 @@ EryonCidadeLiga_EventScript_PlazaSign::
 EryonCidadeLiga_EventScript_Notice::
 	lock
 	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonCidadeLiga_EventScript_NoticeChampion
-	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonCidadeLiga_EventScript_NoticeEvidence
 	goto_if_set FLAG_ERYON_QUALIFIED, EryonCidadeLiga_EventScript_NoticeQualified
+	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonCidadeLiga_EventScript_NoticeEvidence
 	msgbox EryonCidadeLiga_Text_Notice, MSGBOX_DEFAULT
 	release
 	end
