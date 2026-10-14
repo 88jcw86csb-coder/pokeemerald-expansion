@@ -39,12 +39,22 @@ class EryonWildAndRiverTests(unittest.TestCase):
         wild = json.loads((ROOT / "src/data/wild_encounters.json").read_text(encoding="utf-8"))
         cls.group = next(x for x in wild["wild_encounter_groups"] if x["label"] == "gWildMonHeaders")
         cls.by_map = {e["map"]: e for e in cls.group["encounters"]}
-        cls.species = dict(
-            (key, int(value)) for key, value in re.findall(
+        species_text = (ROOT / "include/constants/species.h").read_text(encoding="utf-8")
+        cls.species = {
+            key: int(value) for key, value in re.findall(
                 r"(?m)^\s*(SPECIES_[A-Z0-9_]+)\s*=\s*(\d+)\s*,?",
-                (ROOT / "include/constants/species.h").read_text(encoding="utf-8")
+                species_text
             )
-        )
+        }
+        # Legitimate Gen VI species such as PUMPKABOO are aliases for the
+        # numerically enumerated average-size form. Resolve aliases rather
+        # than rejecting a valid, engine-supported canonical species name.
+        for alias, target in re.findall(
+            r"(?m)^\s*(SPECIES_[A-Z0-9_]+)\s*=\s*(SPECIES_[A-Z0-9_]+)\s*,?",
+            species_text
+        ):
+            if target in cls.species:
+                cls.species[alias] = cls.species[target]
 
     def test_nine_new_land_tables_are_unique_and_balanced(self):
         # Vanilla groups intentionally reuse maps for alternate game versions.
