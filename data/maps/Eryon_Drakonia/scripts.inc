@@ -647,3 +647,69 @@ EryonDrakonia_Text_LeagueNoticeManifest:
 	.string "para a CIDADE DA LIGA.\p"
 	.string "Os viajantes podem\n"
 	.string "seguir pelo caminho.$"
+
+
+@ An existing graphic represents a League trail scout stationed near the east gate.
+@ The scout offers guidance only; the cave path never requires a badge or item.
+EryonDrakonia_EventScript_LeagueScout::
+	lock
+	faceplayer
+	goto_if_set FLAG_BADGE08_GET, EryonDrakonia_EventScript_ScoutAfterBadge
+	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonDrakonia_EventScript_ScoutAfterReport
+	goto_if_set FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED, EryonDrakonia_EventScript_ScoutAfterRelay
+	goto_if_set FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ, EryonDrakonia_EventScript_ScoutManifest
+	msgbox EryonDrakonia_Text_ScoutBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_EventScript_ScoutManifest:
+	msgbox EryonDrakonia_Text_ScoutManifest, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_EventScript_ScoutAfterRelay:
+	msgbox EryonDrakonia_Text_ScoutAfterRelay, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_EventScript_ScoutAfterReport:
+	msgbox EryonDrakonia_Text_ScoutAfterReport, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_EventScript_ScoutAfterBadge:
+	msgbox EryonDrakonia_Text_ScoutAfterBadge, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_Text_ScoutBefore:
+	.string "EXPLORADORA: Eu mapeei\n"
+	.string "a gruta a leste!\p"
+	.string "A trilha ate a LIGA\n"
+	.string "pode ser feita a pe.$"
+
+EryonDrakonia_Text_ScoutManifest:
+	.string "EXPLORADORA: As cargas\n"
+	.string "da ECLIPSE passam aqui!\p"
+	.string "Cuidado com as pedras\n"
+	.string "da GRUTA DAS ESTRELAS.$"
+
+EryonDrakonia_Text_ScoutAfterRelay:
+	.string "EXPLORADORA: O sinal\n"
+	.string "da gruta foi cortado!\p"
+	.string "A passagem a LIGA\n"
+	.string "continua livre a pe.$"
+
+EryonDrakonia_Text_ScoutAfterReport:
+	.string "EXPLORADORA: A LIGA\n"
+	.string "recebeu suas provas!\p"
+	.string "Os guardas vigiam\n"
+	.string "a estrada oriental.$"
+
+EryonDrakonia_Text_ScoutAfterBadge:
+	.string "EXPLORADORA: Oito\n"
+	.string "INSIGNIAS! Parabens!\p"
+	.string "Enfrente oito duelos\n"
+	.string "antes da ELITE FOUR.\p"
+	.string "Ha uma area de cura\n"
+	.string "apos a classificatoria.$"

@@ -1440,5 +1440,46 @@ class EryonEventFlowTests(unittest.TestCase):
                         )
 
 
+
+    def test_drakonia_league_scout_walkable_and_story_aware(self):
+        """NPC at east gate must be accessible and preserve badge/event priority."""
+        import json
+
+        root = ROOT / "data/maps/Eryon_Drakonia"
+        info = json.loads((root / "map.json").read_text(encoding="utf-8"))
+        script = (root / "scripts.inc").read_text(encoding="utf-8")
+        label = "EryonDrakonia_EventScript_LeagueScout"
+        scouts = [event for event in info["object_events"] if event["script"] == label]
+        self.assertEqual(len(scouts), 1)
+        self.assertEqual((scouts[0]["x"], scouts[0]["y"]), (59, 29))
+        self.assertEqual(scouts[0]["trainer_type"], "TRAINER_TYPE_NONE")
+        entry = script.split(label + "::", 1)[1].split("\n\n", 1)[0]
+        flags = re.findall(r"goto_if_set (FLAG_[A-Z0-9_]+)", entry)
+        self.assertEqual(flags, [
+            "FLAG_BADGE08_GET",
+            "FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED",
+            "FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED",
+            "FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ",
+        ])
+        for suffix in ("ScoutManifest", "ScoutAfterRelay",
+                       "ScoutAfterReport", "ScoutAfterBadge", "ScoutBefore"):
+            self.assertIn("EryonDrakonia_Text_" + suffix + ":", script)
+        for side_effect in ("setflag ", "giveitem ", "trainerbattle_", "warp "):
+            self.assertNotIn(side_effect, entry)
+
+        layouts = json.loads((ROOT / "data/layouts/layouts.json").read_text(encoding="utf-8"))
+        layout = next(item for item in layouts["layouts"] if item["id"] == info["layout"])
+        raw = (ROOT / layout["blockdata_filepath"]).read_bytes()
+        width = layout["width"]
+        def is_walkable(x, y):
+            offset = 2 * (y * width + x)
+            block = int.from_bytes(raw[offset:offset + 2], "little")
+            return (block & 0x0C00) == 0
+        self.assertTrue(is_walkable(59, 29))
+        self.assertTrue(is_walkable(59, 28))
+        self.assertTrue(is_walkable(58, 29))
+        self.assertTrue(is_walkable(60, 28))
+
+
 if __name__ == "__main__":
     unittest.main()
