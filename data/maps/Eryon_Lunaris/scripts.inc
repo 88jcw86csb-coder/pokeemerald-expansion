@@ -294,9 +294,9 @@ EryonLunaris_EventScript_ScholarArchiveAndBadge:
 	end
 
 EryonLunaris_Text_ScholarArchiveAndBadge:
-	.string "PESQUISADORA: O arquivo\\n"
-	.string "e sua 7a INSIGNIA!\\p"
-	.string "O canto antigo foi\\n"
-	.string "distorcido pela ECLIPSE.\\p"
-	.string "Compare as cargas na\\n"
+	.string "PESQUISADORA: O arquivo\n"
+	.string "e sua 7a INSIGNIA!\p"
+	.string "O canto antigo foi\n"
+	.string "distorcido pela ECLIPSE.\p"
+	.string "Compare as cargas na\n"
 	.string "TRILHA DOS DRAGOES.$"
