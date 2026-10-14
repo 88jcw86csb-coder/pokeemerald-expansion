@@ -90,6 +90,7 @@ EryonLigaCaminho_Text_LeagueGate:
 EryonLigaCaminho_EventScript_ScoutWitness::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonLigaCaminho_EventScript_ScoutWitnessReported
 	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonLigaCaminho_EventScript_ScoutWitnessAfter
 	msgbox EryonLigaCaminho_Text_ScoutWitnessBefore, MSGBOX_DEFAULT
 	release
@@ -345,3 +346,19 @@ EryonLigaCaminho_Text_LigaCourierChampion:
 	.string "tem um novo CAMPEAO!\p"
 	.string "Os oito duelos e a\n"
 	.string "ELITE foram superados.$"
+
+
+@ The road witness follows the evidence after it has been officially filed.
+@ Revisits remain optional and never reset the tournament or Eclipse story.
+EryonLigaCaminho_EventScript_ScoutWitnessReported::
+	msgbox EryonLigaCaminho_Text_ScoutWitnessReported, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_Text_ScoutWitnessReported:
+	.string "VIAJANTE: A LIGA\n"
+	.string "recebeu as provas!\p"
+	.string "A ECLIPSE perdeu\n"
+	.string "seu esconderijo.\p"
+	.string "Mas a investigacao\n"
+	.string "continua em ERYON.$"
