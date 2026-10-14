@@ -20,6 +20,15 @@ EXPECTED = {
     "MAP_ERYON_DESERTO_DE_SOLARIS": (34, 40, {"SANDSHREW", "CACNEA", "DWEBBLE", "SIGILYPH", "HELIOPTILE", "GIBLE"}),
     "MAP_ERYON_FLORESTA_DOS_ECOS": (38, 44, {"PHANTUMP", "PUMPKABOO", "FOONGUS", "ZORUA", "KARRABLAST", "LARVESTA"}),
     "MAP_ERYON_CAMINHO_DA_LIGA": (44, 52, {"GOLBAT", "GRAVELER", "GURDURR", "ZWEILOUS", "GABITE", "BAGON"}),
+    "MAP_ERYON_ESTRADA_DOS_POMARES": (16, 22, {"CHERUBI", "LILLIPUP", "BUDEW", "DEERLING", "COMBEE", "PETILIL"}),
+    "MAP_ERYON_ROTA04": (18, 24, {"SENTRET", "RATTATA", "MACHOP", "SHINX", "SCRAGGY", "PANCHAM"}),
+    "MAP_ERYON_COLINAS_DA_NEBLINA": (24, 30, {"GASTLY", "MURKROW", "MUNNA", "ESPURR", "MISDREAVUS", "SNEASEL"}),
+    "MAP_ERYON_TRILHA_GLACIAL": (25, 31, {"SWINUB", "SNOVER", "SNEASEL", "CUBCHOO", "BERGMITE", "SNORUNT"}),
+    "MAP_ERYON_TRILHA_DO_OASIS": (32, 38, {"SANDSHREW", "MARACTUS", "HIPPOPOTAS", "CACNEA", "HELIOPTILE", "TRAPINCH"}),
+    "MAP_ERYON_VALE_DOS_ECOS": (42, 48, {"LOUDRED", "SWADLOON", "SAWSBUCK", "GOTHORITA", "ELGYEM", "HONEDGE"}),
+    "MAP_ERYON_TRILHA_LUNAR": (45, 51, {"CLEFAIRY", "LUNATONE", "SOLROCK", "GOTHORITA", "ELGYEM", "INKAY"}),
+    "MAP_ERYON_TRILHA_DOS_DRAGOES": (49, 55, {"DRUDDIGON", "SLIGGOO", "GABITE", "ALTARIA", "FRAXURE", "NOIBAT"}),
+    "MAP_ERYON_GRUTA_DAS_ESTRELAS": (50, 57, {"BOLDORE", "SOLROCK", "LUNATONE", "CARBINK", "ELGYEM", "BELDUM"}),
 }
 OPENING = {
     "MAP_ERYON_ROTA01", "MAP_ERYON_BOSQUE_DE_LUMINA", "MAP_ERYON_ROTA02"
@@ -30,6 +39,7 @@ STORY = (
     ("Eryon_RotaDasCachoeiras", "bg_events", "EryonCachoeiras_EventScript_SamplingStation", 29, 22),
     ("Eryon_VilaDasAguas", "object_events", "EryonAguas_EventScript_RiverResearcher", 20, 14),
     ("Eryon_Ignivar", "bg_events", "EryonIgnivar_EventScript_RiverTransportBoard", 42, 28),
+    ("Eryon_TrilhaDoOasis", "bg_events", "EryonOasis_EventScript_CaravanWaterRecord", 28, 22),
 )
 
 
@@ -56,13 +66,15 @@ class EryonWildAndRiverTests(unittest.TestCase):
             if target in cls.species:
                 cls.species[alias] = cls.species[target]
 
-    def test_nine_new_land_tables_are_unique_and_balanced(self):
+    def test_all_twenty_one_land_tables_are_unique_and_balanced(self):
         # Vanilla groups intentionally reuse maps for alternate game versions.
         # Eryon itself must never duplicate a map header or encounter label.
         eryon_entries = [e for e in self.group["encounters"]
                          if e["map"].startswith("MAP_ERYON_")]
         all_maps = [e["map"] for e in eryon_entries]
         labels = [e["base_label"] for e in eryon_entries]
+        self.assertEqual(len(all_maps), 21, "Every Eryon route/cave needs land encounters")
+        self.assertEqual(len(EXPECTED), 18, "Opening route tables are separately audited")
         self.assertEqual(len(all_maps), len(set(all_maps)), "Duplicate encounter map")
         self.assertEqual(len(labels), len(set(labels)), "Duplicate encounter base label")
         self.assertTrue(OPENING <= self.by_map.keys())
@@ -133,6 +145,12 @@ class EryonWildAndRiverTests(unittest.TestCase):
                         check.index("setflag " + FLAG_REWARD))
         city = (ROOT / "data/maps/Eryon_Ignivar/scripts.inc").read_text(encoding="utf-8")
         self.assertIn("goto_if_set " + FLAG_SAMPLE, city)
+        oasis = (ROOT / "data/maps/Eryon_TrilhaDoOasis/scripts.inc").read_text(encoding="utf-8")
+        solaris = (ROOT / "data/maps/Eryon_DesertoDeSolaris/scripts.inc").read_text(encoding="utf-8")
+        self.assertIn("goto_if_set " + FLAG_SAMPLE, oasis)
+        self.assertIn("EryonOasis_EventScript_WaterRecordConfirmed::", oasis)
+        self.assertIn("goto_if_set " + FLAG_SAMPLE, solaris)
+        self.assertIn("EryonSolaris_EventScript_DeviceRiverData::", solaris)
 
 
 if __name__ == "__main__":
