@@ -58,6 +58,9 @@ def cavern():
         for x in range(26, 33):
             if (x - 29) ** 2 / 16 + (y - 10) ** 2 / 9 <= 1.03:
                 t[y][x] = ":"
+    # Keep the already-registered Eclipse relay terminal at (42, 29) reachable.
+    # Its previous block collision was nonzero; do not move the saved event.
+    t[29][42] = ":"
     return t
 
 def reachable(t):
