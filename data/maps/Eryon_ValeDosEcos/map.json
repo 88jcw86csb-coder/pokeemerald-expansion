@@ -63,6 +63,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EryonEcoVale_EventScript_VillageSign"
+    },
+    {
+      "type": "sign",
+      "x": 32,
+      "y": 22,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EryonEcoVale_EventScript_PulseRecorder"
     }
   ],
   "id": "MAP_ERYON_VALE_DOS_ECOS",
