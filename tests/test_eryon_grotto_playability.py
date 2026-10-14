@@ -110,6 +110,25 @@ class EryonGrottoPlayability(unittest.TestCase):
             "goto_if_set FLAG_ERYON_GROTTO_ECLIPSE_SCOUT_DEFEATED, "
             "EryonLigaCaminho_EventScript_GuardianScoutDefeated", road_script)
 
+    def test_astronomer_story_prioritizes_league_epilogue(self):
+        obj = [o for o in self.map["object_events"]
+               if o["script"] == "EryonEstrelas_EventScript_Astronomer"]
+        self.assertEqual(len(obj), 1)
+        block = self.script.split("EryonEstrelas_EventScript_Astronomer::", 1)[1].split(
+            "EryonEstrelas_EventScript_AstronomerAfterChart::", 1)[0]
+        ordered = (
+            "FLAG_ERYON_CHAMPION_CROWNED",
+            "FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED",
+            "FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED",
+            "FLAG_ERYON_STAR_CHART_READ",
+        )
+        self.assertEqual(list(map(block.index, ordered)), sorted(map(block.index, ordered)))
+        for suffix in ("RelayOff", "Evidence", "Champion"):
+            self.assertIn("EryonEstrelas_EventScript_Astronomer" + suffix + "::", self.script)
+            self.assertIn("EryonEstrelas_Text_Astronomer" + suffix + ":", self.script)
+        self.assertNotIn("setflag ", block)
+        self.assertNotIn("trainerbattle_", block)
+
 
 if __name__ == "__main__":
     unittest.main()
