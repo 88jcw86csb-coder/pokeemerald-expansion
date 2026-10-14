@@ -61,6 +61,14 @@ def route():
         t[12][x] = ":"
     for y in range(8, 13):
         t[y][32] = ":"
+    # A new northern connector offers a shorter walk from the Star Memorial
+    # to the eastern summit switchback without closing the original winding rim.
+    for x in range(25, 33):
+        t[11][x] = ":"
+    for y in range(11, 15):
+        t[y][26] = ":"
+    for x in range(25, 27):
+        t[14][x] = ":"
     # The east gate now links to the City of the League.
     for y in range(h):
         t[y][w - 1]="#"
