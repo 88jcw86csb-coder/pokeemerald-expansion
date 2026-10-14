@@ -123,6 +123,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EryonIgnivar_EventScript_EmergencyBoard"
+    },
+    {
+      "type": "sign",
+      "x": 42,
+      "y": 28,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EryonIgnivar_EventScript_RiverTransportBoard"
     }
   ],
   "id": "MAP_ERYON_IGNIVAR",

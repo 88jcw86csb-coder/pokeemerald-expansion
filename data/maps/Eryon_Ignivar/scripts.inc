@@ -144,6 +144,7 @@ EryonIgnivar_Text_BurntFuseClue:
 EryonIgnivar_EventScript_GridInspector::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_RIVER_SAMPLE_RECORDED, EryonIgnivar_EventScript_GridInspectorRiverSample
 	msgbox EryonIgnivar_Text_GridInspector, MSGBOX_DEFAULT
 	release
 	end
@@ -275,3 +276,44 @@ EryonIgnivar_Text_GymNotReady:
 	.string "KAIO: Primeiro,\n"
 	.string "conquiste a INSIGNIA\n"
 	.string "do GINASIO anterior.$"
+
+@ Reports from the western waterway reach the large city power station.
+EryonIgnivar_EventScript_RiverTransportBoard::
+	lock
+	goto_if_set FLAG_ERYON_RIVER_SAMPLE_RECORDED, EryonIgnivar_EventScript_RiverBoardSample
+	msgbox EryonIgnivar_Text_RiverBoardBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonIgnivar_EventScript_RiverBoardSample::
+	msgbox EryonIgnivar_Text_RiverBoardSample, MSGBOX_DEFAULT
+	release
+	end
+
+EryonIgnivar_EventScript_GridInspectorRiverSample::
+	msgbox EryonIgnivar_Text_InspectorRiverSample, MSGBOX_DEFAULT
+	release
+	end
+
+EryonIgnivar_Text_RiverBoardBefore:
+	.string "QUADRO DA USINA:\n"
+	.string "Cargas de origem\n"
+	.string "desconhecida chegaram.\p"
+	.string "Analise de agua:\n"
+	.string "ainda sem resultado.$"
+
+EryonIgnivar_Text_RiverBoardSample:
+	.string "QUADRO DA USINA:\n"
+	.string "A ECLIPSE contaminou\n"
+	.string "o rio das CACHOEIRAS.\p"
+	.string "A energia segue do\n"
+	.string "SOLARIS aos ECOS.$"
+
+EryonIgnivar_Text_InspectorRiverSample:
+	.string "TECNICA: A analise\n"
+	.string "da vila chegou aqui!\p"
+	.string "A usina e a floresta\n"
+	.string "partilham o mesmo sinal.\p"
+	.string "A ECLIPSE nao controla\n"
+	.string "somente o deserto.$"
+

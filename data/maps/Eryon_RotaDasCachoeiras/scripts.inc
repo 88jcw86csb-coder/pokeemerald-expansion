@@ -73,3 +73,58 @@ EryonCachoeiras_Text_CrystalResidueClue:
 	.string "cristais roubados!\p"
 	.string "Alguem despejou residuos\n"
 	.string "da carga na agua.$"
+
+@ Optional river investigation: the captured sample persists across maps.
+@ Does not require a badge, HM or combat; the observatory notes are optional.
+EryonCachoeiras_EventScript_SamplingStation::
+	lock
+	goto_if_set FLAG_ERYON_RIVER_SAMPLE_RECORDED, EryonCachoeiras_EventScript_SamplingComplete
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonCachoeiras_EventScript_SamplingOffer
+	msgbox EryonCachoeiras_Text_SamplingUnknown, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCachoeiras_EventScript_SamplingOffer::
+	msgbox EryonCachoeiras_Text_SamplingOffer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonCachoeiras_EventScript_SamplingDecline
+	closemessage
+	setflag FLAG_ERYON_RIVER_SAMPLE_RECORDED
+	msgbox EryonCachoeiras_Text_SamplingCollected, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCachoeiras_EventScript_SamplingDecline::
+	closemessage
+	release
+	end
+
+EryonCachoeiras_EventScript_SamplingComplete::
+	msgbox EryonCachoeiras_Text_SamplingComplete, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCachoeiras_Text_SamplingUnknown:
+	.string "ESTACAO DE AMOSTRAS:\n"
+	.string "A agua parece turva.\p"
+	.string "Falta uma pista sobre\n"
+	.string "a origem deste brilho.$"
+
+EryonCachoeiras_Text_SamplingOffer:
+	.string "O medidor reconhece\n"
+	.string "o sinal da ECLIPSE!\p"
+	.string "Registrar uma amostra\n"
+	.string "para VILA DAS AGUAS?$"
+
+EryonCachoeiras_Text_SamplingCollected:
+	.string "Amostra registrada!\p"
+	.string "Um registro foi enviado\n"
+	.string "para VILA DAS AGUAS.\p"
+	.string "Procure a pesquisadora\n"
+	.string "na praca da vila.$"
+
+EryonCachoeiras_Text_SamplingComplete:
+	.string "ESTACAO DE AMOSTRAS:\n"
+	.string "Registro completo.\p"
+	.string "Os dados ja seguiram\n"
+	.string "para VILA DAS AGUAS.$"
+
