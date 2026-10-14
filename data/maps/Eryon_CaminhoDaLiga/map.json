@@ -145,6 +145,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EryonLigaCaminho_EventScript_RidgeFletchling"
+    },
+    {
+      "type": "sign",
+      "x": 28,
+      "y": 9,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EryonLigaCaminho_EventScript_BirdwatchClearing"
     }
   ],
   "id": "MAP_ERYON_CAMINHO_DA_LIGA",
