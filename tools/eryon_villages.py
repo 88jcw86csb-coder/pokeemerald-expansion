@@ -66,6 +66,11 @@ def village(name):
     for y in range(min(cy,8 if cy<15 else 23),max(cy,8 if cy<15 else 23)+1):
         t[y][8 if cx<18 else 27]="."
     t[cy][cx]="P"
+    # Walkable east-side research courtyard introduced in the registered map.
+    if name == "vila_do_pico":
+        for y in range(19, 22):
+            for x in range(20, 23):
+                t[y][x] = "."
     return t
 
 
