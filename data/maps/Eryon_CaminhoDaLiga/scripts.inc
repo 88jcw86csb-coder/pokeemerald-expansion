@@ -5,6 +5,8 @@ Eryon_CaminhoDaLiga_MapScripts::
 EryonLigaCaminho_EventScript_RouteGuardian::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonLigaCaminho_EventScript_GuardianChampion
+	goto_if_set FLAG_ERYON_QUALIFIED, EryonLigaCaminho_EventScript_GuardianQualified
 	goto_if_set FLAG_ERYON_GROTTO_ECLIPSE_SCOUT_DEFEATED, EryonLigaCaminho_EventScript_GuardianScoutDefeated
 	goto_if_set FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED, EryonLigaCaminho_EventScript_GuardianRelayDisabled
 	msgbox EryonLigaCaminho_Text_Guardian, MSGBOX_DEFAULT
@@ -101,7 +103,9 @@ EryonLigaCaminho_EventScript_ScoutWitnessAfter::
 EryonLigaCaminho_EventScript_LigaCourier::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonLigaCaminho_EventScript_LigaCourierChampion
 	goto_if_set FLAG_ERYON_QUALIFIED, EryonLigaCaminho_EventScript_LigaCourierAfter
+	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonLigaCaminho_EventScript_LigaCourierEvidence
 	msgbox EryonLigaCaminho_Text_LigaCourierBefore, MSGBOX_DEFAULT
 	release
 	end
@@ -293,3 +297,51 @@ EryonLigaCaminho_Text_GuardianRelayDisabled:
 	.string "perdeu a antena da gruta!\p"
 	.string "O acesso a CIDADE\n"
 	.string "DA LIGA segue livre.$"
+
+
+@ After qualifying, the road directs the player to recovery, not another qualifier.
+@ After becoming Champion, the original road remains open for revisits.
+EryonLigaCaminho_EventScript_GuardianQualified::
+	msgbox EryonLigaCaminho_Text_GuardianQualified, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_GuardianChampion::
+	msgbox EryonLigaCaminho_Text_GuardianChampion, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_LigaCourierEvidence::
+	msgbox EryonLigaCaminho_Text_LigaCourierEvidence, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_LigaCourierChampion::
+	msgbox EryonLigaCaminho_Text_LigaCourierChampion, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_Text_GuardianQualified:
+	.string "GUARDIAO: Oito duelos\n"
+	.string "vencidos na LIGA!\\p"
+	.string "Recupere seus Pokemon\n"
+	.string "antes da ELITE FOUR.$"
+
+EryonLigaCaminho_Text_GuardianChampion:
+	.string "GUARDIAO: O CAMPEAO\n"
+	.string "retorna a esta trilha!\\p"
+	.string "A estrada continua\n"
+	.string "aberta para explorar.$"
+
+EryonLigaCaminho_Text_LigaCourierEvidence:
+	.string "MENSAGEIRO: A LIGA\n"
+	.string "recebeu as provas\n"
+	.string "contra a ECLIPSE.\\p"
+	.string "O torneio segue\n"
+	.string "na cidade a leste.$"
+
+EryonLigaCaminho_Text_LigaCourierChampion:
+	.string "MENSAGEIRO: A LIGA\n"
+	.string "tem um novo CAMPEAO!\\p"
+	.string "Os oito duelos e a\n"
+	.string "ELITE foram superados.$"
