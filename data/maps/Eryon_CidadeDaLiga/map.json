@@ -139,6 +139,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EryonCidadeLiga_EventScript_EightStarsTerrace"
+    },
+    {
+      "type": "sign",
+      "x": 54,
+      "y": 42,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EryonCidadeLiga_EventScript_CrystalArchive"
     }
   ],
   "id": "MAP_ERYON_CIDADE_DA_LIGA",
