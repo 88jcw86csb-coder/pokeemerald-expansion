@@ -12,6 +12,8 @@ EryonCidadeLiga_EventScript_Medic::
 EryonCidadeLiga_EventScript_Guide::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonCidadeLiga_EventScript_GuideChampion
+	goto_if_set FLAG_ERYON_QUALIFIED, EryonCidadeLiga_EventScript_GuideQualified
 	goto_if_set FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED, EryonCidadeLiga_EventScript_GuideRelayOff
 	msgbox EryonCidadeLiga_Text_Guide, MSGBOX_DEFAULT
 	release
@@ -609,3 +611,28 @@ EryonCidadeLiga_Text_NoticeChampion:
 
 @ The report on the Eclipse dossier takes precedence over older battle news.
 @ No additional flags, fights, items or League progression changes.
+
+
+@ City entrance guide: the central League building remains the destination.
+@ The existing guide points qualified trainers to recovery and greets Champions.
+EryonCidadeLiga_EventScript_GuideQualified::
+	msgbox EryonCidadeLiga_Text_GuideQualified, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_GuideChampion::
+	msgbox EryonCidadeLiga_Text_GuideChampion, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_Text_GuideQualified:
+	.string "GUIA: Venceu as oito\n"
+	.string "lutas classificatorias!\p"
+	.string "Recupere sua equipe\n"
+	.string "antes da ELITE FOUR.$"
+
+EryonCidadeLiga_Text_GuideChampion:
+	.string "GUIA: Bem-vindo de\n"
+	.string "volta, CAMPEAO!\p"
+	.string "O predio central\n"
+	.string "celebra sua historia.$"
