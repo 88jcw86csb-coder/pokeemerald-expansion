@@ -169,6 +169,25 @@ class EryonGymBalance(unittest.TestCase):
             r"(?m)^Level: (\d+)$", self.party["TRAINER_ERYON_CHAMPION"])]
         self.assertEqual((min(champion), max(champion)), (72, 75))
 
+    def test_battle_exp_and_optional_wild_encounters_share_progression_contract(self):
+        """Static regression: EXP behavior, Kalos species, and League entry coexist.
+
+        This is source validation, not an emulator EXP calculation.
+        """
+        battle = (ROOT / "src/battle_main.c").read_text(encoding="utf-8")
+        species = (ROOT / "include/constants/species.h").read_text(encoding="utf-8")
+        dragon = (MAPS / "Eryon_TrilhaDosDragoes" / "scripts.inc").read_text(encoding="utf-8")
+        league = (MAPS / "Eryon_LigaRecepcao" / "scripts.inc").read_text(encoding="utf-8")
+        self.assertIn("gBattleScripting.expOnCatch = (GetConfig(B_EXP_CATCH) >= GEN_6);", battle)
+        self.assertIn("gBattleStruct->givenExpMons[0] = 0;", battle)
+        self.assertIn("SPECIES_NOIBAT", species)
+        self.assertIn("setwildbattle SPECIES_NOIBAT, 38", dragon)
+        for badge in range(1, 9):
+            self.assertIn(f"FLAG_BADGE{badge:02d}_GET", league)
+        for trainer in GYM_TRAINERS:
+            self.assertIn(trainer, self.party)
+
+
 
 if __name__ == "__main__":
     unittest.main()
