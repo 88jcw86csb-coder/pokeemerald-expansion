@@ -5,6 +5,7 @@ Eryon_PassagemRochosa_MapScripts::
 EryonPassagem_EventScript_Guard::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_SERRA_CORE_GUARD_DEFEATED, EryonPassagem_EventScript_GuardSerraSentryDefeated
 	goto_if_set FLAG_ERYON_SERRA_ECLIPSE_SIGNAL_DISABLED, EryonPassagem_EventScript_GuardSerraQuiet
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonPassagem_EventScript_GuardClue
 	goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonPassagem_EventScript_GuardBadge
@@ -343,3 +344,18 @@ EryonPassagem_Text_CrystalMarkSerraQuiet:
 	.string "continuam na pedra.\p"
 	.string "Mas os cristais ja\n"
 	.string "nao emitem sinais.$"
+
+
+@ Border patrol sees the Eclipse guard retreat before the core is silenced.
+EryonPassagem_EventScript_GuardSerraSentryDefeated::
+	msgbox EryonPassagem_Text_GuardSerraSentryDefeated, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPassagem_Text_GuardSerraSentryDefeated:
+	.string "GUARDA: A escolta\n"
+	.string "da ECLIPSE recuou!\p"
+	.string "Mas o sinal do NUCLEO\n"
+	.string "continua na montanha.\p"
+	.string "A rota ate ARKHARA\n"
+	.string "esta livre.$"
