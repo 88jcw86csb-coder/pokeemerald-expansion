@@ -98,6 +98,27 @@ class LeagueMapTests(unittest.TestCase):
             render("caminho_da_liga", terrain),
         )
 
+    def test_north_shortcut_story_landmark_is_accessible(self):
+        import json
+        terrain = route()
+        data = json.loads((ROOT / "data/maps/Eryon_CaminhoDaLiga/map.json").read_text())
+        events = [e for e in data["bg_events"] if
+                  e["script"] == "EryonLigaCaminho_EventScript_NorthShortcut"]
+        self.assertEqual(len(events), 1)
+        self.assertEqual((events[0]["x"], events[0]["y"]), (29, 11))
+        self.assertEqual(terrain[11][29], ":")
+        self.assertIn((29, 11), connected(terrain, (0, 22)))
+        script = (ROOT / "data/maps/Eryon_CaminhoDaLiga/scripts.inc").read_text()
+        self.assertEqual(script.count("EryonLigaCaminho_EventScript_NorthShortcut::"), 1)
+        entry = script.split("EryonLigaCaminho_EventScript_NorthShortcut::", 1)[1].split(
+            "EryonLigaCaminho_EventScript_NorthShortcutChart::", 1)[0]
+        for flag in ("FLAG_ERYON_CHAMPION_CROWNED",
+                     "FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED",
+                     "FLAG_ERYON_STAR_CHART_READ"):
+            self.assertIn(flag, entry)
+        self.assertNotIn("setflag ", entry)
+        self.assertIn((47, 22), connected(terrain, (0, 22)))
+
     def test_summit_alcove_event_walkability_and_unique_script(self):
         import json
         t = route()
