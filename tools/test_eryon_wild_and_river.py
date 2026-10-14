@@ -47,8 +47,12 @@ class EryonWildAndRiverTests(unittest.TestCase):
         )
 
     def test_nine_new_land_tables_are_unique_and_balanced(self):
-        all_maps = [e["map"] for e in self.group["encounters"]]
-        labels = [e["base_label"] for e in self.group["encounters"]]
+        # Vanilla groups intentionally reuse maps for alternate game versions.
+        # Eryon itself must never duplicate a map header or encounter label.
+        eryon_entries = [e for e in self.group["encounters"]
+                         if e["map"].startswith("MAP_ERYON_")]
+        all_maps = [e["map"] for e in eryon_entries]
+        labels = [e["base_label"] for e in eryon_entries]
         self.assertEqual(len(all_maps), len(set(all_maps)), "Duplicate encounter map")
         self.assertEqual(len(labels), len(set(labels)), "Duplicate encounter base label")
         self.assertTrue(OPENING <= self.by_map.keys())
