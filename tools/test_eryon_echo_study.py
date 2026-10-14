@@ -83,6 +83,13 @@ class EchoStudyTests(unittest.TestCase):
         gym = gym.split("EryonLunaris_Text_GymOffer:", 1)[0]
         self.assertIn("trainerbattle_single TRAINER_ERYON_GYM_LUNARIS", gym)
         self.assertIn("setflag FLAG_BADGE07_GET", gym)
+        drakonia = (ROOT / "data/maps/Eryon_Drakonia/scripts.inc").read_text(encoding="utf-8")
+        researcher = drakonia.split("EryonDrakonia_EventScript_RuneResearcher::", 1)[1]
+        researcher = researcher.split("EryonDrakonia_EventScript_EclipseAgent::", 1)[0]
+        self.assertIn("FLAG_ERYON_ECHO_ARCHIVE_REWARD_CLAIMED", researcher)
+        self.assertLess(researcher.index("FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED"),
+                        researcher.index("FLAG_ERYON_ECHO_ARCHIVE_REWARD_CLAIMED"))
+        self.assertIn("EryonDrakonia_EventScript_ResearcherEchoArchive::", drakonia)
 
 
 if __name__ == "__main__":
