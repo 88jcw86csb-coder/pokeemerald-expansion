@@ -361,3 +361,56 @@ EryonPassagem_Text_GuardSerraSentryDefeated:
 	.string "continua na montanha.\p"
 	.string "A rota ate ARKHARA\n"
 	.string "esta livre.$"
+
+@ A field engineer interprets the completed Crystal Serra investigation.
+@ Optional dialogue only: never blocks the passage, badge or main road.
+EryonPassagem_EventScript_FrequencyEngineer::
+	lock
+	faceplayer
+	goto_if_set FLAG_ERYON_SERRA_ECLIPSE_SIGNAL_DISABLED, EryonPassagem_EventScript_FrequencyEngineerQuiet
+	goto_if_set FLAG_ERYON_SERRA_CORE_GUARD_DEFEATED, EryonPassagem_EventScript_FrequencyEngineerGuard
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonPassagem_EventScript_FrequencyEngineerClue
+	msgbox EryonPassagem_Text_EngineerBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPassagem_EventScript_FrequencyEngineerClue::
+	msgbox EryonPassagem_Text_EngineerClue, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPassagem_EventScript_FrequencyEngineerGuard::
+	msgbox EryonPassagem_Text_EngineerGuard, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPassagem_EventScript_FrequencyEngineerQuiet::
+	msgbox EryonPassagem_Text_EngineerQuiet, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPassagem_Text_EngineerBefore:
+	.string "ENGENHEIRA: Estes cabos\n"
+	.string "seguem para ARKHARA.\p"
+	.string "Ha sinais estranhos\n"
+	.string "vindo das montanhas.$"
+
+EryonPassagem_Text_EngineerClue:
+	.string "ENGENHEIRA: O pulso\n"
+	.string "da ECLIPSE foi visto!\p"
+	.string "Dois cristais alimentam\n"
+	.string "a estacao na SERRA.$"
+
+EryonPassagem_Text_EngineerGuard:
+	.string "ENGENHEIRA: O vigia\n"
+	.string "do NUCLEO recuou!\p"
+	.string "Volte aos cristais\n"
+	.string "e desligue o sinal.$"
+
+EryonPassagem_Text_EngineerQuiet:
+	.string "ENGENHEIRA: A rede\n"
+	.string "da SERRA silenciou.\p"
+	.string "Mas os cabos seguem\n"
+	.string "para outras cidades.\p"
+	.string "ARKHARA investiga\n"
+	.string "a proxima remessa.$"
