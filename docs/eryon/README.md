@@ -1,34 +1,37 @@
-# Pokémon Eryon — estado real do desenvolvimento (13/10/2026)
+# Pokémon Eryon — estado de desenvolvimento (14/10/2026)
 
-Este diretório reúne os projetos e arquivos de documentação dos mapas de Eryon. O jogo está **em desenvolvimento**, sem teste completo confirmado no emulador Delta.
+A ROM de GBA segue em desenvolvimento na branch `eryon-development`. **Ter arquivos de jogo e testes estáticos aprovados não equivale a ter uma ROM completa validada no Delta.**
 
-## Região implementada no repositório
+## Região e jornada
+- O grupo Eryon registra **42 mapas**. Inclui Vila Aurora, Bosque de Lumina, os oito centros de ginásio, vilas intermediárias, Serra dos Cristais, Passagem Rochosa, Trilha dos Dragões, Drakonia e Cidade da Liga.
+- Os cenários têm arquivos de terreno `map.bin` registrados, mas boa parte dos gráficos/metatiles e interiores é provisória e necessita revisão visual em Porymap e emulador.
+- Riolu permanece como inicial; espécies oficiais até Kalos, sem Fakemon. Os limites de espécies têm testes específicos.
+- A Equipe Eclipse aparece progressivamente nas rotas e grandes cidades; vários encontros, documentos, terminais e consequências persistentes estão nos scripts.
 
-- **41 mapas registrados** no grupo Eryon, com layouts e arquivos binários próprios. Estão incluídos Vila Aurora, Bosque de Lumina, Verdelume, Neonara, Frostheim, Arkhara, Umbra, Ignivar, Lunaris, Drakonia, Gruta das Estrelas e Caminho da Liga.
-- Os cinco mapas de abertura que ainda reutilizavam blocos de Hoenn (Vila Aurora, Rota 01, Rota 02, Verdelume e Rota 03) receberam terrenos exclusivos com dimensões corrigidas e acessos a pé verificados por testes estáticos.
-- A Cidade de Arkhara ocupa o quarto ginásio, sob responsabilidade de Tessa (Pedra, Armaldo); sua investigação Eclipse e ligações leste-oeste já existem, mas seu combate oficial ainda não foi implementado.
-- Todos os mapas possuem algum NPC ou ponto investigável, mas vários encontros e sistemas de progressão ainda estão incompletos.
-- O plano é usar **Riolu como inicial, sem fakemon**, e oferecer espécies oficiais até Kalos.
+## Ginásios, Liga e combate
+- Os oito ginásios possuem equipes, batalhas de líderes e lógica de insígnias verificadas por testes estruturais. A escala de principais é 18, 25, 31, 36, 41, 46, 51 e 56.
+- Há testes automatizados para progressão de níveis e EXP; o equilíbrio real em jogo ainda exige playtest.
+- A Cidade da Liga possui terreno 96×72 e acesso ao edifício central. Recepção, oito adversários classificatórios, sala de recuperação, Elite Four e Campeão têm mapas/scripts registrados. Verificar o funcionamento integral **no jogo** continua obrigatório.
+- A derrota na classificatória deve reiniciar os oito confrontos após a perda normal de dinheiro; isso precisa ser exercitado em emulador, além dos testes de lógica.
 
-## Limitações funcionais detectadas
+## Trabalhos recentes
+- Os mapas de Trilha dos Dragões, Vila do Pico e Drakonia foram sincronizados com expansões físicas de 218, 9 e 122 blocos respectivamente; os geradores foram ajustados para preservar esses acessos.
+- A missão opcional da Serra dos Cristais inclui estações de ressonância, sentinela Eclipse e desativação do sinal; Arkhara e Passagem Rochosa reconhecem a conclusão.
+- Novos acontecimentos foram colocados na Passagem Rochosa (engenheira de frequência), Arkhara (quadro de cargas) e Cidade da Liga (delegada de pesquisa), utilizando os flags existentes.
+- Corrigidos testes obsoletos de capacidade de treinadores e discrepância entre a validação e a equipe real de Kael.
+- Verifique o build atual do GitHub Actions antes de declarar a ROM compilada; alterações recentes atacam falhas de sintaxe no arquivo de equipes.
 
-- **Ginásios:** somente Kael, de Verdelume, possui confronto de líder e concessão de insígnia nos scripts atuais. Os outros **sete** ainda precisam de batalhas, insígnias e interiores.
-- **Encontros selvagens:** **18 de 21** áreas registradas como rotas ou cavernas não possuem tabelas `land_mons`. As distribuições em `distribuicao_pokemon_rotas.md` não estão todas codificadas no jogo.
-- **Liga:** Caminho da Liga é explorável no esquema de terreno, mas o edifício, Elite Four, campeão e final não estão implementados.
-- **Arte:** os metatiles e cenários são provisórios, não representam uma região inteiramente desenhada no Porymap.
-- **HMs:** a progressão principal não deve exigir Cut, Rock Smash, Strength, Surf, Waterfall, Dive ou Flash. O código possui validações para scripts e colisões, mas é necessário testar esses acessos no emulador.
-- **Game testing:** compilação e testes estáticos não substituem jogar do início ao fim, testar capturas, salvamento, batalhas, transições e estabilidade no Delta.
+## Pendências prioritárias
+1. Compilação limpa e verificação da ROM GBA via `tools/build_eryon.sh` e GitHub Actions.
+2. Auditoria das tabelas `land_mons`, evolução, disponibilidade e distribuição de capturas por rota.
+3. Conferência visual e funcional de sprites, insígnias, tilesets, interiores e colisões.
+4. Jogabilidade completa no Delta: novo jogo, oito insígnias, história Eclipse, classificatória, Elite Four, Campeão, salvamento e retorno após derrotas.
 
-## Para acompanhar os trabalhos
+## Comandos de verificação
+- `python3 tools/eryon_validate.py`
+- `python3 -m unittest discover -s tools -p 'test_eryon_event_flow.py' -v`
+- `python3 -m unittest discover -s tests -p 'test_eryon_gym_balance.py' -v`
+- `python3 tools/eryon_readiness_report.py`
+- `bash tools/build_eryon.sh`
 
-- `docs/eryon/AUDITORIA_TECNICA_2026-10-13.md`: defeitos encontrados, correções e pendências.
-- `docs/eryon/SEM_HMS_OBRIGATORIAS.md`: regra de progressão sem HMs.
-- `tools/eryon_readiness_report.py`: contagem automática de mapas, ginásios e capturas por implementar.
-- `tools/test_eryon_opening_terrain.py`: verificação de tamanhos e acessibilidade dos cinco mapas iniciais.
-- `tools/build_eryon.sh`: validações, compilação e teste básico do arquivo GBA.
-
-**Critério de conclusão:** entregar uma ROM somente após oito ginásios jogáveis, história completa da Eclipse, Liga, encontros distribuídos e teste final no emulador. Os próximos passos devem reduzir essas pendências reais.
-
-## Nova Liga Central
-
-A Liga possui uma cidade de 96×72 blocos, edifício central com recepção, arena de oito adversários visíveis e sala de recuperação. A classificação exige oito insígnias e oito vitórias consecutivas; cada derrota segue a penalidade normal de dinheiro do combate e a entrada seguinte na arena reinicia a série. Os ginásios restantes e as salas de combate da Elite Four ainda precisam ser implementados e testados.
+**Critério de conclusão:** uma ROM .gba produzida por compilação limpa, com mapas, capturas e progressão funcionalmente testados no Delta. As rotinas estáticas não certificam sozinhas que o jogo está terminado.
