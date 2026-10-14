@@ -38,6 +38,7 @@ EryonLunar_EventScript_EclipseSurveyorExposed::
 
 EryonLunar_EventScript_MoonMarker::
 	lock
+	goto_if_set FLAG_ERYON_ECHO_ARCHIVE_REWARD_CLAIMED, EryonLunar_EventScript_MoonMarkerArchive
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonLunar_EventScript_MoonMarkerClue
 	msgbox EryonLunar_Text_MoonMarkerBefore, MSGBOX_DEFAULT
 	release
@@ -151,3 +152,32 @@ EryonLunar_Text_WatchmanTrace:
 	.string "precisa de sua prova!\p"
 	.string "Depois siga a LUNARIS\n"
 	.string "pela trilha leste.$"
+
+@ The existing lunar marker reveals a new chapter after the optional archive delivery.
+@ No new flag, item, trainer or badge state is introduced.
+EryonLunar_EventScript_MoonMarkerArchive:
+	goto_if_set FLAG_BADGE07_GET, EryonLunar_EventScript_MoonMarkerBadge
+	msgbox EryonLunar_Text_MoonMarkerArchive, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLunar_EventScript_MoonMarkerBadge:
+	msgbox EryonLunar_Text_MoonMarkerBadge, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLunar_Text_MoonMarkerArchive:
+	.string "O registro da ALDEIA\\n"
+	.string "faz o disco ressoar!\\p"
+	.string "As marcas indicam que\\n"
+	.string "a ECLIPSE mudou o sinal.\\p"
+	.string "A ASTRONOMA de LUNARIS\\n"
+	.string "pode comparar os dados.$"
+
+EryonLunar_Text_MoonMarkerBadge:
+	.string "A 7a INSIGNIA brilha\\n"
+	.string "diante do disco lunar.\\p"
+	.string "Um novo padrao aponta\\n"
+	.string "para DRAKONIA.\\p"
+	.string "A jornada continua\\n"
+	.string "pela TRILHA DOS DRAGOES.$"
