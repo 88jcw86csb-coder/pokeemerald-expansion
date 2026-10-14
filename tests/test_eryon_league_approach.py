@@ -261,6 +261,29 @@ class EryonLeagueApproach(unittest.TestCase):
             len([w for w in city["warp_events"]
                  if w["dest_map"] == "MAP_ERYON_LIGA_RECEPCAO"]), 1)
 
+    def test_eastern_lookout_is_accessible_and_nonblocking(self):
+        road, walkable = self.areas["Eryon_CaminhoDaLiga"]
+        signs = [event for event in road["bg_events"]
+                 if event["script"] == "EryonLigaCaminho_EventScript_EastLookout"]
+        self.assertEqual(len(signs), 1)
+        pos = (signs[0]["x"], signs[0]["y"])
+        self.assertEqual(pos, (41, 22))
+        self.assertIn(pos, walkable)
+        blocked = {(npc["x"], npc["y"]) for npc in road["object_events"]}
+        start = (road["warp_events"][0]["x"], road["warp_events"][0]["y"])
+        reachable = reachable_tiles(walkable, start, blocked)
+        self.assertTrue(any(neighbor in reachable for neighbor in neighbors(pos)))
+        self.assertIn((47, 22), reachable)
+        script = (MAP_ROOT / "Eryon_CaminhoDaLiga" / "scripts.inc").read_text(encoding="utf-8")
+        entry = script.split("EryonLigaCaminho_EventScript_EastLookout::", 1)[1].split(
+            "EryonLigaCaminho_EventScript_EastLookoutQuiet::", 1)[0]
+        for flag in ("FLAG_ERYON_CHAMPION_CROWNED",
+                     "FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED",
+                     "FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED"):
+            self.assertIn(flag, entry)
+        self.assertNotIn("setflag ", entry)
+        self.assertNotIn("trainerbattle_", entry)
+
 
 if __name__ == "__main__":
     unittest.main()
