@@ -49,6 +49,7 @@ EryonDrakonia_EventScript_RuneResearcher::
 	faceplayer
 	goto_if_set FLAG_ERYON_DRAGON_TRAIL_NOIBAT_RESOLVED, EryonDrakonia_EventScript_ResearcherNoibat
 	goto_if_set FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED, EryonDrakonia_EventScript_ResearcherRelayOff
+	goto_if_set FLAG_ERYON_ECHO_ARCHIVE_REWARD_CLAIMED, EryonDrakonia_EventScript_ResearcherEchoArchive
 	msgbox EryonDrakonia_Text_Researcher, MSGBOX_DEFAULT
 	release
 	end
@@ -576,3 +577,18 @@ EryonDrakonia_Text_GymNotReady:
 	.string "RYU: Primeiro,\n"
 	.string "conquiste a INSIGNIA\n"
 	.string "do GINASIO anterior.$"
+
+@ A completed Echo Valley archive study informs Drakonia, without eclipsing
+@ Noibat/cave relay resolution or altering the eighth leader's badge scripts.
+EryonDrakonia_EventScript_ResearcherEchoArchive::
+	msgbox EryonDrakonia_Text_ResearcherEchoArchive, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_Text_ResearcherEchoArchive:
+	.string "PESQUISADOR: A ALDEIA\n"
+	.string "DOS ECOS enviou dados!\p"
+	.string "O pulso artificial\n"
+	.string "tambem chegou a DRAKONIA.\p"
+	.string "As runas podem ajudar\n"
+	.string "a rastrear a ECLIPSE.$"
