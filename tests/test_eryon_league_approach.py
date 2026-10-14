@@ -159,6 +159,23 @@ class EryonLeagueApproach(unittest.TestCase):
         self.assertNotIn("setflag ", witness)
         self.assertNotIn("setflag ", reporter)
 
+    def test_summit_memorial_epilogue_uses_existing_event(self):
+        road, _ = self.areas["Eryon_CaminhoDaLiga"]
+        signs = [event for event in road["bg_events"]
+                 if event["script"] == "EryonLigaCaminho_EventScript_StarMemorial"]
+        self.assertEqual(len(signs), 1)
+        script = (MAP_ROOT / "Eryon_CaminhoDaLiga" / "scripts.inc").read_text(encoding="utf-8")
+        entry = script.split("EryonLigaCaminho_EventScript_StarMemorial::", 1)[1].split(
+            "EryonLigaCaminho_EventScript_StarMemorialReported::", 1)[0]
+        self.assertLess(entry.index("FLAG_ERYON_CHAMPION_CROWNED"),
+                        entry.index("FLAG_ERYON_QUALIFIED"))
+        self.assertLess(entry.index("FLAG_ERYON_QUALIFIED"),
+                        entry.index("FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED"))
+        for name in ("StarMemorialQualified", "StarMemorialChampion"):
+            self.assertIn("EryonLigaCaminho_EventScript_" + name + "::", script)
+            self.assertIn("EryonLigaCaminho_Text_" + name + ":", script)
+        self.assertNotIn("setflag ", entry)
+
 
 if __name__ == "__main__":
     unittest.main()
