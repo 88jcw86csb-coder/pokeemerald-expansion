@@ -65,7 +65,7 @@ def audit():
         })
 
     trainers = (ROOT / "src/data/trainers.party").read_text(encoding="utf-8")
-    chunks = re.split(r"(?m)^=== (TRAINER_ERYON_[A-Z0-9_]+) ===\\n", trainers)
+    chunks = re.split(r"(?m)^=== (TRAINER_ERYON_[A-Z0-9_]+) ===\n", trainers)
     for i in range(1, len(chunks), 2):
         section = chunks[i + 1]
         pic = re.search(r"(?m)^Pic: (.+)$", section)
