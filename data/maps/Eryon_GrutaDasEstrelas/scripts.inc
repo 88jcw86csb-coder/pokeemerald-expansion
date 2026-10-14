@@ -307,3 +307,57 @@ EryonEstrelas_Text_ScoutRelayOff:
 	.string "ECLIPSE: Voce cortou\n"
 	.string "o sinal da antena?!\p"
 	.string "Vamos ter de recuar.$"
+
+
+@ Original upper Star Gallery: a navigable detour connecting the northern
+@ crystal chamber to the eastern tunnel, outside the League's mandatory route.
+@ Existing story flags only: never blocks travel or awards a duplicate item.
+EryonEstrelas_EventScript_ResonanceGallery::
+	lock
+	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonEstrelas_EventScript_GalleryReported
+	goto_if_set FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED, EryonEstrelas_EventScript_GallerySilent
+	goto_if_set FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ, EryonEstrelas_EventScript_GalleryManifest
+	msgbox EryonEstrelas_Text_GalleryBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEstrelas_EventScript_GalleryReported::
+	msgbox EryonEstrelas_Text_GalleryReported, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEstrelas_EventScript_GallerySilent::
+	msgbox EryonEstrelas_Text_GallerySilent, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEstrelas_EventScript_GalleryManifest::
+	msgbox EryonEstrelas_Text_GalleryManifest, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEstrelas_Text_GalleryBefore:
+	.string "CAMARA ESTELAR:\p"
+	.string "Os cristais da parede\n"
+	.string "cantam em dois tons.\p"
+	.string "Uma passagem curva\n"
+	.string "leva ate a gruta leste.$"
+
+EryonEstrelas_Text_GalleryManifest:
+	.string "Marcas das cargas\n"
+	.string "ECLIPSE brilham aqui!\p"
+	.string "LUNARIS e DRAKONIA\n"
+	.string "surgem gravadas na rocha.$"
+
+EryonEstrelas_Text_GallerySilent:
+	.string "Os cristais nao emitem\n"
+	.string "mais pulsos artificiais.\p"
+	.string "Um brilho suave ilumina\n"
+	.string "a galeria silenciosa.$"
+
+EryonEstrelas_Text_GalleryReported:
+	.string "CAMARA ESTELAR:\p"
+	.string "A LIGA recebeu provas\n"
+	.string "da rede da ECLIPSE.\p"
+	.string "Os ecos antigos\n"
+	.string "voltam a ser ouvidos.$"

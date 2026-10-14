@@ -84,6 +84,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EryonEstrelas_EventScript_RelayConsole"
+    },
+    {
+      "type": "sign",
+      "x": 29,
+      "y": 9,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EryonEstrelas_EventScript_ResonanceGallery"
     }
   ],
   "id": "MAP_ERYON_GRUTA_DAS_ESTRELAS",
