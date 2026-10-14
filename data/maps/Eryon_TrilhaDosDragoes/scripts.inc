@@ -5,6 +5,9 @@ Eryon_TrilhaDosDragoes_MapScripts::
 EryonDragoes_EventScript_RidgeGuide::
 	lock
 	faceplayer
+	goto_if_set FLAG_BADGE08_GET, EryonDragoes_EventScript_RidgeGuideAfterBadge
+	goto_if_set FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ, EryonDragoes_EventScript_RidgeGuideManifest
+	goto_if_set FLAG_ERYON_ECHO_ARCHIVE_REWARD_CLAIMED, EryonDragoes_EventScript_RidgeGuideEcho
 	msgbox EryonDragoes_Text_Guide, MSGBOX_DEFAULT
 	release
 	end
@@ -427,3 +430,4 @@ EryonDragoes_Text_NestResearcherAfter:
 	.string "finalmente sossegou!\p"
 	.string "Vou registrar a sua\n"
 	.string "descoberta na vila.$"
+@ The existing ridge guide follows the investigation from Echo Village through Drakonia.\n@ Optional conversation only: no new flags, battles, species, or progression gates.\nEryonDragoes_EventScript_RidgeGuideEcho:\n\tmsgbox EryonDragoes_Text_RidgeGuideEcho, MSGBOX_DEFAULT\n\trelease\n\tend\n\nEryonDragoes_EventScript_RidgeGuideManifest:\n\tmsgbox EryonDragoes_Text_RidgeGuideManifest, MSGBOX_DEFAULT\n\trelease\n\tend\n\nEryonDragoes_EventScript_RidgeGuideAfterBadge:\n\tmsgbox EryonDragoes_Text_RidgeGuideAfterBadge, MSGBOX_DEFAULT\n\trelease\n\tend\n\nEryonDragoes_Text_RidgeGuideEcho:\n\t.string "GUIA: O arquivo dos\n"\n\t.string "ECOS detectou dois sons!\p"\n\t.string "As caixas na trilha\n"\n\t.string "podem revelar a origem.$"\n\nEryonDragoes_Text_RidgeGuideManifest:\n\t.string "GUIA: Seu manifesto\n"\n\t.string "liga LUNARIS ao PICO!\p"\n\t.string "Os guardioes precisam\n"\n\t.string "conhecer essa rota.$"\n\nEryonDragoes_Text_RidgeGuideAfterBadge:\n\t.string "GUIA: Oito INSIGNIAS!\p"\n\t.string "A ECLIPSE deixou marcas\n"\n\t.string "em toda a montanha.\p"\n\t.string "Siga para a LIGA\n"\n\t.string "e proteja os cristais.$"\n
