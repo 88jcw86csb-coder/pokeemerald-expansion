@@ -11,7 +11,7 @@ if [[ ! -f Makefile || ! -f tools/eryon_rom_smoke.py ]]; then
 fi
 
 echo "== Eryon: checking Python validator/test syntax =="
-python3 -m py_compile tools/eryon_layout_audit.py tools/eryon_validate.py tools/test_eryon_event_flow.py tools/test_eryon_opening_terrain.py tools/test_eryon_layout_audit.py tools/test_eryon_species.py tools/test_eryon_wild_and_river.py tools/test_eryon_rom_smoke.py tools/eryon_rom_smoke.py
+python3 -m py_compile tools/eryon_layout_audit.py tools/eryon_validate.py tools/test_eryon_event_flow.py tools/test_eryon_opening_terrain.py tools/test_eryon_layout_audit.py tools/test_eryon_species.py tools/test_eryon_wild_and_river.py tools/test_eryon_echo_study.py tools/test_eryon_rom_smoke.py tools/eryon_rom_smoke.py
 
 echo "== Eryon: opening data validation =="
 python3 tools/eryon_validate.py
@@ -26,6 +26,8 @@ echo "== Eryon: species tests =="
 python3 -m unittest discover -s tools -p 'test_eryon_species.py' -v
 echo "== Eryon: wild route habitats and Eclipse river quest =="
 python3 -m unittest discover -s tools -p 'test_eryon_wild_and_river.py' -v
+echo "== Eryon: Echo Valley archive and Lunaris investigation =="
+python3 -m unittest discover -s tools -p 'test_eryon_echo_study.py' -v
 echo "== Eryon: event flow tests =="
 python3 -m unittest discover -s tools -p 'test_eryon_event_flow.py' -v
 echo "== Eryon: Elite Four tournament integrity =="
