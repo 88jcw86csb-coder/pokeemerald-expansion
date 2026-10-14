@@ -741,3 +741,56 @@ EryonLigaCaminho_Text_BirdwatchChampion:
 	.string "a cidade ao sul.\p"
 	.string "O vento segue guiando\n"
 	.string "novos treinadores.$"
+
+
+@ Optional battle at the newly accessible windy clearing, off the main League road.
+EryonLigaCaminho_EventScript_RidgeBirdwatcher::
+	lock
+	faceplayer
+	goto_if_set FLAG_ERYON_RIDGE_BIRDWATCHER_DEFEATED, EryonLigaCaminho_EventScript_RidgeBirdwatcherAfter
+	msgbox EryonLigaCaminho_Text_RidgeBirdwatcherOffer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonLigaCaminho_EventScript_RidgeBirdwatcherDecline
+	closemessage
+	trainerbattle_single TRAINER_ERYON_RIDGE_BIRDWATCHER, EryonLigaCaminho_Text_RidgeBirdwatcherIntro, EryonLigaCaminho_Text_RidgeBirdwatcherLoss, EryonLigaCaminho_EventScript_RidgeBirdwatcherVictory, FALSE
+	msgbox EryonLigaCaminho_Text_RidgeBirdwatcherAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_RidgeBirdwatcherDecline::
+	closemessage
+	release
+	end
+
+EryonLigaCaminho_EventScript_RidgeBirdwatcherVictory::
+	msgbox EryonLigaCaminho_Text_RidgeBirdwatcherVictory, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_RidgeBirdwatcherAfter::
+	msgbox EryonLigaCaminho_Text_RidgeBirdwatcherAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_Text_RidgeBirdwatcherOffer:
+	.string "ARI: Estudo as aves\n"
+	.string "dos picos de ERYON!\p"
+	.string "Quer uma batalha\n"
+	.string "de treinamento?$"
+
+EryonLigaCaminho_Text_RidgeBirdwatcherIntro:
+	.string "ARI: Mostre como sua\n"
+	.string "equipe enfrenta o vento!$"
+
+EryonLigaCaminho_Text_RidgeBirdwatcherLoss:
+	.string "ARI: Voce conhece\n"
+	.string "os caminhos do ceu!$"
+
+EryonLigaCaminho_Text_RidgeBirdwatcherVictory:
+	.string "ARI: Meu estudo vai\n"
+	.string "ajudar os viajantes.$"
+
+EryonLigaCaminho_Text_RidgeBirdwatcherAfter:
+	.string "ARI: Vi FLETCHLING\n"
+	.string "ao longo do atalho.\p"
+	.string "Proteja os Pokemon\n"
+	.string "desta montanha.$"
