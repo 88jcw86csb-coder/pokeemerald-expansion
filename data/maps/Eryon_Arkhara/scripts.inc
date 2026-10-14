@@ -34,6 +34,7 @@ EryonArkhara_EventScript_TessaInformed::
 EryonArkhara_EventScript_Geologist::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_SERRA_CORE_GUARD_DEFEATED, EryonArkhara_EventScript_GeologistGuardDefeated
 	goto_if_set FLAG_ERYON_SERRA_ECLIPSE_SIGNAL_DISABLED, EryonArkhara_EventScript_GeologistResonance
 	goto_if_set FLAG_ERYON_ARKHARA_RELAY_READ, EryonArkhara_EventScript_GeologistInformed
 	msgbox EryonArkhara_Text_GeologistBefore, MSGBOX_DEFAULT
@@ -279,3 +280,18 @@ EryonArkhara_Text_TessaResonance:
 	.string "ARKHARA e a serra!\p"
 	.string "Minha INSIGNIA e sua\n"
 	.string "prova de coragem.$"
+
+
+@ Reports arrive in Arkhara as the Crystal Serra operation progresses.
+EryonArkhara_EventScript_GeologistGuardDefeated::
+	msgbox EryonArkhara_Text_GeologistGuardDefeated, MSGBOX_DEFAULT
+	release
+	end
+
+EryonArkhara_Text_GeologistGuardDefeated:
+	.string "GEOLOGO: Venceu o\n"
+	.string "sentinela da ECLIPSE?!\p"
+	.string "Volte ao NUCLEO\n"
+	.string "na SERRA DOS CRISTAIS.\p"
+	.string "Desligar o sinal\n"
+	.string "protegera ARKHARA.$"
