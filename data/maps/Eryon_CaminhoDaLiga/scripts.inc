@@ -699,3 +699,45 @@ EryonLigaCaminho_Text_RidgeFletchlingEscaped:
 	.string "FLETCHLING voou\n"
 	.string "sobre os picos!\p"
 	.string "Talvez reapareca.$"
+
+
+@ Optional clearing reached from the new upper northern trail.
+@ No flags, trainer state or League access are changed here.
+EryonLigaCaminho_EventScript_BirdwatchClearing::
+	lock
+	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonLigaCaminho_EventScript_BirdwatchChampion
+	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonLigaCaminho_EventScript_BirdwatchEvidence
+	msgbox EryonLigaCaminho_Text_BirdwatchBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_BirdwatchEvidence::
+	msgbox EryonLigaCaminho_Text_BirdwatchEvidence, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_BirdwatchChampion::
+	msgbox EryonLigaCaminho_Text_BirdwatchChampion, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_Text_BirdwatchBefore:
+	.string "CLAREIRA DO VENTO:\p"
+	.string "FLETCHLING sobrevoam\n"
+	.string "o velho atalho.\p"
+	.string "Marcas de cristais\n"
+	.string "brilham entre as penas.$"
+
+EryonLigaCaminho_Text_BirdwatchEvidence:
+	.string "CLAREIRA DO VENTO:\p"
+	.string "A pesquisa da ECLIPSE\n"
+	.string "agora e conhecida.\p"
+	.string "Os FLETCHLING voltaram\n"
+	.string "a voar em paz.$"
+
+EryonLigaCaminho_Text_BirdwatchChampion:
+	.string "CLAREIRA DO VENTO:\p"
+	.string "O CAMPEAO avista\n"
+	.string "a cidade ao sul.\p"
+	.string "O vento segue guiando\n"
+	.string "novos treinadores.$"
