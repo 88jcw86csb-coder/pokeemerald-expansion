@@ -408,3 +408,57 @@ EryonLigaCaminho_Text_ScoutWitnessChampion:
 	.string "ainda sera estudada.\p"
 	.string "Ha caminhos antigos\n"
 	.string "a descobrir em ERYON.$"
+
+
+@ Optional Crystal Survey marker on the existing walkable League road.
+@ This environmental discovery reacts to Eclipse progress, never gates traversal.
+EryonLigaCaminho_EventScript_CrystalSurvey::
+	lock
+	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonLigaCaminho_EventScript_CrystalSurveyChampion
+	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonLigaCaminho_EventScript_CrystalSurveyFiled
+	goto_if_set FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED, EryonLigaCaminho_EventScript_CrystalSurveyQuiet
+	msgbox EryonLigaCaminho_Text_CrystalSurveyBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_CrystalSurveyQuiet::
+	msgbox EryonLigaCaminho_Text_CrystalSurveyQuiet, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_CrystalSurveyFiled::
+	msgbox EryonLigaCaminho_Text_CrystalSurveyFiled, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_CrystalSurveyChampion::
+	msgbox EryonLigaCaminho_Text_CrystalSurveyChampion, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_Text_CrystalSurveyBefore:
+	.string "MARCO DOS CRISTAIS:\p"
+	.string "Pulsos estranhos vem\n"
+	.string "da GRUTA DAS ESTRELAS.\p"
+	.string "Siga a oeste para\n"
+	.string "investigar a origem.$"
+
+EryonLigaCaminho_Text_CrystalSurveyQuiet:
+	.string "MARCO DOS CRISTAIS:\p"
+	.string "O pulso da ECLIPSE\n"
+	.string "foi interrompido!\p"
+	.string "O vale recupera\n"
+	.string "seu brilho natural.$"
+
+EryonLigaCaminho_Text_CrystalSurveyFiled:
+	.string "MARCO DOS CRISTAIS:\p"
+	.string "A LIGA catalogou\n"
+	.string "as provas da ECLIPSE.\p"
+	.string "Os estudos continuam\n"
+	.string "pelas rotas de ERYON.$"
+
+EryonLigaCaminho_Text_CrystalSurveyChampion:
+	.string "MARCO DOS CRISTAIS:\p"
+	.string "O CAMPEAO retornou!\p"
+	.string "A trilha permanece\n"
+	.string "aberta a exploradores.$"
