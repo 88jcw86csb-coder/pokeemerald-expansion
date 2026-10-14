@@ -229,6 +229,20 @@ class LeagueMapTests(unittest.TestCase):
             "EryonLigaCaminho_EventScript_SummitAlcove::", 1)[1].split(
             "EryonLigaCaminho_EventScript_SummitAlcoveFiled::", 1)[0])
 
+    def test_western_ravine_loop_is_a_second_access_to_south_peak(self):
+        terrain = route()
+        for y in range(25, 32):
+            self.assertEqual(terrain[y][20], ":")
+        for x in range(20, 26):
+            self.assertEqual(terrain[31][x], ":")
+        reached = connected(terrain, (0, 22))
+        for point in ((20, 25), (20, 31), (25, 31), (25, 36), (47, 22)):
+            self.assertIn(point, reached)
+        self.assertEqual(
+            (ROOT / "docs/eryon/caminho_da_liga_terrain_plan.txt").read_text(),
+            render("caminho_da_liga", terrain),
+        )
+
     def test_eight_stars_terrace_connected_city(self):
         """Check the new skyline park, unchanged League building, and exact terrain."""
         import json,struct
