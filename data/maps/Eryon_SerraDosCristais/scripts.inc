@@ -318,6 +318,7 @@ EryonSerra_EventScript_EclipseResonanceCore::
 	goto_if_set FLAG_ERYON_SERRA_ECLIPSE_SIGNAL_DISABLED, EryonSerra_EventScript_ResonanceQuiet
 	goto_if_unset FLAG_ERYON_SERRA_NORTH_CRYSTAL_CALIBRATED, EryonSerra_EventScript_CoreNeedsSeals
 	goto_if_unset FLAG_ERYON_SERRA_SOUTH_CRYSTAL_CALIBRATED, EryonSerra_EventScript_CoreNeedsSeals
+	goto_if_unset FLAG_ERYON_SERRA_CORE_GUARD_DEFEATED, EryonSerra_EventScript_CoreStillGuarded
 	msgbox EryonSerra_Text_CorePrompt, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EryonSerra_EventScript_ResonanceLeave
 	closemessage
@@ -435,3 +436,77 @@ EryonSerra_Text_ExplorerResonanceQuiet:
 	.string "esta mais tranquila!\p"
 	.string "A passagem rochosa\n"
 	.string "esta pronta para voce.$"
+
+
+@ Optional fourth step of the Serra survey: face the Eclipse sentry.
+@ The ordinary mountain roads and four warps remain open independently.
+EryonSerra_EventScript_CoreGuardian::
+	lock
+	faceplayer
+	goto_if_set FLAG_ERYON_SERRA_ECLIPSE_SIGNAL_DISABLED, EryonSerra_EventScript_CoreGuardianAfter
+	goto_if_set FLAG_ERYON_SERRA_CORE_GUARD_DEFEATED, EryonSerra_EventScript_CoreGuardianAfter
+	goto_if_unset FLAG_ERYON_SERRA_NORTH_CRYSTAL_CALIBRATED, EryonSerra_EventScript_GuardianWaiting
+	goto_if_unset FLAG_ERYON_SERRA_SOUTH_CRYSTAL_CALIBRATED, EryonSerra_EventScript_GuardianWaiting
+	msgbox EryonSerra_Text_GuardianChallenge, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonSerra_EventScript_ResonanceLeave
+	closemessage
+	trainerbattle_single TRAINER_ERYON_SERRA_CORE_GUARD, EryonSerra_Text_GuardianIntro, EryonSerra_Text_GuardianLoss, EryonSerra_EventScript_GuardianVictory, FALSE
+	msgbox EryonSerra_Text_GuardianAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonSerra_EventScript_GuardianVictory::
+	msgbox EryonSerra_Text_GuardianVictory, MSGBOX_DEFAULT
+	release
+	end
+
+EryonSerra_EventScript_GuardianWaiting::
+	msgbox EryonSerra_Text_GuardianWaiting, MSGBOX_DEFAULT
+	release
+	end
+
+EryonSerra_EventScript_CoreGuardianAfter::
+	msgbox EryonSerra_Text_GuardianAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonSerra_EventScript_CoreStillGuarded::
+	msgbox EryonSerra_Text_CoreStillGuarded, MSGBOX_DEFAULT
+	release
+	end
+
+EryonSerra_Text_GuardianChallenge:
+	.string "ECLIPSE: Descobriu\n"
+	.string "os dois selos?!\p"
+	.string "Quer medir forcas\n"
+	.string "com meu time Pokemon?$"
+
+EryonSerra_Text_GuardianIntro:
+	.string "ECLIPSE: O NUCLEO\n"
+	.string "continua sob minha guarda!$"
+
+EryonSerra_Text_GuardianLoss:
+	.string "ECLIPSE: Minha equipe\n"
+	.string "nao deteve voce!$"
+
+EryonSerra_Text_GuardianVictory:
+	.string "ECLIPSE: Inacreditavel!\p"
+	.string "O nucleo esta livre.\n"
+	.string "Mas a operacao continua.$"
+
+EryonSerra_Text_GuardianWaiting:
+	.string "ECLIPSE: Dois selos\n"
+	.string "estabilizam o NUCLEO.\p"
+	.string "Nao ha combate\n"
+	.string "sem minha ordem.$"
+
+EryonSerra_Text_GuardianAfter:
+	.string "ECLIPSE: Ja fui vencido.\p"
+	.string "Pode tentar desligar\n"
+	.string "o sinal do NUCLEO.$"
+
+EryonSerra_Text_CoreStillGuarded:
+	.string "NUCLEO: A equipe\n"
+	.string "ECLIPSE bloqueia o painel.\p"
+	.string "Encontre o guarda\n"
+	.string "na alcova ao norte.$"
