@@ -238,6 +238,8 @@ EryonLigaCaminho_Text_ObserverParkRestored:
 @ Does not award items, set flags, block access or modify League battles.
 EryonLigaCaminho_EventScript_StarMemorial::
 	lock
+	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonLigaCaminho_EventScript_StarMemorialChampion
+	goto_if_set FLAG_ERYON_QUALIFIED, EryonLigaCaminho_EventScript_StarMemorialQualified
 	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonLigaCaminho_EventScript_StarMemorialReported
 	goto_if_set FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED, EryonLigaCaminho_EventScript_StarMemorialSilent
 	goto_if_set FLAG_BADGE08_GET, EryonLigaCaminho_EventScript_StarMemorialBadges
@@ -362,3 +364,30 @@ EryonLigaCaminho_Text_ScoutWitnessReported:
 	.string "seu esconderijo.\p"
 	.string "Mas a investigacao\n"
 	.string "continua em ERYON.$"
+
+
+@ Summit epilogue: old northern mountain route remains accessible after the tournament.
+@ These are alternate texts on the existing memorial, without new events or flags.
+EryonLigaCaminho_EventScript_StarMemorialQualified::
+	msgbox EryonLigaCaminho_Text_StarMemorialQualified, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_StarMemorialChampion::
+	msgbox EryonLigaCaminho_Text_StarMemorialChampion, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_Text_StarMemorialQualified:
+	.string "MEMORIAL ESTELAR:\p"
+	.string "Oito vitorias acendem\n"
+	.string "a trilha das estrelas!\p"
+	.string "A ELITE FOUR espera\n"
+	.string "na cidade a leste.$"
+
+EryonLigaCaminho_Text_StarMemorialChampion:
+	.string "MEMORIAL ESTELAR:\p"
+	.string "O CAMPEAO de ERYON\n"
+	.string "retorna a montanha!\p"
+	.string "Mesmo apos a LIGA,\n"
+	.string "ha caminhos a explorar.$"
