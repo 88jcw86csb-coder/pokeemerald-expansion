@@ -76,8 +76,8 @@ EryonCidadeLiga_EventScript_Reporter::
 	lock
 	faceplayer
 	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonCidadeLiga_EventScript_ReporterChampion
-	goto_if_set FLAG_ERYON_DRAKONIA_ECLIPSE_DEFEATED, EryonCidadeLiga_EventScript_ReporterDrakonia
 	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonCidadeLiga_EventScript_ReporterEvidence
+	goto_if_set FLAG_ERYON_DRAKONIA_ECLIPSE_DEFEATED, EryonCidadeLiga_EventScript_ReporterDrakonia
 	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonCidadeLiga_EventScript_ReporterChart
 	msgbox EryonCidadeLiga_Text_Reporter, MSGBOX_DEFAULT
 	release
@@ -605,3 +605,7 @@ EryonCidadeLiga_Text_NoticeChampion:
 	.string "da arena foram vencidos.\p"
 	.string "A cidade celebra\n"
 	.string "sua jornada por ERYON.$"
+
+
+@ The report on the Eclipse dossier takes precedence over older battle news.
+@ No additional flags, fights, items or League progression changes.
