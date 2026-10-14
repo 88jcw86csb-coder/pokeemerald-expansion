@@ -115,3 +115,56 @@ EryonEcoVale_Text_CrystalClue:
 EryonEcoVale_Text_VillageSign:
 	.string "LESTE: ALDEIA DOS ECOS.\n"
 	.string "OESTE: FLORESTA DOS ECOS.$"
+
+@ Optional signal study; records evidence without changing the Eclipse battle.
+EryonEcoVale_EventScript_PulseRecorder::
+	lock
+	goto_if_set FLAG_ERYON_ECHO_TRACE_RECORDED, EryonEcoVale_EventScript_PulseRecorderDone
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonEcoVale_EventScript_PulseRecorderOffer
+	msgbox EryonEcoVale_Text_RecorderWaiting, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEcoVale_EventScript_PulseRecorderOffer::
+	msgbox EryonEcoVale_Text_RecorderOffer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonEcoVale_EventScript_PulseRecorderDecline
+	closemessage
+	setflag FLAG_ERYON_ECHO_TRACE_RECORDED
+	msgbox EryonEcoVale_Text_RecorderSaved, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEcoVale_EventScript_PulseRecorderDecline::
+	closemessage
+	release
+	end
+
+EryonEcoVale_EventScript_PulseRecorderDone::
+	msgbox EryonEcoVale_Text_RecorderDone, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEcoVale_Text_RecorderWaiting:
+	.string "GRAVADOR DE ECOS:\n"
+	.string "As pedras vibram.\p"
+	.string "Faltam pistas para\n"
+	.string "comparar a frequencia.$"
+
+EryonEcoVale_Text_RecorderOffer:
+	.string "Os pulsos lembram a\n"
+	.string "pesquisa da SERRA!\p"
+	.string "Registrar os dados\n"
+	.string "para a ALDEIA DOS ECOS?$"
+
+EryonEcoVale_Text_RecorderSaved:
+	.string "O eco foi registrado!\p"
+	.string "Leve os dados a\n"
+	.string "ALDEIA DOS ECOS.\p"
+	.string "A ECLIPSE procura\n"
+	.string "o mesmo som.$"
+
+EryonEcoVale_Text_RecorderDone:
+	.string "GRAVADOR DE ECOS:\n"
+	.string "Frequencia armazenada.\p"
+	.string "O ARQUIVO DA ALDEIA\n"
+	.string "pode analisar o sinal.$"
