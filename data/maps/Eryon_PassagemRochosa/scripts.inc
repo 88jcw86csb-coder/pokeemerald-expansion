@@ -178,6 +178,7 @@ EryonPassagem_EventScript_Medic::
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonPassagem_EventScript_MedicClue
 	msgbox EryonPassagem_Text_MedicOffer, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EryonPassagem_EventScript_MedicDecline
+	closemessage
 	special HealPlayerParty
 	msgbox EryonPassagem_Text_MedicHealed, MSGBOX_DEFAULT
 	release
@@ -186,6 +187,7 @@ EryonPassagem_EventScript_Medic::
 EryonPassagem_EventScript_MedicClue::
 	msgbox EryonPassagem_Text_MedicClueOffer, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EryonPassagem_EventScript_MedicDecline
+	closemessage
 	special HealPlayerParty
 	msgbox EryonPassagem_Text_MedicHealed, MSGBOX_DEFAULT
 	release
