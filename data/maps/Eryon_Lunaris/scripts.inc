@@ -234,3 +234,54 @@ EryonLunaris_Text_GymNotReady:
 	.string "LYRA: Primeiro,\n"
 	.string "conquiste a INSIGNIA\n"
 	.string "do GINASIO anterior.$"
+
+@ Scholar connects evidence from the valley archive to the existing seventh Gym.
+@ Badge checks remain read-only here; the leader battle is unchanged.
+EryonLunaris_EventScript_ObservatoryScholar::
+	lock
+	faceplayer
+	goto_if_set FLAG_BADGE07_GET, EryonLunaris_EventScript_ScholarAfterBadge
+	goto_if_set FLAG_ERYON_ECHO_ARCHIVE_REWARD_CLAIMED, EryonLunaris_EventScript_ScholarConfirmed
+	goto_if_set FLAG_ERYON_ECHO_TRACE_RECORDED, EryonLunaris_EventScript_ScholarPending
+	msgbox EryonLunaris_Text_ScholarWaiting, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLunaris_EventScript_ScholarPending::
+	msgbox EryonLunaris_Text_ScholarPending, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLunaris_EventScript_ScholarConfirmed::
+	msgbox EryonLunaris_Text_ScholarConfirmed, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLunaris_EventScript_ScholarAfterBadge::
+	msgbox EryonLunaris_Text_ScholarAfterBadge, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLunaris_Text_ScholarWaiting:
+	.string "PESQUISADORA: Nosso\n"
+	.string "telescopio ouve ecos!\p"
+	.string "Registre a frequencia\n"
+	.string "no VALE DOS ECOS.$"
+
+EryonLunaris_Text_ScholarPending:
+	.string "PESQUISADORA: Trouxe\n"
+	.string "dados do VALE DOS ECOS!\p"
+	.string "O ARQUIVO DA ALDEIA\n"
+	.string "pode separar os sons.$"
+
+EryonLunaris_Text_ScholarConfirmed:
+	.string "PESQUISADORA: O arquivo\n"
+	.string "confirmou a ECLIPSE!\p"
+	.string "O sinal sai daqui\n"
+	.string "para a TRILHA DOS DRAGOES.$"
+
+EryonLunaris_Text_ScholarAfterBadge:
+	.string "PESQUISADORA: Sua 7a\n"
+	.string "INSIGNIA mostra coragem!\p"
+	.string "Os ecos continuam\n"
+	.string "ate DRAKONIA.$"
