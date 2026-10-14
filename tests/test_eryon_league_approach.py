@@ -114,5 +114,31 @@ class EryonLeagueApproach(unittest.TestCase):
         )
 
 
+    def test_league_road_story_priorities_and_existing_warps(self):
+        script = (MAP_ROOT / "Eryon_CaminhoDaLiga" / "scripts.inc").read_text(encoding="utf-8")
+        guardian = script.split("EryonLigaCaminho_EventScript_RouteGuardian::", 1)[1].split("EryonLigaCaminho_EventScript_Medic:", 1)[0]
+        courier = script.split("EryonLigaCaminho_EventScript_LigaCourier::", 1)[1].split("EryonLigaCaminho_EventScript_LigaCourierAfter::", 1)[0]
+        self.assertLess(
+            guardian.index("goto_if_set FLAG_ERYON_CHAMPION_CROWNED"),
+            guardian.index("goto_if_set FLAG_ERYON_QUALIFIED"),
+        )
+        self.assertLess(
+            courier.index("goto_if_set FLAG_ERYON_CHAMPION_CROWNED"),
+            courier.index("goto_if_set FLAG_ERYON_QUALIFIED"),
+        )
+        self.assertLess(
+            courier.index("goto_if_set FLAG_ERYON_QUALIFIED"),
+            courier.index("goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED"),
+        )
+        for label in (
+            "GuardianChampion", "GuardianQualified",
+            "LigaCourierChampion", "LigaCourierEvidence",
+        ):
+            self.assertIn("EryonLigaCaminho_EventScript_" + label + "::", script)
+        road = self.areas["Eryon_CaminhoDaLiga"][0]
+        self.assertEqual(road["warp_events"][0]["dest_map"], "MAP_ERYON_GRUTA_DAS_ESTRELAS")
+        self.assertEqual(road["warp_events"][1]["dest_map"], "MAP_ERYON_CIDADE_DA_LIGA")
+
+
 if __name__ == "__main__":
     unittest.main()
