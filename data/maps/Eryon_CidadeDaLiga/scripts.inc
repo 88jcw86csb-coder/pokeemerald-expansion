@@ -33,6 +33,9 @@ EryonCidadeLiga_EventScript_PlazaSign::
 
 EryonCidadeLiga_EventScript_Notice::
 	lock
+	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonCidadeLiga_EventScript_NoticeChampion
+	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonCidadeLiga_EventScript_NoticeEvidence
+	goto_if_set FLAG_ERYON_QUALIFIED, EryonCidadeLiga_EventScript_NoticeQualified
 	msgbox EryonCidadeLiga_Text_Notice, MSGBOX_DEFAULT
 	release
 	end
@@ -563,3 +566,42 @@ EryonCidadeLiga_Text_ReporterChart:
 	.string "chegam a esta cidade.\p"
 	.string "O torneio permanece\n"
 	.string "aberto aos treinadores.$"
+
+
+@ City notice dynamically reflects the classification tournament and Eclipse case.
+@ Information only; the real tournament, rewards, flags and warps stay unchanged.
+EryonCidadeLiga_EventScript_NoticeQualified:
+	msgbox EryonCidadeLiga_Text_NoticeQualified, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_NoticeEvidence:
+	msgbox EryonCidadeLiga_Text_NoticeEvidence, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_NoticeChampion:
+	msgbox EryonCidadeLiga_Text_NoticeChampion, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_Text_NoticeQualified:
+	.string "MURAL DA LIGA:\p"
+	.string "OITO VITORIAS REGISTRADAS!\p"
+	.string "Area de recuperacao\n"
+	.string "antes da ELITE FOUR.$"
+
+EryonCidadeLiga_Text_NoticeEvidence:
+	.string "MURAL DA LIGA:\p"
+	.string "Investigacao ECLIPSE\n"
+	.string "em andamento na cidade.\p"
+	.string "O torneio continua\n"
+	.string "com oito classificatorias.$"
+
+EryonCidadeLiga_Text_NoticeChampion:
+	.string "MURAL DA LIGA:\p"
+	.string "UM NOVO CAMPEAO!\p"
+	.string "Os oito confrontos\n"
+	.string "da arena foram vencidos.\p"
+	.string "A cidade celebra\n"
+	.string "sua jornada por ERYON.$"
