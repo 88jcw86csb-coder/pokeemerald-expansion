@@ -449,8 +449,20 @@ EryonDragoes_EventScript_RidgeGuideAfterBadge:
 	end
 
 EryonDragoes_Text_RidgeGuideEcho:
-	.string "GUIA: O arquivo dos\n"\n	.string "ECOS detectou dois sons!\p"\n	.string "As caixas na trilha\n"\n	.string "podem revelar a origem.$"\n
+	.string "GUIA: O arquivo dos\n"
+	.string "ECOS detectou dois sons!\p"
+	.string "As caixas na trilha\n"
+	.string "podem revelar a origem.$"
+
 EryonDragoes_Text_RidgeGuideManifest:
-	.string "GUIA: Seu manifesto\n"\n	.string "liga LUNARIS ao PICO!\p"\n	.string "Os guardioes precisam\n"\n	.string "conhecer essa rota.$"\n
+	.string "GUIA: Seu manifesto\n"
+	.string "liga LUNARIS ao PICO!\p"
+	.string "Os guardioes precisam\n"
+	.string "conhecer essa rota.$"
+
 EryonDragoes_Text_RidgeGuideAfterBadge:
-	.string "GUIA: Oito INSIGNIAS!\p"\n	.string "A ECLIPSE deixou marcas\n"\n	.string "em toda a montanha.\p"\n	.string "Siga para a LIGA\n"\n	.string "e proteja os cristais.$"
+	.string "GUIA: Oito INSIGNIAS!\p"
+	.string "A ECLIPSE deixou marcas\n"
+	.string "em toda a montanha.\p"
+	.string "Siga para a LIGA\n"
+	.string "e proteja os cristais.$"
