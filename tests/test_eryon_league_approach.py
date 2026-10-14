@@ -284,6 +284,30 @@ class EryonLeagueApproach(unittest.TestCase):
         self.assertNotIn("setflag ", entry)
         self.assertNotIn("trainerbattle_", entry)
 
+    def test_city_crystal_archive_is_accessible_and_optional(self):
+        city, walkable = self.areas["Eryon_CidadeDaLiga"]
+        signs = [event for event in city["bg_events"]
+                 if event["script"] == "EryonCidadeLiga_EventScript_CrystalArchive"]
+        self.assertEqual(len(signs), 1)
+        pos = (signs[0]["x"], signs[0]["y"])
+        self.assertEqual(pos, (54, 42))
+        self.assertIn(pos, walkable)
+        blocked = {(n["x"], n["y"]) for n in city["object_events"]}
+        origin = (city["warp_events"][0]["x"], city["warp_events"][0]["y"])
+        visited = reachable_tiles(walkable, origin, blocked)
+        self.assertTrue(any(p in visited for p in neighbors(pos)))
+        script = (MAP_ROOT / "Eryon_CidadeDaLiga" / "scripts.inc").read_text(encoding="utf-8")
+        entry = script.split("EryonCidadeLiga_EventScript_CrystalArchive::", 1)[1].split(
+            "EryonCidadeLiga_EventScript_CrystalArchiveChart::", 1)[0]
+        milestones = ("FLAG_ERYON_CHAMPION_CROWNED",
+                      "FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED",
+                      "FLAG_ERYON_STAR_CHART_READ")
+        self.assertEqual([entry.index(m) for m in milestones],
+                         sorted(entry.index(m) for m in milestones))
+        self.assertNotIn("setflag ", entry)
+        self.assertNotIn("trainerbattle_", entry)
+        self.assertIn((48, 36), visited)
+
 
 if __name__ == "__main__":
     unittest.main()
