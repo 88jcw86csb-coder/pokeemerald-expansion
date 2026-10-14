@@ -90,6 +90,7 @@ EryonLigaCaminho_Text_LeagueGate:
 EryonLigaCaminho_EventScript_ScoutWitness::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonLigaCaminho_EventScript_ScoutWitnessChampion
 	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonLigaCaminho_EventScript_ScoutWitnessReported
 	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonLigaCaminho_EventScript_ScoutWitnessAfter
 	msgbox EryonLigaCaminho_Text_ScoutWitnessBefore, MSGBOX_DEFAULT
@@ -391,3 +392,19 @@ EryonLigaCaminho_Text_StarMemorialChampion:
 	.string "retorna a montanha!\p"
 	.string "Mesmo apos a LIGA,\n"
 	.string "ha caminhos a explorar.$"
+
+
+@ On a return trip after the League, the original trail witness remembers the Champion.
+@ This is an optional epilogue, with no new flag or battle.
+EryonLigaCaminho_EventScript_ScoutWitnessChampion::
+	msgbox EryonLigaCaminho_Text_ScoutWitnessChampion, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_Text_ScoutWitnessChampion:
+	.string "VIAJANTE: O CAMPEAO\n"
+	.string "voltou pela trilha!\p"
+	.string "A rede da ECLIPSE\n"
+	.string "ainda sera estudada.\p"
+	.string "Ha caminhos antigos\n"
+	.string "a descobrir em ERYON.$"
