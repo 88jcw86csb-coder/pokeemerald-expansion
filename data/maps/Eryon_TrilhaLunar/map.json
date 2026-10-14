@@ -63,6 +63,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EryonLunar_EventScript_ClosedPass"
+    },
+    {
+      "type": "sign",
+      "x": 34,
+      "y": 22,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EryonLunar_EventScript_StarCalibration"
     }
   ],
   "id": "MAP_ERYON_TRILHA_LUNAR",
