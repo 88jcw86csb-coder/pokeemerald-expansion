@@ -103,6 +103,10 @@ EryonDrakonia_EventScript_SanctuaryMarker::
 
 EryonDrakonia_EventScript_LeagueNotice::
 	lock
+	goto_if_set FLAG_BADGE08_GET, EryonDrakonia_EventScript_LeagueNoticeQualified
+	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonDrakonia_EventScript_LeagueNoticeReported
+	goto_if_set FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED, EryonDrakonia_EventScript_LeagueNoticeRelayOff
+	goto_if_set FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ, EryonDrakonia_EventScript_LeagueNoticeManifest
 	msgbox EryonDrakonia_Text_League, MSGBOX_DEFAULT
 	release
 	end
@@ -592,3 +596,54 @@ EryonDrakonia_Text_ResearcherEchoArchive:
 	.string "tambem chegou a DRAKONIA.\p"
 	.string "As runas podem ajudar\n"
 	.string "a rastrear a ECLIPSE.$"
+
+
+@ Drakonia road sign reflects prior decisions without changing travel, battles or save flags.
+
+EryonDrakonia_EventScript_LeagueNoticeQualified::
+	msgbox EryonDrakonia_Text_LeagueNoticeQualified, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_Text_LeagueNoticeQualified:
+	.string "8 INSIGNIAS CONQUISTADAS!\p"
+	.string "LESTE: GRUTA DAS ESTRELAS.\n"
+	.string "DEPOIS: CIDADE DA LIGA.\p"
+	.string "Oito duelos classificam\n"
+	.string "para a ELITE FOUR.$"
+
+EryonDrakonia_EventScript_LeagueNoticeReported::
+	msgbox EryonDrakonia_Text_LeagueNoticeReported, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_Text_LeagueNoticeReported:
+	.string "LESTE: GRUTA DAS ESTRELAS.\p"
+	.string "A LIGA recebeu provas\n"
+	.string "contra a ECLIPSE.\p"
+	.string "O caminho continua\n"
+	.string "livre para treinar.$"
+
+EryonDrakonia_EventScript_LeagueNoticeRelayOff::
+	msgbox EryonDrakonia_Text_LeagueNoticeRelayOff, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_Text_LeagueNoticeRelayOff:
+	.string "LESTE: GRUTA DAS ESTRELAS.\p"
+	.string "A antena ECLIPSE\n"
+	.string "da gruta foi desligada.\p"
+	.string "Caminho da LIGA\n"
+	.string "aberto aos viajantes.$"
+
+EryonDrakonia_EventScript_LeagueNoticeManifest::
+	msgbox EryonDrakonia_Text_LeagueNoticeManifest, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_Text_LeagueNoticeManifest:
+	.string "LESTE: GRUTA DAS ESTRELAS.\p"
+	.string "O manifesto aponta\n"
+	.string "para a CIDADE DA LIGA.\p"
+	.string "Os viajantes podem\n"
+	.string "seguir pelo caminho.$"
