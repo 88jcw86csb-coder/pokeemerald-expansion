@@ -119,6 +119,18 @@ class LeagueMapTests(unittest.TestCase):
         self.assertNotIn("setflag ", entry)
         self.assertIn((47, 22), connected(terrain, (0, 22)))
 
+    def test_northern_marker_prioritizes_champion_and_qualifier(self):
+        script = (ROOT / "data/maps/Eryon_CaminhoDaLiga/scripts.inc").read_text()
+        entry = script.split("EryonLigaCaminho_EventScript_NorthShortcut::", 1)[1].split(
+            "EryonLigaCaminho_EventScript_NorthShortcutChart::", 1)[0]
+        conditions = ("FLAG_ERYON_CHAMPION_CROWNED", "FLAG_ERYON_QUALIFIED",
+                      "FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED", "FLAG_ERYON_STAR_CHART_READ")
+        self.assertEqual([entry.index(flag) for flag in conditions],
+                         sorted(entry.index(flag) for flag in conditions))
+        self.assertIn("EryonLigaCaminho_EventScript_NorthShortcutQualified::", script)
+        self.assertIn("EryonLigaCaminho_Text_NorthShortcutQualified:", script)
+        self.assertNotIn("setflag ", entry)
+
     def test_summit_alcove_event_walkability_and_unique_script(self):
         import json
         t = route()
