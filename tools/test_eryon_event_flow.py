@@ -1374,5 +1374,71 @@ class EryonEventFlowTests(unittest.TestCase):
         self.assertIn("giveitem ITEM_PP_UP", arkhara)
 
 
+
+    def test_dragon_trail_to_league_notices_follow_existing_state(self):
+        """Reused landmarks react to progress without duplicating or gating routes."""
+        import json
+
+        cases = (
+            ("Eryon_TrilhaDosDragoes",
+             "EryonDragoes_EventScript_MountainMarker",
+             ("FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED",
+              "FLAG_ERYON_PICO_SIGNAL_REPAIRED",
+              "FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ")),
+            ("Eryon_VilaDoPico",
+             "EryonPico_EventScript_VillageNotice",
+             ("FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED",
+              "FLAG_ERYON_PICO_SIGNAL_REPAIRED",
+              "FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ")),
+            ("Eryon_Drakonia",
+             "EryonDrakonia_EventScript_LeagueNotice",
+             ("FLAG_BADGE08_GET",
+              "FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED",
+              "FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED",
+              "FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ")),
+        )
+        for name, label, expected_flags in cases:
+            with self.subTest(map=name):
+                folder = ROOT / "data/maps" / name
+                map_data = json.loads((folder / "map.json").read_text(encoding="utf-8"))
+                signs = [event for event in map_data["bg_events"]
+                         if event["script"] == label]
+                self.assertEqual(len(signs), 1, "existing landmark must remain unique")
+                script = (folder / "scripts.inc").read_text(encoding="utf-8")
+                block = script.split(label + "::", 1)[1].split("\n\n", 1)[0]
+                flags_and_targets = re.findall(
+                    r"goto_if_set (FLAG_[A-Z0-9_]+), ([A-Za-z0-9_]+)", block)
+                self.assertEqual(tuple(flag for flag, _ in flags_and_targets),
+                                 expected_flags)
+                for _, target in flags_and_targets:
+                    self.assertIn(target + "::", script)
+                    self.assertIn(target.replace("_EventScript_", "_Text_") + ":", script)
+                for side_effect in ("setflag ", "clearflag ", "giveitem ",
+                                    "trainerbattle_", "dowildbattle", "warp "):
+                    self.assertNotIn(side_effect, block)
+
+        # The original west-to-east route stays traversable in both directions.
+        segments = ("Eryon_TrilhaDosDragoes", "Eryon_VilaDoPico",
+                    "Eryon_Drakonia", "Eryon_GrutaDasEstrelas")
+        map_data = {
+            name: json.loads((ROOT / "data/maps" / name / "map.json").read_text(encoding="utf-8"))
+            for name in segments
+        }
+        for west, east in zip(segments, segments[1:]):
+            with self.subTest(connection=west + " -> " + east):
+                for source, dest in ((west, east), (east, west)):
+                    warps = [warp for warp in map_data[source]["warp_events"]
+                             if warp["dest_map"] == map_data[dest]["id"]]
+                    self.assertTrue(warps, "route connection unexpectedly missing")
+                    for warp in warps:
+                        index = int(warp["dest_warp_id"])
+                        self.assertGreaterEqual(index, 0)
+                        self.assertLess(index, len(map_data[dest]["warp_events"]))
+                        self.assertEqual(
+                            map_data[dest]["warp_events"][index]["dest_map"],
+                            map_data[source]["id"],
+                        )
+
+
 if __name__ == "__main__":
     unittest.main()
