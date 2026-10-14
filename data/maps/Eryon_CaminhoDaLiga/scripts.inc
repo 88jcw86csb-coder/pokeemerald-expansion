@@ -645,3 +645,57 @@ EryonLigaCaminho_Text_NorthShortcutQualified:
 	.string "Oito vitorias na LIGA!\p"
 	.string "Recupere seus Pokemon\n"
 	.string "antes da ELITE FOUR.$"
+
+
+@ Optional Kalos bird encounter on the newly opened northern ridge.
+@ The bird may return after a battle; no new flag or progress gate is needed.
+EryonLigaCaminho_EventScript_RidgeFletchling::
+	lock
+	msgbox EryonLigaCaminho_Text_RidgeFletchling, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonLigaCaminho_EventScript_RidgeFletchlingLeave
+	closemessage
+	setwildbattle SPECIES_FLETCHLING, 56
+	waitse
+	playmoncry SPECIES_FLETCHLING, CRY_MODE_ENCOUNTER
+	delay 30
+	waitmoncry
+	dowildbattle
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, EryonLigaCaminho_EventScript_RidgeFletchlingDone
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, EryonLigaCaminho_EventScript_RidgeFletchlingDone
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, EryonLigaCaminho_EventScript_RidgeFletchlingEscaped
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, EryonLigaCaminho_EventScript_RidgeFletchlingEscaped
+	release
+	end
+
+EryonLigaCaminho_EventScript_RidgeFletchlingDone::
+	msgbox EryonLigaCaminho_Text_RidgeFletchlingDone, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_RidgeFletchlingEscaped::
+	msgbox EryonLigaCaminho_Text_RidgeFletchlingEscaped, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_RidgeFletchlingLeave::
+	closemessage
+	release
+	end
+
+EryonLigaCaminho_Text_RidgeFletchling:
+	.string "Um FLETCHLING selvagem\n"
+	.string "observa a trilha!\p"
+	.string "Parece proteger seu\n"
+	.string "poleiro no cume.\p"
+	.string "Aproximar-se?$"
+
+EryonLigaCaminho_Text_RidgeFletchlingDone:
+	.string "O FLETCHLING deixou\n"
+	.string "o poleiro tranquilo.\p"
+	.string "Outros voam ao longe.$"
+
+EryonLigaCaminho_Text_RidgeFletchlingEscaped:
+	.string "FLETCHLING voou\n"
+	.string "sobre os picos!\p"
+	.string "Talvez reapareca.$"
