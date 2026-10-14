@@ -166,6 +166,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EryonLigaCaminho_EventScript_BirdwatchClearing"
+    },
+    {
+      "type": "sign",
+      "x": 20,
+      "y": 29,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EryonLigaCaminho_EventScript_WestRavine"
     }
   ],
   "id": "MAP_ERYON_CAMINHO_DA_LIGA",
