@@ -582,6 +582,7 @@ EryonLigaCaminho_Text_SummitAlcoveQualified:
 EryonLigaCaminho_EventScript_NorthShortcut::
 	lock
 	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonLigaCaminho_EventScript_NorthShortcutChampion
+	goto_if_set FLAG_ERYON_QUALIFIED, EryonLigaCaminho_EventScript_NorthShortcutQualified
 	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonLigaCaminho_EventScript_NorthShortcutFiled
 	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonLigaCaminho_EventScript_NorthShortcutChart
 	msgbox EryonLigaCaminho_Text_NorthShortcutBefore, MSGBOX_DEFAULT
@@ -630,3 +631,17 @@ EryonLigaCaminho_Text_NorthShortcutChampion:
 	.string "um velho atalho!\p"
 	.string "As montanhas de ERYON\n"
 	.string "seguem cheias de vida.$"
+
+
+@ Once the eight-match qualifier is finished, this mountain marker points
+@ to the recovery chamber without modifying qualification flags.
+EryonLigaCaminho_EventScript_NorthShortcutQualified::
+	msgbox EryonLigaCaminho_Text_NorthShortcutQualified, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_Text_NorthShortcutQualified:
+	.string "ATALHO NORTE:\p"
+	.string "Oito vitorias na LIGA!\p"
+	.string "Recupere seus Pokemon\n"
+	.string "antes da ELITE FOUR.$"
