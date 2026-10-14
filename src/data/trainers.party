@@ -17836,3 +17836,26 @@ Level: 34
 - Charge Beam
 - Bind
 - Metal Sound
+
+=== TRAINER_ERYON_RIDGE_BIRDWATCHER ===
+Name: ARI
+Class: Bird Keeper
+Pic: Bird Keeper
+Gender: Male
+Music: Male
+AI: Check Bad Move
+
+Swellow
+Level: 57
+- Aerial Ace
+- Quick Attack
+- Double Team
+- Wing Attack
+
+Talonflame
+Level: 58
+- Flame Charge
+- Acrobatics
+- Roost
+- Quick Attack
+
