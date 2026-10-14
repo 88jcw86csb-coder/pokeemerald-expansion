@@ -41,6 +41,9 @@ python3 -m unittest discover -s tests -p 'test_eryon_glacial_eclipse.py' -v
 echo "== Eryon: Sierra rocky terrain and Eclipse crystal puzzle =="
 python3 -m unittest discover -s tests -p 'test_eryon_serra_resonance.py' -v
 
+echo "== Eryon: Crystal Serra sentry and multi-stage Eclipse investigation =="
+python3 -m unittest discover -s tests -p 'test_eryon_serra_sentry.py' -v
+
 echo "== Eryon: ROM smoke validator unit tests =="
 python3 -m unittest discover -s tools -p 'test_eryon_rom_smoke.py' -v
 
