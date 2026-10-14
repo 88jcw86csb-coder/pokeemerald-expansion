@@ -1080,6 +1080,8 @@ static u16 GetEryonTrainerFlagId(u16 trainerId)
         return FLAG_BADGE02_GET + trainerId - TRAINER_ERYON_GYM_NEONARA;
     if (trainerId == TRAINER_ERYON_GLACIAL_ECLIPSE_RESEARCHER)
         return FLAG_ERYON_GLACIAL_ECLIPSE_RESEARCHER_DEFEATED;
+    if (trainerId == TRAINER_ERYON_SERRA_CORE_GUARD)
+        return FLAG_ERYON_SERRA_CORE_GUARD_DEFEATED;
     return TRAINER_FLAGS_START + trainerId;
 }
 
