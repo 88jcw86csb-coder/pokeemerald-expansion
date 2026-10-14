@@ -18,6 +18,7 @@ EryonLunar_EventScript_AstronomerClue::
 EryonLunar_EventScript_Watchman::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_ECHO_TRACE_RECORDED, EryonLunar_EventScript_WatchmanTrace
 	msgbox EryonLunar_Text_Watchman, MSGBOX_DEFAULT
 	release
 	end
@@ -100,3 +101,53 @@ EryonLunar_Text_ClosedPass:
 	.string "Desvio para LUNARIS aberto.\p"
 	.string "Os viajantes podem\n"
 	.string "seguir pela trilha.$"
+
+@ Optional chart connects Echo Valley, its village archive, and Lunaris.
+EryonLunar_EventScript_StarCalibration::
+	lock
+	goto_if_set FLAG_ERYON_ECHO_ARCHIVE_REWARD_CLAIMED, EryonLunar_EventScript_StarCalibrationComplete
+	goto_if_set FLAG_ERYON_ECHO_TRACE_RECORDED, EryonLunar_EventScript_StarCalibrationPending
+	msgbox EryonLunar_Text_StarCalibrationBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLunar_EventScript_StarCalibrationPending::
+	msgbox EryonLunar_Text_StarCalibrationPending, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLunar_EventScript_StarCalibrationComplete::
+	msgbox EryonLunar_Text_StarCalibrationComplete, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLunar_EventScript_WatchmanTrace::
+	msgbox EryonLunar_Text_WatchmanTrace, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLunar_Text_StarCalibrationBefore:
+	.string "MARCADOR ESTELAR:\n"
+	.string "Este disco segue a LUA.\p"
+	.string "O vale ainda nao tem\n"
+	.string "dados registrados.$"
+
+EryonLunar_Text_StarCalibrationPending:
+	.string "MARCADOR ESTELAR:\n"
+	.string "O som do vale aponta\n"
+	.string "para o OBSERVATORIO.\p"
+	.string "Consulte antes o\n"
+	.string "ARQUIVO DA ALDEIA.$"
+
+EryonLunar_Text_StarCalibrationComplete:
+	.string "MARCADOR ESTELAR:\n"
+	.string "A frequencia natural\n"
+	.string "e a da ECLIPSE diferem.\p"
+	.string "LUNARIS pode comparar\n"
+	.string "ambos os sinais.$"
+
+EryonLunar_Text_WatchmanTrace:
+	.string "VIGIA: O ARQUIVO\n"
+	.string "precisa de sua prova!\p"
+	.string "Depois siga a LUNARIS\n"
+	.string "pela trilha leste.$"
