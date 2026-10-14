@@ -105,6 +105,7 @@ EryonSerra_EventScript_Medic::
 	faceplayer
 	msgbox EryonSerra_Text_MedicOffer, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EryonSerra_EventScript_MedicDecline
+	closemessage
 	special HealPlayerParty
 	msgbox EryonSerra_Text_MedicHealed, MSGBOX_DEFAULT
 	release
