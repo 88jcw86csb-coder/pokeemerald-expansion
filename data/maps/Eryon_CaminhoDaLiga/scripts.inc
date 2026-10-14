@@ -462,3 +462,58 @@ EryonLigaCaminho_Text_CrystalSurveyChampion:
 	.string "O CAMPEAO retornou!\p"
 	.string "A trilha permanece\n"
 	.string "aberta a exploradores.$"
+
+
+@ Eastern overlook on the existing road; visits remain optional and HM-free.
+@ The lookout foreshadows the city's Eclipse investigation without changing flags.
+EryonLigaCaminho_EventScript_EastLookout::
+	lock
+	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonLigaCaminho_EventScript_EastLookoutChampion
+	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonLigaCaminho_EventScript_EastLookoutFiled
+	goto_if_set FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED, EryonLigaCaminho_EventScript_EastLookoutQuiet
+	msgbox EryonLigaCaminho_Text_EastLookoutBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_EastLookoutQuiet::
+	msgbox EryonLigaCaminho_Text_EastLookoutQuiet, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_EastLookoutFiled::
+	msgbox EryonLigaCaminho_Text_EastLookoutFiled, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_EastLookoutChampion::
+	msgbox EryonLigaCaminho_Text_EastLookoutChampion, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_Text_EastLookoutBefore:
+	.string "MIRANTE LESTE:\p"
+	.string "A cidade da LIGA\n"
+	.string "surge entre os picos.\p"
+	.string "Uma luz estranha vem\n"
+	.string "da gruta a oeste.$"
+
+EryonLigaCaminho_Text_EastLookoutQuiet:
+	.string "MIRANTE LESTE:\p"
+	.string "O sinal da ECLIPSE\n"
+	.string "na gruta desapareceu.\p"
+	.string "As luzes da cidade\n"
+	.string "brilham sem interferencia.$"
+
+EryonLigaCaminho_Text_EastLookoutFiled:
+	.string "MIRANTE LESTE:\p"
+	.string "Guardas investigam\n"
+	.string "a rede da ECLIPSE.\p"
+	.string "A LIGA continua aberta\n"
+	.string "a novos desafiantes.$"
+
+EryonLigaCaminho_Text_EastLookoutChampion:
+	.string "MIRANTE LESTE:\p"
+	.string "As bandeiras da LIGA\n"
+	.string "celebram o CAMPEAO!\p"
+	.string "Ainda ha rotas para\n"
+	.string "explorar em ERYON.$"
