@@ -55,6 +55,12 @@ def route():
     for y in (12, 13, 14):
         for x in range(35, 40):
             t[y][x] = ":"
+    # A narrow switchback connects the eastern summit alcove to the upper rim.
+    # All existing ridge and road cells remain unchanged.
+    for x in range(32, 36):
+        t[12][x] = ":"
+    for y in range(8, 13):
+        t[y][32] = ":"
     # The east gate now links to the City of the League.
     for y in range(h):
         t[y][w - 1]="#"
