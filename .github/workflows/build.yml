@@ -110,6 +110,11 @@ jobs:
         run: python3 -m unittest discover -s tools -p 'test_eryon_rom_smoke.py' -v
       - name: Validate Eryon data
         run: python3 tools/eryon_validate.py
+      - name: Inventory provisional Eryon map and sprite art
+        run: |
+          python3 -m py_compile tools/eryon_visual_audit.py tools/test_eryon_visual_audit.py
+          python3 -m unittest discover -s tools -p 'test_eryon_visual_audit.py' -v
+          python3 tools/eryon_visual_audit.py
       - name: Report unfinished Eryon map, gym and encounter work
         run: python3 tools/eryon_readiness_report.py
 
