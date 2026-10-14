@@ -524,6 +524,7 @@ EryonLigaCaminho_Text_EastLookoutChampion:
 EryonLigaCaminho_EventScript_SummitAlcove::
 	lock
 	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonLigaCaminho_EventScript_SummitAlcoveChampion
+	goto_if_set FLAG_ERYON_QUALIFIED, EryonLigaCaminho_EventScript_SummitAlcoveQualified
 	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonLigaCaminho_EventScript_SummitAlcoveFiled
 	msgbox EryonLigaCaminho_Text_SummitAlcoveBefore, MSGBOX_DEFAULT
 	release
@@ -559,3 +560,18 @@ EryonLigaCaminho_Text_SummitAlcoveChampion:
 	.string "cidade do alto!\p"
 	.string "A montanha ainda tem\n"
 	.string "segredos a explorar.$"
+
+
+@ During the League's eight-win qualification, summit explorers can revisit
+@ the optional mountain alcove and receive accurate recovery directions.
+EryonLigaCaminho_EventScript_SummitAlcoveQualified::
+	msgbox EryonLigaCaminho_Text_SummitAlcoveQualified, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_Text_SummitAlcoveQualified:
+	.string "NICHO DO CUME:\p"
+	.string "Oito vitorias ecoam\n"
+	.string "por esta montanha!\p"
+	.string "A ELITE FOUR espera\n"
+	.string "na cidade abaixo.$"
