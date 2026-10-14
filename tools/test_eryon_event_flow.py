@@ -1500,14 +1500,14 @@ class EryonEventFlowTests(unittest.TestCase):
                 section = parties.split("=== " + trainer + " ===", 1)
                 self.assertEqual(len(section), 2, "Gym leader party missing")
                 team = section[1].split("\n=== ", 1)[0]
-                levels = [int(value) for value in re.findall(r"(?m)^Level: (\\d+)$", team)]
+                levels = [int(value) for value in re.findall(r"(?m)^Level: (\d+)$", team)]
                 self.assertGreaterEqual(len(levels), 3)
                 self.assertLessEqual(len(levels), 6)
                 self.assertEqual(max(levels), max_level)
 
         config = (ROOT / "include/config/battle.h").read_text(encoding="utf-8")
-        self.assertRegex(config, r"(?m)^#define\\s+B_SCALED_EXP\\s+GEN_LATEST\\b")
-        self.assertRegex(config, r"(?m)^#define\\s+B_TRAINER_EXP_MULTIPLIER\\s+GEN_6\\b")
+        self.assertRegex(config, r"(?m)^#define\s+B_SCALED_EXP\s+GEN_LATEST\b")
+        self.assertRegex(config, r"(?m)^#define\s+B_TRAINER_EXP_MULTIPLIER\s+GEN_6\b")
         engine = (ROOT / "src/battle_script_commands.c").read_text(encoding="utf-8")
         self.assertIn("GetConfig(B_SCALED_EXP)", engine)
         self.assertIn("ApplyExperienceMultipliers(", engine)
