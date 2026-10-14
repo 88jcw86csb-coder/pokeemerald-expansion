@@ -128,6 +128,10 @@ def route(kind):
         for y in (14, 16, 20, 24, 29, 31, 35):
             for x in range(12, 40):
                 tiles[y][x] = ":"
+    if kind == "mountain":
+        # Surveyor at (9,34) now has a short path from the western switchback.
+        for x in range(7, 13):
+            tiles[34][x] = ":"
     if kind == "passage":
         # A northern ledge offers a second route around the central crossing.
         for x in range(9, 43):
