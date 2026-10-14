@@ -6,6 +6,7 @@ EryonLigaCaminho_EventScript_RouteGuardian::
 	lock
 	faceplayer
 	goto_if_set FLAG_ERYON_GROTTO_ECLIPSE_SCOUT_DEFEATED, EryonLigaCaminho_EventScript_GuardianScoutDefeated
+	goto_if_set FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED, EryonLigaCaminho_EventScript_GuardianRelayDisabled
 	msgbox EryonLigaCaminho_Text_Guardian, MSGBOX_DEFAULT
 	release
 	end
@@ -279,3 +280,16 @@ EryonLigaCaminho_Text_StarMemorialReported:
 	.string "secreta da ECLIPSE.\p"
 	.string "Os viajantes voltam\n"
 	.string "a subir estes montes.$"
+
+
+@ The roadside guardian hears that the underground Eclipse signal was stopped.
+EryonLigaCaminho_EventScript_GuardianRelayDisabled:
+	msgbox EryonLigaCaminho_Text_GuardianRelayDisabled, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_Text_GuardianRelayDisabled:
+	.string "GUARDIAO: A ECLIPSE\n"
+	.string "perdeu a antena da gruta!\p"
+	.string "O acesso a CIDADE\n"
+	.string "DA LIGA segue livre.$"

@@ -14,6 +14,15 @@ class StarCavernTests(unittest.TestCase):
         t = cavern()
         self.assertEqual(t[22][21], "#")
         self.assertIn((23, 28), reachable(t))
+        maps = json.loads((ROOT / "data/maps/Eryon_GrutaDasEstrelas/map.json").read_text())
+        side_events = [e for e in maps["bg_events"]
+                       if e["script"] == "EryonEstrelas_EventScript_ResonanceAlcove"]
+        self.assertEqual([(e["x"], e["y"]) for e in side_events], [(23, 28)])
+        story = (ROOT / "data/maps/Eryon_GrutaDasEstrelas/scripts.inc").read_text()
+        for fragment in ("EryonEstrelas_EventScript_ResonanceAlcove::",
+                         "FLAG_ERYON_ECHO_ARCHIVE_REWARD_CLAIMED",
+                         "FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED"):
+            self.assertIn(fragment, story)
         self.assertIn((29, 9), reachable(t))
         self.assertIn((47, 22), reachable(t))
         info = json.loads((ROOT / "data/maps/Eryon_GrutaDasEstrelas/map.json").read_text())

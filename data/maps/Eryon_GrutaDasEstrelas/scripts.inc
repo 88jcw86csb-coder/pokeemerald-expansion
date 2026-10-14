@@ -361,3 +361,42 @@ EryonEstrelas_Text_GalleryReported:
 	.string "da rede da ECLIPSE.\p"
 	.string "Os ecos antigos\n"
 	.string "voltam a ser ouvidos.$"
+
+
+@ A side alcove on the newly connected lower bypass. Existing progress flags
+@ change its description, without any reward or new mandatory battle.
+EryonEstrelas_EventScript_ResonanceAlcove::
+	lock
+	goto_if_set FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED, EryonEstrelas_EventScript_AlcoveQuiet
+	goto_if_set FLAG_ERYON_ECHO_ARCHIVE_REWARD_CLAIMED, EryonEstrelas_EventScript_AlcoveArchive
+	msgbox EryonEstrelas_Text_AlcoveBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEstrelas_EventScript_AlcoveArchive:
+	msgbox EryonEstrelas_Text_AlcoveArchive, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEstrelas_EventScript_AlcoveQuiet:
+	msgbox EryonEstrelas_Text_AlcoveQuiet, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEstrelas_Text_AlcoveBefore:
+	.string "Cristais se cruzam\n"
+	.string "em dois tons distintos.\p"
+	.string "Um deles parece vir\n"
+	.string "de uma maquina distante.$"
+
+EryonEstrelas_Text_AlcoveArchive:
+	.string "O arquivo dos ECOS\n"
+	.string "combina com estas marcas!\p"
+	.string "O sinal da ECLIPSE\n"
+	.string "imita o som natural.$"
+
+EryonEstrelas_Text_AlcoveQuiet:
+	.string "Os cristais desta\n"
+	.string "galeria silenciaram.\p"
+	.string "O transmissor ECLIPSE\n"
+	.string "ja nao distorce o eco.$"

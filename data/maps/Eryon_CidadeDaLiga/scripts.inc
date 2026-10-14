@@ -75,6 +75,7 @@ EryonCidadeLiga_EventScript_Reporter::
 	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonCidadeLiga_EventScript_ReporterChampion
 	goto_if_set FLAG_ERYON_DRAKONIA_ECLIPSE_DEFEATED, EryonCidadeLiga_EventScript_ReporterDrakonia
 	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonCidadeLiga_EventScript_ReporterEvidence
+	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonCidadeLiga_EventScript_ReporterChart
 	msgbox EryonCidadeLiga_Text_Reporter, MSGBOX_DEFAULT
 	release
 	end
@@ -547,3 +548,18 @@ EryonCidadeLiga_Text_TerraceChampion:
 	.string "o novo CAMPEAO!\p"
 	.string "ERYON recordara\n"
 	.string "sua grande jornada.$"
+
+
+@ The reporter follows Star Grotto discoveries before the tournament.
+EryonCidadeLiga_EventScript_ReporterChart:
+	msgbox EryonCidadeLiga_Text_ReporterChart, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_Text_ReporterChart:
+	.string "REPORTER: A Carta\n"
+	.string "Estelar foi decifrada!\p"
+	.string "As pistas da ECLIPSE\n"
+	.string "chegam a esta cidade.\p"
+	.string "O torneio permanece\n"
+	.string "aberto aos treinadores.$"
