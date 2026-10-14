@@ -204,6 +204,21 @@ class EryonLeagueApproach(unittest.TestCase):
         self.assertLess(qualified, evidence)
         self.assertNotIn("setflag ", entry)
 
+    def test_league_road_witness_champion_return_is_optional(self):
+        road, _ = self.areas["Eryon_CaminhoDaLiga"]
+        witnesses = [n for n in road["object_events"]
+                     if n["script"] == "EryonLigaCaminho_EventScript_ScoutWitness"]
+        self.assertEqual(len(witnesses), 1)
+        script = (MAP_ROOT / "Eryon_CaminhoDaLiga" / "scripts.inc").read_text(encoding="utf-8")
+        entry = script.split("EryonLigaCaminho_EventScript_ScoutWitness::", 1)[1].split(
+            "EryonLigaCaminho_EventScript_ScoutWitnessAfter::", 1)[0]
+        self.assertLess(entry.index("FLAG_ERYON_CHAMPION_CROWNED"),
+                        entry.index("FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED"))
+        self.assertIn("EryonLigaCaminho_EventScript_ScoutWitnessChampion::", script)
+        self.assertIn("EryonLigaCaminho_Text_ScoutWitnessChampion:", script)
+        self.assertNotIn("setflag ", entry)
+        self.assertNotIn("trainerbattle_", entry)
+
 
 if __name__ == "__main__":
     unittest.main()
