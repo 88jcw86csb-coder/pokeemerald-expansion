@@ -575,3 +575,58 @@ EryonLigaCaminho_Text_SummitAlcoveQualified:
 	.string "por esta montanha!\p"
 	.string "A ELITE FOUR espera\n"
 	.string "na cidade abaixo.$"
+
+
+@ The newly opened northern shortcut bears survey marks from the Eclipse network.
+@ This optional landmark is revisitable and does not change badge or League flags.
+EryonLigaCaminho_EventScript_NorthShortcut::
+	lock
+	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonLigaCaminho_EventScript_NorthShortcutChampion
+	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonLigaCaminho_EventScript_NorthShortcutFiled
+	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonLigaCaminho_EventScript_NorthShortcutChart
+	msgbox EryonLigaCaminho_Text_NorthShortcutBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_NorthShortcutChart::
+	msgbox EryonLigaCaminho_Text_NorthShortcutChart, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_NorthShortcutFiled::
+	msgbox EryonLigaCaminho_Text_NorthShortcutFiled, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_NorthShortcutChampion::
+	msgbox EryonLigaCaminho_Text_NorthShortcutChampion, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_Text_NorthShortcutBefore:
+	.string "ATALHO NORTE:\p"
+	.string "Marcas antigas indicam\n"
+	.string "um caminho entre picos.\p"
+	.string "O memorial fica a oeste\n"
+	.string "da passagem de pedra.$"
+
+EryonLigaCaminho_Text_NorthShortcutChart:
+	.string "ATALHO NORTE:\p"
+	.string "Os simbolos combinam\n"
+	.string "com a CARTA ESTELAR!\p"
+	.string "Alguem transportou\n"
+	.string "cristais por este atalho.$"
+
+EryonLigaCaminho_Text_NorthShortcutFiled:
+	.string "ATALHO NORTE:\p"
+	.string "As provas da ECLIPSE\n"
+	.string "revelaram esta trilha.\p"
+	.string "A LIGA investiga as\n"
+	.string "rotas pela montanha.$"
+
+EryonLigaCaminho_Text_NorthShortcutChampion:
+	.string "ATALHO NORTE:\p"
+	.string "O CAMPEAO encontra\n"
+	.string "um velho atalho!\p"
+	.string "As montanhas de ERYON\n"
+	.string "seguem cheias de vida.$"
