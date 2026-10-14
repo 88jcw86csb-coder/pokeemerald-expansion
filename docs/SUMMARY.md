@@ -15,6 +15,7 @@
     - [Eryon — Liga Central e classificatória](./eryon/LIGA_CENTRAL_CLASSIFICATORIA.md)
     - [Eryon — auditoria técnica 2026-10-13](./eryon/AUDITORIA_TECNICA_2026-10-13.md)
     - [Eryon — documentação regional](./eryon/README.md)
+    - [Eryon — identidade visual original](./eryon/IDENTIDADE_VISUAL_ORIGINAL.md)
     - [Eryon — ginásios oficiais](./eryon/ginasios_oficiais.md)
     - [Eryon — Pokémon por rotas](./eryon/distribuicao_pokemon_rotas.md)
     - [Eryon — capítulo 03](./eryon/historia/capitulo_03_ecos_sob_o_gelo.md)
