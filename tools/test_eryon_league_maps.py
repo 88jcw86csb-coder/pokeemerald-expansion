@@ -72,6 +72,32 @@ class LeagueMapTests(unittest.TestCase):
             render("caminho_da_liga", terrain),
         )
 
+    def test_northern_shortcut_links_memorial_and_eastern_ridge(self):
+        from collections import deque
+        terrain = route()
+        for x in range(25, 33):
+            self.assertEqual(terrain[11][x], ":")
+        for y in range(11, 15):
+            self.assertEqual(terrain[y][26], ":")
+        free = {(x, y) for y, row in enumerate(terrain)
+                for x, tile in enumerate(row) if tile != "#"}
+        start, goal = (25, 14), (32, 11)
+        pending = deque([start])
+        visited = {start}
+        while pending:
+            x, y = pending.popleft()
+            for pos in ((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)):
+                if pos not in free or pos in visited:
+                    continue
+                visited.add(pos)
+                pending.append(pos)
+        self.assertIn(goal, visited)
+        self.assertIn((47, 22), connected(terrain, (0, 22)))
+        self.assertEqual(
+            (ROOT / "docs/eryon/caminho_da_liga_terrain_plan.txt").read_text(),
+            render("caminho_da_liga", terrain),
+        )
+
     def test_summit_alcove_event_walkability_and_unique_script(self):
         import json
         t = route()
