@@ -58,6 +58,20 @@ class LeagueMapTests(unittest.TestCase):
             self.assertEqual(struct.unpack_from("<H",data,2*(y*48+x))[0]&0x0c00,0)
 
 
+    def test_eastern_summit_switchback_reaches_both_rims(self):
+        terrain = route()
+        for y in range(8, 13):
+            self.assertEqual(terrain[y][32], ":")
+        for x in range(32, 40):
+            self.assertEqual(terrain[12][x], ":")
+        reached = connected(terrain, (0, 22))
+        for point in ((32, 7), (32, 12), (38, 13), (47, 22)):
+            self.assertIn(point, reached)
+        self.assertEqual(
+            (ROOT / "docs/eryon/caminho_da_liga_terrain_plan.txt").read_text(),
+            render("caminho_da_liga", terrain),
+        )
+
     def test_eight_stars_terrace_connected_city(self):
         """Check the new skyline park, unchanged League building, and exact terrain."""
         import json,struct
