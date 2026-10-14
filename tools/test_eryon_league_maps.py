@@ -58,5 +58,29 @@ class LeagueMapTests(unittest.TestCase):
             self.assertEqual(struct.unpack_from("<H",data,2*(y*48+x))[0]&0x0c00,0)
 
 
+    def test_eight_stars_terrace_connected_city(self):
+        """Check the new skyline park, unchanged League building, and exact terrain."""
+        import json,struct
+        from build_eryon_map_bins import compile_plan
+        t=league()
+        self.assertIn((70,25),connected(t,(0,36)))
+        self.assertIn((80,28),connected(t,(0,36)))
+        self.assertIn((48,36),connected(t,(0,36)))
+        info=json.loads((ROOT/"data/maps/Eryon_CidadeDaLiga/map.json").read_text())
+        self.assertEqual([(e["x"],e["y"]) for e in info["warp_events"]],[(0,36),(48,36)])
+        signs=[e for e in info["bg_events"] if e["script"]=="EryonCidadeLiga_EventScript_EightStarsTerrace"]
+        self.assertEqual([(e["x"],e["y"]) for e in signs],[(70,25)])
+        scripts=(ROOT/"data/maps/Eryon_CidadeDaLiga/scripts.inc").read_text()
+        self.assertIn("EryonCidadeLiga_EventScript_EightStarsTerrace::",scripts)
+        plan=ROOT/"docs/eryon/liga_eryon_terrain_plan.txt"
+        self.assertEqual(plan.read_text(),render("liga_eryon",t))
+        expected=compile_plan(plan,{"#":0x3c01,".":0x3001,",":0x3002,"L":0x3001},
+                              width=96,height=72)
+        bin=(ROOT/"data/layouts/Eryon_CidadeDaLiga/map.bin").read_bytes()
+        self.assertEqual(bin,expected)
+        for x,y in ((0,36),(48,36),(70,25),(80,28)):
+            self.assertEqual(struct.unpack_from("<H",bin,2*(y*96+x))[0]&0x0c00,0)
+
+
 if __name__=="__main__":
     unittest.main()

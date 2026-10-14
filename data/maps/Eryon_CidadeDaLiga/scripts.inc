@@ -495,3 +495,55 @@ EryonCidadeLiga_Text_ResonanceDelegateChampion:
 	.string "a LIGA e ajudou ERYON!\p"
 	.string "As cidades agora\n"
 	.string "compartilham os estudos.$"
+
+
+@ Eight Stars lookout above the League city; no trainer, badge or save changes.
+EryonCidadeLiga_EventScript_EightStarsTerrace::
+	lock
+	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonCidadeLiga_EventScript_TerraceChampion
+	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonCidadeLiga_EventScript_TerraceReported
+	goto_if_set FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED, EryonCidadeLiga_EventScript_TerraceSilent
+	msgbox EryonCidadeLiga_Text_TerraceBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_TerraceChampion::
+	msgbox EryonCidadeLiga_Text_TerraceChampion, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_TerraceReported::
+	msgbox EryonCidadeLiga_Text_TerraceReported, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_TerraceSilent::
+	msgbox EryonCidadeLiga_Text_TerraceSilent, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_Text_TerraceBefore:
+	.string "MIRANTE OITO ESTRELAS:\p"
+	.string "Cada pedra representa\n"
+	.string "uma regiao de ERYON.\p"
+	.string "O caminho curvo liga\n"
+	.string "a praca ao bairro leste.$"
+
+EryonCidadeLiga_Text_TerraceSilent:
+	.string "O eco artificial\n"
+	.string "na gruta silenciou.\p"
+	.string "Agora e possivel ver\n"
+	.string "o ceu limpo da LIGA.$"
+
+EryonCidadeLiga_Text_TerraceReported:
+	.string "A LIGA ja recebeu as\n"
+	.string "provas contra a ECLIPSE.\p"
+	.string "O mirante recebe\n"
+	.string "viajantes novamente.$"
+
+EryonCidadeLiga_Text_TerraceChampion:
+	.string "OITO ESTRELAS:\p"
+	.string "Uma nona luz celebra\n"
+	.string "o novo CAMPEAO!\p"
+	.string "ERYON recordara\n"
+	.string "sua grande jornada.$"

@@ -78,6 +78,31 @@ def league():
     rect(33,53,63,59)
     for x,y in ((18,25),(73,27),(20,46),(74,48)):
         rect(x-4,y-3,x+4,y+3,",")
+    # Preserve earlier 33 garden block refinements from the committed city.
+    for x,y in ((64,44),(65,44),(67,44),(68,44),(69,44),(70,44),(72,44),(73,44),(74,44),(64,45),(65,45),(67,45),(68,45),(69,45),(64,46),(66,46),(67,46),(68,46),(69,46),(66,47),(67,47),(68,47),(69,47),(66,48),(68,48),(69,48),(66,49),(67,49),(68,49),(69,49),(66,50),(67,50),(69,50)):
+        t[y][x]=","
+    # Original north-east hill district: winding hill, oval planted court and
+    # two accesses, from the central square and the east avenue.
+    def terrace_step(x,y):
+        for yy in range(y-1,y+2):
+            for xx in range(x-1,x+2):
+                if 0<xx<95 and 0<yy<71 and t[yy][xx]=="#":
+                    t[yy][xx]="."
+    stages=((60,34),(62,32),(65,30),(67,28),(70,26),(75,25),(79,25),(80,28))
+    for (ax,ay),(bx,by) in zip(stages,stages[1:]):
+        x,y=ax,ay
+        while x!=bx or y!=by:
+            terrace_step(x,y)
+            if x!=bx: x+=1 if bx>x else -1
+            if y!=by: y+=1 if by>y else -1
+        terrace_step(bx,by)
+    for y in range(20,32):
+        for x in range(63,82):
+            if ((x-71.5)/9)**2+((y-25.5)/5)**2<=1 and t[y][x]=="#":
+                t[y][x]=","
+    for y in range(25,30):
+        terrace_step(70,y)
+    t[25][70]="."
     for x,y in ((0,36),(48,36),(29,36),(43,33),(64,35),(48,42),(60,40)):
         t[y][x]="."
     t[36][48]="L"

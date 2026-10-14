@@ -131,6 +131,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EryonCidadeLiga_EventScript_ParkEspurr"
+    },
+    {
+      "type": "sign",
+      "x": 70,
+      "y": 25,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EryonCidadeLiga_EventScript_EightStarsTerrace"
     }
   ],
   "id": "MAP_ERYON_CIDADE_DA_LIGA",
