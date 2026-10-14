@@ -37405,6 +37405,627 @@
               }
             ]
           }
+        },
+        {
+          "map": "MAP_ERYON_ESTRADA_DOS_POMARES",
+          "base_label": "gEryonEstradaDosPomares",
+          "land_mons": {
+            "encounter_rate": 24,
+            "mons": [
+              {
+                "min_level": 16,
+                "max_level": 17,
+                "species": "SPECIES_CHERUBI"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_LILLIPUP"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_BUDEW"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_CHERUBI"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_LILLIPUP"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_BUDEW"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_DEERLING"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_DEERLING"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_COMBEE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_COMBEE"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_PETILIL"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_PETILIL"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ERYON_ROTA04",
+          "base_label": "gEryonRota04",
+          "land_mons": {
+            "encounter_rate": 22,
+            "mons": [
+              {
+                "min_level": 18,
+                "max_level": 19,
+                "species": "SPECIES_SENTRET"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_RATTATA"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_MACHOP"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_SENTRET"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_RATTATA"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_MACHOP"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_SHINX"
+              },
+              {
+                "min_level": 21,
+                "max_level": 23,
+                "species": "SPECIES_SHINX"
+              },
+              {
+                "min_level": 21,
+                "max_level": 23,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 21,
+                "max_level": 23,
+                "species": "SPECIES_SCRAGGY"
+              },
+              {
+                "min_level": 23,
+                "max_level": 24,
+                "species": "SPECIES_PANCHAM"
+              },
+              {
+                "min_level": 24,
+                "max_level": 24,
+                "species": "SPECIES_PANCHAM"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ERYON_COLINAS_DA_NEBLINA",
+          "base_label": "gEryonColinasDaNeblina",
+          "land_mons": {
+            "encounter_rate": 22,
+            "mons": [
+              {
+                "min_level": 24,
+                "max_level": 25,
+                "species": "SPECIES_GASTLY"
+              },
+              {
+                "min_level": 24,
+                "max_level": 26,
+                "species": "SPECIES_MURKROW"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_GASTLY"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_MURKROW"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_MUNNA"
+              },
+              {
+                "min_level": 27,
+                "max_level": 28,
+                "species": "SPECIES_ESPURR"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_ESPURR"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_MISDREAVUS"
+              },
+              {
+                "min_level": 29,
+                "max_level": 30,
+                "species": "SPECIES_SNEASEL"
+              },
+              {
+                "min_level": 30,
+                "max_level": 30,
+                "species": "SPECIES_SNEASEL"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ERYON_TRILHA_GLACIAL",
+          "base_label": "gEryonTrilhaGlacial",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 25,
+                "max_level": 26,
+                "species": "SPECIES_SWINUB"
+              },
+              {
+                "min_level": 25,
+                "max_level": 27,
+                "species": "SPECIES_SNOVER"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_SNEASEL"
+              },
+              {
+                "min_level": 26,
+                "max_level": 28,
+                "species": "SPECIES_SWINUB"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_SNOVER"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_SNEASEL"
+              },
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_CUBCHOO"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_CUBCHOO"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_BERGMITE"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_BERGMITE"
+              },
+              {
+                "min_level": 30,
+                "max_level": 31,
+                "species": "SPECIES_SNORUNT"
+              },
+              {
+                "min_level": 31,
+                "max_level": 31,
+                "species": "SPECIES_SNORUNT"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ERYON_TRILHA_DO_OASIS",
+          "base_label": "gEryonTrilhaDoOasis",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_SANDSHREW"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_MARACTUS"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_HIPPOPOTAS"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_SANDSHREW"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_MARACTUS"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_HIPPOPOTAS"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_CACNEA"
+              },
+              {
+                "min_level": 35,
+                "max_level": 37,
+                "species": "SPECIES_CACNEA"
+              },
+              {
+                "min_level": 35,
+                "max_level": 37,
+                "species": "SPECIES_HELIOPTILE"
+              },
+              {
+                "min_level": 35,
+                "max_level": 37,
+                "species": "SPECIES_HELIOPTILE"
+              },
+              {
+                "min_level": 37,
+                "max_level": 38,
+                "species": "SPECIES_TRAPINCH"
+              },
+              {
+                "min_level": 38,
+                "max_level": 38,
+                "species": "SPECIES_TRAPINCH"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ERYON_VALE_DOS_ECOS",
+          "base_label": "gEryonValeDosEcos",
+          "land_mons": {
+            "encounter_rate": 22,
+            "mons": [
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_LOUDRED"
+              },
+              {
+                "min_level": 42,
+                "max_level": 44,
+                "species": "SPECIES_SWADLOON"
+              },
+              {
+                "min_level": 43,
+                "max_level": 45,
+                "species": "SPECIES_SAWSBUCK"
+              },
+              {
+                "min_level": 43,
+                "max_level": 45,
+                "species": "SPECIES_LOUDRED"
+              },
+              {
+                "min_level": 44,
+                "max_level": 46,
+                "species": "SPECIES_SWADLOON"
+              },
+              {
+                "min_level": 44,
+                "max_level": 46,
+                "species": "SPECIES_SAWSBUCK"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_GOTHORITA"
+              },
+              {
+                "min_level": 45,
+                "max_level": 47,
+                "species": "SPECIES_GOTHORITA"
+              },
+              {
+                "min_level": 45,
+                "max_level": 47,
+                "species": "SPECIES_ELGYEM"
+              },
+              {
+                "min_level": 45,
+                "max_level": 47,
+                "species": "SPECIES_ELGYEM"
+              },
+              {
+                "min_level": 47,
+                "max_level": 48,
+                "species": "SPECIES_HONEDGE"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_HONEDGE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ERYON_TRILHA_LUNAR",
+          "base_label": "gEryonTrilhaLunar",
+          "land_mons": {
+            "encounter_rate": 18,
+            "mons": [
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_CLEFAIRY"
+              },
+              {
+                "min_level": 45,
+                "max_level": 47,
+                "species": "SPECIES_LUNATONE"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_SOLROCK"
+              },
+              {
+                "min_level": 46,
+                "max_level": 48,
+                "species": "SPECIES_CLEFAIRY"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_LUNATONE"
+              },
+              {
+                "min_level": 47,
+                "max_level": 49,
+                "species": "SPECIES_SOLROCK"
+              },
+              {
+                "min_level": 48,
+                "max_level": 49,
+                "species": "SPECIES_GOTHORITA"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_GOTHORITA"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_ELGYEM"
+              },
+              {
+                "min_level": 48,
+                "max_level": 50,
+                "species": "SPECIES_ELGYEM"
+              },
+              {
+                "min_level": 50,
+                "max_level": 51,
+                "species": "SPECIES_INKAY"
+              },
+              {
+                "min_level": 51,
+                "max_level": 51,
+                "species": "SPECIES_INKAY"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ERYON_TRILHA_DOS_DRAGOES",
+          "base_label": "gEryonTrilhaDosDragoes",
+          "land_mons": {
+            "encounter_rate": 18,
+            "mons": [
+              {
+                "min_level": 49,
+                "max_level": 50,
+                "species": "SPECIES_DRUDDIGON"
+              },
+              {
+                "min_level": 49,
+                "max_level": 51,
+                "species": "SPECIES_SLIGGOO"
+              },
+              {
+                "min_level": 50,
+                "max_level": 52,
+                "species": "SPECIES_GABITE"
+              },
+              {
+                "min_level": 50,
+                "max_level": 52,
+                "species": "SPECIES_DRUDDIGON"
+              },
+              {
+                "min_level": 51,
+                "max_level": 53,
+                "species": "SPECIES_SLIGGOO"
+              },
+              {
+                "min_level": 51,
+                "max_level": 53,
+                "species": "SPECIES_GABITE"
+              },
+              {
+                "min_level": 52,
+                "max_level": 53,
+                "species": "SPECIES_ALTARIA"
+              },
+              {
+                "min_level": 52,
+                "max_level": 54,
+                "species": "SPECIES_ALTARIA"
+              },
+              {
+                "min_level": 52,
+                "max_level": 54,
+                "species": "SPECIES_FRAXURE"
+              },
+              {
+                "min_level": 52,
+                "max_level": 54,
+                "species": "SPECIES_FRAXURE"
+              },
+              {
+                "min_level": 54,
+                "max_level": 55,
+                "species": "SPECIES_NOIBAT"
+              },
+              {
+                "min_level": 55,
+                "max_level": 55,
+                "species": "SPECIES_NOIBAT"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ERYON_GRUTA_DAS_ESTRELAS",
+          "base_label": "gEryonGrutaDasEstrelas",
+          "land_mons": {
+            "encounter_rate": 16,
+            "mons": [
+              {
+                "min_level": 50,
+                "max_level": 51,
+                "species": "SPECIES_BOLDORE"
+              },
+              {
+                "min_level": 50,
+                "max_level": 52,
+                "species": "SPECIES_SOLROCK"
+              },
+              {
+                "min_level": 51,
+                "max_level": 53,
+                "species": "SPECIES_LUNATONE"
+              },
+              {
+                "min_level": 51,
+                "max_level": 53,
+                "species": "SPECIES_BOLDORE"
+              },
+              {
+                "min_level": 52,
+                "max_level": 54,
+                "species": "SPECIES_SOLROCK"
+              },
+              {
+                "min_level": 52,
+                "max_level": 54,
+                "species": "SPECIES_LUNATONE"
+              },
+              {
+                "min_level": 53,
+                "max_level": 54,
+                "species": "SPECIES_CARBINK"
+              },
+              {
+                "min_level": 53,
+                "max_level": 55,
+                "species": "SPECIES_CARBINK"
+              },
+              {
+                "min_level": 53,
+                "max_level": 55,
+                "species": "SPECIES_ELGYEM"
+              },
+              {
+                "min_level": 53,
+                "max_level": 55,
+                "species": "SPECIES_ELGYEM"
+              },
+              {
+                "min_level": 56,
+                "max_level": 57,
+                "species": "SPECIES_BELDUM"
+              },
+              {
+                "min_level": 57,
+                "max_level": 57,
+                "species": "SPECIES_BELDUM"
+              }
+            ]
+          }
         }
       ]
     },
