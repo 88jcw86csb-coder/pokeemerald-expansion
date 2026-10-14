@@ -26,6 +26,8 @@ EryonAldeia_EventScript_Healer::
 EryonAldeia_EventScript_Archivist::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_ECHO_ARCHIVE_REWARD_CLAIMED, EryonAldeia_EventScript_ArchivistReportDone
+	goto_if_set FLAG_ERYON_ECHO_TRACE_RECORDED, EryonAldeia_EventScript_ArchivistReceiveTrace
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonAldeia_EventScript_ArchivistClue
 	msgbox EryonAldeia_Text_ArchivistBefore, MSGBOX_DEFAULT
 	release
@@ -114,3 +116,42 @@ EryonAldeia_Text_MonumentClue:
 	.string "foi riscado na pedra.\p"
 	.string "Alguem tentou alterar\n"
 	.string "o som do monumento.$"
+
+@ Archived valley signal rewards one Star Piece; failed Bag transfer is retriable.
+EryonAldeia_EventScript_ArchivistReceiveTrace::
+	msgbox EryonAldeia_Text_ArchivistReceiveTrace, MSGBOX_DEFAULT
+	giveitem ITEM_STAR_PIECE
+	goto_if_eq VAR_RESULT, FALSE, EryonAldeia_EventScript_ArchivistBagFull
+	setflag FLAG_ERYON_ECHO_ARCHIVE_REWARD_CLAIMED
+	msgbox EryonAldeia_Text_ArchivistResearchDone, MSGBOX_DEFAULT
+	release
+	end
+
+EryonAldeia_EventScript_ArchivistBagFull::
+	msgbox EryonAldeia_Text_ArchivistBagFull, MSGBOX_DEFAULT
+	release
+	end
+
+EryonAldeia_EventScript_ArchivistReportDone::
+	msgbox EryonAldeia_Text_ArchivistResearchDone, MSGBOX_DEFAULT
+	release
+	end
+
+EryonAldeia_Text_ArchivistReceiveTrace:
+	.string "ARQUIVISTA: Seu registro\n"
+	.string "revela duas frequencias!\p"
+	.string "Uma e natural; a outra\n"
+	.string "foi criada pela ECLIPSE.\p"
+	.string "Receba isto por ajudar\n"
+	.string "a salvar o arquivo.$"
+
+EryonAldeia_Text_ArchivistBagFull:
+	.string "Sua BOLSA esta cheia!\p"
+	.string "Guardarei a recompensa.\n"
+	.string "Volte quando puder.$"
+
+EryonAldeia_Text_ArchivistResearchDone:
+	.string "ARQUIVISTA: A LUA pode\n"
+	.string "ampliar as frequencias.\p"
+	.string "Mostre os resultados\n"
+	.string "no OBSERVATORIO LUNAR.$"
