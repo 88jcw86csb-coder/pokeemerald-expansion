@@ -113,6 +113,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EryonLigaCaminho_EventScript_CrystalSurvey"
+    },
+    {
+      "type": "sign",
+      "x": 41,
+      "y": 22,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EryonLigaCaminho_EventScript_EastLookout"
     }
   ],
   "id": "MAP_ERYON_CAMINHO_DA_LIGA",
