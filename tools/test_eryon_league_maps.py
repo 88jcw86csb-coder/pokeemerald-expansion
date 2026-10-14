@@ -72,6 +72,30 @@ class LeagueMapTests(unittest.TestCase):
             render("caminho_da_liga", terrain),
         )
 
+    def test_summit_alcove_event_walkability_and_unique_script(self):
+        import json
+        t = route()
+        data = json.loads((ROOT / "data/maps/Eryon_CaminhoDaLiga/map.json").read_text())
+        signs = [e for e in data["bg_events"]
+                 if e["script"] == "EryonLigaCaminho_EventScript_SummitAlcove"]
+        self.assertEqual(len(signs), 1)
+        pos = (signs[0]["x"], signs[0]["y"])
+        self.assertEqual(pos, (38, 13))
+        self.assertNotEqual(t[pos[1]][pos[0]], "#")
+        occupied = {(e["x"], e["y"]) for e in data["object_events"]}
+        walkable = {(x, y) for y, row in enumerate(t)
+                    for x, cell in enumerate(row) if cell != "#"}
+        seen = connected(t, (0, 22))
+        self.assertIn((47, 22), seen)
+        self.assertTrue(any(p in seen and p not in occupied
+                            for p in ((37, 13), (39, 13), (38, 12), (38, 14))))
+        self.assertIn((32, 8), seen)
+        scripts = (ROOT / "data/maps/Eryon_CaminhoDaLiga/scripts.inc").read_text()
+        self.assertEqual(scripts.count("EryonLigaCaminho_EventScript_SummitAlcove::"), 1)
+        self.assertNotIn("setflag ", scripts.split(
+            "EryonLigaCaminho_EventScript_SummitAlcove::", 1)[1].split(
+            "EryonLigaCaminho_EventScript_SummitAlcoveFiled::", 1)[0])
+
     def test_eight_stars_terrace_connected_city(self):
         """Check the new skyline park, unchanged League building, and exact terrain."""
         import json,struct
