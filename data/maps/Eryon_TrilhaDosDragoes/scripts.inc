@@ -81,6 +81,9 @@ EryonDragoes_EventScript_SupplyCrateClue::
 
 EryonDragoes_EventScript_MountainMarker::
 	lock
+	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonDragoes_EventScript_MarkerEvidenceFiled
+	goto_if_set FLAG_ERYON_PICO_SIGNAL_REPAIRED, EryonDragoes_EventScript_MarkerRelayWorking
+	goto_if_set FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ, EryonDragoes_EventScript_MarkerManifest
 	msgbox EryonDragoes_Text_Marker, MSGBOX_DEFAULT
 	release
 	end
@@ -466,3 +469,39 @@ EryonDragoes_Text_RidgeGuideAfterBadge:
 	.string "em toda a montanha.\p"
 	.string "Siga para a LIGA\n"
 	.string "e proteja os cristais.$"
+
+
+@ Trail sign reflects prior decisions without changing travel, battles or save flags.
+
+EryonDragoes_EventScript_MarkerEvidenceFiled::
+	msgbox EryonDragoes_Text_MarkerEvidenceFiled, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDragoes_Text_MarkerEvidenceFiled:
+	.string "OESTE: LUNARIS.\n"
+	.string "LESTE: VILA DO PICO.\p"
+	.string "A LIGA recebeu provas\n"
+	.string "da rede ECLIPSE.$"
+
+EryonDragoes_EventScript_MarkerRelayWorking::
+	msgbox EryonDragoes_Text_MarkerRelayWorking, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDragoes_Text_MarkerRelayWorking:
+	.string "OESTE: LUNARIS.\n"
+	.string "LESTE: VILA DO PICO.\p"
+	.string "A radio do PICO\n"
+	.string "ja envia alertas.$"
+
+EryonDragoes_EventScript_MarkerManifest::
+	msgbox EryonDragoes_Text_MarkerManifest, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDragoes_Text_MarkerManifest:
+	.string "OESTE: LUNARIS.\n"
+	.string "LESTE: VILA DO PICO.\p"
+	.string "As caixas ECLIPSE\n"
+	.string "revelaram sua rota.$"
