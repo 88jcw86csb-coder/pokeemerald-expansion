@@ -167,17 +167,17 @@ EryonLunar_EventScript_MoonMarkerBadge:
 	end
 
 EryonLunar_Text_MoonMarkerArchive:
-	.string "O registro da ALDEIA\\n"
-	.string "faz o disco ressoar!\\p"
-	.string "As marcas indicam que\\n"
-	.string "a ECLIPSE mudou o sinal.\\p"
-	.string "A ASTRONOMA de LUNARIS\\n"
+	.string "O registro da ALDEIA\n"
+	.string "faz o disco ressoar!\p"
+	.string "As marcas indicam que\n"
+	.string "a ECLIPSE mudou o sinal.\p"
+	.string "A ASTRONOMA de LUNARIS\n"
 	.string "pode comparar os dados.$"
 
 EryonLunar_Text_MoonMarkerBadge:
-	.string "A 7a INSIGNIA brilha\\n"
-	.string "diante do disco lunar.\\p"
-	.string "Um novo padrao aponta\\n"
-	.string "para DRAKONIA.\\p"
-	.string "A jornada continua\\n"
+	.string "A 7a INSIGNIA brilha\n"
+	.string "diante do disco lunar.\p"
+	.string "Um novo padrao aponta\n"
+	.string "para DRAKONIA.\p"
+	.string "A jornada continua\n"
 	.string "pela TRILHA DOS DRAGOES.$"
