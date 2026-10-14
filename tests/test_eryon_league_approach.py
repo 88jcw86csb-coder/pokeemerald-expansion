@@ -240,6 +240,27 @@ class EryonLeagueApproach(unittest.TestCase):
         self.assertNotIn("setflag ", entry)
         self.assertNotIn("trainerbattle_", entry)
 
+    def test_central_plaza_sign_tracks_story_without_changing_league_access(self):
+        city, walkable = self.areas["Eryon_CidadeDaLiga"]
+        signs = [e for e in city["bg_events"]
+                 if e["script"] == "EryonCidadeLiga_EventScript_PlazaSign"]
+        self.assertEqual(len(signs), 1)
+        pos = signs[0]["x"], signs[0]["y"]
+        self.assertIn(pos, walkable)
+        script = (MAP_ROOT / "Eryon_CidadeDaLiga" / "scripts.inc").read_text(encoding="utf-8")
+        entry = script.split("EryonCidadeLiga_EventScript_PlazaSign::", 1)[1].split(
+            "EryonCidadeLiga_EventScript_Notice::", 1)[0]
+        markers = ("FLAG_ERYON_CHAMPION_CROWNED", "FLAG_ERYON_QUALIFIED",
+                   "FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED")
+        self.assertEqual([entry.index(m) for m in markers],
+                         sorted(entry.index(m) for m in markers))
+        for suffix in ("Evidence", "Qualified", "Champion"):
+            self.assertIn("EryonCidadeLiga_EventScript_Plaza" + suffix + "::", script)
+        self.assertNotIn("setflag ", entry)
+        self.assertEqual(
+            len([w for w in city["warp_events"]
+                 if w["dest_map"] == "MAP_ERYON_LIGA_RECEPCAO"]), 1)
+
 
 if __name__ == "__main__":
     unittest.main()
