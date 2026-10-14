@@ -517,3 +517,45 @@ EryonLigaCaminho_Text_EastLookoutChampion:
 	.string "celebram o CAMPEAO!\p"
 	.string "Ainda ha rotas para\n"
 	.string "explorar em ERYON.$"
+
+
+@ Newly walkable eastern summit alcove. An optional observation site above the road.
+@ The League and Eclipse story flags only change its description.
+EryonLigaCaminho_EventScript_SummitAlcove::
+	lock
+	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonLigaCaminho_EventScript_SummitAlcoveChampion
+	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonLigaCaminho_EventScript_SummitAlcoveFiled
+	msgbox EryonLigaCaminho_Text_SummitAlcoveBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_SummitAlcoveFiled::
+	msgbox EryonLigaCaminho_Text_SummitAlcoveFiled, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_SummitAlcoveChampion::
+	msgbox EryonLigaCaminho_Text_SummitAlcoveChampion, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_Text_SummitAlcoveBefore:
+	.string "NICHO DO CUME:\p"
+	.string "Daqui se ve a LIGA\n"
+	.string "e a GRUTA ESTELAR.\p"
+	.string "Marcas de cristais\n"
+	.string "cortam a pedra antiga.$"
+
+EryonLigaCaminho_Text_SummitAlcoveFiled:
+	.string "NICHO DO CUME:\p"
+	.string "Os estudiosos da LIGA\n"
+	.string "catalogaram os cristais.\p"
+	.string "A ECLIPSE ja nao pode\n"
+	.string "ocultar suas rotas.$"
+
+EryonLigaCaminho_Text_SummitAlcoveChampion:
+	.string "NICHO DO CUME:\p"
+	.string "O CAMPEAO avista a\n"
+	.string "cidade do alto!\p"
+	.string "A montanha ainda tem\n"
+	.string "segredos a explorar.$"
