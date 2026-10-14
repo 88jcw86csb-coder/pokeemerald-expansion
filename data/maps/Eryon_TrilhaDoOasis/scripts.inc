@@ -5,6 +5,7 @@ Eryon_TrilhaDoOasis_MapScripts::
 EryonOasis_EventScript_Guide::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_RIVER_SAMPLE_RECORDED, EryonOasis_EventScript_GuideWaterEvidence
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonOasis_EventScript_GuideClue
 	msgbox EryonOasis_Text_GuideBefore, MSGBOX_DEFAULT
 	release
@@ -18,6 +19,7 @@ EryonOasis_EventScript_GuideClue::
 EryonOasis_EventScript_EclipseCarrier::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_RIVER_SAMPLE_RECORDED, EryonOasis_EventScript_CarrierWaterEvidence
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonOasis_EventScript_EclipseCarrierClue
 	msgbox EryonOasis_Text_CarrierBefore, MSGBOX_DEFAULT
 	release
@@ -74,3 +76,52 @@ EryonOasis_Text_CanisterClue:
 	.string "po azul cristalino.\p"
 	.string "Um selo da ECLIPSE\n"
 	.string "aponta para Solaris.$"
+
+@ Waterfall sample follows Eclipse's transport route past the oasis.
+EryonOasis_EventScript_CaravanWaterRecord::
+	lock
+	goto_if_set FLAG_ERYON_RIVER_SAMPLE_RECORDED, EryonOasis_EventScript_WaterRecordConfirmed
+	msgbox EryonOasis_Text_WaterRecordBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonOasis_EventScript_WaterRecordConfirmed::
+	msgbox EryonOasis_Text_WaterRecordConfirmed, MSGBOX_DEFAULT
+	release
+	end
+
+EryonOasis_EventScript_GuideWaterEvidence::
+	msgbox EryonOasis_Text_GuideWaterEvidence, MSGBOX_DEFAULT
+	release
+	end
+
+EryonOasis_EventScript_CarrierWaterEvidence::
+	msgbox EryonOasis_Text_CarrierWaterEvidence, MSGBOX_DEFAULT
+	release
+	end
+
+EryonOasis_Text_WaterRecordBefore:
+	.string "MANIFESTO DA CARAVANA:\n"
+	.string "Cargas trazidas do rio.\p"
+	.string "Destino: IGNIVAR.\n"
+	.string "Conteudo: sigiloso.$"
+
+EryonOasis_Text_WaterRecordConfirmed:
+	.string "MANIFESTO DA CARAVANA:\n"
+	.string "O residuo coincide com\n"
+	.string "o sinal da ECLIPSE!\p"
+	.string "A proxima antena fica\n"
+	.string "no DESERTO DE SOLARIS.$"
+
+EryonOasis_Text_GuideWaterEvidence:
+	.string "GUIA: A vila confirmou\n"
+	.string "a origem dos residuos!\p"
+	.string "Proteja seus Pokemon.\n"
+	.string "As dunas vem adiante.$"
+
+EryonOasis_Text_CarrierWaterEvidence:
+	.string "ECLIPSE: Descobriram\n"
+	.string "nossa carga no rio?!\p"
+	.string "O reator de IGNIVAR\n"
+	.string "ainda nos espera.$"
+

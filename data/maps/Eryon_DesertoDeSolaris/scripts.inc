@@ -30,6 +30,7 @@ EryonSolaris_EventScript_EclipseGuardClue::
 
 EryonSolaris_EventScript_BuriedDevice::
 	lock
+	goto_if_set FLAG_ERYON_RIVER_SAMPLE_RECORDED, EryonSolaris_EventScript_DeviceRiverData
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonSolaris_EventScript_BuriedDeviceClue
 	msgbox EryonSolaris_Text_DeviceBefore, MSGBOX_DEFAULT
 	release
@@ -78,6 +79,7 @@ EryonSolaris_Text_DeviceClue:
 EryonSolaris_EventScript_CaravanScout::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_RIVER_SAMPLE_RECORDED, EryonSolaris_EventScript_CaravanScoutWaterEvidence
 	msgbox EryonSolaris_Text_CaravanScout, MSGBOX_DEFAULT
 	release
 	end
@@ -87,3 +89,29 @@ EryonSolaris_Text_CaravanScout:
 	.string "nao sao de Pokemon.\p"
 	.string "Um comboio ECLIPSE\n"
 	.string "seguiu para Ignivar.$"
+
+@ Evidence collected upriver identifies the buried Eclipse transmitters.
+EryonSolaris_EventScript_DeviceRiverData::
+	msgbox EryonSolaris_Text_DeviceRiverData, MSGBOX_DEFAULT
+	release
+	end
+
+EryonSolaris_EventScript_CaravanScoutWaterEvidence::
+	msgbox EryonSolaris_Text_CaravanScoutWaterEvidence, MSGBOX_DEFAULT
+	release
+	end
+
+EryonSolaris_Text_DeviceRiverData:
+	.string "A antena usa cristais\n"
+	.string "como os vistos no rio!\p"
+	.string "O cabo segue para\n"
+	.string "a usina de IGNIVAR.$"
+
+EryonSolaris_Text_CaravanScoutWaterEvidence:
+	.string "GUIA: Os exames da\n"
+	.string "vila chegaram aqui!\p"
+	.string "A ECLIPSE deixou provas\n"
+	.string "desde as CACHOEIRAS.\p"
+	.string "Siga para IGNIVAR,\n"
+	.string "mas tome cuidado.$"
+
