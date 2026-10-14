@@ -60,6 +60,9 @@ EryonEstrelas_EventScript_ScoutAfterChart::
 EryonEstrelas_EventScript_Astronomer::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonEstrelas_EventScript_AstronomerChampion
+	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonEstrelas_EventScript_AstronomerEvidence
+	goto_if_set FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED, EryonEstrelas_EventScript_AstronomerRelayOff
 	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonEstrelas_EventScript_AstronomerAfterChart
 	msgbox EryonEstrelas_Text_AstronomerBefore, MSGBOX_DEFAULT
 	release
@@ -400,3 +403,39 @@ EryonEstrelas_Text_AlcoveQuiet:
 	.string "galeria silenciaram.\p"
 	.string "O transmissor ECLIPSE\n"
 	.string "ja nao distorce o eco.$"
+
+
+@ Existing cave astronomer follows changes after the relay shutdown and League events.
+@ Dialogue-only epilogue: no new rewards, battles, map warps, or progression flags.
+EryonEstrelas_EventScript_AstronomerRelayOff::
+	msgbox EryonEstrelas_Text_AstronomerRelayOff, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEstrelas_EventScript_AstronomerEvidence::
+	msgbox EryonEstrelas_Text_AstronomerEvidence, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEstrelas_EventScript_AstronomerChampion::
+	msgbox EryonEstrelas_Text_AstronomerChampion, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEstrelas_Text_AstronomerRelayOff:
+	.string "ASTRONOMA: O sinal\n"
+	.string "artificial se apagou!\p"
+	.string "Agora podemos ouvir\n"
+	.string "o eco das estrelas.$"
+
+EryonEstrelas_Text_AstronomerEvidence:
+	.string "ASTRONOMA: A LIGA\n"
+	.string "recebeu suas provas!\p"
+	.string "Os mapas da ECLIPSE\n"
+	.string "serao investigados.$"
+
+EryonEstrelas_Text_AstronomerChampion:
+	.string "ASTRONOMA: O CAMPEAO\n"
+	.string "voltou a esta gruta!\p"
+	.string "A historia de ERYON\n"
+	.string "segue alem da LIGA.$"
