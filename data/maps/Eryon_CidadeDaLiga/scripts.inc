@@ -442,3 +442,56 @@ EryonCidadeLiga_Text_ReporterChampion:
 	.string "e uma vitoria final!\p"
 	.string "O trabalho contra a\n"
 	.string "ECLIPSE ainda continua.$"
+
+@ League capital research delegate carries the consequences of the Serra relay.
+@ This is optional and never alters the eight-qualifier tournament rules.
+EryonCidadeLiga_EventScript_ResonanceDelegate::
+	lock
+	faceplayer
+	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonCidadeLiga_EventScript_ResonanceDelegateChampion
+	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonCidadeLiga_EventScript_ResonanceDelegateFiled
+	goto_if_set FLAG_ERYON_SERRA_ECLIPSE_SIGNAL_DISABLED, EryonCidadeLiga_EventScript_ResonanceDelegateQuiet
+	msgbox EryonCidadeLiga_Text_ResonanceDelegateBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_ResonanceDelegateQuiet::
+	msgbox EryonCidadeLiga_Text_ResonanceDelegateQuiet, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_ResonanceDelegateFiled::
+	msgbox EryonCidadeLiga_Text_ResonanceDelegateFiled, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_ResonanceDelegateChampion::
+	msgbox EryonCidadeLiga_Text_ResonanceDelegateChampion, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_Text_ResonanceDelegateBefore:
+	.string "PESQUISADORA: A LIGA\n"
+	.string "recebe ecos estranhos.\p"
+	.string "O sinal vem da SERRA.\n"
+	.string "Nao ignore as pistas.$"
+
+EryonCidadeLiga_Text_ResonanceDelegateQuiet:
+	.string "PESQUISADORA: A SERRA\n"
+	.string "ja nao transmite!\p"
+	.string "Mas a ECLIPSE possui\n"
+	.string "mais de um terminal.\p"
+	.string "Traga suas provas ao\n"
+	.string "investigador da praca.$"
+
+EryonCidadeLiga_Text_ResonanceDelegateFiled:
+	.string "PESQUISADORA: Os dados\n"
+	.string "foram entregues a LIGA!\p"
+	.string "Podemos proteger a\n"
+	.string "arena e os treinadores.$"
+
+EryonCidadeLiga_Text_ResonanceDelegateChampion:
+	.string "PESQUISADORA: Venceu\n"
+	.string "a LIGA e ajudou ERYON!\p"
+	.string "As cidades agora\n"
+	.string "compartilham os estudos.$"
