@@ -258,6 +258,7 @@ EryonLunaris_EventScript_ScholarConfirmed::
 	end
 
 EryonLunaris_EventScript_ScholarAfterBadge::
+	goto_if_set FLAG_ERYON_ECHO_ARCHIVE_REWARD_CLAIMED, EryonLunaris_EventScript_ScholarArchiveAndBadge
 	msgbox EryonLunaris_Text_ScholarAfterBadge, MSGBOX_DEFAULT
 	release
 	end
@@ -285,3 +286,17 @@ EryonLunaris_Text_ScholarAfterBadge:
 	.string "INSIGNIA mostra coragem!\p"
 	.string "Os ecos continuam\n"
 	.string "ate DRAKONIA.$"
+
+@ The scholar acknowledges both the optional echo archive and seventh badge.
+EryonLunaris_EventScript_ScholarArchiveAndBadge:
+	msgbox EryonLunaris_Text_ScholarArchiveAndBadge, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLunaris_Text_ScholarArchiveAndBadge:
+	.string "PESQUISADORA: O arquivo\\n"
+	.string "e sua 7a INSIGNIA!\\p"
+	.string "O canto antigo foi\\n"
+	.string "distorcido pela ECLIPSE.\\p"
+	.string "Compare as cargas na\\n"
+	.string "TRILHA DOS DRAGOES.$"
