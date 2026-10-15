@@ -54,7 +54,7 @@ jobs:
           from tools.eryon_villages import VILLAGES
           from tools.eryon_gym_cities import CITIES
           for name in VILLAGES:
-              if name in ("vila_dos_pomares", "vila_da_neblina", "refugio_cristal", "posto_oriental", "vila_das_aguas", "vila_do_pico"):
+              if name in ("vila_dos_pomares", "vila_da_neblina", "refugio_cristal", "posto_oriental", "vila_das_aguas", "vila_do_pico", "aldeia_dos_ecos"):
                   continue
               path = Path("build/eryon-previews/villages") / name / "map.bin"
               assert path.is_file() and path.stat().st_size == 36 * 30 * 2, path

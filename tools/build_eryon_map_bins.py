@@ -135,6 +135,14 @@ def main():
     peak_dest.write_bytes(peak_payload)
     generated["LAYOUT_ERYON_VILA_DO_PICO"] = peak_dest.relative_to(ROOT).as_posix()
     print(f"{peak_dest.relative_to(ROOT)}: {len(peak_payload)} bytes")
+    # Echo Village is registered; compile its current authoritative village plan.
+    aldeia_src = ROOT / "docs/eryon/vilas/aldeia_dos_ecos_village_plan.txt"
+    aldeia_dest = ROOT / "data/layouts/Eryon_AldeiaDosEcos/map.bin"
+    aldeia_payload = compile_plan(aldeia_src, village_tiles, width=36, height=30)
+    aldeia_dest.parent.mkdir(parents=True, exist_ok=True)
+    aldeia_dest.write_bytes(aldeia_payload)
+    generated["LAYOUT_ERYON_ALDEIA_DOS_ECOS"] = aldeia_dest.relative_to(ROOT).as_posix()
+    print(f"{aldeia_dest.relative_to(ROOT)}: {len(aldeia_payload)} bytes")
     # Neonara is the first registered gym city after Verdelume.
     neonara_tiles = {**tiles, "=": tiles["."],
                      **{mark: tiles["."] for mark in "GCMHP"}}
@@ -208,7 +216,7 @@ def main():
         from eryon_gym_cities import CITIES
         village_tiles = {**tiles, **{mark: tiles["."] for mark in "PC MHI".replace(" ", "")}}
         for key in VILLAGES:
-            if key in ("vila_dos_pomares", "vila_da_neblina", "refugio_cristal", "posto_oriental", "vila_das_aguas", "vila_do_pico"):
+            if key in ("vila_dos_pomares", "vila_da_neblina", "refugio_cristal", "posto_oriental", "vila_das_aguas", "vila_do_pico", "aldeia_dos_ecos"):
                 continue
             src = ROOT / "docs/eryon/vilas" / f"{key}_village_plan.txt"
             dest = ROOT / "build/eryon-previews/villages" / key / "map.bin"

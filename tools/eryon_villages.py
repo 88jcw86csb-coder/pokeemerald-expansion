@@ -71,6 +71,10 @@ def village(name):
         for y in range(19, 22):
             for x in range(20, 23):
                 t[y][x] = "."
+    # Registered Echo Village: give the witness beside the archive a real path.
+    if name == "aldeia_dos_ecos":
+        for y in range(19, 23):
+            t[y][21] = "."
     return t
 
 
