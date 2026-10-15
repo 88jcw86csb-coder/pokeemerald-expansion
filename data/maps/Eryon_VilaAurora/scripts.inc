@@ -1,5 +1,11 @@
 Eryon_VilaAurora_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, Eryon_VilaAurora_RespawnCheckpoint
 	.byte 0
+
+@ Native whiteout/Teleport checkpoint. Preserve all existing NPC and gym scripts.
+Eryon_VilaAurora_RespawnCheckpoint:
+	setrespawn HEAL_LOCATION_ERYON_VILA_AURORA
+	end
 
 @ Eryon: Professor Elya gives the one-time Riolu starter.
 @ Progress uses Eryon's own persistent variable, independent from Birch's story.

@@ -349,6 +349,116 @@
       "y": 12,
       "respawn_map": "MAP_SIX_ISLAND_POKEMON_CENTER_1F",
       "respawn_npc": "LOCALID_SIX_ISLAND_NURSE"
+    },
+    {
+      "id": "HEAL_LOCATION_ERYON_VILA_AURORA",
+      "map": "MAP_ERYON_VILA_AURORA",
+      "x": 10,
+      "y": 10,
+      "respawn_map": "MAP_ERYON_VILA_AURORA",
+      "respawn_npc": "LOCALID_NONE",
+      "respawn_x": 10,
+      "respawn_y": 10
+    },
+    {
+      "id": "HEAL_LOCATION_ERYON_VERDELUME",
+      "map": "MAP_ERYON_VERDELUME",
+      "x": 4,
+      "y": 30,
+      "respawn_map": "MAP_ERYON_VERDELUME",
+      "respawn_npc": "LOCALID_NONE",
+      "respawn_x": 4,
+      "respawn_y": 30
+    },
+    {
+      "id": "HEAL_LOCATION_ERYON_NEONARA",
+      "map": "MAP_ERYON_NEONARA",
+      "x": 4,
+      "y": 28,
+      "respawn_map": "MAP_ERYON_NEONARA",
+      "respawn_npc": "LOCALID_NONE",
+      "respawn_x": 4,
+      "respawn_y": 28
+    },
+    {
+      "id": "HEAL_LOCATION_ERYON_FROSTHEIM",
+      "map": "MAP_ERYON_FROSTHEIM",
+      "x": 4,
+      "y": 12,
+      "respawn_map": "MAP_ERYON_FROSTHEIM",
+      "respawn_npc": "LOCALID_NONE",
+      "respawn_x": 4,
+      "respawn_y": 12
+    },
+    {
+      "id": "HEAL_LOCATION_ERYON_ARKHARA",
+      "map": "MAP_ERYON_ARKHARA",
+      "x": 15,
+      "y": 20,
+      "respawn_map": "MAP_ERYON_ARKHARA",
+      "respawn_npc": "LOCALID_NONE",
+      "respawn_x": 15,
+      "respawn_y": 20
+    },
+    {
+      "id": "HEAL_LOCATION_ERYON_UMBRA",
+      "map": "MAP_ERYON_UMBRA",
+      "x": 4,
+      "y": 12,
+      "respawn_map": "MAP_ERYON_UMBRA",
+      "respawn_npc": "LOCALID_NONE",
+      "respawn_x": 4,
+      "respawn_y": 12
+    },
+    {
+      "id": "HEAL_LOCATION_ERYON_IGNIVAR",
+      "map": "MAP_ERYON_IGNIVAR",
+      "x": 4,
+      "y": 28,
+      "respawn_map": "MAP_ERYON_IGNIVAR",
+      "respawn_npc": "LOCALID_NONE",
+      "respawn_x": 4,
+      "respawn_y": 28
+    },
+    {
+      "id": "HEAL_LOCATION_ERYON_LUNARIS",
+      "map": "MAP_ERYON_LUNARIS",
+      "x": 19,
+      "y": 29,
+      "respawn_map": "MAP_ERYON_LUNARIS",
+      "respawn_npc": "LOCALID_NONE",
+      "respawn_x": 19,
+      "respawn_y": 29
+    },
+    {
+      "id": "HEAL_LOCATION_ERYON_DRAKONIA",
+      "map": "MAP_ERYON_DRAKONIA",
+      "x": 14,
+      "y": 21,
+      "respawn_map": "MAP_ERYON_DRAKONIA",
+      "respawn_npc": "LOCALID_NONE",
+      "respawn_x": 14,
+      "respawn_y": 21
+    },
+    {
+      "id": "HEAL_LOCATION_ERYON_CIDADE_DA_LIGA",
+      "map": "MAP_ERYON_CIDADE_DA_LIGA",
+      "x": 30,
+      "y": 36,
+      "respawn_map": "MAP_ERYON_CIDADE_DA_LIGA",
+      "respawn_npc": "LOCALID_NONE",
+      "respawn_x": 30,
+      "respawn_y": 36
+    },
+    {
+      "id": "HEAL_LOCATION_ERYON_LIGA_RECEPCAO",
+      "map": "MAP_ERYON_LIGA_RECEPCAO",
+      "x": 12,
+      "y": 12,
+      "respawn_map": "MAP_ERYON_LIGA_RECEPCAO",
+      "respawn_npc": "LOCALID_NONE",
+      "respawn_x": 12,
+      "respawn_y": 12
     }
   ]
 }

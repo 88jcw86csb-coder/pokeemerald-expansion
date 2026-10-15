@@ -1,5 +1,11 @@
 Eryon_Arkhara_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, Eryon_Arkhara_RespawnCheckpoint
 	.byte 0
+
+@ Native whiteout/Teleport checkpoint. Preserve all existing NPC and gym scripts.
+Eryon_Arkhara_RespawnCheckpoint:
+	setrespawn HEAL_LOCATION_ERYON_ARKHARA
+	end
 
 EryonArkhara_EventScript_Medic::
 	lock

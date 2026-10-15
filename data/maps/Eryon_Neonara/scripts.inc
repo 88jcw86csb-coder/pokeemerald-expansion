@@ -1,5 +1,11 @@
 Eryon_Neonara_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, Eryon_Neonara_RespawnCheckpoint
 	.byte 0
+
+@ Native whiteout/Teleport checkpoint. Preserve all existing NPC and gym scripts.
+Eryon_Neonara_RespawnCheckpoint:
+	setrespawn HEAL_LOCATION_ERYON_NEONARA
+	end
 
 @ Neonara is the future second gym city; interiors remain unfinished.
 EryonNeonara_EventScript_Resident::

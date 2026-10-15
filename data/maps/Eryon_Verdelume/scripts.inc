@@ -1,5 +1,11 @@
 Eryon_Verdelume_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, Eryon_Verdelume_RespawnCheckpoint
 	.byte 0
+
+@ Native whiteout/Teleport checkpoint. Preserve all existing NPC and gym scripts.
+Eryon_Verdelume_RespawnCheckpoint:
+	setrespawn HEAL_LOCATION_ERYON_VERDELUME
+	end
 
 @ The town guide acknowledges the forest discovery without forcing progression.
 EryonVerdelume_EventScript_Guide::

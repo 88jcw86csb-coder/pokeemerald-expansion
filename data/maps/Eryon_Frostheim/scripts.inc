@@ -1,5 +1,11 @@
 Eryon_Frostheim_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, Eryon_Frostheim_RespawnCheckpoint
 	.byte 0
+
+@ Native whiteout/Teleport checkpoint. Preserve all existing NPC and gym scripts.
+Eryon_Frostheim_RespawnCheckpoint:
+	setrespawn HEAL_LOCATION_ERYON_FROSTHEIM
+	end
 
 @ Frostheim connects the route's mystery to the third gym.
 EryonFrostheim_EventScript_Researcher::
