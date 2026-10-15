@@ -13,7 +13,7 @@ import struct
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT_WARP = re.compile(
-    r"(?m)^\\s*warp\\s+(MAP_[A-Z0-9_]+)\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)\\s*(?:@[^\\n]*)?$"
+    r"(?m)^\s*warp\s+(MAP_[A-Z0-9_]+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:@[^\n]*)?$"
 )
 LEAGUE_ROOMS = {
     "Eryon_LigaRecepcao",
