@@ -772,3 +772,56 @@ EryonCidadeLiga_Text_HillsideChampion:
 	.string "a colina da cidade.\p"
 	.string "Novos treinadores\n"
 	.string "seguem para a LIGA.$"
+
+
+@ Southwest civic amphitheatre is open to visitors before or after the League.
+EryonCidadeLiga_EventScript_Amphitheatre::
+	lock
+	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonCidadeLiga_EventScript_AmphitheatreChampion
+	goto_if_set FLAG_ERYON_QUALIFIED, EryonCidadeLiga_EventScript_AmphitheatreQualified
+	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonCidadeLiga_EventScript_AmphitheatreEvidence
+	msgbox EryonCidadeLiga_Text_AmphitheatreBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_AmphitheatreEvidence::
+	msgbox EryonCidadeLiga_Text_AmphitheatreEvidence, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_AmphitheatreQualified::
+	msgbox EryonCidadeLiga_Text_AmphitheatreQualified, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_AmphitheatreChampion::
+	msgbox EryonCidadeLiga_Text_AmphitheatreChampion, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_Text_AmphitheatreBefore:
+	.string "ANFITEATRO DAS FOLHAS:\p"
+	.string "Treinadores estudam\n"
+	.string "as rotas de ERYON.\p"
+	.string "A LIGA fica ao norte,\n"
+	.string "no centro da cidade.$"
+
+EryonCidadeLiga_Text_AmphitheatreEvidence:
+	.string "ANFITEATRO DAS FOLHAS:\p"
+	.string "As provas da ECLIPSE\n"
+	.string "mobilizaram a cidade.\p"
+	.string "Pesquisadores vigiam\n"
+	.string "as rotas dos cristais.$"
+
+EryonCidadeLiga_Text_AmphitheatreQualified:
+	.string "ANFITEATRO DAS FOLHAS:\p"
+	.string "Oito vitorias!\p"
+	.string "A sala de descanso\n"
+	.string "espera na LIGA.$"
+
+EryonCidadeLiga_Text_AmphitheatreChampion:
+	.string "ANFITEATRO DAS FOLHAS:\p"
+	.string "O novo CAMPEAO traz\n"
+	.string "esperanca a ERYON.\p"
+	.string "A cidade celebra\n"
+	.string "sua grande jornada.$"
