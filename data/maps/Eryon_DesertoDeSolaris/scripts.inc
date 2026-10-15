@@ -115,3 +115,31 @@ EryonSolaris_Text_CaravanScoutWaterEvidence:
 	.string "Siga para IGNIVAR,\n"
 	.string "mas tome cuidado.$"
 
+
+
+@ Optional canyon cut into the original Solaris route; Eclipse story adapts.
+EryonSolaris_EventScript_SolarCanyon::
+	lock
+	goto_if_set FLAG_ERYON_RIVER_SAMPLE_RECORDED, EryonSolaris_EventScript_SolarCanyonRiver
+	msgbox EryonSolaris_Text_SolarCanyonBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonSolaris_EventScript_SolarCanyonRiver::
+	msgbox EryonSolaris_Text_SolarCanyonRiver, MSGBOX_DEFAULT
+	release
+	end
+
+EryonSolaris_Text_SolarCanyonBefore:
+	.string "CANION SOLAR:\p"
+	.string "Rochas altas formam\n"
+	.string "um abrigo na areia.\p"
+	.string "Rodas de uma caravana\n"
+	.string "deixaram marcas aqui.$"
+
+EryonSolaris_Text_SolarCanyonRiver:
+	.string "CANION SOLAR:\p"
+	.string "As marcas da caravana\n"
+	.string "cruzam todo o deserto.\p"
+	.string "A agua investigada\n"
+	.string "pode revelar a rota.$"
