@@ -849,3 +849,33 @@ EryonLigaCaminho_Text_WestRavineChampion:
 	.string "os picos de ERYON.\p"
 	.string "Ainda ha misterios\n"
 	.string "alem desta trilha.$"
+
+
+@ A sheltered pocket in the original western ravine offers free team recovery.
+@ Optional exploration support: no story, trainer or badge flags are modified.
+EryonLigaCaminho_EventScript_RavineRest::
+	lock
+	msgbox EryonLigaCaminho_Text_RavineRestOffer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonLigaCaminho_EventScript_RavineRestDecline
+	closemessage
+	special HealPlayerParty
+	msgbox EryonLigaCaminho_Text_RavineRestThanks, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_RavineRestDecline::
+	closemessage
+	release
+	end
+
+EryonLigaCaminho_Text_RavineRestOffer:
+	.string "ABRIGO DO VALE:\p"
+	.string "A agua da montanha\n"
+	.string "esta cristalina.\p"
+	.string "Descansar e recuperar\n"
+	.string "seus Pokemon?$"
+
+EryonLigaCaminho_Text_RavineRestThanks:
+	.string "Seus Pokemon estao\n"
+	.string "prontos para a trilha!\p"
+	.string "A cidade fica a leste.$"
