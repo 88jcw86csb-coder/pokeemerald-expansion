@@ -125,3 +125,67 @@ EryonOasis_Text_CarrierWaterEvidence:
 	.string "O reator de IGNIVAR\n"
 	.string "ainda nos espera.$"
 
+
+
+@ Optional Kalos wildlife in Eryon's river-to-desert passage.
+@ Running or teleporting leaves the encounter available for another attempt.
+EryonOasis_EventScript_HelioptileNest::
+	lock
+	goto_if_set FLAG_ERYON_OASIS_HELIOPTILE_RESOLVED, EryonOasis_EventScript_HelioptileQuiet
+	msgbox EryonOasis_Text_HelioptileIntro, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonOasis_EventScript_HelioptileLeave
+	closemessage
+	setwildbattle SPECIES_HELIOPTILE, 32
+	waitse
+	playmoncry SPECIES_HELIOPTILE, CRY_MODE_ENCOUNTER
+	delay 30
+	waitmoncry
+	dowildbattle
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, EryonOasis_EventScript_HelioptileResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, EryonOasis_EventScript_HelioptileResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, EryonOasis_EventScript_HelioptileEscaped
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, EryonOasis_EventScript_HelioptileEscaped
+	release
+	end
+
+EryonOasis_EventScript_HelioptileResolved::
+	setflag FLAG_ERYON_OASIS_HELIOPTILE_RESOLVED
+	msgbox EryonOasis_Text_HelioptileResolved, MSGBOX_DEFAULT
+	release
+	end
+
+EryonOasis_EventScript_HelioptileEscaped::
+	msgbox EryonOasis_Text_HelioptileEscaped, MSGBOX_DEFAULT
+	release
+	end
+
+EryonOasis_EventScript_HelioptileQuiet::
+	msgbox EryonOasis_Text_HelioptileQuiet, MSGBOX_DEFAULT
+	release
+	end
+
+EryonOasis_EventScript_HelioptileLeave::
+	closemessage
+	release
+	end
+
+EryonOasis_Text_HelioptileIntro:
+	.string "Entre as pedras quentes\n"
+	.string "ha um HELIOPTILE!\p"
+	.string "Sua pele absorve a luz\n"
+	.string "do sol do deserto.\p"
+	.string "Investigar o abrigo?$"
+
+EryonOasis_Text_HelioptileResolved:
+	.string "O encontro terminou!\p"
+	.string "O abrigo esta tranquilo.$"
+
+EryonOasis_Text_HelioptileEscaped:
+	.string "HELIOPTILE correu para\n"
+	.string "tras das rochas!\p"
+	.string "Ele pode voltar.$"
+
+EryonOasis_Text_HelioptileQuiet:
+	.string "As pedras ainda estao\n"
+	.string "quentes ao sol.$"
