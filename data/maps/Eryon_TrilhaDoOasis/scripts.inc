@@ -5,6 +5,7 @@ Eryon_TrilhaDoOasis_MapScripts::
 EryonOasis_EventScript_Guide::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_OASIS_HELIOPTILE_RESOLVED, EryonOasis_EventScript_GuideHelioptile
 	goto_if_set FLAG_ERYON_RIVER_SAMPLE_RECORDED, EryonOasis_EventScript_GuideWaterEvidence
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonOasis_EventScript_GuideClue
 	msgbox EryonOasis_Text_GuideBefore, MSGBOX_DEFAULT
@@ -267,3 +268,18 @@ EryonOasis_Text_AlcoveSuppliesBagFull:
 EryonOasis_Text_AlcoveSuppliesEmpty:
 	.string "A caixa da caravana\n"
 	.string "agora esta vazia.$"
+
+
+@ Existing guide recognizes the optional Kalos wildlife encounter.
+EryonOasis_EventScript_GuideHelioptile::
+	msgbox EryonOasis_Text_GuideHelioptile, MSGBOX_DEFAULT
+	release
+	end
+
+EryonOasis_Text_GuideHelioptile:
+	.string "GUIA: Voce encontrou\n"
+	.string "o HELIOPTILE da trilha!\p"
+	.string "Ele pode evoluir com\n"
+	.string "treino, no nivel 36.\p"
+	.string "Siga ate SOLARIS para\n"
+	.string "explorar novas areas.$"
