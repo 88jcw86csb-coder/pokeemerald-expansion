@@ -230,3 +230,40 @@ EryonOasis_Text_AlcoveWildlifeSafe:
 	.string "encontrado na trilha.\p"
 	.string "O calor protege este\n"
 	.string "pequeno refugio.$"
+
+
+@ One-time desert survival medicine at the optional caravan refuge.
+@ The item remains available if the player's bag is full.
+EryonOasis_EventScript_AlcoveSupplies::
+	lock
+	goto_if_set FLAG_ERYON_OASIS_ALCOVE_SUPPLIES_TAKEN, EryonOasis_EventScript_AlcoveSuppliesEmpty
+	msgbox EryonOasis_Text_AlcoveSupplies, MSGBOX_DEFAULT
+	giveitem ITEM_HYPER_POTION
+	goto_if_eq VAR_RESULT, FALSE, EryonOasis_EventScript_AlcoveSuppliesBagFull
+	setflag FLAG_ERYON_OASIS_ALCOVE_SUPPLIES_TAKEN
+	release
+	end
+
+EryonOasis_EventScript_AlcoveSuppliesBagFull::
+	msgbox EryonOasis_Text_AlcoveSuppliesBagFull, MSGBOX_DEFAULT
+	release
+	end
+
+EryonOasis_EventScript_AlcoveSuppliesEmpty::
+	msgbox EryonOasis_Text_AlcoveSuppliesEmpty, MSGBOX_DEFAULT
+	release
+	end
+
+EryonOasis_Text_AlcoveSupplies:
+	.string "MANTIMENTOS ANTIGOS:\p"
+	.string "Uma HYPER POTION\n"
+	.string "resistiu ao deserto.$"
+
+EryonOasis_Text_AlcoveSuppliesBagFull:
+	.string "Sua BOLSA esta cheia!\p"
+	.string "O remedio ainda\n"
+	.string "ficara no abrigo.$"
+
+EryonOasis_Text_AlcoveSuppliesEmpty:
+	.string "A caixa da caravana\n"
+	.string "agora esta vazia.$"
