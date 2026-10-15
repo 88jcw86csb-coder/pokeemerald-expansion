@@ -160,6 +160,31 @@ class EryonKalosEncounters(unittest.TestCase):
         self.assertIn("EryonOasis_EventScript_GuideHelioptile::", source)
         self.assertIn("nivel 36", source)
 
+    def test_wind_valley_new_garden_connects_to_existing_route(self):
+        map_data = json.loads((MAPS / "Eryon_ValeDosVentos/map.json").read_text())
+        terrain = (ROOT / "docs/eryon/vale_dos_ventos_terrain_plan.txt").read_text().splitlines()[4:48]
+        self.assertEqual(len(terrain), 44)
+        self.assertTrue(all(len(row) == 48 for row in terrain))
+        events = [e for e in map_data["bg_events"] if
+                  e["script"] == "EryonVale_EventScript_WindGarden"]
+        self.assertEqual([(e["x"], e["y"]) for e in events], [(28, 15)])
+        found = {(0, 21)}
+        queue = deque([(0, 21)])
+        while queue:
+            x, y = queue.popleft()
+            for nx, ny in neighbors(x, y):
+                coord = nx, ny
+                if 0 <= nx < 48 and 0 <= ny < 44 and terrain[ny][nx] != "#" and coord not in found:
+                    found.add(coord)
+                    queue.append(coord)
+        for coord in ((28, 15), (28, 18), (47, 21)):
+            self.assertIn(coord, found)
+        source = (MAPS / "Eryon_ValeDosVentos/scripts.inc").read_text()
+        entry = source.split("EryonVale_EventScript_WindGarden::", 1)[1].split(
+            "EryonVale_EventScript_WindGardenClue::", 1)[0]
+        self.assertIn("VAR_ERYON_SERRA_CLUE_FOUND", entry)
+        self.assertNotIn("setflag ", entry)
+
     def test_dragon_shrine_requires_local_eclipse_victory(self):
         source = (MAPS / "Eryon_Drakonia/scripts.inc").read_text(encoding="utf-8")
         self.assertIn(
