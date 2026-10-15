@@ -1240,7 +1240,7 @@
 #define FLAG_ERYON_ECHO_TRACE_RECORDED                               0x4A2 // Optional valley oscillator study
 #define FLAG_ERYON_ECHO_ARCHIVE_REWARD_CLAIMED                       0x4A3 // Unique Aldeia research reward
 #define FLAG_ERYON_RIDGE_BIRDWATCHER_DEFEATED                        0x4A4 // Optional mountain trainer
-#define FLAG_UNUSED_0x4A5                                           0x4A5 // Unused Flag
+#define FLAG_ERYON_AMPHITHEATRE_SUPPLIES_CLAIMED                     0x4A5 // One-time city training supplies
 #define FLAG_UNUSED_0x4A6                                           0x4A6 // Unused Flag
 #define FLAG_UNUSED_0x4A7                                           0x4A7 // Unused Flag
 #define FLAG_UNUSED_0x4A8                                           0x4A8 // Unused Flag
