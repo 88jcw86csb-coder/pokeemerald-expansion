@@ -366,3 +366,67 @@ EryonLunar_Text_MoonfallBagFull:
 EryonLunar_Text_MoonfallEmpty:
 	.string "A caixa de suprimentos\n"
 	.string "esta vazia.$"
+@ Moonfall ranger: optional Pokemon battle, default trainer EXP and money rules.
+EryonLunar_EventScript_MoonfallRanger::
+	lock
+	faceplayer
+	goto_if_set FLAG_ERYON_LUNAR_RANGER_DEFEATED, EryonLunar_EventScript_MoonfallRangerAfter
+	msgbox EryonLunar_Text_MoonfallRangerOffer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonLunar_EventScript_MoonfallRangerDecline
+	closemessage
+	trainerbattle_single TRAINER_ERYON_LUNAR_RANGER, EryonLunar_Text_MoonfallRangerIntro, EryonLunar_Text_MoonfallRangerLoss, EryonLunar_EventScript_MoonfallRangerVictory, FALSE
+	msgbox EryonLunar_Text_MoonfallRangerAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLunar_EventScript_MoonfallRangerDecline::
+	closemessage
+	release
+	end
+
+EryonLunar_EventScript_MoonfallRangerVictory::
+	msgbox EryonLunar_Text_MoonfallRangerVictory, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLunar_EventScript_MoonfallRangerAfter::
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonLunar_EventScript_MoonfallRangerPeace
+	msgbox EryonLunar_Text_MoonfallRangerAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLunar_EventScript_MoonfallRangerPeace::
+	msgbox EryonLunar_Text_MoonfallRangerPeace, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLunar_Text_MoonfallRangerOffer:
+	.string "NILO: Cuido deste\n"
+	.string "santuario sob a LUA.\p"
+	.string "Quer uma batalha\n"
+	.string "de treinamento?$"
+
+EryonLunar_Text_MoonfallRangerIntro:
+	.string "As estrelas testam\n"
+	.string "sua estrategia!$"
+
+EryonLunar_Text_MoonfallRangerLoss:
+	.string "Sua equipe venceu\n"
+	.string "a prova lunar!$"
+
+EryonLunar_Text_MoonfallRangerVictory:
+	.string "NILO: Excelente luta!\p"
+	.string "Proteja a trilha\n"
+	.string "da ECLIPSE.$"
+
+EryonLunar_Text_MoonfallRangerAfter:
+	.string "NILO: A LUA muda\n"
+	.string "o canto dos cristais.\p"
+	.string "Visite o observatorio\n"
+	.string "de LUNARIS adiante.$"
+
+EryonLunar_Text_MoonfallRangerPeace:
+	.string "NILO: A rede ECLIPSE\n"
+	.string "se calou em ERYON!\p"
+	.string "Enfim temos paz\n"
+	.string "neste santuario.$"

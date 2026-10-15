@@ -17882,3 +17882,24 @@ Level: 35
 - Mud Slap
 - Thunder Wave
 
+=== TRAINER_ERYON_LUNAR_RANGER ===
+Name: NILO
+Class: Hiker
+Pic: Hiker
+Gender: Male
+Music: Male
+AI: Check Bad Move
+
+Lunatone
+Level: 46
+- Psybeam
+- Rock Slide
+- Hypnosis
+- Cosmic Power
+
+Solrock
+Level: 47
+- Zen Headbutt
+- Rock Slide
+- Flamethrower
+- Cosmic Power
