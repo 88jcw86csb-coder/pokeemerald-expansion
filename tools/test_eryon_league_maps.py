@@ -399,6 +399,24 @@ class LeagueMapTests(unittest.TestCase):
         self.assertNotIn("setflag ", entry)
         self.assertNotIn("trainerbattle_", entry)
 
+    def test_amphitheatre_revive_pickup_is_reachable_and_retryable(self):
+        import json
+        terrain = league()
+        data = json.loads((ROOT / "data/maps/Eryon_CidadeDaLiga/map.json").read_text())
+        events = [e for e in data["bg_events"] if
+                  e["script"] == "EryonCidadeLiga_EventScript_AmphitheatreSupplies"]
+        self.assertEqual([(e["x"], e["y"]) for e in events], [(23, 48)])
+        self.assertIn((23, 48), connected(terrain, (0, 36)))
+        self.assertIn((48, 36), connected(terrain, (0, 36)))
+        scripts = (ROOT / "data/maps/Eryon_CidadeDaLiga/scripts.inc").read_text()
+        block = scripts.split("EryonCidadeLiga_EventScript_AmphitheatreSupplies::", 1)[1].split(
+            "EryonCidadeLiga_EventScript_AmphitheatreSuppliesFull::", 1)[0]
+        self.assertIn("giveitem ITEM_REVIVE", block)
+        self.assertLess(block.index("goto_if_eq VAR_RESULT, FALSE"),
+                        block.index("setflag FLAG_ERYON_AMPHITHEATRE_SUPPLIES_CLAIMED"))
+        self.assertIn("FLAG_ERYON_AMPHITHEATRE_SUPPLIES_CLAIMED",
+                      (ROOT / "include/constants/flags.h").read_text())
+
     def test_eight_stars_terrace_connected_city(self):
         """Check the new skyline park, unchanged League building, and exact terrain."""
         import json,struct
