@@ -37,6 +37,17 @@ A ROM de GBA segue em desenvolvimento na branch `eryon-development`. **Ter arqui
 - O epílogo alcança também a astrônoma e o arquivista da **Gruta das Estrelas**, a testemunha do **Caminho da Liga** e o comunicado da **Vila do Pico**, com diálogos especiais quando o jogador já é Campeão.
 - Nenhum acesso, requisito de insígnia, resultado de batalha, evolução ou registro de classificação foi alterado. Os testes novos conferem a estrutura e não substituem compilação nem jogo no emulador.
 
+## Clareira da Copa — Floresta dos Ecos (15/10/2026)
+
+- Nova trilha física no norte do mapa 48×44: passagem (25,8–13) e clareira (22–28,14–18). As duas saídas originais para Ignivar e o Vale dos Ecos continuam registradas.
+- Corrigida a divergência preexistente de `map.bin`: paredes da floresta estavam codificadas sem colisão. O novo binário corresponde ao plano autoritativo e à paleta de `tools/build_eryon_map_bins.py`, com paredes `0x3C01` e pisos `0x3001`/`0x3002`.
+- O Caderno da Copa encontra a interferência Eclipse e reage à amostra opcional do rio (`FLAG_ERYON_FOREST_SIGNAL_LOG_READ=0x4AC`).
+- Phantump, Pokémon oficial de Kalos, aparece no nível 40 após a leitura. Captura ou vitória registra a resolução (`0x4AD`); fuga, recusa e teleporte permitem tentar novamente. A batalha utiliza o fluxo padrão do motor de EXP, que ainda necessita de playtest.
+- Após resolver o encontro, uma Dusk Ball é entregue uma única vez (`0x4AE`), sem consumo em caso de Bolsa cheia.
+- O guarda existente, a engenheira da cidade de Ignivar e uma testemunha da Aldeia dos Ecos comentam a restauração da clareira. Sem alteração do sexto ginásio, da Liga e da estrutura de treinadores.
+- Corrigida alternativa redundante por Linking Cord: Phantump evolui para Trevenant somente pelo nível 36. Teste de regressão da floresta adicionado a `tools/build_eryon.sh`.
+- Os testes estáticos não certificam funcionamento gráfico nem gameplay real no Delta.
+
 ## Pendências prioritárias
 1. Compilação limpa e verificação da ROM GBA via `tools/build_eryon.sh` e GitHub Actions.
 2. Auditoria das tabelas `land_mons`, evolução, disponibilidade e distribuição de capturas por rota.

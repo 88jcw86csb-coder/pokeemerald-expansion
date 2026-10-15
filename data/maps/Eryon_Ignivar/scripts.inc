@@ -5,6 +5,7 @@ Eryon_Ignivar_MapScripts::
 EryonIgnivar_EventScript_Engineer::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_FOREST_PHANTUMP_RESOLVED, EryonIgnivar_EventScript_EngineerGroveSafe
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonIgnivar_EventScript_EngineerClue
 	msgbox EryonIgnivar_Text_EngineerBefore, MSGBOX_DEFAULT
 	release
@@ -317,3 +318,15 @@ EryonIgnivar_Text_InspectorRiverSample:
 	.string "A ECLIPSE nao controla\n"
 	.string "somente o deserto.$"
 
+
+@ The sixth gym city recognizes the optional northern woodland restoration.
+EryonIgnivar_EventScript_EngineerGroveSafe::
+	msgbox EryonIgnivar_Text_EngineerGroveSafe, MSGBOX_DEFAULT
+	release
+	end
+
+EryonIgnivar_Text_EngineerGroveSafe:
+	.string "ENGENHEIRA: O eco da\n"
+	.string "floresta se acalmou!\p"
+	.string "Obrigado por ajudar\n"
+	.string "o PHANTUMP da clareira.$"

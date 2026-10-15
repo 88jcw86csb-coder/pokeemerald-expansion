@@ -41,6 +41,8 @@ EryonAldeia_EventScript_ArchivistClue::
 EryonAldeia_EventScript_Witness::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_FOREST_PHANTUMP_RESOLVED, EryonAldeia_EventScript_WitnessGroveSafe
+	goto_if_set FLAG_ERYON_FOREST_SIGNAL_LOG_READ, EryonAldeia_EventScript_WitnessCanopyLog
 	msgbox EryonAldeia_Text_Witness, MSGBOX_DEFAULT
 	release
 	end
@@ -155,3 +157,26 @@ EryonAldeia_Text_ArchivistResearchDone:
 	.string "ampliar as frequencias.\p"
 	.string "Mostre os resultados\n"
 	.string "no OBSERVATORIO LUNAR.$"
+
+@ The valley village learns the results of the optional forest grove survey.
+EryonAldeia_EventScript_WitnessCanopyLog::
+	msgbox EryonAldeia_Text_WitnessCanopyLog, MSGBOX_DEFAULT
+	release
+	end
+
+EryonAldeia_EventScript_WitnessGroveSafe::
+	msgbox EryonAldeia_Text_WitnessGroveSafe, MSGBOX_DEFAULT
+	release
+	end
+
+EryonAldeia_Text_WitnessCanopyLog:
+	.string "JOVEM: Achou o caderno\n"
+	.string "da copa da floresta?\p"
+	.string "PHANTUMP mora numa\n"
+	.string "clareira escondida!$"
+
+EryonAldeia_Text_WitnessGroveSafe:
+	.string "JOVEM: A floresta\n"
+	.string "esta em paz novamente!\p"
+	.string "As arvores voltaram\n"
+	.string "a cantar naturalmente.$"
