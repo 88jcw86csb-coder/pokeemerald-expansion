@@ -29,6 +29,7 @@ echo "== Eryon: global gameplay/data and map collision audits =="
 python3 tools/eryon_validate.py
 python3 tools/eryon_layout_audit.py
 python3 tools/eryon_world_audit.py
+python3 tools/eryon_map_traversal_audit.py
 
 echo "== Eryon: compiling GBA ROM =="
 jobs=2
