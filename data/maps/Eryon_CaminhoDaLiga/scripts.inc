@@ -879,3 +879,58 @@ EryonLigaCaminho_Text_RavineRestThanks:
 	.string "Seus Pokemon estao\n"
 	.string "prontos para a trilha!\p"
 	.string "A cidade fica a leste.$"
+
+
+@ Optional archive of old mountain surveys in Eryon's unique western refuge.
+@ Reads existing story milestones; no new flags or progression gates.
+EryonLigaCaminho_EventScript_RockRefuge::
+	lock
+	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonLigaCaminho_EventScript_RockRefugeChampion
+	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonLigaCaminho_EventScript_RockRefugeReported
+	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonLigaCaminho_EventScript_RockRefugeChart
+	msgbox EryonLigaCaminho_Text_RockRefugeBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_RockRefugeChart::
+	msgbox EryonLigaCaminho_Text_RockRefugeChart, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_RockRefugeReported::
+	msgbox EryonLigaCaminho_Text_RockRefugeReported, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_RockRefugeChampion::
+	msgbox EryonLigaCaminho_Text_RockRefugeChampion, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_Text_RockRefugeBefore:
+	.string "REFUGIO ROCHOSO:\p"
+	.string "Pedras lisas mostram\n"
+	.string "marcas de uma caravana.\p"
+	.string "Cristais foram levados\n"
+	.string "pelo vale ha anos.$"
+
+EryonLigaCaminho_Text_RockRefugeChart:
+	.string "REFUGIO ROCHOSO:\p"
+	.string "As marcas combinam\n"
+	.string "com a CARTA ESTELAR!\p"
+	.string "A antiga rota une\n"
+	.string "os picos de ERYON.$"
+
+EryonLigaCaminho_Text_RockRefugeReported:
+	.string "REFUGIO ROCHOSO:\p"
+	.string "A LIGA documentou\n"
+	.string "as marcas da ECLIPSE.\p"
+	.string "Viajantes voltaram\n"
+	.string "a explorar o vale.$"
+
+EryonLigaCaminho_Text_RockRefugeChampion:
+	.string "REFUGIO ROCHOSO:\p"
+	.string "O CAMPEAO reconhece\n"
+	.string "a antiga passagem.\p"
+	.string "A historia de ERYON\n"
+	.string "vive nestas pedras.$"
