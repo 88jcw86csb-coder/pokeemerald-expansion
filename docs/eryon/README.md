@@ -156,3 +156,10 @@ A ROM de GBA segue em desenvolvimento na branch `eryon-development`. **Ter arqui
 - `bash tools/build_eryon.sh`
 
 **Critério de conclusão:** uma ROM .gba produzida por compilação limpa, com mapas, capturas e progressão funcionalmente testados no Delta. As rotinas estáticas não certificam sozinhas que o jogo está terminado.
+
+## Investigacao dos carregamentos — Rota 04 (15/10/2026)
+
+- Nova pista opcional no pomar (10,9), retransmissor no mirante (35,32) e vigia (38,32); todos nos caminhos ja acessiveis do terreno 48x44.
+- A leitura do livro registra a flag 0x4B9; a decodificacao do emissor requer o livro e registra 0x4BA. A estrada, os dois warps, as insignias e o checkpoint da vila permanecem inalterados.
+- O explorador da rota, o entregador da Vila dos Pomares e o tecnico de Neonara reagem ao progresso. As prioridades anteriores do tecnico foram preservadas.
+- Teste estatico: tests/test_eryon_orchard_investigation.py. Compilacao, salvamento, graficos e comportamento no Delta ainda necessitam validacao.

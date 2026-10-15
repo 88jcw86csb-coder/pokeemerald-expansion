@@ -28,6 +28,7 @@ EryonNeonara_EventScript_Technician::
 	goto_if_set FLAG_ERYON_MIST_SIGNAL_REPAIRED, EryonNeonara_EventScript_TechnicianRestored
 	goto_if_set FLAG_BADGE02_GET, EryonNeonara_EventScript_TechnicianBadge
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonNeonara_EventScript_TechnicianAfterClue
+	goto_if_set FLAG_ERYON_ORCHARD_RELAY_TRACED, EryonNeonara_EventScript_TechnicianOrchard
 	msgbox EryonNeonara_Text_TechnicianBefore, MSGBOX_DEFAULT
 	release
 	end
@@ -182,3 +183,18 @@ EryonNeonara_Text_GymAfterEclipse:
 	.string "NEONARA estao firmes!\p"
 	.string "A ECLIPSE nao usara\n"
 	.string "nossa energia outra vez.$"
+
+
+@ Early optional lead; badge, Serra clue and repaired-grid priority unchanged.
+EryonNeonara_EventScript_TechnicianOrchard::
+	msgbox EryonNeonara_Text_TechnicianOrchard, MSGBOX_DEFAULT
+	release
+	end
+
+EryonNeonara_Text_TechnicianOrchard:
+	.string "TECNICO: Esse transmissor\n"
+	.string "veio da ROTA 04?\p"
+	.string "As cargas da ECLIPSE\n"
+	.string "alimentam nossa rede!\p"
+	.string "Preciso verificar a serra\n"
+	.string "antes de restaurar o sinal.$"

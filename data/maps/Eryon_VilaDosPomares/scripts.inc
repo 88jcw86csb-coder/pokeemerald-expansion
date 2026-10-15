@@ -33,6 +33,8 @@ EryonPomaresVila_EventScript_ElderInformed::
 EryonPomaresVila_EventScript_Courier::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_ORCHARD_RELAY_TRACED, EryonPomaresVila_EventScript_CourierRelay
+	goto_if_set FLAG_ERYON_ORCHARD_LEDGER_READ, EryonPomaresVila_EventScript_CourierLedger
 	msgbox EryonPomaresVila_Text_Courier, MSGBOX_DEFAULT
 	release
 	end
@@ -72,3 +74,27 @@ EryonPomaresVila_Text_Notice:
 	.string "centro de descanso.\p"
 	.string "Saida leste: ROTA 04\n"
 	.string "rumo a NEONARA.$"
+
+
+@ Optional side-story acknowledgements; original village checkpoint retained.
+EryonPomaresVila_EventScript_CourierLedger::
+	msgbox EryonPomaresVila_Text_CourierLedger, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPomaresVila_EventScript_CourierRelay::
+	msgbox EryonPomaresVila_Text_CourierRelay, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPomaresVila_Text_CourierLedger:
+	.string "ENTREGADOR: O livro de\n"
+	.string "cargas estava no pomar?\p"
+	.string "Vi um vigia perto das\n"
+	.string "pedras ao sul da ROTA 04.$"
+
+EryonPomaresVila_Text_CourierRelay:
+	.string "ENTREGADOR: A ECLIPSE\n"
+	.string "escondia seus embarques!\p"
+	.string "Vou informar a vila.\n"
+	.string "Mostre o sinal em NEONARA.$"
