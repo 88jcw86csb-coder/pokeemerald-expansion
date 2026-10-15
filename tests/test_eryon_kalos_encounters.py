@@ -146,7 +146,10 @@ class EryonKalosEncounters(unittest.TestCase):
                         build.index("python3 tools/eryon_layout_audit.py"))
         self.assertLess(build.index(rebuild),
                         build.index('make -j"$jobs" -O all'))
-        self.assertIn("test_eryon_kalos_encounters.py", build)
+        # Test auto-discovery is intentionally used so new regression files
+        # cannot be forgotten in a hard-coded per-file invocation list.
+        self.assertIn("unittest discover -s tests -p 'test_eryon_*.py'", build)
+        self.assertTrue((ROOT / "tests/test_eryon_kalos_encounters.py").is_file())
 
     def test_oasis_guide_recognizes_helioptile_without_new_npc(self):
         area = json.loads((MAPS / "Eryon_TrilhaDoOasis/map.json").read_text())
