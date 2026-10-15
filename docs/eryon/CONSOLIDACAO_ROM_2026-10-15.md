@@ -48,4 +48,4 @@ Este lote parte de b2c74a3a073d930672f3172ee2841b232412da3f e preserva a estrutu
 3. Ha cenarios ainda com metatiles provisorios e retratos de lideres ainda sem sprites GBA proprios finalizados.
 4. Fazer teste completo no Delta: fluxos de batalha, encontros selvagens, nivel de Riolu e Lucario, EXP, checkpoints, dezesseis? Nao: **oito classificatorias**, quatro membros da Elite e Campeao, saves, historia Eclipse nas duas ordens, cerimonia e retorno ao inicio.
 
-A integracao deve manter o teste de regressao que proteje as oito classificatorias e o retorno apos perda, sem alterar flags de insiginias, montagem de equipes ou capacidade de treinadores.
+A integracao deve manter o teste de regressao que protege as oito classificatorias e o retorno apos perda, sem alterar flags de insiginias, montagem de equipes ou capacidade de treinadores.
