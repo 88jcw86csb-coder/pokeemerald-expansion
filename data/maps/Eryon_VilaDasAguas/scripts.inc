@@ -1,5 +1,11 @@
 Eryon_VilaDasAguas_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, Eryon_VilaDasAguas_RespawnCheckpoint
 	.byte 0
+
+@ Rest stop: remember the safe village, preserve all Eclipse events.
+Eryon_VilaDasAguas_RespawnCheckpoint:
+	setrespawn HEAL_LOCATION_ERYON_VILA_DAS_AGUAS
+	end
 
 @ River pollution links the village to Eclipse's stolen crystal cargo.
 EryonAguas_EventScript_Fisher::

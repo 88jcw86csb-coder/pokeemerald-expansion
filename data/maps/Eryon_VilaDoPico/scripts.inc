@@ -1,5 +1,11 @@
 Eryon_VilaDoPico_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, Eryon_VilaDoPico_RespawnCheckpoint
 	.byte 0
+
+@ Rest stop: remember the safe village, preserve all Eclipse events.
+Eryon_VilaDoPico_RespawnCheckpoint:
+	setrespawn HEAL_LOCATION_ERYON_VILA_DO_PICO
+	end
 
 @ Quiet resting stop between the dragon trail and the final gym city.
 EryonPico_EventScript_Caretaker::

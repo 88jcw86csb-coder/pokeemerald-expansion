@@ -1,5 +1,11 @@
 Eryon_VilaDosPomares_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, Eryon_VilaDosPomares_RespawnCheckpoint
 	.byte 0
+
+@ Rest stop: remember the safe village, preserve all Eclipse events.
+Eryon_VilaDosPomares_RespawnCheckpoint:
+	setrespawn HEAL_LOCATION_ERYON_VILA_DOS_POMARES
+	end
 
 
 @ A real rest stop and story beat before the second gym area.

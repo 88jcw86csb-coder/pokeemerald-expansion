@@ -459,6 +459,56 @@
       "respawn_npc": "LOCALID_NONE",
       "respawn_x": 12,
       "respawn_y": 12
+    },
+    {
+      "id": "HEAL_LOCATION_ERYON_VILA_DOS_POMARES",
+      "map": "MAP_ERYON_VILA_DOS_POMARES",
+      "x": 4,
+      "y": 14,
+      "respawn_map": "MAP_ERYON_VILA_DOS_POMARES",
+      "respawn_npc": "LOCALID_NONE",
+      "respawn_x": 4,
+      "respawn_y": 14
+    },
+    {
+      "id": "HEAL_LOCATION_ERYON_VILA_DA_NEBLINA",
+      "map": "MAP_ERYON_VILA_DA_NEBLINA",
+      "x": 4,
+      "y": 14,
+      "respawn_map": "MAP_ERYON_VILA_DA_NEBLINA",
+      "respawn_npc": "LOCALID_NONE",
+      "respawn_x": 4,
+      "respawn_y": 14
+    },
+    {
+      "id": "HEAL_LOCATION_ERYON_VILA_DAS_AGUAS",
+      "map": "MAP_ERYON_VILA_DAS_AGUAS",
+      "x": 4,
+      "y": 13,
+      "respawn_map": "MAP_ERYON_VILA_DAS_AGUAS",
+      "respawn_npc": "LOCALID_NONE",
+      "respawn_x": 4,
+      "respawn_y": 13
+    },
+    {
+      "id": "HEAL_LOCATION_ERYON_ALDEIA_DOS_ECOS",
+      "map": "MAP_ERYON_ALDEIA_DOS_ECOS",
+      "x": 4,
+      "y": 14,
+      "respawn_map": "MAP_ERYON_ALDEIA_DOS_ECOS",
+      "respawn_npc": "LOCALID_NONE",
+      "respawn_x": 4,
+      "respawn_y": 14
+    },
+    {
+      "id": "HEAL_LOCATION_ERYON_VILA_DO_PICO",
+      "map": "MAP_ERYON_VILA_DO_PICO",
+      "x": 4,
+      "y": 14,
+      "respawn_map": "MAP_ERYON_VILA_DO_PICO",
+      "respawn_npc": "LOCALID_NONE",
+      "respawn_x": 4,
+      "respawn_y": 14
     }
   ]
 }

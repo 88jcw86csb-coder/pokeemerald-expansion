@@ -1,5 +1,11 @@
 Eryon_AldeiaDosEcos_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, Eryon_AldeiaDosEcos_RespawnCheckpoint
 	.byte 0
+
+@ Rest stop: remember the safe village, preserve all Eclipse events.
+Eryon_AldeiaDosEcos_RespawnCheckpoint:
+	setrespawn HEAL_LOCATION_ERYON_ALDEIA_DOS_ECOS
+	end
 
 @ A settlement protects an ancient archive now targeted by Team Eclipse.
 EryonAldeia_EventScript_Elder::

@@ -1,5 +1,11 @@
 Eryon_VilaDaNeblina_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, Eryon_VilaDaNeblina_RespawnCheckpoint
 	.byte 0
+
+@ Rest stop: remember the safe village, preserve all Eclipse events.
+Eryon_VilaDaNeblina_RespawnCheckpoint:
+	setrespawn HEAL_LOCATION_ERYON_VILA_DA_NEBLINA
+	end
 
 @ An elder hints at the frozen trail without unlocking an unfinished area.
 EryonVilaNeblina_EventScript_Elder::
