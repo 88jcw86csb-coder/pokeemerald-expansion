@@ -323,3 +323,64 @@ EryonVerdelume_Text_KaelAfterPeace:
 	.string "do Bosque de Lumina.\p"
 	.string "Volte as trilhas sempre\n"
 	.string "que sentir saudade.$"
+
+@ The first regional supply stall remains useful through the entire campaign.
+@ The inventory grows after badges 3 and 6; no story flags are changed.
+@ This compensates for the absence of an accessible Eryon Mart interior.
+EryonVerdelume_EventScript_SupplyMerchant::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	goto_if_set FLAG_BADGE06_GET, EryonVerdelume_EventScript_SupplyMerchantAdvanced
+	goto_if_set FLAG_BADGE03_GET, EryonVerdelume_EventScript_SupplyMerchantExpanded
+	pokemart EryonVerdelume_Pokemart_Basic
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVerdelume_EventScript_SupplyMerchantExpanded::
+	pokemart EryonVerdelume_Pokemart_Expanded
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVerdelume_EventScript_SupplyMerchantAdvanced::
+	pokemart EryonVerdelume_Pokemart_Advanced
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+	.align 2
+EryonVerdelume_Pokemart_Basic:
+	.2byte ITEM_POKE_BALL
+	.2byte ITEM_POTION
+	.2byte ITEM_ANTIDOTE
+	.2byte ITEM_PARALYZE_HEAL
+	.2byte ITEM_ESCAPE_ROPE
+	.2byte ITEM_REPEL
+	pokemartlistend
+
+	.align 2
+EryonVerdelume_Pokemart_Expanded:
+	.2byte ITEM_POKE_BALL
+	.2byte ITEM_GREAT_BALL
+	.2byte ITEM_POTION
+	.2byte ITEM_SUPER_POTION
+	.2byte ITEM_ANTIDOTE
+	.2byte ITEM_PARALYZE_HEAL
+	.2byte ITEM_ESCAPE_ROPE
+	.2byte ITEM_SUPER_REPEL
+	pokemartlistend
+
+	.align 2
+EryonVerdelume_Pokemart_Advanced:
+	.2byte ITEM_POKE_BALL
+	.2byte ITEM_GREAT_BALL
+	.2byte ITEM_ULTRA_BALL
+	.2byte ITEM_SUPER_POTION
+	.2byte ITEM_HYPER_POTION
+	.2byte ITEM_FULL_HEAL
+	.2byte ITEM_ESCAPE_ROPE
+	.2byte ITEM_MAX_REPEL
+	pokemartlistend
