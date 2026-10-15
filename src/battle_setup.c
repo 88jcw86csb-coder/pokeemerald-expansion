@@ -1084,6 +1084,8 @@ static u16 GetEryonTrainerFlagId(u16 trainerId)
         return FLAG_ERYON_SERRA_CORE_GUARD_DEFEATED;
     if (trainerId == TRAINER_ERYON_RIDGE_BIRDWATCHER)
         return FLAG_ERYON_RIDGE_BIRDWATCHER_DEFEATED;
+    if (trainerId == TRAINER_ERYON_SOLAR_CANYON_RANGER)
+        return FLAG_ERYON_SOLAR_CANYON_RANGER_DEFEATED;
     return TRAINER_FLAGS_START + trainerId;
 }
 
