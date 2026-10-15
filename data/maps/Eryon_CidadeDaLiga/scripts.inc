@@ -897,3 +897,45 @@ EryonCidadeLiga_Text_TrainingChampion:
 	.string "Sua jornada inspira\n"
 	.string "os novos treinadores\n"
 	.string "da cidade.$"
+
+
+@ One-time training supplies placed in the southwest amphitheatre.
+@ Bag-full attempts can be retried: persistence is set only after a successful gift.
+EryonCidadeLiga_EventScript_AmphitheatreSupplies::
+	lock
+	goto_if_set FLAG_ERYON_AMPHITHEATRE_SUPPLIES_CLAIMED, EryonCidadeLiga_EventScript_AmphitheatreSuppliesTaken
+	msgbox EryonCidadeLiga_Text_AmphitheatreSuppliesOffer, MSGBOX_DEFAULT
+	giveitem ITEM_REVIVE
+	goto_if_eq VAR_RESULT, FALSE, EryonCidadeLiga_EventScript_AmphitheatreSuppliesFull
+	setflag FLAG_ERYON_AMPHITHEATRE_SUPPLIES_CLAIMED
+	msgbox EryonCidadeLiga_Text_AmphitheatreSuppliesThanks, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_AmphitheatreSuppliesFull::
+	msgbox EryonCidadeLiga_Text_AmphitheatreSuppliesFull, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_AmphitheatreSuppliesTaken::
+	msgbox EryonCidadeLiga_Text_AmphitheatreSuppliesTaken, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_Text_AmphitheatreSuppliesOffer:
+	.string "CAIXA DE TREINAMENTO:\p"
+	.string "Uma REVIVE esta\n"
+	.string "guardada no jardim.$"
+
+EryonCidadeLiga_Text_AmphitheatreSuppliesThanks:
+	.string "Os voluntarios da\n"
+	.string "cidade desejam sorte!$"
+
+EryonCidadeLiga_Text_AmphitheatreSuppliesFull:
+	.string "Sua BOLSA esta cheia!\p"
+	.string "O item ficara aqui\n"
+	.string "ate voce voltar.$"
+
+EryonCidadeLiga_Text_AmphitheatreSuppliesTaken:
+	.string "A caixa de apoio\n"
+	.string "esta vazia.$"
