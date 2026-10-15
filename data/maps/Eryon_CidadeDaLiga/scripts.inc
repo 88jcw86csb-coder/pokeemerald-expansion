@@ -855,3 +855,45 @@ EryonCidadeLiga_Text_AmphitheatreMedicDone:
 	.string "SOCORRISTA: Sua equipe\n"
 	.string "esta recuperada!\p"
 	.string "Boa sorte nas batalhas.$"
+
+
+@ A training steward explains safe League preparation and local wildlife.
+@ Optional city encounter, no flag writes or tournament state modifications.
+EryonCidadeLiga_EventScript_AmphitheatreTraining::
+	lock
+	faceplayer
+	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonCidadeLiga_EventScript_TrainingChampion
+	goto_if_set FLAG_ERYON_QUALIFIED, EryonCidadeLiga_EventScript_TrainingQualified
+	msgbox EryonCidadeLiga_Text_TrainingBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_TrainingQualified::
+	msgbox EryonCidadeLiga_Text_TrainingQualified, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_TrainingChampion::
+	msgbox EryonCidadeLiga_Text_TrainingChampion, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_Text_TrainingBefore:
+	.string "INSTRUTOR: Nesta arena\n"
+	.string "treinamos com cuidado!\p"
+	.string "Treine nas rotas e\n"
+	.string "cuide de sua equipe.\p"
+	.string "A LIGA tem oito lutas\n"
+	.string "classificatorias.$"
+
+EryonCidadeLiga_Text_TrainingQualified:
+	.string "INSTRUTOR: Parabens\n"
+	.string "pelas oito vitorias!\p"
+	.string "Recupere sua equipe\n"
+	.string "antes da ELITE FOUR.$"
+
+EryonCidadeLiga_Text_TrainingChampion:
+	.string "INSTRUTOR: CAMPEAO!\p"
+	.string "Sua jornada inspira\n"
+	.string "os novos treinadores\n"
+	.string "da cidade.$"
