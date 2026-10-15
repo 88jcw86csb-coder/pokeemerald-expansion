@@ -200,6 +200,34 @@ class EryonKalosEncounters(unittest.TestCase):
         self.assertLess(body.index("goto_if_eq VAR_RESULT, FALSE"),
                         body.index("setflag FLAG_ERYON_WIND_GARDEN_REWARD_CLAIMED"))
 
+    def test_solar_canyon_branch_and_river_story(self):
+        area = json.loads((MAPS / "Eryon_DesertoDeSolaris/map.json").read_text())
+        terrain = (ROOT / "docs/eryon/deserto_de_solaris_terrain_plan.txt").read_text().splitlines()[4:48]
+        self.assertEqual(len(terrain), 44)
+        self.assertTrue(all(len(row) == 48 for row in terrain))
+        for y in range(15, 21):
+            for x in range(20, 26):
+                self.assertNotEqual(terrain[y][x], "#")
+        events = [event for event in area["bg_events"]
+                  if event["script"] == "EryonSolaris_EventScript_SolarCanyon"]
+        self.assertEqual([(e["x"], e["y"]) for e in events], [(22, 18)])
+        seen = {(0, 22)}
+        queue = deque([(0, 22)])
+        while queue:
+            x, y = queue.popleft()
+            for nx, ny in neighbors(x, y):
+                point = (nx, ny)
+                if 0 <= nx < 48 and 0 <= ny < 44 and terrain[ny][nx] != "#" and point not in seen:
+                    seen.add(point)
+                    queue.append(point)
+        self.assertIn((22, 18), seen)
+        self.assertIn((47, 22), seen)
+        script = (MAPS / "Eryon_DesertoDeSolaris/scripts.inc").read_text()
+        entry = script.split("EryonSolaris_EventScript_SolarCanyon::", 1)[1].split(
+            "EryonSolaris_EventScript_SolarCanyonRiver::", 1)[0]
+        self.assertIn("FLAG_ERYON_RIVER_SAMPLE_RECORDED", entry)
+        self.assertNotIn("setflag ", entry)
+
     def test_dragon_shrine_requires_local_eclipse_victory(self):
         source = (MAPS / "Eryon_Drakonia/scripts.inc").read_text(encoding="utf-8")
         self.assertIn(
