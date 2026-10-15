@@ -243,6 +243,29 @@ class EryonKalosEncounters(unittest.TestCase):
         self.assertLess(block.index("goto_if_eq VAR_RESULT, FALSE"),
                         block.index("setflag FLAG_ERYON_SOLAR_CANYON_SUPPLIES_CLAIMED"))
 
+    def test_solaris_ranger_battle_and_exp_integration(self):
+        area = json.loads((MAPS / "Eryon_DesertoDeSolaris/map.json").read_text())
+        npcs = [e for e in area["object_events"]
+                if e["script"] == "EryonSolaris_EventScript_CanyonRanger"]
+        self.assertEqual([(e["x"], e["y"]) for e in npcs], [(24, 17)])
+        terrain = (ROOT / "docs/eryon/deserto_de_solaris_terrain_plan.txt").read_text().splitlines()[4:48]
+        self.assertNotEqual(terrain[17][24], "#")
+        source = (MAPS / "Eryon_DesertoDeSolaris/scripts.inc").read_text()
+        battle = source.split("EryonSolaris_EventScript_CanyonRanger::", 1)[1].split(
+            "EryonSolaris_EventScript_CanyonRangerDecline::", 1)[0]
+        self.assertIn("trainerbattle_single TRAINER_ERYON_SOLAR_CANYON_RANGER", battle)
+        self.assertIn("FLAG_ERYON_SOLAR_CANYON_RANGER_DEFEATED", battle)
+        self.assertNotIn("setflag ", battle)
+        party = (ROOT / "src/data/trainers.party").read_text()
+        team = party.split("=== TRAINER_ERYON_SOLAR_CANYON_RANGER ===", 1)[1]
+        self.assertIn("Sandile", team)
+        self.assertIn("Helioptile", team)
+        battle_setup = (ROOT / "src/battle_setup.c").read_text()
+        self.assertIn("return FLAG_ERYON_SOLAR_CANYON_RANGER_DEFEATED;", battle_setup)
+        constants = (ROOT / "include/constants/opponents.h").read_text()
+        self.assertIn("#define TRAINER_ERYON_SOLAR_CANYON_RANGER 890", constants)
+        self.assertIn("#define TRAINERS_COUNT_EMERALD     891", constants)
+
     def test_dragon_shrine_requires_local_eclipse_victory(self):
         source = (MAPS / "Eryon_Drakonia/scripts.inc").read_text(encoding="utf-8")
         self.assertIn(
