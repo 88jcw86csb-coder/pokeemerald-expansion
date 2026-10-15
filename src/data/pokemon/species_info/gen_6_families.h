@@ -4449,7 +4449,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .levelUpLearnset = sHelioptileLevelUpLearnset,
         .teachableLearnset = sHelioptileTeachableLearnset,
         .eggMoveLearnset = sHelioptileEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_SUN_STONE, SPECIES_HELIOLISK}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_HELIOLISK}),
     },
 
     [SPECIES_HELIOLISK] =
