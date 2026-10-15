@@ -61,6 +61,7 @@ EryonEstrelas_EventScript_Astronomer::
 	lock
 	faceplayer
 	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonEstrelas_EventScript_AstronomerChampion
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonEstrelas_EventScript_AstronomerPeace
 	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonEstrelas_EventScript_AstronomerEvidence
 	goto_if_set FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED, EryonEstrelas_EventScript_AstronomerRelayOff
 	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonEstrelas_EventScript_AstronomerAfterChart
@@ -152,6 +153,7 @@ EryonEstrelas_Text_Bridge:
 EryonEstrelas_EventScript_ExpeditionArchivist::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonEstrelas_EventScript_ArchivistPeace
 	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonEstrelas_EventScript_ArchivistReported
 	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonEstrelas_EventScript_ArchivistAfter
 	msgbox EryonEstrelas_Text_ArchivistBefore, MSGBOX_DEFAULT
@@ -418,6 +420,7 @@ EryonEstrelas_EventScript_AstronomerEvidence::
 	end
 
 EryonEstrelas_EventScript_AstronomerChampion::
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonEstrelas_EventScript_AstronomerChampionPeace
 	msgbox EryonEstrelas_Text_AstronomerChampion, MSGBOX_DEFAULT
 	release
 	end
@@ -439,3 +442,43 @@ EryonEstrelas_Text_AstronomerChampion:
 	.string "voltou a esta gruta!\p"
 	.string "A historia de ERYON\n"
 	.string "segue alem da LIGA.$"
+
+@ The old cavern researchers confirm the restoration from Drakonia.
+@ This is a dialogue-only consequence of the existing finale flag.
+EryonEstrelas_EventScript_AstronomerPeace::
+	msgbox EryonEstrelas_Text_AstronomerPeace, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEstrelas_EventScript_AstronomerChampionPeace::
+	msgbox EryonEstrelas_Text_AstronomerChampionPeace, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEstrelas_EventScript_ArchivistPeace::
+	msgbox EryonEstrelas_Text_ArchivistPeace, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEstrelas_Text_AstronomerPeace:
+	.string "ASTRONOMA: As estrelas\n"
+	.string "voltaram a brilhar!\p"
+	.string "A rede ECLIPSE caiu\n"
+	.string "em DRAKONIA.\p"
+	.string "A gruta guarda apenas\n"
+	.string "seus ecos naturais.$"
+
+EryonEstrelas_Text_AstronomerChampionPeace:
+	.string "ASTRONOMA: CAMPEAO!\p"
+	.string "Voce venceu a LIGA\n"
+	.string "e protegeu as estrelas.\p"
+	.string "As runas desta gruta\n"
+	.string "contarao sua historia.$"
+
+EryonEstrelas_Text_ArchivistPeace:
+	.string "ARQUIVISTA: A LIGA\n"
+	.string "confirmou a paz!\p"
+	.string "Os registros ECLIPSE\n"
+	.string "agora sao historia.\p"
+	.string "Os cristais continuam\n"
+	.string "aqui para estudo.$"

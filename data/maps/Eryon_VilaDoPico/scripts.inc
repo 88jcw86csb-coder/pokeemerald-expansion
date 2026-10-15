@@ -48,6 +48,7 @@ EryonPico_EventScript_GeologistClue::
 
 EryonPico_EventScript_VillageNotice::
 	lock
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonPico_EventScript_NoticeAfterPeace
 	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonPico_EventScript_NoticeAfterReport
 	goto_if_set FLAG_ERYON_PICO_SIGNAL_REPAIRED, EryonPico_EventScript_NoticeAfterRelay
 	goto_if_set FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ, EryonPico_EventScript_NoticeAfterManifest
@@ -338,3 +339,18 @@ EryonPico_Text_NoticeAfterManifest:
 	.string "AVISO AOS VIAJANTES!\p"
 	.string "Cargas da ECLIPSE\n"
 	.string "seguem para DRAKONIA.$"
+
+@ The mountain village notice receives the League's final peace bulletin.
+@ Roads, Dragon Trail escort and seventh/eighth badges remain unaffected.
+EryonPico_EventScript_NoticeAfterPeace::
+	msgbox EryonPico_Text_NoticeAfterPeace, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPico_Text_NoticeAfterPeace:
+	.string "VILA DO PICO:\n"
+	.string "COMUNICADO DA LIGA!\p"
+	.string "A rede ECLIPSE foi\n"
+	.string "desligada em DRAKONIA.\p"
+	.string "As trilhas voltaram\n"
+	.string "a receber viajantes.$"

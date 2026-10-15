@@ -91,6 +91,7 @@ EryonLigaCaminho_EventScript_ScoutWitness::
 	lock
 	faceplayer
 	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonLigaCaminho_EventScript_ScoutWitnessChampion
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonLigaCaminho_EventScript_ScoutWitnessPeace
 	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonLigaCaminho_EventScript_ScoutWitnessReported
 	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonLigaCaminho_EventScript_ScoutWitnessAfter
 	msgbox EryonLigaCaminho_Text_ScoutWitnessBefore, MSGBOX_DEFAULT
@@ -397,6 +398,7 @@ EryonLigaCaminho_Text_StarMemorialChampion:
 @ On a return trip after the League, the original trail witness remembers the Champion.
 @ This is an optional epilogue, with no new flag or battle.
 EryonLigaCaminho_EventScript_ScoutWitnessChampion::
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonLigaCaminho_EventScript_ScoutWitnessChampionPeace
 	msgbox EryonLigaCaminho_Text_ScoutWitnessChampion, MSGBOX_DEFAULT
 	release
 	end
@@ -934,3 +936,30 @@ EryonLigaCaminho_Text_RockRefugeChampion:
 	.string "a antiga passagem.\p"
 	.string "A historia de ERYON\n"
 	.string "vive nestas pedras.$"
+
+@ The witness hears the final news as travelers approach the League building.
+@ This conversation never changes qualifier, battle or checkpoint state.
+EryonLigaCaminho_EventScript_ScoutWitnessPeace::
+	msgbox EryonLigaCaminho_Text_ScoutWitnessPeace, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_EventScript_ScoutWitnessChampionPeace::
+	msgbox EryonLigaCaminho_Text_ScoutWitnessChampionPeace, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaCaminho_Text_ScoutWitnessPeace:
+	.string "VIAJANTE: Soube que\n"
+	.string "DRAKONIA esta livre!\p"
+	.string "A ECLIPSE perdeu toda\n"
+	.string "a rede dos cristais.\p"
+	.string "A LIGA recebe novos\n"
+	.string "treinadores no leste.$"
+
+EryonLigaCaminho_Text_ScoutWitnessChampionPeace:
+	.string "VIAJANTE: Nosso CAMPEAO\n"
+	.string "voltou ao caminho!\p"
+	.string "A LIGA e os guardioes\n"
+	.string "lembram sua vitoria\n"
+	.string "sobre a ECLIPSE.$"

@@ -80,5 +80,36 @@ class EclipseFinaleContract(unittest.TestCase):
         self.assertNotIn("FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN", lobby)
 
 
+    def test_eclipse_peace_reaches_cave_road_and_mountain_village(self):
+        cave = (ROOT / "data/maps/Eryon_GrutaDasEstrelas/scripts.inc").read_text()
+        road = (ROOT / "data/maps/Eryon_CaminhoDaLiga/scripts.inc").read_text()
+        pico = (ROOT / "data/maps/Eryon_VilaDoPico/scripts.inc").read_text()
+        for script, branch in (
+            (cave, "EryonEstrelas_EventScript_AstronomerPeace"),
+            (cave, "EryonEstrelas_EventScript_ArchivistPeace"),
+            (road, "EryonLigaCaminho_EventScript_ScoutWitnessPeace"),
+            (pico, "EryonPico_EventScript_NoticeAfterPeace"),
+        ):
+            self.assertIn("goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, " + branch, script)
+            self.assertEqual(script.count(branch + "::"), 1)
+        for script, branch in (
+            (cave, "EryonEstrelas_EventScript_AstronomerChampionPeace"),
+            (road, "EryonLigaCaminho_EventScript_ScoutWitnessChampionPeace"),
+        ):
+            self.assertIn("goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, " + branch, script)
+            self.assertIn(branch + "::", script)
+        # Old prerequisites still decide the finale, and no earlier progress
+        # flag is changed by these new, informational epilogue branches.
+        for script, branch in (
+            (cave, "EryonEstrelas_EventScript_ArchivistPeace"),
+            (road, "EryonLigaCaminho_EventScript_ScoutWitnessPeace"),
+            (pico, "EryonPico_EventScript_NoticeAfterPeace"),
+        ):
+            content = script.split(branch + "::", 1)[1].split("\n\tend", 1)[0]
+            self.assertNotIn("setflag ", content)
+            self.assertNotIn("trainerbattle", content)
+            self.assertNotIn("warp ", content)
+
+
 if __name__ == "__main__":
     unittest.main()
