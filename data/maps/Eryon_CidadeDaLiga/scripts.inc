@@ -1019,6 +1019,56 @@ EryonCidadeLiga_Text_ResonanceDelegateChampionPeace:
 	.string "Os pesquisadores\n"
 	.string "jamais esquecerao.$"
 
+@ Optional final ceremony: BOTH the Championship and Eclipse shutdown are
+@ acknowledged, regardless of which storyline was finished first.
+@ This flag records only the homage, never gates the League.
+EryonCidadeLiga_EventScript_PeaceCeremony::
+	goto_if_set FLAG_ERYON_PEACE_CEREMONY_RECORDED, EryonCidadeLiga_EventScript_ResonanceBoardChampion
+	msgbox EryonCidadeLiga_Text_CeremonyOffer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonCidadeLiga_EventScript_CeremonyDecline
+	closemessage
+	msgbox EryonCidadeLiga_Text_CeremonyOpening, MSGBOX_DEFAULT
+	msgbox EryonCidadeLiga_Text_CeremonyWitnesses, MSGBOX_DEFAULT
+	msgbox EryonCidadeLiga_Text_CeremonyFinal, MSGBOX_DEFAULT
+	setflag FLAG_ERYON_PEACE_CEREMONY_RECORDED
+	release
+	end
+
+EryonCidadeLiga_EventScript_CeremonyDecline::
+	closemessage
+	release
+	end
+
+EryonCidadeLiga_Text_CeremonyOffer:
+	.string "HOMENAGEM DE ERYON:\p"
+	.string "A ECLIPSE foi detida\n"
+	.string "e a LIGA tem um CAMPEAO!\p"
+	.string "Iniciar a cerimonia\n"
+	.string "da paz agora?$"
+
+EryonCidadeLiga_Text_CeremonyOpening:
+	.string "A praca fica silenciosa.\p"
+	.string "A PROFA. ELYA relembra\n"
+	.string "a primeira viagem\n"
+	.string "com RIOLU na VILA AURORA.$"
+
+EryonCidadeLiga_Text_CeremonyWitnesses:
+	.string "Os oito lideres celebram\n"
+	.string "a coragem dos guardioes.\p"
+	.string "Os cristais retornam\n"
+	.string "a seu pulso natural.\p"
+	.string "As rotas e cidades\n"
+	.string "voltam a viver em paz.$"
+
+EryonCidadeLiga_Text_CeremonyFinal:
+	.string "AURELIO: Como CAMPEAO,\n"
+	.string "voce mostrou que forca\n"
+	.string "e proteger e aprender.\p"
+	.string "Sua historia com RIOLU\n"
+	.string "inspira toda ERYON!\p"
+	.string "O torneio e as trilhas\n"
+	.string "seguirao sempre abertos.$"
+
 @ New public resonance board beside the central League building.
 @ It follows evidence, network shutdown and Champion milestones, without
 @ granting items, forcing a battle or blocking any League doorway.
@@ -1036,7 +1086,7 @@ EryonCidadeLiga_EventScript_ResonanceBoardAlert::
 	end
 
 EryonCidadeLiga_EventScript_ResonanceBoardRestored::
-	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonCidadeLiga_EventScript_ResonanceBoardChampion
+	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonCidadeLiga_EventScript_PeaceCeremony
 	msgbox EryonCidadeLiga_Text_ResonanceBoardRestored, MSGBOX_DEFAULT
 	release
 	end

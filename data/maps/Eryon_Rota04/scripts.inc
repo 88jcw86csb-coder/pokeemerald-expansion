@@ -180,3 +180,77 @@ EryonRota04_Text_KeeperTraced:
 	.string "usou mesmo nossos pomares!\p"
 	.string "A vila precisa saber o que\n"
 	.string "voce achou no transmissor.$"
+
+
+@ Eastern orchard clearing reconnects to the main path.
+EryonRota04_EventScript_EasternGrove::
+	lock
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonRota04_EventScript_GrovePeace
+	goto_if_set FLAG_ERYON_ORCHARD_RELAY_TRACED, EryonRota04_EventScript_GroveTraced
+	msgbox EryonRota04_Text_GroveBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonRota04_EventScript_GroveTraced::
+	msgbox EryonRota04_Text_GroveTraced, MSGBOX_DEFAULT
+	release
+	end
+
+EryonRota04_EventScript_GrovePeace::
+	msgbox EryonRota04_Text_GrovePeace, MSGBOX_DEFAULT
+	release
+	end
+
+@ Only take the reward flag after giveitem succeeds. Allow full bag retry.
+EryonRota04_EventScript_CaravanCache::
+	lock
+	goto_if_set FLAG_ERYON_ORCHARD_CARAVAN_CACHE_TAKEN, EryonRota04_EventScript_CaravanCacheEmpty
+	msgbox EryonRota04_Text_CaravanCache, MSGBOX_DEFAULT
+	giveitem ITEM_FULL_HEAL
+	goto_if_eq VAR_RESULT, FALSE, EryonRota04_EventScript_CaravanCacheFull
+	setflag FLAG_ERYON_ORCHARD_CARAVAN_CACHE_TAKEN
+	release
+	end
+
+EryonRota04_EventScript_CaravanCacheFull::
+	msgbox EryonRota04_Text_CaravanCacheFull, MSGBOX_DEFAULT
+	release
+	end
+
+EryonRota04_EventScript_CaravanCacheEmpty::
+	msgbox EryonRota04_Text_CaravanCacheEmpty, MSGBOX_DEFAULT
+	release
+	end
+
+EryonRota04_Text_GroveBefore:
+	.string "BOSQUE DOS POMARES:\p"
+	.string "As folhas estao marcadas\n"
+	.string "por um brilho estranho.\p"
+	.string "O ar parece vibrar\n"
+	.string "perto das raizes.$"
+
+EryonRota04_Text_GroveTraced:
+	.string "O sinal segue os rastros\n"
+	.string "das carrocas da ECLIPSE.\p"
+	.string "O pomar foi usado para\n"
+	.string "ocultar cargas de cristal.$"
+
+EryonRota04_Text_GrovePeace:
+	.string "As folhas voltaram\n"
+	.string "a sua cor natural!\p"
+	.string "A ECLIPSE nao controla\n"
+	.string "mais o solo da rota.$"
+
+EryonRota04_Text_CaravanCache:
+	.string "ACAMPAMENTO ABANDONADO:\p"
+	.string "Ha um FULL HEAL\n"
+	.string "esquecido no abrigo.$"
+
+EryonRota04_Text_CaravanCacheFull:
+	.string "A BOLSA esta cheia!\p"
+	.string "O FULL HEAL continua\n"
+	.string "guardado no acampamento.$"
+
+EryonRota04_Text_CaravanCacheEmpty:
+	.string "O antigo abrigo esta\n"
+	.string "vazio e silencioso.$"
