@@ -80,6 +80,8 @@ EryonEcos_Text_StoneClue:
 EryonEcos_EventScript_ForestRanger::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_FOREST_PHANTUMP_RESOLVED, EryonEcos_EventScript_RangerGroveSafe
+	goto_if_set FLAG_ERYON_FOREST_SIGNAL_LOG_READ, EryonEcos_EventScript_RangerLogFound
 	msgbox EryonEcos_Text_ForestRanger, MSGBOX_DEFAULT
 	release
 	end
@@ -219,3 +221,185 @@ EryonEcos_Text_RelayRecordExposed:
 	.string "Rede SOLARIS-IGNIVAR.\p"
 	.string "Proximo ponto: VALE\n"
 	.string "DOS ECOS. Sinal ativo.$"
+
+@ North-canopy grove: the original east/west route never requires this detour.
+EryonEcos_EventScript_CanopyLog::
+	lock
+	goto_if_set FLAG_ERYON_FOREST_SIGNAL_LOG_READ, EryonEcos_EventScript_LogRepeat
+	goto_if_set FLAG_ERYON_RIVER_SAMPLE_RECORDED, EryonEcos_EventScript_LogRiver
+	msgbox EryonEcos_Text_LogFirst, MSGBOX_DEFAULT
+	setflag FLAG_ERYON_FOREST_SIGNAL_LOG_READ
+	release
+	end
+
+EryonEcos_EventScript_LogRiver::
+	msgbox EryonEcos_Text_LogRiver, MSGBOX_DEFAULT
+	setflag FLAG_ERYON_FOREST_SIGNAL_LOG_READ
+	release
+	end
+
+EryonEcos_EventScript_LogRepeat::
+	msgbox EryonEcos_Text_LogRepeat, MSGBOX_DEFAULT
+	release
+	end
+
+@ Victory or capture persists; flee, teleport and decline permit retries.
+@ Uses the regular wild battle and EXP routines.
+EryonEcos_EventScript_PhantumpNest::
+	lock
+	goto_if_set FLAG_ERYON_FOREST_PHANTUMP_RESOLVED, EryonEcos_EventScript_PhantumpQuiet
+	goto_if_unset FLAG_ERYON_FOREST_SIGNAL_LOG_READ, EryonEcos_EventScript_PhantumpHidden
+	msgbox EryonEcos_Text_PhantumpOffer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonEcos_EventScript_PhantumpLeave
+	closemessage
+	setwildbattle SPECIES_PHANTUMP, 40
+	waitse
+	playmoncry SPECIES_PHANTUMP, CRY_MODE_ENCOUNTER
+	delay 30
+	waitmoncry
+	dowildbattle
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, EryonEcos_EventScript_PhantumpResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, EryonEcos_EventScript_PhantumpResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, EryonEcos_EventScript_PhantumpEscaped
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, EryonEcos_EventScript_PhantumpEscaped
+	release
+	end
+
+EryonEcos_EventScript_PhantumpResolved::
+	setflag FLAG_ERYON_FOREST_PHANTUMP_RESOLVED
+	msgbox EryonEcos_Text_PhantumpResolved, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEcos_EventScript_PhantumpEscaped::
+	msgbox EryonEcos_Text_PhantumpEscaped, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEcos_EventScript_PhantumpHidden::
+	msgbox EryonEcos_Text_PhantumpHidden, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEcos_EventScript_PhantumpQuiet::
+	msgbox EryonEcos_Text_PhantumpQuiet, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEcos_EventScript_PhantumpLeave::
+	closemessage
+	release
+	end
+
+@ The one-time Dusk Ball is not consumed if the Bag is full.
+EryonEcos_EventScript_GroveCache::
+	lock
+	goto_if_set FLAG_ERYON_FOREST_GROVE_CACHE_TAKEN, EryonEcos_EventScript_GroveCacheEmpty
+	goto_if_unset FLAG_ERYON_FOREST_PHANTUMP_RESOLVED, EryonEcos_EventScript_GroveCacheSealed
+	msgbox EryonEcos_Text_GroveCacheOffer, MSGBOX_DEFAULT
+	giveitem ITEM_DUSK_BALL
+	goto_if_eq VAR_RESULT, FALSE, EryonEcos_EventScript_GroveCacheFull
+	setflag FLAG_ERYON_FOREST_GROVE_CACHE_TAKEN
+	release
+	end
+
+EryonEcos_EventScript_GroveCacheSealed::
+	msgbox EryonEcos_Text_GroveCacheSealed, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEcos_EventScript_GroveCacheFull::
+	msgbox EryonEcos_Text_GroveCacheFull, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEcos_EventScript_GroveCacheEmpty::
+	msgbox EryonEcos_Text_GroveCacheEmpty, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEcos_EventScript_RangerLogFound::
+	msgbox EryonEcos_Text_RangerLogFound, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEcos_EventScript_RangerGroveSafe::
+	msgbox EryonEcos_Text_RangerGroveSafe, MSGBOX_DEFAULT
+	release
+	end
+
+EryonEcos_Text_LogFirst:
+	.string "CADERNO DA COPA:\p"
+	.string "A ECLIPSE alterou\n"
+	.string "o eco das arvores.\p"
+	.string "Ha um sinal estranho\n"
+	.string "escondido na mata.$"
+
+EryonEcos_Text_LogRiver:
+	.string "CADERNO DA COPA:\p"
+	.string "A amostra do rio\n"
+	.string "confirma esta energia!\p"
+	.string "SOLARIS enviou pulsos\n"
+	.string "para IGNIVAR.$"
+
+EryonEcos_Text_LogRepeat:
+	.string "O caderno aponta\n"
+	.string "para uma clareira.\p"
+	.string "Um Pokemon precisa\n"
+	.string "de ajuda por perto.$"
+
+EryonEcos_Text_PhantumpHidden:
+	.string "As folhas se movem.\p"
+	.string "Leia o caderno da\n"
+	.string "copa primeiro.$"
+
+EryonEcos_Text_PhantumpOffer:
+	.string "Um PHANTUMP assustado\n"
+	.string "surge das raizes!\p"
+	.string "Investigar de perto?$"
+
+EryonEcos_Text_PhantumpResolved:
+	.string "PHANTUMP se acalmou!\p"
+	.string "Os ecos naturais\n"
+	.string "voltaram a floresta.$"
+
+EryonEcos_Text_PhantumpEscaped:
+	.string "PHANTUMP voltou para\n"
+	.string "dentro das arvores.\p"
+	.string "Pode retornar depois.$"
+
+EryonEcos_Text_PhantumpQuiet:
+	.string "A clareira esta\n"
+	.string "silenciosa agora.$"
+
+EryonEcos_Text_GroveCacheSealed:
+	.string "Uma bolsa esquecida\n"
+	.string "esta nas folhas.\p"
+	.string "PHANTUMP vigia aqui.$"
+
+EryonEcos_Text_GroveCacheOffer:
+	.string "BOLSA DA FLORESTA:\p"
+	.string "Uma DUSK BALL ficou\n"
+	.string "guardada nas folhas.$"
+
+EryonEcos_Text_GroveCacheFull:
+	.string "Sua BOLSA esta cheia!\p"
+	.string "O item ficara aqui\n"
+	.string "ate voce voltar.$"
+
+EryonEcos_Text_GroveCacheEmpty:
+	.string "A bolsa antiga\n"
+	.string "esta vazia.$"
+
+EryonEcos_Text_RangerLogFound:
+	.string "GUARDA: Voce leu o\n"
+	.string "CADERNO DA COPA!\p"
+	.string "Procure o PHANTUMP\n"
+	.string "na clareira ao norte.$"
+
+EryonEcos_Text_RangerGroveSafe:
+	.string "GUARDA: A clareira\n"
+	.string "voltou a ter paz!\p"
+	.string "PHANTUMP evolui\n"
+	.string "no nivel 36.$"
