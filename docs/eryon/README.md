@@ -101,6 +101,12 @@ A ROM de GBA segue em desenvolvimento na branch `eryon-development`. **Ter arqui
 - Novo teste de contrato `tools/test_eryon_build_contract.py` impede que o roteiro volte a omitir módulos e assegura que a checagem da ROM continua após os testes.
 - **Validação ainda não equivale a GBA/Delta:** uma falha da suíte completa deverá ser corrigida nos arquivos reais; um status de sucesso antigo não vale para o HEAD atual.
 
+## Consolidação de referências dos scripts (15/10/2026)
+
+- Auditoria de **42 mapas registrados** confirmou, em inspeção remota dos arquivos, que as batalhas roteirizadas apontam para IDs e equipes cadastradas, as flags Eclipse/Liga são definidas e as espécies selvagens roteirizadas existem no enum do motor.
+- Criado `tools/test_eryon_script_linkage.py`, descoberto automaticamente pelas suítes de testes do build e do CI, para sinalizar futuras referências ausentes, evolução de IDs duplicados, espécie inexistente ou nível selvagem fora do intervalo válido.
+- Estas verificações são **estáticas**. A etapa bloqueadora continua sendo uma compilação do HEAD recente pelo GitHub Actions, seguida do teste integral em Delta.
+
 ## Pendências prioritárias
 1. Compilação limpa e verificação da ROM GBA via `tools/build_eryon.sh` e GitHub Actions.
 2. Auditoria das tabelas `land_mons`, evolução, disponibilidade e distribuição de capturas por rota.
