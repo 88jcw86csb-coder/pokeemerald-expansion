@@ -143,5 +143,40 @@ class EclipseFinaleContract(unittest.TestCase):
         self.assertIn("givemon SPECIES_RIOLU, 5", home)
         self.assertIn("setflag FLAG_BADGE01_GET", verd)
 
+
+    def test_gym_leaders_acknowledge_final_eclipse_shutdown_without_new_gates(self):
+        cities = ("Verdelume", "Neonara", "Frostheim", "Arkhara",
+                  "Umbra", "Ignivar", "Lunaris", "Drakonia")
+        for city in cities:
+            with self.subTest(city=city):
+                source = (ROOT / "data/maps" / ("Eryon_" + city)
+                          / "scripts.inc").read_text(encoding="utf-8")
+                if city == "Verdelume":
+                    after = "EryonVerdelume_EventScript_KaelAfterBattle"
+                    peace = "EryonVerdelume_EventScript_KaelAfterPeace"
+                else:
+                    after = "Eryon" + city + "_EventScript_GymAfter"
+                    peace = "Eryon" + city + "_EventScript_GymAfterEclipse"
+                after_script = source.split(after + "::", 1)[1].split(
+                    "\n\tend", 1)[0]
+                self.assertIn(
+                    "goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, " + peace,
+                    after_script,
+                )
+                self.assertEqual(source.count(peace + "::"), 1)
+                dialogue = source.split(peace + "::", 1)[1].split(
+                    "\n\tend", 1)[0]
+                self.assertIn("msgbox ", dialogue)
+                self.assertNotIn("setflag ", dialogue)
+                self.assertNotIn("trainerbattle", dialogue)
+                self.assertNotIn("\n\twarp ", dialogue)
+                self.assertIn("trainerbattle_single TRAINER_ERYON_", source)
+        for city, badge in (("Neonara", 2), ("Frostheim", 3),
+                            ("Arkhara", 4), ("Umbra", 5), ("Ignivar", 6),
+                            ("Lunaris", 7), ("Drakonia", 8)):
+            source = (ROOT / "data/maps" / ("Eryon_" + city)
+                      / "scripts.inc").read_text(encoding="utf-8")
+            self.assertIn(f"setflag FLAG_BADGE{badge:02d}_GET", source)
+
 if __name__ == "__main__":
     unittest.main()

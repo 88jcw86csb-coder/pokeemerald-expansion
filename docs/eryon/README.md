@@ -135,6 +135,13 @@ A ROM de GBA segue em desenvolvimento na branch `eryon-development`. **Ter arqui
 - A pedra ancestral indica visualmente o fim do sinal, o aviso da vila passa a divulgar o encerramento da crise, Kael reconhece a recuperação da floresta, e Elya encerra o arco do Riolu inicial.
 - Teste estático acrescentado em `tests/test_eryon_eclipse_finale.py` para garantir as quatro reações, a prioridade do kit e a preservação da primeira insígnia. O jogo ainda requer compilação e verificação de diálogos no Delta.
 
+## Resposta dos oito líderes ao desfecho Eclipse (15/10/2026)
+
+- Conectado o encerramento opcional da rede de cristais em Drakonia aos diálogos pós-insígnia dos oito líderes: Kael já reconhece a recuperação de Lumina; Volt comenta a eletricidade de Neonara; Bjorn, o gelo de Frostheim; Tessa, as ruínas de Arkhara; Nyx, o encerramento das cargas de Umbra; Kaio, a usina de Ignivar; Lyra, a observação astronômica de Lunaris; e Ryu, a segurança do santuário de Drakonia.
+- Reutilizada exclusivamente `FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN`, sem criar flags, treinadores, insígnias, recompensas ou viagens obrigatórias. Nenhuma equipe de Pokémon, nível ou script original de batalha foi substituído.
+- As falas originais dos líderes e os desdobramentos intermediários de Tessa continuam acessíveis enquanto o desfecho da Eclipse não ocorreu. Novo teste integrado à descoberta automática `test_eryon_eclipse_finale.py` valida os oito ramos, flags e ausência de novos efeitos.
+- **Arte e execução:** as ilustrações conceituais dos líderes apresentadas no chat não são sprites incorporados à ROM. Seus retratos de batalha atuais ainda são provisórios; a compilação do HEAD e o playtest no Delta são pendências separadas.
+
 ## Pendências prioritárias
 1. Compilação limpa e verificação da ROM GBA via `tools/build_eryon.sh` e GitHub Actions.
 2. Auditoria das tabelas `land_mons`, evolução, disponibilidade e distribuição de capturas por rota.
