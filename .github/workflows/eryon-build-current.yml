@@ -1,6 +1,7 @@
 # Run this from the GitHub Actions tab on the default branch (master).
 # The GBA ROM is ALWAYS built from eryon-development, not from master.
 name: Pokemon Eryon - Compilar ROM Atual
+run-name: Eryon GBA atualizado - branch de desenvolvimento
 
 on:
   workflow_dispatch:
