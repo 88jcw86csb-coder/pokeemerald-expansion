@@ -77,6 +77,15 @@ A ROM de GBA segue em desenvolvimento na branch `eryon-development`. **Ter arqui
 - O geólogo da Vila do Pico e o pesquisador de Drakonia respondem à descoberta. Quando Carbink e Noibat já foram encontrados, os diálogos mencionam ambos, evitando ocultar a missão antiga; o oitavo ginásio e o encerramento da rede Eclipse não foram alterados.
 - Teste `tests/test_eryon_dragon_aurora.py` integrado ao script de build verifica caminho, binário, flags, recompensas, interações e ligações às cidades. **Verificação estrutural não equivale a compilar nem jogar no Delta.**
 
+## Consolidação de colisões em cidades (15/10/2026)
+
+- **Falha detectada:** os binários versionados de Neonara, Frostheim, Umbra e Ignivar continham zero blocos com colisão ativa, divergindo das plantas já existentes que possuem mais de duas mil paredes cada. O processo `tools/build_eryon.sh` regenerava esses mapas antes de compilar, mas `make` direto ou arquivos baixados sem regeneração poderiam manter a geometria incorreta.
+- **Correção:** regenerados apenas os quatro `data/layouts/Eryon_*/map.bin` a partir dos planos `docs/eryon/cidades/*_city_plan.txt`, com a paleta do gerador oficial (`#=0x3C01`, pisos `0x3001`, vegetação `0x3002`, pedra `0x3003`). Entradas, NPCs e placas foram avaliados por busca de caminhos sem remover recursos. Arkhara e Drakonia já eram consistentes; também foram incluídas nos testes.
+- O novo `tools/test_eryon_city_collision.py` verifica binários, colisões, alcance dos NPCs e saídas, posições de eventos e acesso às praças de ginásio. Foi integrado ao script de build e ao job de validação separado do CI.
+- **Não modificar Lunaris automaticamente:** o binário dessa cidade usa metatiles diferentes do padrão compartilhado; requer inspeção visual no Porymap antes de qualquer repintura.
+- **Para compilar o HEAD atual:** GitHub → Actions → `CI` → `Run workflow` → branch `eryon-development`. Baixar o artefato `eryon-gba` apenas se a execução da branch passar, conferindo `build/eryon-rom.sha256` e os logs. Commits gravados pelo conector não produziram nova execução automática até esta auditoria.
+- **Aprovação final ainda exige** jogar a ROM compilada no Delta: captura, EXP, oito insígnias, história Eclipse, oito batalhas classificatórias, Elite Four, Campeão, whiteout, menus e save/load. Teste Python não equivale à jogabilidade.
+
 ## Pendências prioritárias
 1. Compilação limpa e verificação da ROM GBA via `tools/build_eryon.sh` e GitHub Actions.
 2. Auditoria das tabelas `land_mons`, evolução, disponibilidade e distribuição de capturas por rota.

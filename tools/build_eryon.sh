@@ -16,6 +16,9 @@ python3 -m py_compile tools/eryon_layout_audit.py tools/eryon_validate.py tools/
 echo "== Eryon: regenerate registered map binaries from authoritative terrain plans =="
 python3 tools/build_eryon_map_bins.py --wall 0x3c01 --path 0x3001 --meadow 0x3002 --stone 0x3003 --preview-unregistered
 
+echo "== Eryon: registered city collision and walkable NPC access =="
+python3 -m unittest discover -s tools -p 'test_eryon_city_collision.py' -v
+
 echo "== Eryon: check Kalos wildlife encounters and new oasis passages =="
 python3 -m unittest discover -s tests -p 'test_eryon_kalos_encounters.py' -v
 
