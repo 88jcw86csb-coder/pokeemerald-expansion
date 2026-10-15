@@ -35,9 +35,16 @@ class EryonBuildContract(unittest.TestCase):
         for command in (
             "python3 tools/eryon_validate.py",
             "python3 tools/eryon_layout_audit.py",
+            "python3 tools/eryon_script_warp_audit.py",
             "python3 tools/eryon_world_audit.py",
         ):
             self.assertLess(script.index(command), compile_at)
+
+    def test_ci_also_runs_scripted_arrival_audit(self):
+        workflow = CI.read_text(encoding="utf-8")
+        validation = workflow.split("  eryon-validation:", 1)[1].split(
+            "  build-firered:", 1)[0]
+        self.assertIn("python3 tools/eryon_script_warp_audit.py", validation)
 
     def test_build_never_accepts_a_stale_rom_and_checks_new_binary(self):
         source = BUILD.read_text(encoding="utf-8")
