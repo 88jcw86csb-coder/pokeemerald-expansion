@@ -142,3 +142,41 @@ EryonRota04_Text_ScoutTraced:
 	.string "o pomar ao sinal da serra!\p"
 	.string "Em NEONARA, as luzes\n"
 	.string "podem dar outra pista.$"
+
+
+@ Visible guide to the otherwise subtle ledger inspection tile in the grove.
+EryonRota04_EventScript_OrchardKeeper::
+	lock
+	faceplayer
+	goto_if_set FLAG_ERYON_ORCHARD_RELAY_TRACED, EryonRota04_EventScript_KeeperTraced
+	goto_if_set FLAG_ERYON_ORCHARD_LEDGER_READ, EryonRota04_EventScript_KeeperLedger
+	msgbox EryonRota04_Text_KeeperBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonRota04_EventScript_KeeperLedger::
+	msgbox EryonRota04_Text_KeeperLedger, MSGBOX_DEFAULT
+	release
+	end
+
+EryonRota04_EventScript_KeeperTraced::
+	msgbox EryonRota04_Text_KeeperTraced, MSGBOX_DEFAULT
+	release
+	end
+
+EryonRota04_Text_KeeperBefore:
+	.string "CUIDADORA: Vi um livro\n"
+	.string "caido perto das raizes.\p"
+	.string "Procure a noroeste daqui,\n"
+	.string "entre as arvores do pomar.$"
+
+EryonRota04_Text_KeeperLedger:
+	.string "CUIDADORA: Encontrou o livro?\p"
+	.string "O vigia viu carrocas perto\n"
+	.string "das pedras ao sul da rota.$"
+
+EryonRota04_Text_KeeperTraced:
+	.string "CUIDADORA: Entao a ECLIPSE\n"
+	.string "usou mesmo nossos pomares!\p"
+	.string "A vila precisa saber o que\n"
+	.string "voce achou no transmissor.$"

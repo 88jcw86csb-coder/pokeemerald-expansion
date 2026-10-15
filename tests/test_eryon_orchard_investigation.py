@@ -33,6 +33,7 @@ class Route04InvestigationTests(unittest.TestCase):
                     self.assertIn((e["x"],e["y"]), reachable)
         self.assertEqual({(e["x"],e["y"]) for e in self.m["bg_events"]}, {(10,9),(35,32)})
         self.assertEqual(len(self.m["warp_events"]), 2)
+        self.assertIn((11,10),{(e["x"],e["y"]) for e in self.m["object_events"]})
         self.assertEqual((self.m["object_events"][0]["x"],self.m["object_events"][0]["y"]),(24,21))
 
     def test_event_script_definitions_and_no_duplicate_positions(self):
