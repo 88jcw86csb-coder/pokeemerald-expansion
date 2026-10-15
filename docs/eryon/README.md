@@ -120,6 +120,14 @@ A ROM de GBA segue em desenvolvimento na branch `eryon-development`. **Ter arqui
 - Acrescentado `tests/test_eryon_world_map_network.py`: valida índices e pares de retorno dos warps, conexões de borda recíprocas, dimensões dos mapas e posições de warps roteirizados e conectividade global desde a Vila Aurora até a Liga. Descoberta automática já presente no `tools/build_eryon.sh` e CI.
 - O novo teste detecta mapas ou ligações desconectadas antes da compilação, mas **não substitui o teste das colisões, renderização e transferências no Delta**.
 
+## Checkpoints de Eryon — derrota, retorno e Liga (15/10/2026)
+
+- **Falha funcional provável identificada:** NPCs de Eryon usavam `special HealPlayerParty`, mas nenhum mapa de Eryon era registrado em `src/data/heal_locations.json` nem usava `setrespawn`. Assim, a derrota podia usar o último ponto de cura de Hoenn/Kanto, isolando o jogador da região original.
+- **Correção em 16 locais existentes:** a Vila Aurora, os oito centros urbanos de ginásio, a Cidade da Liga, a recepção e cinco vilas de passagem agora registram `HEAL_LOCATION_ERYON_*` na tabela nativa gerada e usam `MAP_SCRIPT_ON_TRANSITION` + `setrespawn`. Os locais não precisam de NPC de cura novo e não disparam uma cena de enfermaria de Hoenn (`LOCALID_NONE`).
+- O ponto da recepção é `(12,12)`, dentro do prédio, para manter a regra de perda de dinheiro e retorno às **oito classificatórias desde a fase 1**. A credencial de classificado e o título de Campeão continuam sujeitos às flags anteriores, sem alterações.
+- Verificações sobre os binários de todos os 16 mapas confirmaram chão com colisão zero, ausência de eventos sobrepostos e acesso desde a entrada (ou spawn de Riolu). Novo teste `tests/test_eryon_whiteout_checkpoints.py` protege IDs, tabela gerada, scripts e coordenadas.
+- **Ainda não é um teste no Delta**: deve ser validado perdendo uma batalha nas primeiras rotas, depois de visitar cada cidade e dentro da Liga, além de executar `bash tools/build_eryon.sh` com o compilador ARM.
+
 ## Pendências prioritárias
 1. Compilação limpa e verificação da ROM GBA via `tools/build_eryon.sh` e GitHub Actions.
 2. Auditoria das tabelas `land_mons`, evolução, disponibilidade e distribuição de capturas por rota.
