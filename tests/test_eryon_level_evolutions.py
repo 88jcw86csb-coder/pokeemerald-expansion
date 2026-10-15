@@ -26,6 +26,27 @@ class EryonEvolutionRules(unittest.TestCase):
         self.assertIn("{EVO_LEVEL, 36, SPECIES_HELIOLISK}", helioptile)
         self.assertNotIn("EVO_ITEM", helioptile)
 
+
+    def test_kalos_species_evolve_by_level_without_items(self):
+        source = (SPECIES_DIR / "gen_6_families.h").read_text(encoding="utf-8")
+        self.assertNotIn("{EVO_ITEM,", source)
+        self.assertIn(".evolutions = EVOLUTION({EVO_LEVEL, 38, SPECIES_FLORGES_ ##FORM})", source)
+        expectations = {
+            "DOUBLADE": (42, "AEGISLASH_SHIELD"),
+            "PHANTUMP": (36, "TREVENANT"),
+            "SPRITZEE": (36, "AROMATISSE"),
+            "SWIRLIX": (36, "SLURPUFF"),
+            "PUMPKABOO_AVERAGE": (36, "GOURGEIST_AVERAGE"),
+            "PUMPKABOO_SMALL": (36, "GOURGEIST_SMALL"),
+            "PUMPKABOO_LARGE": (36, "GOURGEIST_LARGE"),
+            "PUMPKABOO_SUPER": (36, "GOURGEIST_SUPER"),
+        }
+        for base, (level, target) in expectations.items():
+            with self.subTest(base=base):
+                body = source.split(f"[SPECIES_{base}] =", 1)[1].split("[SPECIES_", 1)[0]
+                self.assertIn(f".evolutions = EVOLUTION({{EVO_LEVEL, {level}, SPECIES_{target}}})", body)
+                self.assertEqual(body.count(".evolutions = EVOLUTION("), 1)
+
     def test_no_trade_or_friendship_evolutions_up_to_kalos(self):
         for generation in range(1, 7):
             with self.subTest(generation=generation):

@@ -45,7 +45,8 @@ A ROM de GBA segue em desenvolvimento na branch `eryon-development`. **Ter arqui
 - Phantump, Pokémon oficial de Kalos, aparece no nível 40 após a leitura. Captura ou vitória registra a resolução (`0x4AD`); fuga, recusa e teleporte permitem tentar novamente. A batalha utiliza o fluxo padrão do motor de EXP, que ainda necessita de playtest.
 - Após resolver o encontro, uma Dusk Ball é entregue uma única vez (`0x4AE`), sem consumo em caso de Bolsa cheia.
 - O guarda existente, a engenheira da cidade de Ignivar e uma testemunha da Aldeia dos Ecos comentam a restauração da clareira. Sem alteração do sexto ginásio, da Liga e da estrutura de treinadores.
-- Corrigida alternativa redundante por Linking Cord: Phantump evolui para Trevenant somente pelo nível 36. Teste de regressão da floresta adicionado a `tools/build_eryon.sh`.
+- Todas as evoluções por itens da geração Kalos foram convertidas para nível: Phantump, Spritzee, Swirlix e as quatro formas de Pumpkaboo evoluem no nível 36; Doublade no nível 42; todas as formas normais de Floette para Florges no nível 38. As formas originais são preservadas e testes de regressão foram acrescentados ao conjunto já executado por `tools/build_eryon.sh`.
+- As gerações 1, 2, 3 e 5 ainda contêm regras de item/pedra que precisam de migração individual, sobretudo famílias de evoluções ramificadas como Eevee e Clamperl; não converter automaticamente sem controlar destinos duplicados.
 - Os testes estáticos não certificam funcionamento gráfico nem gameplay real no Delta.
 
 ## Pendências prioritárias
