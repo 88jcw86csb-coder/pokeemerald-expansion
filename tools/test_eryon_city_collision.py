@@ -79,7 +79,7 @@ class EryonCityCollisionTests(unittest.TestCase):
                         (city, "unreachable NPC", npc["script"]),
                     )
 
-    def test_all_event_locations_unique_and_gym_landmark_reachable(self):
+    def test_all_event_locations_unique_and_gym_landmark_interactable(self):
         for city in CITIES:
             with self.subTest(city=city):
                 rows, _, info = load_city(city)
@@ -87,8 +87,22 @@ class EryonCityCollisionTests(unittest.TestCase):
                           info["warp_events"])
                 points = [(event["x"], event["y"]) for event in events]
                 self.assertEqual(len(points), len(set(points)), city)
-                self.assertIn((32, 11), traversable_from_west(rows, info),
-                              (city, "gym district unreachable"))
+                reached = traversable_from_west(rows, info)
+                gym = (32, 11)
+                # Arkhara and Drakonia put the gym steward/guide ON the
+                # landmark: the player must talk from an adjacent tile,
+                # never stand on top of the stationary NPC.
+                occupied = any((npc["x"], npc["y"]) == gym
+                               for npc in info["object_events"])
+                if occupied:
+                    self.assertTrue(
+                        any((gym[0]+dx, gym[1]+dy) in reached
+                            for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))),
+                        (city, "gym steward cannot be reached"),
+                    )
+                else:
+                    self.assertIn(gym, reached,
+                                  (city, "gym district unreachable"))
 
 
 if __name__ == "__main__":
