@@ -81,6 +81,12 @@ def route():
         t[y][20] = ":"
     for x in range(20, 26):
         t[31][x] = ":"
+    # Distinct side-pocket on the western ravine, carved into the rock rather
+    # than copying a standard Hoenn straight route or overwriting any warp.
+    for y in range(27, 30):
+        for x in range(16, 20):
+            t[y][x] = "."
+    t[28][20] = ":"
     # The east gate now links to the City of the League.
     for y in range(h):
         t[y][w - 1]="#"
