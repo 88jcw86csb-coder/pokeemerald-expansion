@@ -200,7 +200,7 @@ class LeagueMapTests(unittest.TestCase):
         engine = (ROOT / "src/battle_setup.c").read_text()
         party = (ROOT / "src/data/trainers.party").read_text()
         self.assertIn("#define TRAINER_ERYON_RIDGE_BIRDWATCHER 889", opponents)
-        self.assertIn("#define TRAINERS_COUNT_EMERALD     890", opponents)
+        self.assertIn("#define TRAINERS_COUNT_EMERALD     892", opponents)
         self.assertIn("#define FLAG_ERYON_RIDGE_BIRDWATCHER_DEFEATED", flags)
         self.assertIn("return FLAG_ERYON_RIDGE_BIRDWATCHER_DEFEATED;", engine)
         self.assertIn("=== TRAINER_ERYON_RIDGE_BIRDWATCHER ===", party)
