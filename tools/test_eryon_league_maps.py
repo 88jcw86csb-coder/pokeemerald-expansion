@@ -341,6 +341,29 @@ class LeagueMapTests(unittest.TestCase):
         self.assertIn("FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED", entry)
         self.assertNotIn("setflag ", entry)
 
+    def test_southwest_amphitheatre_route_and_narrative(self):
+        import json
+        terrain = league()
+        reached = connected(terrain, (0, 36))
+        for point in ((35, 43), (32, 45), (28, 47), (26, 48), (22, 53), (48, 36)):
+            self.assertIn(point, reached)
+        self.assertEqual(terrain[48][26], ".")
+        self.assertEqual(
+            (ROOT / "docs/eryon/liga_eryon_terrain_plan.txt").read_text(),
+            render("liga_eryon", terrain),
+        )
+        data = json.loads((ROOT / "data/maps/Eryon_CidadeDaLiga/map.json").read_text())
+        places = [e for e in data["bg_events"] if
+                  e["script"] == "EryonCidadeLiga_EventScript_Amphitheatre"]
+        self.assertEqual([(e["x"], e["y"]) for e in places], [(26, 48)])
+        script = (ROOT / "data/maps/Eryon_CidadeDaLiga/scripts.inc").read_text()
+        entry = script.split("EryonCidadeLiga_EventScript_Amphitheatre::", 1)[1].split(
+            "EryonCidadeLiga_EventScript_AmphitheatreEvidence::", 1)[0]
+        for flag in ("FLAG_ERYON_CHAMPION_CROWNED", "FLAG_ERYON_QUALIFIED",
+                     "FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED"):
+            self.assertIn(flag, entry)
+        self.assertNotIn("setflag ", entry)
+
     def test_eight_stars_terrace_connected_city(self):
         """Check the new skyline park, unchanged League building, and exact terrain."""
         import json,struct
