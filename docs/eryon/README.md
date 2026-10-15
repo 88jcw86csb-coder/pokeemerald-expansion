@@ -86,6 +86,13 @@ A ROM de GBA segue em desenvolvimento na branch `eryon-development`. **Ter arqui
 - **Para compilar o HEAD atual:** GitHub → Actions → `CI` → `Run workflow` → branch `eryon-development`. Baixar o artefato `eryon-gba` apenas se a execução da branch passar, conferindo `build/eryon-rom.sha256` e os logs. Commits gravados pelo conector não produziram nova execução automática até esta auditoria.
 - **Aprovação final ainda exige** jogar a ROM compilada no Delta: captura, EXP, oito insígnias, história Eclipse, oito batalhas classificatórias, Elite Four, Campeão, whiteout, menus e save/load. Teste Python não equivale à jogabilidade.
 
+## Consolidação do gerador da Trilha Lunar (15/10/2026)
+
+- Corrigido o erro de classificação: `Eryon_TrilhaLunar` já tem layout oficial `LAYOUT_ERYON_TRILHA_LUNAR` e seu próprio `map.bin`, mas estava na lista `PREVIEW_SPECS`, excluída da regeneração de mapas registrados.
+- Agora consta em `SPECS`, portanto `bash tools/build_eryon.sh` gera o `data/layouts/Eryon_TrilhaLunar/map.bin` verdadeiro a partir do plano de 48×44 antes dos testes e do build, sem mudar os eventos, a história, Inkay ou o treinador Nilo.
+- Acrescentada regressão em `tools/test_eryon_map_bins.py` que exige layout registrado, gerador correto e identidade byte a byte do binário da Trilha Lunar com a planta. O teste é descoberto pelo workflow de terrenos.
+- **Limite:** a verificação confirma o contrato de geração; ainda é necessária compilação GBA no Actions e validação da travessia no Delta.
+
 ## Pendências prioritárias
 1. Compilação limpa e verificação da ROM GBA via `tools/build_eryon.sh` e GitHub Actions.
 2. Auditoria das tabelas `land_mons`, evolução, disponibilidade e distribuição de capturas por rota.

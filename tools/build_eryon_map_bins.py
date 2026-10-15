@@ -26,10 +26,11 @@ SPECS = {
     "floresta_dos_ecos": "FlorestaDosEcos",
     "gruta_das_estrelas": "GrutaDasEstrelas",
     "trilha_dos_dragoes": "TrilhaDosDragoes",
-}
-PREVIEW_SPECS = {
     "trilha_lunar": "TrilhaLunar",
 }
+# Every currently registered 48x44 route belongs in SPECS. Do not create
+# previews for maps which are already referenced by data/layouts/layouts.json.
+PREVIEW_SPECS = {}
 WIDTH, HEIGHT = 48, 44
 
 def compile_plan(path, tile_ids, width=WIDTH, height=HEIGHT):

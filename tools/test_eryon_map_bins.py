@@ -4,7 +4,7 @@ import struct
 import tempfile
 import unittest
 from pathlib import Path
-from build_eryon_map_bins import WIDTH, HEIGHT, compile_plan
+from build_eryon_map_bins import WIDTH, HEIGHT, SPECS, PREVIEW_SPECS, compile_plan
 
 class TerrainCompilerTests(unittest.TestCase):
     def test_output_size_and_order(self):
@@ -52,6 +52,23 @@ class TerrainCompilerTests(unittest.TestCase):
                 self.assertEqual(word, 0x3003, (x, y))
         self.assertEqual(struct.unpack_from("<H", binary, 2 * (15 * 48 + 38))[0],
                          0x3003)
+
+    def test_lunar_trail_is_registered_and_regenerated_for_rom(self):
+        import json
+        root = Path(__file__).resolve().parents[1]
+        self.assertEqual(SPECS["trilha_lunar"], "TrilhaLunar")
+        self.assertNotIn("trilha_lunar", PREVIEW_SPECS)
+        layouts = json.loads((root / "data/layouts/layouts.json").read_text(
+            encoding="utf-8"))["layouts"]
+        lunar = next(entry for entry in layouts
+                     if entry["id"] == "LAYOUT_ERYON_TRILHA_LUNAR")
+        self.assertEqual(lunar["blockdata_filepath"],
+                         "data/layouts/Eryon_TrilhaLunar/map.bin")
+        source = root / "docs/eryon/trilha_lunar_terrain_plan.txt"
+        expected = compile_plan(
+            source, {"#": 0x3C01, ".": 0x3001, ",": 0x3002, ":": 0x3003})
+        checked_in = (root / lunar["blockdata_filepath"]).read_bytes()
+        self.assertEqual(checked_in, expected)
 
     def test_rejects_incomplete_plan(self):
         with tempfile.TemporaryDirectory() as folder:
