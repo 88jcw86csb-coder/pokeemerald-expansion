@@ -26,6 +26,7 @@ EryonDrakonia_EventScript_GymGuideInformed::
 EryonDrakonia_EventScript_Sage::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonDrakonia_EventScript_SageNetworkRestored
 	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonDrakonia_EventScript_SageEvidenceReported
 	goto_if_set FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ, EryonDrakonia_EventScript_SageManifest
 	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonDrakonia_EventScript_SageAfterChart
@@ -799,3 +800,17 @@ EryonDrakonia_Text_EclipseFinaleComplete:
 	.string "voltaram a ressoar.\p"
 	.string "A cidade agradece\n"
 	.string "pela sua coragem.$"
+
+
+EryonDrakonia_EventScript_SageNetworkRestored::
+	msgbox EryonDrakonia_Text_SageNetworkRestored, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_Text_SageNetworkRestored:
+	.string "ANCIA: A REDE ECLIPSE\n"
+	.string "foi desligada enfim!\p"
+	.string "Voce protegeu o eco\n"
+	.string "original de ERYON.\p"
+	.string "Agora siga rumo a\n"
+	.string "LIGA dos campeoes.$"
