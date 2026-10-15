@@ -2,7 +2,7 @@ Eryon_Rota03_MapScripts::
 	.byte 0
 
 @ Eryon Route 03: the eastern trail, following Kael's first badge.
-@ The route is exploratory; the next area is not yet connected.
+@ The existing connections reach Verdelume, Route 04, Serra and Neonara.
 EryonRota03_EventScript_Prospector::
 	lock
 	faceplayer
@@ -86,6 +86,7 @@ EryonRota03_EventScript_Researcher::
 
 EryonRota03_EventScript_ResearcherBadge::
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonRota03_EventScript_ResearcherSerraClue
+	goto_if_set FLAG_ERYON_ORCHARD_RELAY_TRACED, EryonRota03_EventScript_ResearcherOrchardRelay
 	msgbox EryonRota03_Text_ResearcherBadge, MSGBOX_DEFAULT
 	release
 	end
@@ -217,3 +218,18 @@ EryonRota03_Text_TrainerDefeat:
 EryonRota03_Text_TrainerAfter:
 	.string "LIA: Boa batalha!\n"
 	.string "Sua equipe esta preparada.$"
+
+
+@ Optional pre-Serra evidence bridges Route 04's cargo relay with Neonara.
+EryonRota03_EventScript_ResearcherOrchardRelay::
+	msgbox EryonRota03_Text_ResearcherOrchardRelay, MSGBOX_DEFAULT
+	release
+	end
+
+EryonRota03_Text_ResearcherOrchardRelay:
+	.string "PESQUISADORA: Voce ligou\n"
+	.string "o pomar aos transmissores?\p"
+	.string "Os rastros seguem daqui\n"
+	.string "para as luzes de NEONARA.\p"
+	.string "Esses cristais podem vir\n"
+	.string "das escavacoes da serra.$"

@@ -55,6 +55,9 @@ class Route04InvestigationTests(unittest.TestCase):
     def test_dialogue_follows_clues_without_badge_gating(self):
         vila=(ROOT/"data/maps/Eryon_VilaDosPomares/scripts.inc").read_text()
         neon=(ROOT/"data/maps/Eryon_Neonara/scripts.inc").read_text()
+        route03=(ROOT/"data/maps/Eryon_Rota03/scripts.inc").read_text()
+        self.assertIn("goto_if_set "+FLAGS[1]+", EryonRota03_EventScript_ResearcherOrchardRelay",route03)
+        self.assertIn("EryonRota03_EventScript_ResearcherOrchardRelay::",route03)
         self.assertIn("goto_if_set "+FLAGS[0],vila)
         self.assertIn("goto_if_set "+FLAGS[1],vila)
         self.assertIn("goto_if_set "+FLAGS[1],neon)
