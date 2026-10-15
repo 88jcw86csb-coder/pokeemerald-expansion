@@ -825,3 +825,33 @@ EryonCidadeLiga_Text_AmphitheatreChampion:
 	.string "esperanca a ERYON.\p"
 	.string "A cidade celebra\n"
 	.string "sua grande jornada.$"
+
+
+@ An optional field medic supports teams training in the southwest amphitheatre.
+@ Does not alter League qualification, badges, EXP rules or persistent flags.
+EryonCidadeLiga_EventScript_AmphitheatreMedic::
+	lock
+	faceplayer
+	msgbox EryonCidadeLiga_Text_AmphitheatreMedicOffer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonCidadeLiga_EventScript_AmphitheatreMedicDecline
+	closemessage
+	special HealPlayerParty
+	msgbox EryonCidadeLiga_Text_AmphitheatreMedicDone, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_AmphitheatreMedicDecline::
+	closemessage
+	release
+	end
+
+EryonCidadeLiga_Text_AmphitheatreMedicOffer:
+	.string "SOCORRISTA: Treinar\n"
+	.string "no jardim cansa!\p"
+	.string "Quer recuperar seus\n"
+	.string "Pokemon antes da LIGA?$"
+
+EryonCidadeLiga_Text_AmphitheatreMedicDone:
+	.string "SOCORRISTA: Sua equipe\n"
+	.string "esta recuperada!\p"
+	.string "Boa sorte nas batalhas.$"
