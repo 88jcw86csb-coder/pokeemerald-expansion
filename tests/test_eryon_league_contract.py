@@ -74,6 +74,19 @@ class EryonLeagueContract(unittest.TestCase):
             self.assertIn(f"clearflag FLAG_ERYON_QUALIFIER_ROUND_{i}", body)
             self.assertIn(f"cleartrainerflag TRAINER_ERYON_QUALIFIER_{i}", body)
 
+    def test_declining_qualifier_exit_closes_dialogue_and_keeps_rounds(self):
+        exit_script = script_body(self.qual, "EryonLigaQual_EventScript_ExitMarshal")
+        self.assertIn("MSGBOX_YESNO", exit_script)
+        self.assertIn(
+            "goto_if_eq VAR_RESULT, NO, EryonLigaQual_EventScript_Stay",
+            exit_script,
+        )
+        stay = script_body(self.qual, "EryonLigaQual_EventScript_Stay")
+        self.assertIn("closemessage", stay)
+        self.assertLess(stay.index("closemessage"), stay.index("release"))
+        self.assertNotIn("clearflag", stay)
+        self.assertNotIn("warp", stay)
+
     def test_eighth_win_unlocks_recovery(self):
         body = script_body(self.qual, "EryonLigaQual_EventScript_Win8")
         self.assertIn("setflag FLAG_ERYON_QUALIFIED", body)

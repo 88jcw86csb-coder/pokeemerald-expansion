@@ -37,6 +37,7 @@ EryonLigaQual_EventScript_ExitMarshal::
 	end
 
 EryonLigaQual_EventScript_Stay::
+	closemessage
 	release
 	end
 
