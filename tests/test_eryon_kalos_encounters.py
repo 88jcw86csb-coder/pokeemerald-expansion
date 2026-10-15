@@ -185,6 +185,21 @@ class EryonKalosEncounters(unittest.TestCase):
         self.assertIn("VAR_ERYON_SERRA_CLUE_FOUND", entry)
         self.assertNotIn("setflag ", entry)
 
+    def test_wind_garden_supplies_are_unique_and_bag_safe(self):
+        area = json.loads((MAPS / "Eryon_ValeDosVentos/map.json").read_text())
+        events = [e for e in area["bg_events"] if
+                  e["script"] == "EryonVale_EventScript_WindGardenSupplies"]
+        self.assertEqual([(e["x"], e["y"]) for e in events], [(30, 15)])
+        terrain = (ROOT / "docs/eryon/vale_dos_ventos_terrain_plan.txt").read_text().splitlines()[4:48]
+        self.assertNotEqual(terrain[15][30], "#")
+        self.assertIn("#define FLAG_ERYON_WIND_GARDEN_REWARD_CLAIMED ", FLAGS)
+        source = (MAPS / "Eryon_ValeDosVentos/scripts.inc").read_text()
+        body = source.split("EryonVale_EventScript_WindGardenSupplies::", 1)[1].split(
+            "EryonVale_EventScript_WindGardenBagFull::", 1)[0]
+        self.assertIn("giveitem ITEM_SUPER_POTION", body)
+        self.assertLess(body.index("goto_if_eq VAR_RESULT, FALSE"),
+                        body.index("setflag FLAG_ERYON_WIND_GARDEN_REWARD_CLAIMED"))
+
     def test_dragon_shrine_requires_local_eclipse_victory(self):
         source = (MAPS / "Eryon_Drakonia/scripts.inc").read_text(encoding="utf-8")
         self.assertIn(
