@@ -55,6 +55,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EryonSolaris_EventScript_BuriedDevice"
+    },
+    {
+      "type": "sign",
+      "x": 22,
+      "y": 18,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EryonSolaris_EventScript_SolarCanyon"
     }
   ],
   "id": "MAP_ERYON_DESERTO_DE_SOLARIS",
