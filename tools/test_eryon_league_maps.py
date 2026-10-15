@@ -364,6 +364,24 @@ class LeagueMapTests(unittest.TestCase):
             self.assertIn(flag, entry)
         self.assertNotIn("setflag ", entry)
 
+    def test_amphitheatre_medic_is_optional_and_accessible(self):
+        import json
+        terrain = league()
+        data = json.loads((ROOT / "data/maps/Eryon_CidadeDaLiga/map.json").read_text())
+        medics = [e for e in data["object_events"] if
+                  e["script"] == "EryonCidadeLiga_EventScript_AmphitheatreMedic"]
+        self.assertEqual([(e["x"], e["y"]) for e in medics], [(27, 48)])
+        self.assertIn((27, 48), connected(terrain, (0, 36)))
+        self.assertIn((48, 36), connected(terrain, (0, 36)))
+        script = (ROOT / "data/maps/Eryon_CidadeDaLiga/scripts.inc").read_text()
+        body = script.split("EryonCidadeLiga_EventScript_AmphitheatreMedic::", 1)[1].split(
+            "EryonCidadeLiga_EventScript_AmphitheatreMedicDecline::", 1)[0]
+        self.assertIn("MSGBOX_YESNO", body)
+        self.assertIn("special HealPlayerParty", body)
+        self.assertIn("goto_if_eq VAR_RESULT, NO", body)
+        self.assertNotIn("setflag ", body)
+        self.assertNotIn("trainerbattle_", body)
+
     def test_eight_stars_terrace_connected_city(self):
         """Check the new skyline park, unchanged League building, and exact terrain."""
         import json,struct
