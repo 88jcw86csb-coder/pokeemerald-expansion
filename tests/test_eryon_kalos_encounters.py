@@ -228,6 +228,21 @@ class EryonKalosEncounters(unittest.TestCase):
         self.assertIn("FLAG_ERYON_RIVER_SAMPLE_RECORDED", entry)
         self.assertNotIn("setflag ", entry)
 
+    def test_solar_canyon_supplies_are_unique_and_retriable(self):
+        area = json.loads((MAPS / "Eryon_DesertoDeSolaris/map.json").read_text())
+        events = [event for event in area["bg_events"]
+                  if event["script"] == "EryonSolaris_EventScript_CanyonSupplies"]
+        self.assertEqual([(e["x"], e["y"]) for e in events], [(24, 18)])
+        terrain = (ROOT / "docs/eryon/deserto_de_solaris_terrain_plan.txt").read_text().splitlines()[4:48]
+        self.assertNotEqual(terrain[18][24], "#")
+        self.assertIn("#define FLAG_ERYON_SOLAR_CANYON_SUPPLIES_CLAIMED ", FLAGS)
+        source = (MAPS / "Eryon_DesertoDeSolaris/scripts.inc").read_text()
+        block = source.split("EryonSolaris_EventScript_CanyonSupplies::", 1)[1].split(
+            "EryonSolaris_EventScript_CanyonSuppliesBagFull::", 1)[0]
+        self.assertIn("giveitem ITEM_HYPER_POTION", block)
+        self.assertLess(block.index("goto_if_eq VAR_RESULT, FALSE"),
+                        block.index("setflag FLAG_ERYON_SOLAR_CANYON_SUPPLIES_CLAIMED"))
+
     def test_dragon_shrine_requires_local_eclipse_victory(self):
         source = (MAPS / "Eryon_Drakonia/scripts.inc").read_text(encoding="utf-8")
         self.assertIn(
