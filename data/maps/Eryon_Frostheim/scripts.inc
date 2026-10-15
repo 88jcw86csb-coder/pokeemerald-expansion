@@ -105,6 +105,7 @@ EryonFrostheim_EventScript_GymNotReady::
 	end
 
 EryonFrostheim_EventScript_GymAfter::
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonFrostheim_EventScript_GymAfterEclipse
 	msgbox EryonFrostheim_Text_GymAfter, MSGBOX_DEFAULT
 	release
 	end
@@ -209,3 +210,15 @@ EryonFrostheim_Text_ResearcherBergmiteSafe:
 	.string "ja nao ameacam o gelo.\p"
 	.string "BJORN continuara\n"
 	.string "protegendo FROSTHEIM.$"
+ 
+@ Epilogue only; previous badge, Serra and battle routes remain unchanged.
+EryonFrostheim_EventScript_GymAfterEclipse::
+	msgbox EryonFrostheim_Text_GymAfterEclipse, MSGBOX_DEFAULT
+	release
+	end
+
+EryonFrostheim_Text_GymAfterEclipse:
+	.string "BJORN: O gelo recuperou\n"
+	.string "seu brilho natural.\p"
+	.string "Os cristais da ECLIPSE\n"
+	.string "nao ameacam FROSTHEIM.$"

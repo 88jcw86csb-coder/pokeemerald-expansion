@@ -113,6 +113,7 @@ EryonNeonara_EventScript_GymNotReady::
 	end
 
 EryonNeonara_EventScript_GymAfter::
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonNeonara_EventScript_GymAfterEclipse
 	msgbox EryonNeonara_Text_GymAfter, MSGBOX_DEFAULT
 	release
 	end
@@ -169,3 +170,15 @@ EryonNeonara_Text_TechnicianRestored:
 	.string "A VILA DA NEBLINA e\n"
 	.string "FROSTHEIM receberam\n"
 	.string "avisos sobre a ECLIPSE.$"
+ 
+@ Epilogue only; previous badge, Serra and battle routes remain unchanged.
+EryonNeonara_EventScript_GymAfterEclipse::
+	msgbox EryonNeonara_Text_GymAfterEclipse, MSGBOX_DEFAULT
+	release
+	end
+
+EryonNeonara_Text_GymAfterEclipse:
+	.string "VOLT: As luzes de\n"
+	.string "NEONARA estao firmes!\p"
+	.string "A ECLIPSE nao usara\n"
+	.string "nossa energia outra vez.$"

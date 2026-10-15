@@ -183,6 +183,7 @@ EryonArkhara_EventScript_GymNotReady::
 	end
 
 EryonArkhara_EventScript_GymAfter::
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonArkhara_EventScript_GymAfterEclipse
 	goto_if_set FLAG_ERYON_SERRA_ECLIPSE_SIGNAL_DISABLED, EryonArkhara_EventScript_TessaResonance
 	msgbox EryonArkhara_Text_GymAfter, MSGBOX_DEFAULT
 	release
@@ -356,3 +357,15 @@ EryonArkhara_Text_CaravanBoardQuiet:
 	.string "seguiram para UMBRA.\p"
 	.string "Outros relatorios citam\n"
 	.string "a usina de IGNIVAR.$"
+ 
+@ Epilogue only; previous badge, Serra and battle routes remain unchanged.
+EryonArkhara_EventScript_GymAfterEclipse::
+	msgbox EryonArkhara_Text_GymAfterEclipse, MSGBOX_DEFAULT
+	release
+	end
+
+EryonArkhara_Text_GymAfterEclipse:
+	.string "TESSA: As ruinas agora\n"
+	.string "podem repousar.\p"
+	.string "O sinal da ECLIPSE\n"
+	.string "sumiu das pedras.$"

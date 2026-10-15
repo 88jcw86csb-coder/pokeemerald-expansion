@@ -174,6 +174,7 @@ EryonUmbra_EventScript_GymNotReady::
 	end
 
 EryonUmbra_EventScript_GymAfter::
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonUmbra_EventScript_GymAfterEclipse
 	msgbox EryonUmbra_Text_GymAfter, MSGBOX_DEFAULT
 	release
 	end
@@ -205,3 +206,15 @@ EryonUmbra_Text_GymNotReady:
 	.string "NYX: Primeiro,\n"
 	.string "conquiste a INSIGNIA\n"
 	.string "do GINASIO anterior.$"
+ 
+@ Epilogue only; previous badge, Serra and battle routes remain unchanged.
+EryonUmbra_EventScript_GymAfterEclipse::
+	msgbox EryonUmbra_Text_GymAfterEclipse, MSGBOX_DEFAULT
+	release
+	end
+
+EryonUmbra_Text_GymAfterEclipse:
+	.string "NYX: As cargas ilegais\n"
+	.string "foram interrompidas.\p"
+	.string "UMBRA voltou a ser uma\n"
+	.string "cidade de caminhos livres.$"
