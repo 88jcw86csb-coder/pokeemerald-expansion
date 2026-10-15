@@ -189,3 +189,44 @@ EryonOasis_Text_HelioptileEscaped:
 EryonOasis_Text_HelioptileQuiet:
 	.string "As pedras ainda estao\n"
 	.string "quentes ao sol.$"
+
+
+@ A previously blocked caravan alcove branches off Eryon's desert approach.
+EryonOasis_EventScript_CaravanAlcove::
+	lock
+	goto_if_set FLAG_ERYON_OASIS_HELIOPTILE_RESOLVED, EryonOasis_EventScript_AlcoveWildlifeSafe
+	goto_if_set FLAG_ERYON_RIVER_SAMPLE_RECORDED, EryonOasis_EventScript_AlcoveRiverEvidence
+	msgbox EryonOasis_Text_AlcoveBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonOasis_EventScript_AlcoveRiverEvidence::
+	msgbox EryonOasis_Text_AlcoveRiverEvidence, MSGBOX_DEFAULT
+	release
+	end
+
+EryonOasis_EventScript_AlcoveWildlifeSafe::
+	msgbox EryonOasis_Text_AlcoveWildlifeSafe, MSGBOX_DEFAULT
+	release
+	end
+
+EryonOasis_Text_AlcoveBefore:
+	.string "REFUGIO DA CARAVANA:\p"
+	.string "Uma passagem entre\n"
+	.string "rochas leva ao norte.\p"
+	.string "A areia cobre marcas\n"
+	.string "de antigas carrocas.$"
+
+EryonOasis_Text_AlcoveRiverEvidence:
+	.string "REFUGIO DA CARAVANA:\p"
+	.string "A agua do rio chegou\n"
+	.string "ate esta passagem.\p"
+	.string "Os rastros seguem\n"
+	.string "rumo a SOLARIS.$"
+
+EryonOasis_Text_AlcoveWildlifeSafe:
+	.string "REFUGIO DA CARAVANA:\p"
+	.string "O HELIOPTILE ja foi\n"
+	.string "encontrado na trilha.\p"
+	.string "O calor protege este\n"
+	.string "pequeno refugio.$"
