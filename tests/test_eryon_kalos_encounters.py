@@ -122,6 +122,22 @@ class EryonKalosEncounters(unittest.TestCase):
         self.assertIn("FLAG_ERYON_RIVER_SAMPLE_RECORDED", entry)
         self.assertNotIn("setflag ", entry)
 
+    def test_oasis_refuge_reward_is_accessible_and_bag_safe(self):
+        area = json.loads((MAPS / "Eryon_TrilhaDoOasis/map.json").read_text())
+        events = [e for e in area["bg_events"] if
+                  e["script"] == "EryonOasis_EventScript_AlcoveSupplies"]
+        self.assertEqual([(e["x"], e["y"]) for e in events], [(23, 17)])
+        terrain = (ROOT / "docs/eryon/trilha_do_oasis_terrain_plan.txt").read_text().splitlines()[4:]
+        self.assertNotEqual(terrain[17][23], "#")
+        self.assertIn("#define FLAG_ERYON_OASIS_ALCOVE_SUPPLIES_TAKEN ", FLAGS)
+        source = (MAPS / "Eryon_TrilhaDoOasis/scripts.inc").read_text()
+        body = source.split("EryonOasis_EventScript_AlcoveSupplies::", 1)[1].split(
+            "EryonOasis_EventScript_AlcoveSuppliesBagFull::", 1)[0]
+        self.assertIn("giveitem ITEM_HYPER_POTION", body)
+        self.assertLess(body.index("goto_if_eq VAR_RESULT, FALSE"),
+                        body.index("setflag FLAG_ERYON_OASIS_ALCOVE_SUPPLIES_TAKEN"))
+        self.assertEqual(source.count("EryonOasis_EventScript_AlcoveSupplies::"), 1)
+
     def test_dragon_shrine_requires_local_eclipse_victory(self):
         source = (MAPS / "Eryon_Drakonia/scripts.inc").read_text(encoding="utf-8")
         self.assertIn(
