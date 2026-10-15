@@ -171,3 +171,31 @@ EryonVale_Text_CaravanWitnessClue:
 	.string "tinham marcas da ECLIPSE.\p"
 	.string "Foram descarregadas\n"
 	.string "perto da fabrica de Umbra.$"
+
+
+@ Wind-sheltered garden carved into the original valley landscape.
+EryonVale_EventScript_WindGarden::
+	lock
+	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonVale_EventScript_WindGardenClue
+	msgbox EryonVale_Text_WindGardenBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVale_EventScript_WindGardenClue::
+	msgbox EryonVale_Text_WindGardenClue, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVale_Text_WindGardenBefore:
+	.string "JARDIM DOS VENTOS:\p"
+	.string "As rochas protegem\n"
+	.string "flores raras do vento.\p"
+	.string "Marcas de carrocas\n"
+	.string "seguem para o leste.$"
+
+EryonVale_Text_WindGardenClue:
+	.string "JARDIM DOS VENTOS:\p"
+	.string "Os rastros da ECLIPSE\n"
+	.string "passaram por aqui.\p"
+	.string "O vento escondeu\n"
+	.string "as marcas da caravana.$"
