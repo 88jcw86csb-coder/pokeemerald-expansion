@@ -31,7 +31,10 @@ class Route04InvestigationTests(unittest.TestCase):
             for e in self.m[category]:
                 with self.subTest(event=e):
                     self.assertIn((e["x"],e["y"]), reachable)
-        self.assertEqual({(e["x"],e["y"]) for e in self.m["bg_events"]}, {(10,9),(35,32)})
+        # The orchard now includes a new grove and caravan cache. Retain
+        # original clues without forbidding additional reachable landmarks.
+        self.assertTrue({(10,9),(35,32)} <=
+                        {(e["x"],e["y"]) for e in self.m["bg_events"]})
         self.assertEqual(len(self.m["warp_events"]), 2)
         self.assertIn((11,10),{(e["x"],e["y"]) for e in self.m["object_events"]})
         self.assertEqual((self.m["object_events"][0]["x"],self.m["object_events"][0]["y"]),(24,21))
