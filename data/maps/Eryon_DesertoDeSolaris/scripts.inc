@@ -180,3 +180,53 @@ EryonSolaris_Text_CanyonSuppliesBagFull:
 EryonSolaris_Text_CanyonSuppliesEmpty:
 	.string "A caixa de suprimentos\n"
 	.string "esta vazia.$"
+
+
+@ Optional battle along the new canyon; defeat uses a dedicated saved trainer flag.
+EryonSolaris_EventScript_CanyonRanger::
+	lock
+	faceplayer
+	goto_if_set FLAG_ERYON_SOLAR_CANYON_RANGER_DEFEATED, EryonSolaris_EventScript_CanyonRangerAfter
+	msgbox EryonSolaris_Text_CanyonRangerOffer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonSolaris_EventScript_CanyonRangerDecline
+	closemessage
+	trainerbattle_single TRAINER_ERYON_SOLAR_CANYON_RANGER, EryonSolaris_Text_CanyonRangerIntro, EryonSolaris_Text_CanyonRangerLoss, EryonSolaris_EventScript_CanyonRangerVictory, FALSE
+	msgbox EryonSolaris_Text_CanyonRangerAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonSolaris_EventScript_CanyonRangerDecline::
+	closemessage
+	release
+	end
+
+EryonSolaris_EventScript_CanyonRangerVictory::
+	msgbox EryonSolaris_Text_CanyonRangerVictory, MSGBOX_DEFAULT
+	release
+	end
+
+EryonSolaris_EventScript_CanyonRangerAfter::
+	msgbox EryonSolaris_Text_CanyonRangerAfter, MSGBOX_DEFAULT
+	release
+	end
+
+EryonSolaris_Text_CanyonRangerOffer:
+	.string "DARIO: Exploro esta\n"
+	.string "trilha sob o sol!\p"
+	.string "Quer treinar comigo?$"
+
+EryonSolaris_Text_CanyonRangerIntro:
+	.string "Vamos ver como sua\n"
+	.string "equipe lida com areia!$"
+
+EryonSolaris_Text_CanyonRangerLoss:
+	.string "Que equipe resistente!$"
+
+EryonSolaris_Text_CanyonRangerVictory:
+	.string "DARIO: O canion agora\n"
+	.string "faz parte de sua rota!$"
+
+EryonSolaris_Text_CanyonRangerAfter:
+	.string "DARIO: Um HELIOPTILE\n"
+	.string "bem treinado evolui\n"
+	.string "no nivel 36.$"
