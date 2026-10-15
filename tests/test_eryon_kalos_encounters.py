@@ -148,6 +148,18 @@ class EryonKalosEncounters(unittest.TestCase):
                         build.index('make -j"$jobs" -O all'))
         self.assertIn("test_eryon_kalos_encounters.py", build)
 
+    def test_oasis_guide_recognizes_helioptile_without_new_npc(self):
+        area = json.loads((MAPS / "Eryon_TrilhaDoOasis/map.json").read_text())
+        guides = [e for e in area["object_events"]
+                  if e["script"] == "EryonOasis_EventScript_Guide"]
+        self.assertEqual(len(guides), 1)
+        source = (MAPS / "Eryon_TrilhaDoOasis/scripts.inc").read_text()
+        guide = source.split("EryonOasis_EventScript_Guide::", 1)[1].split(
+            "EryonOasis_EventScript_GuideClue::", 1)[0]
+        self.assertIn("FLAG_ERYON_OASIS_HELIOPTILE_RESOLVED", guide)
+        self.assertIn("EryonOasis_EventScript_GuideHelioptile::", source)
+        self.assertIn("nivel 36", source)
+
     def test_dragon_shrine_requires_local_eclipse_victory(self):
         source = (MAPS / "Eryon_Drakonia/scripts.inc").read_text(encoding="utf-8")
         self.assertIn(
