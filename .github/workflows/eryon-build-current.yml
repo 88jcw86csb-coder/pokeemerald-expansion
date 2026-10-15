@@ -1,0 +1,72 @@
+# Run this from the GitHub Actions tab on the default branch (master).
+# The GBA ROM is ALWAYS built from eryon-development, not from master.
+name: Pokemon Eryon - Compilar ROM Atual
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  GAME_VERSION: EMERALD
+  GAME_LANGUAGE: ENGLISH
+  COMPARE: 0
+  UNUSED_ERROR: 1
+  DEPRECATED_ERROR: 1
+
+jobs:
+  compilar-eryon-atual:
+    name: Compilar Eryon (branch eryon-development)
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Baixar o codigo ATUAL de Eryon
+        uses: actions/checkout@v4
+        with:
+          ref: eryon-development
+          fetch-depth: 1
+
+      - name: Confirmar branch e identificar commit da ROM
+        run: |
+          set -eu
+          test "$(git branch --show-current)" = "eryon-development"
+          mkdir -p build
+          git rev-parse HEAD | tee build/eryon-source-commit.txt
+          echo "Compilando exatamente a revisao acima de eryon-development"
+
+      - name: Instalar ferramentas para Game Boy Advance
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi \
+            libpng-dev python3 build-essential
+
+      - name: Compilar ROM e testar scripts mapas e sistemas
+        run: |
+          set -o pipefail
+          bash tools/build_eryon.sh 2>&1 | tee build/eryon-current-build.log
+
+      - name: Publicar diagnosticos inclusive se houver erro
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eryon-atual-diagnosticos
+          path: |
+            build/eryon-source-commit.txt
+            build/eryon-current-build.log
+            build/eryon-build.log
+            build/eryon-rom.sha256
+            build/eryon-physical-routes.json
+          if-no-files-found: warn
+
+      - name: Publicar ROM ATUAL de Eryon para o emulador Delta
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eryon-atual-gba
+          path: |
+            pokeeryon.gba
+            build/eryon-rom.sha256
+            build/eryon-source-commit.txt
+          if-no-files-found: error
