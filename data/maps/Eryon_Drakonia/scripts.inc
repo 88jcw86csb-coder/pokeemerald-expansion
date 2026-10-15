@@ -713,3 +713,89 @@ EryonDrakonia_Text_ScoutAfterBadge:
 	.string "antes da ELITE FOUR.\p"
 	.string "Ha uma area de cura\n"
 	.string "apos a classificatoria.$"
+
+
+@ Eclipse final chapter: three established investigations converge in Drakonia.
+@ The regional League remains freely accessible; this is an optional story resolution.
+EryonDrakonia_EventScript_EclipseFinale::
+	lock
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonDrakonia_EventScript_EclipseFinaleComplete
+	goto_if_unset FLAG_ERYON_DRAKONIA_ECLIPSE_DEFEATED, EryonDrakonia_EventScript_EclipseFinaleAgent
+	goto_if_unset FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED, EryonDrakonia_EventScript_EclipseFinaleRelay
+	goto_if_unset FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonDrakonia_EventScript_EclipseFinaleEvidence
+	msgbox EryonDrakonia_Text_EclipseFinaleReady, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonDrakonia_EventScript_EclipseFinaleLater
+	closemessage
+	msgbox EryonDrakonia_Text_EclipseFinaleShutdown, MSGBOX_DEFAULT
+	setflag FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN
+	release
+	end
+
+EryonDrakonia_EventScript_EclipseFinaleAgent::
+	msgbox EryonDrakonia_Text_EclipseFinaleAgent, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_EventScript_EclipseFinaleRelay::
+	msgbox EryonDrakonia_Text_EclipseFinaleRelay, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_EventScript_EclipseFinaleEvidence::
+	msgbox EryonDrakonia_Text_EclipseFinaleEvidence, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_EventScript_EclipseFinaleLater::
+	closemessage
+	release
+	end
+
+EryonDrakonia_EventScript_EclipseFinaleComplete::
+	msgbox EryonDrakonia_Text_EclipseFinaleComplete, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_Text_EclipseFinaleAgent:
+	.string "CENTRAL DO SANTUARIO:\p"
+	.string "O comandante ECLIPSE\n"
+	.string "ainda controla o posto.\p"
+	.string "Enfrente-o em DRAKONIA.$"
+
+EryonDrakonia_Text_EclipseFinaleRelay:
+	.string "CENTRAL DO SANTUARIO:\p"
+	.string "O transmissor da GRUTA\n"
+	.string "DAS ESTRELAS esta ativo.\p"
+	.string "Desligue a antena\n"
+	.string "antes da operacao final.$"
+
+EryonDrakonia_Text_EclipseFinaleEvidence:
+	.string "CENTRAL DO SANTUARIO:\p"
+	.string "Os guardioes exigem\n"
+	.string "provas da operacao.\p"
+	.string "Entregue o manifesto\n"
+	.string "aos investigadores.$"
+
+EryonDrakonia_Text_EclipseFinaleReady:
+	.string "CENTRAL DO SANTUARIO:\p"
+	.string "Comandante derrotado.\n"
+	.string "Antena desativada.\p"
+	.string "A LIGA recebeu as provas.\p"
+	.string "Desligar a rede ECLIPSE\n"
+	.string "em toda DRAKONIA?$"
+
+EryonDrakonia_Text_EclipseFinaleShutdown:
+	.string "Os selos do santuario\n"
+	.string "voltam a brilhar!\p"
+	.string "A rede da ECLIPSE\n"
+	.string "perdeu a alimentacao.\p"
+	.string "Os guardioes protegem\n"
+	.string "os cristais de ERYON.\p"
+	.string "A LIGA espera por voce!$"
+
+EryonDrakonia_Text_EclipseFinaleComplete:
+	.string "REDE ECLIPSE: INATIVA.\p"
+	.string "Os cristais naturais\n"
+	.string "voltaram a ressoar.\p"
+	.string "A cidade agradece\n"
+	.string "pela sua coragem.$"
