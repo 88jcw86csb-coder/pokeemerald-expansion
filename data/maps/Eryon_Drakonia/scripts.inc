@@ -1,5 +1,11 @@
 Eryon_Drakonia_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, Eryon_Drakonia_RespawnCheckpoint
 	.byte 0
+
+@ Native Eryon whiteout checkpoint. Re-entry updates the safe return town.
+Eryon_Drakonia_RespawnCheckpoint:
+	setrespawn HEAL_LOCATION_ERYON_DRAKONIA
+	end
 
 @ Eighth gym city: dragon sanctuary and Eclipse transmission terminus.
 EryonDrakonia_EventScript_Caretaker::

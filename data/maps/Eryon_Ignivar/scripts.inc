@@ -1,5 +1,11 @@
 Eryon_Ignivar_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, Eryon_Ignivar_RespawnCheckpoint
 	.byte 0
+
+@ Native Eryon whiteout checkpoint. Re-entry updates the safe return town.
+Eryon_Ignivar_RespawnCheckpoint:
+	setrespawn HEAL_LOCATION_ERYON_IGNIVAR
+	end
 
 @ The city receives unstable geothermal power after Eclipse's desert relay activates.
 EryonIgnivar_EventScript_Engineer::

@@ -1,5 +1,11 @@
 Eryon_Lunaris_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, Eryon_Lunaris_RespawnCheckpoint
 	.byte 0
+
+@ Native Eryon whiteout checkpoint. Re-entry updates the safe return town.
+Eryon_Lunaris_RespawnCheckpoint:
+	setrespawn HEAL_LOCATION_ERYON_LUNARIS
+	end
 
 @ Lunaris protects the ancient observatory and the seventh gym.
 EryonLunaris_EventScript_Medic::

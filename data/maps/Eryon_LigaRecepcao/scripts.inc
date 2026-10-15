@@ -1,5 +1,11 @@
 Eryon_LigaRecepcao_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, Eryon_LigaRecepcao_RespawnCheckpoint
 	.byte 0
+
+@ Native Eryon whiteout checkpoint. Re-entry updates the safe return town.
+Eryon_LigaRecepcao_RespawnCheckpoint:
+	setrespawn HEAL_LOCATION_ERYON_LIGA_RECEPCAO
+	end
 
 EryonLigaLobby_EventScript_Medic::
 	lock
