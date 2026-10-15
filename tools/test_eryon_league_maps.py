@@ -284,6 +284,20 @@ class LeagueMapTests(unittest.TestCase):
         self.assertNotIn("setflag ", body)
         self.assertNotIn("trainerbattle_", body)
 
+    def test_original_west_ravine_side_pocket_is_walkable(self):
+        terrain = route()
+        reachable = connected(terrain, (0, 22))
+        for y in range(27, 30):
+            for x in range(16, 20):
+                self.assertEqual(terrain[y][x], ".")
+                self.assertIn((x, y), reachable)
+        self.assertIn((20, 28), reachable)
+        self.assertIn((47, 22), reachable)
+        self.assertEqual(
+            (ROOT / "docs/eryon/caminho_da_liga_terrain_plan.txt").read_text(),
+            render("caminho_da_liga", terrain),
+        )
+
     def test_eight_stars_terrace_connected_city(self):
         """Check the new skyline park, unchanged League building, and exact terrain."""
         import json,struct
