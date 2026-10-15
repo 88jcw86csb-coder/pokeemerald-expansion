@@ -731,3 +731,44 @@ EryonCidadeLiga_Text_CrystalArchiveChampion:
 	.string "a revelar esta rede!\p"
 	.string "Outros misterios\n"
 	.string "ainda esperam em ERYON.$"
+
+
+@ The northwest hill district is an original winding walk through the capital.
+EryonCidadeLiga_EventScript_HillsidePromenade::
+	lock
+	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonCidadeLiga_EventScript_HillsideChampion
+	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonCidadeLiga_EventScript_HillsideEvidence
+	msgbox EryonCidadeLiga_Text_HillsideBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_HillsideEvidence::
+	msgbox EryonCidadeLiga_Text_HillsideEvidence, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_HillsideChampion::
+	msgbox EryonCidadeLiga_Text_HillsideChampion, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_Text_HillsideBefore:
+	.string "PASSEIO DAS ENCOSTAS:\p"
+	.string "Esta trilha liga os\n"
+	.string "jardins a praca central.\p"
+	.string "Daqui se avista o\n"
+	.string "predio da LIGA.$"
+
+EryonCidadeLiga_Text_HillsideEvidence:
+	.string "PASSEIO DAS ENCOSTAS:\p"
+	.string "A cidade acompanha\n"
+	.string "a pesquisa ECLIPSE.\p"
+	.string "A LIGA protege as\n"
+	.string "rotas dos cristais.$"
+
+EryonCidadeLiga_Text_HillsideChampion:
+	.string "PASSEIO DAS ENCOSTAS:\p"
+	.string "O CAMPEAO percorre\n"
+	.string "a colina da cidade.\p"
+	.string "Novos treinadores\n"
+	.string "seguem para a LIGA.$"
