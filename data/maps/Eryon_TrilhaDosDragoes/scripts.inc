@@ -505,3 +505,188 @@ EryonDragoes_Text_MarkerManifest:
 	.string "LESTE: VILA DO PICO.\p"
 	.string "As caixas ECLIPSE\n"
 	.string "revelaram sua rota.$"
+@ Eastern Aurora Crystal Terrace is an optional branch of the Dragon Trail.
+@ The array records original crystal resonance, not mandatory story progress.
+EryonDragoes_EventScript_AuroraCrystalArray::
+	lock
+	goto_if_set FLAG_ERYON_DRAGON_AURORA_ARRAY_READ, EryonDragoes_EventScript_AuroraArrayRepeat
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonDragoes_EventScript_AuroraArrayPeace
+	goto_if_set FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ, EryonDragoes_EventScript_AuroraArrayManifest
+	msgbox EryonDragoes_Text_AuroraArrayBefore, MSGBOX_DEFAULT
+	setflag FLAG_ERYON_DRAGON_AURORA_ARRAY_READ
+	release
+	end
+
+EryonDragoes_EventScript_AuroraArrayManifest::
+	msgbox EryonDragoes_Text_AuroraArrayManifest, MSGBOX_DEFAULT
+	setflag FLAG_ERYON_DRAGON_AURORA_ARRAY_READ
+	release
+	end
+
+EryonDragoes_EventScript_AuroraArrayPeace::
+	msgbox EryonDragoes_Text_AuroraArrayPeace, MSGBOX_DEFAULT
+	setflag FLAG_ERYON_DRAGON_AURORA_ARRAY_READ
+	release
+	end
+
+EryonDragoes_EventScript_AuroraArrayRepeat::
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonDragoes_EventScript_AuroraArrayRestored
+	msgbox EryonDragoes_Text_AuroraArrayRepeat, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDragoes_EventScript_AuroraArrayRestored::
+	msgbox EryonDragoes_Text_AuroraArrayRestored, MSGBOX_DEFAULT
+	release
+	end
+
+@ Normal wild battle/EXP: capture or faint resolves, flee or refusal retries.
+EryonDragoes_EventScript_CarbinkChamber::
+	lock
+	goto_if_set FLAG_ERYON_DRAGON_CARBINK_RESOLVED, EryonDragoes_EventScript_CarbinkQuiet
+	goto_if_unset FLAG_ERYON_DRAGON_AURORA_ARRAY_READ, EryonDragoes_EventScript_CarbinkHidden
+	msgbox EryonDragoes_Text_CarbinkOffer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonDragoes_EventScript_CarbinkDecline
+	closemessage
+	setwildbattle SPECIES_CARBINK, 43
+	waitse
+	playmoncry SPECIES_CARBINK, CRY_MODE_ENCOUNTER
+	delay 30
+	waitmoncry
+	dowildbattle
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, EryonDragoes_EventScript_CarbinkResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, EryonDragoes_EventScript_CarbinkResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, EryonDragoes_EventScript_CarbinkEscaped
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, EryonDragoes_EventScript_CarbinkEscaped
+	release
+	end
+
+EryonDragoes_EventScript_CarbinkResolved::
+	setflag FLAG_ERYON_DRAGON_CARBINK_RESOLVED
+	msgbox EryonDragoes_Text_CarbinkResolved, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDragoes_EventScript_CarbinkHidden::
+	msgbox EryonDragoes_Text_CarbinkHidden, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDragoes_EventScript_CarbinkEscaped::
+	msgbox EryonDragoes_Text_CarbinkEscaped, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDragoes_EventScript_CarbinkQuiet::
+	msgbox EryonDragoes_Text_CarbinkQuiet, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDragoes_EventScript_CarbinkDecline::
+	closemessage
+	release
+	end
+
+@ Max Ether remains claimable when Bag is full.
+EryonDragoes_EventScript_AuroraSupplies::
+	lock
+	goto_if_set FLAG_ERYON_DRAGON_AURORA_SUPPLIES_TAKEN, EryonDragoes_EventScript_AuroraSuppliesEmpty
+	goto_if_unset FLAG_ERYON_DRAGON_CARBINK_RESOLVED, EryonDragoes_EventScript_AuroraSuppliesLocked
+	msgbox EryonDragoes_Text_AuroraSuppliesFound, MSGBOX_DEFAULT
+	giveitem ITEM_MAX_ETHER
+	goto_if_eq VAR_RESULT, FALSE, EryonDragoes_EventScript_AuroraSuppliesFull
+	setflag FLAG_ERYON_DRAGON_AURORA_SUPPLIES_TAKEN
+	release
+	end
+
+EryonDragoes_EventScript_AuroraSuppliesLocked::
+	msgbox EryonDragoes_Text_AuroraSuppliesLocked, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDragoes_EventScript_AuroraSuppliesFull::
+	msgbox EryonDragoes_Text_AuroraSuppliesFull, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDragoes_EventScript_AuroraSuppliesEmpty::
+	msgbox EryonDragoes_Text_AuroraSuppliesEmpty, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDragoes_Text_AuroraArrayBefore:
+	.string "MIRANTE DA AURORA:\p"
+	.string "Os cristais guardam\n"
+	.string "um eco muito antigo.\p"
+	.string "Uma luz artificial\n"
+	.string "perturbou a encosta.$"
+
+EryonDragoes_Text_AuroraArrayManifest:
+	.string "MIRANTE DA AURORA:\p"
+	.string "O manifesto da ECLIPSE\n"
+	.string "cita estes cristais!\p"
+	.string "Sua energia foi\n"
+	.string "levada a DRAKONIA.$"
+
+EryonDragoes_Text_AuroraArrayPeace:
+	.string "MIRANTE DA AURORA:\p"
+	.string "REDE ECLIPSE INATIVA.\p"
+	.string "A montanha voltou\n"
+	.string "ao equilibrio natural.$"
+
+EryonDragoes_Text_AuroraArrayRepeat:
+	.string "O mirante aponta\n"
+	.string "para um CARBINK\n"
+	.string "escondido nas pedras.$"
+
+EryonDragoes_Text_AuroraArrayRestored:
+	.string "A energia artificial\n"
+	.string "desapareceu do mirante.\p"
+	.string "Os cristais naturais\n"
+	.string "continuam brilhando.$"
+
+EryonDragoes_Text_CarbinkHidden:
+	.string "Algo brilha entre\n"
+	.string "as rochas.\p"
+	.string "Leia o painel do\n"
+	.string "MIRANTE primeiro.$"
+
+EryonDragoes_Text_CarbinkOffer:
+	.string "Um CARBINK surge\n"
+	.string "dos cristais!\p"
+	.string "Deseja investigar?$"
+
+EryonDragoes_Text_CarbinkResolved:
+	.string "CARBINK retorna\n"
+	.string "aos cristais antigos.\p"
+	.string "O mirante esta calmo.$"
+
+EryonDragoes_Text_CarbinkEscaped:
+	.string "CARBINK desapareceu\n"
+	.string "entre as rochas.\p"
+	.string "Pode voltar depois.$"
+
+EryonDragoes_Text_CarbinkQuiet:
+	.string "O mirante esta em paz\n"
+	.string "e o eco ficou suave.$"
+
+EryonDragoes_Text_AuroraSuppliesLocked:
+	.string "Uma caixa fechada\n"
+	.string "fica nas rochas.\p"
+	.string "Um CARBINK vigia\n"
+	.string "seu interior.$"
+
+EryonDragoes_Text_AuroraSuppliesFound:
+	.string "CAIXA DA AURORA:\p"
+	.string "Um MAX ETHER estava\n"
+	.string "guardado aqui.$"
+
+EryonDragoes_Text_AuroraSuppliesFull:
+	.string "Sua BOLSA esta cheia!\p"
+	.string "O item pode ser\n"
+	.string "recolhido depois.$"
+
+EryonDragoes_Text_AuroraSuppliesEmpty:
+	.string "A caixa da AURORA\n"
+	.string "esta vazia.$"

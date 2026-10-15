@@ -1257,9 +1257,9 @@
 #define FLAG_ERYON_GLACIAL_RIFT_LOG_READ                                   0x4B3 // Glacial Rift journal read
 #define FLAG_ERYON_GLACIAL_BERGMITE_RESOLVED                               0x4B4 // Optional wild Bergmite resolved
 #define FLAG_ERYON_GLACIAL_RIFT_SUPPLIES_TAKEN                             0x4B5 // One-time Ice Rift Revive
-#define FLAG_UNUSED_0x4B6                                           0x4B6 // Unused Flag
-#define FLAG_UNUSED_0x4B7                                           0x4B7 // Unused Flag
-#define FLAG_UNUSED_0x4B8                                           0x4B8 // Unused Flag
+#define FLAG_ERYON_DRAGON_AURORA_ARRAY_READ                                 0x4B6 // Aurora array studied
+#define FLAG_ERYON_DRAGON_CARBINK_RESOLVED                                  0x4B7 // Carbink wildlife event resolved
+#define FLAG_ERYON_DRAGON_AURORA_SUPPLIES_TAKEN                             0x4B8 // Aurora one-time Max Ether
 #define FLAG_UNUSED_0x4B9                                           0x4B9 // Unused Flag
 #define FLAG_UNUSED_0x4BA                                           0x4BA // Unused Flag
 #define FLAG_UNUSED_0x4BB                                           0x4BB // Unused Flag
