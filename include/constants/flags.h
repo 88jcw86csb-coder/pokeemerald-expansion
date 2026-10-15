@@ -1245,7 +1245,7 @@
 #define FLAG_ERYON_OASIS_ALCOVE_SUPPLIES_TAKEN                        0x4A7 // Unique caravan refuge supplies
 #define FLAG_ERYON_WIND_GARDEN_REWARD_CLAIMED                          0x4A8 // Optional valley supplies
 #define FLAG_ERYON_SOLAR_CANYON_SUPPLIES_CLAIMED                       0x4A9 // Desert side-route supplies
-#define FLAG_UNUSED_0x4AA                                           0x4AA // Unused Flag
+#define FLAG_ERYON_SOLAR_CANYON_RANGER_DEFEATED                       0x4AA // Optional Solaris canyon trainer
 #define FLAG_UNUSED_0x4AB                                           0x4AB // Unused Flag
 #define FLAG_UNUSED_0x4AC                                           0x4AC // Unused Flag
 #define FLAG_UNUSED_0x4AD                                           0x4AD // Unused Flag
