@@ -1242,7 +1242,7 @@
 #define FLAG_ERYON_RIDGE_BIRDWATCHER_DEFEATED                        0x4A4 // Optional mountain trainer
 #define FLAG_ERYON_AMPHITHEATRE_SUPPLIES_CLAIMED                     0x4A5 // One-time city training supplies
 #define FLAG_ERYON_OASIS_HELIOPTILE_RESOLVED                         0x4A6 // Optional desert-trail Kalos encounter
-#define FLAG_UNUSED_0x4A7                                           0x4A7 // Unused Flag
+#define FLAG_ERYON_OASIS_ALCOVE_SUPPLIES_TAKEN                        0x4A7 // Unique caravan refuge supplies
 #define FLAG_UNUSED_0x4A8                                           0x4A8 // Unused Flag
 #define FLAG_UNUSED_0x4A9                                           0x4A9 // Unused Flag
 #define FLAG_UNUSED_0x4AA                                           0x4AA // Unused Flag
