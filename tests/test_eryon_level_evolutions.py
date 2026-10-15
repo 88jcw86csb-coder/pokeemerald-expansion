@@ -19,6 +19,13 @@ class EryonEvolutionRules(unittest.TestCase):
         self.assertNotIn("IF_TIME", riolu)
         self.assertNotIn("IF_NOT_TIME", riolu)
 
+    def test_oasis_helioptile_evolves_by_level_not_stone(self):
+        source = (SPECIES_DIR / "gen_6_families.h").read_text(encoding="utf-8")
+        helioptile = source.split("[SPECIES_HELIOPTILE] =", 1)[1].split(
+            "[SPECIES_HELIOLISK] =", 1)[0]
+        self.assertIn("{EVO_LEVEL, 36, SPECIES_HELIOLISK}", helioptile)
+        self.assertNotIn("EVO_ITEM", helioptile)
+
     def test_no_trade_or_friendship_evolutions_up_to_kalos(self):
         for generation in range(1, 7):
             with self.subTest(generation=generation):
