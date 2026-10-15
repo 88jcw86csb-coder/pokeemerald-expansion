@@ -66,7 +66,7 @@ class EryonWhiteoutCheckpoints(unittest.TestCase):
                 label = "Eryon_" + name + "_RespawnCheckpoint"
                 self.assertIn("map_script MAP_SCRIPT_ON_TRANSITION, " + label,
                               script)
-                self.assertEqual(script.count(label + ":"), 2)
+                self.assertEqual(script.count(label + ":"), 1)
                 self.assertIn("setrespawn HEAL_LOCATION_ERYON_" + map_part, script)
                 self.assertIn(label + ":\n\tsetrespawn "
                               "HEAL_LOCATION_ERYON_" + map_part + "\n\tend",
