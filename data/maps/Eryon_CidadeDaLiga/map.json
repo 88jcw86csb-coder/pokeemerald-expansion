@@ -197,6 +197,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EryonCidadeLiga_EventScript_AmphitheatreSupplies"
+    },
+    {
+      "type": "sign",
+      "x": 50,
+      "y": 39,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EryonCidadeLiga_EventScript_ResonanceBoard"
     }
   ],
   "id": "MAP_ERYON_CIDADE_DA_LIGA",

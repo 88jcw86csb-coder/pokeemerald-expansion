@@ -29,6 +29,13 @@ A ROM de GBA segue em desenvolvimento na branch `eryon-development`. **Ter arqui
 - A missão opcional **Os Ecos do Observatório** adiciona um gravador de pulsos ao Vale dos Ecos, entrega dos registros ao arquivista da Aldeia dos Ecos, um marcador na Trilha Lunar e reações narrativas em Lunaris e Drakonia. O arquivista concede `Star Piece` uma vez; flags permanentes independentes `0x4A2` e `0x4A3` não modificam o sétimo e oitavo ginásios.
 - Os testes de mapa e o validador de espécies cobrem as tabelas, locais e flags. Ainda é preciso comprovar no **Delta** os encontros no terreno, a entrega da recompensa, o salvamento e a jornada completa.
 
+## Continuidade do desfecho Eclipse na Cidade da Liga — 15/10/2026
+
+- A capital reconhece o desligamento opcional da rede Eclipse em Drakonia por meio da repórter, do investigador e da pesquisadora. Há diálogos próprios para a combinação de Campeão com rede desativada.
+- O novo **Painel dos Cristais** foi colocado na praça junto ao prédio central, em (50,39), sobre caminho transitável no plano 96×72. Ele acompanha o estado das provas, o desligamento e a conquista da Liga.
+- O investigador verifica primeiro sua recompensa anterior da Gruta das Estrelas, preservando o direito de buscá-la quando a Bolsa estiver cheia.
+- Nenhum acesso, requisito de insígnia, resultado de batalha, evolução ou registro de classificação foi alterado. Os testes novos conferem a estrutura e não substituem compilação nem jogo no emulador.
+
 ## Pendências prioritárias
 1. Compilação limpa e verificação da ROM GBA via `tools/build_eryon.sh` e GitHub Actions.
 2. Auditoria das tabelas `land_mons`, evolução, disponibilidade e distribuição de capturas por rota.

@@ -81,6 +81,7 @@ EryonCidadeLiga_EventScript_Reporter::
 	lock
 	faceplayer
 	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonCidadeLiga_EventScript_ReporterChampion
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonCidadeLiga_EventScript_ReporterPeace
 	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonCidadeLiga_EventScript_ReporterEvidence
 	goto_if_set FLAG_ERYON_DRAKONIA_ECLIPSE_DEFEATED, EryonCidadeLiga_EventScript_ReporterDrakonia
 	goto_if_set FLAG_ERYON_STAR_CHART_READ, EryonCidadeLiga_EventScript_ReporterChart
@@ -93,6 +94,7 @@ EryonCidadeLiga_EventScript_Investigator::
 	faceplayer
 	goto_if_unset FLAG_ERYON_GROTTO_SCOUT_REWARD_CLAIMED, EryonCidadeLiga_EventScript_InvestigatorScoutRewardCheck
 EryonCidadeLiga_EventScript_InvestigatorNormal::
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonCidadeLiga_EventScript_InvestigatorPeace
 	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonCidadeLiga_EventScript_InvestigatorEvidenceFiled
 	goto_if_set FLAG_ERYON_DRAGON_TRAIL_MANIFEST_READ, EryonCidadeLiga_EventScript_InvestigatorManifest
 	goto_if_set FLAG_ERYON_QUALIFIED, EryonCidadeLiga_EventScript_InvestigatorQualified
@@ -433,6 +435,7 @@ EryonCidadeLiga_EventScript_FanChampion::
 	end
 
 EryonCidadeLiga_EventScript_ReporterChampion::
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonCidadeLiga_EventScript_ReporterChampionPeace
 	msgbox EryonCidadeLiga_Text_ReporterChampion, MSGBOX_DEFAULT
 	release
 	end
@@ -458,6 +461,7 @@ EryonCidadeLiga_EventScript_ResonanceDelegate::
 	lock
 	faceplayer
 	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonCidadeLiga_EventScript_ResonanceDelegateChampion
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonCidadeLiga_EventScript_ResonanceDelegatePeace
 	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonCidadeLiga_EventScript_ResonanceDelegateFiled
 	goto_if_set FLAG_ERYON_SERRA_ECLIPSE_SIGNAL_DISABLED, EryonCidadeLiga_EventScript_ResonanceDelegateQuiet
 	msgbox EryonCidadeLiga_Text_ResonanceDelegateBefore, MSGBOX_DEFAULT
@@ -475,6 +479,7 @@ EryonCidadeLiga_EventScript_ResonanceDelegateFiled::
 	end
 
 EryonCidadeLiga_EventScript_ResonanceDelegateChampion::
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonCidadeLiga_EventScript_ResonanceDelegateChampionPeace
 	msgbox EryonCidadeLiga_Text_ResonanceDelegateChampion, MSGBOX_DEFAULT
 	release
 	end
@@ -939,3 +944,128 @@ EryonCidadeLiga_Text_AmphitheatreSuppliesFull:
 EryonCidadeLiga_Text_AmphitheatreSuppliesTaken:
 	.string "A caixa de apoio\n"
 	.string "esta vazia.$"
+
+@ Eclipse finale now has visible consequences in the League capital.
+@ All paths are informational. The investigator's existing cave reward is checked
+@ before these responses, so an unclaimed Rare Candy stays available.
+EryonCidadeLiga_EventScript_ReporterPeace::
+	msgbox EryonCidadeLiga_Text_ReporterPeace, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_ReporterChampionPeace::
+	msgbox EryonCidadeLiga_Text_ReporterChampionPeace, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_InvestigatorPeace::
+	msgbox EryonCidadeLiga_Text_InvestigatorPeace, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_ResonanceDelegatePeace::
+	msgbox EryonCidadeLiga_Text_ResonanceDelegatePeace, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_ResonanceDelegateChampionPeace::
+	msgbox EryonCidadeLiga_Text_ResonanceDelegateChampionPeace, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_Text_ReporterPeace:
+	.string "REPORTER: A rede da\n"
+	.string "ECLIPSE foi desligada!\p"
+	.string "DRAKONIA esta segura\n"
+	.string "e a LIGA segue aberta.\p"
+	.string "A cidade prepara uma\n"
+	.string "homenagem aos guardioes.$"
+
+EryonCidadeLiga_Text_ReporterChampionPeace:
+	.string "REPORTER: O CAMPEAO\n"
+	.string "salvou o torneio\n"
+	.string "e protegeu os cristais!\p"
+	.string "ERYON comemora a paz\n"
+	.string "em toda a regiao.$"
+
+EryonCidadeLiga_Text_InvestigatorPeace:
+	.string "INVESTIGADOR: A LIGA\n"
+	.string "confirmou o desligamento\n"
+	.string "da rede ECLIPSE.\p"
+	.string "As provas permitiram\n"
+	.string "isolar os terminais.\p"
+	.string "O torneio pode seguir\n"
+	.string "sem aquela ameaca.$"
+
+EryonCidadeLiga_Text_ResonanceDelegatePeace:
+	.string "PESQUISADORA: A energia\n"
+	.string "dos cristais se acalmou.\p"
+	.string "Os sinais de DRAKONIA\n"
+	.string "e da gruta cessaram.\p"
+	.string "A pesquisa em ERYON\n"
+	.string "agora sera pacifica.$"
+
+EryonCidadeLiga_Text_ResonanceDelegateChampionPeace:
+	.string "PESQUISADORA: CAMPEAO,\n"
+	.string "seu legado e duplo!\p"
+	.string "Venceu a LIGA e acabou\n"
+	.string "com a rede ECLIPSE.\p"
+	.string "Os pesquisadores\n"
+	.string "jamais esquecerao.$"
+
+@ New public resonance board beside the central League building.
+@ It follows evidence, network shutdown and Champion milestones, without
+@ granting items, forcing a battle or blocking any League doorway.
+EryonCidadeLiga_EventScript_ResonanceBoard::
+	lock
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonCidadeLiga_EventScript_ResonanceBoardRestored
+	goto_if_set FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED, EryonCidadeLiga_EventScript_ResonanceBoardAlert
+	msgbox EryonCidadeLiga_Text_ResonanceBoardBefore, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_ResonanceBoardAlert::
+	msgbox EryonCidadeLiga_Text_ResonanceBoardAlert, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_ResonanceBoardRestored::
+	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonCidadeLiga_EventScript_ResonanceBoardChampion
+	msgbox EryonCidadeLiga_Text_ResonanceBoardRestored, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_EventScript_ResonanceBoardChampion::
+	msgbox EryonCidadeLiga_Text_ResonanceBoardChampion, MSGBOX_DEFAULT
+	release
+	end
+
+EryonCidadeLiga_Text_ResonanceBoardBefore:
+	.string "PAINEL DOS CRISTAIS:\p"
+	.string "O mapa mostra sinais\n"
+	.string "de varias rotas.\p"
+	.string "A origem do pulso\n"
+	.string "ainda e desconhecida.$"
+
+EryonCidadeLiga_Text_ResonanceBoardAlert:
+	.string "PAINEL DOS CRISTAIS:\p"
+	.string "A LIGA recebeu provas\n"
+	.string "sobre a rede ECLIPSE.\p"
+	.string "O sinal mais forte\n"
+	.string "vem de DRAKONIA.$"
+
+EryonCidadeLiga_Text_ResonanceBoardRestored:
+	.string "PAINEL DOS CRISTAIS:\p"
+	.string "REDE ECLIPSE: INATIVA!\p"
+	.string "A energia natural\n"
+	.string "voltou ao equilibrio.\p"
+	.string "O edificio central\n"
+	.string "recebe o torneio.$"
+
+EryonCidadeLiga_Text_ResonanceBoardChampion:
+	.string "PAINEL DOS CRISTAIS:\p"
+	.string "REDE ECLIPSE: INATIVA!\p"
+	.string "Homenagem ao CAMPEAO\n"
+	.string "e aos guardioes de ERYON.\p"
+	.string "A LIGA segue aberta\n"
+	.string "a novos desafios.$"
