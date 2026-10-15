@@ -10,8 +10,8 @@ import re
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-LABEL = re.compile(r"(?m)^([A-Za-z_][A-Za-z_0-9]*)::?\\s*$")
-STRING = re.compile(r'^\\s*\\.string\\s+"(?:[^"\\\\]|\\\\.)*"\\s*$')
+LABEL = re.compile(r"(?m)^([A-Za-z_][A-Za-z_0-9]*)::?\s*$")
+STRING = re.compile(r'^\s*\.string\s+"(?:[^"\\]|\\.)*"\s*$')
 
 
 class EryonDialogueLinksTests(unittest.TestCase):
