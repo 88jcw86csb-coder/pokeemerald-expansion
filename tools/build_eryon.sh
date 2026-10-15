@@ -39,6 +39,9 @@ python3 -m unittest discover -s tools -p 'test_eryon_event_flow.py' -v
 echo "== Eryon: Elite Four tournament integrity =="
 python3 -m unittest discover -s tests -p 'test_eryon_elite_four.py' -v
 
+echo "== Eryon: Riolu level 35 and no trade/friendship evolution through Kalos =="
+python3 -m unittest discover -s tests -p 'test_eryon_level_evolutions.py' -v
+
 echo "== Eryon: Eight Gym level and EXP balance integrity =="
 python3 -m unittest discover -s tests -p 'test_eryon_gym_balance.py' -v
 
