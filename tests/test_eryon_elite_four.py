@@ -109,8 +109,11 @@ class EliteFourContract(unittest.TestCase):
         self.assertIn("goto_if_set FLAG_ERYON_CHAMPION_CROWNED", transition)
         for trainer in TRAINERS:
             self.assertIn(f"cleartrainerflag {trainer}", transition)
-        self.assertNotIn("TRAINER_ERYON_QUALIFIER_", transition)
-        self.assertNotIn("FLAG_ERYON_QUALIFIED", transition)
+        # Exclude script comments: mentioning a protected flag in a warning
+        # does not mutate the saved qualification state.
+        commands = "\n".join(line.split("@", 1)[0] for line in transition.splitlines())
+        self.assertNotIn("TRAINER_ERYON_QUALIFIER_", commands)
+        self.assertNotIn("FLAG_ERYON_QUALIFIED", commands)
 
     def test_healing_room_gate_and_safe_exit(self):
         gate = body(self.recovery, "EryonLigaRecover_EventScript_EliteGate")
