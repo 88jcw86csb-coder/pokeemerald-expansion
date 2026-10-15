@@ -4,6 +4,11 @@ name: Pokemon Eryon - Compilar ROM Atual
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - .github/workflows/eryon-build-current.yml
 
 permissions:
   contents: read
