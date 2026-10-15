@@ -39,6 +39,9 @@ python3 -m unittest discover -s tools -p 'test_eryon_event_flow.py' -v
 echo "== Eryon: Elite Four tournament integrity =="
 python3 -m unittest discover -s tests -p 'test_eryon_elite_four.py' -v
 
+echo "== Eryon: Dragon Trail Aurora Terrace and Carbink protection =="
+python3 -m unittest discover -s tests -p 'test_eryon_dragon_aurora.py' -v
+
 echo "== Eryon: Lunar Trail Moonfall Sanctuary and ranger encounter =="
 python3 -m unittest discover -s tests -p 'test_eryon_moonfall_sanctuary.py' -v
 

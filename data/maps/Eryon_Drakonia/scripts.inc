@@ -48,6 +48,7 @@ EryonDrakonia_EventScript_SageAfterChart::
 EryonDrakonia_EventScript_RuneResearcher::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_DRAGON_CARBINK_RESOLVED, EryonDrakonia_EventScript_ResearcherCarbink
 	goto_if_set FLAG_ERYON_DRAGON_TRAIL_NOIBAT_RESOLVED, EryonDrakonia_EventScript_ResearcherNoibat
 	goto_if_set FLAG_ERYON_STAR_GROTTO_RELAY_DISABLED, EryonDrakonia_EventScript_ResearcherRelayOff
 	goto_if_set FLAG_ERYON_ECHO_ARCHIVE_REWARD_CLAIMED, EryonDrakonia_EventScript_ResearcherEchoArchive
@@ -814,3 +815,43 @@ EryonDrakonia_Text_SageNetworkRestored:
 	.string "original de ERYON.\p"
 	.string "Agora siga rumo a\n"
 	.string "LIGA dos campeoes.$"
+@ The final city records crystal and Noibat restoration without altering its
+@ eighth gym, dragon shrine, Eclipse finale or main quest requirements.
+EryonDrakonia_EventScript_ResearcherCarbink::
+	goto_if_set FLAG_ERYON_DRAGON_TRAIL_NOIBAT_RESOLVED, EryonDrakonia_EventScript_ResearcherAuroraAndNoibat
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonDrakonia_EventScript_ResearcherAuroraPeace
+	msgbox EryonDrakonia_Text_ResearcherCarbink, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_EventScript_ResearcherAuroraAndNoibat::
+	msgbox EryonDrakonia_Text_ResearcherAuroraAndNoibat, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_EventScript_ResearcherAuroraPeace::
+	msgbox EryonDrakonia_Text_ResearcherAuroraPeace, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_Text_ResearcherCarbink:
+	.string "PESQUISADOR: O CARBINK\n"
+	.string "da AURORA mostrou\n"
+	.string "cristais muito antigos.\p"
+	.string "A ECLIPSE tentou\n"
+	.string "alterar esse pulso.$"
+
+EryonDrakonia_Text_ResearcherAuroraAndNoibat:
+	.string "PESQUISADOR: CARBINK\n"
+	.string "e NOIBAT estao a salvo!\p"
+	.string "Agora o santuario\n"
+	.string "estudara ambos.\p"
+	.string "O eco dos cristais\n"
+	.string "ja nao sera explorado.$"
+
+EryonDrakonia_Text_ResearcherAuroraPeace:
+	.string "PESQUISADOR: Com a\n"
+	.string "ECLIPSE derrotada,\n"
+	.string "a AURORA esta em paz.\p"
+	.string "Seus cristais serao\n"
+	.string "protegidos pela cidade.$"

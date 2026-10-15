@@ -68,6 +68,15 @@ A ROM de GBA segue em desenvolvimento na branch `eryon-development`. **Ter arqui
 - A cientista de Frostheim e a anciã da Vila da Neblina agora respondem ao novo acontecimento. O terceiro ginásio de Bjorn, a batalha já existente do pesquisador da Eclipse, suas recompensas e ambas as saídas da trilha foram mantidos.
 - Novo teste estático `tests/test_eryon_glacial_rift.py`, chamado por `tools/build_eryon.sh`, cobre terreno/binário, alcançabilidade de caches/eventos, referências de scripts, flags e recompensa. Necessários ainda compilação e testes no Delta.
 
+## Mirante da Aurora — Trilha dos Dragões (15/10/2026)
+
+- Extensão física do ramo norte já existente entre Lunaris e Vila do Pico: 57 metatiles adicionais na área (39–45,7–13), ligados pela passagem da encosta, sem mexer na estrada principal, na sala do ninho de Noibat, na recompensa do Mirante Sul e nos NPCs anteriores.
+- O `map.bin` foi regenerado a partir do plano autoritativo de terreno, mantendo bits de colisão correspondentes; duas saídas antigas e todos os locais já registrados continuaram alcançáveis.
+- **Painel da Aurora** (`0x4B6`) reconhece o manifesto Eclipse, o desfecho em Drakonia e o estudo dos cristais; **Carbink nível 43** (`0x4B7`) entra por batalha selvagem padrão, podendo ser capturado ou derrotado. Fugir ou recusar não consome o encontro.
+- A caixa da encosta oferece um único Max Ether (`0x4B8`) após resolver o encontro, sem consumir a recompensa quando a Bolsa está cheia.
+- O geólogo da Vila do Pico e o pesquisador de Drakonia respondem à descoberta. Quando Carbink e Noibat já foram encontrados, os diálogos mencionam ambos, evitando ocultar a missão antiga; o oitavo ginásio e o encerramento da rede Eclipse não foram alterados.
+- Teste `tests/test_eryon_dragon_aurora.py` integrado ao script de build verifica caminho, binário, flags, recompensas, interações e ligações às cidades. **Verificação estrutural não equivale a compilar nem jogar no Delta.**
+
 ## Pendências prioritárias
 1. Compilação limpa e verificação da ROM GBA via `tools/build_eryon.sh` e GitHub Actions.
 2. Auditoria das tabelas `land_mons`, evolução, disponibilidade e distribuição de capturas por rota.

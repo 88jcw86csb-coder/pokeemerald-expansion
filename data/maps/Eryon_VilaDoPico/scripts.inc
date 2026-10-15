@@ -35,6 +35,7 @@ EryonPico_EventScript_Messenger::
 EryonPico_EventScript_Geologist::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_DRAGON_CARBINK_RESOLVED, EryonPico_EventScript_GeologistCarbink
 	goto_if_set FLAG_ERYON_DRAGON_TRAIL_NOIBAT_RESOLVED, EryonPico_EventScript_GeologistNoibat
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonPico_EventScript_GeologistClue
 	msgbox EryonPico_Text_GeologistBefore, MSGBOX_DEFAULT
@@ -354,3 +355,29 @@ EryonPico_Text_NoticeAfterPeace:
 	.string "desligada em DRAKONIA.\p"
 	.string "As trilhas voltaram\n"
 	.string "a receber viajantes.$"
+@ Aurora discovery is mentioned in Peak Village. Noibat keeps its own
+@ dialogue when only that encounter is complete; a combined text handles both.
+EryonPico_EventScript_GeologistCarbink::
+	goto_if_set FLAG_ERYON_DRAGON_TRAIL_NOIBAT_RESOLVED, EryonPico_EventScript_GeologistAuroraAndNoibat
+	msgbox EryonPico_Text_GeologistCarbink, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPico_EventScript_GeologistAuroraAndNoibat::
+	msgbox EryonPico_Text_GeologistAuroraAndNoibat, MSGBOX_DEFAULT
+	release
+	end
+
+EryonPico_Text_GeologistCarbink:
+	.string "GEOLOGO: Um CARBINK\n"
+	.string "foi visto na AURORA!\p"
+	.string "Os cristais voltaram\n"
+	.string "ao ritmo natural.$"
+
+EryonPico_Text_GeologistAuroraAndNoibat:
+	.string "GEOLOGO: Encontrou\n"
+	.string "CARBINK e NOIBAT!\p"
+	.string "Seus dados ajudarao\n"
+	.string "a proteger o PICO.\p"
+	.string "Obrigado por cuidar\n"
+	.string "dos dois habitats.$"
