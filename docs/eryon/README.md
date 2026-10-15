@@ -59,6 +59,15 @@ A ROM de GBA segue em desenvolvimento na branch `eryon-development`. **Ter arqui
 - Astrônoma de Lunaris e anciã da Aldeia dos Ecos agora reagem à pesquisa e ao Inkay sem mudar o sétimo ginásio. Teste `test_eryon_moonfall_sanctuary.py` integrado à compilação e teste antigo ajustado para não presumir capacidade fixa de 891 treinadores.
 - Esses testes e inspeções estáticas não certificam a compilação GBA nem a compatibilidade visual com Delta.
 
+## Encosta norte e Fenda Glacial — Trilha Glacial (15/10/2026)
+
+- Corrigida a divergência anterior entre plano 48×44 e `data/layouts/Eryon_TrilhaGlacial/map.bin`, que continha paredes codificadas como pisos sem colisão. O novo binário foi gerado do mesmo plano de terreno que o build utiliza.
+- Uma passagem sinuosa pela encosta norte acrescentou 80 células transitáveis, alcançando os dois suprimentos preexistentes da Eclipse em (35,12) e (39,12), antes isolados por paredes do plano; nenhum script antigo foi removido.
+- Na fenda de gelo, o Diário Glacial (`0x4B3`) conecta a pesquisa da Eclipse ao estado da equipe inimiga e ao final da rede em Drakonia. Bergmite nível 29 pode ser encontrado após examinar o diário; captura ou vitória registra `0x4B4`, enquanto recusa, fuga e teleporte permitem tentar novamente.
+- A recompensa da fenda é uma única Revive (`0x4B5`), entregue somente após a resolução de Bergmite e mantendo nova tentativa com Bolsa cheia. O guia original comenta a recuperação do local.
+- A cientista de Frostheim e a anciã da Vila da Neblina agora respondem ao novo acontecimento. O terceiro ginásio de Bjorn, a batalha já existente do pesquisador da Eclipse, suas recompensas e ambas as saídas da trilha foram mantidos.
+- Novo teste estático `tests/test_eryon_glacial_rift.py`, chamado por `tools/build_eryon.sh`, cobre terreno/binário, alcançabilidade de caches/eventos, referências de scripts, flags e recompensa. Necessários ainda compilação e testes no Delta.
+
 ## Pendências prioritárias
 1. Compilação limpa e verificação da ROM GBA via `tools/build_eryon.sh` e GitHub Actions.
 2. Auditoria das tabelas `land_mons`, evolução, disponibilidade e distribuição de capturas por rota.

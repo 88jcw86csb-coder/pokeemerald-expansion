@@ -57,6 +57,9 @@ python3 -m unittest discover -s tests -p 'test_eryon_gym_balance.py' -v
 echo "== Eryon: Mist lookout and Glacial route progression =="
 python3 -m unittest discover -s tests -p 'test_eryon_mist_watch.py' -v
 
+echo "== Eryon: Glacial ridge, existing caches and Bergmite encounter =="
+python3 -m unittest discover -s tests -p 'test_eryon_glacial_rift.py' -v
+
 echo "== Eryon: Balanced Glacial Eclipse battle and Frostheim consequence =="
 python3 -m unittest discover -s tests -p 'test_eryon_glacial_eclipse.py' -v
 

@@ -5,6 +5,7 @@ Eryon_Frostheim_MapScripts::
 EryonFrostheim_EventScript_Researcher::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_GLACIAL_BERGMITE_RESOLVED, EryonFrostheim_EventScript_ResearcherBergmiteSafe
 	goto_if_set FLAG_ERYON_SERRA_ECLIPSE_SIGNAL_DISABLED, EryonFrostheim_EventScript_ResearcherSerraQuiet
 	goto_if_set FLAG_BADGE03_GET, EryonFrostheim_EventScript_ResearcherSerraHint
 	goto_if_set FLAG_ERYON_GLACIAL_ECLIPSE_RESEARCHER_DEFEATED, EryonFrostheim_EventScript_ResearcherEclipseDefeated
@@ -188,3 +189,17 @@ EryonFrostheim_Text_ResearcherSerraQuiet:
 	.string "ao seu estado natural.\p"
 	.string "ARKHARA deve saber\n"
 	.string "dessa descoberta.$"
+
+@ Frostheim receives the optional report from the newly accessible Ice Rift.
+EryonFrostheim_EventScript_ResearcherBergmiteSafe::
+	msgbox EryonFrostheim_Text_ResearcherBergmiteSafe, MSGBOX_DEFAULT
+	release
+	end
+
+EryonFrostheim_Text_ResearcherBergmiteSafe:
+	.string "CIENTISTA: O BERGMITE\n"
+	.string "da fenda foi salvo!\p"
+	.string "As amostras da ECLIPSE\n"
+	.string "ja nao ameacam o gelo.\p"
+	.string "BJORN continuara\n"
+	.string "protegendo FROSTHEIM.$"
