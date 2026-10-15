@@ -382,6 +382,23 @@ class LeagueMapTests(unittest.TestCase):
         self.assertNotIn("setflag ", body)
         self.assertNotIn("trainerbattle_", body)
 
+    def test_city_training_steward_is_reachable_and_preserves_qualifiers(self):
+        import json
+        terrain = league()
+        data = json.loads((ROOT / "data/maps/Eryon_CidadeDaLiga/map.json").read_text())
+        people = [event for event in data["object_events"] if
+                  event["script"] == "EryonCidadeLiga_EventScript_AmphitheatreTraining"]
+        self.assertEqual([(event["x"], event["y"]) for event in people], [(25, 48)])
+        self.assertIn((25, 48), connected(terrain, (0, 36)))
+        self.assertIn((48, 36), connected(terrain, (0, 36)))
+        scripts = (ROOT / "data/maps/Eryon_CidadeDaLiga/scripts.inc").read_text()
+        entry = scripts.split("EryonCidadeLiga_EventScript_AmphitheatreTraining::", 1)[1].split(
+            "EryonCidadeLiga_EventScript_TrainingQualified::", 1)[0]
+        self.assertIn("FLAG_ERYON_CHAMPION_CROWNED", entry)
+        self.assertIn("FLAG_ERYON_QUALIFIED", entry)
+        self.assertNotIn("setflag ", entry)
+        self.assertNotIn("trainerbattle_", entry)
+
     def test_eight_stars_terrace_connected_city(self):
         """Check the new skyline park, unchanged League building, and exact terrain."""
         import json,struct
