@@ -265,6 +265,25 @@ class LeagueMapTests(unittest.TestCase):
         self.assertNotIn("setflag ", entry)
         self.assertNotIn("trainerbattle_", entry)
 
+    def test_western_ravine_healing_shelter_is_optional_and_accessible(self):
+        import json
+        t = route()
+        data = json.loads((ROOT / "data/maps/Eryon_CaminhoDaLiga/map.json").read_text())
+        signs = [event for event in data["bg_events"]
+                 if event["script"] == "EryonLigaCaminho_EventScript_RavineRest"]
+        self.assertEqual([(event["x"], event["y"]) for event in signs], [(20, 30)])
+        self.assertEqual(t[30][20], ":")
+        self.assertIn((20, 30), connected(t, (0, 22)))
+        self.assertIn((47, 22), connected(t, (0, 22)))
+        source = (ROOT / "data/maps/Eryon_CaminhoDaLiga/scripts.inc").read_text()
+        body = source.split("EryonLigaCaminho_EventScript_RavineRest::", 1)[1].split(
+            "EryonLigaCaminho_EventScript_RavineRestDecline::", 1)[0]
+        self.assertIn("MSGBOX_YESNO", body)
+        self.assertIn("special HealPlayerParty", body)
+        self.assertIn("goto_if_eq VAR_RESULT, NO", body)
+        self.assertNotIn("setflag ", body)
+        self.assertNotIn("trainerbattle_", body)
+
     def test_eight_stars_terrace_connected_city(self):
         """Check the new skyline park, unchanged League building, and exact terrain."""
         import json,struct
