@@ -298,6 +298,27 @@ class LeagueMapTests(unittest.TestCase):
             render("caminho_da_liga", terrain),
         )
 
+    def test_rock_refuge_relic_is_walkable_and_does_not_gate_league(self):
+        import json
+        terrain = route()
+        data = json.loads((ROOT / "data/maps/Eryon_CaminhoDaLiga/map.json").read_text())
+        signs = [event for event in data["bg_events"]
+                 if event["script"] == "EryonLigaCaminho_EventScript_RockRefuge"]
+        self.assertEqual([(event["x"], event["y"]) for event in signs], [(17, 28)])
+        self.assertEqual(terrain[28][17], ".")
+        reached = connected(terrain, (0, 22))
+        self.assertIn((17, 28), reached)
+        self.assertIn((47, 22), reached)
+        scripts = (ROOT / "data/maps/Eryon_CaminhoDaLiga/scripts.inc").read_text()
+        entry = scripts.split("EryonLigaCaminho_EventScript_RockRefuge::", 1)[1].split(
+            "EryonLigaCaminho_EventScript_RockRefugeChart::", 1)[0]
+        for flag in ("FLAG_ERYON_CHAMPION_CROWNED",
+                     "FLAG_ERYON_ECLIPSE_EVIDENCE_REPORTED",
+                     "FLAG_ERYON_STAR_CHART_READ"):
+            self.assertIn(flag, entry)
+        self.assertNotIn("setflag ", entry)
+        self.assertNotIn("trainerbattle_", entry)
+
     def test_eight_stars_terrace_connected_city(self):
         """Check the new skyline park, unchanged League building, and exact terrain."""
         import json,struct
