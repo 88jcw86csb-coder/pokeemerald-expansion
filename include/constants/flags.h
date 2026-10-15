@@ -1246,7 +1246,7 @@
 #define FLAG_ERYON_WIND_GARDEN_REWARD_CLAIMED                          0x4A8 // Optional valley supplies
 #define FLAG_ERYON_SOLAR_CANYON_SUPPLIES_CLAIMED                       0x4A9 // Desert side-route supplies
 #define FLAG_ERYON_SOLAR_CANYON_RANGER_DEFEATED                       0x4AA // Optional Solaris canyon trainer
-#define FLAG_UNUSED_0x4AB                                           0x4AB // Unused Flag
+#define FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN                           0x4AB // Drakonia finale: Eclipse crystal network dismantled
 #define FLAG_UNUSED_0x4AC                                           0x4AC // Unused Flag
 #define FLAG_UNUSED_0x4AD                                           0x4AD // Unused Flag
 #define FLAG_UNUSED_0x4AE                                           0x4AE // Unused Flag
