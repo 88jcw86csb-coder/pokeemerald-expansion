@@ -42,6 +42,9 @@ python3 -m unittest discover -s tests -p 'test_eryon_elite_four.py' -v
 echo "== Eryon: Riolu level 35 and no trade/friendship evolution through Kalos =="
 python3 -m unittest discover -s tests -p 'test_eryon_level_evolutions.py' -v
 
+echo "== Eryon: Eclipse network finale continuity =="
+python3 -m unittest discover -s tests -p 'test_eryon_eclipse_finale.py' -v
+
 echo "== Eryon: Eight Gym level and EXP balance integrity =="
 python3 -m unittest discover -s tests -p 'test_eryon_gym_balance.py' -v
 
