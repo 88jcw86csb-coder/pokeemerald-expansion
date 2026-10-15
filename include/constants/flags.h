@@ -1262,7 +1262,7 @@
 #define FLAG_ERYON_DRAGON_AURORA_SUPPLIES_TAKEN                             0x4B8 // Aurora one-time Max Ether
 #define FLAG_ERYON_ORCHARD_LEDGER_READ                                  0x4B9 // Route 04 orchard manifest examined
 #define FLAG_ERYON_ORCHARD_RELAY_TRACED                                 0x4BA // Route 04 lookout relay decoded after ledger
-#define FLAG_UNUSED_0x4BB                                           0x4BB // Unused Flag
+#define FLAG_ERYON_PEACE_CEREMONY_RECORDED                             0x4BB // Final League peace and Champion epilogue
 #define FLAG_UNUSED_0x4BC                                           0x4BC // Unused Flag
 #define FLAG_UNUSED_0x4BD                                           0x4BD // Unused Flag
 #define FLAG_UNUSED_0x4BE                                           0x4BE // Unused Flag

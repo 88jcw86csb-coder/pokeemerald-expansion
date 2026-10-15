@@ -761,6 +761,7 @@ EryonDrakonia_EventScript_EclipseFinaleLater::
 	end
 
 EryonDrakonia_EventScript_EclipseFinaleComplete::
+	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonDrakonia_EventScript_FinalNetworkChampion
 	msgbox EryonDrakonia_Text_EclipseFinaleComplete, MSGBOX_DEFAULT
 	release
 	end
@@ -874,3 +875,17 @@ EryonDrakonia_Text_GymAfterEclipse:
 	.string "os guardioes de ERYON.\p"
 	.string "Nosso santuario esta\n"
 	.string "livre da rede ECLIPSE.$"
+
+
+@ The sanctuary acknowledges a Champion who returns after ending Eclipse.
+EryonDrakonia_EventScript_FinalNetworkChampion::
+	msgbox EryonDrakonia_Text_FinalNetworkChampion, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_Text_FinalNetworkChampion:
+	.string "REDE ECLIPSE: INATIVA.\p"
+	.string "O CAMPEAO de ERYON\n"
+	.string "protegeu os cristais.\p"
+	.string "A LIGA guarda a historia\n"
+	.string "desta longa aventura.$"

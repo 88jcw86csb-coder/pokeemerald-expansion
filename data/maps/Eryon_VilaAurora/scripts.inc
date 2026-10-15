@@ -172,6 +172,7 @@ EryonVilaAurora_Text_ElyaHealDeclined:
 @ Homecoming after the three Eclipse finale prerequisites in Drakonia.
 @ This never resets the starter/kit, badge progression or whiteout checkpoint.
 EryonVilaAurora_EventScript_ElyaAfterEclipse::
+	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonVilaAurora_EventScript_ElyaChampionPeace
 	msgbox EryonVilaAurora_Text_ElyaAfterEclipse, MSGBOX_DEFAULT
 	goto EryonVilaAurora_EventScript_ElyaHealOffer
 
@@ -194,3 +195,19 @@ EryonVilaAurora_Text_VillageNoticePeace:
 	.string "da ECLIPSE foi detida!\p"
 	.string "As trilhas seguem abertas\n"
 	.string "a todos os treinadores.$"
+
+
+@ Personal epilogue remains available on returning home after the title.
+EryonVilaAurora_EventScript_ElyaChampionPeace::
+	msgbox EryonVilaAurora_Text_ElyaChampionPeace, MSGBOX_DEFAULT
+	goto EryonVilaAurora_EventScript_ElyaHealOffer
+
+EryonVilaAurora_Text_ElyaChampionPeace:
+	.string "PROF. ELYA: Meu primeiro\n"
+	.string "RIOLU encontrou um\n"
+	.string "verdadeiro companheiro!\p"
+	.string "Voce protegeu ERYON\n"
+	.string "da ECLIPSE e tornou-se\n"
+	.string "o novo CAMPEAO.\p"
+	.string "Sua jornada terminou,\n"
+	.string "mas novas trilhas esperam.$"

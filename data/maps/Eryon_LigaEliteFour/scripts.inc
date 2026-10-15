@@ -110,9 +110,24 @@ EryonLigaElite_EventScript_Champion::
 EryonLigaElite_EventScript_Win5::
 	setflag FLAG_ERYON_CHAMPION_TRAINER_DEFEATED
 	setflag FLAG_ERYON_CHAMPION_CROWNED
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonLigaElite_EventScript_Win5Peace
 	msgbox EryonLigaElite_Text_Win5, MSGBOX_DEFAULT
 	release
 	end
+
+@ League victory can come before or after the optional Eclipse finale.
+EryonLigaElite_EventScript_Win5Peace::
+	msgbox EryonLigaElite_Text_Win5Peace, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaElite_Text_Win5Peace:
+	.string "AURELIO: Voce venceu\n"
+	.string "a ELITE e a ECLIPSE!\p"
+	.string "Ao salvar os cristais,\n"
+	.string "protegeu nossa regiao.\p"
+	.string "Agora, novo CAMPEAO,\n"
+	.string "ERYON celebra seu nome!$"
 
 EryonLigaElite_EventScript_Exit::
 	lock
@@ -148,6 +163,7 @@ EryonLigaElite_EventScript_RulesChampion::
 	end
 
 EryonLigaElite_EventScript_TrophyChampion::
+	goto_if_set FLAG_ERYON_PEACE_CEREMONY_RECORDED, EryonLigaElite_EventScript_TrophyPeace
 	msgbox EryonLigaElite_Text_TrophyChampion, MSGBOX_DEFAULT
 	release
 	end
@@ -291,3 +307,19 @@ EryonLigaElite_Text_Win5:
 	.string "da regiao ERYON!\n"
 	.string "A LIGA celebra!$"
 
+
+
+@ After the public ceremony, the League's trophy carries the epilogue.
+EryonLigaElite_EventScript_TrophyPeace::
+	msgbox EryonLigaElite_Text_TrophyPeace, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLigaElite_Text_TrophyPeace:
+	.string "HALL DA FAMA DE ERYON:\p"
+	.string "O CAMPEAO da paz\n"
+	.string "concluiu sua jornada!\p"
+	.string "Oito insignias, oito\n"
+	.string "duelos e a ELITE FOUR.\p"
+	.string "A historia de RIOLU\n"
+	.string "agora pertence a ERYON.$"
