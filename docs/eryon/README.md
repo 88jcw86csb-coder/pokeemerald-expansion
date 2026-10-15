@@ -49,6 +49,16 @@ A ROM de GBA segue em desenvolvimento na branch `eryon-development`. **Ter arqui
 - As gerações 1, 2, 3 e 5 ainda contêm regras de item/pedra que precisam de migração individual, sobretudo famílias de evoluções ramificadas como Eevee e Clamperl; não converter automaticamente sem controlar destinos duplicados.
 - Os testes estáticos não certificam funcionamento gráfico nem gameplay real no Delta.
 
+## Santuário Lunar — extensão da Trilha Lunar (15/10/2026)
+
+- Nova área lateral **Santuário Lunar** ao sul da Trilha Lunar, ligada pela antiga clareira do sudoeste, com 48 blocos adicionais de caminho acessível. A travessia Aldeia dos Ecos ⇄ Lunaris permanece livre e sem HMs.
+- Plano 48×44 e `map.bin` regenerados com bits corretos de colisão, usando a paleta dos geradores existentes. Não foram removidas as trilhas nem os eventos anteriores.
+- Receptor de pesquisa (`FLAG_ERYON_LUNAR_ARRAY_READ`, 0x4B0) conecta dados da Aldeia e o desfecho da Eclipse à área nova; Inkay oficial de Kalos nível 45 pode ser capturado/derrotado (`0x4B1`), sendo novamente tentável após fuga ou recusa.
+- Suprimentos opcionais oferecem uma única Max Revive (`0x4B2`), após a resolução do encontro; Bolsa cheia não consome a recompensa.
+- NILO, guarda do santuário, desafia voluntariamente o jogador com Lunatone nível 46 e Solrock nível 47. O ID de treinador 891 foi registrado em `opponents.h`, com flag exclusiva `0x4AF` em `GetEryonTrainerFlagId`; contagem de treinadores ajustada para 892. O motor padrão cuida de batalha, prêmio e EXP, ainda dependentes de jogo no emulador.
+- Astrônoma de Lunaris e anciã da Aldeia dos Ecos agora reagem à pesquisa e ao Inkay sem mudar o sétimo ginásio. Teste `test_eryon_moonfall_sanctuary.py` integrado à compilação e teste antigo ajustado para não presumir capacidade fixa de 891 treinadores.
+- Esses testes e inspeções estáticas não certificam a compilação GBA nem a compatibilidade visual com Delta.
+
 ## Pendências prioritárias
 1. Compilação limpa e verificação da ROM GBA via `tools/build_eryon.sh` e GitHub Actions.
 2. Auditoria das tabelas `land_mons`, evolução, disponibilidade e distribuição de capturas por rota.

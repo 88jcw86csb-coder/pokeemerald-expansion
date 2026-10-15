@@ -264,7 +264,11 @@ class EryonKalosEncounters(unittest.TestCase):
         self.assertIn("return FLAG_ERYON_SOLAR_CANYON_RANGER_DEFEATED;", battle_setup)
         constants = (ROOT / "include/constants/opponents.h").read_text()
         self.assertIn("#define TRAINER_ERYON_SOLAR_CANYON_RANGER 890", constants)
-        self.assertIn("#define TRAINERS_COUNT_EMERALD     891", constants)
+        trainer_count = next(
+            int(line.split()[-1]) for line in constants.splitlines()
+            if line.startswith("#define TRAINERS_COUNT_EMERALD ")
+        )
+        self.assertGreater(trainer_count, 890)
 
     def test_dragon_shrine_requires_local_eclipse_victory(self):
         source = (MAPS / "Eryon_Drakonia/scripts.inc").read_text(encoding="utf-8")

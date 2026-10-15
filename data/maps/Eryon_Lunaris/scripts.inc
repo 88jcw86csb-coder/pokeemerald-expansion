@@ -26,6 +26,8 @@ EryonLunaris_EventScript_GymGuideClue::
 EryonLunaris_EventScript_Astronomer::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_LUNAR_INKAY_RESOLVED, EryonLunaris_EventScript_AstronomerInkay
+	goto_if_set FLAG_ERYON_LUNAR_ARRAY_READ, EryonLunaris_EventScript_AstronomerMoonfall
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonLunaris_EventScript_AstronomerClue
 	msgbox EryonLunaris_Text_AstronomerBefore, MSGBOX_DEFAULT
 	release
@@ -300,3 +302,28 @@ EryonLunaris_Text_ScholarArchiveAndBadge:
 	.string "distorcido pela ECLIPSE.\p"
 	.string "Compare as cargas na\n"
 	.string "TRILHA DOS DRAGOES.$"
+
+@ Lunaris astronomer recognizes the southern lunar sanctuary and wildlife.
+EryonLunaris_EventScript_AstronomerMoonfall::
+	msgbox EryonLunaris_Text_AstronomerMoonfall, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLunaris_EventScript_AstronomerInkay::
+	msgbox EryonLunaris_Text_AstronomerInkay, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLunaris_Text_AstronomerMoonfall:
+	.string "ASTRONOMA: O receptor\n"
+	.string "na TRILHA LUNAR liga\n"
+	.string "a ALDEIA a LUNARIS.\p"
+	.string "A ECLIPSE alterou\n"
+	.string "aquele sinal antigo.$"
+
+EryonLunaris_Text_AstronomerInkay:
+	.string "ASTRONOMA: O INKAY\n"
+	.string "do santuario voltou\n"
+	.string "a ter tranquilidade!\p"
+	.string "A LUA ilumina agora\n"
+	.string "os cristais naturais.$"

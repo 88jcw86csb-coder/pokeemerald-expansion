@@ -5,6 +5,8 @@ Eryon_AldeiaDosEcos_MapScripts::
 EryonAldeia_EventScript_Elder::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_LUNAR_INKAY_RESOLVED, EryonAldeia_EventScript_ElderInkay
+	goto_if_set FLAG_ERYON_LUNAR_ARRAY_READ, EryonAldeia_EventScript_ElderMoonfall
 	goto_if_ge VAR_ERYON_SERRA_CLUE_FOUND, 1, EryonAldeia_EventScript_ElderInformed
 	msgbox EryonAldeia_Text_ElderBefore, MSGBOX_DEFAULT
 	release
@@ -180,3 +182,26 @@ EryonAldeia_Text_WitnessGroveSafe:
 	.string "esta em paz novamente!\p"
 	.string "As arvores voltaram\n"
 	.string "a cantar naturalmente.$"
+
+@ Echo Village tracks the optional Moonfall Sanctuary events before Lunaris.
+EryonAldeia_EventScript_ElderMoonfall::
+	msgbox EryonAldeia_Text_ElderMoonfall, MSGBOX_DEFAULT
+	release
+	end
+
+EryonAldeia_EventScript_ElderInkay::
+	msgbox EryonAldeia_Text_ElderInkay, MSGBOX_DEFAULT
+	release
+	end
+
+EryonAldeia_Text_ElderMoonfall:
+	.string "ANCIA: O santuario\n"
+	.string "lunar guarda um eco!\p"
+	.string "A LIGA precisa saber\n"
+	.string "sobre a luz da ECLIPSE.$"
+
+EryonAldeia_Text_ElderInkay:
+	.string "ANCIA: O INKAY encontrou\n"
+	.string "paz na TRILHA LUNAR.\p"
+	.string "A natureza de ERYON\n"
+	.string "se recupera aos poucos.$"
