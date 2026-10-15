@@ -5,6 +5,7 @@ Eryon_TrilhaGlacial_MapScripts::
 EryonTrilhaGlacial_EventScript_Hiker::
 	lock
 	faceplayer
+	goto_if_set FLAG_ERYON_GLACIAL_BERGMITE_RESOLVED, EryonTrilhaGlacial_EventScript_HikerGrottoSafe
 	goto_if_set FLAG_ERYON_MIST_SIGNAL_REPAIRED, EryonTrilhaGlacial_EventScript_HikerAfterSignal
 	msgbox EryonTrilhaGlacial_Text_Hiker, MSGBOX_DEFAULT
 	release
@@ -211,3 +212,200 @@ EryonTrilhaGlacial_Text_IceSampleFull:
 EryonTrilhaGlacial_Text_IceSampleEmpty:
 	.string "As caixas estao vazias.\p"
 	.string "A amostra foi recolhida.$"
+
+@ The northern Ice Rift uses existing rock trail and never gates Frostheim.
+EryonTrilhaGlacial_EventScript_IceRiftJournal::
+	lock
+	goto_if_set FLAG_ERYON_GLACIAL_RIFT_LOG_READ, EryonTrilhaGlacial_EventScript_IceRiftJournalRepeat
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonTrilhaGlacial_EventScript_IceRiftJournalPeace
+	goto_if_set FLAG_ERYON_GLACIAL_ECLIPSE_RESEARCHER_DEFEATED, EryonTrilhaGlacial_EventScript_IceRiftJournalVictory
+	msgbox EryonTrilhaGlacial_Text_IceRiftJournal, MSGBOX_DEFAULT
+	setflag FLAG_ERYON_GLACIAL_RIFT_LOG_READ
+	release
+	end
+
+EryonTrilhaGlacial_EventScript_IceRiftJournalVictory::
+	msgbox EryonTrilhaGlacial_Text_IceRiftJournalVictory, MSGBOX_DEFAULT
+	setflag FLAG_ERYON_GLACIAL_RIFT_LOG_READ
+	release
+	end
+
+EryonTrilhaGlacial_EventScript_IceRiftJournalPeace::
+	msgbox EryonTrilhaGlacial_Text_IceRiftJournalPeace, MSGBOX_DEFAULT
+	setflag FLAG_ERYON_GLACIAL_RIFT_LOG_READ
+	release
+	end
+
+EryonTrilhaGlacial_EventScript_IceRiftJournalRepeat::
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonTrilhaGlacial_EventScript_IceRiftJournalQuiet
+	msgbox EryonTrilhaGlacial_Text_IceRiftJournalRepeat, MSGBOX_DEFAULT
+	release
+	end
+
+EryonTrilhaGlacial_EventScript_IceRiftJournalQuiet::
+	msgbox EryonTrilhaGlacial_Text_IceRiftJournalQuiet, MSGBOX_DEFAULT
+	release
+	end
+
+@ Standard catchable Kalos Bergmite; flee/decline do not consume event.
+EryonTrilhaGlacial_EventScript_BergmiteNest::
+	lock
+	goto_if_set FLAG_ERYON_GLACIAL_BERGMITE_RESOLVED, EryonTrilhaGlacial_EventScript_BergmiteCalm
+	goto_if_unset FLAG_ERYON_GLACIAL_RIFT_LOG_READ, EryonTrilhaGlacial_EventScript_BergmiteHidden
+	msgbox EryonTrilhaGlacial_Text_BergmiteOffer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonTrilhaGlacial_EventScript_BergmiteDecline
+	closemessage
+	setwildbattle SPECIES_BERGMITE, 29
+	waitse
+	playmoncry SPECIES_BERGMITE, CRY_MODE_ENCOUNTER
+	delay 30
+	waitmoncry
+	dowildbattle
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, EryonTrilhaGlacial_EventScript_BergmiteResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, EryonTrilhaGlacial_EventScript_BergmiteResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, EryonTrilhaGlacial_EventScript_BergmiteEscaped
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, EryonTrilhaGlacial_EventScript_BergmiteEscaped
+	release
+	end
+
+EryonTrilhaGlacial_EventScript_BergmiteResolved::
+	setflag FLAG_ERYON_GLACIAL_BERGMITE_RESOLVED
+	msgbox EryonTrilhaGlacial_Text_BergmiteResolved, MSGBOX_DEFAULT
+	release
+	end
+
+EryonTrilhaGlacial_EventScript_BergmiteHidden::
+	msgbox EryonTrilhaGlacial_Text_BergmiteHidden, MSGBOX_DEFAULT
+	release
+	end
+
+EryonTrilhaGlacial_EventScript_BergmiteEscaped::
+	msgbox EryonTrilhaGlacial_Text_BergmiteEscaped, MSGBOX_DEFAULT
+	release
+	end
+
+EryonTrilhaGlacial_EventScript_BergmiteCalm::
+	msgbox EryonTrilhaGlacial_Text_BergmiteCalm, MSGBOX_DEFAULT
+	release
+	end
+
+EryonTrilhaGlacial_EventScript_BergmiteDecline::
+	closemessage
+	release
+	end
+
+@ Reward remains retriable when the Bag is full.
+EryonTrilhaGlacial_EventScript_RiftSupplies::
+	lock
+	goto_if_set FLAG_ERYON_GLACIAL_RIFT_SUPPLIES_TAKEN, EryonTrilhaGlacial_EventScript_RiftSuppliesEmpty
+	goto_if_unset FLAG_ERYON_GLACIAL_BERGMITE_RESOLVED, EryonTrilhaGlacial_EventScript_RiftSuppliesLocked
+	msgbox EryonTrilhaGlacial_Text_RiftSuppliesFound, MSGBOX_DEFAULT
+	giveitem ITEM_REVIVE
+	goto_if_eq VAR_RESULT, FALSE, EryonTrilhaGlacial_EventScript_RiftSuppliesFull
+	setflag FLAG_ERYON_GLACIAL_RIFT_SUPPLIES_TAKEN
+	release
+	end
+
+EryonTrilhaGlacial_EventScript_RiftSuppliesLocked::
+	msgbox EryonTrilhaGlacial_Text_RiftSuppliesLocked, MSGBOX_DEFAULT
+	release
+	end
+
+EryonTrilhaGlacial_EventScript_RiftSuppliesFull::
+	msgbox EryonTrilhaGlacial_Text_RiftSuppliesFull, MSGBOX_DEFAULT
+	release
+	end
+
+EryonTrilhaGlacial_EventScript_RiftSuppliesEmpty::
+	msgbox EryonTrilhaGlacial_Text_RiftSuppliesEmpty, MSGBOX_DEFAULT
+	release
+	end
+
+EryonTrilhaGlacial_EventScript_HikerGrottoSafe::
+	msgbox EryonTrilhaGlacial_Text_HikerGrottoSafe, MSGBOX_DEFAULT
+	release
+	end
+
+EryonTrilhaGlacial_Text_IceRiftJournal:
+	.string "DIARIO GLACIAL:\p"
+	.string "A ECLIPSE estudou\n"
+	.string "a fenda gelada.\p"
+	.string "Um Pokemon ficou\n"
+	.string "preso na encosta.$"
+
+EryonTrilhaGlacial_Text_IceRiftJournalVictory:
+	.string "DIARIO GLACIAL:\p"
+	.string "O tecnico ECLIPSE\n"
+	.string "abandonou a fenda.\p"
+	.string "Resta recuperar\n"
+	.string "a fauna do gelo.$"
+
+EryonTrilhaGlacial_Text_IceRiftJournalPeace:
+	.string "DIARIO GLACIAL:\p"
+	.string "REDE ECLIPSE INATIVA!\p"
+	.string "O gelo recupera\n"
+	.string "a energia natural.$"
+
+EryonTrilhaGlacial_Text_IceRiftJournalRepeat:
+	.string "Os registros marcam\n"
+	.string "um BERGMITE na fenda.\p"
+	.string "A vida da montanha\n"
+	.string "ainda precisa de ajuda.$"
+
+EryonTrilhaGlacial_Text_IceRiftJournalQuiet:
+	.string "O diario confirma\n"
+	.string "o fim da ECLIPSE.\p"
+	.string "Os sinais naturais\n"
+	.string "voltaram as montanhas.$"
+
+EryonTrilhaGlacial_Text_BergmiteHidden:
+	.string "Um bloco de gelo\n"
+	.string "se move de leve.\p"
+	.string "Leia o DIARIO GLACIAL\n"
+	.string "primeiro.$"
+
+EryonTrilhaGlacial_Text_BergmiteOffer:
+	.string "Um BERGMITE aparece\n"
+	.string "perto dos cristais!\p"
+	.string "Investigar agora?$"
+
+EryonTrilhaGlacial_Text_BergmiteResolved:
+	.string "BERGMITE se acalmou!\p"
+	.string "A fenda pode respirar\n"
+	.string "novamente.$"
+
+EryonTrilhaGlacial_Text_BergmiteEscaped:
+	.string "BERGMITE deslizou\n"
+	.string "para a neve profunda.\p"
+	.string "Pode retornar depois.$"
+
+EryonTrilhaGlacial_Text_BergmiteCalm:
+	.string "A fenda gelada\n"
+	.string "esta tranquila.$"
+
+EryonTrilhaGlacial_Text_RiftSuppliesLocked:
+	.string "Uma caixa de gelo\n"
+	.string "esta protegida.\p"
+	.string "BERGMITE vigia\n"
+	.string "estes suprimentos.$"
+
+EryonTrilhaGlacial_Text_RiftSuppliesFound:
+	.string "CAIXA GLACIAL:\p"
+	.string "Um REVIVE foi deixado\n"
+	.string "para emergencias.$"
+
+EryonTrilhaGlacial_Text_RiftSuppliesFull:
+	.string "Sua BOLSA esta cheia!\p"
+	.string "O item ficara aqui\n"
+	.string "para sua volta.$"
+
+EryonTrilhaGlacial_Text_RiftSuppliesEmpty:
+	.string "A caixa de gelo\n"
+	.string "ja esta vazia.$"
+
+EryonTrilhaGlacial_Text_HikerGrottoSafe:
+	.string "GUIA: A fenda gelada\n"
+	.string "esta segura agora!\p"
+	.string "FROSTHEIM agradece\n"
+	.string "por sua ajuda.$"

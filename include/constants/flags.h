@@ -1254,9 +1254,9 @@
 #define FLAG_ERYON_LUNAR_ARRAY_READ                                     0x4B0 // Moonfall receiver decoded
 #define FLAG_ERYON_LUNAR_INKAY_RESOLVED                                 0x4B1 // Moonfall Kalos Inkay encountered
 #define FLAG_ERYON_LUNAR_SUPPLIES_TAKEN                                 0x4B2 // Moonfall one-time Max Revive
-#define FLAG_UNUSED_0x4B3                                           0x4B3 // Unused Flag
-#define FLAG_UNUSED_0x4B4                                           0x4B4 // Unused Flag
-#define FLAG_UNUSED_0x4B5                                           0x4B5 // Unused Flag
+#define FLAG_ERYON_GLACIAL_RIFT_LOG_READ                                   0x4B3 // Glacial Rift journal read
+#define FLAG_ERYON_GLACIAL_BERGMITE_RESOLVED                               0x4B4 // Optional wild Bergmite resolved
+#define FLAG_ERYON_GLACIAL_RIFT_SUPPLIES_TAKEN                             0x4B5 // One-time Ice Rift Revive
 #define FLAG_UNUSED_0x4B6                                           0x4B6 // Unused Flag
 #define FLAG_UNUSED_0x4B7                                           0x4B7 // Unused Flag
 #define FLAG_UNUSED_0x4B8                                           0x4B8 // Unused Flag
