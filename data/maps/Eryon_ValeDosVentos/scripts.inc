@@ -199,3 +199,38 @@ EryonVale_Text_WindGardenClue:
 	.string "passaram por aqui.\p"
 	.string "O vento escondeu\n"
 	.string "as marcas da caravana.$"
+
+
+@ Optional medicine in the newly accessible windbreak; no gym flags affected.
+EryonVale_EventScript_WindGardenSupplies::
+	lock
+	goto_if_set FLAG_ERYON_WIND_GARDEN_REWARD_CLAIMED, EryonVale_EventScript_WindGardenEmpty
+	msgbox EryonVale_Text_WindGardenSupplies, MSGBOX_DEFAULT
+	giveitem ITEM_SUPER_POTION
+	goto_if_eq VAR_RESULT, FALSE, EryonVale_EventScript_WindGardenBagFull
+	setflag FLAG_ERYON_WIND_GARDEN_REWARD_CLAIMED
+	release
+	end
+
+EryonVale_EventScript_WindGardenBagFull::
+	msgbox EryonVale_Text_WindGardenBagFull, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVale_EventScript_WindGardenEmpty::
+	msgbox EryonVale_Text_WindGardenEmpty, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVale_Text_WindGardenSupplies:
+	.string "SUPRIMENTOS DO VALE:\p"
+	.string "Uma SUPER POTION\n"
+	.string "foi protegida do vento.$"
+
+EryonVale_Text_WindGardenBagFull:
+	.string "Sua BOLSA esta cheia!\p"
+	.string "O remedio ficara aqui.$"
+
+EryonVale_Text_WindGardenEmpty:
+	.string "A caixa de suprimentos\n"
+	.string "ja esta vazia.$"
