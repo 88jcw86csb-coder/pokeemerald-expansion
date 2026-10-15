@@ -140,6 +140,21 @@ def league():
     for y in range(25,30):
         terrace_step(70,y)
     t[25][70]="."
+    # Eryon's asymmetric northwest hillside promenade links the garden ring
+    # to the civic square by switchbacks, unlike Emerald's orthogonal layout.
+    promenade=((15,19),(19,21),(23,24),(25,27),(29,29),(32,32),(35,34))
+    for (ax,ay),(bx,by) in zip(promenade,promenade[1:]):
+        x,y=ax,ay
+        while x!=bx or y!=by:
+            terrace_step(x,y)
+            if x!=bx: x+=1 if bx>x else -1
+            if y!=by: y+=1 if by>y else -1
+        terrace_step(bx,by)
+    for y in range(23,29):
+        for x in range(21,29):
+            if ((x-24.5)/4)**2+((y-25.5)/3)**2<=1 and t[y][x]=="#":
+                t[y][x]=","
+    t[25][24]="."
     for x,y in ((0,36),(48,36),(29,36),(43,33),(64,35),(48,42),(60,40)):
         t[y][x]="."
     t[36][48]="L"
