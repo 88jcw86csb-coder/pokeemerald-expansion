@@ -1251,9 +1251,9 @@
 #define FLAG_ERYON_FOREST_PHANTUMP_RESOLVED                            0x4AD // Kalos Phantump resolved
 #define FLAG_ERYON_FOREST_GROVE_CACHE_TAKEN                            0x4AE // One-time grove Dusk Ball
 #define FLAG_UNUSED_0x4AF                                           0x4AF // Unused Flag
-#define FLAG_UNUSED_0x4B0                                           0x4B0 // Unused Flag
-#define FLAG_UNUSED_0x4B1                                           0x4B1 // Unused Flag
-#define FLAG_UNUSED_0x4B2                                           0x4B2 // Unused Flag
+#define FLAG_ERYON_LUNAR_ARRAY_READ                                     0x4B0 // Moonfall receiver decoded
+#define FLAG_ERYON_LUNAR_INKAY_RESOLVED                                 0x4B1 // Moonfall Kalos Inkay encountered
+#define FLAG_ERYON_LUNAR_SUPPLIES_TAKEN                                 0x4B2 // Moonfall one-time Max Revive
 #define FLAG_UNUSED_0x4B3                                           0x4B3 // Unused Flag
 #define FLAG_UNUSED_0x4B4                                           0x4B4 // Unused Flag
 #define FLAG_UNUSED_0x4B5                                           0x4B5 // Unused Flag

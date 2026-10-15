@@ -181,3 +181,188 @@ EryonLunar_Text_MoonMarkerBadge:
 	.string "para DRAKONIA.\p"
 	.string "A jornada continua\n"
 	.string "pela TRILHA DOS DRAGOES.$"
+
+@ Moonfall Sanctuary: an optional southward expedition, west of Lunaris.
+@ Reading the receiver makes a wild Inkay visible; no Gym/warp locks.
+EryonLunar_EventScript_MoonfallArray::
+	lock
+	goto_if_set FLAG_ERYON_LUNAR_ARRAY_READ, EryonLunar_EventScript_MoonfallArrayAgain
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonLunar_EventScript_MoonfallArrayPeace
+	goto_if_set FLAG_ERYON_ECHO_ARCHIVE_REWARD_CLAIMED, EryonLunar_EventScript_MoonfallArrayArchive
+	msgbox EryonLunar_Text_MoonfallArrayBefore, MSGBOX_DEFAULT
+	setflag FLAG_ERYON_LUNAR_ARRAY_READ
+	release
+	end
+
+EryonLunar_EventScript_MoonfallArrayArchive::
+	msgbox EryonLunar_Text_MoonfallArrayArchive, MSGBOX_DEFAULT
+	setflag FLAG_ERYON_LUNAR_ARRAY_READ
+	release
+	end
+
+EryonLunar_EventScript_MoonfallArrayPeace::
+	msgbox EryonLunar_Text_MoonfallArrayPeace, MSGBOX_DEFAULT
+	setflag FLAG_ERYON_LUNAR_ARRAY_READ
+	release
+	end
+
+EryonLunar_EventScript_MoonfallArrayAgain::
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonLunar_EventScript_MoonfallArrayAfterPeace
+	msgbox EryonLunar_Text_MoonfallArrayAgain, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLunar_EventScript_MoonfallArrayAfterPeace::
+	msgbox EryonLunar_Text_MoonfallArrayAfterPeace, MSGBOX_DEFAULT
+	release
+	end
+
+@ Standard wild encounter: capture or knock-out persists; escape permits retry.
+EryonLunar_EventScript_InkayPool::
+	lock
+	goto_if_set FLAG_ERYON_LUNAR_INKAY_RESOLVED, EryonLunar_EventScript_InkayQuiet
+	goto_if_unset FLAG_ERYON_LUNAR_ARRAY_READ, EryonLunar_EventScript_InkayHidden
+	msgbox EryonLunar_Text_InkayOffer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonLunar_EventScript_InkayLeave
+	closemessage
+	setwildbattle SPECIES_INKAY, 45
+	waitse
+	playmoncry SPECIES_INKAY, CRY_MODE_ENCOUNTER
+	delay 30
+	waitmoncry
+	dowildbattle
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, EryonLunar_EventScript_InkayResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, EryonLunar_EventScript_InkayResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, EryonLunar_EventScript_InkayEscaped
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, EryonLunar_EventScript_InkayEscaped
+	release
+	end
+
+EryonLunar_EventScript_InkayResolved::
+	setflag FLAG_ERYON_LUNAR_INKAY_RESOLVED
+	msgbox EryonLunar_Text_InkayResolved, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLunar_EventScript_InkayHidden::
+	msgbox EryonLunar_Text_InkayHidden, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLunar_EventScript_InkayEscaped::
+	msgbox EryonLunar_Text_InkayEscaped, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLunar_EventScript_InkayQuiet::
+	msgbox EryonLunar_Text_InkayQuiet, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLunar_EventScript_InkayLeave::
+	closemessage
+	release
+	end
+
+@ Reusable interaction after full Bag: only successful gift saves flag.
+EryonLunar_EventScript_MoonfallSupplies::
+	lock
+	goto_if_set FLAG_ERYON_LUNAR_SUPPLIES_TAKEN, EryonLunar_EventScript_MoonfallEmpty
+	goto_if_unset FLAG_ERYON_LUNAR_INKAY_RESOLVED, EryonLunar_EventScript_MoonfallSealed
+	msgbox EryonLunar_Text_MoonfallSupplies, MSGBOX_DEFAULT
+	giveitem ITEM_MAX_REVIVE
+	goto_if_eq VAR_RESULT, FALSE, EryonLunar_EventScript_MoonfallBagFull
+	setflag FLAG_ERYON_LUNAR_SUPPLIES_TAKEN
+	release
+	end
+
+EryonLunar_EventScript_MoonfallSealed::
+	msgbox EryonLunar_Text_MoonfallSealed, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLunar_EventScript_MoonfallBagFull::
+	msgbox EryonLunar_Text_MoonfallBagFull, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLunar_EventScript_MoonfallEmpty::
+	msgbox EryonLunar_Text_MoonfallEmpty, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLunar_Text_MoonfallArrayBefore:
+	.string "SANTUARIO LUNAR:\p"
+	.string "Um antigo receptor\n"
+	.string "capta ecos da ECLIPSE.\p"
+	.string "O brilho segue para\n"
+	.string "o lago entre rochas.$"
+
+EryonLunar_Text_MoonfallArrayArchive:
+	.string "SANTUARIO LUNAR:\p"
+	.string "Os dados da ALDEIA\n"
+	.string "explicam estes ecos!\p"
+	.string "O aparelho compara\n"
+	.string "luz lunar e cristais.$"
+
+EryonLunar_Text_MoonfallArrayPeace:
+	.string "SANTUARIO LUNAR:\p"
+	.string "REDE ECLIPSE INATIVA!\p"
+	.string "O receptor capta\n"
+	.string "apenas a luz da LUA.$"
+
+EryonLunar_Text_MoonfallArrayAgain:
+	.string "O receptor aponta\n"
+	.string "para a agua ao sul.\p"
+	.string "Um Pokemon observa\n"
+	.string "o reflexo da LUA.$"
+
+EryonLunar_Text_MoonfallArrayAfterPeace:
+	.string "O eco artificial\n"
+	.string "desapareceu da trilha.\p"
+	.string "As pedras naturais\n"
+	.string "brilham novamente.$"
+
+EryonLunar_Text_InkayHidden:
+	.string "Algo se move na agua.\p"
+	.string "Leia o receptor\n"
+	.string "lunar primeiro.$"
+
+EryonLunar_Text_InkayOffer:
+	.string "Um INKAY gira sobre\n"
+	.string "a agua iluminada!\p"
+	.string "Investigar de perto?$"
+
+EryonLunar_Text_InkayResolved:
+	.string "INKAY sumiu entre\n"
+	.string "os reflexos da LUA.\p"
+	.string "O lago esta tranquilo.$"
+
+EryonLunar_Text_InkayEscaped:
+	.string "INKAY nadou para\n"
+	.string "uma caverna pequena.\p"
+	.string "Pode voltar depois.$"
+
+EryonLunar_Text_InkayQuiet:
+	.string "A agua agora reflete\n"
+	.string "apenas as estrelas.$"
+
+EryonLunar_Text_MoonfallSealed:
+	.string "Uma caixa protegida\n"
+	.string "por cristais lunares.\p"
+	.string "INKAY segue observando.$"
+
+EryonLunar_Text_MoonfallSupplies:
+	.string "CAIXA DO SANTUARIO:\p"
+	.string "Um MAX REVIVE ficou\n"
+	.string "guardado aqui.$"
+
+EryonLunar_Text_MoonfallBagFull:
+	.string "Sua BOLSA esta cheia!\p"
+	.string "O item ficara na\n"
+	.string "caixa ate sua volta.$"
+
+EryonLunar_Text_MoonfallEmpty:
+	.string "A caixa de suprimentos\n"
+	.string "esta vazia.$"
