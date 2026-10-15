@@ -39,6 +39,7 @@ EryonVilaAurora_EventScript_PartyFull::
 
 EryonVilaAurora_EventScript_ElyaAfterStarter::
 	goto_if_eq VAR_ERYON_CAPTURE_KIT_RECEIVED, 0, EryonVilaAurora_EventScript_CaptureKit
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonVilaAurora_EventScript_ElyaAfterEclipse
 	goto_if_ge VAR_ERYON_KAEL_DEFEATED, 1, EryonVilaAurora_EventScript_ElyaAfterBadge
 	msgbox EryonVilaAurora_Text_ElyaAfterStarter, MSGBOX_DEFAULT
 	goto EryonVilaAurora_EventScript_ElyaHealOffer
@@ -108,6 +109,7 @@ EryonVilaAurora_Text_CaptureKitFull:
 @ The village notice introduces the route without forcing an early departure.
 EryonVilaAurora_EventScript_VillageNotice::
 	lock
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonVilaAurora_EventScript_VillageNoticePeace
 	goto_if_ge VAR_ERYON_STARTER_RECEIVED, 1, EryonVilaAurora_EventScript_VillageNoticeAfterStarter
 	msgbox EryonVilaAurora_Text_VillageNoticeBeforeStarter, MSGBOX_DEFAULT
 	release
@@ -166,3 +168,29 @@ EryonVilaAurora_Text_ElyaHealed:
 EryonVilaAurora_Text_ElyaHealDeclined:
 	.string "Tudo bem! Pode voltar\n"
 	.string "quando precisar.$"
+
+@ Homecoming after the three Eclipse finale prerequisites in Drakonia.
+@ This never resets the starter/kit, badge progression or whiteout checkpoint.
+EryonVilaAurora_EventScript_ElyaAfterEclipse::
+	msgbox EryonVilaAurora_Text_ElyaAfterEclipse, MSGBOX_DEFAULT
+	goto EryonVilaAurora_EventScript_ElyaHealOffer
+
+EryonVilaAurora_EventScript_VillageNoticePeace::
+	msgbox EryonVilaAurora_Text_VillageNoticePeace, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVilaAurora_Text_ElyaAfterEclipse:
+	.string "PROF. ELYA: Seu RIOLU\n"
+	.string "iniciou uma grande jornada!\p"
+	.string "A rede da ECLIPSE\n"
+	.string "finalmente foi desligada.\p"
+	.string "O BOSQUE DE LUMINA\n"
+	.string "esta seguro outra vez.$"
+
+EryonVilaAurora_Text_VillageNoticePeace:
+	.string "NOTICIAS DA VILA:\p"
+	.string "A rede de cristais\n"
+	.string "da ECLIPSE foi detida!\p"
+	.string "As trilhas seguem abertas\n"
+	.string "a todos os treinadores.$"

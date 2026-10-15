@@ -100,6 +100,7 @@ EryonVerdelume_EventScript_KaelVictory::
 	end
 
 EryonVerdelume_EventScript_KaelAfterBattle::
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonVerdelume_EventScript_KaelAfterPeace
 	msgbox EryonVerdelume_Text_KaelAfterBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -308,3 +309,17 @@ EryonVerdelume_Text_CaravanWitnessAfterBadge:
 	.string "um rastro de po brilhante.\p"
 	.string "A trilha segue para leste.\n"
 	.string "Mas ainda nao sei ate onde.$"
+
+@ Kael recognizes the completed Eclipse case after his badge was awarded.
+EryonVerdelume_EventScript_KaelAfterPeace::
+	msgbox EryonVerdelume_Text_KaelAfterPeace, MSGBOX_DEFAULT
+	release
+	end
+
+EryonVerdelume_Text_KaelAfterPeace:
+	.string "KAEL: O sinal da ECLIPSE\n"
+	.string "foi desativado!\p"
+	.string "Agora posso cuidar\n"
+	.string "do Bosque de Lumina.\p"
+	.string "Volte as trilhas sempre\n"
+	.string "que sentir saudade.$"

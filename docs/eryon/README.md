@@ -128,6 +128,13 @@ A ROM de GBA segue em desenvolvimento na branch `eryon-development`. **Ter arqui
 - Verificações sobre os binários de todos os 16 mapas confirmaram chão com colisão zero, ausência de eventos sobrepostos e acesso desde a entrada (ou spawn de Riolu). Novo teste `tests/test_eryon_whiteout_checkpoints.py` protege IDs, tabela gerada, scripts e coordenadas.
 - **Ainda não é um teste no Delta**: deve ser validado perdendo uma batalha nas primeiras rotas, depois de visitar cada cidade e dentro da Liga, além de executar `bash tools/build_eryon.sh` com o compilador ARM.
 
+## Regresso à origem — conclusão narrativa da Eclipse (15/10/2026)
+
+- O mistério apresentado pela pedra do Bosque de Lumina, o aviso da Vila Aurora, as falas de Kael e a Prof. Elya agora reagem à flag **já existente** `FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN`, registrada somente após os três pré-requisitos de encerramento em Drakonia.
+- O retorno é **opcional**: nenhuma missão, flag, batalha ou bloqueio de rota foi acrescentado. Elya continua oferecendo as Poké Bolas pendentes antes do diálogo final e mantém o atendimento de cura depois dele.
+- A pedra ancestral indica visualmente o fim do sinal, o aviso da vila passa a divulgar o encerramento da crise, Kael reconhece a recuperação da floresta, e Elya encerra o arco do Riolu inicial.
+- Teste estático acrescentado em `tests/test_eryon_eclipse_finale.py` para garantir as quatro reações, a prioridade do kit e a preservação da primeira insígnia. O jogo ainda requer compilação e verificação de diálogos no Delta.
+
 ## Pendências prioritárias
 1. Compilação limpa e verificação da ROM GBA via `tools/build_eryon.sh` e GitHub Actions.
 2. Auditoria das tabelas `land_mons`, evolução, disponibilidade e distribuição de capturas por rota.

@@ -104,6 +104,7 @@ EryonBosque_Text_TravelerAfterKaelBriefed:
 @ The stone independently unlocks the forest clue, even if the researcher is skipped.
 EryonBosque_EventScript_AncientStone::
 	lock
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonBosque_EventScript_StoneRestored
 	goto_if_ge VAR_ERYON_LUMINA_CLUE_FOUND, 1, EryonBosque_EventScript_StoneRecognized
 	msgbox EryonBosque_Text_StoneUnknown, MSGBOX_DEFAULT
 	setvar VAR_ERYON_LUMINA_CLUE_FOUND, 1
@@ -235,3 +236,17 @@ EryonBosque_Text_EclipseScoutVictory:
 	.string "ESTRANHO: Nao devia ter\n"
 	.string "chamado tanta atencao...\p"
 	.string "Nao conte isso a ninguem.$"
+
+@ The original forest mystery has a quiet optional conclusion.
+EryonBosque_EventScript_StoneRestored::
+	msgbox EryonBosque_Text_StoneRestored, MSGBOX_DEFAULT
+	release
+	end
+
+EryonBosque_Text_StoneRestored:
+	.string "A pedra do eclipse\n"
+	.string "nao emite mais sinais.\p"
+	.string "Pequenas flores crescem\n"
+	.string "entre os cristais.\p"
+	.string "A floresta encontrou\n"
+	.string "novamente sua paz.$"

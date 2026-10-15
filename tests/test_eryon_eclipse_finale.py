@@ -111,5 +111,37 @@ class EclipseFinaleContract(unittest.TestCase):
             self.assertNotIn("warp ", content)
 
 
+
+    def test_eclipse_finale_returns_home_to_elya_kael_and_first_forest(self):
+        home = (ROOT / "data/maps/Eryon_VilaAurora/scripts.inc").read_text()
+        forest = (ROOT / "data/maps/Eryon_BosqueDeLumina/scripts.inc").read_text()
+        verd = (ROOT / "data/maps/Eryon_Verdelume/scripts.inc").read_text()
+        for source, from_label, to_label in (
+            (home, "EryonVilaAurora_EventScript_ElyaAfterStarter",
+             "EryonVilaAurora_EventScript_ElyaAfterEclipse"),
+            (home, "EryonVilaAurora_EventScript_VillageNotice",
+             "EryonVilaAurora_EventScript_VillageNoticePeace"),
+            (forest, "EryonBosque_EventScript_AncientStone",
+             "EryonBosque_EventScript_StoneRestored"),
+            (verd, "EryonVerdelume_EventScript_KaelAfterBattle",
+             "EryonVerdelume_EventScript_KaelAfterPeace"),
+        ):
+            script = source.split(from_label + "::", 1)[1].split("\n\tend", 1)[0]
+            self.assertIn("goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, "
+                          + to_label, script)
+            self.assertEqual(source.count(to_label + "::"), 1)
+            epilogue = source.split(to_label + "::", 1)[1].split("\n\tend", 1)[0]
+            self.assertNotIn("setflag ", epilogue)
+            self.assertNotIn("trainerbattle", epilogue)
+            self.assertNotIn("\n\twarp ", epilogue)
+        self.assertIn("goto EryonVilaAurora_EventScript_ElyaHealOffer",
+                      home.split("EryonVilaAurora_EventScript_ElyaAfterEclipse::", 1)[1])
+        early = home.split("EryonVilaAurora_EventScript_ElyaAfterStarter::", 1)[1].split(
+            "EryonVilaAurora_EventScript_ElyaAfterBadge::", 1)[0]
+        self.assertLess(early.index("VAR_ERYON_CAPTURE_KIT_RECEIVED"),
+                        early.index("FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN"))
+        self.assertIn("givemon SPECIES_RIOLU, 5", home)
+        self.assertIn("setflag FLAG_BADGE01_GET", verd)
+
 if __name__ == "__main__":
     unittest.main()
