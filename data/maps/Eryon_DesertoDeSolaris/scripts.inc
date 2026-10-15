@@ -143,3 +143,40 @@ EryonSolaris_Text_SolarCanyonRiver:
 	.string "cruzam todo o deserto.\p"
 	.string "A agua investigada\n"
 	.string "pode revelar a rota.$"
+
+
+@ Optional supplies discovered in the shelter of the newly carved canyon.
+@ Preserve the item when the player's Bag is full.
+EryonSolaris_EventScript_CanyonSupplies::
+	lock
+	goto_if_set FLAG_ERYON_SOLAR_CANYON_SUPPLIES_CLAIMED, EryonSolaris_EventScript_CanyonSuppliesEmpty
+	msgbox EryonSolaris_Text_CanyonSuppliesOffer, MSGBOX_DEFAULT
+	giveitem ITEM_HYPER_POTION
+	goto_if_eq VAR_RESULT, FALSE, EryonSolaris_EventScript_CanyonSuppliesBagFull
+	setflag FLAG_ERYON_SOLAR_CANYON_SUPPLIES_CLAIMED
+	release
+	end
+
+EryonSolaris_EventScript_CanyonSuppliesBagFull::
+	msgbox EryonSolaris_Text_CanyonSuppliesBagFull, MSGBOX_DEFAULT
+	release
+	end
+
+EryonSolaris_EventScript_CanyonSuppliesEmpty::
+	msgbox EryonSolaris_Text_CanyonSuppliesEmpty, MSGBOX_DEFAULT
+	release
+	end
+
+EryonSolaris_Text_CanyonSuppliesOffer:
+	.string "ABRIGO DO CANION:\p"
+	.string "Uma HYPER POTION\n"
+	.string "foi deixada aqui.$"
+
+EryonSolaris_Text_CanyonSuppliesBagFull:
+	.string "Sua BOLSA esta cheia!\p"
+	.string "O remedio continuara\n"
+	.string "no abrigo.$"
+
+EryonSolaris_Text_CanyonSuppliesEmpty:
+	.string "A caixa de suprimentos\n"
+	.string "esta vazia.$"
