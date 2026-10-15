@@ -252,6 +252,7 @@ EryonIgnivar_EventScript_GymNotReady::
 	end
 
 EryonIgnivar_EventScript_GymAfter::
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonIgnivar_EventScript_GymAfterEclipse
 	msgbox EryonIgnivar_Text_GymAfter, MSGBOX_DEFAULT
 	release
 	end
@@ -336,3 +337,15 @@ EryonIgnivar_Text_EngineerGroveSafe:
 	.string "floresta se acalmou!\p"
 	.string "Obrigado por ajudar\n"
 	.string "o PHANTUMP da clareira.$"
+ 
+@ Post-shutdown optional dialogue; all badge, trainer and final story gates remain.
+EryonIgnivar_EventScript_GymAfterEclipse::
+	msgbox EryonIgnivar_Text_GymAfterEclipse, MSGBOX_DEFAULT
+	release
+	end
+
+EryonIgnivar_Text_GymAfterEclipse:
+	.string "KAIO: A usina voltou\n"
+	.string "a trabalhar em paz.\p"
+	.string "O calor de IGNIVAR\n"
+	.string "pertence ao nosso povo.$"

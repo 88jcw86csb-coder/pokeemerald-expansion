@@ -558,6 +558,7 @@ EryonDrakonia_EventScript_GymNotReady::
 	end
 
 EryonDrakonia_EventScript_GymAfter::
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonDrakonia_EventScript_GymAfterEclipse
 	msgbox EryonDrakonia_Text_GymAfter, MSGBOX_DEFAULT
 	release
 	end
@@ -861,3 +862,15 @@ EryonDrakonia_Text_ResearcherAuroraPeace:
 	.string "a AURORA esta em paz.\p"
 	.string "Seus cristais serao\n"
 	.string "protegidos pela cidade.$"
+ 
+@ Post-shutdown optional dialogue; all badge, trainer and final story gates remain.
+EryonDrakonia_EventScript_GymAfterEclipse::
+	msgbox EryonDrakonia_Text_GymAfterEclipse, MSGBOX_DEFAULT
+	release
+	end
+
+EryonDrakonia_Text_GymAfterEclipse:
+	.string "RYU: Voce honrou\n"
+	.string "os guardioes de ERYON.\p"
+	.string "Nosso santuario esta\n"
+	.string "livre da rede ECLIPSE.$"

@@ -211,6 +211,7 @@ EryonLunaris_EventScript_GymNotReady::
 	end
 
 EryonLunaris_EventScript_GymAfter::
+	goto_if_set FLAG_ERYON_ECLIPSE_NETWORK_SHUT_DOWN, EryonLunaris_EventScript_GymAfterEclipse
 	msgbox EryonLunaris_Text_GymAfter, MSGBOX_DEFAULT
 	release
 	end
@@ -333,3 +334,15 @@ EryonLunaris_Text_AstronomerInkay:
 	.string "a ter tranquilidade!\p"
 	.string "A LUA ilumina agora\n"
 	.string "os cristais naturais.$"
+ 
+@ Post-shutdown optional dialogue; all badge, trainer and final story gates remain.
+EryonLunaris_EventScript_GymAfterEclipse::
+	msgbox EryonLunaris_Text_GymAfterEclipse, MSGBOX_DEFAULT
+	release
+	end
+
+EryonLunaris_Text_GymAfterEclipse:
+	.string "LYRA: A luz das estrelas\n"
+	.string "voltou a ser serena.\p"
+	.string "A ECLIPSE nunca mais\n"
+	.string "usara nosso ceu.$"
