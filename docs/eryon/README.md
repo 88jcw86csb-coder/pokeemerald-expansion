@@ -109,10 +109,16 @@ A ROM de GBA segue em desenvolvimento na branch `eryon-development`. **Ter arqui
 
 ## Consolidação da Liga — reinício da Elite Four (15/10/2026)
 
-- Encontrado risco real de **softlock**: ao entrar de novo na galeria após desistência ou whiteout, o script limpava apenas `cleartrainerflag`, não as flags `FLAG_ERYON_ELITE_TRAINER_{1..4}_DEFEATED` utilizadas para bloquear/liberar os duelos. Uma tentativa parcialmente vencida poderia impedir enfrentar novamente Aria ou concluir a Elite Four.
+- **Endurecimento preventivo**, não correção de softlock comprovado: o motor `GetEryonTrainerFlagId` já associa `cleartrainerflag` às mesmas flags de progresso da Elite Four; assim, a transição anterior provavelmente já reiniciava a série. Adicionadas `clearflag` explícitas para tornar o reinício independente dessa relação implícita e protegê-lo contra alterações futuras.
 - Corrigido `EryonLigaElite_OnTransition`: enquanto o jogador não for Campeão, a transição limpa as quatro flags de rodadas, a flag de batalha do Campeão e as cinco flags de treinador; preserva `FLAG_ERYON_QUALIFIED` e as oito fases classificatórias.
 - A vitória final (`FLAG_ERYON_CHAMPION_CROWNED`) continua **permanente**, e o guard é avaliado antes de quaisquer resets.
 - Dois novos testes de regressão foram acrescentados a `tests/test_eryon_league_contract.py`, já incluído pela descoberta automática do build. O jogo ainda precisa comprovar esses cenários em emulador: desistir após Aria, perder para Bastian e retornar, passar pela cura e vencer o Campeão.
+
+## Auditoria de navegação regional e Liga (15/10/2026)
+
+- A estrutura da região contém 42 mapas, saídas por `warp_events` e uma conexão de borda entre Vila Aurora e Rota 01. A recepção, as oito classificatórias, a sala de cura e a Elite Four usam transições por scripts.
+- Acrescentado `tests/test_eryon_world_map_network.py`: valida índices e pares de retorno dos warps, conexões de borda recíprocas, dimensões dos mapas e posições de warps roteirizados e conectividade global desde a Vila Aurora até a Liga. Descoberta automática já presente no `tools/build_eryon.sh` e CI.
+- O novo teste detecta mapas ou ligações desconectadas antes da compilação, mas **não substitui o teste das colisões, renderização e transferências no Delta**.
 
 ## Pendências prioritárias
 1. Compilação limpa e verificação da ROM GBA via `tools/build_eryon.sh` e GitHub Actions.
