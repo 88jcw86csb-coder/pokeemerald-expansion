@@ -138,6 +138,16 @@ class EryonKalosEncounters(unittest.TestCase):
                         body.index("setflag FLAG_ERYON_OASIS_ALCOVE_SUPPLIES_TAKEN"))
         self.assertEqual(source.count("EryonOasis_EventScript_AlcoveSupplies::"), 1)
 
+    def test_rom_build_regenerates_route_binary_before_map_audit(self):
+        build = (ROOT / "tools/build_eryon.sh").read_text()
+        rebuild = "python3 tools/build_eryon_map_bins.py --wall 0x3c01"
+        self.assertIn(rebuild, build)
+        self.assertLess(build.index(rebuild),
+                        build.index("python3 tools/eryon_layout_audit.py"))
+        self.assertLess(build.index(rebuild),
+                        build.index('make -j"$jobs" -O all'))
+        self.assertIn("test_eryon_kalos_encounters.py", build)
+
     def test_dragon_shrine_requires_local_eclipse_victory(self):
         source = (MAPS / "Eryon_Drakonia/scripts.inc").read_text(encoding="utf-8")
         self.assertIn(
