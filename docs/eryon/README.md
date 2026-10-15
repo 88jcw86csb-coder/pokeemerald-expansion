@@ -163,3 +163,9 @@ A ROM de GBA segue em desenvolvimento na branch `eryon-development`. **Ter arqui
 - A leitura do livro registra a flag 0x4B9; a decodificacao do emissor requer o livro e registra 0x4BA. A estrada, os dois warps, as insignias e o checkpoint da vila permanecem inalterados.
 - O explorador da rota, o entregador da Vila dos Pomares e o tecnico de Neonara reagem ao progresso. As prioridades anteriores do tecnico foram preservadas.
 - Teste estatico: tests/test_eryon_orchard_investigation.py. Compilacao, salvamento, graficos e comportamento no Delta ainda necessitam validacao.
+
+## Rota 04 — expansao fisica dos pomares e acampamento (15/10/2026)
+
+- Corredor norte liga o pomar a uma clareira leste; ramal ao sul conecta a estrada a um antigo acampamento rochoso. Planilha de 48x44 blocos e arquivo map.bin sincronizados, preservando as duas saidas preexistentes.
+- No leste, marcador em (23,10) reage ao desligamento da rede Eclipse. No sul, cache em (21,34) oferece Full Heal uma unica vez (flag 0x4BC), preservando a recompensa quando a Bolsa esta cheia.
+- O novo teste tests/test_eryon_route04_map_completion.py compara os 4224 bytes e verifica o acesso a todos os eventos. As colisoes reais, os sprites e a jogabilidade ainda requerem Delta.
