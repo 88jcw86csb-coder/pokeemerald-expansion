@@ -91,6 +91,37 @@ class EryonKalosEncounters(unittest.TestCase):
                 self.assertLess(source.index("B_OUTCOME_WON"), source.index(f"setflag {flag}"))
                 self.assertIn("MSGBOX_YESNO", source)
 
+    def test_oasis_caravan_alcove_connects_to_original_road(self):
+        area = json.loads((MAPS / "Eryon_TrilhaDoOasis/map.json").read_text())
+        lines = (ROOT / "docs/eryon/trilha_do_oasis_terrain_plan.txt").read_text().splitlines()[4:]
+        self.assertEqual(len(lines), 44)
+        self.assertTrue(all(len(row) == 48 for row in lines))
+        for y in range(16, 21):
+            for x in range(19, 25):
+                self.assertNotEqual(lines[y][x], "#")
+        self.assertEqual(lines[17][21], ".")
+        reached = {(0, 22)}
+        queue = deque([(0, 22)])
+        while queue:
+            x, y = queue.popleft()
+            for nx, ny in neighbors(x, y):
+                tile = (nx, ny)
+                if (0 <= nx < 48 and 0 <= ny < 44 and
+                        lines[ny][nx] != "#" and tile not in reached):
+                    reached.add(tile)
+                    queue.append(tile)
+        for point in ((21, 17), (21, 20), (25, 22), (47, 22)):
+            self.assertIn(point, reached)
+        events = [event for event in area["bg_events"]
+                  if event["script"] == "EryonOasis_EventScript_CaravanAlcove"]
+        self.assertEqual([(e["x"], e["y"]) for e in events], [(21, 17)])
+        source = (MAPS / "Eryon_TrilhaDoOasis/scripts.inc").read_text()
+        entry = source.split("EryonOasis_EventScript_CaravanAlcove::", 1)[1].split(
+            "EryonOasis_EventScript_AlcoveRiverEvidence::", 1)[0]
+        self.assertIn("FLAG_ERYON_OASIS_HELIOPTILE_RESOLVED", entry)
+        self.assertIn("FLAG_ERYON_RIVER_SAMPLE_RECORDED", entry)
+        self.assertNotIn("setflag ", entry)
+
     def test_dragon_shrine_requires_local_eclipse_victory(self):
         source = (MAPS / "Eryon_Drakonia/scripts.inc").read_text(encoding="utf-8")
         self.assertIn(
