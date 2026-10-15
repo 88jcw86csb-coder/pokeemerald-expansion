@@ -6,6 +6,15 @@ Eryon_LigaEliteFour_MapScripts::
 @ Whiteout handles the money penalty; qualification remains permanent.
 EryonLigaElite_OnTransition:
 	goto_if_set FLAG_ERYON_CHAMPION_CROWNED, EryonLigaElite_OnTransitionDone
+	@ Both the scripted progress flags AND the mapped trainer flags must reset.
+	@ Otherwise leaving the gallery after one victory permanently skips Aria,
+	@ and the next Elite Four attempt is softlocked at Bastian.
+	@ Do not reset FLAG_ERYON_QUALIFIED or the eight qualifying rounds.
+	clearflag FLAG_ERYON_ELITE_TRAINER_1_DEFEATED
+	clearflag FLAG_ERYON_ELITE_TRAINER_2_DEFEATED
+	clearflag FLAG_ERYON_ELITE_TRAINER_3_DEFEATED
+	clearflag FLAG_ERYON_ELITE_TRAINER_4_DEFEATED
+	clearflag FLAG_ERYON_CHAMPION_TRAINER_DEFEATED
 	cleartrainerflag TRAINER_ERYON_ELITE_1
 	cleartrainerflag TRAINER_ERYON_ELITE_2
 	cleartrainerflag TRAINER_ERYON_ELITE_3

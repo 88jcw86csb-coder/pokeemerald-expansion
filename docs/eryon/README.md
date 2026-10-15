@@ -107,6 +107,13 @@ A ROM de GBA segue em desenvolvimento na branch `eryon-development`. **Ter arqui
 - Criado `tools/test_eryon_script_linkage.py`, descoberto automaticamente pelas suítes de testes do build e do CI, para sinalizar futuras referências ausentes, evolução de IDs duplicados, espécie inexistente ou nível selvagem fora do intervalo válido.
 - Estas verificações são **estáticas**. A etapa bloqueadora continua sendo uma compilação do HEAD recente pelo GitHub Actions, seguida do teste integral em Delta.
 
+## Consolidação da Liga — reinício da Elite Four (15/10/2026)
+
+- Encontrado risco real de **softlock**: ao entrar de novo na galeria após desistência ou whiteout, o script limpava apenas `cleartrainerflag`, não as flags `FLAG_ERYON_ELITE_TRAINER_{1..4}_DEFEATED` utilizadas para bloquear/liberar os duelos. Uma tentativa parcialmente vencida poderia impedir enfrentar novamente Aria ou concluir a Elite Four.
+- Corrigido `EryonLigaElite_OnTransition`: enquanto o jogador não for Campeão, a transição limpa as quatro flags de rodadas, a flag de batalha do Campeão e as cinco flags de treinador; preserva `FLAG_ERYON_QUALIFIED` e as oito fases classificatórias.
+- A vitória final (`FLAG_ERYON_CHAMPION_CROWNED`) continua **permanente**, e o guard é avaliado antes de quaisquer resets.
+- Dois novos testes de regressão foram acrescentados a `tests/test_eryon_league_contract.py`, já incluído pela descoberta automática do build. O jogo ainda precisa comprovar esses cenários em emulador: desistir após Aria, perder para Bastian e retornar, passar pela cura e vencer o Campeão.
+
 ## Pendências prioritárias
 1. Compilação limpa e verificação da ROM GBA via `tools/build_eryon.sh` e GitHub Actions.
 2. Auditoria das tabelas `land_mons`, evolução, disponibilidade e distribuição de capturas por rota.
