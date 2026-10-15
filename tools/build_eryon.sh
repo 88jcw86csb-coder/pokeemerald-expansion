@@ -10,73 +10,25 @@ if [[ ! -f Makefile || ! -f tools/eryon_rom_smoke.py ]]; then
   exit 2
 fi
 
-echo "== Eryon: checking Python validator/test syntax =="
-python3 -m py_compile tools/eryon_layout_audit.py tools/eryon_validate.py tools/test_eryon_event_flow.py tools/test_eryon_opening_terrain.py tools/test_eryon_layout_audit.py tools/test_eryon_species.py tools/test_eryon_wild_and_river.py tools/test_eryon_echo_study.py tools/test_eryon_rom_smoke.py tools/eryon_rom_smoke.py
+echo "== Eryon: checking all Python tool and gameplay test syntax =="
+python3 -m compileall -q tools tests
 
 echo "== Eryon: regenerate registered map binaries from authoritative terrain plans =="
 python3 tools/build_eryon_map_bins.py --wall 0x3c01 --path 0x3001 --meadow 0x3002 --stone 0x3003 --preview-unregistered
 
-echo "== Eryon: registered city collision and walkable NPC access =="
-python3 -m unittest discover -s tools -p 'test_eryon_city_collision.py' -v
+# Collect the whole regression suite, including League, Eclipse and late
+# routes. Keep test discovery dynamic so future tests cannot be silently
+# omitted by forgetting another explicit entry here.
+echo "== Eryon: Python tool regression suite (complete discovery) =="
+python3 -m unittest discover -s tools -p 'test_eryon_*.py' -v
 
-echo "== Eryon: check Kalos wildlife encounters and new oasis passages =="
-python3 -m unittest discover -s tests -p 'test_eryon_kalos_encounters.py' -v
+echo "== Eryon: adventure, battle, League and map regressions (complete discovery) =="
+python3 -m unittest discover -s tests -p 'test_eryon_*.py' -v
 
-echo "== Eryon: opening data validation =="
+echo "== Eryon: global gameplay/data and map collision audits =="
 python3 tools/eryon_validate.py
-echo "== Eryon: binary terrain and warp tile audit == "
 python3 tools/eryon_layout_audit.py
-echo "== Eryon: terrain collision audit tests =="
-python3 -m unittest discover -s tools -p 'test_eryon_layout_audit.py' -v
-
-echo "== Eryon: opening terrain and exits == "
-python3 -m unittest discover -s tools -p 'test_eryon_opening_terrain.py' -v
-echo "== Eryon: species tests =="
-python3 -m unittest discover -s tools -p 'test_eryon_species.py' -v
-echo "== Eryon: wild route habitats and Eclipse river quest =="
-python3 -m unittest discover -s tools -p 'test_eryon_wild_and_river.py' -v
-echo "== Eryon: Echo Valley archive and Lunaris investigation =="
-python3 -m unittest discover -s tools -p 'test_eryon_echo_study.py' -v
-echo "== Eryon: event flow tests =="
-python3 -m unittest discover -s tools -p 'test_eryon_event_flow.py' -v
-echo "== Eryon: Elite Four tournament integrity =="
-python3 -m unittest discover -s tests -p 'test_eryon_elite_four.py' -v
-
-echo "== Eryon: Dragon Trail Aurora Terrace and Carbink protection =="
-python3 -m unittest discover -s tests -p 'test_eryon_dragon_aurora.py' -v
-
-echo "== Eryon: Lunar Trail Moonfall Sanctuary and ranger encounter =="
-python3 -m unittest discover -s tests -p 'test_eryon_moonfall_sanctuary.py' -v
-
-echo "== Eryon: forest canopy grove, binary collision and Phantump regression =="
-python3 -m unittest discover -s tests -p 'test_eryon_forest_grove.py' -v
-
-echo "== Eryon: Riolu level 35 and no trade/friendship evolution through Kalos =="
-python3 -m unittest discover -s tests -p 'test_eryon_level_evolutions.py' -v
-
-echo "== Eryon: Eclipse network finale continuity =="
-python3 -m unittest discover -s tests -p 'test_eryon_eclipse_finale.py' -v
-
-echo "== Eryon: Eight Gym level and EXP balance integrity =="
-python3 -m unittest discover -s tests -p 'test_eryon_gym_balance.py' -v
-
-echo "== Eryon: Mist lookout and Glacial route progression =="
-python3 -m unittest discover -s tests -p 'test_eryon_mist_watch.py' -v
-
-echo "== Eryon: Glacial ridge, existing caches and Bergmite encounter =="
-python3 -m unittest discover -s tests -p 'test_eryon_glacial_rift.py' -v
-
-echo "== Eryon: Balanced Glacial Eclipse battle and Frostheim consequence =="
-python3 -m unittest discover -s tests -p 'test_eryon_glacial_eclipse.py' -v
-
-echo "== Eryon: Sierra rocky terrain and Eclipse crystal puzzle =="
-python3 -m unittest discover -s tests -p 'test_eryon_serra_resonance.py' -v
-
-echo "== Eryon: Crystal Serra sentry and multi-stage Eclipse investigation =="
-python3 -m unittest discover -s tests -p 'test_eryon_serra_sentry.py' -v
-
-echo "== Eryon: ROM smoke validator unit tests =="
-python3 -m unittest discover -s tools -p 'test_eryon_rom_smoke.py' -v
+python3 tools/eryon_world_audit.py
 
 echo "== Eryon: compiling GBA ROM =="
 jobs=2

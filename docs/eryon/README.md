@@ -93,6 +93,14 @@ A ROM de GBA segue em desenvolvimento na branch `eryon-development`. **Ter arqui
 - Acrescentada regressão em `tools/test_eryon_map_bins.py` que exige layout registrado, gerador correto e identidade byte a byte do binário da Trilha Lunar com a planta. O teste é descoberto pelo workflow de terrenos.
 - **Limite:** a verificação confirma o contrato de geração; ainda é necessária compilação GBA no Actions e validação da travessia no Delta.
 
+## Consolidação da bateria completa de testes (15/10/2026)
+
+- Corrigida a cobertura incompleta em `tools/build_eryon.sh`: 11 módulos que **já existiam** em `tests/` não eram executados pelo roteiro principal. Entre eles, testes da classificatória da Liga, acesso à capital, missões Eclipse e conexões do fim do jogo.
+- `tools/build_eryon.sh` e o job `eryon-validation` agora descobrem **automaticamente todos os arquivos `test_eryon_*.py`** de `tools/` e `tests/`, em vez de manter listas manuais que podem ficar defasadas.
+- A compilação verifica também a sintaxe Python de toda a suíte e executa `eryon_validate.py`, `eryon_layout_audit.py` e `eryon_world_audit.py` antes de chamar `make`. Mantidos o descarte de ROM antiga, a validação do cabeçalho e o SHA-256 na produção da ROM.
+- Novo teste de contrato `tools/test_eryon_build_contract.py` impede que o roteiro volte a omitir módulos e assegura que a checagem da ROM continua após os testes.
+- **Validação ainda não equivale a GBA/Delta:** uma falha da suíte completa deverá ser corrigida nos arquivos reais; um status de sucesso antigo não vale para o HEAD atual.
+
 ## Pendências prioritárias
 1. Compilação limpa e verificação da ROM GBA via `tools/build_eryon.sh` e GitHub Actions.
 2. Auditoria das tabelas `land_mons`, evolução, disponibilidade e distribuição de capturas por rota.
