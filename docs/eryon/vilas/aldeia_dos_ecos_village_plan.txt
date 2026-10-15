@@ -1,6 +1,6 @@
 Aldeia dos Ecos | Eryon village concept 36x30
 # barrier; . path; , grove; : stone; P plaza; C center; M mart; H home; I inn
-Design only: buildings, encounters, warp links and interiors are not implemented.
+Registered Echo Village: reciprocal Echo Valley and Lunar Trail exits, witness and healer accessible; interiors pending.
 
 ################....################
 ################....################

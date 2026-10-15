@@ -92,6 +92,7 @@ def render(name,t):
     status = {
         "refugio_cristal": "Registered provisional village: reciprocal Crystal Ridge warp and caretaker event installed; buildings, encounters and interiors pending.",
         "posto_oriental": "Registered provisional village: optional road warp and cargo investigation NPCs installed; buildings, encounters and interiors pending.",
+        "aldeia_dos_ecos": "Registered Echo Village: reciprocal Echo Valley and Lunar Trail exits, witness and healer accessible; interiors pending.",
         "vila_do_pico": "Registered Peak Village: reciprocal Dragon Trail and Drakonia exits, caretaker, elders and Eclipse clues; building interiors pending."
     }.get(name, "Design only: buildings, encounters, warp links and interiors are not implemented.")
     return (f"{VILLAGES[name][0]} | Eryon village concept 36x30\n"
