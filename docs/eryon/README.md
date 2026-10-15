@@ -169,3 +169,11 @@ A ROM de GBA segue em desenvolvimento na branch `eryon-development`. **Ter arqui
 - Corredor norte liga o pomar a uma clareira leste; ramal ao sul conecta a estrada a um antigo acampamento rochoso. Planilha de 48x44 blocos e arquivo map.bin sincronizados, preservando as duas saidas preexistentes.
 - No leste, marcador em (23,10) reage ao desligamento da rede Eclipse. No sul, cache em (21,34) oferece Full Heal uma unica vez (flag 0x4BC), preservando a recompensa quando a Bolsa esta cheia.
 - O novo teste tests/test_eryon_route04_map_completion.py compara os 4224 bytes e verifica o acesso a todos os eventos. As colisoes reais, os sprites e a jogabilidade ainda requerem Delta.
+
+
+## Cerimonia conclusiva da paz — 15/10/2026
+
+- O titulo de Campeao na Elite Four e o desligamento da rede Eclipse em Drakonia continuam independentes. Ao completar os dois, o Painel dos Cristais na Cidade da Liga oferece uma cerimonia opcional; a flag 0x4BB impede homenagens duplicadas e preserva o acesso a Liga.
+- A cerimonia reconhece oito lideres, Professora Elya, o Riolu inicial, o Campeao Aurelio e a restauracao das rotas. Trofeu, conversa com Elya e terminal de Drakonia reconhecem o desfecho mesmo quando o jogador termina a Liga antes da Eclipse.
+- Os scripts existentes de provas, oito classificatorias, cura, Elite Four, perdedores e checkpoints nao foram substituidos. Teste tests/test_eryon_story_completion.py protege o encadeamento narrativo.
+- Trata-se de narrativa implementada e verificada estruturalmente. Uma ROM compilada e uma campanha no Delta ainda sao provas obrigatorias para anunciar versao completa.
