@@ -15,7 +15,7 @@ class TerrainCompilerTests(unittest.TestCase):
             source.write_text("name\nlegend\nstatus\n\n" + "\n".join(rows) + "\n", encoding="utf-8")
             payload = compile_plan(source, {"#": 0x3C01, ".": 0x3001, ",": 0x3002, ":": 0x3003})
             self.assertEqual(len(payload), WIDTH * HEIGHT * 2)
-            self.assertEqual(struct.unpack_from("<4H", payload), (0x3C01, 0x3002, 0x3003, 0x3001))
+            self.assertEqual(struct.unpack_from("<4H", payload), (0x3C16, 0x301C, 0x3069, 0x302C))
 
     def test_registered_league_city_dimensions(self):
         source = Path(__file__).resolve().parents[1] / "docs/eryon/liga_eryon_terrain_plan.txt"
@@ -49,9 +49,9 @@ class TerrainCompilerTests(unittest.TestCase):
         for y in (12, 13, 14):
             for x in range(35, 40):
                 word = struct.unpack_from("<H", binary, 2 * (y * 48 + x))[0]
-                self.assertEqual(word, 0x3003, (x, y))
+                self.assertEqual(word, 0x3069, (x, y))
         self.assertEqual(struct.unpack_from("<H", binary, 2 * (15 * 48 + 38))[0],
-                         0x3003)
+                         0x3069)
 
     def test_lunar_trail_is_registered_and_regenerated_for_rom(self):
         import json

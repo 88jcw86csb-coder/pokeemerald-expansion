@@ -57,10 +57,16 @@ class EryonCityCollisionTests(unittest.TestCase):
                 self.assertEqual(len(data), W * H * 2)
                 blocks = struct.unpack("<" + str(W * H) + "H", data)
                 self.assertGreater(sum(bool(v & 0x0C00) for v in blocks), 2000)
+                from build_eryon_map_bins import compile_plan
+                plan_path = ROOT / "docs/eryon/cidades" / (city.lower() + "_city_plan.txt")
+                expected = struct.unpack("<" + str(W*H) + "H",
+                                         compile_plan(plan_path, WORDS, W, H))
+                self.assertEqual(blocks, expected, f"{city}: rendered binary differs from plan")
                 for y, row in enumerate(rows):
                     for x, symbol in enumerate(row):
-                        self.assertEqual(blocks[y * W + x], WORDS[symbol],
-                                         (city, x, y))
+                        self.assertEqual(blocks[y*W+x]&0xFC00,
+                                         WORDS[symbol]&0xFC00,
+                                         (city,x,y,"collision/elevation changed"))
 
     def test_travel_and_events_remain_accessible_with_stationary_npcs(self):
         for city in CITIES:

@@ -35,7 +35,7 @@ class VillageTests(unittest.TestCase):
                 **dict.fromkeys("PCMHI",0x3001)}
         expected = compile_plan(plan_path,tile,width=36,height=30)
         self.assertEqual((ROOT/"data/layouts/Eryon_AldeiaDosEcos/map.bin").read_bytes(),expected)
-        self.assertEqual(struct.unpack_from("<H",expected,2*(20*36+21))[0],0x3001)
+        self.assertEqual(struct.unpack_from("<H",expected,2*(20*36+21))[0],0x302C)
 
 
 if __name__=="__main__":

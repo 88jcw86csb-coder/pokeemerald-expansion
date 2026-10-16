@@ -40,7 +40,11 @@ def compile_plan(path, tile_ids, width=WIDTH, height=HEIGHT):
         raise ValueError(f"{path}: invalid terrain symbol or row width")
     if len(rows) != height:
         raise ValueError(f"{path}: expected {height} rows of {width} symbols; got {len(rows)}")
-    values = [tile_ids[symbol] for row in rows for symbol in row]
+    # Convert legacy provisional metatile words to verified art *while*
+    # preserving the authoritative plan's collision/elevation topology.
+    from eryon_terrain_visual_repair import retile_word, stamp_visible_houses
+    values = [retile_word(tile_ids[symbol]) for row in rows for symbol in row]
+    stamp_visible_houses(values, width, height, rows)
     return struct.pack(f"<{len(values)}H", *values)
 
 def main():
