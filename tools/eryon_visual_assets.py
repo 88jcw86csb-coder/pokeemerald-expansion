@@ -249,7 +249,7 @@ def indexed_strip_png(canvas, palette):
           + png_chunk(b"IDAT",zlib.compress(bytes(raw),9))
           + png_chunk(b"IEND",b""))
 
-def hero_frame(size, phase, action):
+def hero_frame(size, phase, action, female=False):
     """One player frame, with no original Emerald character art reused."""
     canvas=[[0]*size for _ in range(32)]
     def rect(x,y,w,h,c):
@@ -293,11 +293,60 @@ def hero_frame(size, phase, action):
         rect(x+13,15,2,6,10)
     elif action == "running":
         rect(x+3,17+shift,2,10,6)
+    if female:
+        # Longer side braids and amber circlet, unlike the original May sprite.
+        rect(x+2,8,3,16,4)
+        rect(x+12,9,3,16,4)
+        rect(x+3,6,10,2,10)
     if phase%4 in (2,3):
         # Back-facing backpack clearly visible on some animations.
         rect(x+5,15,7,10,7); rect(x+6,16,5,7,5)
         rect(x+7,18,3,3,10)
     return canvas
+
+def generate_hero_girl_assets():
+    base=ROOT/"graphics/object_events/pics/people/eryon_hero_f"
+    base.mkdir(parents=True,exist_ok=True)
+    formats={
+        "walking":(9,16,"walking"),"running":(9,16,"running"),
+        "field_move":(5,32,"field"),"surfing":(6,32,"surf"),
+        "mach_bike":(9,32,"bike"),"acro_bike":(27,32,"acro"),
+        "fishing":(12,32,"fishing"),"underwater":(4,32,"underwater"),
+        "watering":(6,32,"field"),"decorating":(1,16,"field"),
+    }
+    for name,(count,size,action) in formats.items():
+        frames=[hero_frame(size,i,action,True) for i in range(count)]
+        rows=[[pixel for frame in frames for pixel in frame[y]]
+              for y in range(32)]
+        (base/(name+".png")).write_bytes(indexed_strip_png(
+            rows,HERO_FIELD_PALETTE))
+    # All player actions, both genders and reflections share one palette.
+    # Their original Emerald graphics stay on disk and are not deleted.
+    front, colors=paint("eryon_hero_f", "#674135", "#366c79",
+                        "#dbb269", "#d3a083", "long", "star")
+    (OUT/"eryon_hero_f.png").write_bytes(indexed_png(front,colors))
+    back=[]
+    for frame in range(4):
+        pixels=[[0]*64 for _ in range(64)]
+        def rect(x,y,w,h,c):
+            for yy in range(max(0,y),min(64,y+h)):
+                for xx in range(max(0,x),min(64,x+w)):
+                    pixels[yy][xx]=c
+        rect(20,9,26,38,7);rect(23,10,22,37,8)
+        rect(22,8,24,8,5);rect(24,10,20,5,6)
+        rect(18,30,33,34,1);rect(21,31,26,32,4)
+        rect(25,33,20,30,5);rect(27,36,16,22,3)
+        rect(28,39,14,12,7);rect(31,42,8,7,13)
+        rect(35,43,3,4,6)
+        rect(12,43+frame,9,6,2);rect(46,35-frame*2,11,6,2)
+        if frame>=2:
+            rect(53,25,5,5,14);rect(55,26,2,3,1)
+        back.extend(pixels)
+    (ROOT/"graphics/trainers/back_pics/eryon_hero_f.png").write_bytes(
+        indexed_strip_png(back,colors))
+    # The May palette color indices are replaced in the Eryon build,
+    # but Hoenn's original sprite files remain untouched.
+    print("ERYON_VISUAL female explorer x10 and battle front/back generated")
 
 def generate_hero_assets():
     base=ROOT/"graphics/object_events/pics/people/eryon_hero"
@@ -318,6 +367,12 @@ def generate_hero_assets():
     lines=["JASC-PAL","0100","16"]
     lines.extend(" ".join(str(c) for c in rgb) for rgb in HERO_FIELD_PALETTE)
     pal.write_text("\n".join(lines)+"\n",encoding="utf-8")
+    reflection=ROOT/"graphics/object_events/palettes/eryon_hero_reflection.pal"
+    reflected=[tuple(min(255,int(c*0.75)) for c in color)
+               for color in HERO_FIELD_PALETTE]
+    reflection.write_text("\n".join(["JASC-PAL","0100","16"]+[
+        " ".join(str(c) for c in rgb) for rgb in reflected])+"\n",
+        encoding="utf-8")
     # New trainer portrait and complete throwing animation strip.
     front, colors=paint("eryon_hero", "#63432b", "#366c79",
                         "#dbb269", "#d3a083", "spike", "star")
@@ -355,6 +410,7 @@ def generate(target=OUT):
         created.append(dest)
         print("ERYON_VISUAL",dest.relative_to(ROOT) if dest.is_relative_to(ROOT) else dest)
     generate_hero_assets()
+    generate_hero_girl_assets()
     field = make_eclipse_field_sprite(
         ROOT / "graphics/object_events/pics/people/eryon_eclipse.png")
     print("ERYON_VISUAL", field.relative_to(ROOT))
