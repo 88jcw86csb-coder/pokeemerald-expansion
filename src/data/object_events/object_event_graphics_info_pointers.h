@@ -114,6 +114,14 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MovingBox;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CableCar;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Scientist2;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DevonEmployee;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_EryonLeaderKael;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_EryonLeaderVolt;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_EryonLeaderBjorn;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_EryonLeaderTessa;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_EryonLeaderNyx;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_EryonLeaderKaio;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_EryonLeaderLyra;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_EryonLeaderRyu;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_EryonEclipse;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AquaMemberM;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AquaMemberF;
@@ -520,6 +528,14 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_CABLE_CAR] =                &gObjectEventGraphicsInfo_CableCar,
     [OBJ_EVENT_GFX_SCIENTIST_2] =              &gObjectEventGraphicsInfo_Scientist2,
     [OBJ_EVENT_GFX_DEVON_EMPLOYEE] =           &gObjectEventGraphicsInfo_DevonEmployee,
+    [OBJ_EVENT_GFX_ERYON_LEADER_KAEL] = &gObjectEventGraphicsInfo_EryonLeaderKael,
+    [OBJ_EVENT_GFX_ERYON_LEADER_VOLT] = &gObjectEventGraphicsInfo_EryonLeaderVolt,
+    [OBJ_EVENT_GFX_ERYON_LEADER_BJORN] = &gObjectEventGraphicsInfo_EryonLeaderBjorn,
+    [OBJ_EVENT_GFX_ERYON_LEADER_TESSA] = &gObjectEventGraphicsInfo_EryonLeaderTessa,
+    [OBJ_EVENT_GFX_ERYON_LEADER_NYX] = &gObjectEventGraphicsInfo_EryonLeaderNyx,
+    [OBJ_EVENT_GFX_ERYON_LEADER_KAIO] = &gObjectEventGraphicsInfo_EryonLeaderKaio,
+    [OBJ_EVENT_GFX_ERYON_LEADER_LYRA] = &gObjectEventGraphicsInfo_EryonLeaderLyra,
+    [OBJ_EVENT_GFX_ERYON_LEADER_RYU] = &gObjectEventGraphicsInfo_EryonLeaderRyu,
     [OBJ_EVENT_GFX_ERYON_ECLIPSE] =             &gObjectEventGraphicsInfo_EryonEclipse,
     [OBJ_EVENT_GFX_AQUA_MEMBER_M] =            &gObjectEventGraphicsInfo_AquaMemberM,
     [OBJ_EVENT_GFX_AQUA_MEMBER_F] =            &gObjectEventGraphicsInfo_AquaMemberF,
