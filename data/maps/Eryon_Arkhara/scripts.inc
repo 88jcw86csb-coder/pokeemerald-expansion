@@ -389,5 +389,5 @@ EryonArkhara_EventScript_GymEntranceCancel::
 
 EryonArkhara_Text_GymEntrance:
 	.string "ENTRADA DO GINASIO:\p"
-	.string "Entrar na arena de\\n"
+	.string "Entrar na arena de\n"
 	.string "ARKHARA agora?$"
