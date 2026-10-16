@@ -102,6 +102,14 @@ jobs:
         run: python3 tools/eryon_visual_assets.py
       - name: Generate exclusive Eryon title graphic
         run: python3 tools/eryon_boot_assets.py
+      - name: Render indexed pixel-art preview sheets
+        run: python3 tools/eryon_preview_contact_sheet.py
+      - name: Upload Eryon visual previews for inspection
+        uses: actions/upload-artifact@v4
+        with:
+          name: eryon-visual-preview
+          path: build/eryon-preview/
+          if-no-files-found: error
       - name: Generate Eryon gym interior collision binaries for validation
         run: python3 tools/eryon_gym_interiors.py
       - name: Compile-check all Python test and validator modules
