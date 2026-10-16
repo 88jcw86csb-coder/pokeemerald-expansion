@@ -13,7 +13,10 @@ fi
 echo "== Eryon: checking all Python tool and gameplay test syntax =="
 python3 -m compileall -q tools tests
 
-echo "== Eryon: generate distinct indexed GBA portraits (leaders / Team Eclipse) =="
+echo "== Eryon: generate six original regional tileset banks without touching collisions =="
+python3 tools/eryon_tileset_visuals.py
+
+echo "== Eryon: generate distinct indexed GBA portraits (leaders / Team Eclipse) =="echo "== Eryon: generate distinct indexed GBA portraits (leaders / Team Eclipse) =="
 python3 tools/eryon_visual_assets.py
 
 echo "== Eryon: regenerate registered map binaries from authoritative terrain plans =="
