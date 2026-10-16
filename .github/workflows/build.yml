@@ -95,6 +95,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Generate Eryon GBA character assets for independent validation
+        run: python3 tools/eryon_visual_assets.py
       - name: Compile-check all Python test and validator modules
         run: python3 -m compileall -q tools tests
       - name: Test every Eryon tool regression
