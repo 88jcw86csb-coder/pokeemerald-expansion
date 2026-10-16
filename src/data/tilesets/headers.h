@@ -52,6 +52,72 @@ const struct Tileset gTileset_Petalburg =
     .callback = InitTilesetAnim_Petalburg,
 };
 
+// Eryon aurora preserves Petalburg's metatile indices, attributes and animation rules.
+const struct Tileset gTileset_EryonAurora = {
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_EryonAurora,
+    .palettes = gTilesetPalettes_EryonAurora,
+    .metatiles = gMetatiles_Petalburg,
+    .metatileAttributes = gMetatileAttributes_Petalburg,
+    .callback = InitTilesetAnim_Petalburg,
+};
+
+// Eryon urban preserves Rustboro's metatile indices, attributes and animation rules.
+const struct Tileset gTileset_EryonUrban = {
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_EryonUrban,
+    .palettes = gTilesetPalettes_EryonUrban,
+    .metatiles = gMetatiles_Rustboro,
+    .metatileAttributes = gMetatileAttributes_Rustboro,
+    .callback = InitTilesetAnim_Rustboro,
+};
+
+// Eryon forest preserves Rustboro's metatile indices, attributes and animation rules.
+const struct Tileset gTileset_EryonForest = {
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_EryonForest,
+    .palettes = gTilesetPalettes_EryonForest,
+    .metatiles = gMetatiles_Rustboro,
+    .metatileAttributes = gMetatileAttributes_Rustboro,
+    .callback = InitTilesetAnim_Rustboro,
+};
+
+// Eryon crystal preserves Rustboro's metatile indices, attributes and animation rules.
+const struct Tileset gTileset_EryonCrystal = {
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_EryonCrystal,
+    .palettes = gTilesetPalettes_EryonCrystal,
+    .metatiles = gMetatiles_Rustboro,
+    .metatileAttributes = gMetatileAttributes_Rustboro,
+    .callback = InitTilesetAnim_Rustboro,
+};
+
+// Eryon desert preserves Rustboro's metatile indices, attributes and animation rules.
+const struct Tileset gTileset_EryonDesert = {
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_EryonDesert,
+    .palettes = gTilesetPalettes_EryonDesert,
+    .metatiles = gMetatiles_Rustboro,
+    .metatileAttributes = gMetatileAttributes_Rustboro,
+    .callback = InitTilesetAnim_Rustboro,
+};
+
+// Eryon lunar preserves Rustboro's metatile indices, attributes and animation rules.
+const struct Tileset gTileset_EryonLunar = {
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_EryonLunar,
+    .palettes = gTilesetPalettes_EryonLunar,
+    .metatiles = gMetatiles_Rustboro,
+    .metatileAttributes = gMetatileAttributes_Rustboro,
+    .callback = InitTilesetAnim_Rustboro,
+};
+
 const struct Tileset gTileset_Rustboro =
 {
     .isCompressed = TRUE,
