@@ -1,0 +1,179 @@
+#!/usr/bin/env python3
+"""Deterministic, original 4bpp-compatible Eryon trainer portraits.
+
+All sprites are authored from geometric pixel shapes, not recolors of Hoenn
+trainers. Source is Python stdlib only (no runtime Pillow dependency).
+PNG: 64x64, indexed 4-bit, 16 palette slots, transparent index 0.
+This is the first *integrated* art pass, not the final full-detail art pass.
+"""
+from __future__ import annotations
+
+import argparse
+from pathlib import Path
+import struct
+import zlib
+
+ROOT = Path(__file__).resolve().parents[1]
+OUT = ROOT / "graphics/trainers/front_pics"
+
+# Code, hair, coat, accent, skin, hair length, signature accessory.
+# All leaders keep their existing trainer identities, teams, levels and flags.
+CAST = (
+    ("eryon_kael",       "#486b39", "#416c49", "#74b16b", "#e4a879", "short", "leaves"),
+    ("eryon_volt",       "#d8ab45", "#25446c", "#fac85a", "#dfaa80", "spike", "coil"),
+    ("eryon_bjorn",      "#aec6e3", "#344c75", "#c1e7ff", "#dbad98", "side",  "snow"),
+    ("eryon_tessa",      "#9b5536", "#927051", "#d8a46a", "#c48963", "long",  "relic"),
+    ("eryon_nyx",        "#42355e", "#282a57", "#9b8cca", "#d9a28b", "long",  "moon"),
+    ("eryon_kaio",       "#b64632", "#682f30", "#ef813c", "#d2926e", "spike", "forge"),
+    ("eryon_lyra",       "#947dbb", "#37365f", "#f0cf8a", "#daa3a0", "long",  "star"),
+    ("eryon_ryu",        "#287a8c", "#29465f", "#c7dde3", "#cca48b", "long",  "dragon"),
+    ("eryon_eclipse",    "#483956", "#26283d", "#9b74bc", "#d5a28c", "short", "eclipse"),
+    ("eryon_eclipse_f",  "#9272b4", "#303049", "#b78fd2", "#d7ad99", "long",  "eclipse"),
+    ("eryon_commander",  "#b9adc9", "#292943", "#d6b46b", "#d7a999", "long",  "eclipse"),
+)
+
+def rgb(value):
+    return tuple(int(value[i:i+2], 16) for i in (1, 3, 5))
+
+def shade(color, factor):
+    return tuple(max(0, min(255, int(c*factor))) for c in color)
+
+def palette(hair, coat, accent, skin):
+    h, c, a, s = (rgb(x) for x in (hair, coat, accent, skin))
+    colors = [
+        (255, 0, 255), (23, 28, 43), (40, 43, 62),
+        shade(c, .64), c, a, shade(a, 1.27),
+        shade(h, .56), h, shade(h, 1.25),
+        shade(s, .76), s, shade(s, 1.17),
+        (211, 190, 135), (211, 218, 228), (253, 248, 229),
+    ]
+    return [tuple(min(255, ch) for ch in color) for color in colors]
+
+def paint(name, hair, coat, accent, skin, cut, motif):
+    w = h = 64
+    p = [[0] * w for _ in range(h)]
+    def put(x, y, color):
+        if 0 <= x < w and 0 <= y < h:
+            p[y][x] = color
+    def rect(x0, y0, x1, y1, color):
+        for y in range(max(0, y0), min(h, y1)):
+            for x in range(max(0, x0), min(w, x1)):
+                put(x, y, color)
+    def oval(cx, cy, rx, ry, color):
+        for y in range(max(0, cy-ry), min(h, cy+ry+1)):
+            for x in range(max(0, cx-rx), min(w, cx+rx+1)):
+                if (x-cx)**2 * ry**2 + (y-cy)**2 * rx**2 <= rx**2 * ry**2:
+                    put(x, y, color)
+    def line(x0, y0, x1, y1, color, thick=1):
+        steps=max(abs(x1-x0),abs(y1-y0),1)
+        for i in range(steps+1):
+            x=x0+(x1-x0)*i//steps; y=y0+(y1-y0)*i//steps
+            rect(x-thick//2,y-thick//2,x+1+thick//2,y+1+thick//2,color)
+    # Dark outlined shoulders, dimensional coat and contrasting sleeves.
+    oval(31, 60, 30, 21, 1)
+    oval(31, 62, 27, 20, 3)
+    oval(15, 55, 11, 14, 2)
+    oval(49, 55, 11, 14, 2)
+    oval(16, 57, 8, 12, 4)
+    oval(47, 56, 8, 12, 4)
+    rect(22, 43, 42, 64, 2)
+    rect(24, 44, 40, 64, 4)
+    line(23, 44, 34, 64, 5, 3)
+    line(42, 44, 33, 64, 6, 2)
+    # Collar and neutral neck, with facial outline and three skin values.
+    rect(27, 39, 37, 48, 1)
+    rect(28, 39, 36, 46, 11)
+    oval(32, 26, 15, 17, 1)
+    oval(32, 27, 13, 15, 10)
+    oval(33, 26, 11, 14, 11)
+    rect(25, 33, 39, 36, 12)
+    # Long silhouettes stay readable in the 64px GBA portrait box.
+    if cut == "long":
+        oval(17, 31, 9, 24, 1)
+        oval(47, 30, 8, 23, 1)
+        oval(18, 31, 7, 22, 8)
+        oval(46, 31, 6, 22, 8)
+    if cut == "spike":
+        for x,y in ((16,15),(24,8),(33,6),(43,10),(50,18)):
+            line(x,23,x+3,y,7,5)
+            line(x+1,22,x+3,y+2,8,3)
+    if cut == "side":
+        oval(44, 35, 9, 22, 7)
+        oval(44, 35, 7, 20, 8)
+    oval(30, 15, 17, 12, 7)
+    oval(30, 14, 15, 10, 8)
+    oval(28, 13, 12, 7, 9)
+    rect(17, 19, 27, 24, 7)
+    line(31, 8, 43, 19, 8, 5)
+    # Eyes and mouth: pixels remain intentional when reduced on GBA.
+    rect(25, 27, 29, 29, 1)
+    rect(36, 27, 40, 29, 1)
+    put(27, 27, 15); put(38, 27, 15)
+    line(30, 35, 36, 35, 10)
+    # Insignia and character signature, not just a palette recolor.
+    if motif == "leaves":
+        oval(44, 47, 4, 7, 5); oval(48, 43, 6, 3, 6)
+        line(48, 42, 40, 55, 13)
+    elif motif == "coil":
+        oval(45, 49, 6, 6, 6); oval(45, 49, 3, 3, 1)
+        line(46, 42, 43, 48, 15, 2)
+    elif motif == "snow":
+        for dx,dy in ((-5,0),(5,0),(0,-5),(0,5)):
+            line(46, 48, 46+dx, 48+dy, 15, 2)
+        oval(46, 48, 2, 2, 6)
+    elif motif == "relic":
+        rect(46, 45, 54, 56, 13); rect(48, 47, 52, 54, 5)
+        line(49, 47, 52, 52, 1)
+    elif motif == "moon":
+        oval(47, 48, 7, 7, 6); oval(50, 46, 6, 7, 3)
+    elif motif == "forge":
+        oval(45, 48, 6, 8, 5); oval(45, 49, 3, 5, 6)
+        line(44, 44, 47, 37, 6, 2)
+    elif motif == "star":
+        line(45, 41, 45, 57, 6, 2); line(38, 49, 52, 49, 6, 2)
+        oval(45, 49, 2, 2, 15)
+    elif motif == "dragon":
+        line(45, 42, 50, 47, 14, 3); line(50,47,42,55,14,3)
+        line(47, 45, 51, 43, 6, 2)
+    elif motif == "eclipse":
+        oval(46, 48, 7, 7, 13); oval(46, 48, 5, 5, 2)
+        oval(49, 46, 4, 5, 3); line(45,39,45,57,6,1)
+    # White/cream piping improves silhouettes without transparency tricks.
+    line(21, 48, 18, 60, 14)
+    line(41, 45, 43, 59, 13)
+    return p, palette(hair, coat, accent, skin)
+
+def png_chunk(tag, payload):
+    return struct.pack(">I", len(payload))+tag+payload+struct.pack(
+        ">I", zlib.crc32(tag+payload)&0xffffffff)
+
+def indexed_png(pixels, colors):
+    width=height=64
+    # Two 4-bit palette indices per byte, row filter type 0.
+    data=bytearray()
+    for row in pixels:
+        data.append(0)
+        data.extend((row[i] << 4) | row[i+1] for i in range(0,width,2))
+    pal=bytes(v for rgb in colors for v in rgb)
+    return (b"\x89PNG\r\n\x1a\n"
+            +png_chunk(b"IHDR",struct.pack(">IIBBBBB",width,height,4,3,0,0,0))
+            +png_chunk(b"PLTE",pal)
+            +png_chunk(b"IDAT",zlib.compress(bytes(data),9))
+            +png_chunk(b"IEND",b""))
+
+def generate(target=OUT):
+    target.mkdir(parents=True, exist_ok=True)
+    created=[]
+    for name, hair, coat, accent, skin, cut, motif in CAST:
+        img, colors=paint(name,hair,coat,accent,skin,cut,motif)
+        dest=target/(name+".png")
+        dest.write_bytes(indexed_png(img,colors))
+        created.append(dest)
+        print("ERYON_VISUAL",dest.relative_to(ROOT) if dest.is_relative_to(ROOT) else dest)
+    return created
+
+if __name__=="__main__":
+    parser=argparse.ArgumentParser()
+    parser.add_argument("--out",type=Path,default=OUT)
+    args=parser.parse_args()
+    generate(args.out)
