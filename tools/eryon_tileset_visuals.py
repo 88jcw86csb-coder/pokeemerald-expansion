@@ -67,8 +67,6 @@ def unpack_png(raw):
             else:raise ValueError("unknown indexed PNG filter")
             scan[i]=(scan[i]+delta)&255
         previous=scan
-        rows.append([(value>>4) for value in scan for _ in (0,)] +
-                    []) if False else None
         rows.append([p for value in scan for p in (value>>4,value&15)])
     return rows,palette
 
