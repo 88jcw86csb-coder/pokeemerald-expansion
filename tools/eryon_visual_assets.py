@@ -546,6 +546,56 @@ def generate_leader_field_sprites():
     print("ERYON_VISUAL eight unique gym leader field sprites:",len(produced))
     return produced
 
+
+def make_elya_field_sprite(dest):
+    """Eight native 16x32 frames of Eryon's female scientist, never Birch."""
+    width,height=32,128
+    canvas=[[0]*width for _ in range(height)]
+    def rect(x,y,w,h,c):
+        for yy in range(max(0,y),min(height,y+h)):
+            for xx in range(max(0,x),min(width,x+w)):
+                canvas[yy][xx]=c
+    for frame in range(8):
+        ox=(frame%2)*16;oy=(frame//2)*32
+        step=(-1,1,0)[frame%3]
+        # Lavender/dark-chestnut swept hair; long side locks and crest.
+        rect(ox+4,oy+4,9,13,7)
+        rect(ox+5,oy+3,8,8,13)
+        rect(ox+4,oy+7,2,15,13)
+        rect(ox+12,oy+7,2,14,13)
+        rect(ox+6,oy+10,6,6,1)
+        rect(ox+7,oy+12,4,2,2)
+        # Clean white lab coat with teal inner waistcoat.
+        rect(ox+3,oy+17,11,11,7)
+        rect(ox+4,oy+18,9,10,11)
+        rect(ox+7,oy+18,3,10,5)
+        rect(ox+7,oy+19,1,8,14)
+        rect(ox+3,oy+19,2,9,14)
+        rect(ox+12,oy+19,2,9,14)
+        rect(ox+4,oy+27,3,4,7)
+        rect(ox+10,oy+27,3,4,7)
+        rect(ox+4+step,oy+29,4,2,15)
+        rect(ox+9-step,oy+29,4,2,15)
+        if frame in (2,3):
+            # Back: continuous hair and coat, no floating forward eyes.
+            rect(ox+5,oy+9,8,9,13)
+            rect(ox+6,oy+17,6,9,14)
+            rect(ox+7,oy+18,4,7,5)
+        elif frame in (4,5,6,7):
+            # Left/right 1-pixel profile with spectacles.
+            rect(ox+9,oy+11,3,2,7)
+            rect(ox+10,oy+12,1,2,14)
+        else:
+            # Round glasses, silver rims, eyes and cheek shading.
+            rect(ox+6,oy+11,3,3,14)
+            rect(ox+10,oy+11,3,3,14)
+            rect(ox+7,oy+12,1,1,7)
+            rect(ox+11,oy+12,1,1,7)
+            rect(ox+9,oy+12,1,1,14)
+    dest.parent.mkdir(parents=True,exist_ok=True)
+    dest.write_bytes(indexed_strip_png(canvas,ECLIPSE_FIELD_PALETTE))
+    return dest
+
 def generate(target=OUT):
     target.mkdir(parents=True, exist_ok=True)
     created=[]
@@ -558,6 +608,9 @@ def generate(target=OUT):
     generate_hero_assets()
     generate_hero_girl_assets()
     generate_leader_field_sprites()
+    scientist = make_elya_field_sprite(
+        ROOT / "graphics/object_events/pics/people/eryon_elya.png")
+    print("ERYON_VISUAL original female professor overworld:", scientist)
     field = make_eclipse_field_sprite(
         ROOT / "graphics/object_events/pics/people/eryon_eclipse.png")
     print("ERYON_VISUAL", field.relative_to(ROOT))

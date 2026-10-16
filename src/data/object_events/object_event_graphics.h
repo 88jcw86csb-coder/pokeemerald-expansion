@@ -144,6 +144,7 @@ const u32 gObjectEventPic_EryonLeaderKaio[] = INCGFX_U32("graphics/object_events
 const u32 gObjectEventPic_EryonLeaderLyra[] = INCGFX_U32("graphics/object_events/pics/people/eryon_leaders/eryon_lyra.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_EryonLeaderRyu[] = INCGFX_U32("graphics/object_events/pics/people/eryon_leaders/eryon_ryu.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_EryonEclipse[] = INCGFX_U32("graphics/object_events/pics/people/eryon_eclipse.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_EryonElya[] = INCGFX_U32("graphics/object_events/pics/people/eryon_elya.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_AquaMemberF[] = INCGFX_U32("graphics/object_events/pics/people/team_aqua/aqua_member_f.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_MagmaMemberM[] = INCGFX_U32("graphics/object_events/pics/people/team_magma/magma_member_m.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_MagmaMemberF[] = INCGFX_U32("graphics/object_events/pics/people/team_magma/magma_member_f.png", ".4bpp", "-mwidth 2 -mheight 4");

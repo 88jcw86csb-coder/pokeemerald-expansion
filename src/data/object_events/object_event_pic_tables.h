@@ -508,6 +508,9 @@ static const struct SpriteFrameImage sPicTable_EryonLeaderRyu[] = {
 static const struct SpriteFrameImage sPicTable_EryonEclipse[] = {
     overworld_ascending_frames(gObjectEventPic_EryonEclipse, 2, 4),
 };
+static const struct SpriteFrameImage sPicTable_EryonElya[] = {
+    overworld_ascending_frames(gObjectEventPic_EryonElya, 2, 4),
+};
 
 static const struct SpriteFrameImage sPicTable_AquaMemberM[] = {
     overworld_ascending_frames(gObjectEventPic_AquaMemberM, 2, 4),

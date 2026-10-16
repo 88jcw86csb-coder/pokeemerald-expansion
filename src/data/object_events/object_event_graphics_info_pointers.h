@@ -123,6 +123,7 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_EryonLeader
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_EryonLeaderLyra;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_EryonLeaderRyu;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_EryonEclipse;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_EryonElya;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AquaMemberM;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AquaMemberF;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MagmaMemberM;
@@ -537,6 +538,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_ERYON_LEADER_LYRA] = &gObjectEventGraphicsInfo_EryonLeaderLyra,
     [OBJ_EVENT_GFX_ERYON_LEADER_RYU] = &gObjectEventGraphicsInfo_EryonLeaderRyu,
     [OBJ_EVENT_GFX_ERYON_ECLIPSE] =             &gObjectEventGraphicsInfo_EryonEclipse,
+    [OBJ_EVENT_GFX_ERYON_ELYA] =                &gObjectEventGraphicsInfo_EryonElya,
     [OBJ_EVENT_GFX_AQUA_MEMBER_M] =            &gObjectEventGraphicsInfo_AquaMemberM,
     [OBJ_EVENT_GFX_AQUA_MEMBER_F] =            &gObjectEventGraphicsInfo_AquaMemberF,
     [OBJ_EVENT_GFX_MAGMA_MEMBER_M] =           &gObjectEventGraphicsInfo_MagmaMemberM,
