@@ -400,6 +400,97 @@ def generate_hero_assets():
     backfile.write_bytes(indexed_strip_png(back,colors))
     print("ERYON_VISUAL hero overworld x8 and battle front/back generated")
 
+# Dedicated GBA overworld portraits for the eight Eryon leaders.
+# Each keeps a 16x32 frame, eight 2x4 frames, and NPC_4's reserved palette
+# to avoid changing palette assignment or breaking existing NPC sprites.
+ERYON_LEADER_FIELD_STYLES = {
+    "kael":     (11, 4, 3, 10, "leaf"),
+    "volt":     (5, 7, 14, 4, "spark"),
+    "bjorn":    (14, 6, 11, 7, "snow"),
+    "tessa":    (3, 4, 11, 13, "relic"),
+    "nyx":      (10, 7, 8, 13, "moon"),
+    "kaio":     (4, 13, 8, 15, "forge"),
+    "lyra":     (8, 10, 14, 7, "star"),
+    "ryu":      (6, 7, 11, 15, "dragon"),
+}
+
+def generate_leader_field_sprites():
+    dest=ROOT/"graphics/object_events/pics/people/eryon_leaders"
+    dest.mkdir(parents=True,exist_ok=True)
+    produced=[]
+    for name,(coat,hair,trim,boots,emblem) in ERYON_LEADER_FIELD_STYLES.items():
+        canvas=[[0]*32 for _ in range(128)]
+        def rect(x,y,w,h,c):
+            for yy in range(max(0,y),min(128,y+h)):
+                for xx in range(max(0,x),min(32,x+w)):
+                    canvas[yy][xx]=c
+        for n in range(8):
+            x,y=(n%2)*16,(n//2)*32
+            step=(0,-1,1)[n%3]
+            # Individual haircut and head silhouette.
+            rect(x+4,y+4,10,12,15)
+            rect(x+5,y+5,8,10,1)
+            rect(x+6,y+7,6,8,2)
+            rect(x+4,y+4,10,4,hair)
+            if name in ("nyx","lyra","tessa"):
+                rect(x+3,y+7,3,13,hair)
+                rect(x+12,y+7,3,13,hair)
+            elif name in ("volt","kaio"):
+                rect(x+4,y+2,3,6,hair)
+                rect(x+9,y+1,4,6,hair)
+            elif name in ("bjorn","ryu"):
+                rect(x+3,y+6,11,3,trim)
+            elif name=="kael":
+                rect(x+5,y+2,7,3,coat)
+            rect(x+6,y+12,2,2,15)
+            rect(x+10,y+12,2,2,15)
+            # Coats/sashes/capes; preserve transparent margins.
+            rect(x+3,y+17,11,11,15)
+            rect(x+4,y+18,9,9,coat)
+            rect(x+3,y+18,2,8,trim)
+            rect(x+12,y+18,2,8,trim)
+            rect(x+7,y+18,3,9,hair)
+            rect(x+7,y+20,3,2,trim)
+            if name in ("bjorn","ryu","lyra"):
+                rect(x+2,y+19,2,12,coat)
+                rect(x+13,y+19,2,12,coat)
+            rect(x+5+step,y+27,3,3,boots)
+            rect(x+10-step,y+27,3,3,boots)
+            # Symbol drawn onto the tunic (botanical / electric / icy /
+            # archaeology / moon / forge / stellar / dragon).
+            if emblem=="leaf":
+                rect(x+8,y+20,2,3,11)
+                rect(x+10,y+19,2,2,11)
+            elif emblem=="spark":
+                rect(x+9,y+18,2,3,14)
+                rect(x+7,y+21,3,2,14)
+            elif emblem=="snow":
+                rect(x+8,y+20,5,1,14)
+                rect(x+10,y+18,1,5,14)
+            elif emblem=="relic":
+                rect(x+8,y+19,4,5,11)
+                rect(x+9,y+20,2,3,7)
+            elif emblem=="moon":
+                rect(x+8,y+19,4,5,14)
+                rect(x+10,y+18,3,5,coat)
+            elif emblem=="forge":
+                rect(x+8,y+20,4,4,8)
+                rect(x+9,y+19,2,2,11)
+            elif emblem=="star":
+                rect(x+10,y+19,1,6,14)
+                rect(x+8,y+21,5,1,14)
+            else:
+                rect(x+8,y+19,4,2,11)
+                rect(x+10,y+21,2,3,14)
+            if n in (2,3):
+                rect(x+6,y+9,7,3,hair)
+                rect(x+7,y+20,3,5,trim)
+        out=dest/("eryon_"+name+".png")
+        out.write_bytes(indexed_strip_png(canvas,ECLIPSE_FIELD_PALETTE))
+        produced.append(out)
+    print("ERYON_VISUAL eight unique gym leader field sprites:",len(produced))
+    return produced
+
 def generate(target=OUT):
     target.mkdir(parents=True, exist_ok=True)
     created=[]
@@ -411,6 +502,7 @@ def generate(target=OUT):
         print("ERYON_VISUAL",dest.relative_to(ROOT) if dest.is_relative_to(ROOT) else dest)
     generate_hero_assets()
     generate_hero_girl_assets()
+    generate_leader_field_sprites()
     field = make_eclipse_field_sprite(
         ROOT / "graphics/object_events/pics/people/eryon_eclipse.png")
     print("ERYON_VISUAL", field.relative_to(ROOT))
