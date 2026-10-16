@@ -132,6 +132,39 @@ class VisualAssetTests(unittest.TestCase):
             ROOT/"graphics/trainers/back_pics/eryon_hero_f.png").read_bytes()[16:24]),
             (64,256))
 
+    def test_all_eight_leaders_have_unique_reachable_field_sprites(self):
+        loc = {
+            "Eryon_Verdelume": "KAEL",
+            "Eryon_Neonara": "VOLT",
+            "Eryon_Frostheim": "BJORN",
+            "Eryon_Arkhara": "TESSA",
+            "Eryon_Umbra": "NYX",
+            "Eryon_Ignivar": "KAIO",
+            "Eryon_Lunaris": "LYRA",
+            "Eryon_Drakonia": "RYU",
+        }
+        ids=set()
+        for city,leader in loc.items():
+            with self.subTest(city=city):
+                info=json.loads((ROOT/"data/maps"/city/"map.json").read_text())
+                matches=[e for e in info["object_events"] if
+                         ("GymLeader" in e["script"] or
+                          e["script"].endswith(("Kael","Bjorn","Tessa")))]
+                self.assertEqual(len(matches),1)
+                gfx="OBJ_EVENT_GFX_ERYON_LEADER_"+leader
+                self.assertEqual(matches[0]["graphics_id"],gfx)
+                ids.add(gfx)
+                img=ROOT/"graphics/object_events/pics/people/eryon_leaders"/(
+                    "eryon_"+leader.lower()+".png")
+                self.assertEqual(struct.unpack(">IIBBBBB",img.read_bytes()[16:29])[:4],
+                                 (32,128,4,3))
+        self.assertEqual(len(ids),8)
+        ptr=(ROOT/"src/data/object_events/object_event_graphics_info_pointers.h").read_text()
+        info=(ROOT/"src/data/object_events/object_event_graphics_info.h").read_text()
+        for id in ids:
+            self.assertIn("["+id+"]",ptr)
+            self.assertIn("gObjectEventGraphicsInfo_EryonLeader",info)
+
     def test_image_generator_runs_before_make(self):
         script=(ROOT/"tools/build_eryon.sh").read_text()
         self.assertIn("python3 tools/eryon_visual_assets.py",script)
