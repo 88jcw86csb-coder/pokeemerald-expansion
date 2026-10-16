@@ -384,3 +384,25 @@ EryonVerdelume_Pokemart_Advanced:
 	.2byte ITEM_ESCAPE_ROPE
 	.2byte ITEM_MAX_REPEL
 	pokemartlistend
+
+@ Separate playable gym interior. The existing badge and trainer battle scripts
+@ are not duplicated: the interior leader calls this city's original challenge.
+EryonVerdelume_EventScript_GymEntrance::
+	lock
+	faceplayer
+	msgbox EryonVerdelume_Text_GymEntrance, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonVerdelume_EventScript_GymEntranceCancel
+	closemessage
+	warp MAP_GYMERYON_VERDELUME, 12, 15
+	waitstate
+	end
+
+EryonVerdelume_EventScript_GymEntranceCancel::
+	closemessage
+	release
+	end
+
+EryonVerdelume_Text_GymEntrance:
+	.string "ENTRADA DO GINASIO:\p"
+	.string "Entrar na arena de\\n"
+	.string "VERDELUME agora?$"
