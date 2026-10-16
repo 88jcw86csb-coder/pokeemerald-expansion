@@ -346,3 +346,25 @@ EryonLunaris_Text_GymAfterEclipse:
 	.string "voltou a ser serena.\p"
 	.string "A ECLIPSE nunca mais\n"
 	.string "usara nosso ceu.$"
+
+@ Separate playable gym interior. The existing badge and trainer battle scripts
+@ are not duplicated: the interior leader calls this city's original challenge.
+EryonLunaris_EventScript_GymEntrance::
+	lock
+	faceplayer
+	msgbox EryonLunaris_Text_GymEntrance, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonLunaris_EventScript_GymEntranceCancel
+	closemessage
+	warp MAP_GYMERYON_LUNARIS, 12, 15
+	waitstate
+	end
+
+EryonLunaris_EventScript_GymEntranceCancel::
+	closemessage
+	release
+	end
+
+EryonLunaris_Text_GymEntrance:
+	.string "ENTRADA DO GINASIO:\p"
+	.string "Entrar na arena de\\n"
+	.string "LUNARIS agora?$"
