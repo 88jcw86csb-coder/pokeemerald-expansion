@@ -1,4 +1,4 @@
-GymEryonNeonara_MapScripts::
+GymEryon_Neonara_MapScripts::
 	.byte 0
 
 GymEryonNeonara_EventScript_Leader::
