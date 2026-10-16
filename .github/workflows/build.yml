@@ -100,6 +100,8 @@ jobs:
         run: python3 tools/eryon_tileset_visuals.py
       - name: Generate Eryon GBA character assets for independent validation
         run: python3 tools/eryon_visual_assets.py
+      - name: Restore complete native 4bpp protagonist action sheets
+        run: python3 tools/eryon_native_overworld.py
       - name: Generate exclusive Eryon title graphic
         run: python3 tools/eryon_boot_assets.py
       - name: Render indexed pixel-art preview sheets

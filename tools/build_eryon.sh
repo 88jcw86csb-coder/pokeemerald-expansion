@@ -19,6 +19,9 @@ python3 tools/eryon_tileset_visuals.py
 echo "== Eryon: generate distinct indexed GBA portraits (leaders / Team Eclipse) =="
 python3 tools/eryon_visual_assets.py
 
+# Replace scratch-painted rectangle avatars with complete native GBA frames.
+python3 tools/eryon_native_overworld.py
+
 python3 tools/eryon_release_qa.py
 
 echo "== Eryon: generate independent title graphic =="
