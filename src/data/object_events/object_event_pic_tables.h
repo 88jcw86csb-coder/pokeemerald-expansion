@@ -473,6 +473,38 @@ static const struct SpriteFrameImage sPicTable_DevonEmployee[] = {
     overworld_ascending_frames(gObjectEventPic_DevonEmployee, 2, 4),
 };
 
+static const struct SpriteFrameImage sPicTable_EryonLeaderKael[] = {
+    overworld_ascending_frames(gObjectEventPic_EryonLeaderKael, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_EryonLeaderVolt[] = {
+    overworld_ascending_frames(gObjectEventPic_EryonLeaderVolt, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_EryonLeaderBjorn[] = {
+    overworld_ascending_frames(gObjectEventPic_EryonLeaderBjorn, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_EryonLeaderTessa[] = {
+    overworld_ascending_frames(gObjectEventPic_EryonLeaderTessa, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_EryonLeaderNyx[] = {
+    overworld_ascending_frames(gObjectEventPic_EryonLeaderNyx, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_EryonLeaderKaio[] = {
+    overworld_ascending_frames(gObjectEventPic_EryonLeaderKaio, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_EryonLeaderLyra[] = {
+    overworld_ascending_frames(gObjectEventPic_EryonLeaderLyra, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_EryonLeaderRyu[] = {
+    overworld_ascending_frames(gObjectEventPic_EryonLeaderRyu, 2, 4),
+};
+
 static const struct SpriteFrameImage sPicTable_EryonEclipse[] = {
     overworld_ascending_frames(gObjectEventPic_EryonEclipse, 2, 4),
 };
