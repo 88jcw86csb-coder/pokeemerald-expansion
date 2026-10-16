@@ -349,3 +349,25 @@ EryonIgnivar_Text_GymAfterEclipse:
 	.string "a trabalhar em paz.\p"
 	.string "O calor de IGNIVAR\n"
 	.string "pertence ao nosso povo.$"
+
+@ Separate playable gym interior. The existing badge and trainer battle scripts
+@ are not duplicated: the interior leader calls this city's original challenge.
+EryonIgnivar_EventScript_GymEntrance::
+	lock
+	faceplayer
+	msgbox EryonIgnivar_Text_GymEntrance, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonIgnivar_EventScript_GymEntranceCancel
+	closemessage
+	warp MAP_GYMERYON_IGNIVAR, 12, 15
+	waitstate
+	end
+
+EryonIgnivar_EventScript_GymEntranceCancel::
+	closemessage
+	release
+	end
+
+EryonIgnivar_Text_GymEntrance:
+	.string "ENTRADA DO GINASIO:\p"
+	.string "Entrar na arena de\\n"
+	.string "IGNIVAR agora?$"
