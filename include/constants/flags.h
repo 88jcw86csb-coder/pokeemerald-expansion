@@ -1264,22 +1264,22 @@
 #define FLAG_ERYON_ORCHARD_RELAY_TRACED                                 0x4BA // Route 04 lookout relay decoded after ledger
 #define FLAG_ERYON_PEACE_CEREMONY_RECORDED                             0x4BB // Final League peace and Champion epilogue
 #define FLAG_ERYON_ORCHARD_CARAVAN_CACHE_TAKEN                          0x4BC // Route 04 southern caravan cache
-#define FLAG_UNUSED_0x4BD                                           0x4BD // Unused Flag
-#define FLAG_UNUSED_0x4BE                                           0x4BE // Unused Flag
-#define FLAG_UNUSED_0x4BF                                           0x4BF // Unused Flag
-#define FLAG_UNUSED_0x4C0                                           0x4C0 // Unused Flag
-#define FLAG_UNUSED_0x4C1                                           0x4C1 // Unused Flag
-#define FLAG_UNUSED_0x4C2                                           0x4C2 // Unused Flag
-#define FLAG_UNUSED_0x4C3                                           0x4C3 // Unused Flag
-#define FLAG_UNUSED_0x4C4                                           0x4C4 // Unused Flag
-#define FLAG_UNUSED_0x4C5                                           0x4C5 // Unused Flag
-#define FLAG_UNUSED_0x4C6                                           0x4C6 // Unused Flag
-#define FLAG_UNUSED_0x4C7                                           0x4C7 // Unused Flag
-#define FLAG_UNUSED_0x4C8                                           0x4C8 // Unused Flag
-#define FLAG_UNUSED_0x4C9                                           0x4C9 // Unused Flag
-#define FLAG_UNUSED_0x4CA                                           0x4CA // Unused Flag
-#define FLAG_UNUSED_0x4CB                                           0x4CB // Unused Flag
-#define FLAG_UNUSED_0x4CC                                           0x4CC // Unused Flag
+#define FLAG_ERYON_GYM_VERDELUME_PRIMED                                  0x4BD // Eryon gym in-building trial
+#define FLAG_ERYON_GYM_VERDELUME_READY                                   0x4BE // Eryon gym in-building trial
+#define FLAG_ERYON_GYM_NEONARA_PRIMED                                    0x4BF // Eryon gym in-building trial
+#define FLAG_ERYON_GYM_NEONARA_READY                                     0x4C0 // Eryon gym in-building trial
+#define FLAG_ERYON_GYM_FROSTHEIM_PRIMED                                  0x4C1 // Eryon gym in-building trial
+#define FLAG_ERYON_GYM_FROSTHEIM_READY                                   0x4C2 // Eryon gym in-building trial
+#define FLAG_ERYON_GYM_ARKHARA_PRIMED                                    0x4C3 // Eryon gym in-building trial
+#define FLAG_ERYON_GYM_ARKHARA_READY                                     0x4C4 // Eryon gym in-building trial
+#define FLAG_ERYON_GYM_UMBRA_PRIMED                                      0x4C5 // Eryon gym in-building trial
+#define FLAG_ERYON_GYM_UMBRA_READY                                       0x4C6 // Eryon gym in-building trial
+#define FLAG_ERYON_GYM_IGNIVAR_PRIMED                                    0x4C7 // Eryon gym in-building trial
+#define FLAG_ERYON_GYM_IGNIVAR_READY                                     0x4C8 // Eryon gym in-building trial
+#define FLAG_ERYON_GYM_LUNARIS_PRIMED                                    0x4C9 // Eryon gym in-building trial
+#define FLAG_ERYON_GYM_LUNARIS_READY                                     0x4CA // Eryon gym in-building trial
+#define FLAG_ERYON_GYM_DRAKONIA_PRIMED                                   0x4CB // Eryon gym in-building trial
+#define FLAG_ERYON_GYM_DRAKONIA_READY                                    0x4CC // Eryon gym in-building trial
 #define FLAG_UNUSED_0x4CD                                           0x4CD // Unused Flag
 #define FLAG_UNUSED_0x4CE                                           0x4CE // Unused Flag
 #define FLAG_UNUSED_0x4CF                                           0x4CF // Unused Flag
