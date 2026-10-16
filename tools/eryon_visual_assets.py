@@ -161,6 +161,69 @@ def indexed_png(pixels, colors):
             +png_chunk(b"IDAT",zlib.compress(bytes(data),9))
             +png_chunk(b"IEND",b""))
 
+# Field sprite shares the existing 16-color NPC_4 palette, avoiding a
+# dangerous global palette remap. 0 is the field sprite's transparent index.
+ECLIPSE_FIELD_PALETTE = (
+    (115,197,164), (255,213,180), (255,197,148), (222,148,115),
+    (123,65,65), (106,139,172), (57,74,98), (8,16,32),
+    (213,115,164), (164,65,115), (82,32,65), (213,213,213),
+    (139,139,148), (65,65,82), (255,255,255), (0,0,0),
+)
+
+def make_eclipse_field_sprite(dest):
+    """8 GBA-ready 16x32 frames arranged 2 columns x 4 rows."""
+    width, height = 32, 128
+    canvas = [[0]*width for _ in range(height)]
+    def rect(x, y, w, h, value):
+        for yy in range(y, y+h):
+            for xx in range(x, x+w):
+                if 0 <= xx < width and 0 <= yy < height:
+                    canvas[yy][xx] = value
+    for frame in range(8):
+        ox, oy=(frame % 2)*16, (frame // 2)*32
+        # New angular field uniform: violet cap with eclipse emblem,
+        # navy split tunic and boots, not a recolored Aqua member.
+        step = (-1 if frame % 3 == 1 else 1 if frame % 3 == 2 else 0)
+        rect(ox+5,oy+6,7,8,15)    # hair/head outline
+        rect(ox+6,oy+7,5,8,2)     # face
+        rect(ox+4,oy+4,9,5,7)     # cap band
+        rect(ox+5,oy+4,7,2,9)     # violet trim
+        rect(ox+9,oy+5,2,2,14)    # emblem
+        rect(ox+10,oy+5,1,2,7)
+        rect(ox+3,oy+15,11,12,15) # coat shadow silhouette
+        rect(ox+4,oy+16,9,10,7)   # dark uniform
+        rect(ox+5,oy+17,7,7,10)   # purple panels
+        rect(ox+7,oy+17,2,9,9)    # jacket centre
+        rect(ox+7,oy+20,2,3,14)   # clasp
+        rect(ox+2,oy+17,2,8,6)    # left sleeve
+        rect(ox+13,oy+17,2,8,6)   # right sleeve
+        rect(ox+5+step,oy+26,3,4,15)
+        rect(ox+9-step,oy+26,3,4,15)
+        rect(ox+5+step,oy+26,3,3,7)
+        rect(ox+9-step,oy+26,3,3,7)
+        if frame in (2,3):
+            rect(ox+5,oy+10,6,3,7) # back hat / coat
+            rect(ox+7,oy+21,3,3,14)
+            rect(ox+8,oy+21,2,3,7)
+        elif frame in (4,5,6,7):
+            rect(ox+5,oy+11,2,2,1)
+        else:
+            rect(ox+6,oy+11,2,2,15)
+            rect(ox+10,oy+11,2,2,15)
+    pal=bytes(v for color in ECLIPSE_FIELD_PALETTE for v in color)
+    rows=bytearray()
+    for row in canvas:
+        rows.append(0)
+        rows.extend((row[i]<<4)|row[i+1] for i in range(0,width,2))
+    payload=(b"\x89PNG\r\n\x1a\n"
+        +png_chunk(b"IHDR",struct.pack(">IIBBBBB",width,height,4,3,0,0,0))
+        +png_chunk(b"PLTE",pal)
+        +png_chunk(b"IDAT",zlib.compress(bytes(rows),9))
+        +png_chunk(b"IEND",b""))
+    dest.parent.mkdir(parents=True,exist_ok=True)
+    dest.write_bytes(payload)
+    return dest
+
 def generate(target=OUT):
     target.mkdir(parents=True, exist_ok=True)
     created=[]
@@ -170,6 +233,9 @@ def generate(target=OUT):
         dest.write_bytes(indexed_png(img,colors))
         created.append(dest)
         print("ERYON_VISUAL",dest.relative_to(ROOT) if dest.is_relative_to(ROOT) else dest)
+    field = make_eclipse_field_sprite(
+        ROOT / "graphics/object_events/pics/people/eryon_eclipse.png")
+    print("ERYON_VISUAL", field.relative_to(ROOT))
     return created
 
 if __name__=="__main__":
