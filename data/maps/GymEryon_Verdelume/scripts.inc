@@ -1,4 +1,4 @@
-GymEryonVerdelume_MapScripts::
+GymEryon_Verdelume_MapScripts::
 	.byte 0
 
 GymEryonVerdelume_EventScript_Leader::
