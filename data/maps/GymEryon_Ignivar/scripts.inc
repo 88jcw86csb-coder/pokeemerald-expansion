@@ -1,4 +1,4 @@
-GymEryonIgnivar_MapScripts::
+GymEryon_Ignivar_MapScripts::
 	.byte 0
 
 GymEryonIgnivar_EventScript_Leader::
