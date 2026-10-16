@@ -141,6 +141,18 @@ def paint(name, hair, coat, accent, skin, cut, motif):
     # White/cream piping improves silhouettes without transparency tricks.
     line(21, 48, 18, 60, 14)
     line(41, 45, 43, 59, 13)
+    if name == "eryon_commander":
+        # The commander's ceremonial crescent headpiece and epaulettes must
+        # read differently from the female Eclipse operative even in 4bpp
+        # grayscale/index space, not merely through palette recoloring.
+        line(22, 8, 29, 3, 14, 3)
+        line(29, 3, 38, 6, 14, 3)
+        rect(28, 3, 35, 6, 15)
+        oval(14, 52, 11, 5, 13)
+        oval(51, 52, 10, 5, 13)
+        line(17, 49, 14, 61, 15, 2)
+        line(47, 49, 50, 61, 15, 2)
+        rect(28, 46, 36, 50, 6)
     return p, palette(hair, coat, accent, skin)
 
 def png_chunk(tag, payload):
