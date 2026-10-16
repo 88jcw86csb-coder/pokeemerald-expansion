@@ -55,6 +55,34 @@ class VisualAssetTests(unittest.TestCase):
         self.assertIn("Pic: Eryon Commander",cmd)
         self.assertIn("Pic: Eryon Eclipse",data)
         self.assertIn("gTrainerFrontPic_EryonEclipse", (ROOT/"src/data/graphics/trainers.h").read_text())
+    def test_eclipse_field_sprite_has_eight_native_gba_frames(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = visuals.make_eclipse_field_sprite(Path(tmp) / "eclipse.png")
+            raw = path.read_bytes()
+            self.assertEqual(raw[:8], b"\x89PNG\r\n\x1a\n")
+            self.assertEqual(struct.unpack(">IIBBBBB", raw[16:29])[:4],
+                             (32, 128, 4, 3))
+            graphics = (ROOT / "src/data/object_events/object_event_graphics.h").read_text()
+            info = (ROOT / "src/data/object_events/object_event_graphics_info.h").read_text()
+            pointers = (ROOT / "src/data/object_events/object_event_graphics_info_pointers.h").read_text()
+            const = (ROOT / "include/constants/event_objects.h").read_text()
+            self.assertIn("gObjectEventPic_EryonEclipse[]", graphics)
+            self.assertIn(".images = sPicTable_EryonEclipse,", info)
+            self.assertIn("[OBJ_EVENT_GFX_ERYON_ECLIPSE]", pointers)
+            self.assertIn("    OBJ_EVENT_GFX_ERYON_ECLIPSE,", const)
+
+    def test_eclipse_agent_references_are_replaced_but_others_preserved(self):
+        maps = json.loads((ROOT / "data/maps/map_groups.json").read_text())["gMapGroup_Eryon"]
+        modified = 0
+        for name in maps:
+            info = json.loads((ROOT / "data/maps" / name / "map.json").read_text())
+            for npc in info["object_events"]:
+                if "Eclipse" in npc.get("script", "") or "CoreGuardian" in npc.get("script", ""):
+                    if npc["graphics_id"] == "OBJ_EVENT_GFX_ERYON_ECLIPSE":
+                        modified += 1
+                    self.assertNotEqual(npc["graphics_id"], "OBJ_EVENT_GFX_AQUA_MEMBER_M")
+        self.assertGreaterEqual(modified, 16)
+
     def test_image_generator_runs_before_make(self):
         script=(ROOT/"tools/build_eryon.sh").read_text()
         self.assertIn("python3 tools/eryon_visual_assets.py",script)
