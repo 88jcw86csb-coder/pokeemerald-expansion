@@ -98,7 +98,6 @@ jobs:
       - name: Generate Eryon biome graphics for independent validation
         run: python3 tools/eryon_tileset_visuals.py
       - name: Generate Eryon GBA character assets for independent validation
-      - name: Generate Eryon GBA character assets for independent validation
         run: python3 tools/eryon_visual_assets.py
       - name: Compile-check all Python test and validator modules
         run: python3 -m compileall -q tools tests
