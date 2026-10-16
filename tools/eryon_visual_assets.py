@@ -157,6 +157,20 @@ def paint(name, hair, coat, accent, skin, cut, motif):
     # White/cream piping improves silhouettes without transparency tricks.
     line(21, 48, 18, 60, 14)
     line(41, 45, 43, 59, 13)
+    if name == "eryon_elya":
+        # Field researcher Elya: upright spectacles, crystal cap pin,
+        # slim research collar and a distinct shoulder-length hair shape.
+        # Keep the face / silhouette different from Lyra's long hair.
+        rect(22, 24, 11, 4, 14)
+        rect(35, 24, 11, 4, 14)
+        rect(31, 25, 5, 2, 13)
+        rect(23, 25, 8, 2, 3)
+        rect(36, 25, 8, 2, 3)
+        line(25, 18, 22, 36, 7, 2)
+        line(46, 17, 49, 33, 7, 2)
+        rect(27, 41, 10, 8, 9)
+        rect(29, 45, 6, 3, 4)
+        rect(37, 49, 6, 10, 14)
     if name == "eryon_commander":
         # The commander's ceremonial crescent headpiece and epaulettes must
         # read differently from the female Eclipse operative even in 4bpp
