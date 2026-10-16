@@ -47,6 +47,7 @@ python3 tools/eryon_map_traversal_audit.py
 
 echo "== Eryon: post-validation graphical repair =="
 python3 tools/eryon_terrain_visual_repair.py
+python3 tools/eryon_overworld_preview.py
 # Repeat structural checks against the EXACT rendered blockdata compiled in ROM.
 python3 tools/eryon_layout_audit.py
 python3 tools/eryon_map_traversal_audit.py

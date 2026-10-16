@@ -46,6 +46,16 @@ jobs:
           name: eryon-metatile-catalog
           path: build/eryon-metatiles/
           if-no-files-found: error
+      - name: Render corrected overworld source tiles without changing warp topology
+        run: |
+          python3 tools/eryon_terrain_visual_repair.py
+          python3 tools/eryon_overworld_preview.py
+      - name: Publish corrected-map previews for manual review
+        uses: actions/upload-artifact@v4
+        with:
+          name: eryon-overworld-source-preview
+          path: build/eryon-overworld-previews/
+          if-no-files-found: error
       - name: Audit 37-stage Eryon regional map inventory
         run: python3 tools/eryon_world_audit.py
       - name: Verify unregistered route, village, city and league previews
