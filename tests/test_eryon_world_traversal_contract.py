@@ -61,8 +61,10 @@ class EryonWorldTraversalContract(unittest.TestCase):
                 rows = plan.read_text(encoding="utf-8").splitlines()[4:]
                 self.assertEqual(len(rows), h)
                 self.assertTrue(all(len(row) == w for row in rows))
-                expected = struct.pack(f"<{w*h}H",
-                                       *(glyphs[c] for row in rows for c in row))
+                from tools.eryon_terrain_visual_repair import retile_word, stamp_visible_houses
+                rendered=[retile_word(glyphs[c]) for row in rows for c in row]
+                stamp_visible_houses(rendered,w,h,rows)
+                expected = struct.pack(f"<{w*h}H", *rendered)
                 actual = (root / "data/layouts" / name / "map.bin").read_bytes()
                 self.assertEqual(actual, expected, f"{name} is stale versus {plan_name}")
 

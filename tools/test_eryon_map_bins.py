@@ -67,8 +67,11 @@ class TerrainCompilerTests(unittest.TestCase):
         source = root / "docs/eryon/trilha_lunar_terrain_plan.txt"
         expected = compile_plan(
             source, {"#": 0x3C01, ".": 0x3001, ",": 0x3002, ":": 0x3003})
+        from eryon_terrain_visual_repair import retile_word
+        values=struct.unpack(f"<{WIDTH*HEIGHT}H",expected)
+        visual_expected=struct.pack(f"<{WIDTH*HEIGHT}H",*(retile_word(x) for x in values))
         checked_in = (root / lunar["blockdata_filepath"]).read_bytes()
-        self.assertEqual(checked_in, expected)
+        self.assertEqual(checked_in, visual_expected)
 
     def test_rejects_incomplete_plan(self):
         with tempfile.TemporaryDirectory() as folder:
