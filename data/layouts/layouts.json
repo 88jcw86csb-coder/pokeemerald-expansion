@@ -9785,6 +9785,94 @@
       "border_filepath": "data/layouts/PetalburgWoods/border.bin",
       "blockdata_filepath": "data/layouts/Eryon_LigaEliteFour/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_GYMERYON_VERDELUME",
+      "name": "GYMERYON_VERDELUME_Layout",
+      "width": 24,
+      "height": 18,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_EryonUrban",
+      "border_filepath": "data/layouts/PetalburgWoods/border.bin",
+      "blockdata_filepath": "data/layouts/GymEryon_Verdelume/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_GYMERYON_NEONARA",
+      "name": "GYMERYON_NEONARA_Layout",
+      "width": 24,
+      "height": 18,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_EryonUrban",
+      "border_filepath": "data/layouts/PetalburgWoods/border.bin",
+      "blockdata_filepath": "data/layouts/GymEryon_Neonara/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_GYMERYON_FROSTHEIM",
+      "name": "GYMERYON_FROSTHEIM_Layout",
+      "width": 24,
+      "height": 18,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_EryonCrystal",
+      "border_filepath": "data/layouts/PetalburgWoods/border.bin",
+      "blockdata_filepath": "data/layouts/GymEryon_Frostheim/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_GYMERYON_ARKHARA",
+      "name": "GYMERYON_ARKHARA_Layout",
+      "width": 24,
+      "height": 18,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_EryonCrystal",
+      "border_filepath": "data/layouts/PetalburgWoods/border.bin",
+      "blockdata_filepath": "data/layouts/GymEryon_Arkhara/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_GYMERYON_UMBRA",
+      "name": "GYMERYON_UMBRA_Layout",
+      "width": 24,
+      "height": 18,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_EryonUrban",
+      "border_filepath": "data/layouts/PetalburgWoods/border.bin",
+      "blockdata_filepath": "data/layouts/GymEryon_Umbra/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_GYMERYON_IGNIVAR",
+      "name": "GYMERYON_IGNIVAR_Layout",
+      "width": 24,
+      "height": 18,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_EryonDesert",
+      "border_filepath": "data/layouts/PetalburgWoods/border.bin",
+      "blockdata_filepath": "data/layouts/GymEryon_Ignivar/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_GYMERYON_LUNARIS",
+      "name": "GYMERYON_LUNARIS_Layout",
+      "width": 24,
+      "height": 18,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_EryonLunar",
+      "border_filepath": "data/layouts/PetalburgWoods/border.bin",
+      "blockdata_filepath": "data/layouts/GymEryon_Lunaris/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_GYMERYON_DRAKONIA",
+      "name": "GYMERYON_DRAKONIA_Layout",
+      "width": 24,
+      "height": 18,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_EryonLunar",
+      "border_filepath": "data/layouts/PetalburgWoods/border.bin",
+      "blockdata_filepath": "data/layouts/GymEryon_Drakonia/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }
