@@ -1,4 +1,4 @@
-GymEryonArkhara_MapScripts::
+GymEryon_Arkhara_MapScripts::
 	.byte 0
 
 GymEryonArkhara_EventScript_Leader::
