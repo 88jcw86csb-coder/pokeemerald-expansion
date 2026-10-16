@@ -24,6 +24,9 @@ python3 tools/eryon_release_qa.py
 echo "== Eryon: generate independent title graphic =="
 python3 tools/eryon_boot_assets.py
 
+echo "== Eryon: rebuild designed first-act overworld maps == "
+python3 tools/eryon_opening_visual_layouts.py
+
 echo "== Eryon: regenerate registered map binaries from authoritative terrain plans =="
 python3 tools/build_eryon_map_bins.py --wall 0x3c01 --path 0x3001 --meadow 0x3002 --stone 0x3003 --preview-unregistered
 python3 tools/eryon_gym_interiors.py

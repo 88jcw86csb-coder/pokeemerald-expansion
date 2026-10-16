@@ -110,6 +110,8 @@ jobs:
           name: eryon-visual-preview
           path: build/eryon-preview/
           if-no-files-found: error
+      - name: Generate designed Vila Aurora and Route 01 layouts
+        run: python3 tools/eryon_opening_visual_layouts.py
       - name: Generate Eryon gym interior collision binaries for validation
         run: python3 tools/eryon_gym_interiors.py
       - name: Compile-check all Python test and validator modules

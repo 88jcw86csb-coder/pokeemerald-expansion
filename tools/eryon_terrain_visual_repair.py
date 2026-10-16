@@ -107,7 +107,10 @@ def repair(layouts=None,write=True):
         settlements = ("Vila", "Cidade", "Neonara", "Frostheim",
                        "Arkhara", "Umbra", "Ignivar", "Drakonia",
                        "Lunaris", "Verdelume", "Posto", "Refugio", "Aldeia")
-        if name.removeprefix("Eryon_").startswith(settlements):
+        # Vila Aurora has intentionally clustered tree groves and authored
+        # clearings. Do not replace its canopy with blocked invisible meadow.
+        if (name != "Eryon_VilaAurora"
+                and name.removeprefix("Eryon_").startswith(settlements)):
             old=list(words)
             for y in range(1,h-1):
                 for x in range(1,w-1):
