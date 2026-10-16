@@ -224,6 +224,127 @@ def make_eclipse_field_sprite(dest):
     dest.write_bytes(payload)
     return dest
 
+# Eryon's protagonist is a teal-clad explorer with a cream cap, dark
+# trousers and a circular backpack emblem, NOT Brendan/May's costume.
+# For player movement keep the exact original sprite-strip dimensions and
+# animation frame counts, including bikes, fishing and underwater.
+HERO_FIELD_PALETTE = (
+    (115,197,164), (255,222,190), (238,181,139), (205,142,110),
+    (112,72,49), (56,136,148), (32,92,111), (23,52,74),
+    (20,35,55), (246,233,200), (224,180,96), (69,131,87),
+    (184,104,66), (94,62,53), (255,255,248), (0,0,0),
+)
+
+def indexed_strip_png(canvas, palette):
+    height, width = len(canvas), len(canvas[0])
+    assert width % 2 == 0 and all(len(row) == width for row in canvas)
+    raw=bytearray()
+    for row in canvas:
+        raw.append(0)
+        raw.extend((row[i]<<4)|row[i+1] for i in range(0,width,2))
+    pal=bytes(component for rgb in palette for component in rgb)
+    return (b"\x89PNG\r\n\x1a\n"
+          + png_chunk(b"IHDR",struct.pack(">IIBBBBB",width,height,4,3,0,0,0))
+          + png_chunk(b"PLTE",pal)
+          + png_chunk(b"IDAT",zlib.compress(bytes(raw),9))
+          + png_chunk(b"IEND",b""))
+
+def hero_frame(size, phase, action):
+    """One player frame, with no original Emerald character art reused."""
+    canvas=[[0]*size for _ in range(32)]
+    def rect(x,y,w,h,c):
+        for yy in range(max(0,y),min(32,y+h)):
+            for xx in range(max(0,x),min(size,x+w)):
+                canvas[yy][xx]=c
+    center=size//2
+    shift=(-1,0,1)[phase%3]
+    x=center-8
+    # Distinctive square teal-and-cream cap with amber star insignia.
+    rect(x+4,2,8,8,15); rect(x+5,3,6,5,9)
+    rect(x+4,2,8,3,5); rect(x+5,2,5,2,9)
+    rect(x+9,3,2,2,10); rect(x+2,8,12,2,6)
+    rect(x+5,10,6,5,2)
+    rect(x+5,11,2,2,15);rect(x+9,11,2,2,15)
+    # Explorer's cream jacket and teal vest.
+    rect(x+3,15,11,12,15)
+    rect(x+4,16,9,10,9)
+    rect(x+5,17,7,9,5)
+    rect(x+7,17,3,9,6)
+    rect(x+3,16,2,11,13)
+    rect(x+13,16,2,11,13)
+    # Dark two-tone shorts, stride-specific boots.
+    rect(x+5+shift,26,3,4,8); rect(x+10-shift,26,3,4,8)
+    rect(x+4+shift,29,4,2,15); rect(x+10-shift,29,4,2,15)
+    if action in ("bike","acro"):
+        # Bicycle is part of the 32px-wide sprite (wheels/tubes).
+        if size == 32:
+            rect(2,26,7,4,15);rect(23,26,7,4,15)
+            rect(4,27,3,2,6);rect(25,27,3,2,6)
+            rect(8,24,14,2,10)
+    elif action in ("surf","underwater"):
+        if size == 32:
+            rect(2,25,28,6,5);rect(4,26,24,3,14)
+            rect(7,30,18,2,6)
+    elif action == "fishing":
+        if size == 32:
+            rect(25,3,2,23,4);rect(24,3,3,3,13)
+            rect(18,13,9,2,10)
+    elif action == "field":
+        rect(x+13,15,2,6,10)
+    elif action == "running":
+        rect(x+3,17+shift,2,10,6)
+    if phase%4 in (2,3):
+        # Back-facing backpack clearly visible on some animations.
+        rect(x+5,15,7,10,7); rect(x+6,16,5,7,5)
+        rect(x+7,18,3,3,10)
+    return canvas
+
+def generate_hero_assets():
+    base=ROOT/"graphics/object_events/pics/people/eryon_hero"
+    base.mkdir(parents=True,exist_ok=True)
+    formats={
+        "walking":(9,16,"walking"),"running":(9,16,"running"),
+        "field_move":(5,32,"field"),"surfing":(6,32,"surf"),
+        "mach_bike":(9,32,"bike"),"acro_bike":(27,32,"acro"),
+        "fishing":(12,32,"fishing"),"underwater":(4,32,"underwater"),
+    }
+    for name,(count,size,action) in formats.items():
+        frames=[hero_frame(size,i,action) for i in range(count)]
+        rows=[[pixel for frame in frames for pixel in frame[y]]
+              for y in range(32)]
+        (base/(name+".png")).write_bytes(indexed_strip_png(
+            rows,HERO_FIELD_PALETTE))
+    pal=(ROOT/"graphics/object_events/palettes/eryon_hero.pal")
+    lines=["JASC-PAL","0100","16"]
+    lines.extend(" ".join(str(c) for c in rgb) for rgb in HERO_FIELD_PALETTE)
+    pal.write_text("\n".join(lines)+"\n",encoding="utf-8")
+    # New trainer portrait and complete throwing animation strip.
+    front, colors=paint("eryon_hero", "#63432b", "#366c79",
+                        "#dbb269", "#d3a083", "spike", "star")
+    (OUT/"eryon_hero.png").write_bytes(indexed_png(front,colors))
+    back=[]
+    for frame in range(4):
+        pixels=[[0]*64 for _ in range(64)]
+        def rect(x,y,w,h,c):
+            for yy in range(max(0,y),min(64,y+h)):
+                for xx in range(max(0,x),min(64,x+w)):
+                    pixels[yy][xx]=c
+        rect(22,8,22,28,7); rect(25,8,18,24,8)
+        rect(21,8,24,7,5);rect(23,9,20,5,6)
+        rect(19,31,30,32,1);rect(21,32,26,31,4)
+        rect(25,34,20,29,3);rect(27,36,16,24,5)
+        rect(29,39,12,12,7);rect(31,41,8,8,13)
+        rect(34,43,3,4,6)
+        rect(12,41+frame,10,6,2);rect(47,34-frame*2,11,6,2)
+        rect(51,30-frame*2,6,6,11)
+        if frame>=2:
+            rect(53,25,5,5,14);rect(55,26,2,3,1)
+        back.extend(pixels)
+    # Back animation uses the same indexed palette as the hero front pic.
+    backfile=ROOT/"graphics/trainers/back_pics/eryon_hero.png"
+    backfile.write_bytes(indexed_strip_png(back,colors))
+    print("ERYON_VISUAL hero overworld x8 and battle front/back generated")
+
 def generate(target=OUT):
     target.mkdir(parents=True, exist_ok=True)
     created=[]
@@ -233,6 +354,7 @@ def generate(target=OUT):
         dest.write_bytes(indexed_png(img,colors))
         created.append(dest)
         print("ERYON_VISUAL",dest.relative_to(ROOT) if dest.is_relative_to(ROOT) else dest)
+    generate_hero_assets()
     field = make_eclipse_field_sprite(
         ROOT / "graphics/object_events/pics/people/eryon_eclipse.png")
     print("ERYON_VISUAL", field.relative_to(ROOT))
