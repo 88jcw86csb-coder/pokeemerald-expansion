@@ -20,6 +20,7 @@
     - [Eryon — auditoria mapas 2026-10-15](./eryon/AUDITORIA_MAPAS_2026-10-15.md)
     - [Eryon — documentação regional](./eryon/README.md)
     - [Eryon — identidade visual original](./eryon/IDENTIDADE_VISUAL_ORIGINAL.md)
+    - [Eryon — direção visual para GBA](./eryon/direcao_visual_gba.md)
     - [Eryon — ginásios oficiais](./eryon/ginasios_oficiais.md)
     - [Eryon — Pokémon por rotas](./eryon/distribuicao_pokemon_rotas.md)
     - [Eryon — capítulo 03](./eryon/historia/capitulo_03_ecos_sob_o_gelo.md)
