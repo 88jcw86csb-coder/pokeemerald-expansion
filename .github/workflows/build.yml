@@ -77,6 +77,7 @@ jobs:
             build/eryon-ci.log
             build/eryon-build.log
             build/eryon-rom.sha256
+            build/eryon-qa.json
           if-no-files-found: warn
 
       - name: Upload Eryon ROM
@@ -118,6 +119,8 @@ jobs:
           python3 -m py_compile tools/eryon_visual_audit.py tools/test_eryon_visual_audit.py
           python3 -m unittest discover -s tools -p 'test_eryon_visual_audit.py' -v
           python3 tools/eryon_visual_audit.py
+      - name: Report untranslated text and unapproved visual quality
+        run: python3 tools/eryon_release_qa.py
       - name: Report unfinished Eryon map, gym and encounter work
         run: python3 tools/eryon_readiness_report.py
 

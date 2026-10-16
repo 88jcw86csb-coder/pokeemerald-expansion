@@ -134,6 +134,50 @@ class EryonGraphicsIntegrityTests(unittest.TestCase):
         self.assertEqual((w,h),(32,128))
         self.assertGreater(len(set(px)),3)
 
+    def test_hero_graphics_have_no_missing_or_blank_4bpp_frames(self):
+        # Check every action, not only the two 9-frame walking strips.
+        cases = {
+            "eryon_hero": {"walking":(9,16), "running":(9,16),
+                           "field_move":(5,32), "surfing":(6,32),
+                           "mach_bike":(9,32), "acro_bike":(27,32),
+                           "fishing":(12,32), "underwater":(4,32)},
+            "eryon_hero_f": {"walking":(9,16), "running":(9,16),
+                             "field_move":(5,32), "surfing":(6,32),
+                             "mach_bike":(9,32), "acro_bike":(27,32),
+                             "fishing":(12,32), "underwater":(4,32),
+                             "watering":(6,32), "decorating":(1,16)}
+        }
+        for actor, sheets in cases.items():
+            for action,(count,frame_width) in sheets.items():
+                with self.subTest(actor=actor,action=action):
+                    file = ROOT / "graphics/object_events/pics/people" / actor / (action+".png")
+                    width,height,pixels=decode_indexed_png(file)
+                    self.assertEqual((width,height),(count*frame_width,32))
+                    unique_frames=set()
+                    for i in range(count):
+                        frame=bytes(pixels[y*width+i*frame_width:y*width+(i+1)*frame_width]
+                                    for y in []) if False else bytes(
+                            pix for y in range(32) for pix in
+                            pixels[y*width+i*frame_width:y*width+(i+1)*frame_width]
+                        )
+                        self.assertGreater(sum(value!=0 for value in frame),55)
+                        unique_frames.add(hashlib.sha256(frame).digest())
+                    if count >= 4:
+                        self.assertGreaterEqual(len(unique_frames),3)
+
+    def test_hero_battle_portraits_have_valid_indexed_frame_geometry(self):
+        for name in ("eryon_hero","eryon_hero_f"):
+            with self.subTest(actor=name):
+                w,h,pixels=decode_indexed_png(ROOT / "graphics/trainers/front_pics" / (name+".png"))
+                self.assertEqual((w,h),(64,64))
+                self.assertGreater(sum(x!=0 for x in pixels),200)
+                w,h,pixels=decode_indexed_png(ROOT / "graphics/trainers/back_pics" / (name+".png"))
+                self.assertEqual((w,h),(64,256))
+                frames=[tuple(pixels[y*64:(y+1)*64] for y in range(i*64,(i+1)*64))
+                        for i in range(4)]
+                self.assertTrue(all(sum(sum(px!=0 for px in row) for row in f)>150 for f in frames))
+                self.assertGreaterEqual(len(set(frames)),3)
+
 
 if __name__ == "__main__":
     unittest.main()

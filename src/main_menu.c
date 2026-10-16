@@ -256,10 +256,10 @@ static const u32 sBirchSpeechShadowGfx[] = INCGFX_U32("graphics/birch_speech/sha
 static const u32 sBirchSpeechBgMap[] = INCGFX_U32("graphics/birch_speech/map.bin", ".smolTM");
 static const u16 sBirchSpeechBgGradientPal[] = INCGFX_U16("graphics/birch_speech/bg2.pal", ".gbapal");
 
-static const u8 gText_SaveFileCorrupted[] = _("The save file is corrupted. The\nprevious save file will be loaded.");
-static const u8 gText_SaveFileErased[] = _("The save file has been erased\ndue to corruption or damage.");
+static const u8 gText_SaveFileCorrupted[] = _("Save corrompido.\nCarregando anterior.");
+static const u8 gText_SaveFileErased[] = _("Save danificado.\nOs dados foram apagados.");
 static const u8 gJPText_No1MSubCircuit[] = _("1Mサブきばんが ささっていません！");
-static const u8 gText_BatteryRunDry[] = _("The internal battery has run dry.\nThe game can be played.\pHowever, clock-based events will\nno longer occur.");
+static const u8 gText_BatteryRunDry[] = _("Bateria interna esgotada.\pEventos por horario\nficarao indisponiveis.");
 
 static const u8 gText_MainMenuNewGame[] = _("NOVO JOGO");
 static const u8 gText_MainMenuContinue[] = _("CONTINUAR");
@@ -267,9 +267,9 @@ static const u8 gText_MainMenuOption[] = _("OPCOES");
 static const u8 gText_MainMenuMysteryGift[] = _("PRESENTE");
 static const u8 gText_MainMenuMysteryGift2[] = _("PRESENTE");
 static const u8 gText_MainMenuMysteryEvents[] = _("EVENTOS");
-static const u8 gText_WirelessNotConnected[] = _("The Wireless Adapter is not\nconnected.");
-static const u8 gText_MysteryGiftCantUse[] = _("MYSTERY GIFT can't be used while\nthe Wireless Adapter is attached.");
-static const u8 gText_MysteryEventsCantUse[] = _("MYSTERY EVENTS can't be used while\nthe Wireless Adapter is attached.");
+static const u8 gText_WirelessNotConnected[] = _("Adaptador sem fio\nnao conectado.");
+static const u8 gText_MysteryGiftCantUse[] = _("Presente indisponivel\ncom adaptador sem fio.");
+static const u8 gText_MysteryEventsCantUse[] = _("Eventos indisponiveis\ncom adaptador sem fio.");
 
 static const u8 gText_ContinueMenuPlayer[] = _("JOGADOR");
 static const u8 gText_ContinueMenuTime[] = _("TEMPO");

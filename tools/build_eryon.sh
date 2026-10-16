@@ -19,6 +19,8 @@ python3 tools/eryon_tileset_visuals.py
 echo "== Eryon: generate distinct indexed GBA portraits (leaders / Team Eclipse) =="
 python3 tools/eryon_visual_assets.py
 
+python3 tools/eryon_release_qa.py
+
 echo "== Eryon: generate independent title graphic =="
 python3 tools/eryon_boot_assets.py
 
