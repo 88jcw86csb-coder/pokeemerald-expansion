@@ -198,3 +198,25 @@ EryonNeonara_Text_TechnicianOrchard:
 	.string "alimentam nossa rede!\p"
 	.string "Preciso verificar a serra\n"
 	.string "antes de restaurar o sinal.$"
+
+@ Separate playable gym interior. The existing badge and trainer battle scripts
+@ are not duplicated: the interior leader calls this city's original challenge.
+EryonNeonara_EventScript_GymEntrance::
+	lock
+	faceplayer
+	msgbox EryonNeonara_Text_GymEntrance, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonNeonara_EventScript_GymEntranceCancel
+	closemessage
+	warp MAP_GYMERYON_NEONARA, 12, 15
+	waitstate
+	end
+
+EryonNeonara_EventScript_GymEntranceCancel::
+	closemessage
+	release
+	end
+
+EryonNeonara_Text_GymEntrance:
+	.string "ENTRADA DO GINASIO:\p"
+	.string "Entrar na arena de\\n"
+	.string "NEONARA agora?$"
