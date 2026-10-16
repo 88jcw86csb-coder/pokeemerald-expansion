@@ -17342,7 +17342,7 @@ Level: 46
 === TRAINER_ERYON_ELITE_1 ===
 Name: ARIA
 Class: Elite Four
-Pic: Elite Four Glacia
+Pic: Eryon Aria
 Gender: Female
 Music: Elite Four
 AI: Check Bad Move
@@ -17378,7 +17378,7 @@ Level: 69
 === TRAINER_ERYON_ELITE_2 ===
 Name: BASTIAN
 Class: Elite Four
-Pic: Elite Four Sidney
+Pic: Eryon Bastian
 Gender: Male
 Music: Elite Four
 AI: Check Bad Move
@@ -17414,7 +17414,7 @@ Level: 70
 === TRAINER_ERYON_ELITE_3 ===
 Name: SELENE
 Class: Elite Four
-Pic: Elite Four Phoebe
+Pic: Eryon Selene
 Gender: Female
 Music: Elite Four
 AI: Check Bad Move
@@ -17450,7 +17450,7 @@ Level: 71
 === TRAINER_ERYON_ELITE_4 ===
 Name: DARIUS
 Class: Elite Four
-Pic: Elite Four Drake
+Pic: Eryon Darius
 Gender: Male
 Music: Elite Four
 AI: Check Bad Move
@@ -17486,7 +17486,7 @@ Level: 72
 === TRAINER_ERYON_CHAMPION ===
 Name: AURELIO
 Class: Champion
-Pic: Champion Wallace
+Pic: Eryon Aurelio
 Gender: Male
 Music: Elite Four
 AI: Check Bad Move

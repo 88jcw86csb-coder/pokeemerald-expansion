@@ -14,7 +14,9 @@ ROOT = Path(__file__).resolve().parents[1]
 SIGNATURE = b"\x89PNG\r\n\x1a\n"
 LEADERS = ("kael", "volt", "bjorn", "tessa", "nyx", "kaio", "lyra", "ryu")
 PORTRAITS = tuple("eryon_" + p for p in LEADERS) + (
-    "eryon_eclipse", "eryon_eclipse_f", "eryon_commander")
+    "eryon_eclipse", "eryon_eclipse_f", "eryon_commander",
+    "eryon_aria", "eryon_bastian", "eryon_selene", "eryon_darius",
+    "eryon_aurelio")
 BIOMES = ("aurora", "urban", "forest", "crystal", "desert", "lunar")
 
 

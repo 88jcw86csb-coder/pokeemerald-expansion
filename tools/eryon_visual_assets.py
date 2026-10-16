@@ -30,6 +30,12 @@ CAST = (
     ("eryon_eclipse",    "#483956", "#26283d", "#9b74bc", "#d5a28c", "short", "eclipse"),
     ("eryon_eclipse_f",  "#9272b4", "#303049", "#b78fd2", "#d7ad99", "long",  "eclipse"),
     ("eryon_commander",  "#b9adc9", "#292943", "#d6b46b", "#d7a999", "long",  "eclipse"),
+    # Liga de Eryon: four Elite Four specialists and Champion Aurelio.
+    ("eryon_aria",       "#b8ddf0", "#29465e", "#deeffb", "#d8a994", "long",  "snow"),
+    ("eryon_bastian",    "#49352c", "#686044", "#d6a263", "#bb947f", "short", "relic"),
+    ("eryon_selene",     "#27243a", "#55476d", "#c8a2ec", "#d2a99b", "long",  "wisp"),
+    ("eryon_darius",     "#2c343e", "#2d555c", "#6dab9e", "#c29a7f", "side",  "dragon"),
+    ("eryon_aurelio",    "#ded1a9", "#264757", "#f8d77e", "#d5a486", "spike", "crown"),
 )
 
 def rgb(value):
@@ -138,6 +144,15 @@ def paint(name, hair, coat, accent, skin, cut, motif):
     elif motif == "eclipse":
         oval(46, 48, 7, 7, 13); oval(46, 48, 5, 5, 2)
         oval(49, 46, 4, 5, 3); line(45,39,45,57,6,1)
+    elif motif == "wisp":
+        # Selene's spectral flame and trailing ethereal ribbons.
+        oval(46, 49, 5, 8, 6); oval(45, 48, 3, 6, 3)
+        line(47, 43, 50, 38, 5, 2); line(43, 50, 39, 56, 14, 2)
+    elif motif == "crown":
+        # Aurélio's laurel medallion: not Wallace's costume or portrait.
+        line(42, 54, 42, 44, 13, 2); line(50, 54, 50, 44, 13, 2)
+        line(42, 45, 46, 40, 14, 2); line(50, 45, 46, 40, 14, 2)
+        oval(46, 51, 3, 3, 6)
     # White/cream piping improves silhouettes without transparency tricks.
     line(21, 48, 18, 60, 14)
     line(41, 45, 43, 59, 13)
