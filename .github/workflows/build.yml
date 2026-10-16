@@ -99,6 +99,8 @@ jobs:
         run: python3 tools/eryon_tileset_visuals.py
       - name: Generate Eryon GBA character assets for independent validation
         run: python3 tools/eryon_visual_assets.py
+      - name: Generate exclusive Eryon title graphic
+        run: python3 tools/eryon_boot_assets.py
       - name: Generate Eryon gym interior collision binaries for validation
         run: python3 tools/eryon_gym_interiors.py
       - name: Compile-check all Python test and validator modules
