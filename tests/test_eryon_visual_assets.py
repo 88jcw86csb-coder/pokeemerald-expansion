@@ -109,6 +109,29 @@ class VisualAssetTests(unittest.TestCase):
         self.assertIn('gTrainerFrontPic_Brendan[] = INCGFX_U32("graphics/trainers/front_pics/eryon_hero.png"',refs)
         self.assertIn('gTrainerBackPic_Brendan[] = INCGFX_U8("graphics/trainers/back_pics/eryon_hero.png"',refs)
 
+    def test_female_hero_keeps_may_special_anim_frame_counts(self):
+        root=ROOT/"graphics/object_events/pics/people/eryon_hero_f"
+        expected={"walking":144,"running":144,"field_move":160,
+                  "surfing":192,"mach_bike":288,"acro_bike":864,
+                  "fishing":384,"underwater":128,
+                  "watering":192,"decorating":16}
+        for name,width in expected.items():
+            with self.subTest(name=name):
+                b=(root/(name+".png")).read_bytes()
+                self.assertEqual(struct.unpack(">IIBBBBB",b[16:29])[:4],
+                                 (width,32,4,3))
+        obj=(ROOT/"src/data/object_events/object_event_graphics.h").read_text()
+        for name in expected:
+            self.assertIn("/eryon_hero_f/"+name+".",obj)
+        for name in ("brendan_reflection","may_reflection"):
+            self.assertNotIn("palettes/"+name+".pal",obj)
+        portraits=(ROOT/"src/data/graphics/trainers.h").read_text()
+        self.assertIn("front_pics/eryon_hero_f.png",portraits)
+        self.assertIn("back_pics/eryon_hero_f.png",portraits)
+        self.assertEqual(struct.unpack(">II",(
+            ROOT/"graphics/trainers/back_pics/eryon_hero_f.png").read_bytes()[16:24]),
+            (64,256))
+
     def test_image_generator_runs_before_make(self):
         script=(ROOT/"tools/build_eryon.sh").read_text()
         self.assertIn("python3 tools/eryon_visual_assets.py",script)
