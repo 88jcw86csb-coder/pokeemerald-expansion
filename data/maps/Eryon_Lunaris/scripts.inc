@@ -366,5 +366,5 @@ EryonLunaris_EventScript_GymEntranceCancel::
 
 EryonLunaris_Text_GymEntrance:
 	.string "ENTRADA DO GINASIO:\p"
-	.string "Entrar na arena de\\n"
+	.string "Entrar na arena de\n"
 	.string "LUNARIS agora?$"
