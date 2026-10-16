@@ -64,7 +64,7 @@ EryonRota01_Text_TrailMarker:
 EryonRota01_Text_TrailMarkerAfterClue:
 	.string "AVISO DA ROTA 01\p"
 	.string "Luzes incomuns no bosque.\n"
-	.string "Relate pistas a Kael, em Verdelume.$"
+	.string "Conte a Kael sobre as pistas.$"
 
 EryonRota01_Text_TrailMarkerAfterBadge:
 	.string "TRILHA DA AURORA\p"
