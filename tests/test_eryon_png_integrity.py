@@ -155,8 +155,7 @@ class EryonGraphicsIntegrityTests(unittest.TestCase):
                     self.assertEqual((width,height),(count*frame_width,32))
                     unique_frames=set()
                     for i in range(count):
-                        frame=bytes(pixels[y*width+i*frame_width:y*width+(i+1)*frame_width]
-                                    for y in []) if False else bytes(
+                        frame=bytes(
                             pix for y in range(32) for pix in
                             pixels[y*width+i*frame_width:y*width+(i+1)*frame_width]
                         )
@@ -173,8 +172,8 @@ class EryonGraphicsIntegrityTests(unittest.TestCase):
                 self.assertGreater(sum(x!=0 for x in pixels),200)
                 w,h,pixels=decode_indexed_png(ROOT / "graphics/trainers/back_pics" / (name+".png"))
                 self.assertEqual((w,h),(64,256))
-                frames=[tuple(pixels[y*64:(y+1)*64] for y in range(i*64,(i+1)*64))
-                        for i in range(4)]
+                frames=[tuple(tuple(pixels[y*64:(y+1)*64]) for y in
+                              range(i*64,(i+1)*64)) for i in range(4)]
                 self.assertTrue(all(sum(sum(px!=0 for px in row) for row in f)>150 for f in frames))
                 self.assertGreaterEqual(len(set(frames)),3)
 
