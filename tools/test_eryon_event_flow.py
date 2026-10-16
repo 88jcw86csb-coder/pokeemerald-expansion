@@ -373,9 +373,7 @@ class EryonEventFlowTests(unittest.TestCase):
                 self.assertEqual((len(rows), len(rows[0])), (layout["height"], layout["width"]))
                 payload = (ROOT / layout["blockdata_filepath"]).read_bytes()
                 self.assertEqual(len(payload), 2 * layout["height"] * layout["width"])
-                from eryon_terrain_visual_repair import retile_word, stamp_visible_houses
-                expected = [retile_word(tiles[symbol]) for row in rows for symbol in row]
-                stamp_visible_houses(expected,layout["width"],layout["height"],rows)
+                expected = [tiles[symbol] for row in rows for symbol in row]
                 self.assertEqual(list(struct.unpack("<" + str(len(expected)) + "H", payload)),
                                  expected)
                 scripts = (ROOT / "data/maps" / name / "scripts.inc").read_text(encoding="utf-8")

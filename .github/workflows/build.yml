@@ -110,13 +110,9 @@ jobs:
           name: eryon-visual-preview
           path: build/eryon-preview/
           if-no-files-found: error
-      - name: Regenerate Eryon overworld terrain binaries for QA
-        run: python3 tools/build_eryon_map_bins.py --wall 0x3c01 --path 0x3001 --meadow 0x3002 --stone 0x3003 --preview-unregistered
-      - name: Generate Eryon gym interior collision binaries for validation
+       - name: Generate Eryon gym interior collision binaries for validation
         run: python3 tools/eryon_gym_interiors.py
-      - name: Repair invalid terrain metatile IDs without changing collision
-        run: python3 tools/eryon_terrain_visual_repair.py
-      - name: Compile-check all Python test and validator modules
+       - name: Compile-check all Python test and validator modules
         run: python3 -m compileall -q tools tests
       - name: Test every Eryon tool regression
         run: python3 -m unittest discover -s tools -p 'test_eryon_*.py' -v

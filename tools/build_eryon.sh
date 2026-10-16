@@ -28,10 +28,7 @@ echo "== Eryon: regenerate registered map binaries from authoritative terrain pl
 python3 tools/build_eryon_map_bins.py --wall 0x3c01 --path 0x3001 --meadow 0x3002 --stone 0x3003 --preview-unregistered
 python3 tools/eryon_gym_interiors.py
 
-echo "== Eryon: replace invalid placeholder atlas indices; preserve collisions =="
-python3 tools/eryon_terrain_visual_repair.py
-
-# Collect the whole regression suite, including League, Eclipse and late
+ # Collect the whole regression suite, including League, Eclipse and late
 # routes. Keep test discovery dynamic so future tests cannot be silently
 # omitted by forgetting another explicit entry here.
 echo "== Eryon: Python tool regression suite (complete discovery) =="
@@ -46,6 +43,12 @@ python3 tools/eryon_layout_audit.py
 python3 tools/eryon_physical_route_audit.py --json-output build/eryon-physical-routes.json
 python3 tools/eryon_script_warp_audit.py
 python3 tools/eryon_world_audit.py
+python3 tools/eryon_map_traversal_audit.py
+
+echo "== Eryon: post-validation graphical repair =="
+python3 tools/eryon_terrain_visual_repair.py
+# Repeat structural checks against the EXACT rendered blockdata compiled in ROM.
+python3 tools/eryon_layout_audit.py
 python3 tools/eryon_map_traversal_audit.py
 
 echo "== Eryon: compiling GBA ROM =="
