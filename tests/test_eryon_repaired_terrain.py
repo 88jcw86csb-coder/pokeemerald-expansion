@@ -9,9 +9,9 @@ ROOT=Path(__file__).resolve().parents[1]
 
 class MetatileQualityContracts(unittest.TestCase):
     def test_placeholder_sign_and_same_grass_wall_are_remapped(self):
-        self.assertEqual(retile_word(0x3003),0x3069)
+        self.assertEqual(retile_word(0x3003),0x306C)
         self.assertEqual(retile_word(0x3002),0x301C)
-        self.assertEqual(retile_word(0x3001),0x302C)
+        self.assertEqual(retile_word(0x3001),0x3069)
         self.assertEqual(retile_word(0x3C01),0x3C16)
         for word in (0x3C01,0x3001,0x3002,0x3003,0x30A7,0x3C0D):
             self.assertEqual(retile_word(word)&0xFC00,word&0xFC00)

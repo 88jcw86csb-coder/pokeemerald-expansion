@@ -17,10 +17,10 @@ import struct
 ROOT = Path(__file__).resolve().parents[1]
 REPORT = ROOT/"build/eryon-visual-terrain-report.json"
 # Primary gTileset_General IDs reviewed in rendered atlas:
-# 0x16: solid foliage/tree, 0x2C: natural pebbled path,
-# 0x1C: plain meadow and 0x69: clean earthy surface.
+# 0x16: foliage, 0x69: actual earth trail (NOT blue water),
+# 0x1C: clean grass and 0x6C: neutral rocky soil.
 # No 0x003! That was a storefront SIGN, producing giant visual glitches.
-VISUAL_METATILES = {0x001: 0x02C, 0x002: 0x01C, 0x003: 0x069}
+VISUAL_METATILES = {0x001: 0x069, 0x002: 0x01C, 0x003: 0x06C}
 WALL_METATILE = 0x016
 # Building metatiles are the native three-column red-roof / front walls.
 # Every existing 3x3 footprint is blocked already; collision cannot change.
@@ -99,7 +99,27 @@ def repair(layouts=None,write=True):
             if fixed!=word:
                 swaps[f"{word&0x03ff:03x}->{fixed&0x03ff:03x}"]+=1
                 words[i]=fixed
-        placed=stamp_visible_houses(words,w,h,rows_for_map(name))
+        plan=rows_for_map(name)
+        placed=stamp_visible_houses(words,w,h,plan)
+        # Large towns were solid walls of a single repeated tree motif.
+        # Preserve a readable hedgerow along paths, but turn deep blocked
+        # interior plots back into meadow until buildings are authored.
+        settlements = ("Vila", "Cidade", "Neonara", "Frostheim",
+                       "Arkhara", "Umbra", "Ignivar", "Drakonia",
+                       "Lunaris", "Verdelume", "Posto", "Refugio", "Aldeia")
+        if name.removeprefix("Eryon_").startswith(settlements):
+            old=list(words)
+            for y in range(1,h-1):
+                for x in range(1,w-1):
+                    i=y*w+x
+                    if old[i]!=0x3C16:
+                        continue
+                    # Keep dense, clearly impassable leaf boundaries only
+                    # immediately beside a genuine walkable avenue.
+                    near_walk=any((old[(y+dy)*w+(x+dx)]&0x0C00)==0
+                                  for dy,dx in ((1,0),(-1,0),(0,1),(0,-1)))
+                    if not near_walk and (x*13+y*7)%17 != 0:
+                        words[i]=0x3C1C
         if before!=[word&0xFC00 for word in words]:
             raise AssertionError(f"{name}: collision/elevation changed")
         if write:
