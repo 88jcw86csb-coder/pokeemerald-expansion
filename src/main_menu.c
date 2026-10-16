@@ -261,20 +261,20 @@ static const u8 gText_SaveFileErased[] = _("The save file has been erased\ndue t
 static const u8 gJPText_No1MSubCircuit[] = _("1Mサブきばんが ささっていません！");
 static const u8 gText_BatteryRunDry[] = _("The internal battery has run dry.\nThe game can be played.\pHowever, clock-based events will\nno longer occur.");
 
-static const u8 gText_MainMenuNewGame[] = _("NEW GAME");
-static const u8 gText_MainMenuContinue[] = _("CONTINUE");
-static const u8 gText_MainMenuOption[] = _("OPTION");
-static const u8 gText_MainMenuMysteryGift[] = _("MYSTERY GIFT");
-static const u8 gText_MainMenuMysteryGift2[] = _("MYSTERY GIFT");
-static const u8 gText_MainMenuMysteryEvents[] = _("MYSTERY EVENTS");
+static const u8 gText_MainMenuNewGame[] = _("NOVO JOGO");
+static const u8 gText_MainMenuContinue[] = _("CONTINUAR");
+static const u8 gText_MainMenuOption[] = _("OPCOES");
+static const u8 gText_MainMenuMysteryGift[] = _("PRESENTE");
+static const u8 gText_MainMenuMysteryGift2[] = _("PRESENTE");
+static const u8 gText_MainMenuMysteryEvents[] = _("EVENTOS");
 static const u8 gText_WirelessNotConnected[] = _("The Wireless Adapter is not\nconnected.");
 static const u8 gText_MysteryGiftCantUse[] = _("MYSTERY GIFT can't be used while\nthe Wireless Adapter is attached.");
 static const u8 gText_MysteryEventsCantUse[] = _("MYSTERY EVENTS can't be used while\nthe Wireless Adapter is attached.");
 
-static const u8 gText_ContinueMenuPlayer[] = _("PLAYER");
-static const u8 gText_ContinueMenuTime[] = _("TIME");
+static const u8 gText_ContinueMenuPlayer[] = _("JOGADOR");
+static const u8 gText_ContinueMenuTime[] = _("TEMPO");
 static const u8 gText_ContinueMenuPokedex[] = _("POKéDEX");
-static const u8 gText_ContinueMenuBadges[] = _("BADGES");
+static const u8 gText_ContinueMenuBadges[] = _("INSIGNIAS");
 
 #define MENU_LEFT 2
 #define MENU_TOP_WIN0 1
@@ -1916,7 +1916,8 @@ static void AddBirchSpeechObjects(u8 taskId)
     u8 brendanSpriteId;
     u8 maySpriteId;
 
-    birchSpriteId = AddNewGameBirchObject(0x88, 0x3C, 1);
+    // Eryon's Professor Elya replaces the inherited Hoenn Birch portrait.
+    birchSpriteId = CreateTrainerSprite(TRAINER_PIC_ERYON_ELYA, 136, 60, 0, NULL);
     gSprites[birchSpriteId].callback = SpriteCB_Null;
     gSprites[birchSpriteId].oam.priority = 0;
     gSprites[birchSpriteId].invisible = TRUE;
@@ -1926,12 +1927,12 @@ static void AddBirchSpeechObjects(u8 taskId)
     gSprites[lotadSpriteId].oam.priority = 0;
     gSprites[lotadSpriteId].invisible = TRUE;
     gTasks[taskId].tLotadSpriteId = lotadSpriteId;
-    brendanSpriteId = CreateTrainerSprite(FacilityClassToPicIndex(FACILITY_CLASS_BRENDAN), 120, 60, 0, NULL);
+    brendanSpriteId = CreateTrainerSprite(TRAINER_PIC_BRENDAN, 120, 60, 0, NULL);
     gSprites[brendanSpriteId].callback = SpriteCB_Null;
     gSprites[brendanSpriteId].invisible = TRUE;
     gSprites[brendanSpriteId].oam.priority = 0;
     gTasks[taskId].tBrendanSpriteId = brendanSpriteId;
-    maySpriteId = CreateTrainerSprite(FacilityClassToPicIndex(FACILITY_CLASS_MAY), 120, 60, 0, NULL);
+    maySpriteId = CreateTrainerSprite(TRAINER_PIC_MAY, 120, 60, 0, NULL);
     gSprites[maySpriteId].callback = SpriteCB_Null;
     gSprites[maySpriteId].invisible = TRUE;
     gSprites[maySpriteId].oam.priority = 0;

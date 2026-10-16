@@ -27,7 +27,7 @@ class VisualAssetTests(unittest.TestCase):
     def test_original_gba_4bpp_images_are_distinct_and_palette_safe(self):
         with tempfile.TemporaryDirectory() as tmp:
             paths=visuals.generate(Path(tmp))
-            self.assertEqual(len(paths), 16)
+            self.assertEqual(len(paths), 17)
             unique=set()
             for path in paths:
                 png=path.read_bytes()
@@ -36,7 +36,7 @@ class VisualAssetTests(unittest.TestCase):
                 self.assertEqual((width,height,depth,typ),(64,64,4,3))
                 self.assertEqual(int.from_bytes(png[33:37],"big"),48)
                 unique.add(png)
-            self.assertEqual(len(unique),16,"every leader/Eclipse/League portrait needs its own design")
+            self.assertEqual(len(unique),17,"every leader/Eclipse/League portrait needs its own design")
     def test_all_eight_leaders_use_original_portraits_without_replacing_teams(self):
         trainers=(ROOT/"src/data/trainers.party").read_text()
         enums=(ROOT/"include/constants/trainers.h").read_text()

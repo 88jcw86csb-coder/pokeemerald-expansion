@@ -16,7 +16,7 @@ LEADERS = ("kael", "volt", "bjorn", "tessa", "nyx", "kaio", "lyra", "ryu")
 PORTRAITS = tuple("eryon_" + p for p in LEADERS) + (
     "eryon_eclipse", "eryon_eclipse_f", "eryon_commander",
     "eryon_aria", "eryon_bastian", "eryon_selene", "eryon_darius",
-    "eryon_aurelio")
+    "eryon_aurelio", "eryon_elya")
 BIOMES = ("aurora", "urban", "forest", "crystal", "desert", "lunar")
 
 

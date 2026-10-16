@@ -36,6 +36,7 @@ CAST = (
     ("eryon_selene",     "#27243a", "#55476d", "#c8a2ec", "#d2a99b", "long",  "wisp"),
     ("eryon_darius",     "#2c343e", "#2d555c", "#6dab9e", "#c29a7f", "side",  "dragon"),
     ("eryon_aurelio",    "#ded1a9", "#264757", "#f8d77e", "#d5a486", "spike", "crown"),
+    ("eryon_elya",       "#d4b58d", "#237d86", "#f0d394", "#dcae97", "long", "star"),
 )
 
 def rgb(value):

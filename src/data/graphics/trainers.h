@@ -33,6 +33,8 @@ const u32 gTrainerFrontPic_EryonDarius[] = INCGFX_U32("graphics/trainers/front_p
 const u16 gTrainerPalette_EryonDarius[] = INCGFX_U16("graphics/trainers/front_pics/eryon_darius.png", ".gbapal");
 const u32 gTrainerFrontPic_EryonAurelio[] = INCGFX_U32("graphics/trainers/front_pics/eryon_aurelio.png", ".4bpp.smol");
 const u16 gTrainerPalette_EryonAurelio[] = INCGFX_U16("graphics/trainers/front_pics/eryon_aurelio.png", ".gbapal");
+const u32 gTrainerFrontPic_EryonElya[] = INCGFX_U32("graphics/trainers/front_pics/eryon_elya.png", ".4bpp.smol");
+const u16 gTrainerPalette_EryonElya[] = INCGFX_U16("graphics/trainers/front_pics/eryon_elya.png", ".gbapal");
 
 
 const u32 gTrainerFrontPic_None[] = INCGFX_U32("graphics/trainers/front_pics/none.png", ".4bpp.smol");
@@ -1323,5 +1325,9 @@ const struct TrainerPicInfo gTrainerPicInfo[TRAINER_PIC_COUNT] =
     [TRAINER_PIC_ERYON_AURELIO] =
     {
         .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_EryonAurelio, gTrainerPalette_EryonAurelio),
+    },
+    [TRAINER_PIC_ERYON_ELYA] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_EryonElya, gTrainerPalette_EryonElya),
     },
 };
