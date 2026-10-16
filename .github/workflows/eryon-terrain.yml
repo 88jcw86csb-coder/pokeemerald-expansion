@@ -36,6 +36,16 @@ jobs:
           python3 tools/eryon_gym_interiors.py
       - name: Test map connectivity and encoding
         run: python3 -m unittest discover -s tools -p 'test_eryon_*py'
+      - name: Generate real GBA primary metatile catalog for visual inspection
+        run: |
+          python3 tools/eryon_tileset_visuals.py
+          python3 tools/eryon_metatile_catalog.py
+      - name: Publish metatile catalog for visual auditing
+        uses: actions/upload-artifact@v4
+        with:
+          name: eryon-metatile-catalog
+          path: build/eryon-metatiles/
+          if-no-files-found: error
       - name: Audit 37-stage Eryon regional map inventory
         run: python3 tools/eryon_world_audit.py
       - name: Verify unregistered route, village, city and league previews
