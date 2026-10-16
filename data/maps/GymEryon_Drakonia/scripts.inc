@@ -1,4 +1,4 @@
-GymEryonDrakonia_MapScripts::
+GymEryon_Drakonia_MapScripts::
 	.byte 0
 
 GymEryonDrakonia_EventScript_Leader::
