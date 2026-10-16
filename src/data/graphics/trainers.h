@@ -1,6 +1,30 @@
 #include "constants/trainers.h"
 #include "data.h"
 
+const u32 gTrainerFrontPic_EryonKael[] = INCGFX_U32("graphics/trainers/front_pics/eryon_kael.png", ".4bpp.smol");
+const u16 gTrainerPalette_EryonKael[] = INCGFX_U16("graphics/trainers/front_pics/eryon_kael.png", ".gbapal");
+const u32 gTrainerFrontPic_EryonVolt[] = INCGFX_U32("graphics/trainers/front_pics/eryon_volt.png", ".4bpp.smol");
+const u16 gTrainerPalette_EryonVolt[] = INCGFX_U16("graphics/trainers/front_pics/eryon_volt.png", ".gbapal");
+const u32 gTrainerFrontPic_EryonBjorn[] = INCGFX_U32("graphics/trainers/front_pics/eryon_bjorn.png", ".4bpp.smol");
+const u16 gTrainerPalette_EryonBjorn[] = INCGFX_U16("graphics/trainers/front_pics/eryon_bjorn.png", ".gbapal");
+const u32 gTrainerFrontPic_EryonTessa[] = INCGFX_U32("graphics/trainers/front_pics/eryon_tessa.png", ".4bpp.smol");
+const u16 gTrainerPalette_EryonTessa[] = INCGFX_U16("graphics/trainers/front_pics/eryon_tessa.png", ".gbapal");
+const u32 gTrainerFrontPic_EryonNyx[] = INCGFX_U32("graphics/trainers/front_pics/eryon_nyx.png", ".4bpp.smol");
+const u16 gTrainerPalette_EryonNyx[] = INCGFX_U16("graphics/trainers/front_pics/eryon_nyx.png", ".gbapal");
+const u32 gTrainerFrontPic_EryonKaio[] = INCGFX_U32("graphics/trainers/front_pics/eryon_kaio.png", ".4bpp.smol");
+const u16 gTrainerPalette_EryonKaio[] = INCGFX_U16("graphics/trainers/front_pics/eryon_kaio.png", ".gbapal");
+const u32 gTrainerFrontPic_EryonLyra[] = INCGFX_U32("graphics/trainers/front_pics/eryon_lyra.png", ".4bpp.smol");
+const u16 gTrainerPalette_EryonLyra[] = INCGFX_U16("graphics/trainers/front_pics/eryon_lyra.png", ".gbapal");
+const u32 gTrainerFrontPic_EryonRyu[] = INCGFX_U32("graphics/trainers/front_pics/eryon_ryu.png", ".4bpp.smol");
+const u16 gTrainerPalette_EryonRyu[] = INCGFX_U16("graphics/trainers/front_pics/eryon_ryu.png", ".gbapal");
+const u32 gTrainerFrontPic_EryonEclipse[] = INCGFX_U32("graphics/trainers/front_pics/eryon_eclipse.png", ".4bpp.smol");
+const u16 gTrainerPalette_EryonEclipse[] = INCGFX_U16("graphics/trainers/front_pics/eryon_eclipse.png", ".gbapal");
+const u32 gTrainerFrontPic_EryonEclipseF[] = INCGFX_U32("graphics/trainers/front_pics/eryon_eclipse_f.png", ".4bpp.smol");
+const u16 gTrainerPalette_EryonEclipseF[] = INCGFX_U16("graphics/trainers/front_pics/eryon_eclipse_f.png", ".gbapal");
+const u32 gTrainerFrontPic_EryonCommander[] = INCGFX_U32("graphics/trainers/front_pics/eryon_commander.png", ".4bpp.smol");
+const u16 gTrainerPalette_EryonCommander[] = INCGFX_U16("graphics/trainers/front_pics/eryon_commander.png", ".gbapal");
+
+
 const u32 gTrainerFrontPic_None[] = INCGFX_U32("graphics/trainers/front_pics/none.png", ".4bpp.smol");
 const u16 gTrainerPalette_None[] = INCGFX_U16("graphics/trainers/palettes/none.pal", ".gbapal");
 
@@ -1225,5 +1249,49 @@ const struct TrainerPicInfo gTrainerPicInfo[TRAINER_PIC_COUNT] =
     [TRAINER_PIC_PAINTER_FRLG] =
     {
         .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_PainterFrlg, gTrainerPalette_PainterFrlg),
+    },
+    [TRAINER_PIC_ERYON_KAEL] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_EryonKael, gTrainerPalette_EryonKael),
+    },
+    [TRAINER_PIC_ERYON_VOLT] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_EryonVolt, gTrainerPalette_EryonVolt),
+    },
+    [TRAINER_PIC_ERYON_BJORN] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_EryonBjorn, gTrainerPalette_EryonBjorn),
+    },
+    [TRAINER_PIC_ERYON_TESSA] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_EryonTessa, gTrainerPalette_EryonTessa),
+    },
+    [TRAINER_PIC_ERYON_NYX] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_EryonNyx, gTrainerPalette_EryonNyx),
+    },
+    [TRAINER_PIC_ERYON_KAIO] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_EryonKaio, gTrainerPalette_EryonKaio),
+    },
+    [TRAINER_PIC_ERYON_LYRA] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_EryonLyra, gTrainerPalette_EryonLyra),
+    },
+    [TRAINER_PIC_ERYON_RYU] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_EryonRyu, gTrainerPalette_EryonRyu),
+    },
+    [TRAINER_PIC_ERYON_ECLIPSE] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_EryonEclipse, gTrainerPalette_EryonEclipse),
+    },
+    [TRAINER_PIC_ERYON_ECLIPSE_F] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_EryonEclipseF, gTrainerPalette_EryonEclipseF),
+    },
+    [TRAINER_PIC_ERYON_COMMANDER] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_EryonCommander, gTrainerPalette_EryonCommander),
     },
 };
