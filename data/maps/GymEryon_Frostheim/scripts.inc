@@ -1,4 +1,4 @@
-GymEryonFrostheim_MapScripts::
+GymEryon_Frostheim_MapScripts::
 	.byte 0
 
 GymEryonFrostheim_EventScript_Leader::
