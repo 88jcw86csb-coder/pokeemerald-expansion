@@ -83,6 +83,32 @@ class VisualAssetTests(unittest.TestCase):
                     self.assertNotEqual(npc["graphics_id"], "OBJ_EVENT_GFX_AQUA_MEMBER_M")
         self.assertGreaterEqual(modified, 16)
 
+    def test_eryon_protagonist_has_complete_field_animation_sizes(self):
+        base=ROOT/"graphics/object_events/pics/people/eryon_hero"
+        expected={"walking":144,"running":144,"field_move":160,
+                  "surfing":192,"mach_bike":288,"acro_bike":864,
+                  "fishing":384,"underwater":128}
+        for name,width in expected.items():
+            with self.subTest(action=name):
+                pic=(base/(name+".png")).read_bytes()
+                self.assertEqual(pic[:8],b"\x89PNG\r\n\x1a\n")
+                info=struct.unpack(">IIBBBBB",pic[16:29])
+                self.assertEqual(info[:4],(width,32,4,3))
+        self.assertTrue((ROOT/"graphics/object_events/palettes/eryon_hero.pal").is_file())
+        obj=(ROOT/"src/data/object_events/object_event_graphics.h").read_text()
+        for name in expected:
+            self.assertIn("/eryon_hero/"+name+".",obj)
+
+    def test_eryon_protagonist_battle_front_back_portraits(self):
+        base=ROOT/"graphics/trainers"
+        for relative,size in (("front_pics/eryon_hero.png",(64,64)),
+                               ("back_pics/eryon_hero.png",(64,256))):
+            data=(base/relative).read_bytes()
+            self.assertEqual(struct.unpack(">II",data[16:24]),size)
+        refs=(ROOT/"src/data/graphics/trainers.h").read_text()
+        self.assertIn('gTrainerFrontPic_Brendan[] = INCGFX_U32("graphics/trainers/front_pics/eryon_hero.png"',refs)
+        self.assertIn('gTrainerBackPic_Brendan[] = INCGFX_U8("graphics/trainers/back_pics/eryon_hero.png"',refs)
+
     def test_image_generator_runs_before_make(self):
         script=(ROOT/"tools/build_eryon.sh").read_text()
         self.assertIn("python3 tools/eryon_visual_assets.py",script)
