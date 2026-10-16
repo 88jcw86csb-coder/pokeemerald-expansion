@@ -218,3 +218,25 @@ EryonUmbra_Text_GymAfterEclipse:
 	.string "foram interrompidas.\p"
 	.string "UMBRA voltou a ser uma\n"
 	.string "cidade de caminhos livres.$"
+
+@ Separate playable gym interior. The existing badge and trainer battle scripts
+@ are not duplicated: the interior leader calls this city's original challenge.
+EryonUmbra_EventScript_GymEntrance::
+	lock
+	faceplayer
+	msgbox EryonUmbra_Text_GymEntrance, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonUmbra_EventScript_GymEntranceCancel
+	closemessage
+	warp MAP_GYMERYON_UMBRA, 12, 15
+	waitstate
+	end
+
+EryonUmbra_EventScript_GymEntranceCancel::
+	closemessage
+	release
+	end
+
+EryonUmbra_Text_GymEntrance:
+	.string "ENTRADA DO GINASIO:\p"
+	.string "Entrar na arena de\\n"
+	.string "UMBRA agora?$"
