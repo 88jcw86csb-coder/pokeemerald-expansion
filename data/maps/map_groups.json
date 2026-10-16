@@ -75,7 +75,8 @@
     "gMapGroup_IndoorFiveIslandRoute_Frlg",
     "gMapGroup_IndoorTwoIslandRoute_Frlg",
     "gMapGroup_IndoorSixIslandRoute_Frlg",
-    "gMapGroup_IndoorSevenIslandRoute_Frlg"
+    "gMapGroup_IndoorSevenIslandRoute_Frlg",
+    "gMapGroup_GymEryon"
   ],
   "gMapGroup_TownsAndRoutes": [
     "PetalburgCity",
@@ -1205,5 +1206,15 @@
     "Eryon_LigaClassificatoria",
     "Eryon_LigaRecuperacao",
     "Eryon_LigaEliteFour"
+  ],
+  "gMapGroup_GymEryon": [
+    "GymEryon_Verdelume",
+    "GymEryon_Neonara",
+    "GymEryon_Frostheim",
+    "GymEryon_Arkhara",
+    "GymEryon_Umbra",
+    "GymEryon_Ignivar",
+    "GymEryon_Lunaris",
+    "GymEryon_Drakonia"
   ]
 }
