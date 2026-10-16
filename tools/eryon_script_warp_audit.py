@@ -46,18 +46,21 @@ def component(words, width, height, origin):
 def audit(root=ROOT):
     groups = json.loads((root / "data/maps/map_groups.json").read_text())
     names = groups["gMapGroup_Eryon"]
+    # The eight interiors are a separate group: existing 42-map region IDs
+    # remain stable and its legacy audit count stays unchanged.
+    all_names = names + groups.get("gMapGroup_GymEryon", [])
     layouts = {
         item["id"]: item
         for item in json.loads((root / "data/layouts/layouts.json").read_text())["layouts"]
     }
     maps = {
         name: json.loads((root / "data/maps" / name / "map.json").read_text())
-        for name in names
+        for name in all_names
     }
     by_id = {item["id"]: name for name, item in maps.items()}
     errors, warnings, landings = [], [], {}
     count = 0
-    for name in names:
+    for name in all_names:
         text = (root / "data/maps" / name / "scripts.inc").read_text()
         for match in SCRIPT_WARP.finditer(text):
             count += 1
