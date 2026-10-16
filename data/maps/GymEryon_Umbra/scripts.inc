@@ -1,4 +1,4 @@
-GymEryonUmbra_MapScripts::
+GymEryon_Umbra_MapScripts::
 	.byte 0
 
 GymEryonUmbra_EventScript_Leader::
