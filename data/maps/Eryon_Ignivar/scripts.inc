@@ -369,5 +369,5 @@ EryonIgnivar_EventScript_GymEntranceCancel::
 
 EryonIgnivar_Text_GymEntrance:
 	.string "ENTRADA DO GINASIO:\p"
-	.string "Entrar na arena de\\n"
+	.string "Entrar na arena de\n"
 	.string "IGNIVAR agora?$"
