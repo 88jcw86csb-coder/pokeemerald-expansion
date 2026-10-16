@@ -34,7 +34,7 @@ jobs:
         run: |
           python3 tools/build_eryon_map_bins.py --wall 0x3c01 --path 0x3001 --meadow 0x3002 --stone 0x3003 --preview-unregistered
           python3 tools/eryon_gym_interiors.py
-       - name: Test map connectivity and encoding
+      - name: Test map connectivity and encoding
         run: python3 -m unittest discover -s tools -p 'test_eryon_*py'
       - name: Generate real GBA primary metatile catalog for visual inspection
         run: |

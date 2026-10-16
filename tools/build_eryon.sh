@@ -28,7 +28,7 @@ echo "== Eryon: regenerate registered map binaries from authoritative terrain pl
 python3 tools/build_eryon_map_bins.py --wall 0x3c01 --path 0x3001 --meadow 0x3002 --stone 0x3003 --preview-unregistered
 python3 tools/eryon_gym_interiors.py
 
- # Collect the whole regression suite, including League, Eclipse and late
+# Collect the whole regression suite, including League, Eclipse and late
 # routes. Keep test discovery dynamic so future tests cannot be silently
 # omitted by forgetting another explicit entry here.
 echo "== Eryon: Python tool regression suite (complete discovery) =="
