@@ -66,6 +66,132 @@ const u16 gTilesetPalettes_Petalburg[][16] =
     INCGFX_U16("data/tilesets/secondary/petalburg/palettes/15.pal", ".gbapal"),
 };
 
+// Eryon aurora: regenerated 4bpp tile atlas and complete 16 palette bank.
+const u32 gTilesetTiles_EryonAurora[] = INCGFX_U32("data/tilesets/secondary/eryon_aurora/tiles.png", ".4bpp.fastSmol", "-num_tiles 159 -Wnum_tiles");
+const u16 gTilesetPalettes_EryonAurora[][16] = {
+    INCGFX_U16("data/tilesets/secondary/eryon_aurora/palettes/00.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_aurora/palettes/01.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_aurora/palettes/02.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_aurora/palettes/03.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_aurora/palettes/04.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_aurora/palettes/05.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_aurora/palettes/06.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_aurora/palettes/07.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_aurora/palettes/08.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_aurora/palettes/09.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_aurora/palettes/10.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_aurora/palettes/11.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_aurora/palettes/12.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_aurora/palettes/13.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_aurora/palettes/14.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_aurora/palettes/15.pal", ".gbapal"),
+};
+
+// Eryon urban: regenerated 4bpp tile atlas and complete 16 palette bank.
+const u32 gTilesetTiles_EryonUrban[] = INCGFX_U32("data/tilesets/secondary/eryon_urban/tiles.png", ".4bpp.fastSmol", "-num_tiles 498 -Wnum_tiles");
+const u16 gTilesetPalettes_EryonUrban[][16] = {
+    INCGFX_U16("data/tilesets/secondary/eryon_urban/palettes/00.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_urban/palettes/01.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_urban/palettes/02.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_urban/palettes/03.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_urban/palettes/04.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_urban/palettes/05.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_urban/palettes/06.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_urban/palettes/07.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_urban/palettes/08.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_urban/palettes/09.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_urban/palettes/10.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_urban/palettes/11.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_urban/palettes/12.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_urban/palettes/13.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_urban/palettes/14.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_urban/palettes/15.pal", ".gbapal"),
+};
+
+// Eryon forest: regenerated 4bpp tile atlas and complete 16 palette bank.
+const u32 gTilesetTiles_EryonForest[] = INCGFX_U32("data/tilesets/secondary/eryon_forest/tiles.png", ".4bpp.fastSmol", "-num_tiles 498 -Wnum_tiles");
+const u16 gTilesetPalettes_EryonForest[][16] = {
+    INCGFX_U16("data/tilesets/secondary/eryon_forest/palettes/00.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_forest/palettes/01.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_forest/palettes/02.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_forest/palettes/03.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_forest/palettes/04.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_forest/palettes/05.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_forest/palettes/06.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_forest/palettes/07.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_forest/palettes/08.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_forest/palettes/09.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_forest/palettes/10.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_forest/palettes/11.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_forest/palettes/12.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_forest/palettes/13.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_forest/palettes/14.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_forest/palettes/15.pal", ".gbapal"),
+};
+
+// Eryon crystal: regenerated 4bpp tile atlas and complete 16 palette bank.
+const u32 gTilesetTiles_EryonCrystal[] = INCGFX_U32("data/tilesets/secondary/eryon_crystal/tiles.png", ".4bpp.fastSmol", "-num_tiles 498 -Wnum_tiles");
+const u16 gTilesetPalettes_EryonCrystal[][16] = {
+    INCGFX_U16("data/tilesets/secondary/eryon_crystal/palettes/00.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_crystal/palettes/01.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_crystal/palettes/02.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_crystal/palettes/03.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_crystal/palettes/04.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_crystal/palettes/05.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_crystal/palettes/06.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_crystal/palettes/07.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_crystal/palettes/08.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_crystal/palettes/09.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_crystal/palettes/10.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_crystal/palettes/11.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_crystal/palettes/12.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_crystal/palettes/13.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_crystal/palettes/14.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_crystal/palettes/15.pal", ".gbapal"),
+};
+
+// Eryon desert: regenerated 4bpp tile atlas and complete 16 palette bank.
+const u32 gTilesetTiles_EryonDesert[] = INCGFX_U32("data/tilesets/secondary/eryon_desert/tiles.png", ".4bpp.fastSmol", "-num_tiles 498 -Wnum_tiles");
+const u16 gTilesetPalettes_EryonDesert[][16] = {
+    INCGFX_U16("data/tilesets/secondary/eryon_desert/palettes/00.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_desert/palettes/01.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_desert/palettes/02.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_desert/palettes/03.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_desert/palettes/04.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_desert/palettes/05.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_desert/palettes/06.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_desert/palettes/07.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_desert/palettes/08.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_desert/palettes/09.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_desert/palettes/10.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_desert/palettes/11.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_desert/palettes/12.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_desert/palettes/13.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_desert/palettes/14.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_desert/palettes/15.pal", ".gbapal"),
+};
+
+// Eryon lunar: regenerated 4bpp tile atlas and complete 16 palette bank.
+const u32 gTilesetTiles_EryonLunar[] = INCGFX_U32("data/tilesets/secondary/eryon_lunar/tiles.png", ".4bpp.fastSmol", "-num_tiles 498 -Wnum_tiles");
+const u16 gTilesetPalettes_EryonLunar[][16] = {
+    INCGFX_U16("data/tilesets/secondary/eryon_lunar/palettes/00.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_lunar/palettes/01.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_lunar/palettes/02.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_lunar/palettes/03.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_lunar/palettes/04.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_lunar/palettes/05.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_lunar/palettes/06.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_lunar/palettes/07.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_lunar/palettes/08.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_lunar/palettes/09.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_lunar/palettes/10.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_lunar/palettes/11.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_lunar/palettes/12.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_lunar/palettes/13.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_lunar/palettes/14.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/eryon_lunar/palettes/15.pal", ".gbapal"),
+};
+
 const u32 gTilesetTiles_Rustboro[] = INCGFX_U32("data/tilesets/secondary/rustboro/tiles.png", ".4bpp.fastSmol", "-num_tiles 498 -Wnum_tiles");
 
 const u16 gTilesetPalettes_Rustboro[][16] =
