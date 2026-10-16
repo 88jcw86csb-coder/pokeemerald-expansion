@@ -889,3 +889,25 @@ EryonDrakonia_Text_FinalNetworkChampion:
 	.string "protegeu os cristais.\p"
 	.string "A LIGA guarda a historia\n"
 	.string "desta longa aventura.$"
+
+@ Separate playable gym interior. The existing badge and trainer battle scripts
+@ are not duplicated: the interior leader calls this city's original challenge.
+EryonDrakonia_EventScript_GymEntrance::
+	lock
+	faceplayer
+	msgbox EryonDrakonia_Text_GymEntrance, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonDrakonia_EventScript_GymEntranceCancel
+	closemessage
+	warp MAP_GYMERYON_DRAKONIA, 12, 15
+	waitstate
+	end
+
+EryonDrakonia_EventScript_GymEntranceCancel::
+	closemessage
+	release
+	end
+
+EryonDrakonia_Text_GymEntrance:
+	.string "ENTRADA DO GINASIO:\p"
+	.string "Entrar na arena de\\n"
+	.string "DRAKONIA agora?$"
