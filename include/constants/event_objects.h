@@ -413,6 +413,8 @@ enum
     OBJ_EVENT_GFX_PUSHABLE_BOULDER_FRLG,
     OBJ_EVENT_GFX_CUTTABLE_TREE_FRLG,
     OBJ_EVENT_GFX_BREAKABLE_ROCK_FRLG,
+    // Eryon-only graphics: appended to preserve all existing event IDs.
+    OBJ_EVENT_GFX_ERYON_ECLIPSE,
     NUM_OBJ_EVENT_GFX,
 };
 
