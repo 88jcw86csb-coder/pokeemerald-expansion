@@ -42,7 +42,7 @@ ACCENTS={
 
 def png_info(path):
     raw=path.read_bytes()
-    if raw[:8]!=b"\\x89PNG\\r\\n\\x1a\\n":
+    if raw[:8]!=b"\x89PNG\r\n\x1a\n":
         raise ValueError(f"Invalid PNG signature: {path}")
     w,h,bit,kind,compr,fil,interlace=struct.unpack(">IIBBBBB",raw[16:29])
     if (bit,kind,compr,fil,interlace)!=(4,3,0,0,0):
@@ -60,7 +60,7 @@ def source_palette(name):
 
 def write_palette(path,colors):
     rows=["JASC-PAL","0100","16"]+[" ".join(str(c) for c in item) for item in colors]
-    path.write_text("\\n".join(rows)+"\\n",encoding="ascii")
+    path.write_text("\n".join(rows)+"\n",encoding="ascii")
 
 def install():
     for name,eryon in (("brendan","eryon_hero"),("may","eryon_hero_f")):
