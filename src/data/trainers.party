@@ -16881,7 +16881,7 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 === TRAINER_ERYON_KAEL ===
 Name: KAEL
 Class: Leader
-Pic: Leader Roxanne
+Pic: Eryon Kael
 Gender: Male
 Music: Male
 Items: Potion
@@ -16911,7 +16911,7 @@ Level: 18
 === TRAINER_ERYON_SCOUT ===
 Name: VIGIA
 Class: Team Aqua
-Pic: Aqua Grunt M
+Pic: Eryon Eclipse
 Gender: Male
 Music: Male
 AI: Basic Trainer
@@ -16978,7 +16978,7 @@ Level: 19
 === TRAINER_ERYON_SERRA_ECLIPSE ===
 Name: VIGIA
 Class: Team Aqua
-Pic: Aqua Grunt M
+Pic: Eryon Eclipse
 Gender: Male
 Music: Male
 AI: Basic Trainer
@@ -17044,7 +17044,7 @@ Level: 22
 === TRAINER_ERYON_PASSAGEM_ECLIPSE ===
 Name: VIGIA
 Class: Team Aqua
-Pic: Aqua Grunt M
+Pic: Eryon Eclipse
 Gender: Male
 Music: Male
 AI: Basic Trainer
@@ -17066,7 +17066,7 @@ Level: 23
 === TRAINER_ERYON_ECHO_VALLEY_ECLIPSE ===
 Name: OPERADOR
 Class: Team Aqua
-Pic: Aqua Grunt M
+Pic: Eryon Eclipse
 Gender: Male
 Music: Male
 AI: Basic Trainer
@@ -17255,7 +17255,7 @@ IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 === TRAINER_ERYON_GROTTO_ECLIPSE ===
 Name: AGENTE
 Class: Team Aqua
-Pic: Aqua Grunt M
+Pic: Eryon Eclipse
 Gender: Male
 Music: Male
 AI: Check Bad Move
@@ -17284,7 +17284,7 @@ Level: 53
 === TRAINER_ERYON_DRAKONIA_ECLIPSE ===
 Name: COMANDANTE
 Class: Team Aqua
-Pic: Aqua Grunt M
+Pic: Eryon Commander
 Gender: Male
 Music: Intense
 AI: Check Bad Move
@@ -17313,7 +17313,7 @@ Level: 50
 === TRAINER_ERYON_DRAGON_TRAIL_COURIER ===
 Name: ESCOLTA
 Class: Team Aqua
-Pic: Aqua Grunt M
+Pic: Eryon Eclipse
 Gender: Male
 Music: Intense
 AI: Check Bad Move
@@ -17537,7 +17537,7 @@ Level: 75
 === TRAINER_ERYON_GYM_NEONARA ===
 Name: VOLT
 Class: Leader
-Pic: Leader Wattson
+Pic: Eryon Volt
 Gender: Male
 Music: Male
 Items: Super Potion
@@ -17567,7 +17567,7 @@ Level: 25
 === TRAINER_ERYON_GYM_FROSTHEIM ===
 Name: BJORN
 Class: Leader
-Pic: Elite Four Glacia
+Pic: Eryon Bjorn
 Gender: Male
 Music: Male
 Items: Super Potion
@@ -17597,7 +17597,7 @@ Level: 31
 === TRAINER_ERYON_GYM_ARKHARA ===
 Name: TESSA
 Class: Leader
-Pic: Leader Roxanne
+Pic: Eryon Tessa
 Gender: Female
 Music: Female
 Items: Super Potion
@@ -17634,7 +17634,7 @@ Level: 36
 === TRAINER_ERYON_GYM_UMBRA ===
 Name: NYX
 Class: Leader
-Pic: Elite Four Sidney
+Pic: Eryon Nyx
 Gender: Female
 Music: Female
 Items: Hyper Potion
@@ -17671,7 +17671,7 @@ Level: 41
 === TRAINER_ERYON_GYM_IGNIVAR ===
 Name: KAIO
 Class: Leader
-Pic: Leader Flannery
+Pic: Eryon Kaio
 Gender: Male
 Music: Male
 Items: Hyper Potion
@@ -17708,7 +17708,7 @@ Level: 46
 === TRAINER_ERYON_GYM_LUNARIS ===
 Name: LYRA
 Class: Leader
-Pic: Leader Winona
+Pic: Eryon Lyra
 Gender: Female
 Music: Female
 Items: Hyper Potion
@@ -17745,7 +17745,7 @@ Level: 51
 === TRAINER_ERYON_GYM_DRAKONIA ===
 Name: RYU
 Class: Leader
-Pic: Elite Four Drake
+Pic: Eryon Ryu
 Gender: Male
 Music: Male
 Items: Hyper Potion
@@ -17782,7 +17782,7 @@ Level: 56
 === TRAINER_ERYON_GLACIAL_ECLIPSE_RESEARCHER ===
 Name: CIENTISTA
 Class: Team Aqua
-Pic: Aqua Grunt M
+Pic: Eryon Eclipse
 Gender: Male
 Music: Male
 AI: Check Bad Move
@@ -17811,7 +17811,7 @@ Level: 29
 === TRAINER_ERYON_SERRA_CORE_GUARD ===
 Name: VIGIA
 Class: Team Aqua
-Pic: Aqua Grunt M
+Pic: Eryon Eclipse
 Gender: Male
 Music: Male
 AI: Check Bad Move
