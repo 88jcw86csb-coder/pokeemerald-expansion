@@ -222,3 +222,25 @@ EryonFrostheim_Text_GymAfterEclipse:
 	.string "seu brilho natural.\p"
 	.string "Os cristais da ECLIPSE\n"
 	.string "nao ameacam FROSTHEIM.$"
+
+@ Separate playable gym interior. The existing badge and trainer battle scripts
+@ are not duplicated: the interior leader calls this city's original challenge.
+EryonFrostheim_EventScript_GymEntrance::
+	lock
+	faceplayer
+	msgbox EryonFrostheim_Text_GymEntrance, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonFrostheim_EventScript_GymEntranceCancel
+	closemessage
+	warp MAP_GYMERYON_FROSTHEIM, 12, 15
+	waitstate
+	end
+
+EryonFrostheim_EventScript_GymEntranceCancel::
+	closemessage
+	release
+	end
+
+EryonFrostheim_Text_GymEntrance:
+	.string "ENTRADA DO GINASIO:\p"
+	.string "Entrar na arena de\\n"
+	.string "FROSTHEIM agora?$"
