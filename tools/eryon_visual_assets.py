@@ -600,9 +600,15 @@ def generate(target=OUT):
     target.mkdir(parents=True, exist_ok=True)
     created=[]
     for name, hair, coat, accent, skin, cut, motif in CAST:
-        img, colors=paint(name,hair,coat,accent,skin,cut,motif)
         dest=target/(name+".png")
-        dest.write_bytes(indexed_png(img,colors))
+        if name == "eryon_elya":
+            # Hand-authored 64x64 native GBA 4bpp portrait: original scientist
+            # with spectacles, chestnut hair and a white research coat.
+            # Never regenerate her from the generic leader silhouette.
+            dest.write_bytes((ROOT/"graphics/eryon_original/professor_elya.png").read_bytes())
+        else:
+            img, colors=paint(name,hair,coat,accent,skin,cut,motif)
+            dest.write_bytes(indexed_png(img,colors))
         created.append(dest)
         print("ERYON_VISUAL",dest.relative_to(ROOT) if dest.is_relative_to(ROOT) else dest)
     generate_hero_assets()
