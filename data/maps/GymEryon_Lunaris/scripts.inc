@@ -1,4 +1,4 @@
-GymEryonLunaris_MapScripts::
+GymEryon_Lunaris_MapScripts::
 	.byte 0
 
 GymEryonLunaris_EventScript_Leader::
