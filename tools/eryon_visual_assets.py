@@ -327,6 +327,10 @@ def hero_frame(size, phase, action, female=False):
         if size == 32:
             rect(2,25,28,6,5);rect(4,26,24,3,14)
             rect(7,30,18,2,6)
+            # Visible three-frame water/bubble animation: otherwise the
+            # submerged legs are obscured, yielding repeated identical poses.
+            rect(6+phase%3*3,29,5,2,10)
+            rect(17-phase%3*2,27,4,2,6)
     elif action == "fishing":
         if size == 32:
             rect(25,3,2,23,4);rect(24,3,3,3,13)
@@ -340,10 +344,19 @@ def hero_frame(size, phase, action, female=False):
         rect(x+2,8,3,16,4)
         rect(x+12,9,3,16,4)
         rect(x+3,6,10,2,10)
-    if phase%4 in (2,3):
-        # Back-facing backpack clearly visible on some animations.
-        rect(x+5,15,7,10,7); rect(x+6,16,5,7,5)
-        rect(x+7,18,3,3,10)
+    # The GBA field animation sheet has three ordered directional groups.
+    # Draw the backpack on every back-facing pose; front-facing heroes
+    # must not randomly change direction mid-step.
+    if phase//3%3 == 1:
+        rect(x+5,10,6,5,4)      # Back of head, no front-facing eyes.
+        rect(x+4,16,9,10,7)
+        rect(x+5,17,7,8,5)
+        rect(x+7,19,3,3,10)
+    elif phase//3%3 == 2:
+        # Profile reads clearly in a 16px-wide sprite.
+        rect(x+5,11,5,3,2)
+        rect(x+10,12,2,1,15)
+        rect(x+5,18,3,7,7)
     return canvas
 
 def generate_hero_girl_assets():
