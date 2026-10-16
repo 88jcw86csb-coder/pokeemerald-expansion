@@ -369,3 +369,25 @@ EryonArkhara_Text_GymAfterEclipse:
 	.string "podem repousar.\p"
 	.string "O sinal da ECLIPSE\n"
 	.string "sumiu das pedras.$"
+
+@ Separate playable gym interior. The existing badge and trainer battle scripts
+@ are not duplicated: the interior leader calls this city's original challenge.
+EryonArkhara_EventScript_GymEntrance::
+	lock
+	faceplayer
+	msgbox EryonArkhara_Text_GymEntrance, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EryonArkhara_EventScript_GymEntranceCancel
+	closemessage
+	warp MAP_GYMERYON_ARKHARA, 12, 15
+	waitstate
+	end
+
+EryonArkhara_EventScript_GymEntranceCancel::
+	closemessage
+	release
+	end
+
+EryonArkhara_Text_GymEntrance:
+	.string "ENTRADA DO GINASIO:\p"
+	.string "Entrar na arena de\\n"
+	.string "ARKHARA agora?$"
